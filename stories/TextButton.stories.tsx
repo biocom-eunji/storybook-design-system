@@ -1,0 +1,111 @@
+import React from 'react';
+import { View, Text } from 'react-native';
+import type { Meta, StoryObj } from '@storybook/react-vite';
+import { TextButton } from '../src/components/TextButton';
+
+const ArrowIcon = ({ color = '#000', width = 16, height = 16 }: any) => (
+  <View
+    style={{
+      width,
+      height,
+      alignItems: 'center',
+      justifyContent: 'center',
+    }}
+  >
+    <Text style={{ fontSize: width * 0.7, color, lineHeight: height }}>→</Text>
+  </View>
+);
+
+const meta: Meta<typeof TextButton> = {
+  title: 'Components/TextButton',
+  component: TextButton,
+  argTypes: {
+    color: {
+      control: 'select',
+      options: ['primary', 'assistive'],
+      description: '버튼 컬러',
+    },
+    size: {
+      control: 'select',
+      options: ['small', 'medium'],
+      description: '버튼 크기',
+    },
+    label: { control: 'text', description: '버튼 텍스트' },
+    disabled: { control: 'boolean', description: '비활성화 상태' },
+    loading: { control: 'boolean', description: '로딩 상태' },
+  },
+  tags: ['autodocs'],
+};
+
+export default meta;
+type Story = StoryObj<typeof TextButton>;
+
+// ─── Color ────────────────────────────────────────────────
+
+export const Primary: Story = {
+  args: { label: '텍스트', color: 'primary', size: 'medium' },
+};
+
+export const Assistive: Story = {
+  args: { label: '텍스트', color: 'assistive', size: 'medium' },
+};
+
+// ─── Size ─────────────────────────────────────────────────
+
+export const Small: Story = {
+  args: { label: '텍스트', color: 'primary', size: 'small' },
+};
+
+export const Medium: Story = {
+  args: { label: '텍스트', color: 'primary', size: 'medium' },
+};
+
+// ─── State ────────────────────────────────────────────────
+
+export const Disabled: Story = {
+  args: { label: '텍스트', color: 'primary', disabled: true },
+};
+
+export const Loading: Story = {
+  args: { label: '텍스트', color: 'primary', loading: true },
+};
+
+// ─── Icon ─────────────────────────────────────────────────
+
+export const WithLeadingIcon: Story = {
+  args: {
+    label: '텍스트',
+    color: 'primary',
+    leadingIcon: <ArrowIcon />,
+  },
+};
+
+export const WithTrailingIcon: Story = {
+  args: {
+    label: '텍스트',
+    color: 'primary',
+    trailingIcon: <ArrowIcon />,
+  },
+};
+
+// ─── All Variants ─────────────────────────────────────────
+
+export const AllVariants: Story = {
+  render: () => (
+    <View style={{ gap: 16 }}>
+      <View style={{ flexDirection: 'row', gap: 20, alignItems: 'center' }}>
+        <TextButton label="Primary" color="primary" size="medium" />
+        <TextButton label="Assistive" color="assistive" size="medium" />
+        <TextButton label="Disabled" color="primary" disabled />
+      </View>
+      <View style={{ flexDirection: 'row', gap: 20, alignItems: 'center' }}>
+        <TextButton label="Small" color="primary" size="small" />
+        <TextButton label="Medium" color="primary" size="medium" />
+      </View>
+      <View style={{ flexDirection: 'row', gap: 20, alignItems: 'center' }}>
+        <TextButton label="Leading" color="primary" leadingIcon={<ArrowIcon />} />
+        <TextButton label="Trailing" color="primary" trailingIcon={<ArrowIcon />} />
+      </View>
+    </View>
+  ),
+};
