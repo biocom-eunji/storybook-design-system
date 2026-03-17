@@ -42,3 +42,8 @@ yarn-error.*
 
 # Storybook
 storybook-static/
+
+# Design source files
+*.png
+*.xlsx
+vitest.shims.d.ts
