@@ -2,7 +2,8 @@ import React, { useState } from 'react';
 import { View, Text } from 'react-native';
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import { Switch } from '../src/components/Switch';
-import { coolNeutral, fontSize, fontWeight, spacing } from '../src/tokens/theme';
+import { Section, StateLabel, Row, Col, SpecTable, CodeBlock, CompareGrid, Divider } from './_helpers';
+import { coolNeutral, mint, fontSize, fontWeight, spacing, radius } from '../src/tokens/theme';
 
 const meta: Meta<typeof Switch> = {
   title: 'Components/Switch',
@@ -18,150 +19,319 @@ const meta: Meta<typeof Switch> = {
 export default meta;
 type Story = StoryObj<typeof Switch>;
 
+// ─── 1. Playground ──────────────────────────────────────
+
 export const Playground: Story = {
-  args: { active: true, platform: 'ios', size: 'medium' },
+  args: {
+    active: false,
+    platform: 'ios',
+    size: 'medium',
+    disabled: false,
+  },
 };
 
-const Label = ({ children }: { children: string }) => (
-  <Text style={{ fontSize: fontSize.sm, fontWeight: fontWeight.semibold, color: coolNeutral[50], marginBottom: spacing.sm }}>{children}</Text>
-);
+// ─── 2. 모든 변형 ──────────────────────────────────────
 
-// ─── iOS ──────────────────────────────────────────────────
-
-export const IosSizes: Story = {
+export const AllVariants: Story = {
+  name: '모든 변형',
   render: () => (
-    <View>
-      <Label>iOS — size</Label>
-      <View style={{ flexDirection: 'row', gap: spacing.lg, alignItems: 'center' }}>
-        <Switch platform="ios" size="small" />
-        <Switch platform="ios" size="medium" />
-      </View>
-    </View>
-  ),
-};
+    <Section
+      title="모든 변형"
+      description="스위치의 모든 조합을 한눈에 확인할 수 있습니다."
+    >
+      {(['ios', 'normal'] as const).map((platform) => (
+        <View key={platform} style={{ marginBottom: spacing['3xl'] }}>
+          <Text
+            style={{
+              fontSize: fontSize.md,
+              fontWeight: fontWeight.bold,
+              color: coolNeutral[17],
+              marginBottom: spacing.lg,
+            }}
+          >
+            {platform === 'ios' ? 'iOS' : 'Normal'}
+          </Text>
 
-export const IosActive: Story = {
-  render: () => (
-    <View>
-      <Label>iOS — active</Label>
-      <View style={{ flexDirection: 'row', gap: spacing.lg, alignItems: 'center' }}>
-        <Switch platform="ios" active={false} />
-        <Switch platform="ios" active />
-      </View>
-    </View>
-  ),
-};
-
-export const IosDisabled: Story = {
-  render: () => (
-    <View>
-      <Label>iOS — disabled</Label>
-      <View style={{ gap: spacing.md }}>
-        <View style={{ flexDirection: 'row', gap: spacing.lg, alignItems: 'center' }}>
-          <Switch platform="ios" active={false} />
-          <Switch platform="ios" active={false} disabled />
+          {(['small', 'medium'] as const).map((size) => (
+            <View key={size} style={{ marginBottom: spacing.xl }}>
+              <Text
+                style={{
+                  fontSize: fontSize.sm,
+                  fontWeight: fontWeight.semibold,
+                  color: coolNeutral[40],
+                  marginBottom: spacing.sm,
+                }}
+              >
+                {size === 'small' ? 'Small' : 'Medium'}
+              </Text>
+              <Row gap={spacing['2xl']} wrap>
+                <Col>
+                  <StateLabel>꺼짐</StateLabel>
+                  <Switch platform={platform} size={size} active={false} />
+                </Col>
+                <Col>
+                  <StateLabel>켜짐</StateLabel>
+                  <Switch platform={platform} size={size} active />
+                </Col>
+                <Col>
+                  <StateLabel>비활성 꺼짐</StateLabel>
+                  <Switch platform={platform} size={size} active={false} disabled />
+                </Col>
+                <Col>
+                  <StateLabel>비활성 켜짐</StateLabel>
+                  <Switch platform={platform} size={size} active disabled />
+                </Col>
+              </Row>
+            </View>
+          ))}
         </View>
-        <View style={{ flexDirection: 'row', gap: spacing.lg, alignItems: 'center' }}>
-          <Switch platform="ios" active />
-          <Switch platform="ios" active disabled />
-        </View>
-      </View>
-    </View>
+      ))}
+    </Section>
   ),
 };
 
-// ─── Normal ───────────────────────────────────────────────
+// ─── 3. 플랫폼 비교 ────────────────────────────────────
 
-export const NormalSizes: Story = {
+export const PlatformComparison: Story = {
+  name: '플랫폼 비교',
   render: () => (
-    <View>
-      <Label>Normal — size</Label>
-      <View style={{ flexDirection: 'row', gap: spacing.lg, alignItems: 'center' }}>
-        <Switch platform="normal" size="small" />
-        <Switch platform="normal" size="medium" />
-      </View>
-    </View>
+    <Section
+      title="플랫폼 비교"
+      description="iOS와 Normal 플랫폼의 동일한 상태를 나란히 비교합니다."
+    >
+      <Text
+        style={{
+          fontSize: fontSize.sm,
+          fontWeight: fontWeight.semibold,
+          color: coolNeutral[30],
+          marginBottom: spacing.md,
+        }}
+      >
+        Medium 크기 기준
+      </Text>
+      <CompareGrid
+        items={[
+          {
+            label: 'iOS — 꺼짐',
+            content: <Switch platform="ios" size="medium" active={false} />,
+          },
+          {
+            label: 'Normal — 꺼짐',
+            content: <Switch platform="normal" size="medium" active={false} />,
+          },
+          {
+            label: 'iOS — 켜짐',
+            content: <Switch platform="ios" size="medium" active />,
+          },
+          {
+            label: 'Normal — 켜짐',
+            content: <Switch platform="normal" size="medium" active />,
+          },
+          {
+            label: 'iOS — 비활성 꺼짐',
+            content: <Switch platform="ios" size="medium" active={false} disabled />,
+          },
+          {
+            label: 'Normal — 비활성 꺼짐',
+            content: <Switch platform="normal" size="medium" active={false} disabled />,
+          },
+          {
+            label: 'iOS — 비활성 켜짐',
+            content: <Switch platform="ios" size="medium" active disabled />,
+          },
+          {
+            label: 'Normal — 비활성 켜짐',
+            content: <Switch platform="normal" size="medium" active disabled />,
+          },
+        ]}
+      />
+    </Section>
   ),
 };
 
-export const NormalActive: Story = {
+// ─── 4. 크기 비교 ──────────────────────────────────────
+
+export const Sizes: Story = {
+  name: '크기 비교',
   render: () => (
-    <View>
-      <Label>Normal — active</Label>
-      <View style={{ flexDirection: 'row', gap: spacing.lg, alignItems: 'center' }}>
-        <Switch platform="normal" active={false} />
-        <Switch platform="normal" active />
-      </View>
-    </View>
+    <Section
+      title="크기 비교"
+      description="플랫폼별 Small / Medium 크기를 비교합니다."
+    >
+      {(['ios', 'normal'] as const).map((platform) => (
+        <View key={platform} style={{ marginBottom: spacing['2xl'] }}>
+          <Text
+            style={{
+              fontSize: fontSize.md,
+              fontWeight: fontWeight.bold,
+              color: coolNeutral[17],
+              marginBottom: spacing.md,
+            }}
+          >
+            {platform === 'ios' ? 'iOS' : 'Normal'}
+          </Text>
+          <Row gap={spacing['3xl']}>
+            <Col gap={spacing.sm}>
+              <StateLabel>
+                {platform === 'ios' ? 'Small — 44×26' : 'Small — 36×20'}
+              </StateLabel>
+              <Switch platform={platform} size="small" active />
+            </Col>
+            <Col gap={spacing.sm}>
+              <StateLabel>
+                {platform === 'ios' ? 'Medium — 52×32' : 'Medium — 44×24'}
+              </StateLabel>
+              <Switch platform={platform} size="medium" active />
+            </Col>
+          </Row>
+        </View>
+      ))}
+    </Section>
   ),
 };
 
-export const NormalDisabled: Story = {
-  render: () => (
-    <View>
-      <Label>Normal — disabled</Label>
-      <View style={{ gap: spacing.md }}>
-        <View style={{ flexDirection: 'row', gap: spacing.lg, alignItems: 'center' }}>
-          <Switch platform="normal" active={false} />
-          <Switch platform="normal" active={false} disabled />
-        </View>
-        <View style={{ flexDirection: 'row', gap: spacing.lg, alignItems: 'center' }}>
-          <Switch platform="normal" active />
-          <Switch platform="normal" active disabled />
-        </View>
-      </View>
-    </View>
-  ),
-};
-
-// ─── Interactive ──────────────────────────────────────────
+// ─── 5. 인터랙티브 데모 ────────────────────────────────
 
 export const Interactive: Story = {
+  name: '인터랙티브 데모',
   render: () => {
-    const [val1, setVal1] = useState(false);
-    const [val2, setVal2] = useState(true);
+    const [notif, setNotif] = useState(false);
+    const [dark, setDark] = useState(false);
+
     return (
-      <View style={{ gap: spacing.lg }}>
-        <View style={{ flexDirection: 'row', alignItems: 'center', gap: spacing.md }}>
-          <Switch platform="ios" active={val1} onPress={() => setVal1(!val1)} />
-          <Text style={{ fontSize: fontSize.md, color: coolNeutral[20] }}>알림 설정</Text>
-        </View>
-        <View style={{ flexDirection: 'row', alignItems: 'center', gap: spacing.md }}>
-          <Switch platform="normal" active={val2} onPress={() => setVal2(!val2)} />
-          <Text style={{ fontSize: fontSize.md, color: coolNeutral[20] }}>다크 모드</Text>
-        </View>
-      </View>
+      <Section
+        title="인터랙티브 데모"
+        description="스위치를 직접 눌러보며 상태 변화를 확인하세요."
+      >
+        <Col gap={spacing.xl}>
+          <Row gap={spacing.md}>
+            <Switch platform="ios" size="medium" active={notif} onPress={() => setNotif(!notif)} />
+            <Text style={{ fontSize: fontSize.md, fontWeight: fontWeight.medium, color: coolNeutral[17] }}>
+              알림 설정
+            </Text>
+            <Text
+              style={{
+                fontSize: fontSize.sm,
+                fontWeight: fontWeight.semibold,
+                color: notif ? mint[45] : coolNeutral[60],
+              }}
+            >
+              {notif ? '켜짐' : '꺼짐'}
+            </Text>
+          </Row>
+
+          <Row gap={spacing.md}>
+            <Switch platform="normal" size="medium" active={dark} onPress={() => setDark(!dark)} />
+            <Text style={{ fontSize: fontSize.md, fontWeight: fontWeight.medium, color: coolNeutral[17] }}>
+              다크 모드
+            </Text>
+            <Text
+              style={{
+                fontSize: fontSize.sm,
+                fontWeight: fontWeight.semibold,
+                color: dark ? mint[45] : coolNeutral[60],
+              }}
+            >
+              {dark ? '켜짐' : '꺼짐'}
+            </Text>
+          </Row>
+        </Col>
+      </Section>
     );
   },
 };
 
-// ─── All Variants ─────────────────────────────────────────
+// ─── 6. 디자인 스펙 ────────────────────────────────────
 
-export const AllVariants: Story = {
+export const DesignSpec: Story = {
+  name: '디자인 스펙',
   render: () => (
-    <View style={{ gap: spacing['3xl'] }}>
-      <View>
-        <Label>iOS</Label>
-        <View style={{ flexDirection: 'row', gap: spacing.md, flexWrap: 'wrap', alignItems: 'center' }}>
-          <Switch platform="ios" size="small" active={false} />
-          <Switch platform="ios" size="small" active />
-          <Switch platform="ios" size="medium" active={false} />
-          <Switch platform="ios" size="medium" active />
-          <Switch platform="ios" size="small" active={false} disabled />
-          <Switch platform="ios" size="small" active disabled />
-        </View>
-      </View>
-      <View>
-        <Label>Normal</Label>
-        <View style={{ flexDirection: 'row', gap: spacing.md, flexWrap: 'wrap', alignItems: 'center' }}>
-          <Switch platform="normal" size="small" active={false} />
-          <Switch platform="normal" size="small" active />
-          <Switch platform="normal" size="medium" active={false} />
-          <Switch platform="normal" size="medium" active />
-          <Switch platform="normal" size="small" active={false} disabled />
-          <Switch platform="normal" size="small" active disabled />
-        </View>
-      </View>
-    </View>
+    <Section
+      title="디자인 스펙"
+      description="스위치 컴포넌트의 치수와 색상 토큰을 정리한 참고 자료입니다."
+    >
+      <SpecTable
+        title="iOS 치수"
+        rows={[
+          { label: 'Small 트랙 너비', value: '44px', token: '—' },
+          { label: 'Small 트랙 높이', value: '26px', token: '—' },
+          { label: 'Small 썸 크기', value: '22px', token: '—' },
+          { label: 'Medium 트랙 너비', value: '52px', token: '—' },
+          { label: 'Medium 트랙 높이', value: '32px', token: '—' },
+          { label: 'Medium 썸 크기', value: '28px', token: '—' },
+        ]}
+      />
+
+      <View style={{ height: spacing.lg }} />
+
+      <SpecTable
+        title="Normal 치수"
+        rows={[
+          { label: 'Small 트랙 너비', value: '36px', token: '—' },
+          { label: 'Small 트랙 높이', value: '20px', token: '—' },
+          { label: 'Small 썸 크기', value: '16px', token: '—' },
+          { label: 'Medium 트랙 너비', value: '44px', token: '—' },
+          { label: 'Medium 트랙 높이', value: '24px', token: '—' },
+          { label: 'Medium 썸 크기', value: '20px', token: '—' },
+        ]}
+      />
+
+      <View style={{ height: spacing.lg }} />
+
+      <SpecTable
+        title="색상"
+        rows={[
+          { label: '활성 트랙', value: '#22C3BC', token: 'mint[45]' },
+          { label: '비활성 트랙', value: coolNeutral[90], token: 'coolNeutral[90]' },
+          { label: '비활성화 활성 트랙', value: mint[90], token: 'mint[90]' },
+          { label: '비활성화 비활성 트랙', value: coolNeutral[96], token: 'coolNeutral[96]' },
+          { label: '썸 색상', value: '#FFFFFF', token: '—' },
+        ]}
+      />
+    </Section>
+  ),
+};
+
+// ─── 7. 사용 가이드 ────────────────────────────────────
+
+export const Usage: Story = {
+  name: '사용 가이드',
+  render: () => (
+    <Section
+      title="사용 가이드"
+      description="개발 시 참고할 수 있는 코드 예제입니다."
+    >
+      <CodeBlock
+        title="Import"
+        code={`import { Switch } from '@design-system/components/Switch';`}
+      />
+
+      <CodeBlock
+        title="기본 사용"
+        code={`<Switch />
+<Switch active />
+<Switch size="small" />
+<Switch disabled />`}
+      />
+
+      <CodeBlock
+        title="제어 컴포넌트 (useState)"
+        code={`const [active, setActive] = useState(false);
+
+<Switch
+  active={active}
+  onPress={() => setActive(!active)}
+/>`}
+      />
+
+      <CodeBlock
+        title="플랫폼별 사용"
+        code={`// iOS 스타일 (기본값)
+<Switch platform="ios" size="medium" active />
+
+// Normal 스타일
+<Switch platform="normal" size="small" active={false} />`}
+      />
+    </Section>
   ),
 };
