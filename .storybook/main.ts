@@ -21,6 +21,7 @@ const config: StorybookConfig = {
       ...config.define,
       __DEV__: true,
     };
+    config.base = process.env.STORYBOOK_BASE || '/';
     return config;
   },
 };
