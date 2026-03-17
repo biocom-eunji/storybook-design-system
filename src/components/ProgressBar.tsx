@@ -5,6 +5,7 @@ import { coolNeutral, mint, green, red, yellow, fontSize, fontWeight } from '../
 export type ProgressBarSize = 'small' | 'medium' | 'large';
 export type ProgressBarColor = 'primary' | 'success' | 'error' | 'warning';
 
+/** ProgressBar — 수평 진행률 표시 */
 export interface ProgressBarProps {
   progress: number;
   size?: ProgressBarSize;

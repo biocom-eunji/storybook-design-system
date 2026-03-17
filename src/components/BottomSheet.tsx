@@ -1,7 +1,8 @@
 import React from 'react';
 import { View, Text, Pressable, StyleSheet, type ViewStyle } from 'react-native';
-import { coolNeutral, fontSize, fontWeight, spacing } from '../tokens/theme';
+import { coolNeutral, fontSize, fontWeight, spacing, semanticColor, radius } from '../tokens/theme';
 
+/** BottomSheet — 하단에서 올라오는 시트 */
 export interface BottomSheetProps {
   visible: boolean;
   onClose?: () => void;
@@ -60,9 +61,9 @@ const styles = StyleSheet.create({
     bottom: 0,
   } as ViewStyle,
   sheet: {
-    backgroundColor: '#FFFFFF',
-    borderTopLeftRadius: 20,
-    borderTopRightRadius: 20,
+    backgroundColor: semanticColor.backgroundPrimary,
+    borderTopLeftRadius: radius.xl,
+    borderTopRightRadius: radius.xl,
   } as ViewStyle,
   handleContainer: {
     alignItems: 'center',

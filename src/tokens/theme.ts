@@ -309,6 +309,16 @@ export const radius = {
   full: 9999,
 } as const;
 
+// ─── Interaction ─────────────────────────────────────────
+
+/** 인터랙션 피드백에 사용하는 공통 상수 */
+export const interaction = {
+  /** Pressable 눌림 시 투명도 */
+  pressOpacity: 0.7,
+  /** 오버레이(바텀시트, 모달) 배경 투명도 */
+  overlayOpacity: 0.4,
+} as const;
+
 // ─── Semantic Color Tokens ───────────────────────────────
 // 컴포넌트에서 color={semanticColor.textPrimary} 형태로 사용
 

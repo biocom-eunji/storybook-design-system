@@ -1,10 +1,11 @@
 import React from 'react';
 import { View, type ViewStyle } from 'react-native';
 import { Button, type ButtonProps } from './Button';
-import { actionAreaToken, coolNeutral, spacing, radius } from '../tokens/theme';
+import { actionAreaToken, coolNeutral, spacing, radius, semanticColor } from '../tokens/theme';
 
 export type ActionAreaVariant = 'strong' | 'neutral' | 'compact' | 'cancel';
 
+/** ActionArea — 화면 하단 액션 버튼 영역 */
 export interface ActionAreaProps {
   /** 레이아웃 변형 */
   variant?: ActionAreaVariant;
@@ -38,7 +39,7 @@ export function ActionArea({
     paddingHorizontal: actionAreaToken.padding,
     paddingVertical: spacing.md,
     gap: actionAreaToken.gap,
-    backgroundColor: transparent ? 'transparent' : '#FFFFFF',
+    backgroundColor: transparent ? 'transparent' : semanticColor.backgroundPrimary,
     borderTopWidth: divider ? 1 : 0,
     borderTopColor: coolNeutral[96],
   };

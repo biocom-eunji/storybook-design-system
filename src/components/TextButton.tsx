@@ -9,6 +9,7 @@ import {
   type PressableStateCallbackType,
 } from 'react-native';
 import { textButtonToken, fontWeight } from '../tokens/theme';
+import { renderIcon } from './utils';
 
 export type TextButtonColor = 'primary' | 'assistive';
 export type TextButtonSize = 'small' | 'medium';
@@ -70,29 +71,9 @@ export function TextButton({
 
         return (
           <>
-            {leadingIcon && (
-              <View style={{ width: sizeToken.iconSize, height: sizeToken.iconSize }}>
-                {React.isValidElement(leadingIcon)
-                  ? React.cloneElement(leadingIcon as React.ReactElement<any>, {
-                      width: sizeToken.iconSize,
-                      height: sizeToken.iconSize,
-                      color: contentColor,
-                    })
-                  : leadingIcon}
-              </View>
-            )}
+            {renderIcon(leadingIcon, sizeToken.iconSize, contentColor)}
             <Text style={textStyle}>{label}</Text>
-            {trailingIcon && (
-              <View style={{ width: sizeToken.iconSize, height: sizeToken.iconSize }}>
-                {React.isValidElement(trailingIcon)
-                  ? React.cloneElement(trailingIcon as React.ReactElement<any>, {
-                      width: sizeToken.iconSize,
-                      height: sizeToken.iconSize,
-                      color: contentColor,
-                    })
-                  : trailingIcon}
-              </View>
-            )}
+            {renderIcon(trailingIcon, sizeToken.iconSize, contentColor)}
           </>
         );
       }}

@@ -14,6 +14,7 @@ export type ButtonVariant = 'solid' | 'outlined';
 export type ButtonColor = 'primary' | 'assistive';
 export type ButtonSize = 'small' | 'medium' | 'large';
 
+/** Button — 주요 액션을 유도하는 버튼 */
 export interface ButtonProps {
   label: string;
   onPress?: () => void;

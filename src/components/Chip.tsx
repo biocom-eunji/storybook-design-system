@@ -10,10 +10,12 @@ import {
   type ImageSourcePropType,
 } from 'react-native';
 import { chipToken, fontWeight } from '../tokens/theme';
+import { renderIcon } from './utils';
 
 export type ChipVariant = 'solid' | 'outlined';
 export type ChipSize = 'xsmall' | 'small' | 'medium' | 'large';
 
+/** Chip — 정보 분류·상태 표시용 태그 */
 export interface ChipProps {
   label: string;
   onPress?: () => void;
@@ -96,29 +98,9 @@ export function Chip({
           }}
         />
       )}
-      {leadingIcon && (
-        <View style={{ width: sizeToken.iconSize, height: sizeToken.iconSize }}>
-          {React.isValidElement(leadingIcon)
-            ? React.cloneElement(leadingIcon as React.ReactElement<any>, {
-                width: sizeToken.iconSize,
-                height: sizeToken.iconSize,
-                color: iconColor,
-              })
-            : leadingIcon}
-        </View>
-      )}
+      {renderIcon(leadingIcon, sizeToken.iconSize, iconColor)}
       <Text style={textStyle}>{label}</Text>
-      {trailingIcon && (
-        <View style={{ width: sizeToken.iconSize, height: sizeToken.iconSize }}>
-          {React.isValidElement(trailingIcon)
-            ? React.cloneElement(trailingIcon as React.ReactElement<any>, {
-                width: sizeToken.iconSize,
-                height: sizeToken.iconSize,
-                color: iconColor,
-              })
-            : trailingIcon}
-        </View>
-      )}
+      {renderIcon(trailingIcon, sizeToken.iconSize, iconColor)}
     </Pressable>
   );
 }

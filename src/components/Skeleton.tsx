@@ -4,6 +4,7 @@ import { coolNeutral, radius } from '../tokens/theme';
 
 export type SkeletonVariant = 'text' | 'circular' | 'rectangular';
 
+/** Skeleton — 로딩 플레이스홀더 */
 export interface SkeletonProps {
   variant?: SkeletonVariant;
   width?: number | string;

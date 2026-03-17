@@ -1,7 +1,7 @@
 import React from 'react';
 import { Pressable, View, Text } from 'react-native';
 import Svg, { Path, Rect } from 'react-native-svg';
-import { coolNeutral, mint, fontWeight } from '../tokens/theme';
+import { coolNeutral, mint, fontWeight, interaction } from '../tokens/theme';
 
 export type CheckboxSize = 'small' | 'medium';
 export type CheckboxState = 'unchecked' | 'checked' | 'indeterminate';
@@ -49,11 +49,14 @@ export function Checkbox({
   return (
     <Pressable
       onPress={disabled ? undefined : onPress}
+      accessibilityRole="checkbox"
+      accessibilityState={{ checked: isChecked || isIndeterminate }}
+      accessibilityLabel={label}
       style={({ pressed }) => ({
         flexDirection: 'row',
         alignItems: 'center',
         gap: label ? s.gap : 0,
-        opacity: pressed && !disabled ? 0.7 : 1,
+        opacity: pressed && !disabled ? interaction.pressOpacity : 1,
         paddingVertical: tight ? 8 : 12,
         paddingHorizontal: tight ? 12 : 0,
         backgroundColor: tight ? coolNeutral[99] : 'transparent',

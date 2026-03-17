@@ -11,6 +11,7 @@ export interface ToastAction {
   onPress: () => void;
 }
 
+/** Toast — 짧은 피드백 알림 메시지 */
 export interface ToastProps {
   message: string;
   variant?: ToastVariant;

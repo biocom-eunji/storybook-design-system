@@ -1,23 +1,9 @@
 import React, { useState } from 'react';
 import { View, Text } from 'react-native';
 import type { Meta, StoryObj } from '@storybook/react-vite';
-import { TabBar } from '../src/components/TabBar';
-import { Section, StateLabel, Row, Col, SpecTable, CodeBlock, CompareGrid, Divider } from './storyHelpers';
+import { TabBar, BIOCOM_TABS } from '../src/components/TabBar';
+import { Section, StateLabel, Col, SpecTable, CodeBlock, Divider } from './storyHelpers';
 import { coolNeutral, mint, fontSize, fontWeight, spacing, radius, semanticColor } from '../src/tokens/theme';
-
-const defaultTabs = [
-  { key: 'home', label: '홈' },
-  { key: 'search', label: '검색' },
-  { key: 'notifications', label: '알림' },
-  { key: 'my', label: '마이' },
-];
-
-const iconTabs = [
-  { key: 'home', label: '홈', icon: 'house' },
-  { key: 'search', label: '검색', icon: 'magnifying-glass' },
-  { key: 'notifications', label: '알림', icon: 'bell' },
-  { key: 'my', label: '마이', icon: 'user-circle' },
-];
 
 const meta: Meta<typeof TabBar> = {
   title: 'Display/TabBar',
@@ -25,13 +11,8 @@ const meta: Meta<typeof TabBar> = {
   argTypes: {
     activeTab: {
       control: 'select',
-      options: ['home', 'search', 'notifications', 'my'],
+      options: ['contents', 'goal', 'main', 'ai', 'shop'],
       description: '활성 탭 키',
-    },
-    variant: {
-      control: 'select',
-      options: ['default', 'floating'],
-      description: '스타일 변형',
     },
   },
   tags: ['autodocs'],
@@ -40,9 +21,9 @@ const meta: Meta<typeof TabBar> = {
 export default meta;
 type Story = StoryObj<typeof TabBar>;
 
-const PreviewContainer = ({ children, dark }: { children: React.ReactNode; dark?: boolean }) => (
+const PreviewContainer = ({ children }: { children: React.ReactNode }) => (
   <View style={{
-    backgroundColor: dark ? coolNeutral[17] : coolNeutral[99],
+    backgroundColor: coolNeutral[99],
     paddingTop: spacing['3xl'],
     borderRadius: radius.md,
     overflow: 'hidden',
@@ -54,34 +35,41 @@ const PreviewContainer = ({ children, dark }: { children: React.ReactNode; dark?
 // ─── 1. Playground ───────────────────────────────────────────
 
 export const Playground: Story = {
-  args: {
-    tabs: defaultTabs,
-    activeTab: 'home',
-    variant: 'default',
+  render: () => {
+    const [activeTab, setActiveTab] = useState('main');
+    return (
+      <PreviewContainer>
+        <TabBar
+          tabs={BIOCOM_TABS}
+          activeTab={activeTab}
+          onTabPress={setActiveTab}
+        />
+      </PreviewContainer>
+    );
   },
 };
 
-// ─── 2. 기본 탭바 ───────────────────────────────────────────
+// ─── 2. 바이오컴 탭바 ───────────────────────────────────────
 
-export const Default: Story = {
-  name: '기본 탭바',
+export const BiocomTabBar: Story = {
+  name: '바이오컴 탭바',
   render: () => {
-    const [activeTab, setActiveTab] = useState('home');
+    const [activeTab, setActiveTab] = useState('main');
     return (
       <Section
-        title="기본 탭바"
-        description="4개 탭이 포함된 인터랙티브 탭바입니다. 탭을 눌러 전환해 보세요."
+        title="바이오컴 탭바"
+        description="콘텐츠 · 목표 · 메인 · AI · 쇼핑 — 바이오컴 서비스의 기본 하단 내비게이션입니다."
       >
         <PreviewContainer>
           <TabBar
-            tabs={defaultTabs}
+            tabs={BIOCOM_TABS}
             activeTab={activeTab}
             onTabPress={setActiveTab}
           />
         </PreviewContainer>
         <View style={{ marginTop: spacing.md }}>
           <Text style={{ fontSize: fontSize.sm, color: coolNeutral[50] }}>
-            현재 활성 탭: <Text style={{ fontWeight: fontWeight.bold, color: mint[45] }}>{activeTab}</Text>
+            현재 활성 탭: <Text style={{ fontWeight: fontWeight.bold, color: semanticColor.textBrand }}>{activeTab}</Text>
           </Text>
         </View>
       </Section>
@@ -89,75 +77,64 @@ export const Default: Story = {
   },
 };
 
-// ─── 3. 플로팅 변형 ────────────────────────────────────────────
+// ─── 3. 탭별 활성 상태 ──────────────────────────────────────
 
-export const Floating: Story = {
-  name: '플로팅 변형',
-  render: () => {
-    const [activeTab, setActiveTab] = useState('home');
-    return (
-      <Section
-        title="플로팅 변형"
-        description="둥근 모서리와 그림자가 적용된 플로팅 스타일 탭바입니다."
-      >
-        <PreviewContainer dark>
-          <TabBar
-            tabs={defaultTabs}
-            activeTab={activeTab}
-            onTabPress={setActiveTab}
-            variant="floating"
-          />
-        </PreviewContainer>
-      </Section>
-    );
-  },
+export const ActiveStates: Story = {
+  name: '탭별 활성 상태',
+  render: () => (
+    <Section
+      title="탭별 활성 상태"
+      description="각 탭이 활성화된 상태를 한눈에 비교합니다."
+    >
+      <Col gap={spacing.xl}>
+        {BIOCOM_TABS.map((tab) => (
+          <Col key={tab.key} gap={spacing.sm}>
+            <StateLabel>{`${tab.label} 활성`}</StateLabel>
+            <PreviewContainer>
+              <TabBar tabs={BIOCOM_TABS} activeTab={tab.key} />
+            </PreviewContainer>
+          </Col>
+        ))}
+      </Col>
+    </Section>
+  ),
 };
 
-// ─── 4. 아이콘 탭바 ────────────────────────────────────────────
+// ─── 4. 아이콘 매핑 ────────────────────────────────────────
 
-export const WithIcons: Story = {
-  name: '아이콘 탭바',
-  render: () => {
-    const [activeTab, setActiveTab] = useState('home');
-    return (
-      <View style={{ gap: spacing['3xl'] }}>
-        <Section
-          title="아이콘 탭바"
-          description="아이콘이 포함된 탭바입니다. Icon 컴포넌트와 함께 사용합니다."
-        >
-          <CompareGrid
-            items={[
-              {
-                label: 'Default',
-                content: (
-                  <PreviewContainer>
-                    <TabBar
-                      tabs={iconTabs}
-                      activeTab={activeTab}
-                      onTabPress={setActiveTab}
-                    />
-                  </PreviewContainer>
-                ),
-              },
-              {
-                label: 'Floating',
-                content: (
-                  <PreviewContainer dark>
-                    <TabBar
-                      tabs={iconTabs}
-                      activeTab={activeTab}
-                      onTabPress={setActiveTab}
-                      variant="floating"
-                    />
-                  </PreviewContainer>
-                ),
-              },
-            ]}
-          />
-        </Section>
-      </View>
-    );
-  },
+export const IconMapping: Story = {
+  name: '아이콘 매핑',
+  render: () => (
+    <Section
+      title="아이콘 매핑"
+      description="각 탭에 사용된 Icon 컴포넌트 이름입니다. 모두 기존 Icon 파운데이션에서 가져옵니다."
+    >
+      <SpecTable
+        title="탭 → 아이콘 매핑"
+        rows={[
+          { label: '콘텐츠', value: 'stack', token: '<Icon name="stack" />' },
+          { label: '목표', value: 'streak', token: '<Icon name="streak" />' },
+          { label: '메인', value: 'house', token: '<Icon name="house" />' },
+          { label: 'AI', value: 'heart', token: '<Icon name="heart" />' },
+          { label: '쇼핑', value: 'shopping-cart-simple', token: '<Icon name="shopping-cart-simple" />' },
+        ]}
+      />
+
+      <Divider />
+
+      <SpecTable
+        title="색상 토큰"
+        rows={[
+          { label: '활성 아이콘', value: semanticColor.iconBrand, token: 'semanticColor.iconBrand' },
+          { label: '비활성 아이콘', value: semanticColor.iconDisabled, token: 'semanticColor.iconDisabled' },
+          { label: '활성 텍스트', value: semanticColor.textBrand, token: 'semanticColor.textBrand' },
+          { label: '비활성 텍스트', value: semanticColor.textSecondary, token: 'semanticColor.textSecondary' },
+          { label: '배경', value: semanticColor.backgroundPrimary, token: 'semanticColor.backgroundPrimary' },
+          { label: '구분선', value: semanticColor.borderDefault, token: 'semanticColor.borderDefault' },
+        ]}
+      />
+    </Section>
+  ),
 };
 
 // ─── 5. 디자인 스펙 ─────────────────────────────────────────
@@ -165,73 +142,28 @@ export const WithIcons: Story = {
 export const DesignSpec: Story = {
   name: '디자인 스펙',
   render: () => (
-    <View style={{ gap: spacing['3xl'] }}>
-      <Section
-        title="디자인 스펙"
-        description="TabBar 컴포넌트의 디자인 토큰 상세 스펙입니다."
-      >
+    <Section title="디자인 스펙" description="TabBar 컴포넌트의 레이아웃 토큰 명세입니다.">
+      <Col gap={spacing.xl}>
         <SpecTable
-          title="컨테이너 (Default)"
+          title="컨테이너"
           rows={[
-            { label: '높이', value: '56px', token: '—' },
-            { label: '배경색', value: '#FFFFFF', token: 'palette.white' },
-            { label: '상단 테두리', value: `1px ${coolNeutral[96]}`, token: 'coolNeutral[96]' },
-            { label: '방향', value: 'row', token: '—' },
+            { label: '높이', value: '60px', token: '—' },
+            { label: '배경색', value: semanticColor.backgroundPrimary, token: 'semanticColor.backgroundPrimary' },
+            { label: '상단 테두리', value: semanticColor.borderDefault, token: 'semanticColor.borderDefault' },
+            { label: '하단 패딩', value: `${spacing.xs}px`, token: 'spacing.xs' },
           ]}
         />
-
-        <SpecTable
-          title="컨테이너 (Floating)"
-          rows={[
-            { label: '높이', value: '52px', token: '—' },
-            { label: '배경색', value: '#FFFFFF', token: 'palette.white' },
-            { label: '모서리 반경', value: '28px', token: '—' },
-            { label: '좌우 마진', value: '16px', token: '—' },
-            { label: '하단 마진', value: '8px', token: '—' },
-            { label: '그림자 색상', value: '#000000', token: 'palette.black' },
-            { label: '그림자 오프셋', value: '0 / 2', token: '—' },
-            { label: '그림자 투명도', value: '0.08', token: '—' },
-            { label: '그림자 반경', value: '8px', token: '—' },
-          ]}
-        />
-
         <SpecTable
           title="탭 아이템"
           rows={[
-            { label: '정렬', value: 'flex: 1, center', token: '—' },
-            { label: '간격', value: '2px', token: '—' },
+            { label: '아이콘 크기', value: '24px', token: '—' },
+            { label: '라벨 폰트', value: `${fontSize.xs}px`, token: 'fontSize.xs' },
+            { label: '아이콘-라벨 간격', value: `${spacing.xs}px`, token: 'spacing.xs' },
+            { label: '상단 패딩', value: `${spacing.sm}px`, token: 'spacing.sm' },
           ]}
         />
-
-        <SpecTable
-          title="라벨"
-          rows={[
-            { label: '폰트 크기', value: `${fontSize.xs}px`, token: 'fontSize.xs' },
-            { label: '활성 색상', value: mint[45], token: 'mint[45]' },
-            { label: '비활성 색상', value: coolNeutral[60], token: 'coolNeutral[60]' },
-            { label: '활성 굵기', value: fontWeight.semibold, token: 'fontWeight.semibold' },
-            { label: '비활성 굵기', value: fontWeight.medium, token: 'fontWeight.medium' },
-          ]}
-        />
-
-        <SpecTable
-          title="아이콘"
-          rows={[
-            { label: '크기', value: '24px', token: '—' },
-            { label: '활성 색상', value: mint[45], token: 'mint[45]' },
-            { label: '비활성 색상', value: coolNeutral[60], token: 'coolNeutral[60]' },
-          ]}
-        />
-
-        <SpecTable
-          title="활성 인디케이터"
-          rows={[
-            { label: '크기', value: '4px (원형)', token: '—' },
-            { label: '배경색', value: mint[45], token: 'mint[45]' },
-          ]}
-        />
-      </Section>
-    </View>
+      </Col>
+    </Section>
   ),
 };
 
@@ -240,81 +172,39 @@ export const DesignSpec: Story = {
 export const Usage: Story = {
   name: '사용 가이드',
   render: () => (
-    <View style={{ gap: spacing['3xl'] }}>
-      <Section
-        title="사용 가이드"
-        description="개발자를 위한 TabBar 컴포넌트 사용 예시입니다."
-      >
+    <Section title="사용 가이드" description="개발자를 위한 TabBar 컴포넌트 사용 예시입니다.">
+      <Col gap={spacing.lg}>
         <CodeBlock
           title="Import"
-          code={`import { TabBar } from '@design-system/components/TabBar';`}
+          code={`import { TabBar, BIOCOM_TABS } from '@design-system/components/TabBar';`}
         />
 
         <CodeBlock
-          title="기본 사용"
-          code={`const [activeTab, setActiveTab] = useState('home');
+          title="바이오컴 기본 탭바 (가장 간단한 사용법)"
+          code={`const [activeTab, setActiveTab] = useState('main');
 
 <TabBar
-  tabs={[
-    { key: 'home', label: '홈' },
-    { key: 'search', label: '검색' },
-    { key: 'notifications', label: '알림' },
-    { key: 'my', label: '마이' },
-  ]}
+  tabs={BIOCOM_TABS}
   activeTab={activeTab}
   onTabPress={setActiveTab}
 />`}
         />
 
         <CodeBlock
-          title="아이콘과 함께 사용"
+          title="커스텀 탭 구성"
           code={`<TabBar
   tabs={[
-    { key: 'home', label: '홈', icon: 'house' },
-    { key: 'search', label: '검색', icon: 'magnifying-glass' },
-    { key: 'notifications', label: '알림', icon: 'bell' },
-    { key: 'my', label: '마이', icon: 'user-circle' },
+    { key: 'contents', label: '콘텐츠', icon: 'stack' },
+    { key: 'goal', label: '목표', icon: 'streak' },
+    { key: 'main', label: '메인', icon: 'house' },
+    { key: 'ai', label: 'AI', icon: 'heart' },
+    { key: 'shop', label: '쇼핑', icon: 'shopping-cart-simple' },
   ]}
   activeTab={activeTab}
   onTabPress={setActiveTab}
 />`}
         />
-
-        <CodeBlock
-          title="플로팅 변형"
-          code={`<TabBar
-  tabs={tabs}
-  activeTab={activeTab}
-  onTabPress={setActiveTab}
-  variant="floating"
-/>`}
-        />
-
-        <Divider />
-
-        <Col gap={spacing.sm}>
-          <StateLabel>Props</StateLabel>
-          <SpecTable
-            rows={[
-              { label: 'tabs', value: 'TabItem[]', token: '탭 아이템 배열 (필수)' },
-              { label: 'activeTab', value: 'string', token: '활성 탭 key (필수)' },
-              { label: 'onTabPress', value: '(key: string) => void', token: '탭 클릭 콜백' },
-              { label: 'variant', value: "'default' | 'floating'", token: '스타일 변형 (기본: default)' },
-            ]}
-          />
-        </Col>
-
-        <Col gap={spacing.sm}>
-          <StateLabel>TabItem</StateLabel>
-          <SpecTable
-            rows={[
-              { label: 'key', value: 'string', token: '고유 식별자 (필수)' },
-              { label: 'label', value: 'string', token: '탭 라벨 (필수)' },
-              { label: 'icon', value: 'string', token: 'Icon 이름 (선택)' },
-            ]}
-          />
-        </Col>
-      </Section>
-    </View>
+      </Col>
+    </Section>
   ),
 };

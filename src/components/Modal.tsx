@@ -1,6 +1,6 @@
 import React from 'react';
 import { View, Text, Pressable, StyleSheet, type ViewStyle, type TextStyle } from 'react-native';
-import { coolNeutral, mint, red, fontSize, fontWeight, spacing } from '../tokens/theme';
+import { coolNeutral, mint, red, fontSize, fontWeight, spacing, semanticColor, radius } from '../tokens/theme';
 
 export interface ModalAction {
   label: string;
@@ -8,6 +8,7 @@ export interface ModalAction {
   destructive?: boolean;
 }
 
+/** Modal — 사용자 확인이 필요한 대화상자 */
 export interface ModalProps {
   visible: boolean;
   onClose?: () => void;
@@ -83,8 +84,8 @@ const styles = StyleSheet.create({
     bottom: 0,
   } as ViewStyle,
   dialog: {
-    backgroundColor: '#FFFFFF',
-    borderRadius: 20,
+    backgroundColor: semanticColor.backgroundPrimary,
+    borderRadius: radius.xl,
     width: 300,
     padding: spacing['2xl'],
   } as ViewStyle,

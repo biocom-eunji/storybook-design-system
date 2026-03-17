@@ -12,6 +12,7 @@ import { coolNeutral, mint, palette, fontWeight } from '../tokens/theme';
 
 export type AvatarSize = 'small' | 'medium' | 'large' | 'xlarge';
 
+/** Avatar — 사용자 프로필 이미지/이니셜 */
 export interface AvatarProps {
   source?: ImageSourcePropType;
   name?: string;
@@ -19,7 +20,7 @@ export interface AvatarProps {
   online?: boolean;
 }
 
-const SIZE_MAP = {
+const sizeMap = {
   small: { container: 32, fontSize: 13, onlineDot: 8 },
   medium: { container: 40, fontSize: 15, onlineDot: 10 },
   large: { container: 56, fontSize: 20, onlineDot: 12 },
@@ -32,7 +33,7 @@ export function Avatar({
   size = 'medium',
   online,
 }: AvatarProps) {
-  const sizeToken = SIZE_MAP[size];
+  const sizeToken = sizeMap[size];
   const containerSize = sizeToken.container;
 
   const containerStyle: ViewStyle = {

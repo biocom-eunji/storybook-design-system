@@ -15,6 +15,8 @@ import {
   red,
   green,
   fontWeight,
+  semanticColor,
+  spacing,
 } from '../tokens/theme';
 
 // ─── Types ───────────────────────────────────────────────
@@ -127,7 +129,7 @@ export function InputField({
     borderWidth: 1,
     borderColor: getBorderColor(),
     borderRadius: 12,
-    backgroundColor: disabled ? coolNeutral[99] : '#FFFFFF',
+    backgroundColor: disabled ? semanticColor.backgroundSecondary : semanticColor.backgroundPrimary,
     paddingHorizontal: 16,
     paddingVertical: multiline ? 14 : 0,
     minHeight: multiline ? minHeight : 48,
@@ -165,25 +167,25 @@ export function InputField({
     switch (resolvedTrailingIcon) {
       case 'clear':
         return (
-          <Pressable onPress={onClear} hitSlop={8} style={{ marginLeft: 8 }}>
+          <Pressable onPress={onClear} hitSlop={8} style={{ marginLeft: spacing.sm }}>
             <ClearIcon />
           </Pressable>
         );
       case 'error':
         return (
-          <View style={{ marginLeft: 8 }}>
+          <View style={{ marginLeft: spacing.sm }}>
             <ErrorIcon />
           </View>
         );
       case 'success':
         return (
-          <View style={{ marginLeft: 8 }}>
+          <View style={{ marginLeft: spacing.sm }}>
             <SuccessIcon />
           </View>
         );
       case 'search':
         return (
-          <View style={{ marginLeft: 8 }}>
+          <View style={{ marginLeft: spacing.sm }}>
             <SearchIcon />
           </View>
         );
@@ -218,6 +220,7 @@ export function InputField({
           placeholderTextColor={placeholderColor}
           editable={!disabled}
           multiline={multiline}
+          accessibilityLabel={label}
           onFocus={() => setIsFocused(true)}
           onBlur={() => setIsFocused(false)}
           style={inputStyle}
@@ -226,7 +229,7 @@ export function InputField({
 
         {!multiline && (renderTrailingIcon() || null)}
         {!multiline && trailingText && (
-          <Pressable onPress={onTrailingTextPress} hitSlop={8} style={{ marginLeft: 8 }}>
+          <Pressable onPress={onTrailingTextPress} hitSlop={8} style={{ marginLeft: spacing.sm }}>
             <Text style={{
               fontSize: 14,
               fontWeight: fontWeight.semibold,
@@ -247,7 +250,7 @@ export function InputField({
             <View style={{ flexDirection: 'row', alignItems: 'center' }}>
               {renderTrailingIcon()}
               {trailingText && (
-                <Pressable onPress={onTrailingTextPress} hitSlop={8} style={{ marginLeft: 8 }}>
+                <Pressable onPress={onTrailingTextPress} hitSlop={8} style={{ marginLeft: spacing.sm }}>
                   <Text style={{
                     fontSize: 14,
                     fontWeight: fontWeight.semibold,

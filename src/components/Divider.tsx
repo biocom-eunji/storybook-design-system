@@ -4,6 +4,7 @@ import { coolNeutral } from '../tokens/theme';
 
 export type DividerDirection = 'horizontal' | 'vertical';
 
+/** Divider — 콘텐츠 구분선 */
 export interface DividerProps {
   direction?: DividerDirection;
   thickness?: number;

@@ -1,6 +1,6 @@
 import React from 'react';
 import { Pressable, View, type ViewStyle } from 'react-native';
-import { coolNeutral, mint } from '../tokens/theme';
+import { coolNeutral, mint, interaction, } from '../tokens/theme';
 
 export type SwitchPlatform = 'ios' | 'normal';
 export type SwitchSize = 'small' | 'medium';
@@ -51,8 +51,10 @@ export function Switch({
   return (
     <Pressable
       onPress={disabled ? undefined : onPress}
+      accessibilityRole="switch"
+      accessibilityState={{ checked: active }}
       style={({ pressed }) => ({
-        opacity: pressed && !disabled ? 0.7 : 1,
+        opacity: pressed && !disabled ? interaction.pressOpacity : 1,
       })}
     >
       <View style={{
