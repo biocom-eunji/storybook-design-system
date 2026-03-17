@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { View, Text, Pressable, TextInput } from 'react-native';
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import { Modal } from '../src/components/Modal';
-import { Section, StateLabel, Row, Col, SpecTable, CodeBlock, CompareGrid, Divider } from './storyHelpers';
+import { Section, StateLabel, Col, SpecTable, CodeBlock, Divider } from './storyHelpers';
 import { coolNeutral, mint, red, fontSize, fontWeight, spacing, radius, semanticColor } from '../src/tokens/theme';
 
 const meta: Meta<typeof Modal> = {

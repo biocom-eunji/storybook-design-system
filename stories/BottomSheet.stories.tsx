@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { View, Text, Pressable } from 'react-native';
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import { BottomSheet } from '../src/components/BottomSheet';
-import { Section, StateLabel, Row, Col, SpecTable, CodeBlock, CompareGrid, Divider } from './storyHelpers';
+import { Section, StateLabel, Col, SpecTable, CodeBlock, CompareGrid, Divider } from './storyHelpers';
 import { coolNeutral, mint, fontSize, fontWeight, spacing, radius, semanticColor } from '../src/tokens/theme';
 
 const meta: Meta<typeof BottomSheet> = {

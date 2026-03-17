@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { View, Text, Pressable, type ViewStyle, type TextStyle } from 'react-native';
 import { Icon } from './Icon';
-import { coolNeutral, mint, red, yellow, fontSize, fontWeight, radius, spacing } from '../tokens/theme';
+import { coolNeutral, mint, red, yellow, fontSize, fontWeight, radius, spacing, palette } from '../tokens/theme';
 
 export type ToastVariant = 'success' | 'error' | 'warning';
 export type ToastPosition = 'top' | 'bottom';
@@ -83,7 +83,7 @@ export function Toast({
   };
 
   const messageStyle: TextStyle = {
-    color: '#FFFFFF',
+    color: palette.white,
     fontSize: fontSize.medium,
     fontWeight: fontWeight.medium,
     flex: 1,

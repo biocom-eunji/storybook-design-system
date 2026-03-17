@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { View } from 'react-native';
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import { InputField } from '../src/components/InputField';
-import { Section, StateLabel, Row, Col, SpecTable, CodeBlock, CompareGrid, Divider } from './storyHelpers';
+import { Section, StateLabel, Col, SpecTable, CodeBlock, Divider } from './storyHelpers';
 import { coolNeutral, mint, red, fontSize, fontWeight, spacing, radius } from '../src/tokens/theme';
 
 const meta: Meta<typeof InputField> = {

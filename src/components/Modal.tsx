@@ -1,6 +1,6 @@
 import React from 'react';
 import { View, Text, Pressable, StyleSheet, type ViewStyle, type TextStyle } from 'react-native';
-import { coolNeutral, mint, red, fontSize, fontWeight, spacing, semanticColor, radius } from '../tokens/theme';
+import { coolNeutral, mint, red, fontSize, fontWeight, spacing, semanticColor, radius, palette } from '../tokens/theme';
 
 export interface ModalAction {
   label: string;
@@ -119,7 +119,7 @@ const styles = StyleSheet.create({
     backgroundColor: red[70],
   } as ViewStyle,
   primaryButtonText: {
-    color: '#FFFFFF',
+    color: palette.white,
     fontSize: fontSize.medium,
     fontWeight: fontWeight.semibold,
   } as TextStyle,

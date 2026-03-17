@@ -2,7 +2,7 @@ import React from 'react';
 import { View, Text } from 'react-native';
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import { Divider as DividerComponent } from '../src/components/Divider';
-import { Section, StateLabel, Row, Col, SpecTable, CodeBlock, CompareGrid, Divider as DividerLine } from './storyHelpers';
+import { Section, StateLabel, Col, SpecTable, CodeBlock, Divider as DividerLine } from './storyHelpers';
 import { coolNeutral, mint, red, yellow, fontSize, fontWeight, spacing, radius, semanticColor } from '../src/tokens/theme';
 
 const meta: Meta<typeof DividerComponent> = {

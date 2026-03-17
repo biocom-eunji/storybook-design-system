@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { View, Text, Pressable } from 'react-native';
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import { ProgressBar } from '../src/components/ProgressBar';
-import { Section, StateLabel, Row, Col, SpecTable, CodeBlock, CompareGrid, Divider } from './storyHelpers';
+import { Section, StateLabel, Row, Col, SpecTable, CodeBlock, Divider } from './storyHelpers';
 import { coolNeutral, mint, green, red, yellow, fontSize, fontWeight, spacing, radius } from '../src/tokens/theme';
 
 const meta: Meta<typeof ProgressBar> = {

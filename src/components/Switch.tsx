@@ -1,6 +1,6 @@
 import React from 'react';
 import { Pressable, View, type ViewStyle } from 'react-native';
-import { coolNeutral, mint, interaction, } from '../tokens/theme';
+import { coolNeutral, mint, interaction, palette } from '../tokens/theme';
 
 export type SwitchPlatform = 'ios' | 'normal';
 export type SwitchSize = 'small' | 'medium';
@@ -39,7 +39,7 @@ export function Switch({
     ? (active ? mint[90] : coolNeutral[96])
     : (active ? mint[45] : coolNeutral[90]);
 
-  const thumbColor = '#FFFFFF';
+  const thumbColor = palette.white;
   const thumbShadow: ViewStyle = disabled ? {} : {
     shadowColor: '#000',
     shadowOffset: { width: 0, height: 1 },

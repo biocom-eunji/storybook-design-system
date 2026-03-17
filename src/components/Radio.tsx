@@ -1,6 +1,6 @@
 import React from 'react';
 import { Pressable, View, Text, type ViewStyle, type TextStyle } from 'react-native';
-import { coolNeutral, mint, fontWeight, interaction } from '../tokens/theme';
+import { coolNeutral, mint, fontWeight, interaction, palette } from '../tokens/theme';
 
 export type RadioSize = 'small' | 'medium';
 
@@ -72,7 +72,7 @@ export function Radio({
             width: s.inner,
             height: s.inner,
             borderRadius: s.inner / 2,
-            backgroundColor: '#FFFFFF',
+            backgroundColor: palette.white,
           }} />
         )}
       </View>

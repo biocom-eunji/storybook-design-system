@@ -14,6 +14,7 @@ import {
   mint,
   red,
   green,
+  fontSize,
   fontWeight,
   semanticColor,
   spacing,
@@ -139,7 +140,7 @@ export function InputField({
 
   const inputStyle: TextStyle = {
     flex: 1,
-    fontSize: 15,
+    fontSize: fontSize.medium,
     fontWeight: fontWeight.regular,
     color: disabled ? coolNeutral[80] : coolNeutral[17],
     paddingVertical: multiline ? 0 : 14,
@@ -200,7 +201,7 @@ export function InputField({
     <View style={{ gap: 6 }}>
       {label && (
         <Text style={{
-          fontSize: 13,
+          fontSize: fontSize.small,
           fontWeight: fontWeight.medium,
           color: coolNeutral[30],
         }}>
@@ -231,7 +232,7 @@ export function InputField({
         {!multiline && trailingText && (
           <Pressable onPress={onTrailingTextPress} hitSlop={8} style={{ marginLeft: spacing.small }}>
             <Text style={{
-              fontSize: 14,
+              fontSize: fontSize.small,
               fontWeight: fontWeight.semibold,
               color: isFocused ? mint[45] : coolNeutral[50],
             }}>
@@ -243,7 +244,7 @@ export function InputField({
         {multiline && (
           <View style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', marginTop: 8 }}>
             {maxCharCount != null ? (
-              <Text style={{ fontSize: 13, color: (value?.length ?? 0) > maxCharCount ? red[70] : coolNeutral[17] }}>
+              <Text style={{ fontSize: fontSize.small, color: (value?.length ?? 0) > maxCharCount ? red[70] : coolNeutral[17] }}>
                 {value?.length ?? 0}/{maxCharCount}
               </Text>
             ) : <View />}
@@ -252,7 +253,7 @@ export function InputField({
               {trailingText && (
                 <Pressable onPress={onTrailingTextPress} hitSlop={8} style={{ marginLeft: spacing.small }}>
                   <Text style={{
-                    fontSize: 14,
+                    fontSize: fontSize.small,
                     fontWeight: fontWeight.semibold,
                     color: isFocused ? mint[45] : coolNeutral[50],
                   }}>
@@ -267,12 +268,12 @@ export function InputField({
 
       <View style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' }}>
         {bottomMessage ? (
-          <Text style={{ fontSize: 12, color: bottomMessageColor, flex: 1 }}>
+          <Text style={{ fontSize: fontSize.small, color: bottomMessageColor, flex: 1 }}>
             {bottomMessage}
           </Text>
         ) : <View />}
         {!multiline && maxCharCount != null && (
-          <Text style={{ fontSize: 12, color: (value?.length ?? 0) > maxCharCount ? red[70] : coolNeutral[17] }}>
+          <Text style={{ fontSize: fontSize.small, color: (value?.length ?? 0) > maxCharCount ? red[70] : coolNeutral[17] }}>
             {value?.length ?? 0}/{maxCharCount}
           </Text>
         )}

@@ -2,7 +2,7 @@ import React from 'react';
 import { View, Text } from 'react-native';
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import { Badge } from '../src/components/Badge';
-import { Section, StateLabel, Row, Col, SpecTable, CodeBlock, CompareGrid, Divider as DividerLine } from './storyHelpers';
+import { Section, StateLabel, Row, Col, SpecTable, CodeBlock, Divider as DividerLine } from './storyHelpers';
 import { coolNeutral, mint, red, yellow, fontSize, fontWeight, spacing, radius, semanticColor } from '../src/tokens/theme';
 
 const meta: Meta<typeof Badge> = {
