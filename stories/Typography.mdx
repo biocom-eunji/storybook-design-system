@@ -131,6 +131,26 @@ export const styles = [
     .preview-text {
       color: #171719;
     }
+    .font-family-card .download-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      margin-top: 24px;
+      padding: 12px 28px;
+      background-color: #22C3BC;
+      color: #FFFFFF !important;
+      font-size: 15px;
+      font-weight: 600;
+      border-radius: 12px;
+      text-decoration: none;
+      transition: background 0.15s;
+    }
+    .font-family-card .download-btn:hover {
+      background-color: #1FADA7;
+    }
+    .font-family-card .download-btn:visited {
+      color: #FFFFFF !important;
+    }
     .section-divider {
       border: none;
       border-top: 1px solid #E1E2E4;
@@ -159,22 +179,7 @@ export const styles = [
     href="https://cactus.tistory.com/306"
     target="_blank"
     rel="noopener noreferrer"
-    style={{
-      display: 'inline-flex',
-      alignItems: 'center',
-      gap: 8,
-      marginTop: 24,
-      padding: '12px 28px',
-      backgroundColor: '#22C3BC',
-      color: '#FFFFFF',
-      fontSize: 15,
-      fontWeight: 600,
-      borderRadius: 12,
-      textDecoration: 'none',
-      transition: 'background 0.15s',
-    }}
-    onMouseEnter={(e) => { e.currentTarget.style.backgroundColor = '#1FADA7'; }}
-    onMouseLeave={(e) => { e.currentTarget.style.backgroundColor = '#22C3BC'; }}
+    className="download-btn"
   >
     <span style={{ fontSize: 18 }}>↓</span> Pretendard Variable 다운로드하기
   </a>
