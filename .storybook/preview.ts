@@ -31,7 +31,7 @@ const preview: Preview = {
       storySort: {
         order: [
           'Introduction',
-          'Foundation', ['Color Palette', 'Color Tokens', 'Typography'],
+          'Foundation', ['Color Palette', 'Color Tokens', 'Typography', 'Naming Convention'],
           'General', ['Button', 'TextButton', 'Icon', 'Divider'],
           'Form', ['InputField', 'Checkbox', 'CheckMark', 'Radio', 'Switch', 'Chip'],
           'Feedback', ['Toast', 'Modal', 'BottomSheet', 'ProgressBar', 'Skeleton'],

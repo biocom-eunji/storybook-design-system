@@ -41,7 +41,7 @@ export function Skeleton({
         return 4;
       case 'rectangular':
       default:
-        return radius.sm;
+        return radius.small;
     }
   })();
 

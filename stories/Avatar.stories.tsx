@@ -48,20 +48,20 @@ export const AllSizes: Story = {
       title="크기 비교"
       description="Small(32px), Medium(40px), Large(56px), XLarge(80px) 네 가지 크기를 비교합니다."
     >
-      <Row gap={spacing['2xl']} align="flex-end">
-        <Col gap={spacing.sm}>
+      <Row gap={spacing['2xlarge']} align="flex-end">
+        <Col gap={spacing.small}>
           <StateLabel>Small (32px)</StateLabel>
           <Avatar name="김민수" size="small" />
         </Col>
-        <Col gap={spacing.sm}>
+        <Col gap={spacing.small}>
           <StateLabel>Medium (40px)</StateLabel>
           <Avatar name="김민수" size="medium" />
         </Col>
-        <Col gap={spacing.sm}>
+        <Col gap={spacing.small}>
           <StateLabel>Large (56px)</StateLabel>
           <Avatar name="김민수" size="large" />
         </Col>
-        <Col gap={spacing.sm}>
+        <Col gap={spacing.small}>
           <StateLabel>XLarge (80px)</StateLabel>
           <Avatar name="김민수" size="xlarge" />
         </Col>
@@ -79,16 +79,16 @@ export const InitialFallback: Story = {
       title="이니셜 폴백"
       description="이미지가 없을 때 이름의 첫 글자가 이니셜로 표시됩니다."
     >
-      <Row gap={spacing['2xl']}>
-        <Col gap={spacing.sm}>
+      <Row gap={spacing['2xlarge']}>
+        <Col gap={spacing.small}>
           <StateLabel>한글 이름</StateLabel>
           <Avatar name="홍길동" size="large" />
         </Col>
-        <Col gap={spacing.sm}>
+        <Col gap={spacing.small}>
           <StateLabel>영문 이름</StateLabel>
           <Avatar name="Alice" size="large" />
         </Col>
-        <Col gap={spacing.sm}>
+        <Col gap={spacing.small}>
           <StateLabel>이름 없음</StateLabel>
           <Avatar size="large" />
         </Col>
@@ -121,20 +121,20 @@ export const OnlineStatus: Story = {
 
       <DividerLine />
 
-      <Row gap={spacing['2xl']} align="flex-end">
-        <Col gap={spacing.sm}>
+      <Row gap={spacing['2xlarge']} align="flex-end">
+        <Col gap={spacing.small}>
           <StateLabel>Small</StateLabel>
           <Avatar name="A" size="small" online />
         </Col>
-        <Col gap={spacing.sm}>
+        <Col gap={spacing.small}>
           <StateLabel>Medium</StateLabel>
           <Avatar name="B" size="medium" online />
         </Col>
-        <Col gap={spacing.sm}>
+        <Col gap={spacing.small}>
           <StateLabel>Large</StateLabel>
           <Avatar name="C" size="large" online />
         </Col>
-        <Col gap={spacing.sm}>
+        <Col gap={spacing.small}>
           <StateLabel>XLarge</StateLabel>
           <Avatar name="D" size="xlarge" online />
         </Col>
@@ -148,7 +148,7 @@ export const OnlineStatus: Story = {
 export const DesignSpec: Story = {
   name: '디자인 스펙',
   render: () => (
-    <View style={{ gap: spacing['3xl'] }}>
+    <View style={{ gap: spacing['3xlarge'] }}>
       <Section
         title="디자인 스펙"
         description="디자이너와 개발자를 위한 Avatar 토큰 상세 스펙입니다."
@@ -157,13 +157,13 @@ export const DesignSpec: Story = {
           title="크기별 스펙"
           rows={[
             { label: 'Small 크기', value: '32px', token: 'SIZE_MAP.small.container' },
-            { label: 'Small 폰트', value: '13px', token: 'fontSize.sm' },
+            { label: 'Small 폰트', value: '13px', token: 'fontSize.small' },
             { label: 'Medium 크기', value: '40px', token: 'SIZE_MAP.medium.container' },
-            { label: 'Medium 폰트', value: '15px', token: 'fontSize.md' },
+            { label: 'Medium 폰트', value: '15px', token: 'fontSize.medium' },
             { label: 'Large 크기', value: '56px', token: 'SIZE_MAP.large.container' },
-            { label: 'Large 폰트', value: '20px', token: 'fontSize.xl' },
+            { label: 'Large 폰트', value: '20px', token: 'fontSize.xlarge' },
             { label: 'XLarge 크기', value: '80px', token: 'SIZE_MAP.xlarge.container' },
-            { label: 'XLarge 폰트', value: '28px', token: "fontSize['3xl']" },
+            { label: 'XLarge 폰트', value: '28px', token: "fontSize['3xlarge']" },
           ]}
         />
 
@@ -196,7 +196,7 @@ export const DesignSpec: Story = {
 export const Usage: Story = {
   name: '사용 가이드',
   render: () => (
-    <View style={{ gap: spacing['3xl'] }}>
+    <View style={{ gap: spacing['3xlarge'] }}>
       <Section
         title="사용 가이드"
         description="개발자를 위한 Avatar 컴포넌트 사용 예시입니다."

@@ -62,12 +62,12 @@ const styles = StyleSheet.create({
   } as ViewStyle,
   sheet: {
     backgroundColor: semanticColor.backgroundPrimary,
-    borderTopLeftRadius: radius.xl,
-    borderTopRightRadius: radius.xl,
+    borderTopLeftRadius: radius.xlarge,
+    borderTopRightRadius: radius.xlarge,
   } as ViewStyle,
   handleContainer: {
     alignItems: 'center',
-    marginTop: spacing.md,
+    marginTop: spacing.medium,
   } as ViewStyle,
   handle: {
     width: 40,
@@ -77,27 +77,27 @@ const styles = StyleSheet.create({
   } as ViewStyle,
   closeButton: {
     position: 'absolute',
-    right: spacing.lg,
-    top: spacing.lg,
+    right: spacing.large,
+    top: spacing.large,
     width: 24,
     height: 24,
     alignItems: 'center',
     justifyContent: 'center',
   } as ViewStyle,
   closeButtonText: {
-    fontSize: fontSize.lg,
+    fontSize: fontSize.large,
     color: coolNeutral[50],
     fontWeight: fontWeight.medium,
   },
   title: {
-    fontSize: fontSize.lg,
+    fontSize: fontSize.large,
     fontWeight: fontWeight.bold,
     color: coolNeutral[17],
-    paddingHorizontal: spacing.xl,
-    paddingVertical: spacing.lg,
+    paddingHorizontal: spacing.xlarge,
+    paddingVertical: spacing.large,
   },
   content: {
-    paddingHorizontal: spacing.xl,
+    paddingHorizontal: spacing.xlarge,
     paddingBottom: 34,
   } as ViewStyle,
 });

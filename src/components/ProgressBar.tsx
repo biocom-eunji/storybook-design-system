@@ -41,7 +41,7 @@ export function ProgressBar({
   const borderRadius = rounded ? height / 2 : 0;
 
   const labelStyle: TextStyle = {
-    fontSize: fontSize.xs,
+    fontSize: fontSize.xsmall,
     fontWeight: fontWeight.semibold,
     color: coolNeutral[17],
     textAlign: 'right',

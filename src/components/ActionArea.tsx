@@ -37,7 +37,7 @@ export function ActionArea({
 }: ActionAreaProps) {
   const containerStyle: ViewStyle = {
     paddingHorizontal: actionAreaToken.padding,
-    paddingVertical: spacing.md,
+    paddingVertical: spacing.medium,
     gap: actionAreaToken.gap,
     backgroundColor: transparent ? 'transparent' : semanticColor.backgroundPrimary,
     borderTopWidth: divider ? 1 : 0,

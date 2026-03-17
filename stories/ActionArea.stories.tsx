@@ -19,9 +19,9 @@ const meta: Meta<typeof ActionArea> = {
   },
   decorators: [
     (Story) => (
-      <View style={{ maxWidth: 400, backgroundColor: coolNeutral[99], borderRadius: radius.lg, overflow: 'hidden' }}>
+      <View style={{ maxWidth: 400, backgroundColor: coolNeutral[99], borderRadius: radius.large, overflow: 'hidden' }}>
         <View style={{ height: 200, justifyContent: 'center', alignItems: 'center' }}>
-          <Text style={{ fontSize: fontSize.sm, color: coolNeutral[70] }}>화면 콘텐츠 영역</Text>
+          <Text style={{ fontSize: fontSize.small, color: coolNeutral[70] }}>화면 콘텐츠 영역</Text>
         </View>
         <Story />
       </View>
@@ -55,16 +55,16 @@ export const AllVariants: Story = {
       title="모든 변형"
       description="ActionArea는 화면 하단에서 사용자 액션을 유도하는 영역입니다. 4가지 레이아웃 변형을 제공합니다."
     >
-      <View style={{ gap: spacing['3xl'] }}>
+      <View style={{ gap: spacing['3xlarge'] }}>
         {/* Strong */}
-        <Col gap={spacing.sm}>
+        <Col gap={spacing.small}>
           <StateLabel>STRONG — CTA 강조형</StateLabel>
-          <Text style={{ fontSize: fontSize.xs, color: coolNeutral[50], marginBottom: spacing.sm }}>
+          <Text style={{ fontSize: fontSize.xsmall, color: coolNeutral[50], marginBottom: spacing.small }}>
             메인 액션 하나만 크게 노출합니다. 결제, 가입 완료 등 핵심 전환 화면에 사용합니다.
           </Text>
-          <View style={{ maxWidth: 400, backgroundColor: coolNeutral[99], borderRadius: radius.lg, overflow: 'hidden' }}>
+          <View style={{ maxWidth: 400, backgroundColor: coolNeutral[99], borderRadius: radius.large, overflow: 'hidden' }}>
             <View style={{ height: 80, justifyContent: 'center', alignItems: 'center' }}>
-              <Text style={{ fontSize: fontSize.xs, color: coolNeutral[70] }}>콘텐츠</Text>
+              <Text style={{ fontSize: fontSize.xsmall, color: coolNeutral[70] }}>콘텐츠</Text>
             </View>
             <ActionArea
               variant="strong"
@@ -76,14 +76,14 @@ export const AllVariants: Story = {
         <Divider />
 
         {/* Neutral */}
-        <Col gap={spacing.sm}>
+        <Col gap={spacing.small}>
           <StateLabel>NEUTRAL — 보조/메인 복합</StateLabel>
-          <Text style={{ fontSize: fontSize.xs, color: coolNeutral[50], marginBottom: spacing.sm }}>
+          <Text style={{ fontSize: fontSize.xsmall, color: coolNeutral[50], marginBottom: spacing.small }}>
             보조 버튼과 메인 버튼을 함께 노출합니다. 메인 버튼이 2:1 비율로 강조됩니다.
           </Text>
-          <View style={{ maxWidth: 400, backgroundColor: coolNeutral[99], borderRadius: radius.lg, overflow: 'hidden' }}>
+          <View style={{ maxWidth: 400, backgroundColor: coolNeutral[99], borderRadius: radius.large, overflow: 'hidden' }}>
             <View style={{ height: 80, justifyContent: 'center', alignItems: 'center' }}>
-              <Text style={{ fontSize: fontSize.xs, color: coolNeutral[70] }}>콘텐츠</Text>
+              <Text style={{ fontSize: fontSize.xsmall, color: coolNeutral[70] }}>콘텐츠</Text>
             </View>
             <ActionArea
               variant="neutral"
@@ -96,14 +96,14 @@ export const AllVariants: Story = {
         <Divider />
 
         {/* Neutral with tertiary */}
-        <Col gap={spacing.sm}>
+        <Col gap={spacing.small}>
           <StateLabel>NEUTRAL + 제3 버튼</StateLabel>
-          <Text style={{ fontSize: fontSize.xs, color: coolNeutral[50], marginBottom: spacing.sm }}>
+          <Text style={{ fontSize: fontSize.xsmall, color: coolNeutral[50], marginBottom: spacing.small }}>
             상단에 제3 버튼을 추가로 배치할 수 있습니다.
           </Text>
-          <View style={{ maxWidth: 400, backgroundColor: coolNeutral[99], borderRadius: radius.lg, overflow: 'hidden' }}>
+          <View style={{ maxWidth: 400, backgroundColor: coolNeutral[99], borderRadius: radius.large, overflow: 'hidden' }}>
             <View style={{ height: 80, justifyContent: 'center', alignItems: 'center' }}>
-              <Text style={{ fontSize: fontSize.xs, color: coolNeutral[70] }}>콘텐츠</Text>
+              <Text style={{ fontSize: fontSize.xsmall, color: coolNeutral[70] }}>콘텐츠</Text>
             </View>
             <ActionArea
               variant="neutral"
@@ -117,14 +117,14 @@ export const AllVariants: Story = {
         <Divider />
 
         {/* Compact */}
-        <Col gap={spacing.sm}>
+        <Col gap={spacing.small}>
           <StateLabel>COMPACT — 작은 크기 복합</StateLabel>
-          <Text style={{ fontSize: fontSize.xs, color: coolNeutral[50], marginBottom: spacing.sm }}>
+          <Text style={{ fontSize: fontSize.xsmall, color: coolNeutral[50], marginBottom: spacing.small }}>
             Medium 사이즈 버튼으로 공간을 절약합니다. 모달, 바텀시트 등에 적합합니다.
           </Text>
-          <View style={{ maxWidth: 400, backgroundColor: coolNeutral[99], borderRadius: radius.lg, overflow: 'hidden' }}>
+          <View style={{ maxWidth: 400, backgroundColor: coolNeutral[99], borderRadius: radius.large, overflow: 'hidden' }}>
             <View style={{ height: 80, justifyContent: 'center', alignItems: 'center' }}>
-              <Text style={{ fontSize: fontSize.xs, color: coolNeutral[70] }}>콘텐츠</Text>
+              <Text style={{ fontSize: fontSize.xsmall, color: coolNeutral[70] }}>콘텐츠</Text>
             </View>
             <ActionArea
               variant="compact"
@@ -137,14 +137,14 @@ export const AllVariants: Story = {
         <Divider />
 
         {/* Cancel */}
-        <Col gap={spacing.sm}>
+        <Col gap={spacing.small}>
           <StateLabel>CANCEL — 취소/확인</StateLabel>
-          <Text style={{ fontSize: fontSize.xs, color: coolNeutral[50], marginBottom: spacing.sm }}>
+          <Text style={{ fontSize: fontSize.xsmall, color: coolNeutral[50], marginBottom: spacing.small }}>
             취소와 확인 버튼을 1:1 비율로 배치합니다. 확인 대화상자에 사용합니다.
           </Text>
-          <View style={{ maxWidth: 400, backgroundColor: coolNeutral[99], borderRadius: radius.lg, overflow: 'hidden' }}>
+          <View style={{ maxWidth: 400, backgroundColor: coolNeutral[99], borderRadius: radius.large, overflow: 'hidden' }}>
             <View style={{ height: 80, justifyContent: 'center', alignItems: 'center' }}>
-              <Text style={{ fontSize: fontSize.xs, color: coolNeutral[70] }}>콘텐츠</Text>
+              <Text style={{ fontSize: fontSize.xsmall, color: coolNeutral[70] }}>콘텐츠</Text>
             </View>
             <ActionArea
               variant="cancel"
@@ -168,10 +168,10 @@ export const States: Story = {
       title="버튼 상태"
       description="ActionArea 내 버튼의 활성/비활성 상태를 확인합니다."
     >
-      <Row gap={spacing['2xl']} wrap align="flex-start">
-        <Col gap={spacing.sm}>
+      <Row gap={spacing['2xlarge']} wrap align="flex-start">
+        <Col gap={spacing.small}>
           <StateLabel>기본</StateLabel>
-          <View style={{ width: 320, backgroundColor: coolNeutral[99], borderRadius: radius.lg, overflow: 'hidden' }}>
+          <View style={{ width: 320, backgroundColor: coolNeutral[99], borderRadius: radius.large, overflow: 'hidden' }}>
             <ActionArea
               variant="cancel"
               primary={{ label: '확인' }}
@@ -180,9 +180,9 @@ export const States: Story = {
             />
           </View>
         </Col>
-        <Col gap={spacing.sm}>
+        <Col gap={spacing.small}>
           <StateLabel>메인 버튼 비활성화</StateLabel>
-          <View style={{ width: 320, backgroundColor: coolNeutral[99], borderRadius: radius.lg, overflow: 'hidden' }}>
+          <View style={{ width: 320, backgroundColor: coolNeutral[99], borderRadius: radius.large, overflow: 'hidden' }}>
             <ActionArea
               variant="cancel"
               primary={{ label: '확인', disabled: true }}
@@ -191,9 +191,9 @@ export const States: Story = {
             />
           </View>
         </Col>
-        <Col gap={spacing.sm}>
+        <Col gap={spacing.small}>
           <StateLabel>메인 버튼 로딩</StateLabel>
-          <View style={{ width: 320, backgroundColor: coolNeutral[99], borderRadius: radius.lg, overflow: 'hidden' }}>
+          <View style={{ width: 320, backgroundColor: coolNeutral[99], borderRadius: radius.large, overflow: 'hidden' }}>
             <ActionArea
               variant="cancel"
               primary={{ label: '확인', loading: true }}
@@ -217,10 +217,10 @@ export const Options: Story = {
       title="옵션"
       description="구분선 표시 및 투명 배경 옵션을 확인합니다."
     >
-      <Row gap={spacing['2xl']} wrap align="flex-start">
-        <Col gap={spacing.sm}>
+      <Row gap={spacing['2xlarge']} wrap align="flex-start">
+        <Col gap={spacing.small}>
           <StateLabel>구분선 있음 (기본)</StateLabel>
-          <View style={{ width: 320, backgroundColor: coolNeutral[99], borderRadius: radius.lg, overflow: 'hidden' }}>
+          <View style={{ width: 320, backgroundColor: coolNeutral[99], borderRadius: radius.large, overflow: 'hidden' }}>
             <View style={{ height: 40 }} />
             <ActionArea
               variant="strong"
@@ -229,9 +229,9 @@ export const Options: Story = {
             />
           </View>
         </Col>
-        <Col gap={spacing.sm}>
+        <Col gap={spacing.small}>
           <StateLabel>구분선 없음</StateLabel>
-          <View style={{ width: 320, backgroundColor: coolNeutral[99], borderRadius: radius.lg, overflow: 'hidden' }}>
+          <View style={{ width: 320, backgroundColor: coolNeutral[99], borderRadius: radius.large, overflow: 'hidden' }}>
             <View style={{ height: 40 }} />
             <ActionArea
               variant="strong"
@@ -240,9 +240,9 @@ export const Options: Story = {
             />
           </View>
         </Col>
-        <Col gap={spacing.sm}>
+        <Col gap={spacing.small}>
           <StateLabel>투명 배경</StateLabel>
-          <View style={{ width: 320, backgroundColor: coolNeutral[97], borderRadius: radius.lg, overflow: 'hidden' }}>
+          <View style={{ width: 320, backgroundColor: coolNeutral[97], borderRadius: radius.large, overflow: 'hidden' }}>
             <View style={{ height: 40 }} />
             <ActionArea
               variant="strong"
@@ -263,13 +263,13 @@ export const DesignSpec: Story = {
   decorators: [],
   render: () => (
     <Section title="디자인 스펙" description="ActionArea 컴포넌트의 레이아웃 토큰 명세입니다.">
-      <Col gap={spacing['2xl']}>
+      <Col gap={spacing['2xlarge']}>
         <SpecTable
           title="레이아웃"
           rows={[
-            { label: '좌우 패딩', value: '16px', token: 'actionAreaToken.padding (spacing.lg)' },
-            { label: '상하 패딩', value: '12px', token: 'spacing.md' },
-            { label: '버튼 간격', value: '8px', token: 'actionAreaToken.gap (spacing.sm)' },
+            { label: '좌우 패딩', value: '16px', token: 'actionAreaToken.padding (spacing.large)' },
+            { label: '상하 패딩', value: '12px', token: 'spacing.medium' },
+            { label: '버튼 간격', value: '8px', token: 'actionAreaToken.gap (spacing.small)' },
             { label: '구분선 색상', value: coolNeutral[96], token: 'coolNeutral[96]' },
             { label: '배경색', value: '#FFFFFF', token: 'palette.white' },
           ]}
@@ -295,7 +295,7 @@ export const Usage: Story = {
   decorators: [],
   render: () => (
     <Section title="사용 가이드" description="개발자를 위한 ActionArea 컴포넌트 사용 예시입니다.">
-      <Col gap={spacing.lg}>
+      <Col gap={spacing.large}>
         <CodeBlock
           title="Import"
           code={`import { ActionArea } from '@design-system/components/ActionArea';`}

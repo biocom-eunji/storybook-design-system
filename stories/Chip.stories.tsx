@@ -47,39 +47,39 @@ export const Playground: Story = {
 export const AllVariants: Story = {
   name: '모든 변형',
   render: () => (
-    <View style={{ gap: spacing['3xl'] }}>
+    <View style={{ gap: spacing['3xlarge'] }}>
       <Section
         title="칩 변형 전체 보기"
         description="variant(solid/outlined)와 상태(inactive/active/disabled)의 모든 조합을 확인할 수 있습니다."
       >
         {/* Solid Row */}
-        <View style={{ gap: spacing.xl }}>
-          <Row gap={spacing['2xl']} align="flex-start">
-            <Col gap={spacing.sm}>
+        <View style={{ gap: spacing.xlarge }}>
+          <Row gap={spacing['2xlarge']} align="flex-start">
+            <Col gap={spacing.small}>
               <StateLabel>Solid — 비활성</StateLabel>
               <Chip label="텍스트" variant="solid" />
             </Col>
-            <Col gap={spacing.sm}>
+            <Col gap={spacing.small}>
               <StateLabel>Solid — 활성</StateLabel>
               <Chip label="텍스트" variant="solid" active />
             </Col>
-            <Col gap={spacing.sm}>
+            <Col gap={spacing.small}>
               <StateLabel>Solid — 비활성화</StateLabel>
               <Chip label="텍스트" variant="solid" disabled />
             </Col>
           </Row>
 
           {/* Outlined Row */}
-          <Row gap={spacing['2xl']} align="flex-start">
-            <Col gap={spacing.sm}>
+          <Row gap={spacing['2xlarge']} align="flex-start">
+            <Col gap={spacing.small}>
               <StateLabel>Outlined — 비활성</StateLabel>
               <Chip label="텍스트" variant="outlined" />
             </Col>
-            <Col gap={spacing.sm}>
+            <Col gap={spacing.small}>
               <StateLabel>Outlined — 활성</StateLabel>
               <Chip label="텍스트" variant="outlined" active />
             </Col>
-            <Col gap={spacing.sm}>
+            <Col gap={spacing.small}>
               <StateLabel>Outlined — 비활성화</StateLabel>
               <Chip label="텍스트" variant="outlined" disabled />
             </Col>
@@ -99,20 +99,20 @@ export const Sizes: Story = {
       title="크기 비교"
       description="XSmall, Small, Medium, Large 네 가지 크기를 나란히 비교합니다."
     >
-      <Row gap={spacing['2xl']} align="flex-end">
-        <Col gap={spacing.sm}>
+      <Row gap={spacing['2xlarge']} align="flex-end">
+        <Col gap={spacing.small}>
           <StateLabel>{`XS — ${chipToken.size.xsmall.height}px`}</StateLabel>
           <Chip label="텍스트" size="xsmall" />
         </Col>
-        <Col gap={spacing.sm}>
+        <Col gap={spacing.small}>
           <StateLabel>{`S — ${chipToken.size.small.height}px`}</StateLabel>
           <Chip label="텍스트" size="small" />
         </Col>
-        <Col gap={spacing.sm}>
+        <Col gap={spacing.small}>
           <StateLabel>{`M — ${chipToken.size.medium.height}px`}</StateLabel>
           <Chip label="텍스트" size="medium" />
         </Col>
-        <Col gap={spacing.sm}>
+        <Col gap={spacing.small}>
           <StateLabel>{`L — ${chipToken.size.large.height}px`}</StateLabel>
           <Chip label="텍스트" size="large" />
         </Col>
@@ -126,14 +126,14 @@ export const Sizes: Story = {
 export const WithIcons: Story = {
   name: '아이콘 조합',
   render: () => (
-    <View style={{ gap: spacing['3xl'] }}>
+    <View style={{ gap: spacing['3xlarge'] }}>
       <Section
         title="아이콘 조합"
         description="leadingIcon, trailingIcon 또는 양쪽 모두 아이콘을 배치할 수 있습니다."
       >
-        <View style={{ gap: spacing.xl }}>
-          <Row gap={spacing['2xl']} align="flex-start">
-            <Col gap={spacing.sm}>
+        <View style={{ gap: spacing.xlarge }}>
+          <Row gap={spacing['2xlarge']} align="flex-start">
+            <Col gap={spacing.small}>
               <StateLabel>Leading 아이콘</StateLabel>
               <Chip
                 label="선택됨"
@@ -142,7 +142,7 @@ export const WithIcons: Story = {
                 leadingIcon={<Icon name="null" size={chipToken.size.medium.iconSize} />}
               />
             </Col>
-            <Col gap={spacing.sm}>
+            <Col gap={spacing.small}>
               <StateLabel>Trailing 아이콘</StateLabel>
               <Chip
                 label="삭제"
@@ -150,7 +150,7 @@ export const WithIcons: Story = {
                 trailingIcon={<Icon name="null" size={chipToken.size.medium.iconSize} />}
               />
             </Col>
-            <Col gap={spacing.sm}>
+            <Col gap={spacing.small}>
               <StateLabel>양쪽 아이콘</StateLabel>
               <Chip
                 label="필터"
@@ -163,8 +163,8 @@ export const WithIcons: Story = {
           </Row>
 
           {/* Icon chips in different sizes */}
-          <Row gap={spacing.lg} align="flex-end">
-            <Col gap={spacing.sm}>
+          <Row gap={spacing.large} align="flex-end">
+            <Col gap={spacing.small}>
               <StateLabel>XS + 아이콘</StateLabel>
               <Chip
                 label="태그"
@@ -172,7 +172,7 @@ export const WithIcons: Story = {
                 leadingIcon={<Icon name="null" size={chipToken.size.xsmall.iconSize} />}
               />
             </Col>
-            <Col gap={spacing.sm}>
+            <Col gap={spacing.small}>
               <StateLabel>S + 아이콘</StateLabel>
               <Chip
                 label="태그"
@@ -180,7 +180,7 @@ export const WithIcons: Story = {
                 leadingIcon={<Icon name="null" size={chipToken.size.small.iconSize} />}
               />
             </Col>
-            <Col gap={spacing.sm}>
+            <Col gap={spacing.small}>
               <StateLabel>M + 아이콘</StateLabel>
               <Chip
                 label="태그"
@@ -188,7 +188,7 @@ export const WithIcons: Story = {
                 leadingIcon={<Icon name="null" size={chipToken.size.medium.iconSize} />}
               />
             </Col>
-            <Col gap={spacing.sm}>
+            <Col gap={spacing.small}>
               <StateLabel>L + 아이콘</StateLabel>
               <Chip
                 label="태그"
@@ -208,7 +208,7 @@ export const WithIcons: Story = {
 export const DesignSpec: Story = {
   name: '디자인 스펙',
   render: () => (
-    <View style={{ gap: spacing['3xl'] }}>
+    <View style={{ gap: spacing['3xlarge'] }}>
       <Section
         title="디자인 스펙"
         description="디자이너와 개발자를 위한 칩 토큰 상세 스펙입니다."
@@ -219,8 +219,8 @@ export const DesignSpec: Story = {
           rows={[
             { label: '높이', value: `${chipToken.size.xsmall.height}px`, token: 'chipToken.size.xsmall.height' },
             { label: '좌우 패딩', value: `${chipToken.size.xsmall.paddingHorizontal}px`, token: 'chipToken.size.xsmall.paddingHorizontal' },
-            { label: '폰트 크기', value: `${chipToken.size.xsmall.fontSize}px`, token: 'fontSize.xs' },
-            { label: '모서리 반경', value: `${chipToken.size.xsmall.radius}px`, token: 'radius.xs' },
+            { label: '폰트 크기', value: `${chipToken.size.xsmall.fontSize}px`, token: 'fontSize.xsmall' },
+            { label: '모서리 반경', value: `${chipToken.size.xsmall.radius}px`, token: 'radius.xsmall' },
           ]}
         />
 
@@ -229,8 +229,8 @@ export const DesignSpec: Story = {
           rows={[
             { label: '높이', value: `${chipToken.size.small.height}px`, token: 'chipToken.size.small.height' },
             { label: '좌우 패딩', value: `${chipToken.size.small.paddingHorizontal}px`, token: 'chipToken.size.small.paddingHorizontal' },
-            { label: '폰트 크기', value: `${chipToken.size.small.fontSize}px`, token: 'fontSize.xs' },
-            { label: '모서리 반경', value: `${chipToken.size.small.radius}px`, token: 'radius.sm' },
+            { label: '폰트 크기', value: `${chipToken.size.small.fontSize}px`, token: 'fontSize.xsmall' },
+            { label: '모서리 반경', value: `${chipToken.size.small.radius}px`, token: 'radius.small' },
           ]}
         />
 
@@ -239,8 +239,8 @@ export const DesignSpec: Story = {
           rows={[
             { label: '높이', value: `${chipToken.size.medium.height}px`, token: 'chipToken.size.medium.height' },
             { label: '좌우 패딩', value: `${chipToken.size.medium.paddingHorizontal}px`, token: 'chipToken.size.medium.paddingHorizontal' },
-            { label: '폰트 크기', value: `${chipToken.size.medium.fontSize}px`, token: 'fontSize.sm' },
-            { label: '모서리 반경', value: `${chipToken.size.medium.radius}px`, token: 'radius.sm' },
+            { label: '폰트 크기', value: `${chipToken.size.medium.fontSize}px`, token: 'fontSize.small' },
+            { label: '모서리 반경', value: `${chipToken.size.medium.radius}px`, token: 'radius.small' },
           ]}
         />
 
@@ -249,8 +249,8 @@ export const DesignSpec: Story = {
           rows={[
             { label: '높이', value: `${chipToken.size.large.height}px`, token: 'chipToken.size.large.height' },
             { label: '좌우 패딩', value: `${chipToken.size.large.paddingHorizontal}px`, token: 'chipToken.size.large.paddingHorizontal' },
-            { label: '폰트 크기', value: `${chipToken.size.large.fontSize}px`, token: 'fontSize.md' },
-            { label: '모서리 반경', value: `${chipToken.size.large.radius}px`, token: 'radius.md' },
+            { label: '폰트 크기', value: `${chipToken.size.large.fontSize}px`, token: 'fontSize.medium' },
+            { label: '모서리 반경', value: `${chipToken.size.large.radius}px`, token: 'radius.medium' },
           ]}
         />
 
@@ -292,7 +292,7 @@ export const DesignSpec: Story = {
 export const Usage: Story = {
   name: '사용 가이드',
   render: () => (
-    <View style={{ gap: spacing['3xl'] }}>
+    <View style={{ gap: spacing['3xlarge'] }}>
       <Section
         title="사용 가이드"
         description="개발자를 위한 Chip 컴포넌트 사용 예시입니다."

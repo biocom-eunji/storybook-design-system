@@ -58,31 +58,31 @@ export const Directions: Story = {
       title="방향"
       description="horizontal(가로)과 vertical(세로) 두 가지 방향을 지원합니다."
     >
-      <Col gap={spacing.xl}>
-        <Col gap={spacing.sm}>
+      <Col gap={spacing.xlarge}>
+        <Col gap={spacing.small}>
           <StateLabel>Horizontal (기본)</StateLabel>
-          <View style={{ backgroundColor: coolNeutral[99], padding: spacing.lg, borderRadius: radius.sm }}>
-            <Text style={{ fontSize: fontSize.sm, color: coolNeutral[50], marginBottom: spacing.sm }}>위쪽 콘텐츠</Text>
+          <View style={{ backgroundColor: coolNeutral[99], padding: spacing.large, borderRadius: radius.small }}>
+            <Text style={{ fontSize: fontSize.small, color: coolNeutral[50], marginBottom: spacing.small }}>위쪽 콘텐츠</Text>
             <DividerComponent />
-            <Text style={{ fontSize: fontSize.sm, color: coolNeutral[50], marginTop: spacing.sm }}>아래쪽 콘텐츠</Text>
+            <Text style={{ fontSize: fontSize.small, color: coolNeutral[50], marginTop: spacing.small }}>아래쪽 콘텐츠</Text>
           </View>
         </Col>
 
-        <Col gap={spacing.sm}>
+        <Col gap={spacing.small}>
           <StateLabel>Vertical</StateLabel>
           <View style={{
             flexDirection: 'row',
             alignItems: 'center',
             backgroundColor: coolNeutral[99],
-            padding: spacing.lg,
-            borderRadius: radius.sm,
+            padding: spacing.large,
+            borderRadius: radius.small,
             height: 60,
           }}>
-            <Text style={{ fontSize: fontSize.sm, color: coolNeutral[50] }}>왼쪽</Text>
-            <View style={{ marginHorizontal: spacing.md, height: '100%' }}>
+            <Text style={{ fontSize: fontSize.small, color: coolNeutral[50] }}>왼쪽</Text>
+            <View style={{ marginHorizontal: spacing.medium, height: '100%' }}>
               <DividerComponent direction="vertical" />
             </View>
-            <Text style={{ fontSize: fontSize.sm, color: coolNeutral[50] }}>오른쪽</Text>
+            <Text style={{ fontSize: fontSize.small, color: coolNeutral[50] }}>오른쪽</Text>
           </View>
         </Col>
       </Col>
@@ -99,20 +99,20 @@ export const Thickness: Story = {
       title="두께"
       description="thickness 값을 조절하여 선의 두께를 변경할 수 있습니다."
     >
-      <Col gap={spacing.xl}>
-        <Col gap={spacing.sm}>
+      <Col gap={spacing.xlarge}>
+        <Col gap={spacing.small}>
           <StateLabel>1px (기본)</StateLabel>
           <DividerComponent thickness={1} />
         </Col>
-        <Col gap={spacing.sm}>
+        <Col gap={spacing.small}>
           <StateLabel>2px</StateLabel>
           <DividerComponent thickness={2} />
         </Col>
-        <Col gap={spacing.sm}>
+        <Col gap={spacing.small}>
           <StateLabel>4px</StateLabel>
           <DividerComponent thickness={4} />
         </Col>
-        <Col gap={spacing.sm}>
+        <Col gap={spacing.small}>
           <StateLabel>8px</StateLabel>
           <DividerComponent thickness={8} />
         </Col>
@@ -130,24 +130,24 @@ export const Colors: Story = {
       title="색상"
       description="color prop으로 선 색상을 커스터마이즈할 수 있습니다."
     >
-      <Col gap={spacing.xl}>
-        <Col gap={spacing.sm}>
+      <Col gap={spacing.xlarge}>
+        <Col gap={spacing.small}>
           <StateLabel>{`기본 — coolNeutral[96]`}</StateLabel>
           <DividerComponent thickness={2} />
         </Col>
-        <Col gap={spacing.sm}>
+        <Col gap={spacing.small}>
           <StateLabel>{`coolNeutral[90]`}</StateLabel>
           <DividerComponent thickness={2} color={coolNeutral[90]} />
         </Col>
-        <Col gap={spacing.sm}>
+        <Col gap={spacing.small}>
           <StateLabel>{`mint[45]`}</StateLabel>
           <DividerComponent thickness={2} color={mint[45]} />
         </Col>
-        <Col gap={spacing.sm}>
+        <Col gap={spacing.small}>
           <StateLabel>{`red[70]`}</StateLabel>
           <DividerComponent thickness={2} color={red[70]} />
         </Col>
-        <Col gap={spacing.sm}>
+        <Col gap={spacing.small}>
           <StateLabel>{`yellow[50]`}</StateLabel>
           <DividerComponent thickness={2} color={yellow[50]} />
         </Col>
@@ -165,21 +165,21 @@ export const Inset: Story = {
       title="인셋 (들여쓰기)"
       description="inset prop으로 왼쪽 들여쓰기를 적용할 수 있습니다. 리스트 구분선에 유용합니다."
     >
-      <View style={{ backgroundColor: coolNeutral[99], borderRadius: radius.sm, overflow: 'hidden' }}>
-        <View style={{ padding: spacing.lg }}>
-          <Text style={{ fontSize: fontSize.md, color: coolNeutral[17] }}>전체 너비 (inset: 0)</Text>
+      <View style={{ backgroundColor: coolNeutral[99], borderRadius: radius.small, overflow: 'hidden' }}>
+        <View style={{ padding: spacing.large }}>
+          <Text style={{ fontSize: fontSize.medium, color: coolNeutral[17] }}>전체 너비 (inset: 0)</Text>
         </View>
         <DividerComponent />
-        <View style={{ padding: spacing.lg }}>
-          <Text style={{ fontSize: fontSize.md, color: coolNeutral[17] }}>들여쓰기 16px</Text>
+        <View style={{ padding: spacing.large }}>
+          <Text style={{ fontSize: fontSize.medium, color: coolNeutral[17] }}>들여쓰기 16px</Text>
         </View>
-        <DividerComponent inset={spacing.lg} />
-        <View style={{ padding: spacing.lg }}>
-          <Text style={{ fontSize: fontSize.md, color: coolNeutral[17] }}>들여쓰기 48px</Text>
+        <DividerComponent inset={spacing.large} />
+        <View style={{ padding: spacing.large }}>
+          <Text style={{ fontSize: fontSize.medium, color: coolNeutral[17] }}>들여쓰기 48px</Text>
         </View>
-        <DividerComponent inset={spacing['4xl']} />
-        <View style={{ padding: spacing.lg }}>
-          <Text style={{ fontSize: fontSize.md, color: coolNeutral[17] }}>마지막 항목</Text>
+        <DividerComponent inset={spacing['4xlarge']} />
+        <View style={{ padding: spacing.large }}>
+          <Text style={{ fontSize: fontSize.medium, color: coolNeutral[17] }}>마지막 항목</Text>
         </View>
       </View>
     </Section>
@@ -191,7 +191,7 @@ export const Inset: Story = {
 export const DesignSpec: Story = {
   name: '디자인 스펙',
   render: () => (
-    <View style={{ gap: spacing['3xl'] }}>
+    <View style={{ gap: spacing['3xlarge'] }}>
       <Section
         title="디자인 스펙"
         description="디자이너와 개발자를 위한 Divider 토큰 상세 스펙입니다."
@@ -236,7 +236,7 @@ export const DesignSpec: Story = {
 export const Usage: Story = {
   name: '사용 가이드',
   render: () => (
-    <View style={{ gap: spacing['3xl'] }}>
+    <View style={{ gap: spacing['3xlarge'] }}>
       <Section
         title="사용 가이드"
         description="개발자를 위한 Divider 컴포넌트 사용 예시입니다."

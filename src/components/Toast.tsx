@@ -69,31 +69,31 @@ export function Toast({
     left: 0,
     right: 0,
     ...(position === 'bottom' ? { bottom: 48 } : { top: 48 }),
-    marginHorizontal: spacing.lg,
+    marginHorizontal: spacing.large,
   };
 
   const toastStyle: ViewStyle = {
     backgroundColor: coolNeutral[50],
-    borderRadius: radius.md,
-    paddingHorizontal: spacing.lg,
-    paddingVertical: spacing.md,
+    borderRadius: radius.medium,
+    paddingHorizontal: spacing.large,
+    paddingVertical: spacing.medium,
     flexDirection: 'row',
     alignItems: 'center',
-    gap: spacing.md,
+    gap: spacing.medium,
   };
 
   const messageStyle: TextStyle = {
     color: '#FFFFFF',
-    fontSize: fontSize.md,
+    fontSize: fontSize.medium,
     fontWeight: fontWeight.medium,
     flex: 1,
   };
 
   const actionTextStyle: TextStyle = {
     color: mint[80],
-    fontSize: fontSize.sm,
+    fontSize: fontSize.small,
     fontWeight: fontWeight.semibold,
-    marginLeft: spacing.sm,
+    marginLeft: spacing.small,
   };
 
   return (

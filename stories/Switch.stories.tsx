@@ -40,31 +40,31 @@ export const AllVariants: Story = {
       description="스위치의 모든 조합을 한눈에 확인할 수 있습니다."
     >
       {(['ios', 'normal'] as const).map((platform) => (
-        <View key={platform} style={{ marginBottom: spacing['3xl'] }}>
+        <View key={platform} style={{ marginBottom: spacing['3xlarge'] }}>
           <Text
             style={{
-              fontSize: fontSize.md,
+              fontSize: fontSize.medium,
               fontWeight: fontWeight.bold,
               color: coolNeutral[17],
-              marginBottom: spacing.lg,
+              marginBottom: spacing.large,
             }}
           >
             {platform === 'ios' ? 'iOS' : 'Normal'}
           </Text>
 
           {(['small', 'medium'] as const).map((size) => (
-            <View key={size} style={{ marginBottom: spacing.xl }}>
+            <View key={size} style={{ marginBottom: spacing.xlarge }}>
               <Text
                 style={{
-                  fontSize: fontSize.sm,
+                  fontSize: fontSize.small,
                   fontWeight: fontWeight.semibold,
                   color: coolNeutral[40],
-                  marginBottom: spacing.sm,
+                  marginBottom: spacing.small,
                 }}
               >
                 {size === 'small' ? 'Small' : 'Medium'}
               </Text>
-              <Row gap={spacing['2xl']} wrap>
+              <Row gap={spacing['2xlarge']} wrap>
                 <Col>
                   <StateLabel>꺼짐</StateLabel>
                   <Switch platform={platform} size={size} active={false} />
@@ -101,10 +101,10 @@ export const PlatformComparison: Story = {
     >
       <Text
         style={{
-          fontSize: fontSize.sm,
+          fontSize: fontSize.small,
           fontWeight: fontWeight.semibold,
           color: coolNeutral[30],
-          marginBottom: spacing.md,
+          marginBottom: spacing.medium,
         }}
       >
         Medium 크기 기준
@@ -159,25 +159,25 @@ export const Sizes: Story = {
       description="플랫폼별 Small / Medium 크기를 비교합니다."
     >
       {(['ios', 'normal'] as const).map((platform) => (
-        <View key={platform} style={{ marginBottom: spacing['2xl'] }}>
+        <View key={platform} style={{ marginBottom: spacing['2xlarge'] }}>
           <Text
             style={{
-              fontSize: fontSize.md,
+              fontSize: fontSize.medium,
               fontWeight: fontWeight.bold,
               color: coolNeutral[17],
-              marginBottom: spacing.md,
+              marginBottom: spacing.medium,
             }}
           >
             {platform === 'ios' ? 'iOS' : 'Normal'}
           </Text>
-          <Row gap={spacing['3xl']}>
-            <Col gap={spacing.sm}>
+          <Row gap={spacing['3xlarge']}>
+            <Col gap={spacing.small}>
               <StateLabel>
                 {platform === 'ios' ? 'Small — 44×26' : 'Small — 36×20'}
               </StateLabel>
               <Switch platform={platform} size="small" active />
             </Col>
-            <Col gap={spacing.sm}>
+            <Col gap={spacing.small}>
               <StateLabel>
                 {platform === 'ios' ? 'Medium — 52×32' : 'Medium — 44×24'}
               </StateLabel>
@@ -203,15 +203,15 @@ export const Interactive: Story = {
         title="인터랙티브 데모"
         description="스위치를 직접 눌러보며 상태 변화를 확인하세요."
       >
-        <Col gap={spacing.xl}>
-          <Row gap={spacing.md}>
+        <Col gap={spacing.xlarge}>
+          <Row gap={spacing.medium}>
             <Switch platform="ios" size="medium" active={notif} onPress={() => setNotif(!notif)} />
-            <Text style={{ fontSize: fontSize.md, fontWeight: fontWeight.medium, color: coolNeutral[17] }}>
+            <Text style={{ fontSize: fontSize.medium, fontWeight: fontWeight.medium, color: coolNeutral[17] }}>
               알림 설정
             </Text>
             <Text
               style={{
-                fontSize: fontSize.sm,
+                fontSize: fontSize.small,
                 fontWeight: fontWeight.semibold,
                 color: notif ? mint[45] : coolNeutral[60],
               }}
@@ -220,14 +220,14 @@ export const Interactive: Story = {
             </Text>
           </Row>
 
-          <Row gap={spacing.md}>
+          <Row gap={spacing.medium}>
             <Switch platform="normal" size="medium" active={dark} onPress={() => setDark(!dark)} />
-            <Text style={{ fontSize: fontSize.md, fontWeight: fontWeight.medium, color: coolNeutral[17] }}>
+            <Text style={{ fontSize: fontSize.medium, fontWeight: fontWeight.medium, color: coolNeutral[17] }}>
               다크 모드
             </Text>
             <Text
               style={{
-                fontSize: fontSize.sm,
+                fontSize: fontSize.small,
                 fontWeight: fontWeight.semibold,
                 color: dark ? mint[45] : coolNeutral[60],
               }}
@@ -262,7 +262,7 @@ export const DesignSpec: Story = {
         ]}
       />
 
-      <View style={{ height: spacing.lg }} />
+      <View style={{ height: spacing.large }} />
 
       <SpecTable
         title="Normal 치수"
@@ -276,7 +276,7 @@ export const DesignSpec: Story = {
         ]}
       />
 
-      <View style={{ height: spacing.lg }} />
+      <View style={{ height: spacing.large }} />
 
       <SpecTable
         title="색상"

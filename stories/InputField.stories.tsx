@@ -28,7 +28,7 @@ const meta: Meta<typeof InputField> = {
   tags: ['autodocs'],
   decorators: [
     (Story) => (
-      <View style={{ maxWidth: 360, padding: spacing.lg }}>
+      <View style={{ maxWidth: 360, padding: spacing.large }}>
         <Story />
       </View>
     ),
@@ -55,20 +55,20 @@ export const AllStates: Story = {
   name: '모든 상태',
   decorators: [
     (Story) => (
-      <View style={{ maxWidth: 800, padding: spacing.lg }}>
+      <View style={{ maxWidth: 800, padding: spacing.large }}>
         <Story />
       </View>
     ),
   ],
   render: () => (
-    <View style={{ gap: spacing['3xl'] }}>
+    <View style={{ gap: spacing['3xlarge'] }}>
       <Section
         title="모든 상태"
         description="기획자와 디자이너가 한눈에 확인할 수 있도록 InputField의 모든 상태를 정리했습니다."
       >
-        <View style={{ flexDirection: 'row', flexWrap: 'wrap', gap: spacing['2xl'] }}>
+        <View style={{ flexDirection: 'row', flexWrap: 'wrap', gap: spacing['2xlarge'] }}>
           {/* 비활성 (Inactive) */}
-          <Col gap={spacing.sm}>
+          <Col gap={spacing.small}>
             <StateLabel>비활성 (INACTIVE)</StateLabel>
             <View style={{ width: 320 }}>
               <InputField
@@ -81,7 +81,7 @@ export const AllStates: Story = {
           </Col>
 
           {/* 입력됨 (Active) */}
-          <Col gap={spacing.sm}>
+          <Col gap={spacing.small}>
             <StateLabel>입력됨 (ACTIVE)</StateLabel>
             <View style={{ width: 320 }}>
               <InputField
@@ -94,7 +94,7 @@ export const AllStates: Story = {
           </Col>
 
           {/* 포커스 (Focus) */}
-          <Col gap={spacing.sm}>
+          <Col gap={spacing.small}>
             <StateLabel>포커스 (FOCUS)</StateLabel>
             <View style={{ width: 320 }}>
               <InputField
@@ -107,7 +107,7 @@ export const AllStates: Story = {
           </Col>
 
           {/* 에러 */}
-          <Col gap={spacing.sm}>
+          <Col gap={spacing.small}>
             <StateLabel>에러 (ERROR)</StateLabel>
             <View style={{ width: 320 }}>
               <InputField
@@ -120,7 +120,7 @@ export const AllStates: Story = {
           </Col>
 
           {/* 성공 */}
-          <Col gap={spacing.sm}>
+          <Col gap={spacing.small}>
             <StateLabel>성공 (SUCCESS)</StateLabel>
             <View style={{ width: 320 }}>
               <InputField
@@ -133,7 +133,7 @@ export const AllStates: Story = {
           </Col>
 
           {/* 비활성화 (Disabled) */}
-          <Col gap={spacing.sm}>
+          <Col gap={spacing.small}>
             <StateLabel>비활성화 (DISABLED)</StateLabel>
             <View style={{ width: 320 }}>
               <InputField
@@ -156,19 +156,19 @@ export const TrailingElements: Story = {
   name: '후행 요소',
   decorators: [
     (Story) => (
-      <View style={{ maxWidth: 800, padding: spacing.lg }}>
+      <View style={{ maxWidth: 800, padding: spacing.large }}>
         <Story />
       </View>
     ),
   ],
   render: () => (
-    <View style={{ gap: spacing['3xl'] }}>
+    <View style={{ gap: spacing['3xlarge'] }}>
       <Section
         title="후행 요소"
         description="입력 필드 오른쪽에 배치 가능한 아이콘과 텍스트 조합입니다."
       >
-        <View style={{ flexDirection: 'row', flexWrap: 'wrap', gap: spacing['2xl'] }}>
-          <Col gap={spacing.sm}>
+        <View style={{ flexDirection: 'row', flexWrap: 'wrap', gap: spacing['2xlarge'] }}>
+          <Col gap={spacing.small}>
             <StateLabel>CLEAR 아이콘</StateLabel>
             <View style={{ width: 320 }}>
               <InputField
@@ -180,7 +180,7 @@ export const TrailingElements: Story = {
             </View>
           </Col>
 
-          <Col gap={spacing.sm}>
+          <Col gap={spacing.small}>
             <StateLabel>ERROR 아이콘</StateLabel>
             <View style={{ width: 320 }}>
               <InputField
@@ -192,7 +192,7 @@ export const TrailingElements: Story = {
             </View>
           </Col>
 
-          <Col gap={spacing.sm}>
+          <Col gap={spacing.small}>
             <StateLabel>SUCCESS 아이콘</StateLabel>
             <View style={{ width: 320 }}>
               <InputField
@@ -204,7 +204,7 @@ export const TrailingElements: Story = {
             </View>
           </Col>
 
-          <Col gap={spacing.sm}>
+          <Col gap={spacing.small}>
             <StateLabel>SEARCH 아이콘</StateLabel>
             <View style={{ width: 320 }}>
               <InputField
@@ -215,7 +215,7 @@ export const TrailingElements: Story = {
             </View>
           </Col>
 
-          <Col gap={spacing.sm}>
+          <Col gap={spacing.small}>
             <StateLabel>텍스트 링크</StateLabel>
             <View style={{ width: 320 }}>
               <InputField
@@ -227,7 +227,7 @@ export const TrailingElements: Story = {
             </View>
           </Col>
 
-          <Col gap={spacing.sm}>
+          <Col gap={spacing.small}>
             <StateLabel>아이콘 + 텍스트 링크</StateLabel>
             <View style={{ width: 320 }}>
               <InputField
@@ -251,19 +251,19 @@ export const Textarea: Story = {
   name: '텍스트 영역',
   decorators: [
     (Story) => (
-      <View style={{ maxWidth: 500, padding: spacing.lg }}>
+      <View style={{ maxWidth: 500, padding: spacing.large }}>
         <Story />
       </View>
     ),
   ],
   render: () => (
-    <View style={{ gap: spacing['3xl'] }}>
+    <View style={{ gap: spacing['3xlarge'] }}>
       <Section
         title="텍스트 영역 (Textarea)"
         description="multiline 속성으로 여러 줄 입력이 가능한 텍스트 영역을 제공합니다."
       >
-        <Col gap={spacing['2xl']}>
-          <Col gap={spacing.sm}>
+        <Col gap={spacing['2xlarge']}>
+          <Col gap={spacing.small}>
             <StateLabel>기본 텍스트 영역</StateLabel>
             <InputField
               label="주제"
@@ -276,7 +276,7 @@ export const Textarea: Story = {
 
           <Divider />
 
-          <Col gap={spacing.sm}>
+          <Col gap={spacing.small}>
             <StateLabel>입력된 텍스트 영역</StateLabel>
             <InputField
               label="주제"
@@ -290,7 +290,7 @@ export const Textarea: Story = {
 
           <Divider />
 
-          <Col gap={spacing.sm}>
+          <Col gap={spacing.small}>
             <StateLabel>비활성화된 텍스트 영역</StateLabel>
             <InputField
               label="주제"
@@ -313,7 +313,7 @@ export const InteractiveDemo: Story = {
   name: '인터랙티브 데모',
   decorators: [
     (Story) => (
-      <View style={{ maxWidth: 400, padding: spacing.lg }}>
+      <View style={{ maxWidth: 400, padding: spacing.large }}>
         <Story />
       </View>
     ),
@@ -326,12 +326,12 @@ export const InteractiveDemo: Story = {
     const hasSuccess = submitted && text.length >= 2;
 
     return (
-      <View style={{ gap: spacing['3xl'] }}>
+      <View style={{ gap: spacing['3xlarge'] }}>
         <Section
           title="인터랙티브 데모"
           description="직접 입력하며 상태 변화를 확인해 보세요. 2자 이상 입력 후 텍스트 링크를 누르면 유효성 검사를 실행합니다."
         >
-          <Col gap={spacing.lg}>
+          <Col gap={spacing.large}>
             <InputField
               label="이름"
               placeholder="이름을 입력해 주세요."
@@ -373,15 +373,15 @@ export const DesignSpec: Story = {
   name: '디자인 스펙',
   decorators: [
     (Story) => (
-      <View style={{ maxWidth: 700, padding: spacing.lg }}>
+      <View style={{ maxWidth: 700, padding: spacing.large }}>
         <Story />
       </View>
     ),
   ],
   render: () => (
-    <View style={{ gap: spacing['3xl'] }}>
+    <View style={{ gap: spacing['3xlarge'] }}>
       <Section title="디자인 스펙" description="InputField 컴포넌트의 디자인 토큰 명세입니다.">
-        <Col gap={spacing['2xl']}>
+        <Col gap={spacing['2xlarge']}>
           <SpecTable
             title="상태별 테두리 컬러"
             rows={[
@@ -405,10 +405,10 @@ export const DesignSpec: Story = {
           <SpecTable
             title="텍스트 스타일"
             rows={[
-              { label: '라벨 fontSize', value: `${fontSize.sm}`, token: 'fontSize.sm (13)' },
+              { label: '라벨 fontSize', value: `${fontSize.small}`, token: 'fontSize.small (13)' },
               { label: '라벨 fontWeight', value: fontWeight.medium, token: 'fontWeight.medium (500)' },
               { label: '라벨 색상', value: coolNeutral[30], token: 'coolNeutral[30]' },
-              { label: '입력 텍스트 fontSize', value: `${fontSize.md}`, token: 'fontSize.md (15)' },
+              { label: '입력 텍스트 fontSize', value: `${fontSize.medium}`, token: 'fontSize.medium (15)' },
               { label: '입력 텍스트 색상', value: coolNeutral[17], token: 'coolNeutral[17]' },
               { label: '플레이스홀더 색상', value: coolNeutral[80], token: 'coolNeutral[80]' },
             ]}
@@ -417,8 +417,8 @@ export const DesignSpec: Story = {
           <SpecTable
             title="레이아웃"
             rows={[
-              { label: '테두리 radius', value: `${radius.md}`, token: 'radius.md (12)' },
-              { label: '수평 패딩', value: `${spacing.lg}`, token: 'spacing.lg (16)' },
+              { label: '테두리 radius', value: `${radius.medium}`, token: 'radius.medium (12)' },
+              { label: '수평 패딩', value: `${spacing.large}`, token: 'spacing.large (16)' },
               { label: '최소 높이 (단일)', value: '48', token: '—' },
               { label: '최소 높이 (멀티라인)', value: '100', token: '—' },
               { label: '비활성화 배경색', value: coolNeutral[99], token: 'coolNeutral[99]' },
@@ -436,15 +436,15 @@ export const Usage: Story = {
   name: '사용 가이드',
   decorators: [
     (Story) => (
-      <View style={{ maxWidth: 600, padding: spacing.lg }}>
+      <View style={{ maxWidth: 600, padding: spacing.large }}>
         <Story />
       </View>
     ),
   ],
   render: () => (
-    <View style={{ gap: spacing['3xl'] }}>
+    <View style={{ gap: spacing['3xlarge'] }}>
       <Section title="사용 가이드" description="InputField 컴포넌트의 import 및 사용 예시입니다.">
-        <Col gap={spacing.lg}>
+        <Col gap={spacing.large}>
           <CodeBlock
             title="Import"
             code={`import { InputField } from '@design-system/components/InputField';`}

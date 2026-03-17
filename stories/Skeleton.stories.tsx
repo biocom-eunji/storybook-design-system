@@ -39,23 +39,23 @@ export const Playground: Story = {
 export const Variants: Story = {
   name: '변형',
   render: () => (
-    <View style={{ gap: spacing['3xl'] }}>
+    <View style={{ gap: spacing['3xlarge'] }}>
       <Section
         title="변형"
         description="text, circular, rectangular 세 가지 형태를 제공합니다."
       >
-        <View style={{ gap: spacing.xl }}>
-          <Col gap={spacing.sm}>
+        <View style={{ gap: spacing.xlarge }}>
+          <Col gap={spacing.small}>
             <StateLabel>Text</StateLabel>
             <View style={{ maxWidth: 300 }}>
               <Skeleton variant="text" />
             </View>
           </Col>
-          <Col gap={spacing.sm}>
+          <Col gap={spacing.small}>
             <StateLabel>Circular</StateLabel>
             <Skeleton variant="circular" />
           </Col>
-          <Col gap={spacing.sm}>
+          <Col gap={spacing.small}>
             <StateLabel>Rectangular</StateLabel>
             <View style={{ maxWidth: 300 }}>
               <Skeleton variant="rectangular" />
@@ -72,26 +72,26 @@ export const Variants: Story = {
 export const CustomSizes: Story = {
   name: '크기 커스텀',
   render: () => (
-    <View style={{ gap: spacing['3xl'] }}>
+    <View style={{ gap: spacing['3xlarge'] }}>
       <Section
         title="크기 커스텀"
         description="width와 height를 자유롭게 조합할 수 있습니다."
       >
-        <View style={{ gap: spacing.xl }}>
-          <Row gap={spacing.lg} align="flex-end">
-            <Col gap={spacing.sm}>
+        <View style={{ gap: spacing.xlarge }}>
+          <Row gap={spacing.large} align="flex-end">
+            <Col gap={spacing.small}>
               <StateLabel>40×40</StateLabel>
               <Skeleton variant="rectangular" width={40} height={40} />
             </Col>
-            <Col gap={spacing.sm}>
+            <Col gap={spacing.small}>
               <StateLabel>80×80</StateLabel>
               <Skeleton variant="rectangular" width={80} height={80} />
             </Col>
-            <Col gap={spacing.sm}>
+            <Col gap={spacing.small}>
               <StateLabel>120×60</StateLabel>
               <Skeleton variant="rectangular" width={120} height={60} />
             </Col>
-            <Col gap={spacing.sm}>
+            <Col gap={spacing.small}>
               <StateLabel>200×20</StateLabel>
               <Skeleton variant="rectangular" width={200} height={20} />
             </Col>
@@ -99,20 +99,20 @@ export const CustomSizes: Story = {
 
           <Divider />
 
-          <Row gap={spacing.lg} align="flex-end">
-            <Col gap={spacing.sm}>
+          <Row gap={spacing.large} align="flex-end">
+            <Col gap={spacing.small}>
               <StateLabel>원형 24</StateLabel>
               <Skeleton variant="circular" width={24} height={24} />
             </Col>
-            <Col gap={spacing.sm}>
+            <Col gap={spacing.small}>
               <StateLabel>원형 40</StateLabel>
               <Skeleton variant="circular" width={40} height={40} />
             </Col>
-            <Col gap={spacing.sm}>
+            <Col gap={spacing.small}>
               <StateLabel>원형 56</StateLabel>
               <Skeleton variant="circular" width={56} height={56} />
             </Col>
-            <Col gap={spacing.sm}>
+            <Col gap={spacing.small}>
               <StateLabel>원형 72</StateLabel>
               <Skeleton variant="circular" width={72} height={72} />
             </Col>
@@ -128,7 +128,7 @@ export const CustomSizes: Story = {
 export const CardExample: Story = {
   name: '실전 예시',
   render: () => (
-    <View style={{ gap: spacing['3xl'] }}>
+    <View style={{ gap: spacing['3xlarge'] }}>
       <Section
         title="실전 예시 — 카드 스켈레톤"
         description="실제 UI 레이아웃에 맞춰 Skeleton을 조합한 예시입니다."
@@ -140,17 +140,17 @@ export const CardExample: Story = {
               content: (
                 <View
                   style={{
-                    padding: spacing.lg,
-                    borderRadius: radius.md,
+                    padding: spacing.large,
+                    borderRadius: radius.medium,
                     borderWidth: 1,
                     borderColor: coolNeutral[96],
                     width: 260,
-                    gap: spacing.md,
+                    gap: spacing.medium,
                   }}
                 >
-                  <Row gap={spacing.md} align="center">
+                  <Row gap={spacing.medium} align="center">
                     <Skeleton variant="circular" width={48} height={48} />
-                    <View style={{ flex: 1, gap: spacing.sm }}>
+                    <View style={{ flex: 1, gap: spacing.small }}>
                       <Skeleton variant="text" width={120} />
                       <Skeleton variant="text" width={80} height={12} />
                     </View>
@@ -165,7 +165,7 @@ export const CardExample: Story = {
               content: (
                 <View
                   style={{
-                    borderRadius: radius.md,
+                    borderRadius: radius.medium,
                     borderWidth: 1,
                     borderColor: coolNeutral[96],
                     width: 260,
@@ -173,11 +173,11 @@ export const CardExample: Story = {
                   }}
                 >
                   <Skeleton variant="rectangular" height={140} borderRadius={0} />
-                  <View style={{ padding: spacing.lg, gap: spacing.sm }}>
+                  <View style={{ padding: spacing.large, gap: spacing.small }}>
                     <Skeleton variant="text" width="90%" />
                     <Skeleton variant="text" width="60%" height={12} />
-                    <View style={{ marginTop: spacing.sm }}>
-                      <Skeleton variant="rectangular" height={36} borderRadius={radius.sm} />
+                    <View style={{ marginTop: spacing.small }}>
+                      <Skeleton variant="rectangular" height={36} borderRadius={radius.small} />
                     </View>
                   </View>
                 </View>
@@ -186,15 +186,15 @@ export const CardExample: Story = {
             {
               label: '리스트 아이템',
               content: (
-                <View style={{ width: 260, gap: spacing.md }}>
+                <View style={{ width: 260, gap: spacing.medium }}>
                   {[0, 1, 2].map((i) => (
-                    <Row key={i} gap={spacing.md} align="center">
+                    <Row key={i} gap={spacing.medium} align="center">
                       <Skeleton variant="circular" width={36} height={36} />
-                      <View style={{ flex: 1, gap: spacing.xs }}>
+                      <View style={{ flex: 1, gap: spacing.xsmall }}>
                         <Skeleton variant="text" width="70%" />
                         <Skeleton variant="text" width="40%" height={12} />
                       </View>
-                      <Skeleton variant="rectangular" width={60} height={28} borderRadius={radius.sm} />
+                      <Skeleton variant="rectangular" width={60} height={28} borderRadius={radius.small} />
                     </Row>
                   ))}
                 </View>
@@ -212,7 +212,7 @@ export const CardExample: Story = {
 export const DesignSpec: Story = {
   name: '디자인 스펙',
   render: () => (
-    <View style={{ gap: spacing['3xl'] }}>
+    <View style={{ gap: spacing['3xlarge'] }}>
       <Section
         title="디자인 스펙"
         description="디자이너와 개발자를 위한 Skeleton 토큰 상세 스펙입니다."
@@ -251,7 +251,7 @@ export const DesignSpec: Story = {
           rows={[
             { label: '높이', value: '100px', token: '—' },
             { label: '너비', value: '100%', token: '—' },
-            { label: '모서리 반경', value: `${radius.sm}px`, token: 'radius.sm' },
+            { label: '모서리 반경', value: `${radius.small}px`, token: 'radius.small' },
           ]}
         />
       </Section>
@@ -264,7 +264,7 @@ export const DesignSpec: Story = {
 export const Usage: Story = {
   name: '사용 가이드',
   render: () => (
-    <View style={{ gap: spacing['3xl'] }}>
+    <View style={{ gap: spacing['3xlarge'] }}>
       <Section
         title="사용 가이드"
         description="개발자를 위한 Skeleton 컴포넌트 사용 예시입니다."

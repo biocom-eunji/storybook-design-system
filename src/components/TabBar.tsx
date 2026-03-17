@@ -83,14 +83,14 @@ const styles = StyleSheet.create({
     backgroundColor: semanticColor.backgroundPrimary,
     borderTopWidth: 1,
     borderTopColor: semanticColor.borderDefault,
-    paddingBottom: spacing.xs,
+    paddingBottom: spacing.xsmall,
   } as ViewStyle,
   tab: {
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
-    gap: spacing.xs,
-    paddingTop: spacing.sm,
+    gap: spacing.xsmall,
+    paddingTop: spacing.small,
   } as ViewStyle,
   tabPressed: {
     opacity: interaction.pressOpacity,
@@ -101,6 +101,6 @@ const styles = StyleSheet.create({
     borderRadius: 12,
   } as ViewStyle,
   label: {
-    fontSize: fontSize.xs,
+    fontSize: fontSize.xsmall,
   } as TextStyle,
 });

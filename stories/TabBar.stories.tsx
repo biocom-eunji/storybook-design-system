@@ -24,8 +24,8 @@ type Story = StoryObj<typeof TabBar>;
 const PreviewContainer = ({ children }: { children: React.ReactNode }) => (
   <View style={{
     backgroundColor: coolNeutral[99],
-    paddingTop: spacing['3xl'],
-    borderRadius: radius.md,
+    paddingTop: spacing['3xlarge'],
+    borderRadius: radius.medium,
     overflow: 'hidden',
   }}>
     {children}
@@ -67,8 +67,8 @@ export const BiocomTabBar: Story = {
             onTabPress={setActiveTab}
           />
         </PreviewContainer>
-        <View style={{ marginTop: spacing.md }}>
-          <Text style={{ fontSize: fontSize.sm, color: coolNeutral[50] }}>
+        <View style={{ marginTop: spacing.medium }}>
+          <Text style={{ fontSize: fontSize.small, color: coolNeutral[50] }}>
             현재 활성 탭: <Text style={{ fontWeight: fontWeight.bold, color: semanticColor.textBrand }}>{activeTab}</Text>
           </Text>
         </View>
@@ -86,9 +86,9 @@ export const ActiveStates: Story = {
       title="탭별 활성 상태"
       description="각 탭이 활성화된 상태를 한눈에 비교합니다."
     >
-      <Col gap={spacing.xl}>
+      <Col gap={spacing.xlarge}>
         {BIOCOM_TABS.map((tab) => (
-          <Col key={tab.key} gap={spacing.sm}>
+          <Col key={tab.key} gap={spacing.small}>
             <StateLabel>{`${tab.label} 활성`}</StateLabel>
             <PreviewContainer>
               <TabBar tabs={BIOCOM_TABS} activeTab={tab.key} />
@@ -143,23 +143,23 @@ export const DesignSpec: Story = {
   name: '디자인 스펙',
   render: () => (
     <Section title="디자인 스펙" description="TabBar 컴포넌트의 레이아웃 토큰 명세입니다.">
-      <Col gap={spacing.xl}>
+      <Col gap={spacing.xlarge}>
         <SpecTable
           title="컨테이너"
           rows={[
             { label: '높이', value: '60px', token: '—' },
             { label: '배경색', value: semanticColor.backgroundPrimary, token: 'semanticColor.backgroundPrimary' },
             { label: '상단 테두리', value: semanticColor.borderDefault, token: 'semanticColor.borderDefault' },
-            { label: '하단 패딩', value: `${spacing.xs}px`, token: 'spacing.xs' },
+            { label: '하단 패딩', value: `${spacing.xsmall}px`, token: 'spacing.xsmall' },
           ]}
         />
         <SpecTable
           title="탭 아이템"
           rows={[
             { label: '아이콘 크기', value: '24px', token: '—' },
-            { label: '라벨 폰트', value: `${fontSize.xs}px`, token: 'fontSize.xs' },
-            { label: '아이콘-라벨 간격', value: `${spacing.xs}px`, token: 'spacing.xs' },
-            { label: '상단 패딩', value: `${spacing.sm}px`, token: 'spacing.sm' },
+            { label: '라벨 폰트', value: `${fontSize.xsmall}px`, token: 'fontSize.xsmall' },
+            { label: '아이콘-라벨 간격', value: `${spacing.xsmall}px`, token: 'spacing.xsmall' },
+            { label: '상단 패딩', value: `${spacing.small}px`, token: 'spacing.small' },
           ]}
         />
       </Col>
@@ -173,7 +173,7 @@ export const Usage: Story = {
   name: '사용 가이드',
   render: () => (
     <Section title="사용 가이드" description="개발자를 위한 TabBar 컴포넌트 사용 예시입니다.">
-      <Col gap={spacing.lg}>
+      <Col gap={spacing.large}>
         <CodeBlock
           title="Import"
           code={`import { TabBar, BIOCOM_TABS } from '@design-system/components/TabBar';`}

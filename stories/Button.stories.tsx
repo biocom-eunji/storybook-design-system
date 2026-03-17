@@ -52,13 +52,13 @@ export const Playground: Story = {
 export const AllVariants: Story = {
   name: '모든 변형',
   render: () => (
-    <View style={{ gap: spacing['3xl'] }}>
+    <View style={{ gap: spacing['3xlarge'] }}>
       <Section
         title="버튼 변형 전체 보기"
         description="variant(solid/outlined)와 color(primary/assistive)의 모든 조합을 한눈에 확인할 수 있습니다."
       >
         {/* Header */}
-        <Row gap={spacing['4xl']} align="flex-start">
+        <Row gap={spacing['4xlarge']} align="flex-start">
           <View style={{ width: 200 }} />
           <View style={{ width: 140, alignItems: 'center' }}>
             <StateLabel>Primary</StateLabel>
@@ -68,9 +68,9 @@ export const AllVariants: Story = {
           </View>
         </Row>
 
-        <View style={{ gap: spacing.xl, marginTop: spacing.lg }}>
+        <View style={{ gap: spacing.xlarge, marginTop: spacing.large }}>
           {/* Solid */}
-          <Row gap={spacing['4xl']} align="center">
+          <Row gap={spacing['4xlarge']} align="center">
             <View style={{ width: 200 }}>
               <StateLabel>Solid</StateLabel>
             </View>
@@ -83,7 +83,7 @@ export const AllVariants: Story = {
           </Row>
 
           {/* Solid Disabled */}
-          <Row gap={spacing['4xl']} align="center">
+          <Row gap={spacing['4xlarge']} align="center">
             <View style={{ width: 200 }}>
               <StateLabel>Solid (비활성화)</StateLabel>
             </View>
@@ -96,7 +96,7 @@ export const AllVariants: Story = {
           </Row>
 
           {/* Outlined */}
-          <Row gap={spacing['4xl']} align="center">
+          <Row gap={spacing['4xlarge']} align="center">
             <View style={{ width: 200 }}>
               <StateLabel>Outlined</StateLabel>
             </View>
@@ -109,7 +109,7 @@ export const AllVariants: Story = {
           </Row>
 
           {/* Outlined Disabled */}
-          <Row gap={spacing['4xl']} align="center">
+          <Row gap={spacing['4xlarge']} align="center">
             <View style={{ width: 200 }}>
               <StateLabel>Outlined (비활성화)</StateLabel>
             </View>
@@ -135,16 +135,16 @@ export const Sizes: Story = {
       title="크기 비교"
       description="Small, Medium, Large 세 가지 크기를 나란히 비교합니다."
     >
-      <Row gap={spacing['2xl']} align="flex-end">
-        <Col gap={spacing.sm}>
+      <Row gap={spacing['2xlarge']} align="flex-end">
+        <Col gap={spacing.small}>
           <StateLabel>{`S — ${buttonToken.size.small.height}px`}</StateLabel>
           <Button label="버튼" variant="solid" color="primary" size="small" />
         </Col>
-        <Col gap={spacing.sm}>
+        <Col gap={spacing.small}>
           <StateLabel>{`M — ${buttonToken.size.medium.height}px`}</StateLabel>
           <Button label="버튼" variant="solid" color="primary" size="medium" />
         </Col>
-        <Col gap={spacing.sm}>
+        <Col gap={spacing.small}>
           <StateLabel>{`L — ${buttonToken.size.large.height}px`}</StateLabel>
           <Button label="버튼" variant="solid" color="primary" size="large" />
         </Col>
@@ -204,7 +204,7 @@ export const States: Story = {
 export const DesignSpec: Story = {
   name: '디자인 스펙',
   render: () => (
-    <View style={{ gap: spacing['3xl'] }}>
+    <View style={{ gap: spacing['3xlarge'] }}>
       <Section
         title="디자인 스펙"
         description="디자이너와 개발자를 위한 버튼 토큰 상세 스펙입니다."
@@ -215,8 +215,8 @@ export const DesignSpec: Story = {
           rows={[
             { label: '높이', value: `${buttonToken.size.small.height}px`, token: 'buttonToken.size.small.height' },
             { label: '좌우 패딩', value: `${buttonToken.size.small.paddingHorizontal}px`, token: 'buttonToken.size.small.paddingHorizontal' },
-            { label: '폰트 크기', value: `${buttonToken.size.small.fontSize}px`, token: 'fontSize.sm' },
-            { label: '모서리 반경', value: `${buttonToken.size.small.radius}px`, token: 'radius.sm' },
+            { label: '폰트 크기', value: `${buttonToken.size.small.fontSize}px`, token: 'fontSize.small' },
+            { label: '모서리 반경', value: `${buttonToken.size.small.radius}px`, token: 'radius.small' },
           ]}
         />
 
@@ -225,8 +225,8 @@ export const DesignSpec: Story = {
           rows={[
             { label: '높이', value: `${buttonToken.size.medium.height}px`, token: 'buttonToken.size.medium.height' },
             { label: '좌우 패딩', value: `${buttonToken.size.medium.paddingHorizontal}px`, token: 'buttonToken.size.medium.paddingHorizontal' },
-            { label: '폰트 크기', value: `${buttonToken.size.medium.fontSize}px`, token: 'fontSize.md' },
-            { label: '모서리 반경', value: `${buttonToken.size.medium.radius}px`, token: 'radius.md' },
+            { label: '폰트 크기', value: `${buttonToken.size.medium.fontSize}px`, token: 'fontSize.medium' },
+            { label: '모서리 반경', value: `${buttonToken.size.medium.radius}px`, token: 'radius.medium' },
           ]}
         />
 
@@ -235,8 +235,8 @@ export const DesignSpec: Story = {
           rows={[
             { label: '높이', value: `${buttonToken.size.large.height}px`, token: 'buttonToken.size.large.height' },
             { label: '좌우 패딩', value: `${buttonToken.size.large.paddingHorizontal}px`, token: 'buttonToken.size.large.paddingHorizontal' },
-            { label: '폰트 크기', value: `${buttonToken.size.large.fontSize}px`, token: 'fontSize.lg' },
-            { label: '모서리 반경', value: `${buttonToken.size.large.radius}px`, token: 'radius.md' },
+            { label: '폰트 크기', value: `${buttonToken.size.large.fontSize}px`, token: 'fontSize.large' },
+            { label: '모서리 반경', value: `${buttonToken.size.large.radius}px`, token: 'radius.medium' },
           ]}
         />
 
@@ -298,7 +298,7 @@ export const DesignSpec: Story = {
 export const Usage: Story = {
   name: '사용 가이드',
   render: () => (
-    <View style={{ gap: spacing['3xl'] }}>
+    <View style={{ gap: spacing['3xlarge'] }}>
       <Section
         title="사용 가이드"
         description="개발자를 위한 Button 컴포넌트 사용 예시입니다."

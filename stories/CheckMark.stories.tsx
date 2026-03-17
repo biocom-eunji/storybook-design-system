@@ -44,8 +44,8 @@ export const AllVariants: Story = {
       title="모든 변형"
       description="체크 아이콘만 사용하는 간결한 선택 컴포넌트입니다."
     >
-      <Row gap={spacing['3xl']} wrap align="flex-start">
-        <Col gap={spacing.lg}>
+      <Row gap={spacing['3xlarge']} wrap align="flex-start">
+        <Col gap={spacing.large}>
           <StateLabel>Small - 활성</StateLabel>
           <CompareGrid
             items={[
@@ -54,7 +54,7 @@ export const AllVariants: Story = {
             ]}
           />
         </Col>
-        <Col gap={spacing.lg}>
+        <Col gap={spacing.large}>
           <StateLabel>Small - 비활성</StateLabel>
           <CompareGrid
             items={[
@@ -63,7 +63,7 @@ export const AllVariants: Story = {
             ]}
           />
         </Col>
-        <Col gap={spacing.lg}>
+        <Col gap={spacing.large}>
           <StateLabel>Medium - 활성</StateLabel>
           <CompareGrid
             items={[
@@ -72,7 +72,7 @@ export const AllVariants: Story = {
             ]}
           />
         </Col>
-        <Col gap={spacing.lg}>
+        <Col gap={spacing.large}>
           <StateLabel>Medium - 비활성</StateLabel>
           <CompareGrid
             items={[
@@ -92,8 +92,8 @@ export const WithLabels: Story = {
   name: '라벨 조합',
   render: () => (
     <Section title="라벨 조합" description="라벨, 보조 라벨, tight 모드 등 다양한 라벨 구성을 확인합니다.">
-      <Col gap={spacing['2xl']}>
-        <Col gap={spacing.sm}>
+      <Col gap={spacing['2xlarge']}>
+        <Col gap={spacing.small}>
           <StateLabel>라벨만</StateLabel>
           <CheckMark checked label="선택된 항목" />
           <CheckMark checked={false} label="미선택 항목" />
@@ -101,7 +101,7 @@ export const WithLabels: Story = {
 
         <Divider />
 
-        <Col gap={spacing.sm}>
+        <Col gap={spacing.small}>
           <StateLabel>라벨 + 보조 라벨</StateLabel>
           <CheckMark checked label="메인 라벨" sublabel="보조 설명이 여기에 표시됩니다" />
           <CheckMark checked={false} label="메인 라벨" sublabel="보조 설명이 여기에 표시됩니다" />
@@ -109,10 +109,10 @@ export const WithLabels: Story = {
 
         <Divider />
 
-        <Col gap={spacing.sm}>
+        <Col gap={spacing.small}>
           <StateLabel>Tight 모드</StateLabel>
           <View style={{ maxWidth: 300 }}>
-            <Col gap={spacing.sm}>
+            <Col gap={spacing.small}>
               <CheckMark checked label="좁은 간격" sublabel="tight 모드에서는 간격이 줄어듭니다" tight />
               <CheckMark checked={false} label="좁은 간격" sublabel="tight 모드에서는 간격이 줄어듭니다" tight />
             </Col>
@@ -139,7 +139,7 @@ export const Interactive: Story = {
       setItems(prev => { const n = [...prev]; n[i] = !n[i]; return n; });
     return (
       <Section title="인터랙티브" description="여러 항목을 자유롭게 선택/해제할 수 있는 예시입니다. 직접 클릭해 보세요.">
-        <Col gap={spacing.xs}>
+        <Col gap={spacing.xsmall}>
           {labels.map((opt, i) => (
             <CheckMark
               key={i}
@@ -161,13 +161,13 @@ export const DesignSpec: Story = {
   name: '디자인 스펙',
   render: () => (
     <Section title="디자인 스펙" description="디자이너를 위한 사이즈 및 컬러 토큰 명세입니다.">
-      <Col gap={spacing['2xl']}>
+      <Col gap={spacing['2xlarge']}>
         <SpecTable
           title="Small 사이즈"
           rows={[
             { label: '아이콘 크기', value: '18px', token: '—' },
-            { label: '라벨 간격', value: `${spacing.sm}px`, token: 'spacing.sm' },
-            { label: '라벨 폰트 크기', value: `${fontSize.sm}px`, token: 'fontSize.sm' },
+            { label: '라벨 간격', value: `${spacing.small}px`, token: 'spacing.small' },
+            { label: '라벨 폰트 크기', value: `${fontSize.small}px`, token: 'fontSize.small' },
           ]}
         />
         <SpecTable
@@ -175,7 +175,7 @@ export const DesignSpec: Story = {
           rows={[
             { label: '아이콘 크기', value: '22px', token: '—' },
             { label: '라벨 간격', value: '10px', token: '—' },
-            { label: '라벨 폰트 크기', value: `${fontSize.md}px`, token: 'fontSize.md' },
+            { label: '라벨 폰트 크기', value: `${fontSize.medium}px`, token: 'fontSize.medium' },
           ]}
         />
         <SpecTable
@@ -197,7 +197,7 @@ export const Usage: Story = {
   name: '사용 가이드',
   render: () => (
     <Section title="사용 가이드" description="개발자를 위한 코드 사용 예시입니다.">
-      <Col gap={spacing.lg}>
+      <Col gap={spacing.large}>
         <CodeBlock
           title="기본 사용"
           code={`<CheckMark checked={false} onPress={() => {}} />`}

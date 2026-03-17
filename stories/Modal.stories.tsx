@@ -20,7 +20,7 @@ export default meta;
 type Story = StoryObj<typeof Modal>;
 
 const PreviewContainer = ({ children }: { children: React.ReactNode }) => (
-  <View style={{ height: 400, backgroundColor: coolNeutral[99], position: 'relative', overflow: 'hidden', borderRadius: radius.md, justifyContent: 'center', alignItems: 'center' }}>
+  <View style={{ height: 400, backgroundColor: coolNeutral[99], position: 'relative', overflow: 'hidden', borderRadius: radius.medium, justifyContent: 'center', alignItems: 'center' }}>
     {children}
   </View>
 );
@@ -36,12 +36,12 @@ export const Playground: Story = {
   render: (args) => {
     const [visible, setVisible] = useState(args.visible);
     return (
-      <View style={{ gap: spacing.lg }}>
+      <View style={{ gap: spacing.large }}>
         <Pressable
           onPress={() => setVisible(true)}
-          style={{ backgroundColor: mint[45], paddingHorizontal: spacing.xl, paddingVertical: spacing.md, borderRadius: radius.md, alignSelf: 'flex-start' }}
+          style={{ backgroundColor: mint[45], paddingHorizontal: spacing.xlarge, paddingVertical: spacing.medium, borderRadius: radius.medium, alignSelf: 'flex-start' }}
         >
-          <Text style={{ color: '#FFFFFF', fontSize: fontSize.md, fontWeight: fontWeight.semibold }}>모달 열기</Text>
+          <Text style={{ color: '#FFFFFF', fontSize: fontSize.medium, fontWeight: fontWeight.semibold }}>모달 열기</Text>
         </Pressable>
         <PreviewContainer>
           <Modal
@@ -117,19 +117,19 @@ export const CustomContent: Story = {
           primaryAction={{ label: '보내기', onPress: () => {} }}
           secondaryAction={{ label: '취소', onPress: () => {} }}
         >
-          <View style={{ gap: spacing.md, marginTop: spacing.md }}>
-            <Text style={{ fontSize: fontSize.sm, color: coolNeutral[50], textAlign: 'center' }}>
+          <View style={{ gap: spacing.medium, marginTop: spacing.medium }}>
+            <Text style={{ fontSize: fontSize.small, color: coolNeutral[50], textAlign: 'center' }}>
               서비스 개선을 위해 의견을 보내주세요.
             </Text>
             <View style={{
               borderWidth: 1,
               borderColor: coolNeutral[96],
-              borderRadius: radius.sm,
-              padding: spacing.md,
+              borderRadius: radius.small,
+              padding: spacing.medium,
               minHeight: 80,
               backgroundColor: coolNeutral[99],
             }}>
-              <Text style={{ fontSize: fontSize.md, color: coolNeutral[80] }}>의견을 입력하세요...</Text>
+              <Text style={{ fontSize: fontSize.medium, color: coolNeutral[80] }}>의견을 입력하세요...</Text>
             </View>
           </View>
         </Modal>
@@ -143,7 +143,7 @@ export const CustomContent: Story = {
 export const DesignSpec: Story = {
   name: '디자인 스펙',
   render: () => (
-    <View style={{ gap: spacing['3xl'] }}>
+    <View style={{ gap: spacing['3xlarge'] }}>
       <Section
         title="디자인 스펙"
         description="Modal 컴포넌트의 디자인 토큰 상세 스펙입니다."
@@ -162,14 +162,14 @@ export const DesignSpec: Story = {
             { label: '배경색', value: '#FFFFFF', token: 'palette.white' },
             { label: '모서리 반경', value: '20px', token: '—' },
             { label: '너비', value: '300px', token: '—' },
-            { label: '패딩', value: `${spacing['2xl']}px`, token: 'spacing.2xl' },
+            { label: '패딩', value: `${spacing['2xlarge']}px`, token: 'spacing.2xl' },
           ]}
         />
 
         <SpecTable
           title="타이틀"
           rows={[
-            { label: '폰트 크기', value: `${fontSize.lg}px`, token: 'fontSize.lg' },
+            { label: '폰트 크기', value: `${fontSize.large}px`, token: 'fontSize.large' },
             { label: '폰트 굵기', value: fontWeight.bold, token: 'fontWeight.bold' },
             { label: '색상', value: coolNeutral[17], token: 'coolNeutral[17]' },
             { label: '정렬', value: 'center', token: '—' },
@@ -179,9 +179,9 @@ export const DesignSpec: Story = {
         <SpecTable
           title="설명"
           rows={[
-            { label: '폰트 크기', value: `${fontSize.md}px`, token: 'fontSize.md' },
+            { label: '폰트 크기', value: `${fontSize.medium}px`, token: 'fontSize.medium' },
             { label: '색상', value: coolNeutral[50], token: 'coolNeutral[50]' },
-            { label: '상단 마진', value: `${spacing.sm}px`, token: 'spacing.sm' },
+            { label: '상단 마진', value: `${spacing.small}px`, token: 'spacing.small' },
             { label: '정렬', value: 'center', token: '—' },
           ]}
         />
@@ -190,11 +190,11 @@ export const DesignSpec: Story = {
           title="Primary 버튼"
           rows={[
             { label: '높이', value: '48px', token: '—' },
-            { label: '모서리 반경', value: `${spacing.md}px`, token: 'spacing.md' },
+            { label: '모서리 반경', value: `${spacing.medium}px`, token: 'spacing.medium' },
             { label: '배경색', value: mint[45], token: 'mint[45]' },
             { label: '배경색 (위험)', value: red[70], token: 'red[70]' },
             { label: '텍스트 색상', value: '#FFFFFF', token: 'palette.white' },
-            { label: '폰트 크기', value: `${fontSize.md}px`, token: 'fontSize.md' },
+            { label: '폰트 크기', value: `${fontSize.medium}px`, token: 'fontSize.medium' },
             { label: '폰트 굵기', value: fontWeight.semibold, token: 'fontWeight.semibold' },
           ]}
         />
@@ -203,7 +203,7 @@ export const DesignSpec: Story = {
           title="Secondary 버튼"
           rows={[
             { label: '높이', value: '48px', token: '—' },
-            { label: '모서리 반경', value: `${spacing.md}px`, token: 'spacing.md' },
+            { label: '모서리 반경', value: `${spacing.medium}px`, token: 'spacing.medium' },
             { label: '배경색', value: coolNeutral[97], token: 'coolNeutral[97]' },
             { label: '텍스트 색상', value: coolNeutral[40], token: 'coolNeutral[40]' },
           ]}
@@ -212,8 +212,8 @@ export const DesignSpec: Story = {
         <SpecTable
           title="버튼 영역"
           rows={[
-            { label: '상단 마진', value: `${spacing['2xl']}px`, token: 'spacing.2xl' },
-            { label: '간격', value: `${spacing.sm}px`, token: 'spacing.sm' },
+            { label: '상단 마진', value: `${spacing['2xlarge']}px`, token: 'spacing.2xl' },
+            { label: '간격', value: `${spacing.small}px`, token: 'spacing.small' },
             { label: '정렬', value: '수직 (primary 위, secondary 아래)', token: '—' },
           ]}
         />
@@ -227,7 +227,7 @@ export const DesignSpec: Story = {
 export const Usage: Story = {
   name: '사용 가이드',
   render: () => (
-    <View style={{ gap: spacing['3xl'] }}>
+    <View style={{ gap: spacing['3xlarge'] }}>
       <Section
         title="사용 가이드"
         description="개발자를 위한 Modal 컴포넌트 사용 예시입니다."
@@ -277,7 +277,7 @@ export const Usage: Story = {
 
         <Divider />
 
-        <Col gap={spacing.sm}>
+        <Col gap={spacing.small}>
           <StateLabel>Props</StateLabel>
           <SpecTable
             rows={[

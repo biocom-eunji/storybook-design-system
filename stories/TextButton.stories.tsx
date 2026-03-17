@@ -47,25 +47,25 @@ export const Playground: Story = {
 export const AllVariants: Story = {
   name: '모든 변형',
   render: () => (
-    <View style={{ gap: spacing['3xl'] }}>
+    <View style={{ gap: spacing['3xlarge'] }}>
       <Section
         title="TextButton"
         description="배경이나 테두리 없이 텍스트만으로 동작하는 버튼입니다."
       >
-        <Col gap={spacing['2xl']}>
+        <Col gap={spacing['2xlarge']}>
           {/* Primary */}
-          <Col gap={spacing.md}>
+          <Col gap={spacing.medium}>
             <StateLabel>PRIMARY</StateLabel>
-            <Row gap={spacing.xl}>
-              <Col gap={spacing.xs}>
+            <Row gap={spacing.xlarge}>
+              <Col gap={spacing.xsmall}>
                 <StateLabel>Medium</StateLabel>
                 <TextButton label="텍스트" color="primary" size="medium" />
               </Col>
-              <Col gap={spacing.xs}>
+              <Col gap={spacing.xsmall}>
                 <StateLabel>Small</StateLabel>
                 <TextButton label="텍스트" color="primary" size="small" />
               </Col>
-              <Col gap={spacing.xs}>
+              <Col gap={spacing.xsmall}>
                 <StateLabel>아이콘 포함</StateLabel>
                 <TextButton
                   label="텍스트"
@@ -74,7 +74,7 @@ export const AllVariants: Story = {
                   leadingIcon={<Icon name="null" />}
                 />
               </Col>
-              <Col gap={spacing.xs}>
+              <Col gap={spacing.xsmall}>
                 <StateLabel>비활성화</StateLabel>
                 <TextButton label="텍스트" color="primary" size="medium" disabled />
               </Col>
@@ -84,18 +84,18 @@ export const AllVariants: Story = {
           <Divider />
 
           {/* Assistive */}
-          <Col gap={spacing.md}>
+          <Col gap={spacing.medium}>
             <StateLabel>ASSISTIVE</StateLabel>
-            <Row gap={spacing.xl}>
-              <Col gap={spacing.xs}>
+            <Row gap={spacing.xlarge}>
+              <Col gap={spacing.xsmall}>
                 <StateLabel>Medium</StateLabel>
                 <TextButton label="텍스트" color="assistive" size="medium" />
               </Col>
-              <Col gap={spacing.xs}>
+              <Col gap={spacing.xsmall}>
                 <StateLabel>Small</StateLabel>
                 <TextButton label="텍스트" color="assistive" size="small" />
               </Col>
-              <Col gap={spacing.xs}>
+              <Col gap={spacing.xsmall}>
                 <StateLabel>아이콘 포함</StateLabel>
                 <TextButton
                   label="텍스트"
@@ -104,7 +104,7 @@ export const AllVariants: Story = {
                   leadingIcon={<Icon name="null" />}
                 />
               </Col>
-              <Col gap={spacing.xs}>
+              <Col gap={spacing.xsmall}>
                 <StateLabel>비활성화</StateLabel>
                 <TextButton label="텍스트" color="assistive" size="medium" disabled />
               </Col>
@@ -121,10 +121,10 @@ export const AllVariants: Story = {
 export const States: Story = {
   name: '상태',
   render: () => (
-    <View style={{ gap: spacing['3xl'] }}>
+    <View style={{ gap: spacing['3xlarge'] }}>
       <Section title="상태별 비교" description="각 상태에서의 TextButton 모습을 비교합니다.">
-        <Col gap={spacing['2xl']}>
-          <Col gap={spacing.md}>
+        <Col gap={spacing['2xlarge']}>
+          <Col gap={spacing.medium}>
             <StateLabel>PRIMARY</StateLabel>
             <CompareGrid
               items={[
@@ -146,7 +146,7 @@ export const States: Story = {
 
           <Divider />
 
-          <Col gap={spacing.md}>
+          <Col gap={spacing.medium}>
             <StateLabel>ASSISTIVE</StateLabel>
             <CompareGrid
               items={[
@@ -176,12 +176,12 @@ export const States: Story = {
 export const WithIcons: Story = {
   name: '아이콘 조합',
   render: () => (
-    <View style={{ gap: spacing['3xl'] }}>
+    <View style={{ gap: spacing['3xlarge'] }}>
       <Section title="아이콘 조합" description="Leading, Trailing 또는 양쪽 모두에 아이콘을 배치할 수 있습니다.">
-        <Col gap={spacing['2xl']}>
-          <Col gap={spacing.md}>
+        <Col gap={spacing['2xlarge']}>
+          <Col gap={spacing.medium}>
             <StateLabel>LEADING 아이콘</StateLabel>
-            <Row gap={spacing.xl}>
+            <Row gap={spacing.xlarge}>
               <TextButton
                 label="텍스트"
                 color="primary"
@@ -199,9 +199,9 @@ export const WithIcons: Story = {
 
           <Divider />
 
-          <Col gap={spacing.md}>
+          <Col gap={spacing.medium}>
             <StateLabel>TRAILING 아이콘</StateLabel>
-            <Row gap={spacing.xl}>
+            <Row gap={spacing.xlarge}>
               <TextButton
                 label="텍스트"
                 color="primary"
@@ -219,9 +219,9 @@ export const WithIcons: Story = {
 
           <Divider />
 
-          <Col gap={spacing.md}>
+          <Col gap={spacing.medium}>
             <StateLabel>양쪽 아이콘</StateLabel>
-            <Row gap={spacing.xl}>
+            <Row gap={spacing.xlarge}>
               <TextButton
                 label="텍스트"
                 color="primary"
@@ -249,9 +249,9 @@ export const WithIcons: Story = {
 export const DesignSpec: Story = {
   name: '디자인 스펙',
   render: () => (
-    <View style={{ gap: spacing['3xl'] }}>
+    <View style={{ gap: spacing['3xlarge'] }}>
       <Section title="디자인 스펙" description="TextButton 컴포넌트의 디자인 토큰 명세입니다.">
-        <Col gap={spacing['2xl']}>
+        <Col gap={spacing['2xlarge']}>
           <SpecTable
             title="사이즈별 스펙"
             rows={[
@@ -290,9 +290,9 @@ export const DesignSpec: Story = {
 export const Usage: Story = {
   name: '사용 가이드',
   render: () => (
-    <View style={{ gap: spacing['3xl'] }}>
+    <View style={{ gap: spacing['3xlarge'] }}>
       <Section title="사용 가이드" description="TextButton 컴포넌트의 import 및 사용 예시입니다.">
-        <Col gap={spacing.lg}>
+        <Col gap={spacing.large}>
           <CodeBlock
             title="Import"
             code={`import { TextButton } from '@design-system/components/TextButton';

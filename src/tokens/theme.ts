@@ -247,14 +247,14 @@ export const fontFamily = {
 } as const;
 
 export const fontSize = {
-  xs: 11,
-  sm: 13,
-  md: 15,
-  lg: 17,
-  xl: 20,
-  '2xl': 24,
-  '3xl': 28,
-  '4xl': 34,
+  xsmall: 11,
+  small: 13,
+  medium: 15,
+  large: 17,
+  xlarge: 20,
+  '2xlarge': 24,
+  '3xlarge': 28,
+  '4xlarge': 34,
 } as const;
 
 export const fontWeight = {
@@ -265,47 +265,47 @@ export const fontWeight = {
 };
 
 export const lineHeight = {
-  xs: 16,
-  sm: 18,
-  md: 22,
-  lg: 24,
-  xl: 28,
-  '2xl': 32,
-  '3xl': 36,
-  '4xl': 42,
+  xsmall: 16,
+  small: 18,
+  medium: 22,
+  large: 24,
+  xlarge: 28,
+  '2xlarge': 32,
+  '3xlarge': 36,
+  '4xlarge': 42,
 } as const;
 
 export const textStyle = {
-  heading1: { fontSize: fontSize['4xl'], fontWeight: fontWeight.bold, lineHeight: lineHeight['4xl'] },
-  heading2: { fontSize: fontSize['3xl'], fontWeight: fontWeight.bold, lineHeight: lineHeight['3xl'] },
-  heading3: { fontSize: fontSize['2xl'], fontWeight: fontWeight.bold, lineHeight: lineHeight['2xl'] },
-  title1:   { fontSize: fontSize.xl,     fontWeight: fontWeight.semibold, lineHeight: lineHeight.xl },
-  title2:   { fontSize: fontSize.lg,     fontWeight: fontWeight.semibold, lineHeight: lineHeight.lg },
-  body1:    { fontSize: fontSize.md,     fontWeight: fontWeight.regular, lineHeight: lineHeight.md },
-  body2:    { fontSize: fontSize.sm,     fontWeight: fontWeight.regular, lineHeight: lineHeight.sm },
-  caption:  { fontSize: fontSize.xs,     fontWeight: fontWeight.regular, lineHeight: lineHeight.xs },
-  label:    { fontSize: fontSize.sm,     fontWeight: fontWeight.medium, lineHeight: lineHeight.sm },
+  heading1: { fontSize: fontSize['4xlarge'], fontWeight: fontWeight.bold, lineHeight: lineHeight['4xlarge'] },
+  heading2: { fontSize: fontSize['3xlarge'], fontWeight: fontWeight.bold, lineHeight: lineHeight['3xlarge'] },
+  heading3: { fontSize: fontSize['2xlarge'], fontWeight: fontWeight.bold, lineHeight: lineHeight['2xlarge'] },
+  title1:   { fontSize: fontSize.xlarge,     fontWeight: fontWeight.semibold, lineHeight: lineHeight.xlarge },
+  title2:   { fontSize: fontSize.large,     fontWeight: fontWeight.semibold, lineHeight: lineHeight.large },
+  body1:    { fontSize: fontSize.medium,     fontWeight: fontWeight.regular, lineHeight: lineHeight.medium },
+  body2:    { fontSize: fontSize.small,     fontWeight: fontWeight.regular, lineHeight: lineHeight.small },
+  caption:  { fontSize: fontSize.xsmall,     fontWeight: fontWeight.regular, lineHeight: lineHeight.xsmall },
+  label:    { fontSize: fontSize.small,     fontWeight: fontWeight.medium, lineHeight: lineHeight.small },
 } as const;
 
 // ─── Spacing & Radius ────────────────────────────────────
 
 export const spacing = {
-  xs: 4,
-  sm: 8,
-  md: 12,
-  lg: 16,
-  xl: 20,
-  '2xl': 24,
-  '3xl': 32,
-  '4xl': 48,
+  xsmall: 4,
+  small: 8,
+  medium: 12,
+  large: 16,
+  xlarge: 20,
+  '2xlarge': 24,
+  '3xlarge': 32,
+  '4xlarge': 48,
 } as const;
 
 export const radius = {
-  xs: 4,
-  sm: 8,
-  md: 12,
-  lg: 16,
-  xl: 24,
+  xsmall: 4,
+  small: 8,
+  medium: 12,
+  large: 16,
+  xlarge: 24,
   full: 9999,
 } as const;
 
@@ -415,9 +415,9 @@ export type SemanticColor = typeof semanticColor;
 /** Button: variant = solid | outlined, color = primary | assistive */
 export const buttonToken = {
   size: {
-    small:  { height: 36, paddingHorizontal: 14, fontSize: fontSize.sm, iconSize: 16, radius: radius.sm },
-    medium: { height: 44, paddingHorizontal: 18, fontSize: fontSize.md, iconSize: 20, radius: radius.md },
-    large:  { height: 52, paddingHorizontal: 24, fontSize: fontSize.lg, iconSize: 24, radius: radius.md },
+    small:  { height: 36, paddingHorizontal: 14, fontSize: fontSize.small, iconSize: 16, radius: radius.small },
+    medium: { height: 44, paddingHorizontal: 18, fontSize: fontSize.medium, iconSize: 20, radius: radius.medium },
+    large:  { height: 52, paddingHorizontal: 24, fontSize: fontSize.large, iconSize: 24, radius: radius.medium },
   },
   color: {
     primary: {
@@ -466,8 +466,8 @@ export const buttonToken = {
 /** Text Button: 배경색이나 테두리가 없는 버튼 */
 export const textButtonToken = {
   size: {
-    small:  { fontSize: fontSize.sm, iconSize: 16 },
-    medium: { fontSize: fontSize.md, iconSize: 20 },
+    small:  { fontSize: fontSize.small, iconSize: 16 },
+    medium: { fontSize: fontSize.medium, iconSize: 20 },
   },
   color: {
     primary: {
@@ -488,10 +488,10 @@ export const textButtonToken = {
 /** Chip: 상호작용을 통해 정보를 분류하거나, 상태를 표시 */
 export const chipToken = {
   size: {
-    xsmall: { height: 24, paddingHorizontal: 8,  fontSize: fontSize.xs, iconSize: 12, radius: radius.xs },
-    small:  { height: 28, paddingHorizontal: 10, fontSize: fontSize.xs, iconSize: 14, radius: radius.sm },
-    medium: { height: 32, paddingHorizontal: 12, fontSize: fontSize.sm, iconSize: 16, radius: radius.sm },
-    large:  { height: 38, paddingHorizontal: 14, fontSize: fontSize.md, iconSize: 18, radius: radius.md },
+    xsmall: { height: 24, paddingHorizontal: 8,  fontSize: fontSize.xsmall, iconSize: 12, radius: radius.xsmall },
+    small:  { height: 28, paddingHorizontal: 10, fontSize: fontSize.xsmall, iconSize: 14, radius: radius.small },
+    medium: { height: 32, paddingHorizontal: 12, fontSize: fontSize.small, iconSize: 16, radius: radius.small },
+    large:  { height: 38, paddingHorizontal: 14, fontSize: fontSize.medium, iconSize: 18, radius: radius.medium },
   },
   variant: {
     solid: {
@@ -515,8 +515,8 @@ export const actionAreaToken = {
     compact: { description: '작은 크기 복합 액션' },
     cancel:  { description: '취소/확인 단일 액션' },
   },
-  padding: spacing.lg,
-  gap: spacing.sm,
+  padding: spacing.large,
+  gap: spacing.small,
 } as const;
 
 // ─── Theme (통합) ────────────────────────────────────────

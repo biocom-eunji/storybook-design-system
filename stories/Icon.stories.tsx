@@ -106,7 +106,7 @@ const IconGrid = ({ names, iconStyle }: { names: string[]; iconStyle: IconStyle 
 
   if (names.length === 0) {
     return (
-      <Text style={{ fontSize: fontSize.sm, color: coolNeutral[70], paddingVertical: spacing['2xl'] }}>
+      <Text style={{ fontSize: fontSize.small, color: coolNeutral[70], paddingVertical: spacing['2xlarge'] }}>
         검색 결과가 없습니다.
       </Text>
     );
@@ -215,7 +215,7 @@ export const AllIcons: Story = {
           />
           {query.length > 0 && (
             <Pressable onPress={() => setQuery('')}>
-              <Text style={{ fontSize: fontSize.sm, color: coolNeutral[60] }}>지우기</Text>
+              <Text style={{ fontSize: fontSize.small, color: coolNeutral[60] }}>지우기</Text>
             </Pressable>
           )}
         </View>
@@ -243,8 +243,8 @@ export const AllIcons: Story = {
 
         {total === 0 && q.length > 0 && (
           <View style={styles.emptyState}>
-            <Text style={{ fontSize: fontSize.lg, color: coolNeutral[80], marginBottom: spacing.sm }}>검색 결과 없음</Text>
-            <Text style={{ fontSize: fontSize.sm, color: coolNeutral[70] }}>
+            <Text style={{ fontSize: fontSize.large, color: coolNeutral[80], marginBottom: spacing.small }}>검색 결과 없음</Text>
+            <Text style={{ fontSize: fontSize.small, color: coolNeutral[70] }}>
               "{query}"에 해당하는 아이콘이 없습니다.
             </Text>
           </View>
@@ -261,18 +261,18 @@ const styles = StyleSheet.create({
   grid: {
     flexDirection: 'row',
     flexWrap: 'wrap',
-    gap: spacing.sm,
+    gap: spacing.small,
   },
 
   // Card
   card: {
     width: 104,
-    paddingVertical: spacing.md,
-    paddingHorizontal: spacing.sm,
+    paddingVertical: spacing.medium,
+    paddingHorizontal: spacing.small,
     alignItems: 'center',
     justifyContent: 'center',
-    gap: spacing.sm,
-    borderRadius: radius.md,
+    gap: spacing.small,
+    borderRadius: radius.medium,
     backgroundColor: coolNeutral[99],
     borderWidth: 1,
     borderColor: 'transparent',
@@ -292,13 +292,13 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   cardName: {
-    fontSize: fontSize.xs,
+    fontSize: fontSize.xsmall,
     fontWeight: fontWeight.medium,
     color: coolNeutral[50],
     textAlign: 'center',
   },
   copiedText: {
-    fontSize: fontSize.xs,
+    fontSize: fontSize.xsmall,
     fontWeight: fontWeight.semibold,
     color: mint[45],
     textAlign: 'center',
@@ -306,65 +306,65 @@ const styles = StyleSheet.create({
 
   // Section
   section: {
-    marginBottom: spacing['3xl'],
+    marginBottom: spacing['3xlarge'],
   },
   sectionHeader: {
     flexDirection: 'row',
     alignItems: 'center',
-    gap: spacing.sm,
-    marginBottom: spacing.xs,
+    gap: spacing.small,
+    marginBottom: spacing.xsmall,
   },
   sectionTitle: {
-    fontSize: fontSize.lg,
+    fontSize: fontSize.large,
     fontWeight: fontWeight.bold,
     color: coolNeutral[17],
   },
   sectionDesc: {
-    fontSize: fontSize.sm,
+    fontSize: fontSize.small,
     color: coolNeutral[50],
-    marginBottom: spacing.sm,
+    marginBottom: spacing.small,
   },
   usageHint: {
-    fontSize: fontSize.xs,
+    fontSize: fontSize.xsmall,
     fontFamily: 'monospace',
     color: coolNeutral[70],
     backgroundColor: coolNeutral[99],
-    paddingVertical: spacing.xs,
-    paddingHorizontal: spacing.sm,
-    borderRadius: radius.xs,
-    marginBottom: spacing.lg,
+    paddingVertical: spacing.xsmall,
+    paddingHorizontal: spacing.small,
+    borderRadius: radius.xsmall,
+    marginBottom: spacing.large,
     alignSelf: 'flex-start',
   },
   badge: {
     backgroundColor: mint[95],
-    paddingHorizontal: spacing.sm,
+    paddingHorizontal: spacing.small,
     paddingVertical: 2,
     borderRadius: radius.full,
   },
   badgeText: {
-    fontSize: fontSize.xs,
+    fontSize: fontSize.xsmall,
     fontWeight: fontWeight.semibold,
     color: mint[40],
   },
   divider: {
     height: 1,
     backgroundColor: coolNeutral[96],
-    marginBottom: spacing['3xl'],
+    marginBottom: spacing['3xlarge'],
   },
 
   // Gallery
   gallery: {},
   galleryHeader: {
-    marginBottom: spacing['3xl'],
+    marginBottom: spacing['3xlarge'],
   },
   galleryTitle: {
-    fontSize: fontSize['2xl'],
+    fontSize: fontSize['2xlarge'],
     fontWeight: fontWeight.bold,
     color: coolNeutral[10],
-    marginBottom: spacing.xs,
+    marginBottom: spacing.xsmall,
   },
   gallerySubtitle: {
-    fontSize: fontSize.md,
+    fontSize: fontSize.medium,
     color: coolNeutral[50],
   },
 
@@ -372,31 +372,31 @@ const styles = StyleSheet.create({
   searchWrap: {
     flexDirection: 'row',
     alignItems: 'center',
-    gap: spacing.sm,
+    gap: spacing.small,
     backgroundColor: coolNeutral[99],
     borderWidth: 1,
     borderColor: coolNeutral[95],
-    borderRadius: radius.md,
-    paddingHorizontal: spacing.md,
-    paddingVertical: spacing.sm,
-    marginBottom: spacing['2xl'],
+    borderRadius: radius.medium,
+    paddingHorizontal: spacing.medium,
+    paddingVertical: spacing.small,
+    marginBottom: spacing['2xlarge'],
   },
   searchInput: {
     flex: 1,
-    fontSize: fontSize.md,
+    fontSize: fontSize.medium,
     color: coolNeutral[17],
     outlineStyle: 'none' as any,
   },
   resultCount: {
-    fontSize: fontSize.sm,
+    fontSize: fontSize.small,
     fontWeight: fontWeight.medium,
     color: coolNeutral[50],
-    marginBottom: spacing.lg,
+    marginBottom: spacing.large,
   },
 
   // Empty
   emptyState: {
     alignItems: 'center',
-    paddingVertical: spacing['4xl'],
+    paddingVertical: spacing['4xlarge'],
   },
 });

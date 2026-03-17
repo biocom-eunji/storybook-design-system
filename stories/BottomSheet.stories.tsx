@@ -21,14 +21,14 @@ export default meta;
 type Story = StoryObj<typeof BottomSheet>;
 
 const PreviewContainer = ({ children }: { children: React.ReactNode }) => (
-  <View style={{ height: 400, backgroundColor: coolNeutral[99], position: 'relative', overflow: 'hidden', borderRadius: radius.md }}>
+  <View style={{ height: 400, backgroundColor: coolNeutral[99], position: 'relative', overflow: 'hidden', borderRadius: radius.medium }}>
     {children}
   </View>
 );
 
 const ListItem = ({ label }: { label: string }) => (
-  <Pressable style={{ paddingVertical: spacing.md, borderBottomWidth: 1, borderBottomColor: coolNeutral[96] }}>
-    <Text style={{ fontSize: fontSize.md, color: coolNeutral[17] }}>{label}</Text>
+  <Pressable style={{ paddingVertical: spacing.medium, borderBottomWidth: 1, borderBottomColor: coolNeutral[96] }}>
+    <Text style={{ fontSize: fontSize.medium, color: coolNeutral[17] }}>{label}</Text>
   </Pressable>
 );
 
@@ -44,12 +44,12 @@ export const Playground: Story = {
   render: (args) => {
     const [visible, setVisible] = useState(args.visible);
     return (
-      <View style={{ gap: spacing.lg }}>
+      <View style={{ gap: spacing.large }}>
         <Pressable
           onPress={() => setVisible(true)}
-          style={{ backgroundColor: mint[45], paddingHorizontal: spacing.xl, paddingVertical: spacing.md, borderRadius: radius.md, alignSelf: 'flex-start' }}
+          style={{ backgroundColor: mint[45], paddingHorizontal: spacing.xlarge, paddingVertical: spacing.medium, borderRadius: radius.medium, alignSelf: 'flex-start' }}
         >
-          <Text style={{ color: '#FFFFFF', fontSize: fontSize.md, fontWeight: fontWeight.semibold }}>바텀시트 열기</Text>
+          <Text style={{ color: '#FFFFFF', fontSize: fontSize.medium, fontWeight: fontWeight.semibold }}>바텀시트 열기</Text>
         </Pressable>
         <PreviewContainer>
           <BottomSheet
@@ -93,7 +93,7 @@ export const Default: Story = {
 export const HandleAndCloseOptions: Story = {
   name: '핸들바/닫기버튼 옵션',
   render: () => (
-    <View style={{ gap: spacing['3xl'] }}>
+    <View style={{ gap: spacing['3xlarge'] }}>
       <Section
         title="핸들바/닫기버튼 옵션"
         description="핸들바와 닫기 버튼 조합에 따른 헤더 스타일 변화를 확인합니다."
@@ -156,7 +156,7 @@ export const HandleAndCloseOptions: Story = {
 export const DesignSpec: Story = {
   name: '디자인 스펙',
   render: () => (
-    <View style={{ gap: spacing['3xl'] }}>
+    <View style={{ gap: spacing['3xlarge'] }}>
       <Section
         title="디자인 스펙"
         description="BottomSheet 컴포넌트의 디자인 토큰 상세 스펙입니다."
@@ -185,25 +185,25 @@ export const DesignSpec: Story = {
             { label: '높이', value: '4px', token: '—' },
             { label: '모서리 반경', value: '2px', token: '—' },
             { label: '배경색', value: coolNeutral[90], token: 'coolNeutral[90]' },
-            { label: '상단 마진', value: `${spacing.md}px`, token: 'spacing.md' },
+            { label: '상단 마진', value: `${spacing.medium}px`, token: 'spacing.medium' },
           ]}
         />
 
         <SpecTable
           title="타이틀"
           rows={[
-            { label: '폰트 크기', value: `${fontSize.lg}px`, token: 'fontSize.lg' },
+            { label: '폰트 크기', value: `${fontSize.large}px`, token: 'fontSize.large' },
             { label: '폰트 굵기', value: fontWeight.bold, token: 'fontWeight.bold' },
             { label: '색상', value: coolNeutral[17], token: 'coolNeutral[17]' },
-            { label: '좌우 패딩', value: `${spacing.xl}px`, token: 'spacing.xl' },
-            { label: '상하 패딩', value: `${spacing.lg}px`, token: 'spacing.lg' },
+            { label: '좌우 패딩', value: `${spacing.xlarge}px`, token: 'spacing.xlarge' },
+            { label: '상하 패딩', value: `${spacing.large}px`, token: 'spacing.large' },
           ]}
         />
 
         <SpecTable
           title="닫기 버튼"
           rows={[
-            { label: '위치', value: 'right: 16, top: 16', token: 'spacing.lg' },
+            { label: '위치', value: 'right: 16, top: 16', token: 'spacing.large' },
             { label: '색상', value: coolNeutral[50], token: 'coolNeutral[50]' },
           ]}
         />
@@ -211,7 +211,7 @@ export const DesignSpec: Story = {
         <SpecTable
           title="콘텐츠 영역"
           rows={[
-            { label: '좌우 패딩', value: `${spacing.xl}px`, token: 'spacing.xl' },
+            { label: '좌우 패딩', value: `${spacing.xlarge}px`, token: 'spacing.xlarge' },
             { label: '하단 패딩', value: '34px', token: '— (safe area)' },
           ]}
         />
@@ -225,7 +225,7 @@ export const DesignSpec: Story = {
 export const Usage: Story = {
   name: '사용 가이드',
   render: () => (
-    <View style={{ gap: spacing['3xl'] }}>
+    <View style={{ gap: spacing['3xlarge'] }}>
       <Section
         title="사용 가이드"
         description="개발자를 위한 BottomSheet 컴포넌트 사용 예시입니다."
@@ -264,7 +264,7 @@ export const Usage: Story = {
 
         <Divider />
 
-        <Col gap={spacing.sm}>
+        <Col gap={spacing.small}>
           <StateLabel>Props</StateLabel>
           <SpecTable
             rows={[

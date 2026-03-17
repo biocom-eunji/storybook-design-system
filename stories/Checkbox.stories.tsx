@@ -51,7 +51,7 @@ export const ThreeStates: Story = {
           {
             label: 'Unchecked (미선택)',
             content: (
-              <Col gap={spacing.xs}>
+              <Col gap={spacing.xsmall}>
                 <StateLabel>미선택</StateLabel>
                 <Checkbox state="unchecked" label="미선택 상태" />
               </Col>
@@ -60,7 +60,7 @@ export const ThreeStates: Story = {
           {
             label: 'Checked (선택)',
             content: (
-              <Col gap={spacing.xs}>
+              <Col gap={spacing.xsmall}>
                 <StateLabel>선택</StateLabel>
                 <Checkbox state="checked" label="선택 상태" />
               </Col>
@@ -69,7 +69,7 @@ export const ThreeStates: Story = {
           {
             label: 'Indeterminate (부분 선택)',
             content: (
-              <Col gap={spacing.xs}>
+              <Col gap={spacing.xsmall}>
                 <StateLabel>부분 선택</StateLabel>
                 <Checkbox state="indeterminate" label="부분 선택 상태" />
               </Col>
@@ -96,12 +96,12 @@ export const AllVariants: Story = {
         title="모든 변형"
         description="3가지 상태 x 활성/비활성 x 2가지 사이즈의 전체 조합입니다."
       >
-        <Col gap={spacing['3xl']}>
+        <Col gap={spacing['3xlarge']}>
           {/* Small */}
-          <Col gap={spacing.lg}>
+          <Col gap={spacing.large}>
             <StateLabel>Small 사이즈</StateLabel>
-            <Row gap={spacing['3xl']} wrap align="flex-start">
-              <Col gap={spacing.sm}>
+            <Row gap={spacing['3xlarge']} wrap align="flex-start">
+              <Col gap={spacing.small}>
                 <StateLabel>활성</StateLabel>
                 <CompareGrid
                   items={states.map(s => ({
@@ -110,7 +110,7 @@ export const AllVariants: Story = {
                   }))}
                 />
               </Col>
-              <Col gap={spacing.sm}>
+              <Col gap={spacing.small}>
                 <StateLabel>비활성</StateLabel>
                 <CompareGrid
                   items={states.map(s => ({
@@ -125,10 +125,10 @@ export const AllVariants: Story = {
           <Divider />
 
           {/* Medium */}
-          <Col gap={spacing.lg}>
+          <Col gap={spacing.large}>
             <StateLabel>Medium 사이즈</StateLabel>
-            <Row gap={spacing['3xl']} wrap align="flex-start">
-              <Col gap={spacing.sm}>
+            <Row gap={spacing['3xlarge']} wrap align="flex-start">
+              <Col gap={spacing.small}>
                 <StateLabel>활성</StateLabel>
                 <CompareGrid
                   items={states.map(s => ({
@@ -137,7 +137,7 @@ export const AllVariants: Story = {
                   }))}
                 />
               </Col>
-              <Col gap={spacing.sm}>
+              <Col gap={spacing.small}>
                 <StateLabel>비활성</StateLabel>
                 <CompareGrid
                   items={states.map(s => ({
@@ -160,8 +160,8 @@ export const LabelOptions: Story = {
   name: '라벨 옵션',
   render: () => (
     <Section title="라벨 옵션" description="라벨, 보조 라벨, bold, tight 등 다양한 라벨 구성을 확인합니다.">
-      <Col gap={spacing['2xl']}>
-        <Col gap={spacing.sm}>
+      <Col gap={spacing['2xlarge']}>
+        <Col gap={spacing.small}>
           <StateLabel>라벨만</StateLabel>
           <Checkbox state="checked" label="라벨만 있는 체크박스" />
           <Checkbox state="unchecked" label="라벨만 있는 체크박스" />
@@ -169,7 +169,7 @@ export const LabelOptions: Story = {
 
         <Divider />
 
-        <Col gap={spacing.sm}>
+        <Col gap={spacing.small}>
           <StateLabel>라벨 + 보조 라벨</StateLabel>
           <Checkbox state="checked" label="메인 라벨" sublabel="보조 설명이 여기에 표시됩니다" />
           <Checkbox state="unchecked" label="메인 라벨" sublabel="보조 설명이 여기에 표시됩니다" />
@@ -177,9 +177,9 @@ export const LabelOptions: Story = {
 
         <Divider />
 
-        <Col gap={spacing.sm}>
+        <Col gap={spacing.small}>
           <StateLabel>Bold 라벨</StateLabel>
-          <Row gap={spacing['2xl']} wrap>
+          <Row gap={spacing['2xlarge']} wrap>
             <Checkbox state="checked" label="일반 라벨" sublabel="기본 굵기" />
             <Checkbox state="checked" label="굵은 라벨" sublabel="bold 적용" bold />
           </Row>
@@ -187,10 +187,10 @@ export const LabelOptions: Story = {
 
         <Divider />
 
-        <Col gap={spacing.sm}>
+        <Col gap={spacing.small}>
           <StateLabel>Tight 모드</StateLabel>
           <View style={{ maxWidth: 300 }}>
-            <Col gap={spacing.sm}>
+            <Col gap={spacing.small}>
               <Checkbox state="checked" label="좁은 간격" sublabel="tight 모드에서는 간격이 줄어듭니다" tight />
               <Checkbox state="unchecked" label="좁은 간격" sublabel="tight 모드에서는 간격이 줄어듭니다" tight />
             </Col>
@@ -230,15 +230,15 @@ export const ParentChild: Story = {
         title="부모-자식 연동"
         description="부모 체크박스가 자식의 상태에 따라 indeterminate로 전환됩니다. 직접 클릭해 보세요."
       >
-        <Col gap={spacing.xs}>
+        <Col gap={spacing.xsmall}>
           <Checkbox
             state={parentState}
             label="전체 동의"
             bold
             onPress={toggleAll}
           />
-          <View style={{ paddingLeft: spacing['2xl'] }}>
-            <Col gap={spacing.xs}>
+          <View style={{ paddingLeft: spacing['2xlarge'] }}>
+            <Col gap={spacing.xsmall}>
               {children.map((name, i) => (
                 <Checkbox
                   key={i}
@@ -261,14 +261,14 @@ export const DesignSpec: Story = {
   name: '디자인 스펙',
   render: () => (
     <Section title="디자인 스펙" description="디자이너를 위한 사이즈 및 컬러 토큰 명세입니다.">
-      <Col gap={spacing['2xl']}>
+      <Col gap={spacing['2xlarge']}>
         <SpecTable
           title="Small 사이즈"
           rows={[
             { label: '박스 크기', value: '18px', token: '—' },
-            { label: '모서리 반경', value: `${radius.xs}px`, token: 'radius.xs' },
-            { label: '라벨 간격', value: `${spacing.sm}px`, token: 'spacing.sm' },
-            { label: '라벨 폰트 크기', value: `${fontSize.sm}px`, token: 'fontSize.sm' },
+            { label: '모서리 반경', value: `${radius.xsmall}px`, token: 'radius.xsmall' },
+            { label: '라벨 간격', value: `${spacing.small}px`, token: 'spacing.small' },
+            { label: '라벨 폰트 크기', value: `${fontSize.small}px`, token: 'fontSize.small' },
           ]}
         />
         <SpecTable
@@ -277,7 +277,7 @@ export const DesignSpec: Story = {
             { label: '박스 크기', value: '22px', token: '—' },
             { label: '모서리 반경', value: '5px', token: '—' },
             { label: '라벨 간격', value: '10px', token: '—' },
-            { label: '라벨 폰트 크기', value: `${fontSize.md}px`, token: 'fontSize.md' },
+            { label: '라벨 폰트 크기', value: `${fontSize.medium}px`, token: 'fontSize.medium' },
           ]}
         />
         <SpecTable
@@ -299,7 +299,7 @@ export const Usage: Story = {
   name: '사용 가이드',
   render: () => (
     <Section title="사용 가이드" description="개발자를 위한 코드 사용 예시입니다.">
-      <Col gap={spacing.lg}>
+      <Col gap={spacing.large}>
         <CodeBlock
           title="기본 사용"
           code={`<Checkbox state="unchecked" onPress={() => {}} />`}

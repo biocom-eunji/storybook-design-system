@@ -56,13 +56,13 @@ export const Playground: Story = {
 export const AllVariants: Story = {
   name: '모든 변형',
   render: () => (
-    <View style={{ gap: spacing['3xl'] }}>
+    <View style={{ gap: spacing['3xlarge'] }}>
       <Section
         title="뱃지 변형 전체 보기"
         description="variant(filled/outlined/dot)와 color(primary/error/success/warning)의 모든 조합입니다."
       >
         {/* Header */}
-        <Row gap={spacing['4xl']} align="flex-start">
+        <Row gap={spacing['4xlarge']} align="flex-start">
           <View style={{ width: 100 }} />
           <View style={{ width: 80, alignItems: 'center' }}>
             <StateLabel>Primary</StateLabel>
@@ -78,9 +78,9 @@ export const AllVariants: Story = {
           </View>
         </Row>
 
-        <View style={{ gap: spacing.xl, marginTop: spacing.lg }}>
+        <View style={{ gap: spacing.xlarge, marginTop: spacing.large }}>
           {/* Filled */}
-          <Row gap={spacing['4xl']} align="center">
+          <Row gap={spacing['4xlarge']} align="center">
             <View style={{ width: 100 }}>
               <StateLabel>Filled</StateLabel>
             </View>
@@ -99,7 +99,7 @@ export const AllVariants: Story = {
           </Row>
 
           {/* Outlined */}
-          <Row gap={spacing['4xl']} align="center">
+          <Row gap={spacing['4xlarge']} align="center">
             <View style={{ width: 100 }}>
               <StateLabel>Outlined</StateLabel>
             </View>
@@ -118,7 +118,7 @@ export const AllVariants: Story = {
           </Row>
 
           {/* Dot */}
-          <Row gap={spacing['4xl']} align="center">
+          <Row gap={spacing['4xlarge']} align="center">
             <View style={{ width: 100 }}>
               <StateLabel>Dot</StateLabel>
             </View>
@@ -150,18 +150,18 @@ export const Sizes: Story = {
       title="크기 비교"
       description="Small(16px)과 Medium(20px) 두 가지 크기를 비교합니다."
     >
-      <Row gap={spacing['3xl']} align="flex-end">
-        <Col gap={spacing.sm}>
+      <Row gap={spacing['3xlarge']} align="flex-end">
+        <Col gap={spacing.small}>
           <StateLabel>Small (16px)</StateLabel>
-          <Row gap={spacing.md}>
+          <Row gap={spacing.medium}>
             <Badge count={3} variant="filled" color="error" size="small" />
             <Badge count={3} variant="outlined" color="error" size="small" />
             <Badge variant="dot" color="error" size="small" />
           </Row>
         </Col>
-        <Col gap={spacing.sm}>
+        <Col gap={spacing.small}>
           <StateLabel>Medium (20px)</StateLabel>
-          <Row gap={spacing.md}>
+          <Row gap={spacing.medium}>
             <Badge count={3} variant="filled" color="error" size="medium" />
             <Badge count={3} variant="outlined" color="error" size="medium" />
             <Badge variant="dot" color="error" size="medium" />
@@ -181,67 +181,67 @@ export const WrappingExample: Story = {
       title="래핑 예시"
       description="children을 감싸면 뱃지가 우상단에 자동 위치합니다."
     >
-      <Row gap={spacing['3xl']}>
-        <Col gap={spacing.sm}>
+      <Row gap={spacing['3xlarge']}>
+        <Col gap={spacing.small}>
           <StateLabel>숫자 뱃지</StateLabel>
           <Badge count={3} variant="filled" color="error">
             <View style={{
               width: 48,
               height: 48,
-              borderRadius: radius.md,
+              borderRadius: radius.medium,
               backgroundColor: coolNeutral[97],
               alignItems: 'center',
               justifyContent: 'center',
             }}>
-              <Text style={{ fontSize: fontSize.xl, color: coolNeutral[50] }}>A</Text>
+              <Text style={{ fontSize: fontSize.xlarge, color: coolNeutral[50] }}>A</Text>
             </View>
           </Badge>
         </Col>
 
-        <Col gap={spacing.sm}>
+        <Col gap={spacing.small}>
           <StateLabel>99+ 뱃지</StateLabel>
           <Badge count={150} variant="filled" color="error">
             <View style={{
               width: 48,
               height: 48,
-              borderRadius: radius.md,
+              borderRadius: radius.medium,
               backgroundColor: coolNeutral[97],
               alignItems: 'center',
               justifyContent: 'center',
             }}>
-              <Text style={{ fontSize: fontSize.xl, color: coolNeutral[50] }}>B</Text>
+              <Text style={{ fontSize: fontSize.xlarge, color: coolNeutral[50] }}>B</Text>
             </View>
           </Badge>
         </Col>
 
-        <Col gap={spacing.sm}>
+        <Col gap={spacing.small}>
           <StateLabel>Dot 뱃지</StateLabel>
           <Badge variant="dot" color="error">
             <View style={{
               width: 48,
               height: 48,
-              borderRadius: radius.md,
+              borderRadius: radius.medium,
               backgroundColor: coolNeutral[97],
               alignItems: 'center',
               justifyContent: 'center',
             }}>
-              <Text style={{ fontSize: fontSize.xl, color: coolNeutral[50] }}>C</Text>
+              <Text style={{ fontSize: fontSize.xlarge, color: coolNeutral[50] }}>C</Text>
             </View>
           </Badge>
         </Col>
 
-        <Col gap={spacing.sm}>
+        <Col gap={spacing.small}>
           <StateLabel>Outlined 뱃지</StateLabel>
           <Badge count={7} variant="outlined" color="primary">
             <View style={{
               width: 48,
               height: 48,
-              borderRadius: radius.md,
+              borderRadius: radius.medium,
               backgroundColor: coolNeutral[97],
               alignItems: 'center',
               justifyContent: 'center',
             }}>
-              <Text style={{ fontSize: fontSize.xl, color: coolNeutral[50] }}>D</Text>
+              <Text style={{ fontSize: fontSize.xlarge, color: coolNeutral[50] }}>D</Text>
             </View>
           </Badge>
         </Col>
@@ -255,7 +255,7 @@ export const WrappingExample: Story = {
 export const DesignSpec: Story = {
   name: '디자인 스펙',
   render: () => (
-    <View style={{ gap: spacing['3xl'] }}>
+    <View style={{ gap: spacing['3xlarge'] }}>
       <Section
         title="디자인 스펙"
         description="디자이너와 개발자를 위한 Badge 토큰 상세 스펙입니다."
@@ -304,7 +304,7 @@ export const DesignSpec: Story = {
 export const Usage: Story = {
   name: '사용 가이드',
   render: () => (
-    <View style={{ gap: spacing['3xl'] }}>
+    <View style={{ gap: spacing['3xlarge'] }}>
       <Section
         title="사용 가이드"
         description="개발자를 위한 Badge 컴포넌트 사용 예시입니다."

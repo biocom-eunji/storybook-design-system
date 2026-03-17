@@ -167,25 +167,25 @@ export function InputField({
     switch (resolvedTrailingIcon) {
       case 'clear':
         return (
-          <Pressable onPress={onClear} hitSlop={8} style={{ marginLeft: spacing.sm }}>
+          <Pressable onPress={onClear} hitSlop={8} style={{ marginLeft: spacing.small }}>
             <ClearIcon />
           </Pressable>
         );
       case 'error':
         return (
-          <View style={{ marginLeft: spacing.sm }}>
+          <View style={{ marginLeft: spacing.small }}>
             <ErrorIcon />
           </View>
         );
       case 'success':
         return (
-          <View style={{ marginLeft: spacing.sm }}>
+          <View style={{ marginLeft: spacing.small }}>
             <SuccessIcon />
           </View>
         );
       case 'search':
         return (
-          <View style={{ marginLeft: spacing.sm }}>
+          <View style={{ marginLeft: spacing.small }}>
             <SearchIcon />
           </View>
         );
@@ -229,7 +229,7 @@ export function InputField({
 
         {!multiline && (renderTrailingIcon() || null)}
         {!multiline && trailingText && (
-          <Pressable onPress={onTrailingTextPress} hitSlop={8} style={{ marginLeft: spacing.sm }}>
+          <Pressable onPress={onTrailingTextPress} hitSlop={8} style={{ marginLeft: spacing.small }}>
             <Text style={{
               fontSize: 14,
               fontWeight: fontWeight.semibold,
@@ -250,7 +250,7 @@ export function InputField({
             <View style={{ flexDirection: 'row', alignItems: 'center' }}>
               {renderTrailingIcon()}
               {trailingText && (
-                <Pressable onPress={onTrailingTextPress} hitSlop={8} style={{ marginLeft: spacing.sm }}>
+                <Pressable onPress={onTrailingTextPress} hitSlop={8} style={{ marginLeft: spacing.small }}>
                   <Text style={{
                     fontSize: 14,
                     fontWeight: fontWeight.semibold,

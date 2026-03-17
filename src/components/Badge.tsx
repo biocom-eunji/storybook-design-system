@@ -60,7 +60,7 @@ export function Badge({
         height: sizeToken.height,
         minWidth: sizeToken.height,
         borderRadius: radius.full,
-        paddingHorizontal: spacing.xs,
+        paddingHorizontal: spacing.xsmall,
         alignItems: 'center',
         justifyContent: 'center',
         ...(variant === 'filled'

@@ -40,7 +40,7 @@ export const StateLabel = ({ children }: { children: string }) => (
 
 export const Row = ({
   children,
-  gap = spacing.lg,
+  gap = spacing.large,
   wrap = false,
   align = 'center',
 }: {
@@ -56,7 +56,7 @@ export const Row = ({
 
 export const Col = ({
   children,
-  gap = spacing.sm,
+  gap = spacing.small,
 }: {
   children: React.ReactNode;
   gap?: number;
@@ -106,13 +106,13 @@ export const SpecTable = ({
 // ─── Color Chip ──────────────────────────────────────────
 
 export const ColorChip = ({ color, label }: { color: string; label?: string }) => (
-  <View style={{ flexDirection: 'row', alignItems: 'center', gap: spacing.sm }}>
+  <View style={{ flexDirection: 'row', alignItems: 'center', gap: spacing.small }}>
     <View style={{
       width: 20, height: 20, borderRadius: 4,
       backgroundColor: color,
       borderWidth: 1, borderColor: coolNeutral[95],
     }} />
-    <Text style={{ fontSize: fontSize.xs, fontFamily: 'monospace', color: coolNeutral[40] }}>
+    <Text style={{ fontSize: fontSize.xsmall, fontFamily: 'monospace', color: coolNeutral[40] }}>
       {label || color}
     </Text>
   </View>
@@ -175,12 +175,12 @@ export const AudienceBadge = ({ role }: { role: '기획' | '디자인' | '개발
   return (
     <View style={{
       backgroundColor: c.bg,
-      paddingHorizontal: spacing.sm,
+      paddingHorizontal: spacing.small,
       paddingVertical: 2,
       borderRadius: radius.full,
       alignSelf: 'center',
     }}>
-      <Text style={{ fontSize: fontSize.xs, fontWeight: fontWeight.semibold, color: c.text }}>
+      <Text style={{ fontSize: fontSize.xsmall, fontWeight: fontWeight.semibold, color: c.text }}>
         {role}
       </Text>
     </View>
@@ -198,29 +198,29 @@ export const Divider = () => (
 const h = StyleSheet.create({
   // Section
   section: {
-    marginBottom: spacing['3xl'],
+    marginBottom: spacing['3xlarge'],
   },
   sectionHeader: {
     flexDirection: 'row',
     alignItems: 'center',
-    gap: spacing.sm,
-    marginBottom: spacing.xs,
+    gap: spacing.small,
+    marginBottom: spacing.xsmall,
   },
   sectionTitle: {
-    fontSize: fontSize.xl,
+    fontSize: fontSize.xlarge,
     fontWeight: fontWeight.bold,
     color: coolNeutral[10],
   },
   sectionDesc: {
-    fontSize: fontSize.sm,
+    fontSize: fontSize.small,
     color: coolNeutral[50],
     lineHeight: 20,
-    marginBottom: spacing.xl,
+    marginBottom: spacing.xlarge,
   },
 
   // State Label
   stateLabel: {
-    fontSize: fontSize.xs,
+    fontSize: fontSize.xsmall,
     fontWeight: fontWeight.semibold,
     color: coolNeutral[50],
     letterSpacing: 0.3,
@@ -229,16 +229,16 @@ const h = StyleSheet.create({
 
   // Spec Table
   specWrap: {
-    marginBottom: spacing.xl,
+    marginBottom: spacing.xlarge,
   },
   specTitle: {
-    fontSize: fontSize.sm,
+    fontSize: fontSize.small,
     fontWeight: fontWeight.bold,
     color: coolNeutral[17],
-    marginBottom: spacing.sm,
+    marginBottom: spacing.small,
   },
   specTable: {
-    borderRadius: radius.md,
+    borderRadius: radius.medium,
     borderWidth: 1,
     borderColor: coolNeutral[95],
     overflow: 'hidden',
@@ -247,7 +247,7 @@ const h = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     paddingVertical: 10,
-    paddingHorizontal: spacing.lg,
+    paddingHorizontal: spacing.large,
     minHeight: 40,
   },
   specRowAlt: {
@@ -260,12 +260,12 @@ const h = StyleSheet.create({
     minHeight: 36,
   },
   specHeaderText: {
-    fontSize: fontSize.xs,
+    fontSize: fontSize.xsmall,
     fontWeight: fontWeight.bold,
     color: coolNeutral[40],
   },
   specCell: {
-    fontSize: fontSize.sm,
+    fontSize: fontSize.small,
     color: coolNeutral[50],
   },
   specLabelCell: {
@@ -274,7 +274,7 @@ const h = StyleSheet.create({
   },
   specMono: {
     fontFamily: 'monospace',
-    fontSize: fontSize.xs,
+    fontSize: fontSize.xsmall,
   },
   specTokenCell: {
     color: mint[40],
@@ -282,19 +282,19 @@ const h = StyleSheet.create({
 
   // Code Block
   codeWrap: {
-    marginBottom: spacing.lg,
+    marginBottom: spacing.large,
   },
   codeTitle: {
-    fontSize: fontSize.xs,
+    fontSize: fontSize.xsmall,
     fontWeight: fontWeight.semibold,
     color: coolNeutral[40],
-    marginBottom: spacing.xs,
+    marginBottom: spacing.xsmall,
   },
   codeBlock: {
     backgroundColor: coolNeutral[7],
-    borderRadius: radius.md,
-    paddingVertical: spacing.lg,
-    paddingHorizontal: spacing.xl,
+    borderRadius: radius.medium,
+    paddingVertical: spacing.large,
+    paddingHorizontal: spacing.xlarge,
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'flex-start',
@@ -304,7 +304,7 @@ const h = StyleSheet.create({
     opacity: 0.85,
   },
   codeText: {
-    fontSize: fontSize.sm,
+    fontSize: fontSize.small,
     fontFamily: 'monospace',
     color: mint[80],
     lineHeight: 22,
@@ -312,13 +312,13 @@ const h = StyleSheet.create({
   },
   codeCopyWrap: {
     backgroundColor: 'rgba(255,255,255,0.1)',
-    paddingHorizontal: spacing.sm,
+    paddingHorizontal: spacing.small,
     paddingVertical: 2,
-    borderRadius: radius.xs,
-    marginLeft: spacing.lg,
+    borderRadius: radius.xsmall,
+    marginLeft: spacing.large,
   },
   codeCopy: {
-    fontSize: fontSize.xs,
+    fontSize: fontSize.xsmall,
     fontWeight: fontWeight.medium,
     color: coolNeutral[60],
   },
@@ -331,20 +331,20 @@ const h = StyleSheet.create({
   compareGrid: {
     flexDirection: 'row',
     flexWrap: 'wrap',
-    gap: spacing['2xl'],
+    gap: spacing['2xlarge'],
   },
   compareItem: {
     minWidth: 120,
-    gap: spacing.sm,
+    gap: spacing.small,
   },
   compareContent: {
-    paddingTop: spacing.xs,
+    paddingTop: spacing.xsmall,
   },
 
   // Divider
   divider: {
     height: 1,
     backgroundColor: coolNeutral[96],
-    marginVertical: spacing['2xl'],
+    marginVertical: spacing['2xlarge'],
   },
 });
