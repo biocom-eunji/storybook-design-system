@@ -51,9 +51,14 @@ export function Icon({ name, style = 'normal', size, color, active }: IconProps)
       fillColor = entry.defaultColor;
     }
 
+    const vb = entry.viewBox ?? '0 0 256 256';
+    const pathList = entry.paths ?? (entry.path ? [entry.path] : []);
+
     return (
-      <Svg width={resolvedSize} height={resolvedSize} viewBox="0 0 256 256" fill="none">
-        <Path d={entry.path} fill={fillColor} />
+      <Svg width={resolvedSize} height={resolvedSize} viewBox={vb} fill="none">
+        {pathList.map((d, i) => (
+          <Path key={i} d={d} fill={fillColor} />
+        ))}
       </Svg>
     );
   }

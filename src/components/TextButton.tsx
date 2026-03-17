@@ -63,6 +63,7 @@ export function TextButton({
           fontSize: sizeToken.fontSize,
           fontWeight: fontWeight.medium,
           color: contentColor,
+          textDecorationLine: 'underline',
         };
 
         if (loading) {

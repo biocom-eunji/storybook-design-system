@@ -139,7 +139,7 @@ export const WithIcons: Story = {
                 label="선택됨"
                 variant="solid"
                 active
-                leadingIcon={<Icon name="check" size={chipToken.size.medium.iconSize} />}
+                leadingIcon={<Icon name="null" size={chipToken.size.medium.iconSize} />}
               />
             </Col>
             <Col gap={spacing.sm}>
@@ -147,7 +147,7 @@ export const WithIcons: Story = {
               <Chip
                 label="삭제"
                 variant="outlined"
-                trailingIcon={<Icon name="close" size={chipToken.size.medium.iconSize} />}
+                trailingIcon={<Icon name="null" size={chipToken.size.medium.iconSize} />}
               />
             </Col>
             <Col gap={spacing.sm}>
@@ -156,8 +156,8 @@ export const WithIcons: Story = {
                 label="필터"
                 variant="outlined"
                 active
-                leadingIcon={<Icon name="check" size={chipToken.size.medium.iconSize} />}
-                trailingIcon={<Icon name="close" size={chipToken.size.medium.iconSize} />}
+                leadingIcon={<Icon name="null" size={chipToken.size.medium.iconSize} />}
+                trailingIcon={<Icon name="null" size={chipToken.size.medium.iconSize} />}
               />
             </Col>
           </Row>
@@ -169,7 +169,7 @@ export const WithIcons: Story = {
               <Chip
                 label="태그"
                 size="xsmall"
-                leadingIcon={<Icon name="check" size={chipToken.size.xsmall.iconSize} />}
+                leadingIcon={<Icon name="null" size={chipToken.size.xsmall.iconSize} />}
               />
             </Col>
             <Col gap={spacing.sm}>
@@ -177,7 +177,7 @@ export const WithIcons: Story = {
               <Chip
                 label="태그"
                 size="small"
-                leadingIcon={<Icon name="check" size={chipToken.size.small.iconSize} />}
+                leadingIcon={<Icon name="null" size={chipToken.size.small.iconSize} />}
               />
             </Col>
             <Col gap={spacing.sm}>
@@ -185,7 +185,7 @@ export const WithIcons: Story = {
               <Chip
                 label="태그"
                 size="medium"
-                leadingIcon={<Icon name="check" size={chipToken.size.medium.iconSize} />}
+                leadingIcon={<Icon name="null" size={chipToken.size.medium.iconSize} />}
               />
             </Col>
             <Col gap={spacing.sm}>
@@ -193,7 +193,7 @@ export const WithIcons: Story = {
               <Chip
                 label="태그"
                 size="large"
-                leadingIcon={<Icon name="check" size={chipToken.size.large.iconSize} />}
+                leadingIcon={<Icon name="null" size={chipToken.size.large.iconSize} />}
               />
             </Col>
           </Row>
@@ -316,8 +316,8 @@ import { Icon } from '@design-system/components/Icon';`}
   size="medium"
   active={isSelected}
   disabled={false}
-  leadingIcon={<Icon name="check" size={16} />}
-  trailingIcon={<Icon name="close" size={16} />}
+  leadingIcon={<Icon name="null" size={16} />}
+  trailingIcon={<Icon name="null" size={16} />}
   onPress={handleToggle}
 />`}
         />

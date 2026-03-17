@@ -71,7 +71,7 @@ export const AllVariants: Story = {
                   label="텍스트"
                   color="primary"
                   size="medium"
-                  leadingIcon={<Icon name="arrowRight" />}
+                  leadingIcon={<Icon name="null" />}
                 />
               </Col>
               <Col gap={spacing.xs}>
@@ -101,7 +101,7 @@ export const AllVariants: Story = {
                   label="텍스트"
                   color="assistive"
                   size="medium"
-                  leadingIcon={<Icon name="arrowRight" />}
+                  leadingIcon={<Icon name="null" />}
                 />
               </Col>
               <Col gap={spacing.xs}>
@@ -186,13 +186,13 @@ export const WithIcons: Story = {
                 label="텍스트"
                 color="primary"
                 size="medium"
-                leadingIcon={<Icon name="arrowRight" />}
+                leadingIcon={<Icon name="null" />}
               />
               <TextButton
                 label="텍스트"
                 color="assistive"
                 size="medium"
-                leadingIcon={<Icon name="arrowRight" />}
+                leadingIcon={<Icon name="null" />}
               />
             </Row>
           </Col>
@@ -206,13 +206,13 @@ export const WithIcons: Story = {
                 label="텍스트"
                 color="primary"
                 size="medium"
-                trailingIcon={<Icon name="arrowRight" />}
+                trailingIcon={<Icon name="null" />}
               />
               <TextButton
                 label="텍스트"
                 color="assistive"
                 size="medium"
-                trailingIcon={<Icon name="arrowRight" />}
+                trailingIcon={<Icon name="null" />}
               />
             </Row>
           </Col>
@@ -226,15 +226,15 @@ export const WithIcons: Story = {
                 label="텍스트"
                 color="primary"
                 size="medium"
-                leadingIcon={<Icon name="arrowRight" />}
-                trailingIcon={<Icon name="arrowRight" />}
+                leadingIcon={<Icon name="null" />}
+                trailingIcon={<Icon name="null" />}
               />
               <TextButton
                 label="텍스트"
                 color="assistive"
                 size="medium"
-                leadingIcon={<Icon name="arrowRight" />}
-                trailingIcon={<Icon name="arrowRight" />}
+                leadingIcon={<Icon name="null" />}
+                trailingIcon={<Icon name="null" />}
               />
             </Row>
           </Col>
@@ -318,7 +318,7 @@ import { Icon } from '@design-system/components/Icon';`}
             title="아이콘 포함"
             code={`<TextButton
   label="다음"
-  trailingIcon={<Icon name="arrowRight" />}
+  trailingIcon={<Icon name="null" />}
   onPress={handleNext}
 />`}
           />
