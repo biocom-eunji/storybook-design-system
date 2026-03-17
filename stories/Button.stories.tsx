@@ -2,7 +2,7 @@ import React from 'react';
 import { View } from 'react-native';
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import { Button } from '../src/components/Button';
-import { Section, StateLabel, Row, Col, SpecTable, CodeBlock, CompareGrid, Divider } from './_helpers';
+import { Section, StateLabel, Row, Col, SpecTable, CodeBlock, CompareGrid, Divider } from './storyHelpers';
 import { coolNeutral, mint, fontSize, fontWeight, spacing, radius, buttonToken, chipToken } from '../src/tokens/theme';
 
 const meta: Meta<typeof Button> = {

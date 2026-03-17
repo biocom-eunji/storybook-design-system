@@ -3,7 +3,7 @@ import { View } from 'react-native';
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import { TextButton } from '../src/components/TextButton';
 import { Icon } from '../src/components/Icon';
-import { Section, StateLabel, Row, Col, SpecTable, CodeBlock, CompareGrid, Divider } from './_helpers';
+import { Section, StateLabel, Row, Col, SpecTable, CodeBlock, CompareGrid, Divider } from './storyHelpers';
 import { spacing, coolNeutral, mint } from '../src/tokens/theme';
 
 const meta: Meta<typeof TextButton> = {
