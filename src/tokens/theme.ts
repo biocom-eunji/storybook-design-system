@@ -309,6 +309,43 @@ export const radius = {
   full: 9999,
 } as const;
 
+// ─── Shadow & Elevation ─────────────────────────────────
+
+/** 그림자 단계 토큰 — 카드, 모달, 바텀시트 등에 사용 */
+export const shadow = {
+  level1: {
+    shadowColor: '#000000',
+    shadowOffset: { width: 0, height: 1 },
+    shadowOpacity: 0.06,
+    shadowRadius: 4,
+    elevation: 2,
+  },
+  level2: {
+    shadowColor: '#000000',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.1,
+    shadowRadius: 8,
+    elevation: 4,
+  },
+  level3: {
+    shadowColor: '#000000',
+    shadowOffset: { width: 0, height: 4 },
+    shadowOpacity: 0.15,
+    shadowRadius: 16,
+    elevation: 8,
+  },
+} as const;
+
+/** 화면 좌우 마진 토큰 */
+export const screenMargin = {
+  default: 16,
+  compact: 12,
+  wide: 20,
+} as const;
+
+/** 그리드 기본 단위 (4px 기반) */
+export const gridUnit = 4 as const;
+
 // ─── Interaction ─────────────────────────────────────────
 
 /** 인터랙션 피드백에 사용하는 공통 상수 */
@@ -531,6 +568,9 @@ export const theme = {
   textStyle,
   spacing,
   radius,
+  shadow,
+  screenMargin,
+  gridUnit,
   components: {
     button: buttonToken,
     textButton: textButtonToken,

@@ -7,7 +7,7 @@ import { Section, StateLabel, Row, Col, SpecTable, CodeBlock, Divider } from './
 import { coolNeutral, mint, fontSize, fontWeight, spacing, radius, buttonToken, chipToken } from '../src/tokens/theme';
 
 const meta: Meta<typeof Chip> = {
-  title: 'Form/Chip',
+  title: 'Input/Chip',
   component: Chip,
   argTypes: {
     variant: {

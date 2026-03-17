@@ -1,0 +1,236 @@
+import React from 'react';
+import { Meta } from '@storybook/addon-docs/blocks';
+
+<Meta title="Design Tokens/Spacing & Grid" />
+
+<style>
+  {`
+    .spacing-page {
+      max-width: 900px;
+      margin: 0 auto;
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    }
+    .spacing-page h2 {
+      font-size: 28px;
+      font-weight: 700;
+      color: #171719;
+      margin: 0 0 8px;
+      padding-bottom: 12px;
+      border-bottom: 2px solid #22C3BC;
+    }
+    .spacing-page > p {
+      font-size: 15px;
+      color: #5A5C63;
+      margin: 0 0 40px;
+    }
+    .section-divider {
+      border: none;
+      border-top: 1px solid #E1E2E4;
+      margin: 16px 0 48px;
+    }
+    .spacing-page h3 {
+      font-size: 20px;
+      font-weight: 700;
+      color: #171719;
+      margin: 0 0 4px;
+    }
+    .spacing-page h3 + p {
+      font-size: 14px;
+      color: #70737C;
+      margin: 0 0 16px;
+    }
+    .spacing-page table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 16px 0 32px;
+      font-size: 14px;
+    }
+    .spacing-page th {
+      text-align: left;
+      padding: 10px 12px;
+      background: #F7F7F8;
+      border-bottom: 2px solid #E1E2E4;
+      color: #46474C;
+      font-weight: 600;
+      font-size: 13px;
+    }
+    .spacing-page td {
+      padding: 10px 12px;
+      border-bottom: 1px solid #EAEBEC;
+      color: #292A2D;
+      vertical-align: middle;
+    }
+    .spacing-page code {
+      font-family: 'SF Mono', 'Fira Code', monospace;
+      font-size: 13px;
+      background: #F4F4F5;
+      padding: 2px 6px;
+      border-radius: 4px;
+      color: #5A5C63;
+    }
+    .spacing-page pre {
+      background: #171719;
+      color: #E1E2E4;
+      padding: 20px 24px;
+      border-radius: 12px;
+      font-size: 13px;
+      line-height: 1.6;
+      overflow-x: auto;
+      margin: 16px 0 32px;
+    }
+    .spacing-page pre code {
+      background: none;
+      padding: 0;
+      color: inherit;
+    }
+  `}
+</style>
+
+<div className="spacing-page">
+
+<h2>Spacing & Grid</h2>
+<p>바이오컴 서비스의 여백과 그리드 규칙입니다. 모든 간격은 4px 단위를 기본으로 합니다.</p>
+
+## Grid Unit
+
+<h3>4px Grid</h3>
+<p>바이오컴 디자인 시스템은 <strong>4px 그리드</strong>를 기본 단위로 사용합니다.</p>
+
+<div style={{ display: 'flex', gap: 4, marginBottom: 32 }}>
+  {Array.from({ length: 16 }).map((_, i) => (
+    <div key={i} style={{
+      width: 16,
+      height: 16,
+      backgroundColor: i % 2 === 0 ? '#22C3BC' : '#A8F0EC',
+      borderRadius: 2,
+    }} />
+  ))}
+</div>
+
+<hr className="section-divider" />
+
+## Spacing Scale
+
+<h3>Spacing 토큰</h3>
+<p>컴포넌트 간격, 패딩, 마진에 사용하는 기본 스페이싱 스케일입니다.</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>토큰명</th>
+      <th>값</th>
+      <th>시각화</th>
+      <th>용도</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code>xsmall</code></td>
+      <td>4px</td>
+      <td><div style={{ width: 4 * 3, height: 12, backgroundColor: '#22C3BC', borderRadius: 4 }} /></td>
+      <td>아이콘-텍스트 간격, 인라인 요소 간 최소 간격</td>
+    </tr>
+    <tr>
+      <td><code>small</code></td>
+      <td>8px</td>
+      <td><div style={{ width: 8 * 3, height: 12, backgroundColor: '#22C3BC', borderRadius: 4 }} /></td>
+      <td>컴포넌트 내부 패딩, 관련 요소 간 간격</td>
+    </tr>
+    <tr>
+      <td><code>medium</code></td>
+      <td>12px</td>
+      <td><div style={{ width: 12 * 3, height: 12, backgroundColor: '#22C3BC', borderRadius: 4 }} /></td>
+      <td>카드 내부 패딩, 섹션 내 요소 간격</td>
+    </tr>
+    <tr>
+      <td><code>large</code></td>
+      <td>16px</td>
+      <td><div style={{ width: 16 * 3, height: 12, backgroundColor: '#22C3BC', borderRadius: 4 }} /></td>
+      <td>화면 좌우 마진, 섹션 간 기본 간격</td>
+    </tr>
+    <tr>
+      <td><code>xlarge</code></td>
+      <td>20px</td>
+      <td><div style={{ width: 20 * 3, height: 12, backgroundColor: '#22C3BC', borderRadius: 4 }} /></td>
+      <td>넓은 요소 간격</td>
+    </tr>
+    <tr>
+      <td><code>2xlarge</code></td>
+      <td>24px</td>
+      <td><div style={{ width: 24 * 3, height: 12, backgroundColor: '#22C3BC', borderRadius: 4 }} /></td>
+      <td>섹션 간 큰 간격</td>
+    </tr>
+    <tr>
+      <td><code>3xlarge</code></td>
+      <td>32px</td>
+      <td><div style={{ width: 32 * 3, height: 12, backgroundColor: '#22C3BC', borderRadius: 4 }} /></td>
+      <td>페이지 섹션 구분</td>
+    </tr>
+    <tr>
+      <td><code>4xlarge</code></td>
+      <td>48px</td>
+      <td><div style={{ width: 48 * 3, height: 12, backgroundColor: '#22C3BC', borderRadius: 4 }} /></td>
+      <td>최대 여백, 헤더-콘텐츠 간격</td>
+    </tr>
+  </tbody>
+</table>
+
+<hr className="section-divider" />
+
+## 화면 좌우 마진
+
+<h3>Screen Margin</h3>
+<p>화면 또는 컨테이너의 좌우 여백에 사용하는 토큰입니다.</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>토큰명</th>
+      <th>값</th>
+      <th>용도</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code>default</code></td>
+      <td>16px</td>
+      <td>일반 화면 좌우 여백</td>
+    </tr>
+    <tr>
+      <td><code>compact</code></td>
+      <td>12px</td>
+      <td>모달, 바텀시트 등 좁은 영역</td>
+    </tr>
+    <tr>
+      <td><code>wide</code></td>
+      <td>20px</td>
+      <td>넓은 화면, 태블릿 등</td>
+    </tr>
+  </tbody>
+</table>
+
+<hr className="section-divider" />
+
+## Usage Guide
+
+<h3>사용 예시</h3>
+<p>테마에서 spacing, screenMargin, gridUnit 토큰을 가져와 사용합니다.</p>
+
+<pre><code>{`import { spacing, screenMargin, gridUnit } from '@/tokens/theme';
+
+// 컴포넌트 내부 패딩
+const cardStyle = {
+  padding: spacing.medium,       // 12px
+  gap: spacing.small,            // 8px
+};
+
+// 화면 좌우 마진
+const screenStyle = {
+  paddingHorizontal: screenMargin.default,  // 16px
+};
+
+// 그리드 단위 활용 (커스텀 간격)
+const customGap = gridUnit * 5;  // 20px
+const customPadding = gridUnit * 6;  // 24px`}</code></pre>
+
+</div>

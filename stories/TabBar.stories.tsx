@@ -6,7 +6,7 @@ import { Section, StateLabel, Col, SpecTable, CodeBlock, Divider } from './story
 import { coolNeutral, mint, fontSize, fontWeight, spacing, radius, semanticColor } from '../src/tokens/theme';
 
 const meta: Meta<typeof TabBar> = {
-  title: 'Display/TabBar',
+  title: 'Navigation/TabBar',
   component: TabBar,
   argTypes: {
     activeTab: {

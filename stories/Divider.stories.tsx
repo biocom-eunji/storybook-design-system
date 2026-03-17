@@ -6,7 +6,7 @@ import { Section, StateLabel, Col, SpecTable, CodeBlock, Divider as DividerLine 
 import { coolNeutral, mint, red, yellow, fontSize, fontWeight, spacing, radius, semanticColor } from '../src/tokens/theme';
 
 const meta: Meta<typeof DividerComponent> = {
-  title: 'General/Divider',
+  title: 'Data Display/Divider',
   component: DividerComponent,
   argTypes: {
     direction: {

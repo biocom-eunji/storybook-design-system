@@ -2,11 +2,12 @@ import React, { useState } from 'react';
 import { View } from 'react-native';
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import { Checkbox } from '../src/components/Checkbox';
+import { CheckMark } from '../src/components/CheckMark';
 import { Section, StateLabel, Row, Col, SpecTable, CodeBlock, CompareGrid, Divider } from './storyHelpers';
 import { coolNeutral, mint, fontSize, fontWeight, spacing, radius } from '../src/tokens/theme';
 
 const meta: Meta<typeof Checkbox> = {
-  title: 'Form/Checkbox',
+  title: 'Input/Checkbox',
   component: Checkbox,
   argTypes: {
     state: { control: 'select', options: ['unchecked', 'checked', 'indeterminate'], description: '체크박스 상태' },
@@ -349,4 +350,73 @@ const parentState = allChecked
       </Col>
     </Section>
   ),
+};
+
+// ─── 8. CheckMark ───────────────────────────────────────────
+
+export const CheckMarkSection: Story = {
+  name: 'CheckMark',
+  render: () => {
+    const [items, setItems] = useState([false, true, false, false]);
+    const labels = [
+      { label: '알림 수신 동의', sublabel: '마케팅 및 서비스 알림을 수신합니다' },
+      { label: '이메일 수신 동의', sublabel: '이메일로 소식을 받아봅니다' },
+      { label: 'SMS 수신 동의', sublabel: '문자로 소식을 받아봅니다' },
+      { label: '야간 알림 동의', sublabel: '21시~08시 사이 알림을 수신합니다' },
+    ];
+    const toggle = (i: number) =>
+      setItems(prev => { const n = [...prev]; n[i] = !n[i]; return n; });
+
+    return (
+      <Col gap={spacing['3xlarge']}>
+        <Section
+          title="CheckMark"
+          description="체크 아이콘만 사용하는 간결한 선택 컴포넌트입니다. 박스 없이 체크 표시만으로 선택 상태를 나타냅니다."
+        >
+          <Row gap={spacing['3xlarge']} wrap align="flex-start">
+            <Col gap={spacing.large}>
+              <StateLabel>활성</StateLabel>
+              <CompareGrid
+                items={[
+                  { label: '미선택', content: <CheckMark checked={false} size="medium" /> },
+                  { label: '선택', content: <CheckMark checked size="medium" /> },
+                ]}
+              />
+            </Col>
+            <Col gap={spacing.large}>
+              <StateLabel>비활성</StateLabel>
+              <CompareGrid
+                items={[
+                  { label: '미선택', content: <CheckMark checked={false} size="medium" disabled /> },
+                  { label: '선택', content: <CheckMark checked size="medium" disabled /> },
+                ]}
+              />
+            </Col>
+          </Row>
+        </Section>
+
+        <Section title="CheckMark 인터랙티브" description="직접 클릭해 보세요.">
+          <Col gap={spacing.xsmall}>
+            {labels.map((opt, i) => (
+              <CheckMark
+                key={i}
+                checked={items[i]}
+                label={opt.label}
+                sublabel={opt.sublabel}
+                onPress={() => toggle(i)}
+              />
+            ))}
+          </Col>
+        </Section>
+
+        <Section title="CheckMark 사용 가이드">
+          <CodeBlock
+            title="기본 사용"
+            code={`<CheckMark checked={false} onPress={() => {}} />
+<CheckMark checked label="항목" sublabel="설명" />`}
+          />
+        </Section>
+      </Col>
+    );
+  },
 };

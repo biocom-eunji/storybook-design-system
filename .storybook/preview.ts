@@ -30,12 +30,13 @@ const preview: Preview = {
     options: {
       storySort: {
         order: [
-          'Introduction',
-          'Foundation', ['Color Palette', 'Color Tokens', 'Typography', 'Naming Convention'],
-          'General', ['Button', 'TextButton', 'Icon', 'Divider'],
-          'Form', ['InputField', 'Checkbox', 'CheckMark', 'Radio', 'Switch', 'Chip'],
+          'Getting Started', ['Introduction', 'Release Notes', 'Naming Convention'],
+          'Design Tokens', ['Color Palette', 'Color Tokens', 'Typography', 'Spacing & Grid', 'Shadow & Elevation'],
+          'General', ['Button', 'TextButton', 'Icon'],
+          'Input', ['InputField', 'Checkbox', 'Radio', 'Switch', 'Chip'],
           'Feedback', ['Toast', 'Modal', 'BottomSheet', 'ProgressBar', 'Skeleton'],
-          'Display', ['Badge', 'Avatar', 'TabBar', 'ActionArea'],
+          'Navigation', ['TabBar', 'ActionArea'],
+          'Data Display', ['Badge', 'Avatar', 'Divider'],
         ],
       },
     },

@@ -6,7 +6,7 @@ import { Section, StateLabel, Row, Col, SpecTable, CodeBlock, Divider as Divider
 import { coolNeutral, mint, red, yellow, fontSize, fontWeight, spacing, radius, semanticColor } from '../src/tokens/theme';
 
 const meta: Meta<typeof Badge> = {
-  title: 'Display/Badge',
+  title: 'Data Display/Badge',
   component: Badge,
   argTypes: {
     count: {

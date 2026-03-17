@@ -6,7 +6,7 @@ import { Section, StateLabel, Row, Col, SpecTable, CodeBlock, CompareGrid, Divid
 import { coolNeutral, mint, fontSize, fontWeight, spacing, radius } from '../src/tokens/theme';
 
 const meta: Meta<typeof Radio> = {
-  title: 'Form/Radio',
+  title: 'Input/Radio',
   component: Radio,
   argTypes: {
     checked: { control: 'boolean', description: '선택 상태' },

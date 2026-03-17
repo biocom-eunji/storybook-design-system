@@ -6,7 +6,7 @@ import { Section, StateLabel, Row, Col, SpecTable, CodeBlock, CompareGrid } from
 import { coolNeutral, mint, fontSize, fontWeight, spacing, radius } from '../src/tokens/theme';
 
 const meta: Meta<typeof Switch> = {
-  title: 'Form/Switch',
+  title: 'Input/Switch',
   component: Switch,
   argTypes: {
     active: { control: 'boolean' },
