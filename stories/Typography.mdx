@@ -1,0 +1,237 @@
+import React from 'react';
+import { Meta } from '@storybook/addon-docs/blocks';
+
+<Meta title="Foundation/Typography" />
+
+export const PREVIEW_TEXT = '당신을 가장 잘 아는 바이오컴이 건강을 약속할게요.';
+
+export const styles = [
+  { name: 'Title 1',  size: 32, lineHeight: '44px', lhRatio: '1.375',  letterSpacing: '-0.0253em', weight: 700, usage: '서비스의 핵심 타이틀, 온보딩 메인 문구, 최상위 대제목' },
+  { name: 'Title 2',  size: 28, lineHeight: '38px', lhRatio: '1.358',  letterSpacing: '-0.0236em', weight: 700, usage: '페이지 상단 헤더, 주요 섹션 대제목' },
+  { name: 'Title 3',  size: 24, lineHeight: '32px', lhRatio: '1.334',  letterSpacing: '-0.023em',  weight: 700, usage: '카드/모달 타이틀, 하위 페이지 대제목' },
+  { name: 'Heading',  size: 20, lineHeight: '28px', lhRatio: '1.4',    letterSpacing: '-0.012em',  weight: 600, usage: '소제목, 섹션 구분, 강조가 필요한 중간 타이틀' },
+  { name: 'Headline', size: 17, lineHeight: '24px', lhRatio: '1.412',  letterSpacing: '0em',       weight: 600, usage: '리스트 헤더, 탭 섹션 제목, 강조 소제목' },
+  { name: 'Body 1',   size: 16, lineHeight: '24px', lhRatio: '1.5',    letterSpacing: '0.0057em',  weight: 400, usage: '일반적인 본문 텍스트, 상세 설명, 읽기 편한 긴 글' },
+  { name: 'Body 2',   size: 15, lineHeight: '22px', lhRatio: '1.467',  letterSpacing: '0.0096em',  weight: 400, usage: '보조 본문, 세부 설명, 부가 정보 텍스트' },
+  { name: 'Body 3',   size: 16, lineHeight: '24px', lhRatio: '1.5',    letterSpacing: '0.0057em',  weight: 400, usage: '본문 강조, Body 1과 동일 크기의 대체 스타일' },
+  { name: 'Label 1',  size: 14, lineHeight: '20px', lhRatio: '1.429',  letterSpacing: '0.0145em',  weight: 500, usage: '버튼 내 텍스트, 탭 메뉴, 클릭 요소 강조' },
+  { name: 'Label 2',  size: 13, lineHeight: '18px', lhRatio: '1.385',  letterSpacing: '0.0194em',  weight: 500, usage: '소형 버튼, 태그, 필터 칩 텍스트' },
+  { name: 'Caption',  size: 12, lineHeight: '16px', lhRatio: '1.334',  letterSpacing: '0.0252em',  weight: 400, usage: '이미지 캡션, 보조 설명, 유의사항, 날짜 등 작은 정보' },
+];
+
+<style>
+  {`
+    .typo-page {
+      max-width: 900px;
+      margin: 0 auto;
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      color: #292A2D;
+    }
+    .typo-page h2.page-title {
+      font-size: 28px;
+      font-weight: 700;
+      color: #171719;
+      margin: 0 0 8px;
+      padding-bottom: 12px;
+      border-bottom: 2px solid #22C3BC;
+    }
+    .typo-page > p.page-desc {
+      font-size: 15px;
+      color: #5A5C63;
+      margin: 0 0 40px;
+    }
+    .typo-page h3 {
+      font-size: 20px;
+      font-weight: 700;
+      color: #171719;
+      margin: 48px 0 8px;
+    }
+    .typo-page h3 + p {
+      font-size: 14px;
+      color: #70737C;
+      margin: 0 0 20px;
+    }
+    .font-family-card {
+      background: #F7F7F8;
+      border-radius: 16px;
+      padding: 40px;
+      text-align: center;
+      margin: 0 0 48px;
+    }
+    .font-family-card .font-name {
+      font-size: 40px;
+      font-weight: 700;
+      color: #171719;
+      margin: 0 0 8px;
+    }
+    .font-family-card .font-desc {
+      font-size: 14px;
+      color: #70737C;
+    }
+    .spec-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 14px;
+      margin: 0 0 48px;
+    }
+    .spec-table thead {
+      border-bottom: 2px solid #171719;
+    }
+    .spec-table th {
+      text-align: left;
+      padding: 10px 12px;
+      font-weight: 600;
+      color: #46474C;
+      font-size: 13px;
+    }
+    .spec-table td {
+      padding: 14px 12px;
+      border-bottom: 1px solid #E1E2E4;
+      color: #333438;
+      vertical-align: top;
+    }
+    .spec-table tr:last-child td {
+      border-bottom: none;
+    }
+    .spec-table .style-name {
+      font-weight: 600;
+      color: #171719;
+      white-space: nowrap;
+    }
+    .spec-table .mono {
+      font-family: 'SF Mono', 'Fira Code', monospace;
+      font-size: 13px;
+      color: #5A5C63;
+    }
+    .spec-table .usage-text {
+      font-size: 13px;
+      color: #70737C;
+      line-height: 1.5;
+    }
+    .preview-section {
+      margin: 0 0 48px;
+    }
+    .preview-item {
+      display: flex;
+      align-items: baseline;
+      gap: 24px;
+      padding: 20px 0;
+      border-bottom: 1px solid #E1E2E4;
+    }
+    .preview-item:last-child {
+      border-bottom: none;
+    }
+    .preview-label {
+      min-width: 80px;
+      font-size: 12px;
+      font-weight: 600;
+      color: #22C3BC;
+      flex-shrink: 0;
+    }
+    .preview-text {
+      color: #171719;
+    }
+    .section-divider {
+      border: none;
+      border-top: 1px solid #E1E2E4;
+      margin: 48px 0;
+    }
+  `}
+</style>
+
+<div className="typo-page">
+
+<h2 className="page-title">Typography</h2>
+<p className="page-desc">바이오컴 서비스의 타이포그래피 시스템입니다. Pretendard Variable 글꼴을 기반으로 11개의 텍스트 계층을 정의합니다.</p>
+
+### Font Family
+
+<p>바이오컴은 Pretendard Variable을 기본 글꼴로 사용합니다.</p>
+
+<div className="font-family-card">
+  <p className="font-name">Pretendard Variable</p>
+  <p className="font-name" style={{ fontWeight: 400, fontSize: 28, color: '#5A5C63' }}>프리텐다드 베리어블</p>
+  <p className="font-desc" style={{ marginTop: 16 }}>
+    가변 폰트(Variable Font)로, 하나의 파일에서 다양한 굵기(Weight)를 자유롭게 사용할 수 있습니다.<br />
+    iOS SF Pro · Android Roboto와 높은 호환성을 갖추고 있어 크로스 플랫폼에 적합합니다.
+  </p>
+  <a
+    href="https://cactus.tistory.com/306"
+    target="_blank"
+    rel="noopener noreferrer"
+    style={{
+      display: 'inline-flex',
+      alignItems: 'center',
+      gap: 8,
+      marginTop: 24,
+      padding: '12px 28px',
+      backgroundColor: '#22C3BC',
+      color: '#FFFFFF',
+      fontSize: 15,
+      fontWeight: 600,
+      borderRadius: 12,
+      textDecoration: 'none',
+      transition: 'background 0.15s',
+    }}
+    onMouseEnter={(e) => { e.currentTarget.style.backgroundColor = '#1FADA7'; }}
+    onMouseLeave={(e) => { e.currentTarget.style.backgroundColor = '#22C3BC'; }}
+  >
+    <span style={{ fontSize: 18 }}>↓</span> Pretendard Variable 다운로드하기
+  </a>
+</div>
+
+<hr className="section-divider" />
+
+### Style
+
+<p>바이오컴 타이포그래피는 총 11개 위계를 가지고 있습니다.</p>
+
+<table className="spec-table">
+  <thead>
+    <tr>
+      <th>명칭</th>
+      <th>크기</th>
+      <th>행간</th>
+      <th>자간</th>
+      <th>용도</th>
+    </tr>
+  </thead>
+  <tbody>
+    {styles.map((s) => (
+      <tr key={s.name}>
+        <td className="style-name">{s.name}</td>
+        <td className="mono">{s.size}px</td>
+        <td className="mono">{s.lineHeight} ({s.lhRatio})</td>
+        <td className="mono">{s.letterSpacing}</td>
+        <td className="usage-text">{s.usage}</td>
+      </tr>
+    ))}
+  </tbody>
+</table>
+
+<hr className="section-divider" />
+
+### Preview
+
+<p>각 스타일별 미리보기입니다.</p>
+
+<div className="preview-section">
+  {styles.map((s) => (
+    <div className="preview-item" key={s.name}>
+      <span className="preview-label">{s.name}<br /><span style={{ fontWeight: 400, color: '#989BA2' }}>{s.size}px</span></span>
+      <span
+        className="preview-text"
+        style={{
+          fontSize: s.size,
+          lineHeight: s.lineHeight,
+          letterSpacing: s.letterSpacing,
+          fontWeight: s.weight,
+        }}
+      >
+        {PREVIEW_TEXT}
+      </span>
+    </div>
+  ))}
+</div>
+
+</div>
