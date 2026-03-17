@@ -13,7 +13,6 @@ import {
   coolNeutral,
   mint,
   red,
-  redOrange,
   green,
   fontWeight,
 } from '../tokens/theme';
@@ -66,7 +65,7 @@ const ClearIcon = ({ color = coolNeutral[80] }: { color?: string }) => (
   </Svg>
 );
 
-const ErrorIcon = ({ color = redOrange[50] }: { color?: string }) => (
+const ErrorIcon = ({ color = red[70] }: { color?: string }) => (
   <Svg width={20} height={20} viewBox="0 0 256 256" fill="none">
     <Circle cx="128" cy="128" r="96" fill={color} />
     <Path d="M128,80a12,12,0,0,1,12,12v48a12,12,0,0,1-24,0V92A12,12,0,0,1,128,80Zm0,100a16,16,0,1,0-16-16A16,16,0,0,0,128,180Z" fill="#FFFFFF" />
@@ -91,7 +90,7 @@ const SearchIcon = ({ color = coolNeutral[50] }: { color?: string }) => (
 export function InputField({
   label,
   placeholder = '텍스트를 입력해 주세요.',
-  value,
+  value: valueProp,
   onChangeText,
   helperText,
   errorMessage,
@@ -107,7 +106,20 @@ export function InputField({
   textInputProps,
 }: InputFieldProps) {
   const [isFocused, setIsFocused] = useState(false);
+  const [internalValue, setInternalValue] = useState(valueProp ?? '');
   const inputRef = useRef<TextInput>(null);
+
+  // 외부 value prop이 변경되면 내부 상태도 동기화
+  React.useEffect(() => {
+    if (valueProp !== undefined) setInternalValue(valueProp);
+  }, [valueProp]);
+
+  const value = valueProp ?? internalValue;
+
+  const handleChangeText = (text: string) => {
+    setInternalValue(text);
+    onChangeText?.(text);
+  };
 
   const hasValue = !!value && value.length > 0;
   const status: InputFieldStatus = errorMessage ? 'error' : successMessage ? 'success' : 'default';
@@ -116,7 +128,7 @@ export function InputField({
 
   const getBorderColor = (): string => {
     if (disabled) return coolNeutral[96];
-    if (status === 'error') return redOrange[50];
+    if (status === 'error') return red[70];
     if (isFocused) return mint[45];
     if (hasValue) return coolNeutral[90];
     return coolNeutral[96];
@@ -141,6 +153,7 @@ export function InputField({
     color: disabled ? coolNeutral[80] : coolNeutral[17],
     paddingVertical: multiline ? 0 : 14,
     textAlignVertical: multiline ? 'top' : 'center',
+    outlineStyle: 'none' as any,
   };
 
   const placeholderColor = coolNeutral[80];
@@ -149,7 +162,7 @@ export function InputField({
 
   const bottomMessage = errorMessage || successMessage || helperText;
   const bottomMessageColor = errorMessage
-    ? redOrange[50]
+    ? red[70]
     : successMessage
       ? mint[45]
       : coolNeutral[50];
@@ -211,7 +224,7 @@ export function InputField({
         <TextInput
           ref={inputRef}
           value={value}
-          onChangeText={onChangeText}
+          onChangeText={handleChangeText}
           placeholder={placeholder}
           placeholderTextColor={placeholderColor}
           editable={!disabled}
@@ -237,8 +250,8 @@ export function InputField({
 
         {multiline && (
           <View style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', marginTop: 8 }}>
-            {maxCharCount ? (
-              <Text style={{ fontSize: 13, color: coolNeutral[80] }}>
+            {maxCharCount != null ? (
+              <Text style={{ fontSize: 13, color: (value?.length ?? 0) > maxCharCount ? red[70] : coolNeutral[17] }}>
                 {value?.length ?? 0}/{maxCharCount}
               </Text>
             ) : <View />}
@@ -266,8 +279,8 @@ export function InputField({
             {bottomMessage}
           </Text>
         ) : <View />}
-        {!multiline && maxCharCount && (
-          <Text style={{ fontSize: 12, color: coolNeutral[80] }}>
+        {!multiline && maxCharCount != null && (
+          <Text style={{ fontSize: 12, color: (value?.length ?? 0) > maxCharCount ? red[70] : coolNeutral[17] }}>
             {value?.length ?? 0}/{maxCharCount}
           </Text>
         )}

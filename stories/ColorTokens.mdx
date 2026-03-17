@@ -1,0 +1,270 @@
+import React from 'react';
+import { Meta } from '@storybook/addon-docs/blocks';
+
+<Meta title="Foundation/Color Tokens" />
+
+export const TokenRow = ({ token, hex, source, role }) => {
+  const [copied, setCopied] = React.useState(false);
+  const handleCopy = () => {
+    navigator.clipboard.writeText(`semanticColor.${token}`).then(() => {
+      setCopied(true);
+      setTimeout(() => setCopied(false), 1500);
+    });
+  };
+  return (
+    <tr className="token-row" onClick={handleCopy} style={{ cursor: 'pointer' }}>
+      <td className="token-name">
+        <code>{token}</code>
+        {copied && <span className="copied-badge">복사됨!</span>}
+      </td>
+      <td>
+        <div className="color-preview-wrap">
+          <div className="color-preview" style={{ backgroundColor: hex, border: hex === '#FFFFFF' ? '1px solid #E1E2E4' : 'none' }} />
+        </div>
+      </td>
+      <td className="value-cell">
+        <span className="mono">{hex}</span>
+        {source && <span className="source-tag">{source}</span>}
+      </td>
+      <td className="role-text">{role}</td>
+    </tr>
+  );
+};
+
+export const SectionHeader = ({ title, description }) => (
+  <>
+    <tr className="section-header-row">
+      <td colSpan={4}>
+        <div className="section-header">
+          <span className="section-title">{title}</span>
+          <span className="section-desc">{description}</span>
+        </div>
+      </td>
+    </tr>
+  </>
+);
+
+<style>
+  {`
+    .tokens-page {
+      max-width: 960px;
+      margin: 0 auto;
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      color: #292A2D;
+    }
+    .tokens-page h2.page-title {
+      font-size: 28px;
+      font-weight: 700;
+      color: #171719;
+      margin: 0 0 8px;
+      padding-bottom: 12px;
+      border-bottom: 2px solid #22C3BC;
+    }
+    .tokens-page > p.page-desc {
+      font-size: 15px;
+      color: #5A5C63;
+      margin: 0 0 12px;
+    }
+    .usage-box {
+      background: #171719;
+      border-radius: 8px;
+      padding: 16px 20px;
+      margin: 0 0 40px;
+      font-family: 'SF Mono', 'Fira Code', monospace;
+      font-size: 13px;
+      color: #A8F0EC;
+      line-height: 1.6;
+    }
+    .usage-box .comment { color: #70737C; }
+    .usage-box .keyword { color: #CB59FF; }
+    .usage-box .string { color: #FFD833; }
+    .tokens-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 14px;
+      margin: 0 0 48px;
+    }
+    .tokens-table thead {
+      border-bottom: 2px solid #171719;
+      position: sticky;
+      top: 0;
+      background: #FFFFFF;
+      z-index: 1;
+    }
+    .tokens-table th {
+      text-align: left;
+      padding: 10px 12px;
+      font-weight: 600;
+      color: #46474C;
+      font-size: 13px;
+    }
+    .tokens-table td {
+      padding: 12px;
+      border-bottom: 1px solid #E1E2E4;
+      vertical-align: middle;
+    }
+    .token-row:hover {
+      background: #F7F7F8;
+    }
+    .token-row:hover .token-name code {
+      color: #22C3BC;
+    }
+    .token-name {
+      position: relative;
+    }
+    .token-name code {
+      font-family: 'SF Mono', 'Fira Code', monospace;
+      font-size: 13px;
+      font-weight: 500;
+      color: #171719;
+      background: #F4F4F5;
+      padding: 2px 8px;
+      border-radius: 4px;
+      transition: color 0.15s;
+    }
+    .copied-badge {
+      position: absolute;
+      top: -6px;
+      right: -8px;
+      background: #22C3BC;
+      color: #FFFFFF;
+      font-size: 10px;
+      font-weight: 600;
+      padding: 2px 6px;
+      border-radius: 4px;
+      white-space: nowrap;
+    }
+    .color-preview-wrap {
+      display: flex;
+      align-items: center;
+    }
+    .color-preview {
+      width: 32px;
+      height: 20px;
+      border-radius: 4px;
+      flex-shrink: 0;
+    }
+    .mono {
+      font-family: 'SF Mono', 'Fira Code', monospace;
+      font-size: 13px;
+      color: #5A5C63;
+    }
+    .value-cell {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+    .source-tag {
+      display: inline-block;
+      font-size: 11px;
+      font-weight: 600;
+      color: #22C3BC;
+      background: #E9FBFA;
+      padding: 1px 6px;
+      border-radius: 4px;
+      font-family: 'SF Mono', 'Fira Code', monospace;
+    }
+    .role-text {
+      font-size: 13px;
+      color: #5A5C63;
+      line-height: 1.5;
+    }
+    .section-header-row td {
+      padding: 0 !important;
+      border-bottom: none !important;
+    }
+    .section-header {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 24px 12px 12px;
+      border-bottom: 1px solid #DBDCDF;
+    }
+    .section-title {
+      font-size: 16px;
+      font-weight: 700;
+      color: #171719;
+      white-space: nowrap;
+    }
+    .section-desc {
+      font-size: 13px;
+      color: #70737C;
+    }
+  `}
+</style>
+
+<div className="tokens-page">
+
+<h2 className="page-title">Semantic Color Tokens</h2>
+<p className="page-desc">
+  역할 기반 색상 토큰입니다. 컴포넌트에서 HEX 코드 대신 토큰명을 사용하면 테마 변경 시 일괄 적용됩니다.
+  <br />토큰 이름을 클릭하면 코드가 클립보드에 복사됩니다.
+</p>
+
+<div className="usage-box">
+  <span className="comment">// 사용 예시</span><br />
+  <span className="keyword">import</span> {'{ semanticColor }'} <span className="keyword">from</span> <span className="string">'../tokens/theme'</span>;<br /><br />
+  {'<Text style={{ color: semanticColor.textPrimary }}>본문 텍스트</Text>'}<br />
+  {'<View style={{ backgroundColor: semanticColor.backgroundBrand }} />'}
+</div>
+
+<table className="tokens-table">
+  <thead>
+    <tr>
+      <th style={{ width: '28%' }}>Token Name</th>
+      <th style={{ width: '10%' }}>Preview</th>
+      <th style={{ width: '14%' }}>Value</th>
+      <th>역할 (Role)</th>
+    </tr>
+  </thead>
+  <tbody>
+    <SectionHeader title="Text" description="텍스트에 적용하는 색상 토큰" />
+    <TokenRow token="textPrimary"     hex="#212225" source="Cool Neutral 17" role="기본 본문·타이틀 텍스트 색상. 가장 많이 사용되는 텍스트 컬러입니다." />
+    <TokenRow token="textSecondary"   hex="#70737C" source="Cool Neutral 50" role="보조 설명, 부가 정보, 캡션 등 주요 텍스트보다 약한 위계의 텍스트입니다." />
+    <TokenRow token="textTertiary"    hex="#AEB0B6" source="Cool Neutral 80" role="비활성화된 텍스트, 힌트, 플레이스홀더와 동일 위계입니다." />
+    <TokenRow token="textPlaceholder" hex="#AEB0B6" source="Cool Neutral 80" role="입력 필드의 플레이스홀더 텍스트 색상입니다." />
+    <TokenRow token="textOnColor"     hex="#FFFFFF" source="White" role="브랜드 버튼, 배지 등 색상 배경 위에 올라가는 텍스트입니다." />
+    <TokenRow token="textBrand"       hex="#22C3BC" source="Mint 45" role="링크, 포커스 상태, 브랜드 강조가 필요한 텍스트입니다." />
+    <TokenRow token="textError"       hex="#EF7676" source="Red 70" role="에러·유효성 실패 메시지에 사용합니다." />
+    <TokenRow token="textSuccess"     hex="#22C3BC" source="Mint 45" role="성공·유효성 통과 메시지에 사용합니다." />
+    <TokenRow token="textWarning"     hex="#FFCE00" source="Yellow 50" role="경고·주의 메시지에 사용합니다." />
+
+    <SectionHeader title="Background" description="배경에 적용하는 색상 토큰" />
+    <TokenRow token="backgroundPrimary"       hex="#FFFFFF" source="White" role="기본 화면 배경색. 앱 전체의 기본 바탕 색상입니다." />
+    <TokenRow token="backgroundSecondary"     hex="#F7F7F8" source="Cool Neutral 99" role="카드, 섹션 구분 등 1단계 구분이 필요한 배경색입니다." />
+    <TokenRow token="backgroundTertiary"      hex="#EAEBEC" source="Cool Neutral 97" role="인풋 비활성 배경, 칩 기본 배경 등 2단계 구분 배경색입니다." />
+    <TokenRow token="backgroundInverse"       hex="#171719" source="Cool Neutral 10" role="다크 영역, 활성 칩 배경 등 반전이 필요한 배경색입니다." />
+    <TokenRow token="backgroundBrand"         hex="#22C3BC" source="Mint 45" role="CTA 버튼, 강조 영역 등 브랜드 색상이 필요한 배경입니다." />
+    <TokenRow token="backgroundBrandPressed"  hex="#17827D" source="Mint 30" role="브랜드 배경의 눌림(Pressed) 상태입니다." />
+    <TokenRow token="backgroundBrandDisabled" hex="#E1E2E4" source="Cool Neutral 96" role="브랜드 배경의 비활성화 상태입니다." />
+    <TokenRow token="backgroundError"         hex="#FFFCFA" source="Orange 99" role="에러 상태의 연한 배경색입니다. 인풋 에러 영역 등에 사용합니다." />
+    <TokenRow token="backgroundSuccess"       hex="#FBFEFE" source="Mint 99" role="성공 상태의 연한 배경색입니다." />
+    <TokenRow token="backgroundWarning"       hex="#FFFEFA" source="Yellow 99" role="경고 상태의 연한 배경색입니다." />
+
+    <SectionHeader title="Border" description="테두리·구분선에 적용하는 색상 토큰" />
+    <TokenRow token="borderDefault"  hex="#E1E2E4" source="Cool Neutral 96" role="기본 테두리. 인풋 비활성, 카드 구분선 등에 사용합니다." />
+    <TokenRow token="borderActive"   hex="#C2C4C8" source="Cool Neutral 90" role="값이 입력된 상태의 테두리입니다." />
+    <TokenRow token="borderFocus"    hex="#22C3BC" source="Mint 45" role="포커스 상태 테두리. 민트 브랜드 색상으로 강조합니다." />
+    <TokenRow token="borderError"    hex="#EF7676" source="Red 70" role="에러 상태 테두리입니다." />
+    <TokenRow token="borderSuccess"  hex="#22C3BC" source="Mint 45" role="성공 상태 테두리입니다." />
+    <TokenRow token="borderBrand"    hex="#22C3BC" source="Mint 45" role="브랜드 강조 테두리. Outlined 버튼, 활성 칩 등에 사용합니다." />
+    <TokenRow token="borderDisabled" hex="#E1E2E4" source="Cool Neutral 96" role="비활성화 상태 테두리입니다." />
+
+    <SectionHeader title="Icon" description="아이콘에 적용하는 색상 토큰" />
+    <TokenRow token="iconPrimary"   hex="#212225" source="Cool Neutral 17" role="기본 아이콘 색상. 내비게이션, 액션 아이콘에 사용합니다." />
+    <TokenRow token="iconSecondary" hex="#70737C" source="Cool Neutral 50" role="보조 아이콘 색상. 부가 정보 아이콘에 사용합니다." />
+    <TokenRow token="iconDisabled"  hex="#AEB0B6" source="Cool Neutral 80" role="비활성화된 아이콘 색상입니다." />
+    <TokenRow token="iconBrand"     hex="#22C3BC" source="Mint 45" role="브랜드 아이콘. 체크, 활성 상태 등에 사용합니다." />
+    <TokenRow token="iconOnColor"   hex="#FFFFFF" source="White" role="색상 배경 위에 올라가는 아이콘 (버튼 내 아이콘 등)입니다." />
+    <TokenRow token="iconError"     hex="#EF7676" source="Red 70" role="에러 상태 아이콘입니다." />
+    <TokenRow token="iconSuccess"   hex="#22C3BC" source="Mint 45" role="성공 상태 아이콘입니다." />
+
+    <SectionHeader title="Status" description="상태 표현에 사용하는 주요 색상" />
+    <TokenRow token="statusError"   hex="#EF7676" source="Red 70" role="에러·실패·위험 상태의 주요 색상입니다." />
+    <TokenRow token="statusSuccess" hex="#22C3BC" source="Mint 45" role="성공·완료·안전 상태의 주요 색상입니다." />
+    <TokenRow token="statusWarning" hex="#FFCE00" source="Yellow 50" role="경고·주의가 필요한 상태의 주요 색상입니다." />
+    <TokenRow token="statusInfo"    hex="#22C3BC" source="Mint 45" role="정보·안내 상태의 주요 색상입니다." />
+  </tbody>
+</table>
+
+</div>

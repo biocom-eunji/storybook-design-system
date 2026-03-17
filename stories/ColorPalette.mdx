@@ -19,13 +19,16 @@ export const Swatch = ({ token, hex, desc }) => {
       minWidth: 96,
       flex: '1 1 96px',
     }}>
-      <div style={{
+      <div
+        onClick={handleCopy}
+        style={{
         height: 64,
         borderRadius: 8,
         backgroundColor: hex,
         border: isLight ? '1px solid #E1E2E4' : 'none',
         position: 'relative',
         overflow: 'hidden',
+        cursor: 'pointer',
       }}>
         {copied && (
           <div style={{
@@ -111,7 +114,7 @@ export const PaletteRow = ({ title, description, children }) => (
 <div className="color-page">
 
 <h2>Color Palette</h2>
-<p>Definition.png 기반으로 추출된 디자인 토큰입니다. 각 토큰 이름은 컴포넌트에서 바로 import하여 사용할 수 있습니다.</p>
+<p>바이오컴 색상 규칙은 다음과 같이 구성되어 있습니다.</p>
 
 ## Neutral
 
@@ -210,32 +213,32 @@ export const PaletteRow = ({ title, description, children }) => (
   <Swatch token="red10" hex="#2E0505" desc="에러 최고 다크" />
 </PaletteRow>
 
-<PaletteRow title="Orange" description="주의 알림, 보류 상태, 경고 배지에 사용됩니다.">
-  <Swatch token="orange99" hex="#FFFEFA" desc="경고 배경 틴트" />
-  <Swatch token="orange95" hex="#FFFAE5" desc="경고 배경" />
-  <Swatch token="orange90" hex="#FFF5CC" desc="경고 하이라이트" />
-  <Swatch token="orange80" hex="#FFEC99" desc="서브 경고" />
-  <Swatch token="orange70" hex="#FFE266" desc="라이트 경고" />
-  <Swatch token="orange60" hex="#FFD833" desc="경고 액센트" />
-  <Swatch token="orange50" hex="#FFCE00" desc="경고 메인" />
-  <Swatch token="orange40" hex="#CCA500" desc="경고 호버" />
-  <Swatch token="orange30" hex="#997C00" desc="경고 프레스" />
-  <Swatch token="orange20" hex="#665300" desc="경고 다크" />
-  <Swatch token="orange10" hex="#332900" desc="경고 최고 다크" />
+<PaletteRow title="Yellow" description="주의 알림, 보류 상태, 경고 배지에 사용됩니다.">
+  <Swatch token="yellow99" hex="#FFFEFA" desc="경고 배경 틴트" />
+  <Swatch token="yellow95" hex="#FFFAE5" desc="경고 배경" />
+  <Swatch token="yellow90" hex="#FFF5CC" desc="경고 하이라이트" />
+  <Swatch token="yellow80" hex="#FFEC99" desc="서브 경고" />
+  <Swatch token="yellow70" hex="#FFE266" desc="라이트 경고" />
+  <Swatch token="yellow60" hex="#FFD833" desc="경고 액센트" />
+  <Swatch token="yellow50" hex="#FFCE00" desc="경고 메인" />
+  <Swatch token="yellow40" hex="#CCA500" desc="경고 호버" />
+  <Swatch token="yellow30" hex="#997C00" desc="경고 프레스" />
+  <Swatch token="yellow20" hex="#665300" desc="경고 다크" />
+  <Swatch token="yellow10" hex="#332900" desc="경고 최고 다크" />
 </PaletteRow>
 
-<PaletteRow title="Red Orange" description="강한 경고, 중요 알림, 긴급 배지에 사용됩니다.">
-  <Swatch token="redOrange99" hex="#FFFCFA" desc="긴급 배경 틴트" />
-  <Swatch token="redOrange95" hex="#FFF2E5" desc="긴급 배경" />
-  <Swatch token="redOrange90" hex="#FFE5CC" desc="긴급 하이라이트" />
-  <Swatch token="redOrange80" hex="#FFCB99" desc="서브 긴급" />
-  <Swatch token="redOrange70" hex="#FFB166" desc="라이트 긴급" />
-  <Swatch token="redOrange60" hex="#FF9733" desc="긴급 액센트" />
-  <Swatch token="redOrange50" hex="#FF7D00" desc="긴급 메인" />
-  <Swatch token="redOrange40" hex="#CC6400" desc="긴급 호버" />
-  <Swatch token="redOrange30" hex="#994B00" desc="긴급 프레스" />
-  <Swatch token="redOrange20" hex="#663200" desc="긴급 다크" />
-  <Swatch token="redOrange10" hex="#331900" desc="긴급 최고 다크" />
+<PaletteRow title="Orange" description="강한 경고, 중요 알림, 긴급 배지에 사용됩니다.">
+  <Swatch token="orange99" hex="#FFFCFA" desc="긴급 배경 틴트" />
+  <Swatch token="orange95" hex="#FFF2E5" desc="긴급 배경" />
+  <Swatch token="orange90" hex="#FFE5CC" desc="긴급 하이라이트" />
+  <Swatch token="orange80" hex="#FFCB99" desc="서브 긴급" />
+  <Swatch token="orange70" hex="#FFB166" desc="라이트 긴급" />
+  <Swatch token="orange60" hex="#FF9733" desc="긴급 액센트" />
+  <Swatch token="orange50" hex="#FF7D00" desc="긴급 메인" />
+  <Swatch token="orange40" hex="#CC6400" desc="긴급 호버" />
+  <Swatch token="orange30" hex="#994B00" desc="긴급 프레스" />
+  <Swatch token="orange20" hex="#663200" desc="긴급 다크" />
+  <Swatch token="orange10" hex="#331900" desc="긴급 최고 다크" />
 </PaletteRow>
 
 <hr className="section-divider" />

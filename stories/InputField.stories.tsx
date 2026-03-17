@@ -3,7 +3,7 @@ import { View } from 'react-native';
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import { InputField } from '../src/components/InputField';
 import { Section, StateLabel, Row, Col, SpecTable, CodeBlock, CompareGrid, Divider } from './storyHelpers';
-import { coolNeutral, mint, redOrange, fontSize, fontWeight, spacing, radius } from '../src/tokens/theme';
+import { coolNeutral, mint, red, fontSize, fontWeight, spacing, radius } from '../src/tokens/theme';
 
 const meta: Meta<typeof InputField> = {
   title: 'Components/InputField',
@@ -388,7 +388,7 @@ export const DesignSpec: Story = {
               { label: '비활성 (Inactive) 테두리', value: coolNeutral[96], token: 'coolNeutral[96]' },
               { label: '입력됨 (Active) 테두리', value: coolNeutral[90], token: 'coolNeutral[90]' },
               { label: '포커스 (Focus) 테두리', value: mint[45], token: 'mint[45]' },
-              { label: '에러 (Error) 테두리', value: redOrange[50], token: 'redOrange[50]' },
+              { label: '에러 (Error) 테두리', value: red[70], token: 'red[70]' },
               { label: '비활성화 (Disabled) 테두리', value: coolNeutral[96], token: 'coolNeutral[96]' },
             ]}
           />
@@ -397,7 +397,7 @@ export const DesignSpec: Story = {
             title="메시지 컬러"
             rows={[
               { label: '도움말 텍스트', value: coolNeutral[50], token: 'coolNeutral[50]' },
-              { label: '에러 메시지', value: redOrange[50], token: 'redOrange[50]' },
+              { label: '에러 메시지', value: red[70], token: 'red[70]' },
               { label: '성공 메시지', value: mint[45], token: 'mint[45]' },
             ]}
           />

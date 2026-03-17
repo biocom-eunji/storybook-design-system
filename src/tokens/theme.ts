@@ -60,7 +60,7 @@ export const khaki = {
   10: '#1D2310',
 } as const;
 
-export const orange = {
+export const yellow = {
   99: '#FFFEFA',
   95: '#FFFAE5',
   90: '#FFF5CC',
@@ -74,7 +74,7 @@ export const orange = {
   10: '#332900',
 } as const;
 
-export const redOrange = {
+export const orange = {
   99: '#FFFCFA',
   95: '#FFF2E5',
   90: '#FFE5CC',
@@ -225,8 +225,8 @@ export const palette = {
   neutral,
   coolNeutral,
   khaki,
+  yellow,
   orange,
-  redOrange,
   red,
   pink,
   purple,
@@ -308,6 +308,97 @@ export const radius = {
   xl: 24,
   full: 9999,
 } as const;
+
+// ─── Semantic Color Tokens ───────────────────────────────
+// 컴포넌트에서 color={semanticColor.textPrimary} 형태로 사용
+
+export const semanticColor = {
+  // ── Text ───────────────────────────────────────────────
+  /** 기본 본문·타이틀 텍스트 */
+  textPrimary: coolNeutral[17],
+  /** 보조 설명, 부가 정보 텍스트 */
+  textSecondary: coolNeutral[50],
+  /** 비활성화된 텍스트, 힌트 */
+  textTertiary: coolNeutral[80],
+  /** 플레이스홀더 텍스트 */
+  textPlaceholder: coolNeutral[80],
+  /** 색상 배경 위에 올라가는 텍스트 (버튼, 배지 등) */
+  textOnColor: palette.white,
+  /** 브랜드 강조 텍스트 (링크, 포커스 등) */
+  textBrand: mint[45],
+  /** 에러 상태 텍스트 */
+  textError: red[70],
+  /** 성공 상태 텍스트 */
+  textSuccess: mint[45],
+  /** 경고 상태 텍스트 */
+  textWarning: yellow[50],
+
+  // ── Background ────────────────────────────────────────
+  /** 기본 화면 배경색 (흰색) */
+  backgroundPrimary: palette.white,
+  /** 보조 배경색 (카드, 섹션 구분) */
+  backgroundSecondary: coolNeutral[99],
+  /** 3단계 배경색 (인풋 비활성, 칩 등) */
+  backgroundTertiary: coolNeutral[97],
+  /** 반전 배경 (다크 영역, 활성 칩) */
+  backgroundInverse: coolNeutral[10],
+  /** 브랜드 배경색 (CTA 버튼, 강조 영역) */
+  backgroundBrand: mint[45],
+  /** 브랜드 배경 눌림 */
+  backgroundBrandPressed: mint[30],
+  /** 브랜드 배경 비활성화 */
+  backgroundBrandDisabled: coolNeutral[96],
+  /** 에러 상태 배경 (연한 빨강) */
+  backgroundError: orange[99],
+  /** 성공 상태 배경 (연한 민트) */
+  backgroundSuccess: mint[99],
+  /** 경고 상태 배경 (연한 주황) */
+  backgroundWarning: yellow[99],
+
+  // ── Border ────────────────────────────────────────────
+  /** 기본 테두리 (인풋 비활성, 구분선) */
+  borderDefault: coolNeutral[96],
+  /** 입력됨 상태 테두리 */
+  borderActive: coolNeutral[90],
+  /** 포커스 상태 테두리 */
+  borderFocus: mint[45],
+  /** 에러 상태 테두리 */
+  borderError: red[70],
+  /** 성공 상태 테두리 */
+  borderSuccess: mint[45],
+  /** 강조 테두리 (브랜드) */
+  borderBrand: mint[45],
+  /** 비활성화 테두리 */
+  borderDisabled: coolNeutral[96],
+
+  // ── Icon ──────────────────────────────────────────────
+  /** 기본 아이콘 색상 */
+  iconPrimary: coolNeutral[17],
+  /** 보조 아이콘 색상 */
+  iconSecondary: coolNeutral[50],
+  /** 비활성화 아이콘 */
+  iconDisabled: coolNeutral[80],
+  /** 브랜드 아이콘 */
+  iconBrand: mint[45],
+  /** 색상 배경 위 아이콘 */
+  iconOnColor: palette.white,
+  /** 에러 아이콘 */
+  iconError: red[70],
+  /** 성공 아이콘 */
+  iconSuccess: mint[45],
+
+  // ── Status ────────────────────────────────────────────
+  /** 에러 주색 */
+  statusError: red[70],
+  /** 성공 주색 */
+  statusSuccess: mint[45],
+  /** 경고 주색 */
+  statusWarning: yellow[50],
+  /** 정보 주색 */
+  statusInfo: mint[45],
+} as const;
+
+export type SemanticColor = typeof semanticColor;
 
 // ─── Component Tokens ────────────────────────────────────
 
@@ -422,6 +513,7 @@ export const actionAreaToken = {
 
 export const theme = {
   palette,
+  colors: semanticColor,
   fontFamily,
   fontSize,
   fontWeight,
