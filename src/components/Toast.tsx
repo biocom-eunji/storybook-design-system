@@ -1,8 +1,9 @@
 import React, { useEffect } from 'react';
 import { View, Text, Pressable, type ViewStyle, type TextStyle } from 'react-native';
-import { coolNeutral, mint, red, yellow, fontSize, fontWeight, radius } from '../tokens/theme';
+import { Icon } from './Icon';
+import { coolNeutral, mint, red, yellow, fontSize, fontWeight, radius, spacing } from '../tokens/theme';
 
-export type ToastVariant = 'default' | 'success' | 'error' | 'warning';
+export type ToastVariant = 'success' | 'error' | 'warning';
 export type ToastPosition = 'top' | 'bottom';
 
 export interface ToastAction {
@@ -20,16 +21,31 @@ export interface ToastProps {
   action?: ToastAction;
 }
 
-const accentColors: Record<ToastVariant, string> = {
-  default: mint[45],
-  success: mint[45],
-  error: red[70],
-  warning: yellow[50],
+// ─── Status Icons (Toast.png 디자인 기반) ────────────────
+
+const SuccessIcon = () => (
+  <Icon name="check-circle" size={24} color={mint[45]} />
+);
+
+const WarningIcon = () => (
+  <Icon name="warning" size={24} color={yellow[50]} />
+);
+
+const ErrorIcon = () => (
+  <Icon name="x-circle" size={24} color={red[70]} />
+);
+
+const iconMap: Record<ToastVariant, React.FC> = {
+  success: SuccessIcon,
+  warning: WarningIcon,
+  error: ErrorIcon,
 };
+
+// ─── Component ──────────────────────────────────────────
 
 export function Toast({
   message,
-  variant = 'default',
+  variant = 'success',
   visible,
   duration = 3000,
   onDismiss,
@@ -45,43 +61,44 @@ export function Toast({
 
   if (!visible) return null;
 
+  const IconComponent = iconMap[variant];
+
   const containerStyle: ViewStyle = {
     position: 'absolute',
     left: 0,
     right: 0,
     ...(position === 'bottom' ? { bottom: 48 } : { top: 48 }),
-    marginHorizontal: 16,
+    marginHorizontal: spacing.lg,
   };
 
   const toastStyle: ViewStyle = {
-    backgroundColor: coolNeutral[17],
-    opacity: 0.95,
+    backgroundColor: coolNeutral[50],
     borderRadius: radius.md,
-    paddingHorizontal: 20,
-    paddingVertical: 14,
+    paddingHorizontal: spacing.lg,
+    paddingVertical: spacing.md,
     flexDirection: 'row',
     alignItems: 'center',
-    borderLeftWidth: 3,
-    borderLeftColor: accentColors[variant],
+    gap: spacing.md,
   };
 
   const messageStyle: TextStyle = {
     color: '#FFFFFF',
-    fontSize: fontSize.sm,
+    fontSize: fontSize.md,
     fontWeight: fontWeight.medium,
     flex: 1,
   };
 
   const actionTextStyle: TextStyle = {
-    color: mint[45],
+    color: mint[80],
     fontSize: fontSize.sm,
     fontWeight: fontWeight.semibold,
-    marginLeft: 12,
+    marginLeft: spacing.sm,
   };
 
   return (
     <View style={containerStyle} pointerEvents="box-none">
       <View style={toastStyle}>
+        <IconComponent />
         <Text style={messageStyle}>{message}</Text>
         {action && (
           <Pressable onPress={action.onPress}>

@@ -8,7 +8,7 @@ import {
   type ViewStyle,
   type TextStyle,
 } from 'react-native';
-import Svg, { Path, Circle } from 'react-native-svg';
+import { Icon } from './Icon';
 import {
   coolNeutral,
   mint,
@@ -59,30 +59,19 @@ export interface InputFieldProps {
 // ─── Icons ───────────────────────────────────────────────
 
 const ClearIcon = ({ color = coolNeutral[80] }: { color?: string }) => (
-  <Svg width={20} height={20} viewBox="0 0 256 256" fill="none">
-    <Circle cx="128" cy="128" r="96" fill={color} />
-    <Path d="M168.49,104.49,145,128l23.52,23.51a12,12,0,0,1-17,17L128,145l-23.51,23.52a12,12,0,0,1-17-17L111,128,87.49,104.49a12,12,0,0,1,17-17L128,111l23.51-23.52a12,12,0,0,1,17,17Z" fill="#FFFFFF" />
-  </Svg>
+  <Icon name="x-circle" size={20} color={color} />
 );
 
 const ErrorIcon = ({ color = red[70] }: { color?: string }) => (
-  <Svg width={20} height={20} viewBox="0 0 256 256" fill="none">
-    <Circle cx="128" cy="128" r="96" fill={color} />
-    <Path d="M128,80a12,12,0,0,1,12,12v48a12,12,0,0,1-24,0V92A12,12,0,0,1,128,80Zm0,100a16,16,0,1,0-16-16A16,16,0,0,0,128,180Z" fill="#FFFFFF" />
-  </Svg>
+  <Icon name="warning" size={20} color={color} />
 );
 
 const SuccessIcon = ({ color = mint[45] }: { color?: string }) => (
-  <Svg width={20} height={20} viewBox="0 0 256 256" fill="none">
-    <Circle cx="128" cy="128" r="96" fill={color} />
-    <Path d="M176.49,96.49l-64,64a12,12,0,0,1-17,0l-32-32a12,12,0,1,1,17-17L104,135,159.51,79.51a12,12,0,0,1,17,17Z" fill="#FFFFFF" />
-  </Svg>
+  <Icon name="check-circle" size={20} color={color} />
 );
 
 const SearchIcon = ({ color = coolNeutral[50] }: { color?: string }) => (
-  <Svg width={20} height={20} viewBox="0 0 256 256" fill="none">
-    <Path d="M232.49,215.51,185,168a92.12,92.12,0,1,0-17,17l47.53,47.52a12,12,0,0,0,17-17ZM44,112a68,68,0,1,1,68,68A68.07,68.07,0,0,1,44,112Z" fill={color} />
-  </Svg>
+  <Icon name="magnifying-glass" size={20} color={color} />
 );
 
 // ─── Component ───────────────────────────────────────────

@@ -45,6 +45,7 @@ export function Chip({
 
   const getContainerStyle = (state: PressableStateCallbackType): ViewStyle[] => {
     const base: ViewStyle = {
+      alignSelf: 'flex-start',
       height: sizeToken.height,
       paddingHorizontal: sizeToken.paddingHorizontal,
       borderRadius: sizeToken.radius,

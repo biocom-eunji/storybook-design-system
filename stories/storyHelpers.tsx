@@ -6,33 +6,37 @@ import {
 } from '../src/tokens/theme';
 
 // ─── Section ─────────────────────────────────────────────
-// Story section with Korean title + optional description
+// 스토리 섹션 — 제목 + 설명 + 콘텐츠
 
 export const Section = ({
   title,
   description,
+  badge,
   children,
 }: {
   title: string;
   description?: string;
+  badge?: '기획' | '디자인' | '개발';
   children: React.ReactNode;
 }) => (
   <View style={h.section}>
-    <Text style={h.sectionTitle}>{title}</Text>
+    <View style={h.sectionHeader}>
+      <Text style={h.sectionTitle}>{title}</Text>
+      {badge && <AudienceBadge role={badge} />}
+    </View>
     {description && <Text style={h.sectionDesc}>{description}</Text>}
     {children}
   </View>
 );
 
 // ─── State Label ─────────────────────────────────────────
-// Small label above a component group (e.g. "활성" / "비활성")
+// 상태 라벨 (예: "활성" / "비활성")
 
 export const StateLabel = ({ children }: { children: string }) => (
   <Text style={h.stateLabel}>{children}</Text>
 );
 
 // ─── Row / Col ───────────────────────────────────────────
-// Flex helpers for layout
 
 export const Row = ({
   children,
@@ -61,7 +65,7 @@ export const Col = ({
 );
 
 // ─── Spec Table ──────────────────────────────────────────
-// Design token reference table for designers
+// 디자인 토큰 참조 테이블
 
 export const SpecTable = ({
   title,
@@ -79,10 +83,20 @@ export const SpecTable = ({
         <Text style={[h.specCell, h.specHeaderText, { flex: 1.5 }]}>토큰</Text>
       </View>
       {rows.map((row, i) => (
-        <View key={i} style={[h.specRow, i % 2 === 0 && h.specRowAlt]}>
-          <Text style={[h.specCell, { flex: 1.2, color: coolNeutral[17] }]}>{row.label}</Text>
-          <Text style={[h.specCell, h.specMono, { flex: 1 }]}>{row.value}</Text>
-          <Text style={[h.specCell, h.specMono, { flex: 1.5, color: mint[40] }]}>{row.token || '—'}</Text>
+        <View key={i} style={[h.specRow, i % 2 === 1 && h.specRowAlt]}>
+          <Text style={[h.specCell, h.specLabelCell, { flex: 1.2 }]}>{row.label}</Text>
+          <View style={{ flex: 1, flexDirection: 'row', alignItems: 'center', gap: 6 }}>
+            {/^#[0-9A-Fa-f]{6}$/.test(row.value) && (
+              <View style={{
+                width: 14, height: 14, borderRadius: 3,
+                backgroundColor: row.value,
+                borderWidth: row.value === '#FFFFFF' ? 1 : 0,
+                borderColor: coolNeutral[90],
+              }} />
+            )}
+            <Text style={[h.specCell, h.specMono]}>{row.value}</Text>
+          </View>
+          <Text style={[h.specCell, h.specMono, h.specTokenCell, { flex: 1.5 }]}>{row.token || '—'}</Text>
         </View>
       ))}
     </View>
@@ -90,17 +104,22 @@ export const SpecTable = ({
 );
 
 // ─── Color Chip ──────────────────────────────────────────
-// Small color swatch with hex value
 
 export const ColorChip = ({ color, label }: { color: string; label?: string }) => (
   <View style={{ flexDirection: 'row', alignItems: 'center', gap: spacing.sm }}>
-    <View style={{ width: 16, height: 16, borderRadius: 4, backgroundColor: color, borderWidth: 1, borderColor: coolNeutral[95] }} />
-    <Text style={{ fontSize: fontSize.xs, fontFamily: 'monospace', color: coolNeutral[40] }}>{label || color}</Text>
+    <View style={{
+      width: 20, height: 20, borderRadius: 4,
+      backgroundColor: color,
+      borderWidth: 1, borderColor: coolNeutral[95],
+    }} />
+    <Text style={{ fontSize: fontSize.xs, fontFamily: 'monospace', color: coolNeutral[40] }}>
+      {label || color}
+    </Text>
   </View>
 );
 
 // ─── Code Block ──────────────────────────────────────────
-// Copyable code snippet for developers
+// 복사 가능한 코드 블록
 
 export const CodeBlock = ({ code, title }: { code: string; title?: string }) => {
   const [copied, setCopied] = useState(false);
@@ -114,36 +133,37 @@ export const CodeBlock = ({ code, title }: { code: string; title?: string }) => 
   return (
     <View style={h.codeWrap}>
       {title && <Text style={h.codeTitle}>{title}</Text>}
-      <Pressable onPress={handleCopy} style={h.codeBlock}>
+      <Pressable onPress={handleCopy} style={({ pressed }) => [h.codeBlock, pressed && h.codeBlockPressed]}>
         <Text style={h.codeText}>{code}</Text>
-        <Text style={[h.codeCopy, copied && { color: mint[45] }]}>
-          {copied ? '복사 완료!' : '클릭하여 복사'}
-        </Text>
+        <View style={h.codeCopyWrap}>
+          <Text style={[h.codeCopy, copied && h.codeCopied]}>
+            {copied ? '복사 완료!' : '복사'}
+          </Text>
+        </View>
       </Pressable>
     </View>
   );
 };
 
 // ─── Comparison Grid ─────────────────────────────────────
-// Side-by-side state comparison with labels
+// 상태 비교 그리드
 
 export const CompareGrid = ({
   items,
 }: {
   items: Array<{ label: string; content: React.ReactNode }>;
 }) => (
-  <View style={{ flexDirection: 'row', flexWrap: 'wrap', gap: spacing['2xl'] }}>
+  <View style={h.compareGrid}>
     {items.map((item, i) => (
-      <View key={i} style={{ minWidth: 120 }}>
+      <View key={i} style={h.compareItem}>
         <Text style={h.stateLabel}>{item.label}</Text>
-        <View style={{ marginTop: spacing.sm }}>{item.content}</View>
+        <View style={h.compareContent}>{item.content}</View>
       </View>
     ))}
   </View>
 );
 
 // ─── Audience Badge ──────────────────────────────────────
-// Badge indicating target audience
 
 export const AudienceBadge = ({ role }: { role: '기획' | '디자인' | '개발' }) => {
   const colors = {
@@ -153,8 +173,16 @@ export const AudienceBadge = ({ role }: { role: '기획' | '디자인' | '개발
   };
   const c = colors[role];
   return (
-    <View style={{ backgroundColor: c.bg, paddingHorizontal: spacing.sm, paddingVertical: 2, borderRadius: radius.full, alignSelf: 'flex-start' }}>
-      <Text style={{ fontSize: fontSize.xs, fontWeight: fontWeight.semibold, color: c.text }}>{role}</Text>
+    <View style={{
+      backgroundColor: c.bg,
+      paddingHorizontal: spacing.sm,
+      paddingVertical: 2,
+      borderRadius: radius.full,
+      alignSelf: 'center',
+    }}>
+      <Text style={{ fontSize: fontSize.xs, fontWeight: fontWeight.semibold, color: c.text }}>
+        {role}
+      </Text>
     </View>
   );
 };
@@ -162,52 +190,65 @@ export const AudienceBadge = ({ role }: { role: '기획' | '디자인' | '개발
 // ─── Divider ─────────────────────────────────────────────
 
 export const Divider = () => (
-  <View style={{ height: 1, backgroundColor: coolNeutral[96], marginVertical: spacing['2xl'] }} />
+  <View style={h.divider} />
 );
 
 // ─── Styles ──────────────────────────────────────────────
 
 const h = StyleSheet.create({
+  // Section
   section: {
     marginBottom: spacing['3xl'],
   },
-  sectionTitle: {
-    fontSize: fontSize.lg,
-    fontWeight: fontWeight.bold,
-    color: coolNeutral[17],
+  sectionHeader: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: spacing.sm,
     marginBottom: spacing.xs,
+  },
+  sectionTitle: {
+    fontSize: fontSize.xl,
+    fontWeight: fontWeight.bold,
+    color: coolNeutral[10],
   },
   sectionDesc: {
     fontSize: fontSize.sm,
     color: coolNeutral[50],
-    marginBottom: spacing.lg,
+    lineHeight: 20,
+    marginBottom: spacing.xl,
   },
+
+  // State Label
   stateLabel: {
     fontSize: fontSize.xs,
     fontWeight: fontWeight.semibold,
-    color: coolNeutral[60],
-    textTransform: 'uppercase' as any,
-    letterSpacing: 0.5,
+    color: coolNeutral[50],
+    letterSpacing: 0.3,
+    marginBottom: 2,
   },
+
+  // Spec Table
   specWrap: {
-    marginBottom: spacing.lg,
+    marginBottom: spacing.xl,
   },
   specTitle: {
     fontSize: fontSize.sm,
-    fontWeight: fontWeight.semibold,
-    color: coolNeutral[30],
+    fontWeight: fontWeight.bold,
+    color: coolNeutral[17],
     marginBottom: spacing.sm,
   },
   specTable: {
-    borderRadius: radius.sm,
+    borderRadius: radius.md,
     borderWidth: 1,
     borderColor: coolNeutral[95],
     overflow: 'hidden',
   },
   specRow: {
     flexDirection: 'row',
-    paddingVertical: spacing.sm,
-    paddingHorizontal: spacing.md,
+    alignItems: 'center',
+    paddingVertical: 10,
+    paddingHorizontal: spacing.lg,
+    minHeight: 40,
   },
   specRowAlt: {
     backgroundColor: coolNeutral[99],
@@ -216,46 +257,94 @@ const h = StyleSheet.create({
     backgroundColor: coolNeutral[97],
     borderBottomWidth: 1,
     borderBottomColor: coolNeutral[95],
+    minHeight: 36,
   },
   specHeaderText: {
-    fontWeight: fontWeight.semibold,
+    fontSize: fontSize.xs,
+    fontWeight: fontWeight.bold,
     color: coolNeutral[40],
   },
   specCell: {
-    fontSize: fontSize.xs,
+    fontSize: fontSize.sm,
     color: coolNeutral[50],
+  },
+  specLabelCell: {
+    color: coolNeutral[17],
+    fontWeight: fontWeight.medium,
   },
   specMono: {
     fontFamily: 'monospace',
+    fontSize: fontSize.xs,
   },
+  specTokenCell: {
+    color: mint[40],
+  },
+
+  // Code Block
   codeWrap: {
-    marginBottom: spacing.md,
+    marginBottom: spacing.lg,
   },
   codeTitle: {
     fontSize: fontSize.xs,
     fontWeight: fontWeight.semibold,
-    color: coolNeutral[50],
+    color: coolNeutral[40],
     marginBottom: spacing.xs,
   },
   codeBlock: {
-    backgroundColor: coolNeutral[10],
-    borderRadius: radius.sm,
-    paddingVertical: spacing.md,
-    paddingHorizontal: spacing.lg,
+    backgroundColor: coolNeutral[7],
+    borderRadius: radius.md,
+    paddingVertical: spacing.lg,
+    paddingHorizontal: spacing.xl,
     flexDirection: 'row',
     justifyContent: 'space-between',
-    alignItems: 'center',
+    alignItems: 'flex-start',
     cursor: 'pointer' as any,
+  },
+  codeBlockPressed: {
+    opacity: 0.85,
   },
   codeText: {
     fontSize: fontSize.sm,
     fontFamily: 'monospace',
     color: mint[80],
+    lineHeight: 22,
     flex: 1,
+  },
+  codeCopyWrap: {
+    backgroundColor: 'rgba(255,255,255,0.1)',
+    paddingHorizontal: spacing.sm,
+    paddingVertical: 2,
+    borderRadius: radius.xs,
+    marginLeft: spacing.lg,
   },
   codeCopy: {
     fontSize: fontSize.xs,
+    fontWeight: fontWeight.medium,
     color: coolNeutral[60],
-    marginLeft: spacing.lg,
+  },
+  codeCopied: {
+    color: mint[45],
+    fontWeight: fontWeight.semibold,
+  },
+
+  // Compare Grid
+  compareGrid: {
+    flexDirection: 'row',
+    flexWrap: 'wrap',
+    gap: spacing['2xl'],
+  },
+  compareItem: {
+    minWidth: 120,
+    gap: spacing.sm,
+  },
+  compareContent: {
+    paddingTop: spacing.xs,
+  },
+
+  // Divider
+  divider: {
+    height: 1,
+    backgroundColor: coolNeutral[96],
+    marginVertical: spacing['2xl'],
   },
 });

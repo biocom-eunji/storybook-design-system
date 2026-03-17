@@ -1,6 +1,6 @@
 import React from 'react';
 import { Pressable, View, Text } from 'react-native';
-import Svg, { Path } from 'react-native-svg';
+import { Icon } from './Icon';
 import { coolNeutral, mint, fontWeight } from '../tokens/theme';
 
 export type CheckMarkSize = 'small' | 'medium';
@@ -52,12 +52,7 @@ export function CheckMark({
         borderRadius: tight ? 12 : 0,
       })}
     >
-      <Svg width={s.icon} height={s.icon} viewBox="0 0 256 256" fill="none">
-        <Path
-          d="M232.49,80.49l-128,128a12,12,0,0,1-17,0l-56-56a12,12,0,1,1,17-17L96,183,215.51,63.51a12,12,0,0,1,17,17Z"
-          fill={color}
-        />
-      </Svg>
+      <Icon name="check" size={s.icon} color={color} />
       {label && (
         <View>
           <Text style={{ fontSize: s.fontSize, fontWeight: fontWeight.medium, color: labelColor }}>

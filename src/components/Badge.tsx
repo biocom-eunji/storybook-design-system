@@ -55,6 +55,7 @@ export function Badge({
         backgroundColor: themeColor,
       }
     : {
+        alignSelf: 'flex-start',
         height: sizeToken.height,
         minWidth: sizeToken.height,
         borderRadius: radius.full,
