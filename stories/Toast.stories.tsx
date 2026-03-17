@@ -6,7 +6,7 @@ import { Section, StateLabel, Row, Col, SpecTable, CodeBlock, CompareGrid, Divid
 import { coolNeutral, mint, red, yellow, fontSize, fontWeight, spacing, radius } from '../src/tokens/theme';
 
 const meta: Meta<typeof Toast> = {
-  title: 'Components/Toast',
+  title: 'Feedback/Toast',
   component: Toast,
   argTypes: {
     message: { control: 'text', description: '토스트 메시지 텍스트' },

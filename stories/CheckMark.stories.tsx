@@ -6,7 +6,7 @@ import { Section, StateLabel, Row, Col, SpecTable, CodeBlock, CompareGrid, Divid
 import { coolNeutral, mint, fontSize, fontWeight, spacing, radius } from '../src/tokens/theme';
 
 const meta: Meta<typeof CheckMark> = {
-  title: 'Components/CheckMark',
+  title: 'Form/CheckMark',
   component: CheckMark,
   argTypes: {
     checked: { control: 'boolean', description: '선택 상태' },

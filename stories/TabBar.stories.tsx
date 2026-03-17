@@ -20,7 +20,7 @@ const iconTabs = [
 ];
 
 const meta: Meta<typeof TabBar> = {
-  title: 'Components/TabBar',
+  title: 'Display/TabBar',
   component: TabBar,
   argTypes: {
     activeTab: {

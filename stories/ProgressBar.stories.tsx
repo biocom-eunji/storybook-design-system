@@ -6,7 +6,7 @@ import { Section, StateLabel, Row, Col, SpecTable, CodeBlock, CompareGrid, Divid
 import { coolNeutral, mint, green, red, yellow, fontSize, fontWeight, spacing, radius } from '../src/tokens/theme';
 
 const meta: Meta<typeof ProgressBar> = {
-  title: 'Components/ProgressBar',
+  title: 'Feedback/ProgressBar',
   component: ProgressBar,
   argTypes: {
     progress: { control: { type: 'range', min: 0, max: 1, step: 0.01 }, description: '진행률 (0~1)' },

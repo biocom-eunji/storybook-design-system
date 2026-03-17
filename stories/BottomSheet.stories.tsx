@@ -6,7 +6,7 @@ import { Section, StateLabel, Row, Col, SpecTable, CodeBlock, CompareGrid, Divid
 import { coolNeutral, mint, fontSize, fontWeight, spacing, radius, semanticColor } from '../src/tokens/theme';
 
 const meta: Meta<typeof BottomSheet> = {
-  title: 'Components/BottomSheet',
+  title: 'Feedback/BottomSheet',
   component: BottomSheet,
   argTypes: {
     visible: { control: 'boolean', description: '표시 여부' },

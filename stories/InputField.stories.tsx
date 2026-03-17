@@ -6,7 +6,7 @@ import { Section, StateLabel, Row, Col, SpecTable, CodeBlock, CompareGrid, Divid
 import { coolNeutral, mint, red, fontSize, fontWeight, spacing, radius } from '../src/tokens/theme';
 
 const meta: Meta<typeof InputField> = {
-  title: 'Components/InputField',
+  title: 'Form/InputField',
   component: InputField,
   argTypes: {
     label: { control: 'text', description: '라벨' },

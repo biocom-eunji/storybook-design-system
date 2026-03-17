@@ -13,7 +13,14 @@ const preview: Preview = {
     },
     options: {
       storySort: {
-        order: ['Introduction', 'Foundation', ['Color Palette', 'Color Tokens', 'Typography'], 'Components'],
+        order: [
+          'Introduction',
+          'Foundation', ['Color Palette', 'Color Tokens', 'Typography'],
+          'General', ['Button', 'TextButton', 'Icon', 'Divider'],
+          'Form', ['InputField', 'Checkbox', 'CheckMark', 'Radio', 'Switch', 'Chip'],
+          'Feedback', ['Toast', 'Modal', 'BottomSheet', 'ProgressBar', 'Skeleton'],
+          'Display', ['Badge', 'Avatar', 'TabBar', 'ActionArea'],
+        ],
       },
     },
   },

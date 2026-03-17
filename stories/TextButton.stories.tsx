@@ -7,7 +7,7 @@ import { Section, StateLabel, Row, Col, SpecTable, CodeBlock, CompareGrid, Divid
 import { spacing, coolNeutral, mint } from '../src/tokens/theme';
 
 const meta: Meta<typeof TextButton> = {
-  title: 'Components/TextButton',
+  title: 'General/TextButton',
   component: TextButton,
   argTypes: {
     color: {

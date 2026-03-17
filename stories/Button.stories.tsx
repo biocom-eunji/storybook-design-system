@@ -6,7 +6,7 @@ import { Section, StateLabel, Row, Col, SpecTable, CodeBlock, CompareGrid, Divid
 import { coolNeutral, mint, fontSize, fontWeight, spacing, radius, buttonToken, chipToken } from '../src/tokens/theme';
 
 const meta: Meta<typeof Button> = {
-  title: 'Components/Button',
+  title: 'General/Button',
   component: Button,
   argTypes: {
     variant: {

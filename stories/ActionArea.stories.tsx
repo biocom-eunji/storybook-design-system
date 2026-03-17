@@ -6,7 +6,7 @@ import { Section, StateLabel, Row, Col, SpecTable, CodeBlock, CompareGrid, Divid
 import { coolNeutral, mint, fontSize, fontWeight, spacing, radius } from '../src/tokens/theme';
 
 const meta: Meta<typeof ActionArea> = {
-  title: 'Components/ActionArea',
+  title: 'Display/ActionArea',
   component: ActionArea,
   argTypes: {
     variant: {

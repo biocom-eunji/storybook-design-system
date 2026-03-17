@@ -6,7 +6,7 @@ import { Section, StateLabel, Row, Col, SpecTable, CodeBlock, CompareGrid, Divid
 import { coolNeutral, mint, red, fontSize, fontWeight, spacing, radius, semanticColor } from '../src/tokens/theme';
 
 const meta: Meta<typeof Modal> = {
-  title: 'Components/Modal',
+  title: 'Feedback/Modal',
   component: Modal,
   argTypes: {
     visible: { control: 'boolean', description: '표시 여부' },

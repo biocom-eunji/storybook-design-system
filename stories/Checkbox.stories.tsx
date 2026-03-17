@@ -6,7 +6,7 @@ import { Section, StateLabel, Row, Col, SpecTable, CodeBlock, CompareGrid, Divid
 import { coolNeutral, mint, fontSize, fontWeight, spacing, radius } from '../src/tokens/theme';
 
 const meta: Meta<typeof Checkbox> = {
-  title: 'Components/Checkbox',
+  title: 'Form/Checkbox',
   component: Checkbox,
   argTypes: {
     state: { control: 'select', options: ['unchecked', 'checked', 'indeterminate'], description: '체크박스 상태' },
