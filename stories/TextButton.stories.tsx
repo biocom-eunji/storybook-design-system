@@ -1,20 +1,9 @@
 import React from 'react';
-import { View, Text } from 'react-native';
+import { View } from 'react-native';
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import { TextButton } from '../src/components/TextButton';
-
-const ArrowIcon = ({ color = '#000', width = 16, height = 16 }: any) => (
-  <View
-    style={{
-      width,
-      height,
-      alignItems: 'center',
-      justifyContent: 'center',
-    }}
-  >
-    <Text style={{ fontSize: width * 0.7, color, lineHeight: height }}>→</Text>
-  </View>
-);
+import { Icon } from '../src/components/Icon';
+import { spacing } from '../src/tokens/theme';
 
 const meta: Meta<typeof TextButton> = {
   title: 'Components/TextButton',
@@ -76,7 +65,7 @@ export const WithLeadingIcon: Story = {
   args: {
     label: '텍스트',
     color: 'primary',
-    leadingIcon: <ArrowIcon />,
+    leadingIcon: <Icon name="arrowRight" size={16} />,
   },
 };
 
@@ -84,7 +73,7 @@ export const WithTrailingIcon: Story = {
   args: {
     label: '텍스트',
     color: 'primary',
-    trailingIcon: <ArrowIcon />,
+    trailingIcon: <Icon name="arrowRight" size={16} />,
   },
 };
 
@@ -92,19 +81,19 @@ export const WithTrailingIcon: Story = {
 
 export const AllVariants: Story = {
   render: () => (
-    <View style={{ gap: 16 }}>
-      <View style={{ flexDirection: 'row', gap: 20, alignItems: 'center' }}>
+    <View style={{ gap: spacing.lg }}>
+      <View style={{ flexDirection: 'row', gap: spacing.xl, alignItems: 'center' }}>
         <TextButton label="Primary" color="primary" size="medium" />
         <TextButton label="Assistive" color="assistive" size="medium" />
         <TextButton label="Disabled" color="primary" disabled />
       </View>
-      <View style={{ flexDirection: 'row', gap: 20, alignItems: 'center' }}>
+      <View style={{ flexDirection: 'row', gap: spacing.xl, alignItems: 'center' }}>
         <TextButton label="Small" color="primary" size="small" />
         <TextButton label="Medium" color="primary" size="medium" />
       </View>
-      <View style={{ flexDirection: 'row', gap: 20, alignItems: 'center' }}>
-        <TextButton label="Leading" color="primary" leadingIcon={<ArrowIcon />} />
-        <TextButton label="Trailing" color="primary" trailingIcon={<ArrowIcon />} />
+      <View style={{ flexDirection: 'row', gap: spacing.xl, alignItems: 'center' }}>
+        <TextButton label="Leading" color="primary" leadingIcon={<Icon name="arrowRight" size={16} />} />
+        <TextButton label="Trailing" color="primary" trailingIcon={<Icon name="arrowRight" size={16} />} />
       </View>
     </View>
   ),

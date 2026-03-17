@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
-import { View, Text } from 'react-native';
+import { View } from 'react-native';
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import { Checkbox } from '../src/components/Checkbox';
+import { spacing } from '../src/tokens/theme';
 
 const meta: Meta<typeof Checkbox> = {
   title: 'Components/Checkbox',
@@ -26,7 +27,7 @@ export const Playground: Story = {
 
 export const Sizes: Story = {
   render: () => (
-    <View style={{ flexDirection: 'row', gap: 16, alignItems: 'center' }}>
+    <View style={{ flexDirection: 'row', gap: spacing.lg, alignItems: 'center' }}>
       <Checkbox state="checked" size="small" />
       <Checkbox state="checked" size="medium" />
     </View>
@@ -35,7 +36,7 @@ export const Sizes: Story = {
 
 export const ThreeStates: Story = {
   render: () => (
-    <View style={{ flexDirection: 'row', gap: 24, alignItems: 'center' }}>
+    <View style={{ flexDirection: 'row', gap: spacing['2xl'], alignItems: 'center' }}>
       <Checkbox state="unchecked" />
       <Checkbox state="checked" />
       <Checkbox state="indeterminate" />
@@ -45,7 +46,7 @@ export const ThreeStates: Story = {
 
 export const WithLabel: Story = {
   render: () => (
-    <View style={{ gap: 4 }}>
+    <View style={{ gap: spacing.xs }}>
       <Checkbox state="unchecked" label="텍스트" />
       <Checkbox state="checked" label="텍스트" />
       <Checkbox state="indeterminate" label="텍스트" />
@@ -55,7 +56,7 @@ export const WithLabel: Story = {
 
 export const Tight: Story = {
   render: () => (
-    <View style={{ gap: 8, maxWidth: 300 }}>
+    <View style={{ gap: spacing.sm, maxWidth: 300 }}>
       <Checkbox state="checked" label="텍스트" sublabel="텍스트" tight />
       <Checkbox state="unchecked" label="텍스트" sublabel="텍스트" tight />
     </View>
@@ -64,7 +65,7 @@ export const Tight: Story = {
 
 export const Bold: Story = {
   render: () => (
-    <View style={{ gap: 4 }}>
+    <View style={{ gap: spacing.xs }}>
       <Checkbox state="unchecked" label="텍스트" sublabel="텍스트" />
       <Checkbox state="unchecked" label="텍스트" sublabel="텍스트" bold />
     </View>
@@ -73,16 +74,16 @@ export const Bold: Story = {
 
 export const Disabled: Story = {
   render: () => (
-    <View style={{ gap: 8 }}>
-      <View style={{ flexDirection: 'row', gap: 32 }}>
+    <View style={{ gap: spacing.sm }}>
+      <View style={{ flexDirection: 'row', gap: spacing['3xl'] }}>
         <Checkbox state="unchecked" label="텍스트" />
         <Checkbox state="unchecked" label="텍스트" disabled />
       </View>
-      <View style={{ flexDirection: 'row', gap: 32 }}>
+      <View style={{ flexDirection: 'row', gap: spacing['3xl'] }}>
         <Checkbox state="checked" label="텍스트" />
         <Checkbox state="checked" label="텍스트" disabled />
       </View>
-      <View style={{ flexDirection: 'row', gap: 32 }}>
+      <View style={{ flexDirection: 'row', gap: spacing['3xl'] }}>
         <Checkbox state="indeterminate" label="텍스트" />
         <Checkbox state="indeterminate" label="텍스트" disabled />
       </View>
@@ -97,7 +98,7 @@ export const Interactive: Story = {
     const someChecked = items.some(Boolean);
     const parentState = allChecked ? 'checked' : someChecked ? 'indeterminate' : 'unchecked';
     return (
-      <View style={{ gap: 4, maxWidth: 300 }}>
+      <View style={{ gap: spacing.xs, maxWidth: 300 }}>
         <Checkbox
           state={parentState as any}
           label="전체 선택"
@@ -107,7 +108,7 @@ export const Interactive: Story = {
             setItems(items.map(() => next));
           }}
         />
-        <View style={{ paddingLeft: 24, gap: 4 }}>
+        <View style={{ paddingLeft: spacing['2xl'], gap: spacing.xs }}>
           {['항목 A', '항목 B', '항목 C'].map((name, i) => (
             <Checkbox
               key={i}

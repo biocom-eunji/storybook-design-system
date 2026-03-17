@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { View, Text } from 'react-native';
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import { InputField } from '../src/components/InputField';
+import { coolNeutral, fontSize, fontWeight, spacing } from '../src/tokens/theme';
 
 const meta: Meta<typeof InputField> = {
   title: 'Components/InputField',
@@ -26,7 +27,7 @@ const meta: Meta<typeof InputField> = {
   tags: ['autodocs'],
   decorators: [
     (Story) => (
-      <View style={{ maxWidth: 360, padding: 16 }}>
+      <View style={{ maxWidth: 360, padding: spacing.lg }}>
         <Story />
       </View>
     ),
@@ -51,14 +52,14 @@ export const Playground: Story = {
 
 const StateRow = ({ title, children }: { title: string; children: React.ReactNode }) => (
   <View style={{ flex: 1, minWidth: 280 }}>
-    <Text style={{ fontSize: 12, fontWeight: '600', color: '#70737C', marginBottom: 8 }}>{title}</Text>
+    <Text style={{ fontSize: fontSize.sm, fontWeight: fontWeight.semibold, color: coolNeutral[50], marginBottom: spacing.sm }}>{title}</Text>
     {children}
   </View>
 );
 
 export const FourStates: Story = {
   render: () => (
-    <View style={{ flexDirection: 'row', flexWrap: 'wrap', gap: 24, maxWidth: 800 }}>
+    <View style={{ flexDirection: 'row', flexWrap: 'wrap', gap: spacing['2xl'], maxWidth: 800 }}>
       <StateRow title="Inactive">
         <InputField
           label="주제"
@@ -243,31 +244,35 @@ export const InteractiveDemo: Story = {
 
 // ─── All Variants ─────────────────────────────────────────
 
+const SectionTitle = ({ children }: { children: string }) => (
+  <Text style={{ fontSize: fontSize.sm, fontWeight: fontWeight.bold, marginBottom: spacing.md, color: coolNeutral[10] }}>{children}</Text>
+);
+
 export const AllVariants: Story = {
   render: () => (
-    <View style={{ gap: 32, maxWidth: 360 }}>
+    <View style={{ gap: spacing['3xl'], maxWidth: 360 }}>
       <View>
-        <Text style={{ fontSize: 14, fontWeight: '700', marginBottom: 12, color: '#171719' }}>기본</Text>
+        <SectionTitle>기본</SectionTitle>
         <InputField label="주제" placeholder="메시지를 입력해 주세요." helperText="메시지에 마침표를 찍어요." maxCharCount={2000} />
       </View>
       <View>
-        <Text style={{ fontSize: 14, fontWeight: '700', marginBottom: 12, color: '#171719' }}>입력됨 + 텍스트 링크</Text>
+        <SectionTitle>입력됨 + 텍스트 링크</SectionTitle>
         <InputField label="주제" value="입력된 내용" helperText="메시지에 마침표를 찍어요." maxCharCount={2000} trailingText="텍스트" />
       </View>
       <View>
-        <Text style={{ fontSize: 14, fontWeight: '700', marginBottom: 12, color: '#171719' }}>에러</Text>
+        <SectionTitle>에러</SectionTitle>
         <InputField label="주제" value="값" errorMessage="에러 메시지를 나타내요." trailingIcon="error" />
       </View>
       <View>
-        <Text style={{ fontSize: 14, fontWeight: '700', marginBottom: 12, color: '#171719' }}>성공</Text>
+        <SectionTitle>성공</SectionTitle>
         <InputField label="주제" value="값" successMessage="성공 메시지를 나타내요." trailingIcon="success" />
       </View>
       <View>
-        <Text style={{ fontSize: 14, fontWeight: '700', marginBottom: 12, color: '#171719' }}>비활성화</Text>
+        <SectionTitle>비활성화</SectionTitle>
         <InputField label="주제" placeholder="텍스트를 입력해 주세요." disabled helperText="메시지에 마침표를 찍어요." />
       </View>
       <View>
-        <Text style={{ fontSize: 14, fontWeight: '700', marginBottom: 12, color: '#171719' }}>Textarea</Text>
+        <SectionTitle>Textarea</SectionTitle>
         <InputField label="주제" placeholder="메시지를 입력해 주세요." multiline maxCharCount={2000} helperText="메시지에 마침표를 찍어요." />
       </View>
     </View>

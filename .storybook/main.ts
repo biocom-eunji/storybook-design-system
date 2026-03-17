@@ -17,6 +17,10 @@ const config: StorybookConfig = {
       'react-native': 'react-native-web',
       'react-native-svg': 'react-native-svg-web',
     };
+    config.define = {
+      ...config.define,
+      __DEV__: true,
+    };
     return config;
   },
 };

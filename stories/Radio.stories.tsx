@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
-import { View, Text } from 'react-native';
+import { View } from 'react-native';
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import { Radio } from '../src/components/Radio';
+import { spacing } from '../src/tokens/theme';
 
 const meta: Meta<typeof Radio> = {
   title: 'Components/Radio',
@@ -25,7 +26,7 @@ export const Playground: Story = {
 
 export const Sizes: Story = {
   render: () => (
-    <View style={{ flexDirection: 'row', gap: 16, alignItems: 'center' }}>
+    <View style={{ flexDirection: 'row', gap: spacing.lg, alignItems: 'center' }}>
       <Radio checked size="small" />
       <Radio checked size="medium" />
     </View>
@@ -34,7 +35,7 @@ export const Sizes: Story = {
 
 export const States: Story = {
   render: () => (
-    <View style={{ flexDirection: 'row', gap: 24, alignItems: 'center' }}>
+    <View style={{ flexDirection: 'row', gap: spacing['2xl'], alignItems: 'center' }}>
       <Radio checked={false} size="medium" />
       <Radio checked size="medium" />
     </View>
@@ -43,7 +44,7 @@ export const States: Story = {
 
 export const WithLabel: Story = {
   render: () => (
-    <View style={{ gap: 8 }}>
+    <View style={{ gap: spacing.sm }}>
       <Radio checked label="텍스트" />
       <Radio checked={false} label="텍스트" />
     </View>
@@ -52,7 +53,7 @@ export const WithLabel: Story = {
 
 export const WithSublabel: Story = {
   render: () => (
-    <View style={{ gap: 8 }}>
+    <View style={{ gap: spacing.sm }}>
       <Radio checked label="텍스트" sublabel="텍스트" />
       <Radio checked={false} label="텍스트" sublabel="텍스트" />
     </View>
@@ -61,7 +62,7 @@ export const WithSublabel: Story = {
 
 export const Tight: Story = {
   render: () => (
-    <View style={{ gap: 8, maxWidth: 300 }}>
+    <View style={{ gap: spacing.sm, maxWidth: 300 }}>
       <Radio checked label="텍스트" sublabel="텍스트" tight />
       <Radio checked={false} label="텍스트" sublabel="텍스트" tight />
     </View>
@@ -70,12 +71,12 @@ export const Tight: Story = {
 
 export const Disabled: Story = {
   render: () => (
-    <View style={{ gap: 8 }}>
-      <View style={{ flexDirection: 'row', gap: 32 }}>
+    <View style={{ gap: spacing.sm }}>
+      <View style={{ flexDirection: 'row', gap: spacing['3xl'] }}>
         <Radio checked={false} label="텍스트" sublabel="텍스트" />
         <Radio checked={false} label="텍스트" sublabel="텍스트" disabled />
       </View>
-      <View style={{ flexDirection: 'row', gap: 32 }}>
+      <View style={{ flexDirection: 'row', gap: spacing['3xl'] }}>
         <Radio checked label="텍스트" sublabel="텍스트" />
         <Radio checked label="텍스트" sublabel="텍스트" disabled />
       </View>
@@ -88,7 +89,7 @@ export const RadioGroup: Story = {
     const [selected, setSelected] = useState(0);
     const options = ['옵션 A', '옵션 B', '옵션 C'];
     return (
-      <View style={{ gap: 4 }}>
+      <View style={{ gap: spacing.xs }}>
         {options.map((opt, i) => (
           <Radio key={i} checked={selected === i} label={opt} onPress={() => setSelected(i)} />
         ))}

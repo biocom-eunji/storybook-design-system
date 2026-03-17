@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { View, Text } from 'react-native';
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import { Switch } from '../src/components/Switch';
+import { coolNeutral, fontSize, fontWeight, spacing } from '../src/tokens/theme';
 
 const meta: Meta<typeof Switch> = {
   title: 'Components/Switch',
@@ -22,7 +23,7 @@ export const Playground: Story = {
 };
 
 const Label = ({ children }: { children: string }) => (
-  <Text style={{ fontSize: 12, fontWeight: '600', color: '#70737C', marginBottom: 8 }}>{children}</Text>
+  <Text style={{ fontSize: fontSize.sm, fontWeight: fontWeight.semibold, color: coolNeutral[50], marginBottom: spacing.sm }}>{children}</Text>
 );
 
 // ─── iOS ──────────────────────────────────────────────────
@@ -31,7 +32,7 @@ export const IosSizes: Story = {
   render: () => (
     <View>
       <Label>iOS — size</Label>
-      <View style={{ flexDirection: 'row', gap: 16, alignItems: 'center' }}>
+      <View style={{ flexDirection: 'row', gap: spacing.lg, alignItems: 'center' }}>
         <Switch platform="ios" size="small" />
         <Switch platform="ios" size="medium" />
       </View>
@@ -43,7 +44,7 @@ export const IosActive: Story = {
   render: () => (
     <View>
       <Label>iOS — active</Label>
-      <View style={{ flexDirection: 'row', gap: 16, alignItems: 'center' }}>
+      <View style={{ flexDirection: 'row', gap: spacing.lg, alignItems: 'center' }}>
         <Switch platform="ios" active={false} />
         <Switch platform="ios" active />
       </View>
@@ -55,12 +56,12 @@ export const IosDisabled: Story = {
   render: () => (
     <View>
       <Label>iOS — disabled</Label>
-      <View style={{ gap: 12 }}>
-        <View style={{ flexDirection: 'row', gap: 16, alignItems: 'center' }}>
+      <View style={{ gap: spacing.md }}>
+        <View style={{ flexDirection: 'row', gap: spacing.lg, alignItems: 'center' }}>
           <Switch platform="ios" active={false} />
           <Switch platform="ios" active={false} disabled />
         </View>
-        <View style={{ flexDirection: 'row', gap: 16, alignItems: 'center' }}>
+        <View style={{ flexDirection: 'row', gap: spacing.lg, alignItems: 'center' }}>
           <Switch platform="ios" active />
           <Switch platform="ios" active disabled />
         </View>
@@ -75,7 +76,7 @@ export const NormalSizes: Story = {
   render: () => (
     <View>
       <Label>Normal — size</Label>
-      <View style={{ flexDirection: 'row', gap: 16, alignItems: 'center' }}>
+      <View style={{ flexDirection: 'row', gap: spacing.lg, alignItems: 'center' }}>
         <Switch platform="normal" size="small" />
         <Switch platform="normal" size="medium" />
       </View>
@@ -87,7 +88,7 @@ export const NormalActive: Story = {
   render: () => (
     <View>
       <Label>Normal — active</Label>
-      <View style={{ flexDirection: 'row', gap: 16, alignItems: 'center' }}>
+      <View style={{ flexDirection: 'row', gap: spacing.lg, alignItems: 'center' }}>
         <Switch platform="normal" active={false} />
         <Switch platform="normal" active />
       </View>
@@ -99,12 +100,12 @@ export const NormalDisabled: Story = {
   render: () => (
     <View>
       <Label>Normal — disabled</Label>
-      <View style={{ gap: 12 }}>
-        <View style={{ flexDirection: 'row', gap: 16, alignItems: 'center' }}>
+      <View style={{ gap: spacing.md }}>
+        <View style={{ flexDirection: 'row', gap: spacing.lg, alignItems: 'center' }}>
           <Switch platform="normal" active={false} />
           <Switch platform="normal" active={false} disabled />
         </View>
-        <View style={{ flexDirection: 'row', gap: 16, alignItems: 'center' }}>
+        <View style={{ flexDirection: 'row', gap: spacing.lg, alignItems: 'center' }}>
           <Switch platform="normal" active />
           <Switch platform="normal" active disabled />
         </View>
@@ -120,14 +121,14 @@ export const Interactive: Story = {
     const [val1, setVal1] = useState(false);
     const [val2, setVal2] = useState(true);
     return (
-      <View style={{ gap: 16 }}>
-        <View style={{ flexDirection: 'row', alignItems: 'center', gap: 12 }}>
+      <View style={{ gap: spacing.lg }}>
+        <View style={{ flexDirection: 'row', alignItems: 'center', gap: spacing.md }}>
           <Switch platform="ios" active={val1} onPress={() => setVal1(!val1)} />
-          <Text style={{ fontSize: 15, color: '#292A2D' }}>알림 설정</Text>
+          <Text style={{ fontSize: fontSize.md, color: coolNeutral[20] }}>알림 설정</Text>
         </View>
-        <View style={{ flexDirection: 'row', alignItems: 'center', gap: 12 }}>
+        <View style={{ flexDirection: 'row', alignItems: 'center', gap: spacing.md }}>
           <Switch platform="normal" active={val2} onPress={() => setVal2(!val2)} />
-          <Text style={{ fontSize: 15, color: '#292A2D' }}>다크 모드</Text>
+          <Text style={{ fontSize: fontSize.md, color: coolNeutral[20] }}>다크 모드</Text>
         </View>
       </View>
     );
@@ -138,10 +139,10 @@ export const Interactive: Story = {
 
 export const AllVariants: Story = {
   render: () => (
-    <View style={{ gap: 32 }}>
+    <View style={{ gap: spacing['3xl'] }}>
       <View>
         <Label>iOS</Label>
-        <View style={{ flexDirection: 'row', gap: 12, flexWrap: 'wrap', alignItems: 'center' }}>
+        <View style={{ flexDirection: 'row', gap: spacing.md, flexWrap: 'wrap', alignItems: 'center' }}>
           <Switch platform="ios" size="small" active={false} />
           <Switch platform="ios" size="small" active />
           <Switch platform="ios" size="medium" active={false} />
@@ -152,7 +153,7 @@ export const AllVariants: Story = {
       </View>
       <View>
         <Label>Normal</Label>
-        <View style={{ flexDirection: 'row', gap: 12, flexWrap: 'wrap', alignItems: 'center' }}>
+        <View style={{ flexDirection: 'row', gap: spacing.md, flexWrap: 'wrap', alignItems: 'center' }}>
           <Switch platform="normal" size="small" active={false} />
           <Switch platform="normal" size="small" active />
           <Switch platform="normal" size="medium" active={false} />

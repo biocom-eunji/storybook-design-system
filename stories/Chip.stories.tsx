@@ -1,24 +1,9 @@
 import React from 'react';
-import { View, Text } from 'react-native';
+import { View } from 'react-native';
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import { Chip } from '../src/components/Chip';
-
-/** 아이콘 placeholder (Storybook 데모용) */
-const IconPlaceholder = ({ color = '#000', width = 16, height = 16 }: any) => (
-  <View
-    style={{
-      width,
-      height,
-      borderRadius: 2,
-      borderWidth: 1.5,
-      borderColor: color,
-      alignItems: 'center',
-      justifyContent: 'center',
-    }}
-  >
-    <Text style={{ fontSize: width * 0.5, color, lineHeight: width * 0.7 }}>✓</Text>
-  </View>
-);
+import { Icon } from '../src/components/Icon';
+import { spacing } from '../src/tokens/theme';
 
 const meta: Meta<typeof Chip> = {
   title: 'Components/Chip',
@@ -98,7 +83,7 @@ export const WithLeadingIcon: Story = {
   args: {
     label: '텍스트',
     variant: 'solid',
-    leadingIcon: <IconPlaceholder />,
+    leadingIcon: <Icon name="check" size={16} />,
   },
 };
 
@@ -106,7 +91,7 @@ export const WithTrailingIcon: Story = {
   args: {
     label: '텍스트',
     variant: 'solid',
-    trailingIcon: <IconPlaceholder />,
+    trailingIcon: <Icon name="close" size={16} />,
   },
 };
 
@@ -114,8 +99,8 @@ export const WithBothIcons: Story = {
   args: {
     label: '텍스트',
     variant: 'outlined',
-    leadingIcon: <IconPlaceholder />,
-    trailingIcon: <IconPlaceholder />,
+    leadingIcon: <Icon name="check" size={16} />,
+    trailingIcon: <Icon name="close" size={16} />,
   },
 };
 
@@ -123,7 +108,7 @@ export const WithBothIcons: Story = {
 
 export const AllSizes: Story = {
   render: () => (
-    <View style={{ flexDirection: 'row', alignItems: 'center', gap: 8 }}>
+    <View style={{ flexDirection: 'row', alignItems: 'center', gap: spacing.sm }}>
       <Chip label="텍스트" size="xsmall" />
       <Chip label="텍스트" size="small" />
       <Chip label="텍스트" size="medium" />
@@ -136,13 +121,13 @@ export const AllSizes: Story = {
 
 export const AllStates: Story = {
   render: () => (
-    <View style={{ gap: 12 }}>
-      <View style={{ flexDirection: 'row', gap: 8, alignItems: 'center' }}>
+    <View style={{ gap: spacing.md }}>
+      <View style={{ flexDirection: 'row', gap: spacing.sm, alignItems: 'center' }}>
         <Chip label="Inactive" variant="solid" />
         <Chip label="Active" variant="solid" active />
         <Chip label="Disabled" variant="solid" disabled />
       </View>
-      <View style={{ flexDirection: 'row', gap: 8, alignItems: 'center' }}>
+      <View style={{ flexDirection: 'row', gap: spacing.sm, alignItems: 'center' }}>
         <Chip label="Inactive" variant="outlined" />
         <Chip label="Active" variant="outlined" active />
         <Chip label="Disabled" variant="outlined" disabled />
