@@ -262,7 +262,7 @@ export const fontWeight = {
   medium: '500' as const,
   semibold: '600' as const,
   bold: '700' as const,
-};
+} as const;
 
 export const lineHeight = {
   xsmall: 16,
@@ -570,9 +570,8 @@ export const chipToken = {
 export const actionAreaToken = {
   variant: {
     strong:  { description: 'CTA 강조형 — 메인 액션 하나만 노출' },
-    neutral: { description: '보조/대체/메인 복합 액션' },
+    neutral: { description: '보조/메인 복합 액션' },
     compact: { description: '작은 크기 복합 액션' },
-    cancel:  { description: '취소/확인 단일 액션' },
   },
   padding: spacing.large,
   gap: spacing.small,

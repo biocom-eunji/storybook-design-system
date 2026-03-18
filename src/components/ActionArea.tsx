@@ -1,149 +1,100 @@
 import React from 'react';
-import { View, type ViewStyle } from 'react-native';
+import { View, StyleSheet, type ViewStyle } from 'react-native';
 import { Button, type ButtonProps } from './Button';
-import { actionAreaToken, coolNeutral, spacing, radius, semanticColor } from '../tokens/theme';
+import { actionAreaToken, coolNeutral, spacing, semanticColor } from '../tokens/theme';
 
-export type ActionAreaVariant = 'strong' | 'neutral' | 'compact' | 'cancel';
+export type ActionAreaVariant = 'strong' | 'neutral' | 'compact';
+
+type ActionButtonProps = Omit<ButtonProps, 'variant' | 'color' | 'size'> & {
+  label: string;
+};
 
 /** ActionArea — 화면 하단 액션 버튼 영역 */
 export interface ActionAreaProps {
   /** 레이아웃 변형 */
   variant?: ActionAreaVariant;
   /** 메인(Primary) 버튼 props */
-  primary: Omit<ButtonProps, 'variant' | 'color' | 'size'> & {
-    label: string;
-  };
-  /** 보조(Secondary) 버튼 props — neutral, compact, cancel에서 사용 */
-  secondary?: Omit<ButtonProps, 'variant' | 'color' | 'size'> & {
-    label: string;
-  };
-  /** 제3(Tertiary) 버튼 props — neutral에서 사용 */
-  tertiary?: Omit<ButtonProps, 'variant' | 'color' | 'size'> & {
-    label: string;
-  };
+  primary: ActionButtonProps;
+  /** 보조(Secondary) 버튼 props — neutral, compact에서 사용 */
+  secondary?: ActionButtonProps;
   /** 상단 구분선 표시 여부 */
   divider?: boolean;
   /** 배경색 투명 여부 (기본: 흰색) */
   transparent?: boolean;
+  /**
+   * 하단 Safe Area 여백 (px)
+   * react-native-safe-area-context의 useSafeAreaInsets().bottom 값을 전달하세요.
+   * 기본값: 0
+   */
+  safeAreaBottom?: number;
 }
+
+// ─── Shared sub-layout ───────────────────────────────────
+
+const ButtonRow = ({
+  primary,
+  secondary,
+  size,
+  primaryFlex = 1,
+}: {
+  primary: ActionButtonProps;
+  secondary?: ActionButtonProps;
+  size: 'medium' | 'large';
+  primaryFlex?: number;
+}) => (
+  <View style={styles.row}>
+    {secondary && (
+      <View style={styles.flex1}>
+        <Button {...secondary} variant="outlined" color="assistive" size={size} />
+      </View>
+    )}
+    <View style={{ flex: primaryFlex }}>
+      <Button {...primary} variant="solid" color="primary" size={size} />
+    </View>
+  </View>
+);
+
+// ─── Component ───────────────────────────────────────────
 
 export function ActionArea({
   variant = 'strong',
   primary,
   secondary,
-  tertiary,
   divider = true,
   transparent = false,
+  safeAreaBottom = 0,
 }: ActionAreaProps) {
   const containerStyle: ViewStyle = {
-    paddingHorizontal: actionAreaToken.padding,
-    paddingVertical: spacing.medium,
-    gap: actionAreaToken.gap,
+    ...styles.container,
+    paddingBottom: spacing.medium + safeAreaBottom,
     backgroundColor: transparent ? 'transparent' : semanticColor.backgroundPrimary,
     borderTopWidth: divider ? 1 : 0,
-    borderTopColor: coolNeutral[96],
   };
 
   switch (variant) {
-    // ─── Strong: CTA 강조형 — 메인 액션 하나만 노출
     case 'strong':
       return (
         <View style={containerStyle}>
-          <Button
-            {...primary}
-            variant="solid"
-            color="primary"
+          <Button {...primary} variant="solid" color="primary" size="large" />
+        </View>
+      );
+
+    case 'neutral':
+      return (
+        <View style={containerStyle}>
+          <ButtonRow
+            primary={primary}
+            secondary={secondary}
             size="large"
+            primaryFlex={secondary ? 2 : 1}
           />
         </View>
       );
 
-    // ─── Neutral: 보조/대체/메인 복합 액션
-    case 'neutral':
-      return (
-        <View style={containerStyle}>
-          {tertiary && (
-            <Button
-              {...tertiary}
-              variant="outlined"
-              color="assistive"
-              size="medium"
-            />
-          )}
-          <View style={{ flexDirection: 'row', gap: actionAreaToken.gap }}>
-            {secondary && (
-              <View style={{ flex: 1 }}>
-                <Button
-                  {...secondary}
-                  variant="outlined"
-                  color="assistive"
-                  size="large"
-                />
-              </View>
-            )}
-            <View style={{ flex: secondary ? 2 : 1 }}>
-              <Button
-                {...primary}
-                variant="solid"
-                color="primary"
-                size="large"
-              />
-            </View>
-          </View>
-        </View>
-      );
-
-    // ─── Compact: 작은 크기 복합 액션
     case 'compact':
       return (
         <View style={containerStyle}>
-          <View style={{ flexDirection: 'row', gap: actionAreaToken.gap }}>
-            {secondary && (
-              <View style={{ flex: 1 }}>
-                <Button
-                  {...secondary}
-                  variant="outlined"
-                  color="assistive"
-                  size="medium"
-                />
-              </View>
-            )}
-            <View style={{ flex: 1 }}>
-              <Button
-                {...primary}
-                variant="solid"
-                color="primary"
-                size="medium"
-              />
-            </View>
-          </View>
-        </View>
-      );
-
-    // ─── Cancel: 취소/확인 단일 액션
-    case 'cancel':
-      return (
-        <View style={containerStyle}>
-          <View style={{ flexDirection: 'row', gap: actionAreaToken.gap }}>
-            {secondary && (
-              <View style={{ flex: 1 }}>
-                <Button
-                  {...secondary}
-                  variant="solid"
-                  color="assistive"
-                  size="large"
-                />
-              </View>
-            )}
-            <View style={{ flex: 1 }}>
-              <Button
-                {...primary}
-                variant="solid"
-                color="primary"
-                size="large"
-              />
-            </View>
-          </View>
+          <ButtonRow primary={primary} secondary={secondary} size="medium" />
         </View>
       );
 
@@ -151,3 +102,21 @@ export function ActionArea({
       return null;
   }
 }
+
+// ─── Styles ──────────────────────────────────────────────
+
+const styles = StyleSheet.create({
+  container: {
+    paddingHorizontal: actionAreaToken.padding,
+    paddingTop: spacing.medium,
+    gap: actionAreaToken.gap,
+    borderTopColor: coolNeutral[96],
+  },
+  row: {
+    flexDirection: 'row',
+    gap: actionAreaToken.gap,
+  },
+  flex1: {
+    flex: 1,
+  },
+});

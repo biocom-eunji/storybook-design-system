@@ -1,9 +1,36 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { View, Text } from 'react-native';
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import { ActionArea } from '../src/components/ActionArea';
 import { Section, StateLabel, Row, Col, SpecTable, CodeBlock, Divider } from './storyHelpers';
 import { coolNeutral, mint, fontSize, fontWeight, spacing, radius } from '../src/tokens/theme';
+
+// ─── Safe Area 시뮬레이터 ─────────────────────────────────
+
+const SAFE_AREA_BOTTOM = 34; // iPhone 홈 인디케이터 기본값
+
+/** 실제 기기 하단 Safe Area를 시뮬레이션하는 프리뷰 컨테이너 */
+const DeviceFrame = ({
+  children,
+  safeArea = true,
+  width = 400,
+}: {
+  children: React.ReactNode;
+  safeArea?: boolean;
+  width?: number;
+}) => (
+  <View style={{ maxWidth: width, borderRadius: radius.large, overflow: 'hidden', borderWidth: 1, borderColor: coolNeutral[95] }}>
+    <View style={{ height: 80, backgroundColor: coolNeutral[99], justifyContent: 'center', alignItems: 'center' }}>
+      <Text style={{ fontSize: fontSize.xsmall, color: coolNeutral[70] }}>화면 콘텐츠 영역</Text>
+    </View>
+    {children}
+    {safeArea && (
+      <View style={{ height: SAFE_AREA_BOTTOM, backgroundColor: coolNeutral[99], alignItems: 'center', justifyContent: 'center' }}>
+        <View style={{ width: 120, height: 4, borderRadius: 2, backgroundColor: coolNeutral[90] }} />
+      </View>
+    )}
+  </View>
+);
 
 const meta: Meta<typeof ActionArea> = {
   title: 'Navigation/ActionArea',
@@ -11,16 +38,17 @@ const meta: Meta<typeof ActionArea> = {
   argTypes: {
     variant: {
       control: 'select',
-      options: ['strong', 'neutral', 'compact', 'cancel'],
+      options: ['strong', 'neutral', 'compact'],
       description: '레이아웃 변형',
     },
     divider: { control: 'boolean', description: '상단 구분선' },
     transparent: { control: 'boolean', description: '투명 배경' },
+    safeAreaBottom: { control: { type: 'range', min: 0, max: 48, step: 4 }, description: 'Safe Area 하단 여백 (px)' },
   },
   decorators: [
     (Story) => (
-      <View style={{ maxWidth: 400, backgroundColor: coolNeutral[99], borderRadius: radius.large, overflow: 'hidden' }}>
-        <View style={{ height: 200, justifyContent: 'center', alignItems: 'center' }}>
+      <View style={{ maxWidth: 400, borderRadius: radius.large, overflow: 'hidden', borderWidth: 1, borderColor: coolNeutral[95] }}>
+        <View style={{ height: 200, backgroundColor: coolNeutral[99], justifyContent: 'center', alignItems: 'center' }}>
           <Text style={{ fontSize: fontSize.small, color: coolNeutral[70] }}>화면 콘텐츠 영역</Text>
         </View>
         <Story />
@@ -42,6 +70,7 @@ export const Playground: Story = {
     secondary: { label: '취소' },
     divider: true,
     transparent: false,
+    safeAreaBottom: SAFE_AREA_BOTTOM,
   },
 };
 
@@ -53,7 +82,7 @@ export const AllVariants: Story = {
   render: () => (
     <Section
       title="모든 변형"
-      description="ActionArea는 화면 하단에서 사용자 액션을 유도하는 영역입니다. 4가지 레이아웃 변형을 제공합니다."
+      description="ActionArea는 화면 하단에서 사용자 액션을 유도하는 영역입니다. 3가지 레이아웃 변형을 제공합니다."
     >
       <View style={{ gap: spacing['3xlarge'] }}>
         {/* Strong */}
@@ -62,15 +91,13 @@ export const AllVariants: Story = {
           <Text style={{ fontSize: fontSize.xsmall, color: coolNeutral[50], marginBottom: spacing.small }}>
             메인 액션 하나만 크게 노출합니다. 결제, 가입 완료 등 핵심 전환 화면에 사용합니다.
           </Text>
-          <View style={{ maxWidth: 400, backgroundColor: coolNeutral[99], borderRadius: radius.large, overflow: 'hidden' }}>
-            <View style={{ height: 80, justifyContent: 'center', alignItems: 'center' }}>
-              <Text style={{ fontSize: fontSize.xsmall, color: coolNeutral[70] }}>콘텐츠</Text>
-            </View>
+          <DeviceFrame>
             <ActionArea
               variant="strong"
               primary={{ label: '결제하기', onPress: () => {} }}
+              safeAreaBottom={SAFE_AREA_BOTTOM}
             />
-          </View>
+          </DeviceFrame>
         </Col>
 
         <Divider />
@@ -81,37 +108,14 @@ export const AllVariants: Story = {
           <Text style={{ fontSize: fontSize.xsmall, color: coolNeutral[50], marginBottom: spacing.small }}>
             보조 버튼과 메인 버튼을 함께 노출합니다. 메인 버튼이 2:1 비율로 강조됩니다.
           </Text>
-          <View style={{ maxWidth: 400, backgroundColor: coolNeutral[99], borderRadius: radius.large, overflow: 'hidden' }}>
-            <View style={{ height: 80, justifyContent: 'center', alignItems: 'center' }}>
-              <Text style={{ fontSize: fontSize.xsmall, color: coolNeutral[70] }}>콘텐츠</Text>
-            </View>
+          <DeviceFrame>
             <ActionArea
               variant="neutral"
               primary={{ label: '다음', onPress: () => {} }}
               secondary={{ label: '이전', onPress: () => {} }}
+              safeAreaBottom={SAFE_AREA_BOTTOM}
             />
-          </View>
-        </Col>
-
-        <Divider />
-
-        {/* Neutral with tertiary */}
-        <Col gap={spacing.small}>
-          <StateLabel>NEUTRAL + 제3 버튼</StateLabel>
-          <Text style={{ fontSize: fontSize.xsmall, color: coolNeutral[50], marginBottom: spacing.small }}>
-            상단에 제3 버튼을 추가로 배치할 수 있습니다.
-          </Text>
-          <View style={{ maxWidth: 400, backgroundColor: coolNeutral[99], borderRadius: radius.large, overflow: 'hidden' }}>
-            <View style={{ height: 80, justifyContent: 'center', alignItems: 'center' }}>
-              <Text style={{ fontSize: fontSize.xsmall, color: coolNeutral[70] }}>콘텐츠</Text>
-            </View>
-            <ActionArea
-              variant="neutral"
-              primary={{ label: '저장', onPress: () => {} }}
-              secondary={{ label: '취소', onPress: () => {} }}
-              tertiary={{ label: '임시 저장', onPress: () => {} }}
-            />
-          </View>
+          </DeviceFrame>
         </Col>
 
         <Divider />
@@ -122,43 +126,57 @@ export const AllVariants: Story = {
           <Text style={{ fontSize: fontSize.xsmall, color: coolNeutral[50], marginBottom: spacing.small }}>
             Medium 사이즈 버튼으로 공간을 절약합니다. 모달, 바텀시트 등에 적합합니다.
           </Text>
-          <View style={{ maxWidth: 400, backgroundColor: coolNeutral[99], borderRadius: radius.large, overflow: 'hidden' }}>
-            <View style={{ height: 80, justifyContent: 'center', alignItems: 'center' }}>
-              <Text style={{ fontSize: fontSize.xsmall, color: coolNeutral[70] }}>콘텐츠</Text>
-            </View>
+          <DeviceFrame>
             <ActionArea
               variant="compact"
               primary={{ label: '적용', onPress: () => {} }}
               secondary={{ label: '초기화', onPress: () => {} }}
+              safeAreaBottom={SAFE_AREA_BOTTOM}
             />
-          </View>
-        </Col>
-
-        <Divider />
-
-        {/* Cancel */}
-        <Col gap={spacing.small}>
-          <StateLabel>CANCEL — 취소/확인</StateLabel>
-          <Text style={{ fontSize: fontSize.xsmall, color: coolNeutral[50], marginBottom: spacing.small }}>
-            취소와 확인 버튼을 1:1 비율로 배치합니다. 확인 대화상자에 사용합니다.
-          </Text>
-          <View style={{ maxWidth: 400, backgroundColor: coolNeutral[99], borderRadius: radius.large, overflow: 'hidden' }}>
-            <View style={{ height: 80, justifyContent: 'center', alignItems: 'center' }}>
-              <Text style={{ fontSize: fontSize.xsmall, color: coolNeutral[70] }}>콘텐츠</Text>
-            </View>
-            <ActionArea
-              variant="cancel"
-              primary={{ label: '삭제', onPress: () => {} }}
-              secondary={{ label: '취소', onPress: () => {} }}
-            />
-          </View>
+          </DeviceFrame>
         </Col>
       </View>
     </Section>
   ),
 };
 
-// ─── 3. 상태 ────────────────────────────────────────────
+// ─── 3. Safe Area 비교 ──────────────────────────────────
+
+export const SafeAreaComparison: Story = {
+  name: 'Safe Area 비교',
+  decorators: [],
+  render: () => (
+    <Section
+      title="Safe Area 비교"
+      description="safeAreaBottom 적용 전/후를 비교합니다. 실제 기기에서는 useSafeAreaInsets().bottom 값을 전달하세요."
+    >
+      <Row gap={spacing['2xlarge']} wrap align="flex-start">
+        <Col gap={spacing.small}>
+          <StateLabel>safeAreaBottom: 0</StateLabel>
+          <DeviceFrame safeArea={false}>
+            <ActionArea
+              variant="strong"
+              primary={{ label: '확인' }}
+              safeAreaBottom={0}
+            />
+          </DeviceFrame>
+        </Col>
+        <Col gap={spacing.small}>
+          <StateLabel>safeAreaBottom: 34 (iPhone)</StateLabel>
+          <DeviceFrame>
+            <ActionArea
+              variant="strong"
+              primary={{ label: '확인' }}
+              safeAreaBottom={SAFE_AREA_BOTTOM}
+            />
+          </DeviceFrame>
+        </Col>
+      </Row>
+    </Section>
+  ),
+};
+
+// ─── 4. 상태 ────────────────────────────────────────────
 
 export const States: Story = {
   name: '상태',
@@ -173,7 +191,7 @@ export const States: Story = {
           <StateLabel>기본</StateLabel>
           <View style={{ width: 320, backgroundColor: coolNeutral[99], borderRadius: radius.large, overflow: 'hidden' }}>
             <ActionArea
-              variant="cancel"
+              variant="neutral"
               primary={{ label: '확인' }}
               secondary={{ label: '취소' }}
               divider={false}
@@ -184,7 +202,7 @@ export const States: Story = {
           <StateLabel>메인 버튼 비활성화</StateLabel>
           <View style={{ width: 320, backgroundColor: coolNeutral[99], borderRadius: radius.large, overflow: 'hidden' }}>
             <ActionArea
-              variant="cancel"
+              variant="neutral"
               primary={{ label: '확인', disabled: true }}
               secondary={{ label: '취소' }}
               divider={false}
@@ -195,7 +213,7 @@ export const States: Story = {
           <StateLabel>메인 버튼 로딩</StateLabel>
           <View style={{ width: 320, backgroundColor: coolNeutral[99], borderRadius: radius.large, overflow: 'hidden' }}>
             <ActionArea
-              variant="cancel"
+              variant="neutral"
               primary={{ label: '확인', loading: true }}
               secondary={{ label: '취소' }}
               divider={false}
@@ -207,7 +225,7 @@ export const States: Story = {
   ),
 };
 
-// ─── 4. 옵션 ────────────────────────────────────────────
+// ─── 5. 옵션 ────────────────────────────────────────────
 
 export const Options: Story = {
   name: '옵션',
@@ -256,7 +274,7 @@ export const Options: Story = {
   ),
 };
 
-// ─── 5. 디자인 스펙 ─────────────────────────────────────
+// ─── 6. 디자인 스펙 ─────────────────────────────────────
 
 export const DesignSpec: Story = {
   name: '디자인 스펙',
@@ -268,10 +286,11 @@ export const DesignSpec: Story = {
           title="레이아웃"
           rows={[
             { label: '좌우 패딩', value: '16px', token: 'actionAreaToken.padding (spacing.large)' },
-            { label: '상하 패딩', value: '12px', token: 'spacing.medium' },
+            { label: '상단 패딩', value: '12px', token: 'spacing.medium' },
+            { label: '하단 패딩', value: '12px + safeAreaBottom', token: 'spacing.medium + safeAreaBottom' },
             { label: '버튼 간격', value: '8px', token: 'actionAreaToken.gap (spacing.small)' },
             { label: '구분선 색상', value: coolNeutral[96], token: 'coolNeutral[96]' },
-            { label: '배경색', value: '#FFFFFF', token: 'palette.white' },
+            { label: '배경색', value: '#FFFFFF', token: 'semanticColor.backgroundPrimary' },
           ]}
         />
         <SpecTable
@@ -280,7 +299,6 @@ export const DesignSpec: Story = {
             { label: 'Strong', value: 'Large Solid Primary ×1', token: '메인 CTA 단독' },
             { label: 'Neutral', value: 'Large ×2 (보조 1 : 메인 2)', token: '복합 액션' },
             { label: 'Compact', value: 'Medium ×2 (1:1)', token: '작은 복합 액션' },
-            { label: 'Cancel', value: 'Large ×2 (1:1)', token: '취소/확인' },
           ]}
         />
       </Col>
@@ -288,7 +306,7 @@ export const DesignSpec: Story = {
   ),
 };
 
-// ─── 6. 사용 가이드 ─────────────────────────────────────
+// ─── 7. 사용 가이드 ─────────────────────────────────────
 
 export const Usage: Story = {
   name: '사용 가이드',
@@ -301,10 +319,30 @@ export const Usage: Story = {
           code={`import { ActionArea } from '@design-system/components/ActionArea';`}
         />
         <CodeBlock
+          title="Safe Area 적용 (react-native-safe-area-context)"
+          code={`import { useSafeAreaInsets } from 'react-native-safe-area-context';
+
+function MyScreen() {
+  const insets = useSafeAreaInsets();
+
+  return (
+    <View style={{ flex: 1 }}>
+      {/* 화면 콘텐츠 */}
+      <ActionArea
+        variant="strong"
+        primary={{ label: '결제하기', onPress: handlePay }}
+        safeAreaBottom={insets.bottom}
+      />
+    </View>
+  );
+}`}
+        />
+        <CodeBlock
           title="Strong — CTA 강조형"
           code={`<ActionArea
   variant="strong"
   primary={{ label: '결제하기', onPress: handlePay }}
+  safeAreaBottom={insets.bottom}
 />`}
         />
         <CodeBlock
@@ -313,15 +351,7 @@ export const Usage: Story = {
   variant="neutral"
   primary={{ label: '다음', onPress: handleNext }}
   secondary={{ label: '이전', onPress: handleBack }}
-/>`}
-        />
-        <CodeBlock
-          title="Neutral + 제3 버튼"
-          code={`<ActionArea
-  variant="neutral"
-  primary={{ label: '저장', onPress: handleSave }}
-  secondary={{ label: '취소', onPress: handleCancel }}
-  tertiary={{ label: '임시 저장', onPress: handleDraft }}
+  safeAreaBottom={insets.bottom}
 />`}
         />
         <CodeBlock
@@ -332,36 +362,22 @@ export const Usage: Story = {
   secondary={{ label: '초기화', onPress: handleReset }}
 />`}
         />
-        <CodeBlock
-          title="Cancel — 확인 대화상자"
-          code={`<ActionArea
-  variant="cancel"
-  primary={{ label: '삭제', onPress: handleDelete }}
-  secondary={{ label: '취소', onPress: handleCancel }}
-/>`}
-        />
-        <CodeBlock
-          title="옵션: 구분선 없음 + 투명 배경"
-          code={`<ActionArea
-  variant="strong"
-  primary={{ label: '확인' }}
-  divider={false}
-  transparent
-/>`}
-        />
-        <CodeBlock
-          title="비활성화 / 로딩"
-          code={`<ActionArea
-  variant="cancel"
-  primary={{ label: '확인', disabled: true }}
-  secondary={{ label: '취소' }}
-/>
 
-<ActionArea
-  variant="strong"
-  primary={{ label: '처리 중...', loading: true }}
-/>`}
-        />
+        <Divider />
+
+        <Col gap={spacing.small}>
+          <StateLabel>Props</StateLabel>
+          <SpecTable
+            rows={[
+              { label: 'variant', value: "'strong' | 'neutral' | 'compact'", token: "레이아웃 변형 (기본: 'strong')" },
+              { label: 'primary', value: '{ label, onPress, ... }', token: '메인 버튼 (필수)' },
+              { label: 'secondary', value: '{ label, onPress, ... }', token: '보조 버튼' },
+              { label: 'divider', value: 'boolean', token: '상단 구분선 (기본: true)' },
+              { label: 'transparent', value: 'boolean', token: '투명 배경 (기본: false)' },
+              { label: 'safeAreaBottom', value: 'number', token: 'Safe Area 하단 여백 (기본: 0)' },
+            ]}
+          />
+        </Col>
       </Col>
     </Section>
   ),

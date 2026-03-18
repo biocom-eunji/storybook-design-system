@@ -85,16 +85,18 @@ export const SpecTable = ({
       {rows.map((row, i) => (
         <View key={i} style={[h.specRow, i % 2 === 1 && h.specRowAlt]}>
           <Text style={[h.specCell, h.specLabelCell, { flex: 1.2 }]}>{row.label}</Text>
-          <View style={{ flex: 1, flexDirection: 'row', alignItems: 'center', gap: 6 }}>
+          <View style={{ flex: 1, flexDirection: 'row', alignItems: 'flex-start', gap: 6, flexShrink: 1 }}>
             {/^#[0-9A-Fa-f]{6}$/.test(row.value) && (
               <View style={{
                 width: 14, height: 14, borderRadius: 3,
                 backgroundColor: row.value,
                 borderWidth: row.value === '#FFFFFF' ? 1 : 0,
                 borderColor: coolNeutral[90],
+                marginTop: 2,
+                flexShrink: 0,
               }} />
             )}
-            <Text style={[h.specCell, h.specMono]}>{row.value}</Text>
+            <Text style={[h.specCell, h.specMono, { flex: 1 }]}>{row.value}</Text>
           </View>
           <Text style={[h.specCell, h.specMono, h.specTokenCell, { flex: 1.5 }]}>{row.token || '—'}</Text>
         </View>
@@ -242,13 +244,15 @@ const h = StyleSheet.create({
     borderWidth: 1,
     borderColor: coolNeutral[95],
     overflow: 'hidden',
+    minWidth: 700,
   },
   specRow: {
     flexDirection: 'row',
-    alignItems: 'center',
+    alignItems: 'flex-start',
     paddingVertical: 10,
     paddingHorizontal: spacing.large,
     minHeight: 40,
+    gap: spacing.medium,
   },
   specRowAlt: {
     backgroundColor: coolNeutral[99],
@@ -258,6 +262,7 @@ const h = StyleSheet.create({
     borderBottomWidth: 1,
     borderBottomColor: coolNeutral[95],
     minHeight: 36,
+    alignItems: 'center',
   },
   specHeaderText: {
     fontSize: fontSize.xsmall,
@@ -267,6 +272,7 @@ const h = StyleSheet.create({
   specCell: {
     fontSize: fontSize.small,
     color: coolNeutral[50],
+    flexShrink: 1,
   },
   specLabelCell: {
     color: coolNeutral[17],
@@ -275,6 +281,7 @@ const h = StyleSheet.create({
   specMono: {
     fontFamily: 'monospace',
     fontSize: fontSize.xsmall,
+    flexShrink: 1,
   },
   specTokenCell: {
     color: mint[40],

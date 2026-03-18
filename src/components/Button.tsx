@@ -37,42 +37,36 @@ export function Button({
   const sizeToken = buttonToken.size[size];
   const colorToken = buttonToken.color[color][variant];
 
-  const getContainerStyle = (state: PressableStateCallbackType): ViewStyle[] => {
-    const base: ViewStyle = {
+  const contentColor = disabled ? colorToken.contentDisabled : colorToken.content;
+
+  const getContainerStyle = ({ pressed }: PressableStateCallbackType): ViewStyle => {
+    let bg = colorToken.background;
+    if (disabled) bg = colorToken.backgroundDisabled;
+    else if (pressed) bg = colorToken.backgroundPressed;
+
+    const style: ViewStyle = {
+      ...styles.base,
       height: sizeToken.height,
       paddingHorizontal: sizeToken.paddingHorizontal,
       borderRadius: sizeToken.radius,
-      alignItems: 'center',
-      justifyContent: 'center',
-      flexDirection: 'row',
-      backgroundColor: colorToken.background,
+      backgroundColor: bg,
     };
 
     if ('border' in colorToken) {
-      base.borderWidth = 1;
-      base.borderColor = disabled && 'borderDisabled' in colorToken
+      style.borderWidth = 1;
+      style.borderColor = disabled && 'borderDisabled' in colorToken
         ? colorToken.borderDisabled
         : colorToken.border;
     }
 
-    if (disabled) {
-      base.backgroundColor = colorToken.backgroundDisabled;
-    } else if (state.pressed) {
-      base.backgroundColor = colorToken.backgroundPressed;
-    }
-
-    return [base];
+    return style;
   };
 
   const textStyle: TextStyle = {
     fontSize: sizeToken.fontSize,
     fontWeight: fontWeight.semibold,
-    color: disabled ? colorToken.contentDisabled : colorToken.content,
+    color: contentColor,
   };
-
-  const indicatorColor = disabled
-    ? colorToken.contentDisabled
-    : colorToken.content;
 
   return (
     <Pressable
@@ -81,10 +75,18 @@ export function Button({
       style={getContainerStyle}
     >
       {loading ? (
-        <ActivityIndicator size="small" color={indicatorColor} />
+        <ActivityIndicator size="small" color={contentColor} />
       ) : (
         <Text style={textStyle}>{label}</Text>
       )}
     </Pressable>
   );
 }
+
+const styles = StyleSheet.create({
+  base: {
+    alignItems: 'center',
+    justifyContent: 'center',
+    flexDirection: 'row',
+  },
+});

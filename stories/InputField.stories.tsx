@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { View } from 'react-native';
+import { View, Text } from 'react-native';
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import { InputField } from '../src/components/InputField';
 import { Section, StateLabel, Col, SpecTable, CodeBlock, Divider } from './storyHelpers';
@@ -24,6 +24,17 @@ const meta: Meta<typeof InputField> = {
       description: '우측 아이콘',
     },
     trailingText: { control: 'text', description: '우측 텍스트 링크' },
+    keyboardType: {
+      control: 'select',
+      options: ['default', 'email-address', 'numeric', 'phone-pad', 'decimal-pad', 'number-pad', 'url'],
+      description: '키보드 타입',
+    },
+    secureTextEntry: { control: 'boolean', description: '비밀번호 마스킹' },
+    autoCapitalize: {
+      control: 'select',
+      options: ['none', 'sentences', 'words', 'characters'],
+      description: '자동 대문자',
+    },
   },
   tags: ['autodocs'],
   decorators: [
@@ -307,7 +318,149 @@ export const Textarea: Story = {
   ),
 };
 
-// ─── 5. 인터랙티브 데모 ─────────────────────────────────────
+// ─── 5. 키보드 & 입력 타입 ──────────────────────────────────
+
+export const KeyboardTypes: Story = {
+  name: '키보드 & 입력 타입',
+  decorators: [
+    (Story) => (
+      <View style={{ maxWidth: 800, padding: spacing.large }}>
+        <Story />
+      </View>
+    ),
+  ],
+  render: () => (
+    <View style={{ gap: spacing['3xlarge'] }}>
+      <Section
+        title="키보드 & 입력 타입"
+        description="모바일에서 키보드 타입에 따라 다른 키패드가 올라옵니다. 각 입력 필드를 탭하여 키보드 동작을 확인하세요."
+      >
+        <View style={{ flexDirection: 'row', flexWrap: 'wrap', gap: spacing['2xlarge'] }}>
+          <Col gap={spacing.small}>
+            <StateLabel>기본 (default)</StateLabel>
+            <View style={{ width: 320 }}>
+              <InputField
+                label="이름"
+                placeholder="이름을 입력하세요."
+                keyboardType="default"
+                autoCapitalize="words"
+                helperText="keyboardType: default, autoCapitalize: words"
+              />
+            </View>
+          </Col>
+
+          <Col gap={spacing.small}>
+            <StateLabel>이메일 (email-address)</StateLabel>
+            <View style={{ width: 320 }}>
+              <InputField
+                label="이메일"
+                placeholder="example@email.com"
+                keyboardType="email-address"
+                autoCapitalize="none"
+                helperText="keyboardType: email-address, autoCapitalize: none"
+              />
+            </View>
+          </Col>
+
+          <Col gap={spacing.small}>
+            <StateLabel>전화번호 (phone-pad)</StateLabel>
+            <View style={{ width: 320 }}>
+              <InputField
+                label="전화번호"
+                placeholder="010-0000-0000"
+                keyboardType="phone-pad"
+                helperText="keyboardType: phone-pad"
+              />
+            </View>
+          </Col>
+
+          <Col gap={spacing.small}>
+            <StateLabel>숫자 (numeric)</StateLabel>
+            <View style={{ width: 320 }}>
+              <InputField
+                label="나이"
+                placeholder="숫자만 입력"
+                keyboardType="numeric"
+                helperText="keyboardType: numeric"
+              />
+            </View>
+          </Col>
+
+          <Col gap={spacing.small}>
+            <StateLabel>소수점 (decimal-pad)</StateLabel>
+            <View style={{ width: 320 }}>
+              <InputField
+                label="금액"
+                placeholder="0.00"
+                keyboardType="decimal-pad"
+                helperText="keyboardType: decimal-pad"
+              />
+            </View>
+          </Col>
+
+          <Col gap={spacing.small}>
+            <StateLabel>URL (url)</StateLabel>
+            <View style={{ width: 320 }}>
+              <InputField
+                label="웹사이트"
+                placeholder="https://example.com"
+                keyboardType="url"
+                autoCapitalize="none"
+                helperText="keyboardType: url, autoCapitalize: none"
+              />
+            </View>
+          </Col>
+
+          <Col gap={spacing.small}>
+            <StateLabel>비밀번호 (secureTextEntry)</StateLabel>
+            <View style={{ width: 320 }}>
+              <InputField
+                label="비밀번호"
+                placeholder="비밀번호를 입력하세요."
+                secureTextEntry
+                autoCapitalize="none"
+                helperText="secureTextEntry: true — 입력 내용이 마스킹됩니다."
+              />
+            </View>
+          </Col>
+
+          <Col gap={spacing.small}>
+            <StateLabel>비밀번호 + 에러</StateLabel>
+            <View style={{ width: 320 }}>
+              <InputField
+                label="비밀번호 확인"
+                value="mismatch"
+                secureTextEntry
+                autoCapitalize="none"
+                errorMessage="비밀번호가 일치하지 않습니다."
+                trailingIcon="error"
+              />
+            </View>
+          </Col>
+        </View>
+      </Section>
+
+      <Section
+        title="키보드 타입 매핑 가이드"
+        description="기획자/디자이너를 위한 입력 유형별 권장 설정입니다."
+      >
+        <SpecTable
+          rows={[
+            { label: '일반 텍스트', value: "keyboardType: 'default'", token: '이름, 주소, 메모 등' },
+            { label: '이메일', value: "keyboardType: 'email-address'\nautoCapitalize: 'none'", token: '@ 키가 포함된 키보드' },
+            { label: '전화번호', value: "keyboardType: 'phone-pad'", token: '숫자 + 하이픈 키패드' },
+            { label: '숫자 (정수)', value: "keyboardType: 'number-pad'", token: '숫자만 입력 (나이, 수량)' },
+            { label: '숫자 (소수점)', value: "keyboardType: 'decimal-pad'", token: '숫자 + 소수점 (금액, 체중)' },
+            { label: 'URL', value: "keyboardType: 'url'\nautoCapitalize: 'none'", token: '.com 키가 포함된 키보드' },
+            { label: '비밀번호', value: "secureTextEntry: true\nautoCapitalize: 'none'", token: '입력 내용 마스킹 (●●●●)' },
+          ]}
+        />
+      </Section>
+    </View>
+  ),
+};
+
+// ─── 6. 인터랙티브 데모 ─────────────────────────────────────
 
 export const InteractiveDemo: Story = {
   name: '인터랙티브 데모',
@@ -367,7 +520,7 @@ export const InteractiveDemo: Story = {
   },
 };
 
-// ─── 6. 디자인 스펙 ─────────────────────────────────────────
+// ─── 7. 디자인 스펙 ─────────────────────────────────────────
 
 export const DesignSpec: Story = {
   name: '디자인 스펙',
@@ -430,7 +583,7 @@ export const DesignSpec: Story = {
   ),
 };
 
-// ─── 7. 사용 가이드 ─────────────────────────────────────────
+// ─── 8. 사용 가이드 ─────────────────────────────────────────
 
 export const Usage: Story = {
   name: '사용 가이드',
@@ -506,6 +659,29 @@ export const Usage: Story = {
           />
 
           <CodeBlock
+            title="키보드 타입 지정"
+            code={`// 이메일 키보드 (@ 키 포함)
+<InputField
+  label="이메일"
+  keyboardType="email-address"
+  autoCapitalize="none"
+/>
+
+// 전화번호 키패드
+<InputField
+  label="전화번호"
+  keyboardType="phone-pad"
+/>
+
+// 비밀번호 마스킹
+<InputField
+  label="비밀번호"
+  secureTextEntry
+  autoCapitalize="none"
+/>`}
+          />
+
+          <CodeBlock
             title="Textarea (여러 줄 입력)"
             code={`<InputField
   label="상세 설명"
@@ -515,6 +691,34 @@ export const Usage: Story = {
   maxCharCount={2000}
   helperText="상세한 설명을 작성해 주세요."
 />`}
+          />
+
+          <CodeBlock
+            title="Textarea + KeyboardAvoidingView (키보드 가림 방지)"
+            code={`import { KeyboardAvoidingView, Platform, ScrollView } from 'react-native';
+
+// ⚠️ Textarea(multiline)를 사용할 때 키보드가 입력창을 가리는 문제가 발생합니다.
+// KeyboardAvoidingView로 감싸서 키보드가 올라올 때 화면을 자동으로 밀어올려야 합니다.
+
+function WriteScreen() {
+  return (
+    <KeyboardAvoidingView
+      style={{ flex: 1 }}
+      behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
+      keyboardVerticalOffset={Platform.OS === 'ios' ? 88 : 0}
+    >
+      <ScrollView contentContainerStyle={{ padding: 16 }}>
+        <InputField label="제목" />
+        <InputField
+          label="본문"
+          multiline
+          maxCharCount={2000}
+          minHeight={200}
+        />
+      </ScrollView>
+    </KeyboardAvoidingView>
+  );
+}`}
           />
 
           <CodeBlock

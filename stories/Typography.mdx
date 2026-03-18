@@ -6,17 +6,17 @@ import { Meta } from '@storybook/addon-docs/blocks';
 export const PREVIEW_TEXT = '당신을 가장 잘 아는 바이오컴이 건강을 약속할게요.';
 
 export const styles = [
-  { name: 'Title 1',  token: 'textStyle.title1',  size: 32, lineHeight: 44, letterSpacing: -0.81,  weight: 700, usage: '서비스의 핵심 타이틀, 온보딩 메인 문구, 최상위 대제목' },
-  { name: 'Title 2',  token: 'textStyle.title2',  size: 28, lineHeight: 38, letterSpacing: -0.66,  weight: 700, usage: '페이지 상단 헤더, 주요 섹션 대제목' },
-  { name: 'Title 3',  token: 'textStyle.title3',  size: 24, lineHeight: 32, letterSpacing: -0.55,  weight: 700, usage: '카드/모달 타이틀, 하위 페이지 대제목' },
-  { name: 'Heading',  token: 'textStyle.heading',  size: 20, lineHeight: 28, letterSpacing: -0.24,  weight: 600, usage: '소제목, 섹션 구분, 강조가 필요한 중간 타이틀' },
-  { name: 'Headline', token: 'textStyle.headline', size: 17, lineHeight: 24, letterSpacing: 0,      weight: 600, usage: '리스트 헤더, 탭 섹션 제목, 강조 소제목' },
-  { name: 'Body 1',   token: 'textStyle.body1',   size: 16, lineHeight: 24, letterSpacing: 0.09,   weight: 400, usage: '일반적인 본문 텍스트, 상세 설명, 읽기 편한 긴 글' },
-  { name: 'Body 2',   token: 'textStyle.body2',   size: 15, lineHeight: 22, letterSpacing: 0.14,   weight: 400, usage: '보조 본문, 세부 설명, 부가 정보 텍스트' },
-  { name: 'Body 3',   token: 'textStyle.body3',   size: 16, lineHeight: 24, letterSpacing: 0.09,   weight: 400, usage: '본문 강조, Body 1과 동일 크기의 대체 스타일' },
-  { name: 'Label 1',  token: 'textStyle.label1',  size: 14, lineHeight: 20, letterSpacing: 0.2,    weight: 500, usage: '버튼 내 텍스트, 탭 메뉴, 클릭 요소 강조' },
-  { name: 'Label 2',  token: 'textStyle.label2',  size: 13, lineHeight: 18, letterSpacing: 0.25,   weight: 500, usage: '소형 버튼, 태그, 필터 칩 텍스트' },
-  { name: 'Caption',  token: 'textStyle.caption',  size: 12, lineHeight: 16, letterSpacing: 0.3,    weight: 400, usage: '이미지 캡션, 보조 설명, 유의사항, 날짜 등 작은 정보' },
+  { name: 'Title 1',  token: 'textStyle.title1',  size: 32, lineHeight: 44, letterSpacing: -0.81,  weight: 700, weightName: 'Bold',     usage: '서비스의 핵심 타이틀, 온보딩 메인 문구, 최상위 대제목' },
+  { name: 'Title 2',  token: 'textStyle.title2',  size: 28, lineHeight: 38, letterSpacing: -0.66,  weight: 700, weightName: 'Bold',     usage: '페이지 상단 헤더, 주요 섹션 대제목' },
+  { name: 'Title 3',  token: 'textStyle.title3',  size: 24, lineHeight: 32, letterSpacing: -0.55,  weight: 700, weightName: 'Bold',     usage: '카드/모달 타이틀, 하위 페이지 대제목' },
+  { name: 'Heading',  token: 'textStyle.heading',  size: 20, lineHeight: 28, letterSpacing: -0.24,  weight: 600, weightName: 'SemiBold', usage: '소제목, 섹션 구분, 강조가 필요한 중간 타이틀' },
+  { name: 'Headline', token: 'textStyle.headline', size: 17, lineHeight: 24, letterSpacing: 0,      weight: 600, weightName: 'SemiBold', usage: '리스트 헤더, 탭 섹션 제목, 강조 소제목' },
+  { name: 'Body 1',   token: 'textStyle.body1',   size: 16, lineHeight: 24, letterSpacing: 0.09,   weight: 400, weightName: 'Regular',  usage: '일반적인 본문 텍스트, 상세 설명, 읽기 편한 긴 글' },
+  { name: 'Body 2',   token: 'textStyle.body2',   size: 15, lineHeight: 22, letterSpacing: 0.14,   weight: 400, weightName: 'Regular',  usage: '보조 본문, 세부 설명, 부가 정보 텍스트' },
+  { name: 'Body 3',   token: 'textStyle.body3',   size: 16, lineHeight: 24, letterSpacing: 0.09,   weight: 400, weightName: 'Regular',  usage: '본문 강조, Body 1과 동일 크기의 대체 스타일' },
+  { name: 'Label 1',  token: 'textStyle.label1',  size: 14, lineHeight: 20, letterSpacing: 0.2,    weight: 500, weightName: 'Medium',   usage: '버튼 내 텍스트, 탭 메뉴, 클릭 요소 강조' },
+  { name: 'Label 2',  token: 'textStyle.label2',  size: 13, lineHeight: 18, letterSpacing: 0.25,   weight: 500, weightName: 'Medium',   usage: '소형 버튼, 태그, 필터 칩 텍스트' },
+  { name: 'Caption',  token: 'textStyle.caption',  size: 12, lineHeight: 16, letterSpacing: 0.3,    weight: 400, weightName: 'Regular',  usage: '이미지 캡션, 보조 설명, 유의사항, 날짜 등 작은 정보' },
 ];
 
 <style>
@@ -267,7 +267,7 @@ export const styles = [
         <td className="mono">{s.size}</td>
         <td className="mono">{s.lineHeight}</td>
         <td className="mono">{s.letterSpacing}</td>
-        <td className="mono">{s.weight}</td>
+        <td className="mono">{s.weightName} ({s.weight})</td>
         <td className="usage-text">{s.usage}</td>
       </tr>
     ))}

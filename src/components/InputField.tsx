@@ -4,7 +4,9 @@ import {
   Text,
   TextInput,
   Pressable,
+  StyleSheet,
   type TextInputProps,
+  type KeyboardTypeOptions,
   type ViewStyle,
   type TextStyle,
 } from 'react-native';
@@ -13,11 +15,11 @@ import {
   coolNeutral,
   mint,
   red,
-  green,
   fontSize,
   fontWeight,
   semanticColor,
   spacing,
+  radius,
 } from '../tokens/theme';
 
 // ─── Types ───────────────────────────────────────────────
@@ -55,27 +57,27 @@ export interface InputFieldProps {
   onTrailingTextPress?: () => void;
   /** 지우기 버튼 클릭 콜백 */
   onClear?: () => void;
+  /** 키보드 타입 (숫자 패드, 이메일 등) */
+  keyboardType?: KeyboardTypeOptions;
+  /** 비밀번호 마스킹 */
+  secureTextEntry?: boolean;
+  /** 자동 대문자 변환 */
+  autoCapitalize?: 'none' | 'sentences' | 'words' | 'characters';
   /** 추가 TextInput props */
-  textInputProps?: Omit<TextInputProps, 'value' | 'onChangeText' | 'placeholder' | 'editable' | 'multiline'>;
+  textInputProps?: Omit<TextInputProps, 'value' | 'onChangeText' | 'placeholder' | 'editable' | 'multiline' | 'keyboardType' | 'secureTextEntry' | 'autoCapitalize'>;
 }
 
-// ─── Icons ───────────────────────────────────────────────
+// ─── Constants ───────────────────────────────────────────
 
-const ClearIcon = ({ color = coolNeutral[80] }: { color?: string }) => (
-  <Icon name="x-circle" size={20} color={color} />
-);
+const ICON_SIZE = 20;
+const SINGLE_LINE_HEIGHT = 48;
 
-const ErrorIcon = ({ color = red[70] }: { color?: string }) => (
-  <Icon name="warning" size={20} color={color} />
-);
-
-const SuccessIcon = ({ color = mint[45] }: { color?: string }) => (
-  <Icon name="check-circle" size={20} color={color} />
-);
-
-const SearchIcon = ({ color = coolNeutral[50] }: { color?: string }) => (
-  <Icon name="magnifying-glass" size={20} color={color} />
-);
+const TRAILING_ICON_MAP = {
+  clear:   { name: 'x-circle',        color: coolNeutral[80] },
+  error:   { name: 'warning',         color: red[70] },
+  success: { name: 'check-circle',    color: mint[45] },
+  search:  { name: 'magnifying-glass', color: coolNeutral[50] },
+} as const;
 
 // ─── Component ───────────────────────────────────────────
 
@@ -95,119 +97,108 @@ export function InputField({
   trailingText,
   onTrailingTextPress,
   onClear,
+  keyboardType,
+  secureTextEntry,
+  autoCapitalize,
   textInputProps,
 }: InputFieldProps) {
   const [isFocused, setIsFocused] = useState(false);
   const [internalValue, setInternalValue] = useState(valueProp ?? '');
   const inputRef = useRef<TextInput>(null);
 
-  // 외부 value prop이 변경되면 내부 상태도 동기화
   React.useEffect(() => {
     if (valueProp !== undefined) setInternalValue(valueProp);
   }, [valueProp]);
 
   const value = valueProp ?? internalValue;
+  const charCount = value?.length ?? 0;
+  const hasValue = charCount > 0;
+  const status: InputFieldStatus = errorMessage ? 'error' : successMessage ? 'success' : 'default';
+  const isOverLimit = maxCharCount != null && charCount > maxCharCount;
 
   const handleChangeText = (text: string) => {
     setInternalValue(text);
     onChangeText?.(text);
   };
 
-  const hasValue = !!value && value.length > 0;
-  const status: InputFieldStatus = errorMessage ? 'error' : successMessage ? 'success' : 'default';
+  // ─── Derived styles ─────────────────────────────────
 
-  // ─── State-driven styles ─────────────────────────────
-
-  const getBorderColor = (): string => {
-    if (disabled) return coolNeutral[96];
-    if (status === 'error') return red[70];
-    if (isFocused) return mint[45];
-    if (hasValue) return coolNeutral[90];
-    return coolNeutral[96];
-  };
+  const borderColor = (() => {
+    if (disabled) return semanticColor.borderDisabled;
+    if (status === 'error') return semanticColor.borderError;
+    if (isFocused) return semanticColor.borderFocus;
+    if (hasValue) return semanticColor.borderActive;
+    return semanticColor.borderDefault;
+  })();
 
   const containerStyle: ViewStyle = {
-    borderWidth: 1,
-    borderColor: getBorderColor(),
-    borderRadius: 12,
+    ...styles.container,
+    borderColor,
     backgroundColor: disabled ? semanticColor.backgroundSecondary : semanticColor.backgroundPrimary,
-    paddingHorizontal: 16,
-    paddingVertical: multiline ? 14 : 0,
-    minHeight: multiline ? minHeight : 48,
+    paddingVertical: multiline ? spacing.medium : 0,
+    minHeight: multiline ? minHeight : SINGLE_LINE_HEIGHT,
     flexDirection: multiline ? 'column' : 'row',
     alignItems: multiline ? 'stretch' : 'center',
   };
 
   const inputStyle: TextStyle = {
-    flex: 1,
-    fontSize: fontSize.medium,
-    fontWeight: fontWeight.regular,
-    color: disabled ? coolNeutral[80] : coolNeutral[17],
-    paddingVertical: multiline ? 0 : 14,
+    ...styles.input,
+    color: disabled ? semanticColor.textTertiary : semanticColor.textPrimary,
+    paddingVertical: multiline ? 0 : spacing.medium,
     textAlignVertical: multiline ? 'top' : 'center',
-    outlineStyle: 'none' as any,
   };
 
-  const placeholderColor = coolNeutral[80];
-
-  // ─── Helper / Error / Success text ───────────────────
+  // ─── Sub-renders ────────────────────────────────────
 
   const bottomMessage = errorMessage || successMessage || helperText;
   const bottomMessageColor = errorMessage
-    ? red[70]
+    ? semanticColor.textError
     : successMessage
-      ? mint[45]
-      : coolNeutral[50];
-
-  // ─── Trailing icon resolution ────────────────────────
+      ? semanticColor.textSuccess
+      : semanticColor.textSecondary;
 
   const resolvedTrailingIcon = trailingIcon ?? (status === 'error' ? 'error' : undefined);
 
   const renderTrailingIcon = () => {
     if (!resolvedTrailingIcon) return null;
-    switch (resolvedTrailingIcon) {
-      case 'clear':
-        return (
-          <Pressable onPress={onClear} hitSlop={8} style={{ marginLeft: spacing.small }}>
-            <ClearIcon />
-          </Pressable>
-        );
-      case 'error':
-        return (
-          <View style={{ marginLeft: spacing.small }}>
-            <ErrorIcon />
-          </View>
-        );
-      case 'success':
-        return (
-          <View style={{ marginLeft: spacing.small }}>
-            <SuccessIcon />
-          </View>
-        );
-      case 'search':
-        return (
-          <View style={{ marginLeft: spacing.small }}>
-            <SearchIcon />
-          </View>
-        );
-      default:
-        return null;
+    const { name, color } = TRAILING_ICON_MAP[resolvedTrailingIcon];
+    const icon = <Icon name={name} size={ICON_SIZE} color={color} />;
+
+    if (resolvedTrailingIcon === 'clear') {
+      return (
+        <Pressable onPress={onClear} hitSlop={8} style={styles.trailingSlot}>
+          {icon}
+        </Pressable>
+      );
     }
+    return <View style={styles.trailingSlot}>{icon}</View>;
+  };
+
+  const renderTrailingText = () => {
+    if (!trailingText) return null;
+    return (
+      <Pressable onPress={onTrailingTextPress} hitSlop={8} style={styles.trailingSlot}>
+        <Text style={[styles.trailingTextLabel, isFocused && styles.trailingTextFocused]}>
+          {trailingText}
+        </Text>
+      </Pressable>
+    );
+  };
+
+  const renderCharCounter = () => {
+    if (maxCharCount == null) return null;
+    return (
+      <Text style={[styles.charCounter, isOverLimit && styles.charCounterError]}>
+        {charCount}/{maxCharCount}
+      </Text>
+    );
   };
 
   // ─── Render ──────────────────────────────────────────
 
   return (
-    <View style={{ gap: 6 }}>
-      {label && (
-        <Text style={{
-          fontSize: fontSize.small,
-          fontWeight: fontWeight.medium,
-          color: coolNeutral[30],
-        }}>
-          {label}
-        </Text>
-      )}
+    <View style={styles.root}>
+      {label && <Text style={styles.label}>{label}</Text>}
 
       <Pressable
         onPress={() => { if (!disabled) inputRef.current?.focus(); }}
@@ -218,9 +209,12 @@ export function InputField({
           value={value}
           onChangeText={handleChangeText}
           placeholder={placeholder}
-          placeholderTextColor={placeholderColor}
+          placeholderTextColor={semanticColor.textPlaceholder}
           editable={!disabled}
           multiline={multiline}
+          keyboardType={keyboardType}
+          secureTextEntry={secureTextEntry}
+          autoCapitalize={autoCapitalize}
           accessibilityLabel={label}
           onFocus={() => setIsFocused(true)}
           onBlur={() => setIsFocused(false)}
@@ -228,56 +222,89 @@ export function InputField({
           {...textInputProps}
         />
 
-        {!multiline && (renderTrailingIcon() || null)}
-        {!multiline && trailingText && (
-          <Pressable onPress={onTrailingTextPress} hitSlop={8} style={{ marginLeft: spacing.small }}>
-            <Text style={{
-              fontSize: fontSize.small,
-              fontWeight: fontWeight.semibold,
-              color: isFocused ? mint[45] : coolNeutral[50],
-            }}>
-              {trailingText}
-            </Text>
-          </Pressable>
-        )}
+        {!multiline && renderTrailingIcon()}
+        {!multiline && renderTrailingText()}
 
         {multiline && (
-          <View style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', marginTop: 8 }}>
-            {maxCharCount != null ? (
-              <Text style={{ fontSize: fontSize.small, color: (value?.length ?? 0) > maxCharCount ? red[70] : coolNeutral[17] }}>
-                {value?.length ?? 0}/{maxCharCount}
-              </Text>
-            ) : <View />}
-            <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+          <View style={styles.multilineFooter}>
+            {renderCharCounter() ?? <View />}
+            <View style={styles.multilineTrailing}>
               {renderTrailingIcon()}
-              {trailingText && (
-                <Pressable onPress={onTrailingTextPress} hitSlop={8} style={{ marginLeft: spacing.small }}>
-                  <Text style={{
-                    fontSize: fontSize.small,
-                    fontWeight: fontWeight.semibold,
-                    color: isFocused ? mint[45] : coolNeutral[50],
-                  }}>
-                    {trailingText}
-                  </Text>
-                </Pressable>
-              )}
+              {renderTrailingText()}
             </View>
           </View>
         )}
       </Pressable>
 
-      <View style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' }}>
+      <View style={styles.bottomRow}>
         {bottomMessage ? (
-          <Text style={{ fontSize: fontSize.small, color: bottomMessageColor, flex: 1 }}>
+          <Text style={[styles.bottomMessage, { color: bottomMessageColor }]}>
             {bottomMessage}
           </Text>
         ) : <View />}
-        {!multiline && maxCharCount != null && (
-          <Text style={{ fontSize: fontSize.small, color: (value?.length ?? 0) > maxCharCount ? red[70] : coolNeutral[17] }}>
-            {value?.length ?? 0}/{maxCharCount}
-          </Text>
-        )}
+        {!multiline && renderCharCounter()}
       </View>
     </View>
   );
 }
+
+// ─── Styles ──────────────────────────────────────────────
+
+const styles = StyleSheet.create({
+  root: {
+    gap: spacing.xsmall + 2, // 6px
+  },
+  label: {
+    fontSize: fontSize.small,
+    fontWeight: fontWeight.medium,
+    color: coolNeutral[30],
+  },
+  container: {
+    borderWidth: 1,
+    borderRadius: radius.medium,
+    paddingHorizontal: spacing.large,
+  },
+  input: {
+    flex: 1,
+    fontSize: fontSize.medium,
+    fontWeight: fontWeight.regular,
+    outlineStyle: 'none' as any,
+  },
+  trailingSlot: {
+    marginLeft: spacing.small,
+  },
+  trailingTextLabel: {
+    fontSize: fontSize.small,
+    fontWeight: fontWeight.semibold,
+    color: semanticColor.textSecondary,
+  },
+  trailingTextFocused: {
+    color: semanticColor.textBrand,
+  },
+  multilineFooter: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    marginTop: spacing.small,
+  },
+  multilineTrailing: {
+    flexDirection: 'row',
+    alignItems: 'center',
+  },
+  bottomRow: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+  },
+  bottomMessage: {
+    fontSize: fontSize.small,
+    flex: 1,
+  },
+  charCounter: {
+    fontSize: fontSize.small,
+    color: semanticColor.textPrimary,
+  },
+  charCounterError: {
+    color: semanticColor.textError,
+  },
+});
