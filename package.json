@@ -9,8 +9,8 @@
     "web": "expo start --web",
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build",
-    "deploy": "storybook build && gh-pages -d storybook-static --dotfiles --no-history && npx chromatic --project-token=chpt_a2aa7504369e0a9 --auto-accept-changes",
-    "deploy:pages": "storybook build && gh-pages -d storybook-static --dotfiles --no-history",
+    "deploy": "storybook build && npx gh-pages -d storybook-static --dotfiles --no-history && npx chromatic --project-token=chpt_a2aa7504369e0a9 --auto-accept-changes",
+    "deploy:pages": "storybook build && npx gh-pages -d storybook-static --dotfiles --no-history",
     "deploy:chromatic": "npx chromatic --project-token=chpt_a2aa7504369e0a9 --auto-accept-changes"
   },
   "dependencies": {
