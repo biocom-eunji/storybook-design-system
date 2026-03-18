@@ -4,7 +4,35 @@
 
 ---
 
-## v1.0.0
+## v1.1.0 (2026-03-18)
+
+### 🔧 Enhanced
+
+- **BottomSheet** — `position: absolute` → `<Modal>` 전환, 300ms 슬라이드업 애니메이션 추가, `safeAreaBottom` prop으로 Safe Area 대응
+- **ActionArea** — `safeAreaBottom` prop 추가, DeviceFrame 시뮬레이터로 실기기 프리뷰 제공, Cancel/Tertiary 변형 제거하여 3가지(Strong/Neutral/Compact)로 간소화
+- **InputField** — `keyboardType`, `secureTextEntry`, `autoCapitalize` 1급 props 승격, 키보드 타입별 데모 8종 및 매핑 가이드 추가, KeyboardAvoidingView 사용법 문서화
+- **Typography** — 피그마 11개 시맨틱 텍스트 스타일 1:1 매칭 (`textStyle.title1`~`caption`), lineHeight/letterSpacing RN 절대 px 값으로 수정, Weight 열에 Bold/SemiBold 등 텍스트 병기
+- **Button** — Cancel 변형 보조 버튼 `solid` → `outlined` 통일
+- **SpecTable** — 셀 겹침 수정 (셀 간 gap 추가, flexShrink 적용, 최소 폭 700px 확보)
+
+### ♻️ Refactored
+
+- **InputField** — 매직넘버 → 토큰, 인라인 스타일 → StyleSheet, 아이콘 4개 → `TRAILING_ICON_MAP` 통합, 중복 렌더 함수 추출, 미사용 import 제거
+- **Button** — 정적 스타일 StyleSheet 분리, `contentColor` 변수 추출
+- **ActionArea** — `ButtonRow` 공통 컴포넌트 추출, `ActionButtonProps` 타입 추출로 중복 제거
+- **theme.ts** — `fontWeight`에 `as const` 추가하여 타입 리터럴 추론 개선
+
+### 📝 Docs
+
+- **Release Notes** — v1.1.0 이력 추가, 카드 기반 레이아웃 → 토글(details/summary) 재설계, caret SVG 토글 아이콘, 컴포넌트 하이퍼링크, AS-IS/TO-BE 마이그레이션 스니펫
+- **Design Tokens 페이지 통일** — Usage 섹션을 전체 맨 밑 배치, 연한 민트 그라데이션 배경, `usage-card` 구조 및 구문 하이라이트 통일
+- **Color Tokens** — 페이지 제목 `Semantic Color Tokens` → `Color Tokens` 변경
+- **NamingConvention** — Quick Reference 상단 이동, TableHead/Do/Dont/Ex 헬퍼 추출 (34% 코드 감소), 여백 정리, 테이블 하단 테두리 추가
+- **Chromatic** 설치 및 통합 배포 스크립트 (`npm run deploy`) 추가
+
+---
+
+## v1.0.0 (2026-03-17)
 
 ### ✨ Features
 
@@ -21,7 +49,7 @@
 - **Modal** 컴포넌트 추가 — 확인 대화상자, 위험 액션(빨간 버튼), 커스텀 콘텐츠 지원
 - **BottomSheet** 컴포넌트 추가 — 하단 시트, 드래그 핸들바, 닫기 버튼 옵션
 - **TabBar** 컴포넌트 추가 — 바이오컴 기본 5탭(콘텐츠/목표/메인/AI/쇼핑), 아이콘 연동
-- **ActionArea** 컴포넌트 추가 — 화면 하단 액션 영역, Strong/Neutral/Compact/Cancel 4가지 변형
+- **ActionArea** 컴포넌트 추가 — 화면 하단 액션 영역, Strong/Neutral/Compact 3가지 변형
 - **Badge** 컴포넌트 추가 — 숫자/상태 배지, Filled/Outlined/Dot 변형, 최대값 초과 시 "99+" 표시
 - **Avatar** 컴포넌트 추가 — 프로필 이미지, 이니셜 폴백, 온라인 상태 표시
 - **Divider** 컴포넌트 추가 — 수평/수직 구분선, 두께/색상/인셋 커스텀
