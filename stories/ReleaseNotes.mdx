@@ -5,12 +5,15 @@ import { Meta } from '@storybook/addon-docs/blocks';
 
 <style>
   {`
+    /* ── Base ── */
     .release-page {
       max-width: 900px;
       margin: 0 auto;
       font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-      color: #292A2D;
+      color: #37383C;
     }
+
+    /* ── Page Header ── */
     .release-page h2.page-title {
       font-size: 28px;
       font-weight: 700;
@@ -20,9 +23,9 @@ import { Meta } from '@storybook/addon-docs/blocks';
       border-bottom: 2px solid #22C3BC;
     }
     .release-page > p.page-desc {
-      font-size: 15px;
-      color: #5A5C63;
-      margin: 0 0 36px;
+      font-size: 14px;
+      color: #70737C;
+      margin: 0 0 32px;
       line-height: 1.7;
     }
 
@@ -56,15 +59,15 @@ import { Meta } from '@storybook/addon-docs/blocks';
       display: flex;
       align-items: center;
       gap: 12px;
-      margin: 0 0 28px;
+      margin: 0 0 20px;
     }
     .version-badge {
       display: inline-block;
       background: #22C3BC;
       color: #FFFFFF;
-      font-size: 15px;
+      font-size: 14px;
       font-weight: 700;
-      padding: 6px 18px;
+      padding: 5px 16px;
       border-radius: 20px;
     }
     .version-badge.minor {
@@ -77,55 +80,105 @@ import { Meta } from '@storybook/addon-docs/blocks';
     }
     .version-divider {
       border: none;
-      border-top: 2px solid #E1E2E4;
-      margin: 56px 0 32px;
+      border-top: 1px solid #E1E2E4;
+      margin: 48px 0 32px;
     }
 
-    /* ── Category Card ── */
-    .category-card {
+    /* ── Toggle Card (details/summary) ── */
+    .toggle-card {
       border: 1px solid #E1E2E4;
-      border-radius: 16px;
-      margin: 0 0 20px;
+      border-radius: 12px;
+      margin: 0 0 12px;
       overflow: hidden;
     }
-    .category-header {
+    .toggle-card summary {
       display: flex;
       align-items: center;
       gap: 8px;
-      padding: 16px 20px;
+      padding: 14px 20px;
       background: #F7F7F8;
+      cursor: pointer;
+      list-style: none;
+      user-select: none;
+      transition: background 0.15s;
+    }
+    .toggle-card summary:hover {
+      background: #EAEBEC;
+    }
+    .toggle-card summary::-webkit-details-marker {
+      display: none;
+    }
+    .toggle-card summary::before {
+      content: '▸';
+      font-size: 12px;
+      color: #989BA2;
+      transition: transform 0.2s;
+      flex-shrink: 0;
+      width: 12px;
+    }
+    .toggle-card[open] summary::before {
+      transform: rotate(90deg);
+    }
+    .toggle-card[open] summary {
       border-bottom: 1px solid #E1E2E4;
     }
-    .category-header .emoji {
-      font-size: 16px;
-    }
-    .category-header .title {
+    .toggle-card summary .emoji {
       font-size: 15px;
+      flex-shrink: 0;
+    }
+    .toggle-card summary .title {
+      font-size: 14px;
       font-weight: 700;
       color: #171719;
     }
-    .category-header .count {
-      font-size: 12px;
+    .toggle-card summary .count {
+      font-size: 11px;
       font-weight: 600;
       color: #22C3BC;
       background: #E9FBF5;
       padding: 2px 8px;
       border-radius: 10px;
       margin-left: auto;
+      flex-shrink: 0;
     }
-    .category-body {
+
+    .toggle-body {
       padding: 16px 20px;
     }
 
-    /* ── Change Item ── */
+    /* ── Component Tags ── */
+    .component-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin: 0 0 12px;
+    }
+    .component-tag {
+      display: inline-block;
+      font-size: 11px;
+      font-weight: 600;
+      padding: 3px 10px;
+      border-radius: 12px;
+      background: #F4F4F5;
+      color: #70737C;
+    }
+    .component-tag.new {
+      background: #E9FBF5;
+      color: #22C289;
+    }
+    .component-tag.updated {
+      background: #EBF5FF;
+      color: #3182F6;
+    }
+
+    /* ── Change Item (name + desc 2-col) ── */
     .change-item {
       display: flex;
       gap: 12px;
-      padding: 10px 0;
+      padding: 8px 0;
       border-bottom: 1px solid #F4F4F5;
-      font-size: 14px;
-      line-height: 1.6;
-      color: #46474C;
+      font-size: 13px;
+      line-height: 1.65;
     }
     .change-item:last-child {
       border-bottom: none;
@@ -138,53 +191,31 @@ import { Meta } from '@storybook/addon-docs/blocks';
       font-weight: 600;
       color: #171719;
       white-space: nowrap;
-      min-width: 100px;
+      min-width: 96px;
       flex-shrink: 0;
     }
     .change-item .desc {
       color: #5A5C63;
     }
-
-    /* ── Component Tags ── */
-    .component-tags {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 6px;
-      padding: 4px 0 8px;
-    }
-    .component-tag {
-      display: inline-block;
-      font-size: 12px;
-      font-weight: 600;
-      padding: 3px 10px;
-      border-radius: 12px;
+    .change-item code {
       background: #F4F4F5;
-      color: #5A5C63;
-    }
-    .component-tag.new {
-      background: #E9FBF5;
-      color: #22C289;
-    }
-    .component-tag.updated {
-      background: #EBF5FF;
-      color: #3182F6;
-    }
-    .component-tag.fixed {
-      background: #FFF0F0;
-      color: #EF4452;
+      padding: 1px 5px;
+      border-radius: 4px;
+      font-size: 12px;
+      color: #46474C;
     }
 
-    /* ── Simple List (for short items) ── */
+    /* ── Simple List (for short items like fixes) ── */
     .simple-list {
       list-style: none;
       padding: 0;
       margin: 0;
     }
     .simple-list li {
-      font-size: 14px;
-      color: #46474C;
-      line-height: 1.7;
-      padding: 6px 0 6px 16px;
+      font-size: 13px;
+      color: #5A5C63;
+      line-height: 1.65;
+      padding: 8px 0 8px 16px;
       position: relative;
       border-bottom: 1px solid #F4F4F5;
     }
@@ -199,23 +230,24 @@ import { Meta } from '@storybook/addon-docs/blocks';
       content: '';
       position: absolute;
       left: 0;
-      top: 14px;
-      width: 5px;
-      height: 5px;
+      top: 15px;
+      width: 4px;
+      height: 4px;
       border-radius: 50%;
-      background: #22C3BC;
+      background: #C2C4C8;
     }
     .simple-list li:first-child::before {
-      top: 8px;
+      top: 7px;
     }
     .simple-list li strong {
       color: #171719;
     }
     .simple-list li code {
       background: #F4F4F5;
-      padding: 1px 6px;
+      padding: 1px 5px;
       border-radius: 4px;
-      font-size: 13px;
+      font-size: 12px;
+      color: #46474C;
     }
   `}
 </style>
@@ -224,7 +256,7 @@ import { Meta } from '@storybook/addon-docs/blocks';
 
 <h2 className="page-title">Release Notes</h2>
 <p className="page-desc">
-  바이오컴 디자인 시스템의 변경 이력입니다. 새로운 컴포넌트, 파운데이션 작업, 버그 수정, 문서 업데이트 내역을 확인할 수 있습니다.
+  바이오컴 디자인 시스템의 변경 이력입니다. 카테고리를 클릭하면 상세 내역을 확인할 수 있습니다.
 </p>
 
 <div className="stat-grid">
@@ -255,14 +287,13 @@ import { Meta } from '@storybook/addon-docs/blocks';
   <span className="version-date">2026-03-18</span>
 </div>
 
-{/* ── Enhanced ── */}
-<div className="category-card">
-  <div className="category-header">
+<details className="toggle-card" open>
+  <summary>
     <span className="emoji">🔧</span>
     <span className="title">Enhanced</span>
     <span className="count">6</span>
-  </div>
-  <div className="category-body">
+  </summary>
+  <div className="toggle-body">
     <div className="component-tags">
       <span className="component-tag updated">BottomSheet</span>
       <span className="component-tag updated">ActionArea</span>
@@ -284,7 +315,7 @@ import { Meta } from '@storybook/addon-docs/blocks';
     </div>
     <div className="change-item">
       <span className="name">Typography</span>
-      <span className="desc">피그마 11개 시맨틱 텍스트 스타일 1:1 매칭 (<code>textStyle.title1</code>~<code>caption</code>), lineHeight/letterSpacing RN 절대 px 값으로 수정, Weight 열에 Bold/SemiBold 등 텍스트 병기</span>
+      <span className="desc">피그마 11개 시맨틱 텍스트 스타일 1:1 매칭 (<code>textStyle.title1</code>~<code>caption</code>), lineHeight/letterSpacing RN 절대 px 값으로 수정</span>
     </div>
     <div className="change-item">
       <span className="name">Button</span>
@@ -295,19 +326,18 @@ import { Meta } from '@storybook/addon-docs/blocks';
       <span className="desc">셀 겹침 수정 — 셀 간 gap 추가, flexShrink 적용, 최소 폭 700px 확보</span>
     </div>
   </div>
-</div>
+</details>
 
-{/* ── Refactored ── */}
-<div className="category-card">
-  <div className="category-header">
+<details className="toggle-card">
+  <summary>
     <span className="emoji">♻️</span>
     <span className="title">Refactored</span>
     <span className="count">4</span>
-  </div>
-  <div className="category-body">
+  </summary>
+  <div className="toggle-body">
     <div className="change-item">
       <span className="name">InputField</span>
-      <span className="desc">매직넘버 → 토큰, 인라인 스타일 → StyleSheet, 아이콘 4개 → <code>TRAILING_ICON_MAP</code> 통합, 중복 렌더 함수 추출, 미사용 import 제거</span>
+      <span className="desc">매직넘버 → 토큰, 인라인 스타일 → StyleSheet, 아이콘 4개 → <code>TRAILING_ICON_MAP</code> 통합, 중복 렌더 함수 추출</span>
     </div>
     <div className="change-item">
       <span className="name">Button</span>
@@ -322,7 +352,7 @@ import { Meta } from '@storybook/addon-docs/blocks';
       <span className="desc"><code>fontWeight</code>에 <code>as const</code> 추가하여 타입 리터럴 추론 개선</span>
     </div>
   </div>
-</div>
+</details>
 
 <hr className="version-divider" />
 
@@ -335,14 +365,13 @@ import { Meta } from '@storybook/addon-docs/blocks';
   <span className="version-date">2026-03-17</span>
 </div>
 
-{/* ── Features ── */}
-<div className="category-card">
-  <div className="category-header">
+<details className="toggle-card">
+  <summary>
     <span className="emoji">✨</span>
     <span className="title">Features</span>
     <span className="count">19</span>
-  </div>
-  <div className="category-body">
+  </summary>
+  <div className="toggle-body">
     <div className="component-tags">
       <span className="component-tag new">Button</span>
       <span className="component-tag new">TextButton</span>
@@ -441,16 +470,15 @@ import { Meta } from '@storybook/addon-docs/blocks';
       <span className="desc">로딩 플레이스홀더, 텍스트/원형/사각형 변형, 시머 애니메이션</span>
     </div>
   </div>
-</div>
+</details>
 
-{/* ── Design System ── */}
-<div className="category-card">
-  <div className="category-header">
+<details className="toggle-card">
+  <summary>
     <span className="emoji">🎨</span>
     <span className="title">Design System</span>
     <span className="count">11</span>
-  </div>
-  <div className="category-body">
+  </summary>
+  <div className="toggle-body">
     <div className="change-item">
       <span className="name">컬러 팔레트</span>
       <span className="desc">13종 색상 카테고리, 단계별 HEX 코드 정의</span>
@@ -496,16 +524,15 @@ import { Meta } from '@storybook/addon-docs/blocks';
       <span className="desc">사이드바/도구바 민트 색상(#22C3BC) 적용</span>
     </div>
   </div>
-</div>
+</details>
 
-{/* ── Fixes ── */}
-<div className="category-card">
-  <div className="category-header">
+<details className="toggle-card">
+  <summary>
     <span className="emoji">🐛</span>
     <span className="title">Fixes</span>
     <span className="count">10</span>
-  </div>
-  <div className="category-body">
+  </summary>
+  <div className="toggle-body">
     <ul className="simple-list">
       <li>GitHub Pages 배포 시 모듈 로드 실패 오류 해결</li>
       <li>Jekyll <code>_</code> 접두사 파일 무시 문제 해결</li>
@@ -514,21 +541,20 @@ import { Meta } from '@storybook/addon-docs/blocks';
       <li>InputField 포커스 시 브라우저 기본 파란 outline 제거</li>
       <li>InputField 글자 수 카운터 실시간 업데이트 및 초과 시 에러색 전환</li>
       <li>Chip/Badge 가로 크기 hug contents 동작으로 수정</li>
-      <li>SVG 직접 그리기 코드를 Icon 컴포넌트로 통일 (Toast, InputField, CheckMark)</li>
+      <li>SVG 직접 그리기 코드를 Icon 컴포넌트로 통일</li>
       <li>하드코딩된 색상값을 디자인 토큰으로 전체 교체</li>
       <li>미사용 import 정리</li>
     </ul>
   </div>
-</div>
+</details>
 
-{/* ── Docs ── */}
-<div className="category-card">
-  <div className="category-header">
+<details className="toggle-card">
+  <summary>
     <span className="emoji">📝</span>
     <span className="title">Docs</span>
     <span className="count">9</span>
-  </div>
-  <div className="category-body">
+  </summary>
+  <div className="toggle-body">
     <div className="change-item">
       <span className="name">Introduction</span>
       <span className="desc">디자인 시스템 철학, 비전, 목표</span>
@@ -566,6 +592,6 @@ import { Meta } from '@storybook/addon-docs/blocks';
       <span className="desc">12개 컴포넌트 인터페이스에 한글 설명 추가</span>
     </div>
   </div>
-</div>
+</details>
 
 </div>
