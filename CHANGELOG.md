@@ -4,27 +4,6 @@
 
 ---
 
-## v1.1.1 (2026-03-18)
-
-### ♻️ Refactored
-
-- **neutral 팔레트 삭제** — `neutral` 14단계 완전 제거, `coolNeutral` 단일 무채색 팔레트로 통합
-- **palette 객체** — `neutral` 참조 제거, `index.ts` re-export 정리
-
-### 📝 Docs
-
-- **Color Palette** — Neutral + Cool Neutral → Mono 섹션 통합, Brand & Accent → Brand, Semantic Colors → Semantic, Extended Colors → Extended 이름 정리
-- **Color Tokens** — 페이지 제목 `Semantic Color Tokens` → `Color Tokens` 변경, Usage 섹션 맨 밑 이동
-- **NamingConvention** — Quick Reference 상단 이동, TableHead/Do/Dont/Ex 헬퍼 추출 (34% 코드 감소), 테이블 하단 테두리 추가
-- **Design Tokens 전체** — Usage 섹션 스타일/레이아웃 통일 (민트 그라데이션 배경, usage-card 패턴)
-
-### 🔧 Infra
-
-- **Chromatic** 설치 및 시각적 회귀 테스트 환경 구축
-- **`npm run deploy`** 통합 배포 스크립트 추가 (GitHub Pages + Chromatic 동시 배포)
-
----
-
 ## v1.1.0 (2026-03-18)
 
 ### 🔧 Enhanced
@@ -38,6 +17,7 @@
 
 ### ♻️ Refactored
 
+- **neutral 팔레트 삭제** — `neutral` 14단계 완전 제거, `coolNeutral` 단일 무채색 팔레트로 통합
 - **InputField** — 매직넘버 → 토큰, 인라인 스타일 → StyleSheet, 아이콘 4개 → `TRAILING_ICON_MAP` 통합, 중복 렌더 함수 추출, 미사용 import 제거
 - **Button** — 정적 스타일 StyleSheet 분리, `contentColor` 변수 추출
 - **ActionArea** — `ButtonRow` 공통 컴포넌트 추출, `ActionButtonProps` 타입 추출로 중복 제거
@@ -45,11 +25,16 @@
 
 ### 📝 Docs
 
-- **Release Notes** — v1.1.0 이력 추가, 카드 기반 레이아웃 → 토글(details/summary) 재설계, caret SVG 토글 아이콘, 컴포넌트 하이퍼링크, AS-IS/TO-BE 마이그레이션 스니펫
-- **Design Tokens 페이지 통일** — Usage 섹션을 전체 맨 밑 배치, 연한 민트 그라데이션 배경, `usage-card` 구조 및 구문 하이라이트 통일
-- **Color Tokens** — 페이지 제목 `Semantic Color Tokens` → `Color Tokens` 변경
-- **NamingConvention** — Quick Reference 상단 이동, TableHead/Do/Dont/Ex 헬퍼 추출 (34% 코드 감소), 여백 정리, 테이블 하단 테두리 추가
-- **Chromatic** 설치 및 통합 배포 스크립트 (`npm run deploy`) 추가
+- **Release Notes** — v1.1.0 이력 추가, 토글(details/summary) 재설계, caret SVG 아이콘, 컴포넌트 하이퍼링크, AS-IS/TO-BE 마이그레이션 스니펫
+- **Color Palette** — Neutral + Cool Neutral → Mono 통합, 섹션명 정리 (Brand, Semantic, Extended)
+- **Color Tokens** — 페이지 제목 `Semantic Color Tokens` → `Color Tokens` 변경, Usage 맨 밑 이동
+- **Design Tokens 전체** — Usage 섹션 스타일/레이아웃 통일 (민트 그라데이션 배경, usage-card 패턴)
+- **NamingConvention** — Quick Reference 상단 이동, 헬퍼 추출 (34% 코드 감소), 테이블 하단 테두리 추가
+
+### 🔧 Infra
+
+- **Chromatic** 설치 및 시각적 회귀 테스트 환경 구축
+- **`npm run deploy`** 통합 배포 스크립트 추가 (GitHub Pages + Chromatic 동시 배포)
 
 ---
 
