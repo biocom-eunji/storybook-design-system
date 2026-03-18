@@ -361,87 +361,106 @@ export const interaction = {
   overlayOpacity: 0.4,
 } as const;
 
+// ─── Semantic Role Primitives ────────────────────────────
+// 역할(Role)별 단일 색상 소스 — 다크모드 전환 시 이 값만 교체
+
+const _surface = {
+  primary:   coolNeutral[100],
+  secondary: coolNeutral[99],
+  tertiary:  coolNeutral[97],
+  inverse:   coolNeutral[10],
+} as const;
+
+const _content = {
+  primary:  coolNeutral[17],
+  secondary: coolNeutral[50],
+  tertiary: coolNeutral[80],
+  onColor:  coolNeutral[100],
+} as const;
+
+const _line = {
+  default: coolNeutral[96],
+  active:  coolNeutral[90],
+} as const;
+
+const _role = {
+  brand:        mint[45],
+  brandPressed: mint[30],
+  error:        red[70],
+  success:      mint[45],
+  warning:      yellow[50],
+} as const;
+
 // ─── Semantic Color Tokens ───────────────────────────────
 // 컴포넌트에서 color={semanticColor.textPrimary} 형태로 사용
+// 속성(Property) 기반 — 다크모드 확장 시 _surface/_content/_line/_role만 교체
 
 export const semanticColor = {
   // ── Text ───────────────────────────────────────────────
   /** 기본 본문·타이틀 텍스트 */
-  textPrimary: coolNeutral[17],
+  textPrimary: _content.primary,
   /** 보조 설명, 부가 정보 텍스트 */
-  textSecondary: coolNeutral[50],
+  textSecondary: _content.secondary,
   /** 비활성화 텍스트, 힌트, 플레이스홀더 */
-  textTertiary: coolNeutral[80],
-  /** @alias textTertiary — 플레이스홀더 텍스트 (하위 호환) */
-  textPlaceholder: coolNeutral[80],
-  /** 색상 배경 위에 올라가는 텍스트 (버튼, 배지 등) */
-  textOnColor: palette.white,
+  textTertiary: _content.tertiary,
+  /** @alias textTertiary (하위 호환) */
+  textPlaceholder: _content.tertiary,
+  /** 색상 배경 위 텍스트 (버튼, 배지 등) */
+  textOnColor: _content.onColor,
   /** 브랜드 강조 텍스트 (링크, 포커스 등) */
-  textBrand: mint[45],
+  textBrand: _role.brand,
   /** 에러 상태 텍스트 */
-  textError: red[70],
+  textError: _role.error,
   /** 성공 상태 텍스트 */
-  textSuccess: mint[45],
+  textSuccess: _role.success,
   /** 경고 상태 텍스트 */
-  textWarning: yellow[50],
+  textWarning: _role.warning,
 
   // ── Background ────────────────────────────────────────
-  /** 기본 화면 배경색 (흰색) */
-  backgroundPrimary: palette.white,
+  /** 기본 화면 배경색 */
+  backgroundPrimary: _surface.primary,
   /** 보조 배경색 (카드, 섹션 구분) */
-  backgroundSecondary: coolNeutral[99],
+  backgroundSecondary: _surface.secondary,
   /** 3단계 배경색 (인풋 비활성, 칩 등) */
-  backgroundTertiary: coolNeutral[97],
+  backgroundTertiary: _surface.tertiary,
   /** 반전 배경 (다크 영역, 활성 칩) */
-  backgroundInverse: coolNeutral[10],
+  backgroundInverse: _surface.inverse,
   /** 브랜드 배경색 (CTA 버튼, 강조 영역) */
-  backgroundBrand: mint[45],
+  backgroundBrand: _role.brand,
   /** 브랜드 배경 눌림 */
-  backgroundBrandPressed: mint[30],
-  /** 에러/성공/경고 상태 배경 (흰색 통일) */
-  backgroundError: palette.white,
-  /** 성공 상태 배경 */
-  backgroundSuccess: palette.white,
-  /** 경고 상태 배경 */
-  backgroundWarning: palette.white,
+  backgroundBrandPressed: _role.brandPressed,
+  /** 상태 배경 (에러/성공/경고 — 흰색 통일) */
+  backgroundStatus: _surface.primary,
 
   // ── Border ────────────────────────────────────────────
-  /** 기본 테두리, 비활성화 테두리, 구분선 */
-  borderDefault: coolNeutral[96],
-  /** @alias borderDefault — 비활성화 테두리 (하위 호환) */
-  borderDisabled: coolNeutral[96],
+  /** 기본·비활성화 테두리, 구분선 */
+  borderDefault: _line.default,
+  /** @alias borderDefault (하위 호환) */
+  borderDisabled: _line.default,
   /** 입력됨 상태 테두리 */
-  borderActive: coolNeutral[90],
+  borderActive: _line.active,
   /** 포커스·브랜드 강조 테두리 */
-  borderFocus: mint[45],
+  borderFocus: _role.brand,
   /** 에러 상태 테두리 */
-  borderError: red[70],
+  borderError: _role.error,
   /** 성공 상태 테두리 */
-  borderSuccess: mint[45],
+  borderSuccess: _role.success,
 
   // ── Icon ──────────────────────────────────────────────
   /** 기본 아이콘 색상 */
-  iconPrimary: coolNeutral[17],
+  iconPrimary: _content.primary,
   /** 보조 아이콘 색상 */
-  iconSecondary: coolNeutral[50],
+  iconSecondary: _content.secondary,
   /** 비활성화 아이콘 */
-  iconDisabled: coolNeutral[80],
+  iconDisabled: _content.tertiary,
   /** 브랜드 아이콘 */
-  iconBrand: mint[45],
+  iconBrand: _role.brand,
   /** 색상 배경 위 아이콘 */
-  iconOnColor: palette.white,
+  iconOnColor: _content.onColor,
   /** 에러 아이콘 */
-  iconError: red[70],
+  iconError: _role.error,
   /** 성공 아이콘 */
-  iconSuccess: mint[45],
-
-  // ── Status ────────────────────────────────────────────
-  /** 에러 주색 */
-  statusError: red[70],
-  /** 성공·정보 주색 */
-  statusSuccess: mint[45],
-  /** 경고 주색 */
-  statusWarning: yellow[50],
+  iconSuccess: _role.success,
 } as const;
 
 export type SemanticColor = typeof semanticColor;

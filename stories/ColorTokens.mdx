@@ -220,46 +220,39 @@ export const SectionHeader = ({ title, description }) => (
   </thead>
   <tbody>
     <SectionHeader title="Text" description="텍스트에 적용하는 색상 토큰" />
-    <TokenRow token="textPrimary"   hex="#212225" source="Cool Neutral 17" role="기본 본문·타이틀 텍스트 색상. 가장 많이 사용되는 텍스트 컬러입니다." />
-    <TokenRow token="textSecondary" hex="#70737C" source="Cool Neutral 50" role="보조 설명, 부가 정보, 캡션 등 주요 텍스트보다 약한 위계의 텍스트입니다." />
-    <TokenRow token="textTertiary"  hex="#AEB0B6" source="Cool Neutral 80" role="비활성화 텍스트, 힌트, 플레이스홀더에 사용합니다." />
-    <TokenRow token="textOnColor"   hex="#FFFFFF" source="White" role="브랜드 버튼, 배지 등 색상 배경 위에 올라가는 텍스트입니다." />
-    <TokenRow token="textBrand"     hex="#22C3BC" source="Mint 45" role="링크, 포커스 상태, 브랜드 강조가 필요한 텍스트입니다." />
-    <TokenRow token="textError"     hex="#EF7676" source="Red 70" role="에러·유효성 실패 메시지에 사용합니다." />
-    <TokenRow token="textSuccess"   hex="#22C3BC" source="Mint 45" role="성공·유효성 통과 메시지에 사용합니다." />
-    <TokenRow token="textWarning"   hex="#FFCE00" source="Yellow 50" role="경고·주의 메시지에 사용합니다." />
+    <TokenRow token="textPrimary"   hex="#212225" source="coolNeutral17" role="기본 본문·타이틀 텍스트 색상." />
+    <TokenRow token="textSecondary" hex="#70737C" source="coolNeutral50" role="보조 설명, 부가 정보, 캡션 텍스트." />
+    <TokenRow token="textTertiary"  hex="#AEB0B6" source="coolNeutral80" role="비활성화 텍스트, 힌트, 플레이스홀더." />
+    <TokenRow token="textOnColor"   hex="#FFFFFF" source="coolNeutral100" role="색상 배경 위 텍스트 (버튼, 배지 등)." />
+    <TokenRow token="textBrand"     hex="#22C3BC" source="mint45" role="링크, 포커스, 브랜드 강조 텍스트." />
+    <TokenRow token="textError"     hex="#EF7676" source="red70" role="에러·유효성 실패 메시지." />
+    <TokenRow token="textSuccess"   hex="#22C3BC" source="mint45" role="성공·유효성 통과 메시지." />
+    <TokenRow token="textWarning"   hex="#FFCE00" source="yellow50" role="경고·주의 메시지." />
 
     <SectionHeader title="Background" description="배경에 적용하는 색상 토큰" />
-    <TokenRow token="backgroundPrimary"      hex="#FFFFFF" source="White" role="기본 화면 배경색. 앱 전체의 기본 바탕 색상입니다." />
-    <TokenRow token="backgroundSecondary"    hex="#F7F7F8" source="Cool Neutral 99" role="카드, 섹션 구분 등 1단계 구분이 필요한 배경색입니다." />
-    <TokenRow token="backgroundTertiary"     hex="#EAEBEC" source="Cool Neutral 97" role="인풋 비활성 배경, 칩 기본 배경 등 2단계 구분 배경색입니다." />
-    <TokenRow token="backgroundInverse"      hex="#171719" source="Cool Neutral 10" role="다크 영역, 활성 칩 배경 등 반전이 필요한 배경색입니다." />
-    <TokenRow token="backgroundBrand"        hex="#22C3BC" source="Mint 45" role="CTA 버튼, 강조 영역 등 브랜드 색상이 필요한 배경입니다." />
-    <TokenRow token="backgroundBrandPressed" hex="#17827D" source="Mint 30" role="브랜드 배경의 눌림(Pressed) 상태입니다." />
-    <TokenRow token="backgroundError"        hex="#FFFFFF" source="White" role="에러 상태 배경색입니다." />
-    <TokenRow token="backgroundSuccess"      hex="#FFFFFF" source="White" role="성공 상태 배경색입니다." />
-    <TokenRow token="backgroundWarning"      hex="#FFFFFF" source="White" role="경고 상태 배경색입니다." />
+    <TokenRow token="backgroundPrimary"      hex="#FFFFFF" source="coolNeutral100" role="기본 화면 배경색." />
+    <TokenRow token="backgroundSecondary"    hex="#F7F7F8" source="coolNeutral99" role="카드, 섹션 구분 배경색." />
+    <TokenRow token="backgroundTertiary"     hex="#EAEBEC" source="coolNeutral97" role="인풋 비활성, 칩 기본 배경." />
+    <TokenRow token="backgroundInverse"      hex="#171719" source="coolNeutral10" role="다크 영역, 활성 칩 배경." />
+    <TokenRow token="backgroundBrand"        hex="#22C3BC" source="mint45" role="CTA 버튼, 강조 영역 배경." />
+    <TokenRow token="backgroundBrandPressed" hex="#17827D" source="mint30" role="브랜드 배경 눌림 상태." />
+    <TokenRow token="backgroundStatus"       hex="#FFFFFF" source="coolNeutral100" role="에러/성공/경고 상태 배경 (흰색 통일)." />
 
     <SectionHeader title="Border" description="테두리·구분선에 적용하는 색상 토큰" />
-    <TokenRow token="borderDefault" hex="#E1E2E4" source="Cool Neutral 96" role="기본 테두리, 비활성화 테두리, 구분선에 사용합니다." />
-    <TokenRow token="borderActive"  hex="#C2C4C8" source="Cool Neutral 90" role="값이 입력된 상태의 테두리입니다." />
-    <TokenRow token="borderFocus"   hex="#22C3BC" source="Mint 45" role="포커스·브랜드 강조 테두리. 민트 색상으로 강조합니다." />
-    <TokenRow token="borderError"   hex="#EF7676" source="Red 70" role="에러 상태 테두리입니다." />
-    <TokenRow token="borderSuccess" hex="#22C3BC" source="Mint 45" role="성공 상태 테두리입니다." />
+    <TokenRow token="borderDefault" hex="#E1E2E4" source="coolNeutral96" role="기본·비활성화 테두리, 구분선." />
+    <TokenRow token="borderActive"  hex="#C2C4C8" source="coolNeutral90" role="입력됨 상태 테두리." />
+    <TokenRow token="borderFocus"   hex="#22C3BC" source="mint45" role="포커스·브랜드 강조 테두리." />
+    <TokenRow token="borderError"   hex="#EF7676" source="red70" role="에러 상태 테두리." />
+    <TokenRow token="borderSuccess" hex="#22C3BC" source="mint45" role="성공 상태 테두리." />
 
     <SectionHeader title="Icon" description="아이콘에 적용하는 색상 토큰" />
-    <TokenRow token="iconPrimary"   hex="#212225" source="Cool Neutral 17" role="기본 아이콘 색상. 내비게이션, 액션 아이콘에 사용합니다." />
-    <TokenRow token="iconSecondary" hex="#70737C" source="Cool Neutral 50" role="보조 아이콘 색상. 부가 정보 아이콘에 사용합니다." />
-    <TokenRow token="iconDisabled"  hex="#AEB0B6" source="Cool Neutral 80" role="비활성화된 아이콘 색상입니다." />
-    <TokenRow token="iconBrand"     hex="#22C3BC" source="Mint 45" role="브랜드 아이콘. 체크, 활성 상태 등에 사용합니다." />
-    <TokenRow token="iconOnColor"   hex="#FFFFFF" source="White" role="색상 배경 위에 올라가는 아이콘 (버튼 내 아이콘 등)입니다." />
-    <TokenRow token="iconError"     hex="#EF7676" source="Red 70" role="에러 상태 아이콘입니다." />
-    <TokenRow token="iconSuccess"   hex="#22C3BC" source="Mint 45" role="성공 상태 아이콘입니다." />
-
-    <SectionHeader title="Status" description="상태 표현에 사용하는 주요 색상" />
-    <TokenRow token="statusError"   hex="#EF7676" source="Red 70" role="에러·실패·위험 상태의 주요 색상입니다." />
-    <TokenRow token="statusSuccess" hex="#22C3BC" source="Mint 45" role="성공·완료·정보·안내 상태의 주요 색상입니다." />
-    <TokenRow token="statusWarning" hex="#FFCE00" source="Yellow 50" role="경고·주의가 필요한 상태의 주요 색상입니다." />
+    <TokenRow token="iconPrimary"   hex="#212225" source="coolNeutral17" role="기본 아이콘. 내비게이션, 액션." />
+    <TokenRow token="iconSecondary" hex="#70737C" source="coolNeutral50" role="보조 아이콘. 부가 정보." />
+    <TokenRow token="iconDisabled"  hex="#AEB0B6" source="coolNeutral80" role="비활성화 아이콘." />
+    <TokenRow token="iconBrand"     hex="#22C3BC" source="mint45" role="브랜드 아이콘. 체크, 활성 상태." />
+    <TokenRow token="iconOnColor"   hex="#FFFFFF" source="coolNeutral100" role="색상 배경 위 아이콘." />
+    <TokenRow token="iconError"     hex="#EF7676" source="red70" role="에러 상태 아이콘." />
+    <TokenRow token="iconSuccess"   hex="#22C3BC" source="mint45" role="성공 상태 아이콘." />
   </tbody>
 </table>
 
