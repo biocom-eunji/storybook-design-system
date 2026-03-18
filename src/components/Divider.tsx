@@ -38,5 +38,5 @@ export function Divider({
         marginLeft: inset,
       };
 
-  return <View style={style} />;
+  return <View style={style} accessibilityRole="none" />;
 }

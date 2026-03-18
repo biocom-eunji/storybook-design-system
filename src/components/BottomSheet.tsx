@@ -102,7 +102,7 @@ export function BottomSheet({
             { opacity: backdropOpacity },
           ]}
         >
-          <Pressable style={StyleSheet.absoluteFill} onPress={onClose} />
+          <Pressable style={StyleSheet.absoluteFill} onPress={onClose} accessibilityRole="none" />
         </Animated.View>
 
         {/* 시트 */}

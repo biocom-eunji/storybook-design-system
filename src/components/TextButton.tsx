@@ -48,6 +48,8 @@ export function TextButton({
     <Pressable
       onPress={onPress}
       disabled={disabled || loading}
+      accessibilityRole="button"
+      accessibilityState={{ disabled: disabled || loading }}
       style={(state) => [
         {
           flexDirection: 'row',

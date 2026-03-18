@@ -64,7 +64,7 @@ export function ProgressBar({
   };
 
   return (
-    <View>
+    <View accessibilityRole="progressbar" accessibilityValue={{ min: 0, max: 100, now: Math.round(clampedProgress * 100) }}>
       {showLabel && (
         <Text style={labelStyle}>{Math.round(clampedProgress * 100)}%</Text>
       )}

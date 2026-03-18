@@ -32,7 +32,7 @@ export function Modal({
 
   return (
     <View style={styles.overlay}>
-      <Pressable style={styles.backdrop} onPress={onClose} />
+      <Pressable style={styles.backdrop} onPress={onClose} accessibilityRole="none" />
       <View style={styles.dialog}>
         {title && <Text style={styles.title}>{title}</Text>}
         {children ? (

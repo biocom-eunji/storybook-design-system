@@ -86,6 +86,8 @@ export function Chip({
     <Pressable
       onPress={onPress}
       disabled={disabled}
+      accessibilityRole="button"
+      accessibilityState={{ selected: active, disabled }}
       style={getContainerStyle}
     >
       {thumbnail && (

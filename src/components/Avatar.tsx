@@ -18,6 +18,8 @@ export interface AvatarProps {
   name?: string;
   size?: AvatarSize;
   online?: boolean;
+  /** 접근성 라벨 */
+  accessibilityLabel?: string;
 }
 
 const sizeMap = {
@@ -32,6 +34,7 @@ export function Avatar({
   name,
   size = 'medium',
   online,
+  accessibilityLabel,
 }: AvatarProps) {
   const sizeToken = sizeMap[size];
   const containerSize = sizeToken.container;
@@ -58,7 +61,7 @@ export function Avatar({
   const borderWidth = 2;
 
   return (
-    <View style={styles.wrapper}>
+    <View style={styles.wrapper} accessibilityLabel={accessibilityLabel || name}>
       <View style={containerStyle}>
         {source ? (
           <Image

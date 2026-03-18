@@ -1,7 +1,7 @@
 import React from 'react';
 import { Pressable, View, Text } from 'react-native';
 import Svg, { Path, Rect } from 'react-native-svg';
-import { coolNeutral, mint, fontWeight, interaction } from '../tokens/theme';
+import { coolNeutral, mint, fontWeight, interaction, spacing, radius } from '../tokens/theme';
 
 export type CheckboxSize = 'small' | 'medium';
 export type CheckboxState = 'unchecked' | 'checked' | 'indeterminate';
@@ -57,10 +57,10 @@ export function Checkbox({
         alignItems: 'center',
         gap: label ? s.gap : 0,
         opacity: pressed && !disabled ? interaction.pressOpacity : 1,
-        paddingVertical: tight ? 8 : 12,
-        paddingHorizontal: tight ? 12 : 0,
+        paddingVertical: tight ? spacing.small : spacing.medium,
+        paddingHorizontal: tight ? spacing.medium : 0,
         backgroundColor: tight ? coolNeutral[99] : 'transparent',
-        borderRadius: tight ? 12 : 0,
+        borderRadius: tight ? radius.medium : 0,
       })}
     >
       <View style={{

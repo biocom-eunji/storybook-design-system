@@ -13,6 +13,8 @@ export interface BadgeProps {
   variant?: BadgeVariant;
   color?: BadgeColor;
   size?: BadgeSize;
+  /** 접근성 라벨 */
+  accessibilityLabel?: string;
   children?: React.ReactNode;
 }
 
@@ -34,6 +36,7 @@ export function Badge({
   variant = 'filled',
   color = 'error',
   size = 'medium',
+  accessibilityLabel,
   children,
 }: BadgeProps) {
   const themeColor = colorMap[color];
@@ -92,7 +95,7 @@ export function Badge({
   }
 
   return (
-    <View style={styles.wrapper}>
+    <View style={styles.wrapper} accessibilityLabel={accessibilityLabel}>
       {children}
       <View style={[styles.positioned, isDot && styles.positionedDot]}>
         {badge}

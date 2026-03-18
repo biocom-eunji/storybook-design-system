@@ -72,6 +72,8 @@ export function Button({
     <Pressable
       onPress={onPress}
       disabled={disabled || loading}
+      accessibilityRole="button"
+      accessibilityState={{ disabled: disabled || loading }}
       style={getContainerStyle}
     >
       {loading ? (

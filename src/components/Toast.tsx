@@ -98,7 +98,7 @@ export function Toast({
 
   return (
     <View style={containerStyle} pointerEvents="box-none">
-      <View style={toastStyle}>
+      <View style={toastStyle} accessibilityRole="alert">
         <IconComponent />
         <Text style={messageStyle}>{message}</Text>
         {action && (
