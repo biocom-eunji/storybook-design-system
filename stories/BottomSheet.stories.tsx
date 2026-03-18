@@ -13,6 +13,7 @@ const meta: Meta<typeof BottomSheet> = {
     title: { control: 'text', description: '헤더 타이틀' },
     showHandle: { control: 'boolean', description: '드래그 핸들바 표시' },
     showCloseButton: { control: 'boolean', description: '닫기 버튼 표시' },
+    safeAreaBottom: { control: { type: 'range', min: 0, max: 48, step: 4 }, description: 'Safe Area 하단 여백 (px)' },
   },
   tags: ['autodocs'],
 };
@@ -20,10 +21,15 @@ const meta: Meta<typeof BottomSheet> = {
 export default meta;
 type Story = StoryObj<typeof BottomSheet>;
 
-const PreviewContainer = ({ children }: { children: React.ReactNode }) => (
-  <View style={{ height: 400, backgroundColor: coolNeutral[99], position: 'relative', overflow: 'hidden', borderRadius: radius.medium }}>
-    {children}
-  </View>
+// ─── 공통 헬퍼 ────────────────────────────────────────────
+
+const OpenButton = ({ label, onPress }: { label: string; onPress: () => void }) => (
+  <Pressable
+    onPress={onPress}
+    style={{ backgroundColor: mint[45], paddingHorizontal: spacing.xlarge, paddingVertical: spacing.medium, borderRadius: radius.medium, alignSelf: 'flex-start' }}
+  >
+    <Text style={{ color: '#FFFFFF', fontSize: fontSize.medium, fontWeight: fontWeight.semibold }}>{label}</Text>
+  </Pressable>
 );
 
 const ListItem = ({ label }: { label: string }) => (
@@ -36,32 +42,26 @@ const ListItem = ({ label }: { label: string }) => (
 
 export const Playground: Story = {
   args: {
-    visible: true,
+    visible: false,
     title: '바텀시트 제목',
     showHandle: true,
     showCloseButton: false,
+    safeAreaBottom: 0,
   },
   render: (args) => {
-    const [visible, setVisible] = useState(args.visible);
+    const [visible, setVisible] = useState(false);
     return (
       <View style={{ gap: spacing.large }}>
-        <Pressable
-          onPress={() => setVisible(true)}
-          style={{ backgroundColor: mint[45], paddingHorizontal: spacing.xlarge, paddingVertical: spacing.medium, borderRadius: radius.medium, alignSelf: 'flex-start' }}
+        <OpenButton label="바텀시트 열기" onPress={() => setVisible(true)} />
+        <BottomSheet
+          {...args}
+          visible={visible}
+          onClose={() => setVisible(false)}
         >
-          <Text style={{ color: '#FFFFFF', fontSize: fontSize.medium, fontWeight: fontWeight.semibold }}>바텀시트 열기</Text>
-        </Pressable>
-        <PreviewContainer>
-          <BottomSheet
-            {...args}
-            visible={visible}
-            onClose={() => setVisible(false)}
-          >
-            <ListItem label="옵션 1" />
-            <ListItem label="옵션 2" />
-            <ListItem label="옵션 3" />
-          </BottomSheet>
-        </PreviewContainer>
+          <ListItem label="옵션 1" />
+          <ListItem label="옵션 2" />
+          <ListItem label="옵션 3" />
+        </BottomSheet>
       </View>
     );
   },
@@ -71,83 +71,68 @@ export const Playground: Story = {
 
 export const Default: Story = {
   name: '기본 사용',
-  render: () => (
-    <Section
-      title="기본 사용"
-      description="타이틀과 리스트 콘텐츠가 포함된 기본 바텀시트입니다."
-    >
-      <PreviewContainer>
-        <BottomSheet visible title="메뉴 선택" onClose={() => {}}>
+  render: () => {
+    const [visible, setVisible] = useState(false);
+    return (
+      <Section
+        title="기본 사용"
+        description="타이틀과 리스트 콘텐츠가 포함된 기본 바텀시트입니다. 버튼을 눌러 확인하세요."
+      >
+        <OpenButton label="기본 바텀시트 열기" onPress={() => setVisible(true)} />
+        <BottomSheet visible={visible} title="메뉴 선택" onClose={() => setVisible(false)}>
           <ListItem label="프로필 편집" />
           <ListItem label="알림 설정" />
           <ListItem label="로그아웃" />
           <ListItem label="고객센터" />
         </BottomSheet>
-      </PreviewContainer>
-    </Section>
-  ),
+      </Section>
+    );
+  },
 };
 
 // ─── 3. 핸들바/닫기버튼 옵션 ──────────────────────────────────
 
+const OptionDemo = ({
+  label,
+  showHandle,
+  showCloseButton,
+}: {
+  label: string;
+  showHandle: boolean;
+  showCloseButton: boolean;
+}) => {
+  const [visible, setVisible] = useState(false);
+  return (
+    <View style={{ gap: spacing.small }}>
+      <OpenButton label={label} onPress={() => setVisible(true)} />
+      <BottomSheet
+        visible={visible}
+        title={label}
+        showHandle={showHandle}
+        showCloseButton={showCloseButton}
+        onClose={() => setVisible(false)}
+      >
+        <ListItem label="항목 A" />
+        <ListItem label="항목 B" />
+      </BottomSheet>
+    </View>
+  );
+};
+
 export const HandleAndCloseOptions: Story = {
   name: '핸들바/닫기버튼 옵션',
   render: () => (
-    <View style={{ gap: spacing['3xlarge'] }}>
-      <Section
-        title="핸들바/닫기버튼 옵션"
-        description="핸들바와 닫기 버튼 조합에 따른 헤더 스타일 변화를 확인합니다."
-      >
-        <CompareGrid
-          items={[
-            {
-              label: '핸들바만 (기본)',
-              content: (
-                <PreviewContainer>
-                  <BottomSheet visible title="핸들바만" showHandle showCloseButton={false}>
-                    <ListItem label="항목 A" />
-                    <ListItem label="항목 B" />
-                  </BottomSheet>
-                </PreviewContainer>
-              ),
-            },
-            {
-              label: '닫기 버튼만',
-              content: (
-                <PreviewContainer>
-                  <BottomSheet visible title="닫기 버튼" showHandle={false} showCloseButton>
-                    <ListItem label="항목 A" />
-                    <ListItem label="항목 B" />
-                  </BottomSheet>
-                </PreviewContainer>
-              ),
-            },
-            {
-              label: '핸들바 + 닫기 버튼',
-              content: (
-                <PreviewContainer>
-                  <BottomSheet visible title="모두 표시" showHandle showCloseButton>
-                    <ListItem label="항목 A" />
-                    <ListItem label="항목 B" />
-                  </BottomSheet>
-                </PreviewContainer>
-              ),
-            },
-            {
-              label: '둘 다 없음',
-              content: (
-                <PreviewContainer>
-                  <BottomSheet visible title="헤더 없음" showHandle={false} showCloseButton={false}>
-                    <ListItem label="항목 A" />
-                    <ListItem label="항목 B" />
-                  </BottomSheet>
-                </PreviewContainer>
-              ),
-            },
-          ]}
-        />
-      </Section>
-    </View>
+    <Section
+      title="핸들바/닫기버튼 옵션"
+      description="핸들바와 닫기 버튼 조합에 따른 헤더 스타일 변화를 확인합니다. 각 버튼을 눌러 비교하세요."
+    >
+      <View style={{ flexDirection: 'row', flexWrap: 'wrap', gap: spacing.medium }}>
+        <OptionDemo label="핸들바만 (기본)" showHandle showCloseButton={false} />
+        <OptionDemo label="닫기 버튼만" showHandle={false} showCloseButton />
+        <OptionDemo label="핸들바 + 닫기" showHandle showCloseButton />
+        <OptionDemo label="둘 다 없음" showHandle={false} showCloseButton={false} />
+      </View>
+    </Section>
   ),
 };
 
@@ -164,17 +149,19 @@ export const DesignSpec: Story = {
         <SpecTable
           title="오버레이"
           rows={[
-            { label: '배경색', value: 'rgba(0,0,0,0.4)', token: '—' },
-            { label: '위치', value: 'absolute (full screen)', token: '—' },
+            { label: '구현', value: '<Modal transparent>', token: 'React Native Modal' },
+            { label: '배경색', value: '#000000', token: '—' },
+            { label: '배경 투명도', value: '0.4', token: 'BACKDROP_OPACITY' },
+            { label: '애니메이션', value: '300ms slide up', token: 'ANIMATION_DURATION' },
           ]}
         />
 
         <SpecTable
           title="시트"
           rows={[
-            { label: '배경색', value: '#FFFFFF', token: 'palette.white' },
-            { label: '상단 좌측 반경', value: '20px', token: '—' },
-            { label: '상단 우측 반경', value: '20px', token: '—' },
+            { label: '배경색', value: '#FFFFFF', token: 'semanticColor.backgroundPrimary' },
+            { label: '상단 반경', value: '20px', token: 'radius.xlarge' },
+            { label: '하단 여백', value: 'safeAreaBottom prop', token: 'useSafeAreaInsets().bottom' },
           ]}
         />
 
@@ -212,7 +199,7 @@ export const DesignSpec: Story = {
           title="콘텐츠 영역"
           rows={[
             { label: '좌우 패딩', value: `${spacing.xlarge}px`, token: 'spacing.xlarge' },
-            { label: '하단 패딩', value: '34px', token: '— (safe area)' },
+            { label: '하단 패딩', value: `${spacing.xlarge}px`, token: 'spacing.xlarge' },
           ]}
         />
       </Section>
@@ -250,6 +237,27 @@ export const Usage: Story = {
         />
 
         <CodeBlock
+          title="Safe Area 적용 (react-native-safe-area-context)"
+          code={`import { useSafeAreaInsets } from 'react-native-safe-area-context';
+
+function MyScreen() {
+  const insets = useSafeAreaInsets();
+  const [visible, setVisible] = useState(false);
+
+  return (
+    <BottomSheet
+      visible={visible}
+      onClose={() => setVisible(false)}
+      title="설정"
+      safeAreaBottom={insets.bottom}
+    >
+      {/* 콘텐츠 */}
+    </BottomSheet>
+  );
+}`}
+        />
+
+        <CodeBlock
           title="닫기 버튼 사용"
           code={`<BottomSheet
   visible={visible}
@@ -274,6 +282,7 @@ export const Usage: Story = {
               { label: 'children', value: 'ReactNode', token: '콘텐츠 (필수)' },
               { label: 'showHandle', value: 'boolean', token: '핸들바 표시 (기본: true)' },
               { label: 'showCloseButton', value: 'boolean', token: '닫기 버튼 표시 (기본: false)' },
+              { label: 'safeAreaBottom', value: 'number', token: 'Safe Area 하단 여백 (기본: 0)' },
             ]}
           />
         </Col>
