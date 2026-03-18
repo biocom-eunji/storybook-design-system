@@ -17,17 +17,22 @@
 
 ### ♻️ Refactored
 
-- **neutral 팔레트 삭제** — `neutral` 14단계 완전 제거, `coolNeutral` 단일 무채색 팔레트로 통합
-- **InputField** — 매직넘버 → 토큰, 인라인 스타일 → StyleSheet, 아이콘 4개 → `TRAILING_ICON_MAP` 통합, 중복 렌더 함수 추출, 미사용 import 제거
+- **시맨틱 컬러 토큰 최적화** — Role Primitives(`_surface`, `_content`, `_line`, `_role`) 도입, 다크모드 확장 대비. 토큰 38개 → 27개 정리
+- **시맨틱 토큰 병합** — `textTertiary` + `textPlaceholder`, `borderDefault` + `borderDisabled`, `borderFocus` + `borderBrand`, `statusSuccess` + `statusInfo` 통합
+- **backgroundError/Success/Warning** → `backgroundStatus` 1개로 통합 (white)
+- **`backgroundBrandDisabled`** 삭제, **Status 섹션** 전체 삭제 (역할 프리미티브로 대체)
+- **`palette.white`** → `coolNeutral[100]` 전환 (시맨틱 토큰 6건)
+- **neutral 팔레트 삭제** — `neutral` 14단계 완전 제거, `coolNeutral` 단일 무채색 팔레트로 통합, `coolNeutral[100]` #FFFFFF 추가
+- **InputField** — 매직넘버 → 토큰, 인라인 스타일 → StyleSheet, 아이콘 4개 → `TRAILING_ICON_MAP` 통합, 중복 렌더 함수 추출
 - **Button** — 정적 스타일 StyleSheet 분리, `contentColor` 변수 추출
 - **ActionArea** — `ButtonRow` 공통 컴포넌트 추출, `ActionButtonProps` 타입 추출로 중복 제거
-- **theme.ts** — `fontWeight`에 `as const` 추가하여 타입 리터럴 추론 개선
+- **theme.ts** — `fontWeight`에 `as const` 추가
 
 ### 📝 Docs
 
 - **Release Notes** — v1.1.0 이력 추가, 토글(details/summary) 재설계, caret SVG 아이콘, 컴포넌트 하이퍼링크, AS-IS/TO-BE 마이그레이션 스니펫
-- **Color Palette** — Neutral + Cool Neutral → Mono 통합, 섹션명 정리 (Brand, Semantic, Extended)
-- **Color Tokens** — 페이지 제목 `Semantic Color Tokens` → `Color Tokens` 변경, Usage 맨 밑 이동
+- **Color Palette** — Neutral + Cool Neutral → Mono 통합, 섹션명 정리 (Brand, Semantic, Extended), Orange/Purple 설명 업데이트, coolNeutral100 추가
+- **Color Tokens** — 제목 `Semantic Color Tokens` → `Color Tokens`, Usage 맨 밑 이동, Value에 팔레트명(coolNeutral17, mint45 등) 표기, 토큰 수 반영
 - **Design Tokens 전체** — Usage 섹션 스타일/레이아웃 통일 (민트 그라데이션 배경, usage-card 패턴)
 - **NamingConvention** — Quick Reference 상단 이동, 헬퍼 추출 (34% 코드 감소), 테이블 하단 테두리 추가
 
