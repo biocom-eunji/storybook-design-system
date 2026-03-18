@@ -374,7 +374,7 @@ export const LINK = {
     <p className="label">아이콘</p>
   </div>
   <div className="stat-card">
-    <p className="num">38</p>
+    <p className="num">27</p>
     <p className="label">시맨틱 토큰</p>
   </div>
   <div className="stat-card">
@@ -532,36 +532,60 @@ export const LINK = {
     <CaretIcon />
     <span className="emoji">♻️</span>
     <span className="title">Refactored</span>
-    <span className="count">5</span>
+    <span className="count">8</span>
   </summary>
   <div className="toggle-body">
     <div className="change-item">
+      <span className="name"><a href={LINK.ColorTokens}>Color Tokens</a></span>
+      <span className="desc">Role Primitives(<code>_surface</code>, <code>_content</code>, <code>_line</code>, <code>_role</code>) 도입으로 다크모드 확장 대비. 토큰 38개 → 27개 정리</span>
+    </div>
+    <div className="migration-block">
+      <div className="migration-row">
+        <div className="migration-col">
+          <p className="migration-label">AS-IS (38개, 직접 참조)</p>
+          <pre>{`textError: red[70],
+borderError: red[70],
+iconError: red[70],
+statusError: red[70],
+// 같은 값을 4곳에서 중복 정의`}</pre>
+        </div>
+        <div className="migration-col">
+          <p className="migration-label">TO-BE (27개, 역할 프리미티브)</p>
+          <pre>{`const _role = { error: red[70] };
+
+textError: _role.error,
+borderError: _role.error,
+iconError: _role.error,
+// 단일 소스 → 다크모드 시 _role만 교체`}</pre>
+        </div>
+      </div>
+    </div>
+    <div className="change-item">
       <span className="name"><a href={LINK.ColorPalette}>Color Palette</a></span>
-      <span className="desc"><code>neutral</code> 팔레트 완전 삭제, <code>coolNeutral</code> 단일 무채색으로 통합. Mono 섹션 하나로 문서 정리</span>
+      <span className="desc"><code>neutral</code> 팔레트 삭제, <code>coolNeutral</code> 단일 무채색 통합, <code>coolNeutral[100]</code> #FFFFFF 추가</span>
     </div>
     <div className="migration-block">
       <div className="migration-row">
         <div className="migration-col">
           <p className="migration-label">AS-IS</p>
-          <pre>{`// 두 개의 무채색 팔레트
-import { neutral, coolNeutral } from '../tokens/theme';
-
-neutral[50]      // #737373
-coolNeutral[50]  // #70737C`}</pre>
+          <pre>{`import { neutral, coolNeutral } from '../tokens/theme';
+neutral[50]      // #737373`}</pre>
         </div>
         <div className="migration-col">
           <p className="migration-label">TO-BE</p>
-          <pre>{`// 단일 무채색 팔레트
-import { coolNeutral } from '../tokens/theme';
-
+          <pre>{`import { coolNeutral } from '../tokens/theme';
 coolNeutral[50]  // #70737C
-// neutral 삭제됨 — 모두 coolNeutral 사용`}</pre>
+// neutral 삭제됨`}</pre>
         </div>
       </div>
     </div>
     <div className="change-item">
+      <span className="name-plain">시맨틱 토큰 병합</span>
+      <span className="desc"><code>textTertiary+Placeholder</code>, <code>borderDefault+Disabled</code>, <code>borderFocus+Brand</code>, <code>statusSuccess+Info</code> 통합. <code>backgroundError/Success/Warning</code> → <code>backgroundStatus</code>. <code>backgroundBrandDisabled</code>/Status 섹션 삭제</span>
+    </div>
+    <div className="change-item">
       <span className="name"><a href={LINK.InputField}>InputField</a></span>
-      <span className="desc">매직넘버 → 토큰, 인라인 스타일 → StyleSheet, 아이콘 4개 → <code>TRAILING_ICON_MAP</code> 통합, 중복 렌더 함수 추출</span>
+      <span className="desc">매직넘버 → 토큰, 인라인 → StyleSheet, 아이콘 4개 → <code>TRAILING_ICON_MAP</code>, 중복 함수 추출</span>
     </div>
     <div className="change-item">
       <span className="name"><a href={LINK.Button}>Button</a></span>
@@ -569,11 +593,11 @@ coolNeutral[50]  // #70737C
     </div>
     <div className="change-item">
       <span className="name"><a href={LINK.ActionArea}>ActionArea</a></span>
-      <span className="desc"><code>ButtonRow</code> 공통 컴포넌트 추출, <code>ActionButtonProps</code> 타입 추출로 중복 제거</span>
+      <span className="desc"><code>ButtonRow</code> 공통 컴포넌트 추출, <code>ActionButtonProps</code> 타입 추출</span>
     </div>
     <div className="change-item">
       <span className="name-plain">theme.ts</span>
-      <span className="desc"><code>fontWeight</code>에 <code>as const</code> 추가하여 타입 리터럴 추론 개선</span>
+      <span className="desc"><code>fontWeight</code>에 <code>as const</code>, <code>palette.white</code> → <code>coolNeutral[100]</code> 전환</span>
     </div>
   </div>
 </details>
@@ -583,24 +607,32 @@ coolNeutral[50]  // #70737C
     <CaretIcon />
     <span className="emoji">📝</span>
     <span className="title">Docs</span>
-    <span className="count">4</span>
+    <span className="count">6</span>
   </summary>
   <div className="toggle-body">
     <div className="change-item">
       <span className="name"><a href={LINK.ColorPalette}>Color Palette</a></span>
-      <span className="desc">섹션 이름 정리: Brand & Accent → Brand, Semantic Colors → Semantic, Extended Colors → Extended, Neutral + Cool Neutral → Mono</span>
+      <span className="desc">Neutral+Cool Neutral → Mono 통합, 섹션명 정리 (Brand/Semantic/Extended), Orange 포인트·Purple 업셀링 설명 변경, coolNeutral100 추가</span>
     </div>
     <div className="change-item">
       <span className="name"><a href={LINK.ColorTokens}>Color Tokens</a></span>
-      <span className="desc">페이지 제목 Semantic Color Tokens → Color Tokens 변경, Usage 섹션 맨 밑 이동</span>
+      <span className="desc">제목 변경, Usage 맨 밑 이동, Value에 팔레트명 표기(coolNeutral17, mint45 등), 토큰 수 27개 반영</span>
     </div>
     <div className="change-item">
       <span className="name"><a href={LINK.NamingConv}>Naming Conv.</a></span>
-      <span className="desc">Quick Reference 상단 이동, 헬퍼 컴포넌트 추출(34% 코드 감소), 테이블 하단 테두리 추가</span>
+      <span className="desc">Quick Reference 상단 이동, 헬퍼 추출(34% 코드 감소), 테이블 하단 테두리 추가</span>
     </div>
     <div className="change-item">
       <span className="name-plain">Design Tokens</span>
-      <span className="desc">전체 Usage 섹션 스타일/레이아웃 통일 (민트 그라데이션 배경, usage-card 패턴, 구문 하이라이트)</span>
+      <span className="desc">전체 Usage 섹션 스타일/레이아웃 통일 (민트 그라데이션, usage-card 패턴)</span>
+    </div>
+    <div className="change-item">
+      <span className="name-plain">Release Notes</span>
+      <span className="desc">caret SVG 토글, 컴포넌트 하이퍼링크, AS-IS/TO-BE 마이그레이션 스니펫</span>
+    </div>
+    <div className="change-item">
+      <span className="name-plain">CHANGELOG</span>
+      <span className="desc">v1.1.0 변경 이력 동기화</span>
     </div>
   </div>
 </details>
