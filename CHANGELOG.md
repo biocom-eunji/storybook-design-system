@@ -27,6 +27,7 @@
 - **Button** — 정적 스타일 StyleSheet 분리, `contentColor` 변수 추출
 - **ActionArea** — `ButtonRow` 공통 컴포넌트 추출, `ActionButtonProps` 타입 추출로 중복 제거
 - **theme.ts** — `fontWeight`에 `as const` 추가
+- **접근성 강화 (16/18)** — Button, TextButton, Chip, Toast, Modal, BottomSheet, Badge, Avatar, ProgressBar, Divider에 accessibilityRole/State/Label/Value 추가, Checkbox 매직넘버 → 토큰 교체
 
 ### 📝 Docs
 

@@ -532,7 +532,7 @@ export const LINK = {
     <CaretIcon />
     <span className="emoji">♻️</span>
     <span className="title">Refactored</span>
-    <span className="count">8</span>
+    <span className="count">9</span>
   </summary>
   <div className="toggle-body">
     <div className="change-item">
@@ -598,6 +598,10 @@ coolNeutral[50]  // #70737C
     <div className="change-item">
       <span className="name-plain">theme.ts</span>
       <span className="desc"><code>fontWeight</code>에 <code>as const</code>, <code>palette.white</code> → <code>coolNeutral[100]</code> 전환</span>
+    </div>
+    <div className="change-item">
+      <span className="name-plain">접근성 (16/18)</span>
+      <span className="desc">Button/TextButton/Chip/Toast/Modal/BottomSheet/Badge/Avatar/ProgressBar/Divider에 <code>accessibilityRole</code>, <code>accessibilityState</code>, <code>accessibilityLabel</code>, <code>accessibilityValue</code> 추가. Checkbox 매직넘버 → 토큰 교체</span>
     </div>
   </div>
 </details>
