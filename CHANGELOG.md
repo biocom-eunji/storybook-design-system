@@ -4,6 +4,27 @@
 
 ---
 
+## v1.1.1 (2026-03-18)
+
+### ♻️ Refactored
+
+- **neutral 팔레트 삭제** — `neutral` 14단계 완전 제거, `coolNeutral` 단일 무채색 팔레트로 통합
+- **palette 객체** — `neutral` 참조 제거, `index.ts` re-export 정리
+
+### 📝 Docs
+
+- **Color Palette** — Neutral + Cool Neutral → Mono 섹션 통합, Brand & Accent → Brand, Semantic Colors → Semantic, Extended Colors → Extended 이름 정리
+- **Color Tokens** — 페이지 제목 `Semantic Color Tokens` → `Color Tokens` 변경, Usage 섹션 맨 밑 이동
+- **NamingConvention** — Quick Reference 상단 이동, TableHead/Do/Dont/Ex 헬퍼 추출 (34% 코드 감소), 테이블 하단 테두리 추가
+- **Design Tokens 전체** — Usage 섹션 스타일/레이아웃 통일 (민트 그라데이션 배경, usage-card 패턴)
+
+### 🔧 Infra
+
+- **Chromatic** 설치 및 시각적 회귀 테스트 환경 구축
+- **`npm run deploy`** 통합 배포 스크립트 추가 (GitHub Pages + Chromatic 동시 배포)
+
+---
+
 ## v1.1.0 (2026-03-18)
 
 ### 🔧 Enhanced
