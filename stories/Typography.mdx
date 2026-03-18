@@ -6,17 +6,17 @@ import { Meta } from '@storybook/addon-docs/blocks';
 export const PREVIEW_TEXT = '당신을 가장 잘 아는 바이오컴이 건강을 약속할게요.';
 
 export const styles = [
-  { name: 'Title 1',  size: 32, lineHeight: '44px', lhRatio: '1.375',  letterSpacing: '-0.0253em', weight: 700, usage: '서비스의 핵심 타이틀, 온보딩 메인 문구, 최상위 대제목' },
-  { name: 'Title 2',  size: 28, lineHeight: '38px', lhRatio: '1.358',  letterSpacing: '-0.0236em', weight: 700, usage: '페이지 상단 헤더, 주요 섹션 대제목' },
-  { name: 'Title 3',  size: 24, lineHeight: '32px', lhRatio: '1.334',  letterSpacing: '-0.023em',  weight: 700, usage: '카드/모달 타이틀, 하위 페이지 대제목' },
-  { name: 'Heading',  size: 20, lineHeight: '28px', lhRatio: '1.4',    letterSpacing: '-0.012em',  weight: 600, usage: '소제목, 섹션 구분, 강조가 필요한 중간 타이틀' },
-  { name: 'Headline', size: 17, lineHeight: '24px', lhRatio: '1.412',  letterSpacing: '0em',       weight: 600, usage: '리스트 헤더, 탭 섹션 제목, 강조 소제목' },
-  { name: 'Body 1',   size: 16, lineHeight: '24px', lhRatio: '1.5',    letterSpacing: '0.0057em',  weight: 400, usage: '일반적인 본문 텍스트, 상세 설명, 읽기 편한 긴 글' },
-  { name: 'Body 2',   size: 15, lineHeight: '22px', lhRatio: '1.467',  letterSpacing: '0.0096em',  weight: 400, usage: '보조 본문, 세부 설명, 부가 정보 텍스트' },
-  { name: 'Body 3',   size: 16, lineHeight: '24px', lhRatio: '1.5',    letterSpacing: '0.0057em',  weight: 400, usage: '본문 강조, Body 1과 동일 크기의 대체 스타일' },
-  { name: 'Label 1',  size: 14, lineHeight: '20px', lhRatio: '1.429',  letterSpacing: '0.0145em',  weight: 500, usage: '버튼 내 텍스트, 탭 메뉴, 클릭 요소 강조' },
-  { name: 'Label 2',  size: 13, lineHeight: '18px', lhRatio: '1.385',  letterSpacing: '0.0194em',  weight: 500, usage: '소형 버튼, 태그, 필터 칩 텍스트' },
-  { name: 'Caption',  size: 12, lineHeight: '16px', lhRatio: '1.334',  letterSpacing: '0.0252em',  weight: 400, usage: '이미지 캡션, 보조 설명, 유의사항, 날짜 등 작은 정보' },
+  { name: 'Title 1',  token: 'textStyle.title1',  size: 32, lineHeight: 44, letterSpacing: -0.81,  weight: 700, usage: '서비스의 핵심 타이틀, 온보딩 메인 문구, 최상위 대제목' },
+  { name: 'Title 2',  token: 'textStyle.title2',  size: 28, lineHeight: 38, letterSpacing: -0.66,  weight: 700, usage: '페이지 상단 헤더, 주요 섹션 대제목' },
+  { name: 'Title 3',  token: 'textStyle.title3',  size: 24, lineHeight: 32, letterSpacing: -0.55,  weight: 700, usage: '카드/모달 타이틀, 하위 페이지 대제목' },
+  { name: 'Heading',  token: 'textStyle.heading',  size: 20, lineHeight: 28, letterSpacing: -0.24,  weight: 600, usage: '소제목, 섹션 구분, 강조가 필요한 중간 타이틀' },
+  { name: 'Headline', token: 'textStyle.headline', size: 17, lineHeight: 24, letterSpacing: 0,      weight: 600, usage: '리스트 헤더, 탭 섹션 제목, 강조 소제목' },
+  { name: 'Body 1',   token: 'textStyle.body1',   size: 16, lineHeight: 24, letterSpacing: 0.09,   weight: 400, usage: '일반적인 본문 텍스트, 상세 설명, 읽기 편한 긴 글' },
+  { name: 'Body 2',   token: 'textStyle.body2',   size: 15, lineHeight: 22, letterSpacing: 0.14,   weight: 400, usage: '보조 본문, 세부 설명, 부가 정보 텍스트' },
+  { name: 'Body 3',   token: 'textStyle.body3',   size: 16, lineHeight: 24, letterSpacing: 0.09,   weight: 400, usage: '본문 강조, Body 1과 동일 크기의 대체 스타일' },
+  { name: 'Label 1',  token: 'textStyle.label1',  size: 14, lineHeight: 20, letterSpacing: 0.2,    weight: 500, usage: '버튼 내 텍스트, 탭 메뉴, 클릭 요소 강조' },
+  { name: 'Label 2',  token: 'textStyle.label2',  size: 13, lineHeight: 18, letterSpacing: 0.25,   weight: 500, usage: '소형 버튼, 태그, 필터 칩 텍스트' },
+  { name: 'Caption',  token: 'textStyle.caption',  size: 12, lineHeight: 16, letterSpacing: 0.3,    weight: 400, usage: '이미지 캡션, 보조 설명, 유의사항, 날짜 등 작은 정보' },
 ];
 
 <style>
@@ -103,6 +103,15 @@ export const styles = [
       font-size: 13px;
       color: #5A5C63;
     }
+    .spec-table .token-name {
+      font-family: 'SF Mono', 'Fira Code', monospace;
+      font-size: 12px;
+      color: #22C3BC;
+      background: #E9FBF5;
+      padding: 2px 8px;
+      border-radius: 4px;
+      white-space: nowrap;
+    }
     .spec-table .usage-text {
       font-size: 13px;
       color: #70737C;
@@ -156,13 +165,52 @@ export const styles = [
       border-top: 1px solid #E1E2E4;
       margin: 48px 0;
     }
+    .usage-card {
+      background: #1B1C1E;
+      border-radius: 12px;
+      padding: 24px;
+      margin: 0 0 48px;
+      overflow-x: auto;
+    }
+    .usage-card pre {
+      margin: 0;
+      font-family: 'SF Mono', 'Fira Code', monospace;
+      font-size: 13px;
+      line-height: 1.7;
+      color: #E1E2E4;
+    }
+    .usage-card .comment {
+      color: #70737C;
+    }
+    .usage-card .keyword {
+      color: #FF80A8;
+    }
+    .usage-card .string {
+      color: #7DE8C2;
+    }
+    .usage-card .token {
+      color: #70D2FF;
+    }
+    .note-box {
+      background: #FFF5CC;
+      border-left: 4px solid #FFCE00;
+      border-radius: 0 8px 8px 0;
+      padding: 16px 20px;
+      margin: 0 0 48px;
+      font-size: 14px;
+      color: #46474C;
+      line-height: 1.7;
+    }
+    .note-box strong {
+      color: #171719;
+    }
   `}
 </style>
 
 <div className="typo-page">
 
 <h2 className="page-title">Typography</h2>
-<p className="page-desc">바이오컴 서비스의 타이포그래피 시스템입니다. Pretendard Variable 글꼴을 기반으로 11개의 텍스트 계층을 정의합니다.</p>
+<p className="page-desc">바이오컴 서비스의 타이포그래피 시스템입니다. Pretendard Variable 글꼴을 기반으로 11개의 시맨틱 텍스트 스타일을 정의합니다.</p>
 
 ### Font Family
 
@@ -188,17 +236,26 @@ export const styles = [
 
 <hr className="section-divider" />
 
-### Style
+### Text Styles
 
-<p>바이오컴 타이포그래피는 총 11개 위계를 가지고 있습니다.</p>
+<p>피그마의 텍스트 스타일과 1:1 매칭되는 11개 시맨틱 토큰입니다. 컴포넌트에서 바로 적용할 수 있습니다.</p>
+
+<div className="note-box">
+  <strong>React Native lineHeight 주의</strong><br />
+  CSS의 <code>lineHeight: 1.5</code>는 폰트 크기의 1.5배이지만, React Native에서는 <strong>절대 px 값</strong>입니다.
+  <code>lineHeight: 1.5</code>는 1.5px을 의미하여 글자가 겹칩니다.
+  아래 토큰은 모두 <strong>절대 px 단위</strong>로 정의되어 있으므로 앱에 바로 적용 가능합니다.
+</div>
 
 <table className="spec-table">
   <thead>
     <tr>
-      <th>명칭</th>
+      <th>스타일</th>
+      <th>토큰</th>
       <th>크기</th>
-      <th>행간</th>
-      <th>자간</th>
+      <th>행간 (px)</th>
+      <th>자간 (px)</th>
+      <th>굵기</th>
       <th>용도</th>
     </tr>
   </thead>
@@ -206,14 +263,39 @@ export const styles = [
     {styles.map((s) => (
       <tr key={s.name}>
         <td className="style-name">{s.name}</td>
-        <td className="mono">{s.size}px</td>
-        <td className="mono">{s.lineHeight} ({s.lhRatio})</td>
+        <td><code className="token-name">{s.token}</code></td>
+        <td className="mono">{s.size}</td>
+        <td className="mono">{s.lineHeight}</td>
         <td className="mono">{s.letterSpacing}</td>
+        <td className="mono">{s.weight}</td>
         <td className="usage-text">{s.usage}</td>
       </tr>
     ))}
   </tbody>
 </table>
+
+<hr className="section-divider" />
+
+### Usage
+
+<p>피그마에서 "Title 1" 스타일을 적용하듯, 코드에서도 <code>textStyle.title1</code> 하나로 적용합니다.</p>
+
+<div className="usage-card">
+  <pre>
+    <span className="comment">// theme.ts에서 import</span>{'\n'}
+    <span className="keyword">import</span> {'{ '}<span className="token">textStyle</span>{' }'} <span className="keyword">from</span> <span className="string">'../tokens/theme'</span>;{'\n'}
+    {'\n'}
+    <span className="comment">// 시맨틱 스타일 한 번에 적용 (fontSize + fontWeight + lineHeight + letterSpacing)</span>{'\n'}
+    {'<'}<span className="token">Text</span> style={'{'}<span className="token">textStyle.title1</span>{'}'}{'>'}서비스 핵심 타이틀{'</'}<span className="token">Text</span>{'>'}{'\n'}
+    {'<'}<span className="token">Text</span> style={'{'}<span className="token">textStyle.body1</span>{'}'}{'>'}일반 본문 텍스트{'</'}<span className="token">Text</span>{'>'}{'\n'}
+    {'<'}<span className="token">Text</span> style={'{'}<span className="token">textStyle.caption</span>{'}'}{'>'}보조 설명{'</'}<span className="token">Text</span>{'>'}{'\n'}
+    {'\n'}
+    <span className="comment">// 색상 등 추가 스타일과 조합</span>{'\n'}
+    {'<'}<span className="token">Text</span> style={'{'}[<span className="token">textStyle.headline</span>, {'{ '}color: <span className="token">semanticColor.textBrand</span>{' }'}]{'}'}{'>'}{'\n'}
+    {'  '}브랜드 강조 소제목{'\n'}
+    {'</'}<span className="token">Text</span>{'>'}{'\n'}
+  </pre>
+</div>
 
 <hr className="section-divider" />
 
@@ -229,8 +311,8 @@ export const styles = [
         className="preview-text"
         style={{
           fontSize: s.size,
-          lineHeight: s.lineHeight,
-          letterSpacing: s.letterSpacing,
+          lineHeight: `${s.lineHeight}px`,
+          letterSpacing: `${s.letterSpacing}px`,
           fontWeight: s.weight,
         }}
       >

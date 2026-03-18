@@ -247,14 +247,14 @@ export const fontFamily = {
 } as const;
 
 export const fontSize = {
-  xsmall: 11,
+  xsmall: 12,
   small: 13,
   medium: 15,
   large: 17,
   xlarge: 20,
   '2xlarge': 24,
   '3xlarge': 28,
-  '4xlarge': 34,
+  '4xlarge': 32,
 } as const;
 
 export const fontWeight = {
@@ -267,24 +267,46 @@ export const fontWeight = {
 export const lineHeight = {
   xsmall: 16,
   small: 18,
-  medium: 22,
-  large: 24,
-  xlarge: 28,
-  '2xlarge': 32,
-  '3xlarge': 36,
-  '4xlarge': 42,
+  medium: 20,
+  large: 22,
+  xlarge: 24,
+  '2xlarge': 28,
+  '3xlarge': 32,
+  '4xlarge': 38,
+  '5xlarge': 44,
 } as const;
 
+/**
+ * 시맨틱 텍스트 스타일 — 피그마 11개 위계와 1:1 매칭
+ *
+ * 사용법: <Text style={textStyle.title1}>제목</Text>
+ *
+ * lineHeight · letterSpacing 는 RN 절대 px 단위입니다.
+ * (CSS의 배수가 아니므로 앱에 그대로 적용 가능)
+ */
 export const textStyle = {
-  heading1: { fontSize: fontSize['4xlarge'], fontWeight: fontWeight.bold, lineHeight: lineHeight['4xlarge'] },
-  heading2: { fontSize: fontSize['3xlarge'], fontWeight: fontWeight.bold, lineHeight: lineHeight['3xlarge'] },
-  heading3: { fontSize: fontSize['2xlarge'], fontWeight: fontWeight.bold, lineHeight: lineHeight['2xlarge'] },
-  title1:   { fontSize: fontSize.xlarge,     fontWeight: fontWeight.semibold, lineHeight: lineHeight.xlarge },
-  title2:   { fontSize: fontSize.large,     fontWeight: fontWeight.semibold, lineHeight: lineHeight.large },
-  body1:    { fontSize: fontSize.medium,     fontWeight: fontWeight.regular, lineHeight: lineHeight.medium },
-  body2:    { fontSize: fontSize.small,     fontWeight: fontWeight.regular, lineHeight: lineHeight.small },
-  caption:  { fontSize: fontSize.xsmall,     fontWeight: fontWeight.regular, lineHeight: lineHeight.xsmall },
-  label:    { fontSize: fontSize.small,     fontWeight: fontWeight.medium, lineHeight: lineHeight.small },
+  /** 32px · Bold · 44px — 서비스 핵심 타이틀, 온보딩 메인 문구 */
+  title1:   { fontSize: 32, fontWeight: '700' as const, lineHeight: 44, letterSpacing: -0.81 },
+  /** 28px · Bold · 38px — 페이지 상단 헤더, 주요 섹션 대제목 */
+  title2:   { fontSize: 28, fontWeight: '700' as const, lineHeight: 38, letterSpacing: -0.66 },
+  /** 24px · Bold · 32px — 카드/모달 타이틀, 하위 페이지 대제목 */
+  title3:   { fontSize: 24, fontWeight: '700' as const, lineHeight: 32, letterSpacing: -0.55 },
+  /** 20px · SemiBold · 28px — 소제목, 섹션 구분, 강조 중간 타이틀 */
+  heading:  { fontSize: 20, fontWeight: '600' as const, lineHeight: 28, letterSpacing: -0.24 },
+  /** 17px · SemiBold · 24px — 리스트 헤더, 탭 섹션 제목 */
+  headline: { fontSize: 17, fontWeight: '600' as const, lineHeight: 24, letterSpacing: 0 },
+  /** 16px · Regular · 24px — 일반 본문, 상세 설명 */
+  body1:    { fontSize: 16, fontWeight: '400' as const, lineHeight: 24, letterSpacing: 0.09 },
+  /** 15px · Regular · 22px — 보조 본문, 세부 설명 */
+  body2:    { fontSize: 15, fontWeight: '400' as const, lineHeight: 22, letterSpacing: 0.14 },
+  /** 16px · Regular · 24px — 본문 강조, Body 1 대체 스타일 */
+  body3:    { fontSize: 16, fontWeight: '400' as const, lineHeight: 24, letterSpacing: 0.09 },
+  /** 14px · Medium · 20px — 버튼 텍스트, 탭 메뉴, 클릭 요소 */
+  label1:   { fontSize: 14, fontWeight: '500' as const, lineHeight: 20, letterSpacing: 0.2 },
+  /** 13px · Medium · 18px — 소형 버튼, 태그, 필터 칩 */
+  label2:   { fontSize: 13, fontWeight: '500' as const, lineHeight: 18, letterSpacing: 0.25 },
+  /** 12px · Regular · 16px — 캡션, 보조 설명, 날짜 등 작은 정보 */
+  caption:  { fontSize: 12, fontWeight: '400' as const, lineHeight: 16, letterSpacing: 0.3 },
 } as const;
 
 // ─── Spacing & Radius ────────────────────────────────────
