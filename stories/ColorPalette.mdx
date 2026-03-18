@@ -116,30 +116,9 @@ export const PaletteRow = ({ title, description, children }) => (
 <h2>Color Palette</h2>
 <p>바이오컴 색상 규칙은 다음과 같이 구성되어 있습니다.</p>
 
-## Neutral
+## Mono
 
-<PaletteRow title="Neutral" description="순수 무채색 그레이 스케일. 텍스트, 배경, 보더 등 UI 전반에 사용됩니다.">
-  <Swatch token="neutral99" hex="#F7F7F7" desc="배경 (서피스)" />
-  <Swatch token="neutral95" hex="#DCDCDC" desc="보더, 디바이더" />
-  <Swatch token="neutral90" hex="#C4C4C4" desc="비활성 보더" />
-  <Swatch token="neutral80" hex="#B0B0B0" desc="플레이스홀더" />
-  <Swatch token="neutral70" hex="#9B9B9B" desc="비활성 텍스트" />
-  <Swatch token="neutral60" hex="#8A8A8A" desc="보조 텍스트" />
-  <Swatch token="neutral50" hex="#737373" desc="설명 텍스트" />
-  <Swatch token="neutral40" hex="#5C5C5C" desc="본문 텍스트" />
-  <Swatch token="neutral30" hex="#474747" desc="강조 텍스트" />
-  <Swatch token="neutral22" hex="#303030" desc="타이틀" />
-  <Swatch token="neutral20" hex="#2A2A2A" desc="헤딩" />
-  <Swatch token="neutral15" hex="#1C1C1C" desc="강조 헤딩" />
-  <Swatch token="neutral10" hex="#171717" desc="최고 강조" />
-  <Swatch token="neutral5"  hex="#0F0F0F" desc="최고 어두운 배경" />
-</PaletteRow>
-
-<hr className="section-divider" />
-
-## Cool Neutral
-
-<PaletteRow title="Cool Neutral" description="청색 기조의 중성 그레이. UI 컴포넌트의 기본 텍스트, 배경, 상태 표현에 사용됩니다.">
+<PaletteRow title="Cool Neutral" description="UI의 뼈대를 구성하는 텍스트, 배경, 보더 등에 범용적으로 사용되는 단일 무채색(Mono) 팔레트입니다.">
   <Swatch token="coolNeutral99" hex="#F7F7F8" desc="서피스 배경" />
   <Swatch token="coolNeutral98" hex="#F4F4F5" desc="카드 배경" />
   <Swatch token="coolNeutral97" hex="#EAEBEC" desc="비활성 배경" />
@@ -165,7 +144,7 @@ export const PaletteRow = ({ title, description, children }) => (
 
 <hr className="section-divider" />
 
-## Brand & Accent
+## Brand
 
 <PaletteRow title="Mint" description="브랜드 메인 컬러. CTA 버튼, 활성 상태, 핵심 인터랙션 요소에 사용됩니다.">
   <Swatch token="mint99" hex="#FBFEFE" desc="배경 틴트" />
@@ -181,6 +160,10 @@ export const PaletteRow = ({ title, description, children }) => (
   <Swatch token="mint10" hex="#082B2A" desc="최고 어두운 액센트" />
 </PaletteRow>
 
+<hr className="section-divider" />
+
+## Semantic
+
 <PaletteRow title="Green" description="성공, 완료, 긍정적 피드백 상태에 사용됩니다.">
   <Swatch token="green99" hex="#FBFEFD" desc="성공 배경 틴트" />
   <Swatch token="green95" hex="#E9FBF5" desc="성공 배경" />
@@ -194,10 +177,6 @@ export const PaletteRow = ({ title, description, children }) => (
   <Swatch token="green20" hex="#0F573D" desc="성공 다크" />
   <Swatch token="green10" hex="#082B1F" desc="성공 최고 다크" />
 </PaletteRow>
-
-<hr className="section-divider" />
-
-## Semantic Colors
 
 <PaletteRow title="Red" description="에러, 경고, 삭제 등 위험 상태에 사용됩니다.">
   <Swatch token="red99" hex="#FEFAFA" desc="에러 배경 틴트" />
@@ -243,7 +222,7 @@ export const PaletteRow = ({ title, description, children }) => (
 
 <hr className="section-divider" />
 
-## Extended Colors
+## Extended
 
 <PaletteRow title="Pink" description="프로모션, 하트, 좋아요 등 감성적 인터랙션에 사용됩니다.">
   <Swatch token="pink99" hex="#FFFAFC" desc="배경 틴트" />

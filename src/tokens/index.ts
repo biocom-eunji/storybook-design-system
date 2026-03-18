@@ -1,6 +1,5 @@
 export {
   // 개별 카테고리 색상
-  neutral,
   coolNeutral,
   khaki,
   yellow,

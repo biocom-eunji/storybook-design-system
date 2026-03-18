@@ -3,24 +3,7 @@
  * - Definition.png 기반 컬러 팔레트 + design.png 기반 컴포넌트 토큰
  */
 
-// ─── Color Palette (Definition.png) ──────────────────────
-
-export const neutral = {
-  99: '#F7F7F7',
-  95: '#DCDCDC',
-  90: '#C4C4C4',
-  80: '#B0B0B0',
-  70: '#9B9B9B',
-  60: '#8A8A8A',
-  50: '#737373',
-  40: '#5C5C5C',
-  30: '#474747',
-  22: '#303030',
-  20: '#2A2A2A',
-  15: '#1C1C1C',
-  10: '#171717',
-  5: '#0F0F0F',
-} as const;
+// ─── Color Palette ──────────────────────────────────────
 
 export const coolNeutral = {
   99: '#F7F7F8',
@@ -222,7 +205,6 @@ export const opacity = {
 // ─── Palette (통합 색상 접근) ────────────────────────────
 
 export const palette = {
-  neutral,
   coolNeutral,
   khaki,
   yellow,
