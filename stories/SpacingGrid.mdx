@@ -68,21 +68,23 @@ import { Meta } from '@storybook/addon-docs/blocks';
       border-radius: 4px;
       color: #5A5C63;
     }
-    .spacing-page pre {
-      background: #171719;
-      color: #E1E2E4;
-      padding: 20px 24px;
+    .usage-card {
+      background: linear-gradient(135deg, #FBFEFE 0%, #E9FBFA 100%);
+      border: 1px solid #D4F7F6;
       border-radius: 12px;
-      font-size: 13px;
-      line-height: 1.6;
-      overflow-x: auto;
+      padding: 20px 24px;
       margin: 16px 0 32px;
+      overflow-x: auto;
     }
-    .spacing-page pre code {
-      background: none;
-      padding: 0;
-      color: inherit;
+    .usage-card pre {
+      margin: 0;
+      font-family: 'SF Mono', 'Fira Code', monospace;
+      font-size: 13px;
+      line-height: 1.7;
+      color: #37383C;
     }
+    .usage-card .comment { color: #70737C; }
+    .usage-card .token { color: #22C3BC; }
   `}
 </style>
 
@@ -211,26 +213,30 @@ import { Meta } from '@storybook/addon-docs/blocks';
 
 <hr className="section-divider" />
 
-## Usage Guide
+### Usage
 
-<h3>사용 예시</h3>
-<p>테마에서 spacing, screenMargin, gridUnit 토큰을 가져와 사용합니다.</p>
+<p>테마에서 <code>spacing</code>, <code>screenMargin</code>, <code>gridUnit</code> 토큰을 가져와 사용합니다.</p>
 
-<pre><code>{`import { spacing, screenMargin, gridUnit } from '@/tokens/theme';
-
-// 컴포넌트 내부 패딩
-const cardStyle = {
-  padding: spacing.medium,       // 12px
-  gap: spacing.small,            // 8px
-};
-
-// 화면 좌우 마진
-const screenStyle = {
-  paddingHorizontal: screenMargin.default,  // 16px
-};
-
-// 그리드 단위 활용 (커스텀 간격)
-const customGap = gridUnit * 5;  // 20px
-const customPadding = gridUnit * 6;  // 24px`}</code></pre>
+<div className="usage-card">
+  <pre>
+    <span className="comment">// theme.ts에서 import</span>{'\n'}
+    import {'{ '}<span className="token">spacing</span>, <span className="token">screenMargin</span>, <span className="token">gridUnit</span>{' }'} from '../tokens/theme';{'\n'}
+    {'\n'}
+    <span className="comment">// 컴포넌트 내부 패딩</span>{'\n'}
+    {'const cardStyle = {'}{'\n'}
+    {'  padding: '}<span className="token">spacing.medium</span>,{'       '}<span className="comment">// 12px</span>{'\n'}
+    {'  gap: '}<span className="token">spacing.small</span>,{'            '}<span className="comment">// 8px</span>{'\n'}
+    {'};'}{'\n'}
+    {'\n'}
+    <span className="comment">// 화면 좌우 마진</span>{'\n'}
+    {'const screenStyle = {'}{'\n'}
+    {'  paddingHorizontal: '}<span className="token">screenMargin.default</span>,{'  '}<span className="comment">// 16px</span>{'\n'}
+    {'};'}{'\n'}
+    {'\n'}
+    <span className="comment">// 그리드 단위 활용 (커스텀 간격)</span>{'\n'}
+    {'const customGap = '}<span className="token">gridUnit</span>{' * 5;  '}<span className="comment">// 20px</span>{'\n'}
+    {'const customPadding = '}<span className="token">gridUnit</span>{' * 6;  '}<span className="comment">// 24px</span>{'\n'}
+  </pre>
+</div>
 
 </div>

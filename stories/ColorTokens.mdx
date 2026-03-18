@@ -65,19 +65,25 @@ export const SectionHeader = ({ title, description }) => (
       color: #5A5C63;
       margin: 0 0 12px;
     }
-    .usage-box {
-      background: #171719;
-      border-radius: 8px;
-      padding: 16px 20px;
+    .usage-card {
+      background: linear-gradient(135deg, #FBFEFE 0%, #E9FBFA 100%);
+      border: 1px solid #D4F7F6;
+      border-radius: 12px;
+      padding: 20px 24px;
       margin: 0 0 40px;
+      overflow-x: auto;
+    }
+    .usage-card pre {
+      margin: 0;
       font-family: 'SF Mono', 'Fira Code', monospace;
       font-size: 13px;
-      color: #A8F0EC;
-      line-height: 1.6;
+      line-height: 1.7;
+      color: #37383C;
     }
-    .usage-box .comment { color: #70737C; }
-    .usage-box .keyword { color: #CB59FF; }
-    .usage-box .string { color: #FFD833; }
+    .usage-card .comment { color: #70737C; }
+    .usage-card .keyword { color: #17827D; }
+    .usage-card .string { color: #22C289; }
+    .usage-card .token { color: #22C3BC; }
     .tokens-table {
       width: 100%;
       border-collapse: collapse;
@@ -197,18 +203,11 @@ export const SectionHeader = ({ title, description }) => (
 
 <div className="tokens-page">
 
-<h2 className="page-title">Semantic Color Tokens</h2>
+<h2 className="page-title">Color Tokens</h2>
 <p className="page-desc">
   역할 기반 색상 토큰입니다. 컴포넌트에서 HEX 코드 대신 토큰명을 사용하면 테마 변경 시 일괄 적용됩니다.
   <br />토큰 이름을 클릭하면 코드가 클립보드에 복사됩니다.
 </p>
-
-<div className="usage-box">
-  <span className="comment">// 사용 예시</span><br />
-  <span className="keyword">import</span> {'{ semanticColor }'} <span className="keyword">from</span> <span className="string">'../tokens/theme'</span>;<br /><br />
-  {'<Text style={{ color: semanticColor.textPrimary }}>본문 텍스트</Text>'}<br />
-  {'<View style={{ backgroundColor: semanticColor.backgroundBrand }} />'}
-</div>
 
 <table className="tokens-table">
   <thead>
@@ -268,5 +267,27 @@ export const SectionHeader = ({ title, description }) => (
     <TokenRow token="statusInfo"    hex="#22C3BC" source="Mint 45" role="정보·안내 상태의 주요 색상입니다." />
   </tbody>
 </table>
+
+### Usage
+
+<p>컴포넌트에서 HEX 코드 대신 <code>semanticColor</code> 토큰을 사용합니다.</p>
+
+<div className="usage-card">
+  <pre>
+    <span className="comment">// theme.ts에서 import</span>{'\n'}
+    <span className="keyword">import</span> {'{ '}<span className="token">semanticColor</span>{' }'} <span className="keyword">from</span> <span className="string">'../tokens/theme'</span>;{'\n'}
+    {'\n'}
+    <span className="comment">// 텍스트 색상 적용</span>{'\n'}
+    {'<'}<span className="token">Text</span> style={'{{ '}color: <span className="token">semanticColor.textPrimary</span>{' }}'}{'>'}{'\n'}
+    {'  '}본문 텍스트{'\n'}
+    {'</'}<span className="token">Text</span>{'>'}{'\n'}
+    {'\n'}
+    <span className="comment">// 배경 색상 적용</span>{'\n'}
+    {'<'}<span className="token">View</span> style={'{{ '}backgroundColor: <span className="token">semanticColor.backgroundBrand</span>{' }}'} {'/>'}{'\n'}
+    {'\n'}
+    <span className="comment">// 테두리 색상 적용</span>{'\n'}
+    {'<'}<span className="token">View</span> style={'{{ '}borderColor: <span className="token">semanticColor.borderError</span>, borderWidth: 1{' }}'} {'/>'}{'\n'}
+  </pre>
+</div>
 
 </div>

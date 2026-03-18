@@ -166,7 +166,8 @@ export const styles = [
       margin: 48px 0;
     }
     .usage-card {
-      background: #1B1C1E;
+      background: linear-gradient(135deg, #FBFEFE 0%, #E9FBFA 100%);
+      border: 1px solid #D4F7F6;
       border-radius: 12px;
       padding: 24px;
       margin: 0 0 48px;
@@ -177,19 +178,19 @@ export const styles = [
       font-family: 'SF Mono', 'Fira Code', monospace;
       font-size: 13px;
       line-height: 1.7;
-      color: #E1E2E4;
+      color: #37383C;
     }
     .usage-card .comment {
       color: #70737C;
     }
     .usage-card .keyword {
-      color: #FF80A8;
+      color: #17827D;
     }
     .usage-card .string {
-      color: #7DE8C2;
+      color: #22C289;
     }
     .usage-card .token {
-      color: #70D2FF;
+      color: #22C3BC;
     }
     .note-box {
       background: #FFF5CC;
@@ -276,29 +277,6 @@ export const styles = [
 
 <hr className="section-divider" />
 
-### Usage
-
-<p>피그마에서 "Title 1" 스타일을 적용하듯, 코드에서도 <code>textStyle.title1</code> 하나로 적용합니다.</p>
-
-<div className="usage-card">
-  <pre>
-    <span className="comment">// theme.ts에서 import</span>{'\n'}
-    <span className="keyword">import</span> {'{ '}<span className="token">textStyle</span>{' }'} <span className="keyword">from</span> <span className="string">'../tokens/theme'</span>;{'\n'}
-    {'\n'}
-    <span className="comment">// 시맨틱 스타일 한 번에 적용 (fontSize + fontWeight + lineHeight + letterSpacing)</span>{'\n'}
-    {'<'}<span className="token">Text</span> style={'{'}<span className="token">textStyle.title1</span>{'}'}{'>'}서비스 핵심 타이틀{'</'}<span className="token">Text</span>{'>'}{'\n'}
-    {'<'}<span className="token">Text</span> style={'{'}<span className="token">textStyle.body1</span>{'}'}{'>'}일반 본문 텍스트{'</'}<span className="token">Text</span>{'>'}{'\n'}
-    {'<'}<span className="token">Text</span> style={'{'}<span className="token">textStyle.caption</span>{'}'}{'>'}보조 설명{'</'}<span className="token">Text</span>{'>'}{'\n'}
-    {'\n'}
-    <span className="comment">// 색상 등 추가 스타일과 조합</span>{'\n'}
-    {'<'}<span className="token">Text</span> style={'{'}[<span className="token">textStyle.headline</span>, {'{ '}color: <span className="token">semanticColor.textBrand</span>{' }'}]{'}'}{'>'}{'\n'}
-    {'  '}브랜드 강조 소제목{'\n'}
-    {'</'}<span className="token">Text</span>{'>'}{'\n'}
-  </pre>
-</div>
-
-<hr className="section-divider" />
-
 ### Preview
 
 <p>각 스타일별 미리보기입니다.</p>
@@ -320,6 +298,29 @@ export const styles = [
       </span>
     </div>
   ))}
+</div>
+
+<hr className="section-divider" />
+
+### Usage
+
+<p>피그마에서 "Title 1" 스타일을 적용하듯, 코드에서도 <code>textStyle.title1</code> 하나로 적용합니다.</p>
+
+<div className="usage-card">
+  <pre>
+    <span className="comment">// theme.ts에서 import</span>{'\n'}
+    <span className="keyword">import</span> {'{ '}<span className="token">textStyle</span>{' }'} <span className="keyword">from</span> <span className="string">'../tokens/theme'</span>;{'\n'}
+    {'\n'}
+    <span className="comment">// 시맨틱 스타일 한 번에 적용 (fontSize + fontWeight + lineHeight + letterSpacing)</span>{'\n'}
+    {'<'}<span className="token">Text</span> style={'{'}<span className="token">textStyle.title1</span>{'}'}{'>'}서비스 핵심 타이틀{'</'}<span className="token">Text</span>{'>'}{'\n'}
+    {'<'}<span className="token">Text</span> style={'{'}<span className="token">textStyle.body1</span>{'}'}{'>'}일반 본문 텍스트{'</'}<span className="token">Text</span>{'>'}{'\n'}
+    {'<'}<span className="token">Text</span> style={'{'}<span className="token">textStyle.caption</span>{'}'}{'>'}보조 설명{'</'}<span className="token">Text</span>{'>'}{'\n'}
+    {'\n'}
+    <span className="comment">// 색상 등 추가 스타일과 조합</span>{'\n'}
+    {'<'}<span className="token">Text</span> style={'{'}[<span className="token">textStyle.headline</span>, {'{ '}color: <span className="token">semanticColor.textBrand</span>{' }'}]{'}'}{'>'}{'\n'}
+    {'  '}브랜드 강조 소제목{'\n'}
+    {'</'}<span className="token">Text</span>{'>'}{'\n'}
+  </pre>
 </div>
 
 </div>
