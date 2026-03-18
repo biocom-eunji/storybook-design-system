@@ -6,6 +6,7 @@
 // ─── Color Palette ──────────────────────────────────────
 
 export const coolNeutral = {
+  100: '#FFFFFF',
   99: '#F7F7F8',
   98: '#F4F4F5',
   97: '#EAEBEC',
@@ -369,9 +370,9 @@ export const semanticColor = {
   textPrimary: coolNeutral[17],
   /** 보조 설명, 부가 정보 텍스트 */
   textSecondary: coolNeutral[50],
-  /** 비활성화된 텍스트, 힌트 */
+  /** 비활성화 텍스트, 힌트, 플레이스홀더 */
   textTertiary: coolNeutral[80],
-  /** 플레이스홀더 텍스트 */
+  /** @alias textTertiary — 플레이스홀더 텍스트 (하위 호환) */
   textPlaceholder: coolNeutral[80],
   /** 색상 배경 위에 올라가는 텍스트 (버튼, 배지 등) */
   textOnColor: palette.white,
@@ -397,30 +398,26 @@ export const semanticColor = {
   backgroundBrand: mint[45],
   /** 브랜드 배경 눌림 */
   backgroundBrandPressed: mint[30],
-  /** 브랜드 배경 비활성화 */
-  backgroundBrandDisabled: coolNeutral[96],
-  /** 에러 상태 배경 (연한 빨강) */
-  backgroundError: orange[99],
-  /** 성공 상태 배경 (연한 민트) */
-  backgroundSuccess: mint[99],
-  /** 경고 상태 배경 (연한 주황) */
-  backgroundWarning: yellow[99],
+  /** 에러/성공/경고 상태 배경 (흰색 통일) */
+  backgroundError: palette.white,
+  /** 성공 상태 배경 */
+  backgroundSuccess: palette.white,
+  /** 경고 상태 배경 */
+  backgroundWarning: palette.white,
 
   // ── Border ────────────────────────────────────────────
-  /** 기본 테두리 (인풋 비활성, 구분선) */
+  /** 기본 테두리, 비활성화 테두리, 구분선 */
   borderDefault: coolNeutral[96],
+  /** @alias borderDefault — 비활성화 테두리 (하위 호환) */
+  borderDisabled: coolNeutral[96],
   /** 입력됨 상태 테두리 */
   borderActive: coolNeutral[90],
-  /** 포커스 상태 테두리 */
+  /** 포커스·브랜드 강조 테두리 */
   borderFocus: mint[45],
   /** 에러 상태 테두리 */
   borderError: red[70],
   /** 성공 상태 테두리 */
   borderSuccess: mint[45],
-  /** 강조 테두리 (브랜드) */
-  borderBrand: mint[45],
-  /** 비활성화 테두리 */
-  borderDisabled: coolNeutral[96],
 
   // ── Icon ──────────────────────────────────────────────
   /** 기본 아이콘 색상 */
@@ -441,12 +438,10 @@ export const semanticColor = {
   // ── Status ────────────────────────────────────────────
   /** 에러 주색 */
   statusError: red[70],
-  /** 성공 주색 */
+  /** 성공·정보 주색 */
   statusSuccess: mint[45],
   /** 경고 주색 */
   statusWarning: yellow[50],
-  /** 정보 주색 */
-  statusInfo: mint[45],
 } as const;
 
 export type SemanticColor = typeof semanticColor;
