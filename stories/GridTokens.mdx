@@ -143,6 +143,24 @@ export const TokenRow = ({ token, value, bar, role }) => (
   </tr>
 );
 
+export const RadiusRow = ({ token, value, role }) => (
+  <tr>
+    <td><code className="token-name">{token}</code></td>
+    <td style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
+      <div style={{
+        width: 32,
+        height: 32,
+        backgroundColor: '#F7F7F8',
+        border: '2px solid #22C3BC',
+        borderTopRightRadius: Math.min(value, 16),
+        flexShrink: 0,
+      }} />
+      <span className="token-value">{value === 9999 ? '9999px' : `${value}px`}</span>
+    </td>
+    <td><span className="token-role">{role}</span></td>
+  </tr>
+);
+
 export const SectionRow = ({ title }) => (
   <tr className="section-header-row">
     <td colSpan="3">{title}</td>
@@ -244,12 +262,12 @@ export const SectionRow = ({ title }) => (
     </tr>
   </thead>
   <tbody>
-    <TokenRow token="radius.xsmall"  value={4}    bar={8}  role="소형 태그, 코드 블록" />
-    <TokenRow token="radius.small"   value={8}    bar={16} role="Small 버튼, Small 칩" />
-    <TokenRow token="radius.medium"  value={12}   bar={24} role="Medium/Large 버튼, 인풋, 카드" />
-    <TokenRow token="radius.large"   value={16}   bar={32} role="모달, 바텀시트 상단" />
-    <TokenRow token="radius.xlarge"  value={24}   bar={48} role="BottomSheet, 대형 카드" />
-    <TokenRow token="radius.full"    value={9999} bar={60} role="원형 (배지, 아바타, 토글)" />
+    <RadiusRow token="radius.xsmall"  value={4}    role="소형 태그, 코드 블록" />
+    <RadiusRow token="radius.small"   value={8}    role="Small 버튼, Small 칩" />
+    <RadiusRow token="radius.medium"  value={12}   role="Medium/Large 버튼, 인풋, 카드" />
+    <RadiusRow token="radius.large"   value={16}   role="모달, 바텀시트 상단" />
+    <RadiusRow token="radius.xlarge"  value={24}   role="BottomSheet, 대형 카드" />
+    <RadiusRow token="radius.full"    value={9999} role="원형 (배지, 아바타, 토글)" />
   </tbody>
 </table>
 

@@ -192,34 +192,71 @@ export const GridBar = ({ value, multiplier, desc }) => (
 
 <hr className="section-divider" />
 
-### Visual Comparison
+### Column Grid
 
-<p>동일한 박스 안에서 여백 크기를 비교합니다. 초록 영역이 실제 여백입니다.</p>
+<p>모바일 화면의 컬럼 그리드 간격은 <strong>20px</strong>로 두며, 화면 너비에 맞게 유연히 대응할 수 있는 컬럼 그리드를 사용합니다.</p>
 
-<div style={{ display: 'flex', flexWrap: 'wrap', gap: 12 }}>
-  {gridSteps.slice(0, 8).map((step) => (
-    <div key={step.value} style={{ textAlign: 'center' }}>
-      <div style={{
-        width: 80,
-        height: 80,
-        backgroundColor: '#F7F7F8',
-        borderRadius: 8,
-        border: '1px solid #E1E2E4',
+<div style={{
+  border: '1px solid #E1E2E4',
+  borderRadius: 12,
+  padding: 20,
+  backgroundColor: '#F7F7F8',
+  marginBottom: 24,
+}}>
+  <div style={{ display: 'flex', gap: 20, height: 120 }}>
+    {Array.from({ length: 4 }).map((_, i) => (
+      <div key={i} style={{
+        flex: 1,
+        backgroundColor: 'rgba(34, 195, 188, 0.15)',
+        borderRadius: 6,
+        border: '1px dashed #22C3BC',
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'center',
+        fontSize: 11,
+        fontWeight: 600,
+        color: '#22C3BC',
       }}>
-        <div style={{
-          width: step.value,
-          height: step.value,
-          backgroundColor: '#22C3BC',
-          borderRadius: Math.min(step.value / 4, 6),
-        }} />
+        Col {i + 1}
       </div>
-      <div style={{ fontSize: 12, fontWeight: 600, color: '#171719', marginTop: 6 }}>{step.value}px</div>
-      <div style={{ fontSize: 11, color: '#989BA2' }}>{step.multiplier}</div>
-    </div>
-  ))}
+    ))}
+  </div>
+  <div style={{ display: 'flex', justifyContent: 'center', gap: 4, marginTop: 8 }}>
+    <span style={{ fontSize: 11, color: '#989BA2' }}>margin: 20px</span>
+    <span style={{ fontSize: 11, color: '#989BA2' }}>·</span>
+    <span style={{ fontSize: 11, color: '#989BA2' }}>gutter: 20px</span>
+    <span style={{ fontSize: 11, color: '#989BA2' }}>·</span>
+    <span style={{ fontSize: 11, color: '#989BA2' }}>columns: flexible</span>
+  </div>
+</div>
+
+<hr className="section-divider" />
+
+### Figma Grid Shortcut
+
+<p>피그마에서 그리드를 켜고 끌 때 사용하는 단축키입니다.</p>
+
+<div style={{ display: 'flex', gap: 16, marginBottom: 0 }}>
+  <div style={{
+    flex: 1,
+    background: '#F7F7F8',
+    borderRadius: 10,
+    padding: '16px 20px',
+    border: '1px solid #E1E2E4',
+  }}>
+    <div style={{ fontSize: 11, fontWeight: 600, color: '#989BA2', marginBottom: 6 }}>macOS</div>
+    <div style={{ fontFamily: "'SF Mono', 'Fira Code', monospace", fontSize: 15, fontWeight: 700, color: '#171719' }}>⌃ Control + G</div>
+  </div>
+  <div style={{
+    flex: 1,
+    background: '#F7F7F8',
+    borderRadius: 10,
+    padding: '16px 20px',
+    border: '1px solid #E1E2E4',
+  }}>
+    <div style={{ fontSize: 11, fontWeight: 600, color: '#989BA2', marginBottom: 6 }}>Windows</div>
+    <div style={{ fontFamily: "'SF Mono', 'Fira Code', monospace", fontSize: 15, fontWeight: 700, color: '#171719' }}>Ctrl + Shift + 4</div>
+  </div>
 </div>
 
 </div>
