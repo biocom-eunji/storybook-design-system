@@ -1,6 +1,6 @@
 import React from 'react';
 import { View, Text, type ViewStyle, type TextStyle } from 'react-native';
-import { coolNeutral, mint, green, red, yellow, fontSize, fontWeight } from '../tokens/theme';
+import { coolNeutral, mint, green, red, yellow, fontSize, fontWeight, spacing } from '../tokens/theme';
 
 export type ProgressBarSize = 'small' | 'medium' | 'large';
 export type ProgressBarColor = 'primary' | 'success' | 'error' | 'warning';
@@ -45,7 +45,7 @@ export function ProgressBar({
     fontWeight: fontWeight.semibold,
     color: coolNeutral[17],
     textAlign: 'right',
-    marginBottom: 4,
+    marginBottom: spacing.xsmall,
   };
 
   const trackStyle: ViewStyle = {

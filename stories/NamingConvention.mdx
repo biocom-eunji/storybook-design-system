@@ -264,8 +264,8 @@ export const Ex = ({ children }) => <code className="do-example">{children}</cod
     <li>아이콘 이름: <strong>kebab-case</strong> — <code>check-circle</code>, <code>shopping-cart-simple</code></li>
     <li>색상 토큰: <strong>카테고리 + 역할</strong> — <code>text</code> + <code>Primary</code> = <code>textPrimary</code></li>
     <li>시각적 속성(색상명, 크기값)을 이름에 포함하지 않음</li>
-    <li>그리드 토큰: <strong>camelCase</strong> — <code>spacing.twoXlarge</code>, <code>screenMargin.default</code>, <code>inputField.minHeight</code></li>
-    <li>줄임말 대신 전체 단어, 숫자 접두사는 영문 — <code>twoXlarge</code> not <code>2xlarge</code></li>
+    <li>그리드 토큰: <strong>camelCase</strong> — <code>spacing['2xlarge']</code>, <code>screenMargin.default</code>, <code>inputField.minHeight</code></li>
+    <li>줄임말 대신 전체 단어 사용 — <code>background</code> not <code>bg</code></li>
     <li>샘플 아이콘 슬롯에는 <code>&lt;Icon name="null" /&gt;</code> 사용</li>
   </ul>
 </div>
@@ -373,7 +373,7 @@ export const Ex = ({ children }) => <code className="do-example">{children}</cod
       <td className="category">스페이싱 · 반경</td>
       <td>camelCase. 티셔츠 사이즈 패턴. 전체 단어, 숫자 접두사는 영문으로.</td>
       <td>
-        <Do><Ex>spacing.small</Ex><Ex>spacing.twoXlarge</Ex><Ex>radius.medium</Ex></Do>
+        <Do><Ex>spacing.small</Ex><Ex>spacing['2xlarge']</Ex><Ex>radius.medium</Ex></Do>
         <Dont><Ex>spacing8</Ex><Ex>spacing['2xlarge']</Ex><Ex>RADIUS_12</Ex></Dont>
       </td>
     </tr>

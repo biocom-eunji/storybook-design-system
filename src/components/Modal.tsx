@@ -1,6 +1,6 @@
 import React from 'react';
 import { View, Text, Pressable, StyleSheet, type ViewStyle, type TextStyle } from 'react-native';
-import { coolNeutral, mint, red, fontSize, fontWeight, spacing, semanticColor, radius, palette } from '../tokens/theme';
+import { coolNeutral, mint, red, fontSize, fontWeight, spacing, semanticColor, radius } from '../tokens/theme';
 
 export interface ModalAction {
   label: string;
@@ -110,7 +110,7 @@ const styles = StyleSheet.create({
   } as ViewStyle,
   primaryButton: {
     height: 48,
-    borderRadius: spacing.medium,
+    borderRadius: radius.medium,
     backgroundColor: mint[45],
     alignItems: 'center',
     justifyContent: 'center',
@@ -119,13 +119,13 @@ const styles = StyleSheet.create({
     backgroundColor: red[70],
   } as ViewStyle,
   primaryButtonText: {
-    color: palette.white,
+    color: coolNeutral[100],
     fontSize: fontSize.medium,
     fontWeight: fontWeight.semibold,
   } as TextStyle,
   secondaryButton: {
     height: 48,
-    borderRadius: spacing.medium,
+    borderRadius: radius.medium,
     backgroundColor: coolNeutral[97],
     alignItems: 'center',
     justifyContent: 'center',

@@ -39,7 +39,7 @@ export function Switch({
     ? (active ? mint[90] : coolNeutral[96])
     : (active ? mint[45] : coolNeutral[90]);
 
-  const thumbColor = palette.white;
+  const thumbColor = coolNeutral[100];
   const thumbShadow: ViewStyle = disabled ? {} : {
     shadowColor: '#000',
     shadowOffset: { width: 0, height: 1 },

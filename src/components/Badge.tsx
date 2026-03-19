@@ -1,6 +1,6 @@
 import React from 'react';
 import { View, Text, StyleSheet, type ViewStyle, type TextStyle } from 'react-native';
-import { coolNeutral, mint, red, yellow, radius, palette, spacing } from '../tokens/theme';
+import { coolNeutral, mint, red, yellow, radius,  spacing } from '../tokens/theme';
 
 export type BadgeVariant = 'filled' | 'outlined' | 'dot';
 export type BadgeColor = 'primary' | 'error' | 'success' | 'warning';
@@ -69,7 +69,7 @@ export function Badge({
         ...(variant === 'filled'
           ? { backgroundColor: themeColor }
           : {
-              backgroundColor: palette.white,
+              backgroundColor: coolNeutral[100],
               borderWidth: 1,
               borderColor: themeColor,
             }),
@@ -78,7 +78,7 @@ export function Badge({
   const textStyle: TextStyle = {
     fontSize: sizeToken.fontSize,
     fontWeight: '600',
-    color: variant === 'filled' ? palette.white : themeColor,
+    color: variant === 'filled' ? coolNeutral[100] : themeColor,
     textAlign: 'center',
   };
 

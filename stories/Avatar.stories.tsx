@@ -175,7 +175,7 @@ export const DesignSpec: Story = {
             { label: '폴백 배경색', value: coolNeutral[97], token: 'coolNeutral[97]' },
             { label: '이니셜 텍스트', value: coolNeutral[50], token: 'coolNeutral[50]' },
             { label: '온라인 점 색상', value: mint[45], token: 'mint[45]' },
-            { label: '온라인 점 테두리', value: '#FFFFFF', token: 'palette.white' },
+            { label: '온라인 점 테두리', value: '#FFFFFF', token: 'coolNeutral[100]' },
             { label: '테두리 두께', value: '2px', token: '—' },
           ]}
         />

@@ -291,7 +291,7 @@ export const DesignSpec: Story = {
             { label: 'Error', value: red[70], token: 'red[70]' },
             { label: 'Success', value: mint[45], token: 'mint[45]' },
             { label: 'Warning', value: yellow[50], token: 'yellow[50]' },
-            { label: 'Filled 텍스트', value: '#FFFFFF', token: 'palette.white' },
+            { label: 'Filled 텍스트', value: '#FFFFFF', token: 'coolNeutral[100]' },
           ]}
         />
       </Section>

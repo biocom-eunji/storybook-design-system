@@ -83,7 +83,7 @@ export function Toast({
   };
 
   const messageStyle: TextStyle = {
-    color: palette.white,
+    color: coolNeutral[100],
     fontSize: fontSize.medium,
     fontWeight: fontWeight.medium,
     flex: 1,

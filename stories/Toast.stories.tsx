@@ -201,7 +201,7 @@ export const DesignSpec: Story = {
           title="레이아웃"
           rows={[
             { label: '배경색', value: coolNeutral[50], token: 'coolNeutral[50]' },
-            { label: '텍스트 색상', value: '#FFFFFF', token: 'palette.white' },
+            { label: '텍스트 색상', value: '#FFFFFF', token: 'coolNeutral[100]' },
             { label: '폰트 크기', value: `${fontSize.medium}px`, token: 'fontSize.medium' },
             { label: '폰트 굵기', value: fontWeight.medium, token: 'fontWeight.medium' },
             { label: '모서리 반경', value: `${radius.medium}px`, token: 'radius.medium' },

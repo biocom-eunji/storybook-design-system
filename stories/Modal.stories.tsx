@@ -159,7 +159,7 @@ export const DesignSpec: Story = {
         <SpecTable
           title="대화상자"
           rows={[
-            { label: '배경색', value: '#FFFFFF', token: 'palette.white' },
+            { label: '배경색', value: '#FFFFFF', token: 'coolNeutral[100]' },
             { label: '모서리 반경', value: '20px', token: '—' },
             { label: '너비', value: '300px', token: '—' },
             { label: '패딩', value: `${spacing['2xlarge']}px`, token: 'spacing.2xl' },
@@ -193,7 +193,7 @@ export const DesignSpec: Story = {
             { label: '모서리 반경', value: `${spacing.medium}px`, token: 'spacing.medium' },
             { label: '배경색', value: mint[45], token: 'mint[45]' },
             { label: '배경색 (위험)', value: red[70], token: 'red[70]' },
-            { label: '텍스트 색상', value: '#FFFFFF', token: 'palette.white' },
+            { label: '텍스트 색상', value: '#FFFFFF', token: 'coolNeutral[100]' },
             { label: '폰트 크기', value: `${fontSize.medium}px`, token: 'fontSize.medium' },
             { label: '폰트 굵기', value: fontWeight.semibold, token: 'fontWeight.semibold' },
           ]}
