@@ -14,11 +14,13 @@
 
 ### ♻️ Refactored
 
-- **전체 토큰 네이밍 통일** — 문서(GridTokens/NamingConvention)의 camelCase 오기재를 theme.ts 실제 키(`spacing['2xlarge']`)와 동기화
+- **Grid Palette 확장** — 컴포넌트 토큰 누락값 7개 추가 (14/18/28/36/38/44/52px). Palette 10개 → 17개, Grid Tokens와 완전 1:1 매핑
+- **Grid Tokens 별칭 제거** — 이중 표기(alias) 완전 제거, theme.ts 실제 키만 표시. `inputField.minHeight`(가상) → `SINGLE_LINE_HEIGHT`(실제)
+- **전체 토큰 네이밍 통일** — 문서의 camelCase 오기재를 theme.ts 실제 키(`spacing['2xlarge']`)와 동기화
 - **잘못된 토큰 타입 수정** — Modal `borderRadius: spacing.medium` → `radius.medium` (2건)
 - **하드코딩 → 토큰** — TabBar/Chip/TextButton/ProgressBar px 값 → 토큰 교체 (5건)
 - **palette.white 완전 제거** — 전 컴포넌트/스토리에서 `coolNeutral[100]`으로 전환 (12건)
-- **Grid Tokens 최적화** — BaseRow 공통 추출, 컴포넌트 토큰에 짧은 별칭 추가, SubHeader로 서브 그룹 분리
+- **Grid Tokens 최적화** — BaseRow 공통 추출, SubHeader로 서브 그룹 분리
 - **Shadow & Elevation** → **Shadow**로 이름 변경
 - **Spacing & Grid** 페이지 삭제 — Grid Palette + Grid Tokens로 대체
 - **Button** — 디자인 스펙 폰트 크기 → 폰트 스타일(Label 2, Body 2, Headline) 표기

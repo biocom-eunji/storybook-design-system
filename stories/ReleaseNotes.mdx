@@ -420,20 +420,28 @@ export const LINK = {
     <CaretIcon />
     <span className="emoji">♻️</span>
     <span className="title">Refactored</span>
-    <span className="count">6</span>
+    <span className="count">8</span>
   </summary>
   <div className="toggle-body">
     <div className="change-item">
+      <span className="name-plain">Grid Palette 확장</span>
+      <span className="desc">컴포넌트 토큰에서 사용 중이나 Palette에 없던 4px 배수 값 7개 추가 (14/18/28/36/38/44/52px). Palette 10개 → 17개, Grid Tokens와 완전 1:1 매핑</span>
+    </div>
+    <div className="change-item">
+      <span className="name-plain">Grid Tokens 별칭 제거</span>
+      <span className="desc">혼란 유발하던 이중 표기(alias) 완전 제거, theme.ts 실제 키만 표시. <code>inputField.minHeight</code>(가상) → <code>SINGLE_LINE_HEIGHT</code>(실제)</span>
+    </div>
+    <div className="change-item">
       <span className="name-plain">토큰 네이밍 통일</span>
-      <span className="desc">문서(GridTokens/NamingConvention)의 camelCase 오기재를 theme.ts 실제 키(<code>spacing['2xlarge']</code>)와 동기화, Modal <code>borderRadius: spacing.medium</code> → <code>radius.medium</code> 수정</span>
+      <span className="desc">문서의 camelCase 오기재를 theme.ts 실제 키(<code>spacing['2xlarge']</code>)와 동기화, Modal <code>borderRadius: spacing.medium</code> → <code>radius.medium</code></span>
     </div>
     <div className="change-item">
       <span className="name-plain">하드코딩 제거</span>
-      <span className="desc">TabBar/Chip/TextButton/ProgressBar의 하드코딩 px → 토큰 교체 (5건), <code>palette.white</code> → <code>coolNeutral[100]</code> 전체 완전 전환 (12건)</span>
+      <span className="desc">TabBar/Chip/TextButton/ProgressBar의 하드코딩 px → 토큰 교체 (5건), <code>palette.white</code> → <code>coolNeutral[100]</code> 완전 전환 (12건)</span>
     </div>
     <div className="change-item">
       <span className="name-plain">Grid Tokens</span>
-      <span className="desc">BaseRow 공통 컴포넌트 추출, 컴포넌트 토큰에 짧은 별칭(button.small.height) 추가, SubHeader로 Button/Chip/ActionArea/InputField 서브 그룹 분리</span>
+      <span className="desc">BaseRow 공통 컴포넌트 추출, SubHeader로 Button/Chip/ActionArea/InputField 서브 그룹 분리</span>
     </div>
     <div className="change-item">
       <span className="name-plain">Shadow</span>
