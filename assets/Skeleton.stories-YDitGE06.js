@@ -1,0 +1,274 @@
+import{R as e,V as l}from"./iframe-CExKz_YG.js";import{c as i,r as o,s as t}from"./theme-DRANkRo4.js";import{S as s,c as R,R as S,C as r,a as n,D as x,b as m,d}from"./storyHelpers-Cr27IWoZ.js";import"./preload-helper-PPVm8Dsz.js";const L={text:16,circular:40,rectangular:100};function a({variant:c="rectangular",width:b,height:y,borderRadius:k}){const E=y??L[c],V=b!==void 0?b:c==="circular"?E:"100%",C=(()=>{if(k!==void 0)return k;switch(c){case"circular":return o.full;case"text":return 4;default:return o.small}})(),f={width:V,height:E,borderRadius:C,backgroundColor:i[96],overflow:"hidden"};return e.createElement(l,{style:f},e.createElement("style",{dangerouslySetInnerHTML:{__html:`
+@keyframes skeleton-shimmer {
+  0% { transform: translateX(-100%); }
+  100% { transform: translateX(100%); }
+}
+          `}}),e.createElement("div",{style:{position:"absolute",top:0,left:0,right:0,bottom:0,background:`linear-gradient(90deg, ${i[96]} 0%, ${i[90]} 50%, ${i[96]} 100%)`,animation:"skeleton-shimmer 1.5s ease-in-out infinite"}}))}a.__docgenInfo={description:"",methods:[],displayName:"Skeleton",props:{variant:{required:!1,tsType:{name:"union",raw:"'text' | 'circular' | 'rectangular'",elements:[{name:"literal",value:"'text'"},{name:"literal",value:"'circular'"},{name:"literal",value:"'rectangular'"}]},description:"",defaultValue:{value:"'rectangular'",computed:!1}},width:{required:!1,tsType:{name:"union",raw:"number | string",elements:[{name:"number"},{name:"string"}]},description:""},height:{required:!1,tsType:{name:"number"},description:""},borderRadius:{required:!1,tsType:{name:"number"},description:""}}};const I={title:"Feedback/Skeleton",component:a,argTypes:{variant:{control:"select",options:["text","circular","rectangular"],description:"스켈레톤 형태"},width:{control:"text",description:"너비"},height:{control:"number",description:"높이"},borderRadius:{control:"number",description:"커스텀 모서리 반경"}},tags:["autodocs"]},g={args:{variant:"rectangular",width:200,height:100}},u={name:"변형",render:()=>e.createElement(l,{style:{gap:t["3xlarge"]}},e.createElement(s,{title:"변형",description:"text, circular, rectangular 세 가지 형태를 제공합니다."},e.createElement(l,{style:{gap:t.xlarge}},e.createElement(r,{gap:t.small},e.createElement(n,null,"Text"),e.createElement(l,{style:{maxWidth:300}},e.createElement(a,{variant:"text"}))),e.createElement(r,{gap:t.small},e.createElement(n,null,"Circular"),e.createElement(a,{variant:"circular"})),e.createElement(r,{gap:t.small},e.createElement(n,null,"Rectangular"),e.createElement(l,{style:{maxWidth:300}},e.createElement(a,{variant:"rectangular"}))))))},p={name:"크기 커스텀",render:()=>e.createElement(l,{style:{gap:t["3xlarge"]}},e.createElement(s,{title:"크기 커스텀",description:"width와 height를 자유롭게 조합할 수 있습니다."},e.createElement(l,{style:{gap:t.xlarge}},e.createElement(S,{gap:t.large,align:"flex-end"},e.createElement(r,{gap:t.small},e.createElement(n,null,"40×40"),e.createElement(a,{variant:"rectangular",width:40,height:40})),e.createElement(r,{gap:t.small},e.createElement(n,null,"80×80"),e.createElement(a,{variant:"rectangular",width:80,height:80})),e.createElement(r,{gap:t.small},e.createElement(n,null,"120×60"),e.createElement(a,{variant:"rectangular",width:120,height:60})),e.createElement(r,{gap:t.small},e.createElement(n,null,"200×20"),e.createElement(a,{variant:"rectangular",width:200,height:20}))),e.createElement(x,null),e.createElement(S,{gap:t.large,align:"flex-end"},e.createElement(r,{gap:t.small},e.createElement(n,null,"원형 24"),e.createElement(a,{variant:"circular",width:24,height:24})),e.createElement(r,{gap:t.small},e.createElement(n,null,"원형 40"),e.createElement(a,{variant:"circular",width:40,height:40})),e.createElement(r,{gap:t.small},e.createElement(n,null,"원형 56"),e.createElement(a,{variant:"circular",width:56,height:56})),e.createElement(r,{gap:t.small},e.createElement(n,null,"원형 72"),e.createElement(a,{variant:"circular",width:72,height:72}))))))},h={name:"실전 예시",render:()=>e.createElement(l,{style:{gap:t["3xlarge"]}},e.createElement(s,{title:"실전 예시 — 카드 스켈레톤",description:"실제 UI 레이아웃에 맞춰 Skeleton을 조합한 예시입니다."},e.createElement(R,{items:[{label:"프로필 카드",content:e.createElement(l,{style:{padding:t.large,borderRadius:o.medium,borderWidth:1,borderColor:i[96],width:260,gap:t.medium}},e.createElement(S,{gap:t.medium,align:"center"},e.createElement(a,{variant:"circular",width:48,height:48}),e.createElement(l,{style:{flex:1,gap:t.small}},e.createElement(a,{variant:"text",width:120}),e.createElement(a,{variant:"text",width:80,height:12}))),e.createElement(a,{variant:"text"}),e.createElement(a,{variant:"text",width:"80%"}))},{label:"미디어 카드",content:e.createElement(l,{style:{borderRadius:o.medium,borderWidth:1,borderColor:i[96],width:260,overflow:"hidden"}},e.createElement(a,{variant:"rectangular",height:140,borderRadius:0}),e.createElement(l,{style:{padding:t.large,gap:t.small}},e.createElement(a,{variant:"text",width:"90%"}),e.createElement(a,{variant:"text",width:"60%",height:12}),e.createElement(l,{style:{marginTop:t.small}},e.createElement(a,{variant:"rectangular",height:36,borderRadius:o.small}))))},{label:"리스트 아이템",content:e.createElement(l,{style:{width:260,gap:t.medium}},[0,1,2].map(c=>e.createElement(S,{key:c,gap:t.medium,align:"center"},e.createElement(a,{variant:"circular",width:36,height:36}),e.createElement(l,{style:{flex:1,gap:t.xsmall}},e.createElement(a,{variant:"text",width:"70%"}),e.createElement(a,{variant:"text",width:"40%",height:12})),e.createElement(a,{variant:"rectangular",width:60,height:28,borderRadius:o.small}))))}]})))},w={name:"디자인 스펙",render:()=>e.createElement(l,{style:{gap:t["3xlarge"]}},e.createElement(s,{title:"디자인 스펙",description:"디자이너와 개발자를 위한 Skeleton 토큰 상세 스펙입니다."},e.createElement(m,{title:"기본값",rows:[{label:"배경색",value:i[96],token:"coolNeutral[96]"},{label:"쉬머 하이라이트",value:i[90],token:"coolNeutral[90]"},{label:"애니메이션 주기",value:"1.5s",token:"—"}]}),e.createElement(x,null),e.createElement(m,{title:"Text 변형",rows:[{label:"높이",value:"16px",token:"—"},{label:"너비",value:"100%",token:"—"},{label:"모서리 반경",value:"4px",token:"—"}]}),e.createElement(m,{title:"Circular 변형",rows:[{label:"높이",value:"40px",token:"—"},{label:"너비",value:"40px",token:"—"},{label:"모서리 반경",value:"9999px",token:"radius.full"}]}),e.createElement(m,{title:"Rectangular 변형",rows:[{label:"높이",value:"100px",token:"—"},{label:"너비",value:"100%",token:"—"},{label:"모서리 반경",value:`${o.small}px`,token:"radius.small"}]})))},v={name:"사용 가이드",render:()=>e.createElement(l,{style:{gap:t["3xlarge"]}},e.createElement(s,{title:"사용 가이드",description:"개발자를 위한 Skeleton 컴포넌트 사용 예시입니다."},e.createElement(d,{title:"Import",code:"import { Skeleton } from '@design-system/components/Skeleton';"}),e.createElement(d,{title:"기본 사용",code:`<Skeleton variant="rectangular" />
+<Skeleton variant="text" />
+<Skeleton variant="circular" />`}),e.createElement(d,{title:"커스텀 크기",code:`<Skeleton
+  variant="rectangular"
+  width={200}
+  height={120}
+  borderRadius={16}
+/>`}),e.createElement(d,{title:"카드 스켈레톤 조합",code:`<View style={{ flexDirection: 'row', gap: 12, alignItems: 'center' }}>
+  <Skeleton variant="circular" width={48} height={48} />
+  <View style={{ flex: 1, gap: 8 }}>
+    <Skeleton variant="text" width={120} />
+    <Skeleton variant="text" width={80} height={12} />
+  </View>
+</View>`})))};g.parameters={...g.parameters,docs:{...g.parameters?.docs,source:{originalSource:`{
+  args: {
+    variant: 'rectangular',
+    width: 200,
+    height: 100
+  }
+}`,...g.parameters?.docs?.source}}};u.parameters={...u.parameters,docs:{...u.parameters?.docs,source:{originalSource:`{
+  name: '변형',
+  render: () => <View style={{
+    gap: spacing['3xlarge']
+  }}>
+      <Section title="변형" description="text, circular, rectangular 세 가지 형태를 제공합니다.">
+        <View style={{
+        gap: spacing.xlarge
+      }}>
+          <Col gap={spacing.small}>
+            <StateLabel>Text</StateLabel>
+            <View style={{
+            maxWidth: 300
+          }}>
+              <Skeleton variant="text" />
+            </View>
+          </Col>
+          <Col gap={spacing.small}>
+            <StateLabel>Circular</StateLabel>
+            <Skeleton variant="circular" />
+          </Col>
+          <Col gap={spacing.small}>
+            <StateLabel>Rectangular</StateLabel>
+            <View style={{
+            maxWidth: 300
+          }}>
+              <Skeleton variant="rectangular" />
+            </View>
+          </Col>
+        </View>
+      </Section>
+    </View>
+}`,...u.parameters?.docs?.source}}};p.parameters={...p.parameters,docs:{...p.parameters?.docs,source:{originalSource:`{
+  name: '크기 커스텀',
+  render: () => <View style={{
+    gap: spacing['3xlarge']
+  }}>
+      <Section title="크기 커스텀" description="width와 height를 자유롭게 조합할 수 있습니다.">
+        <View style={{
+        gap: spacing.xlarge
+      }}>
+          <Row gap={spacing.large} align="flex-end">
+            <Col gap={spacing.small}>
+              <StateLabel>40×40</StateLabel>
+              <Skeleton variant="rectangular" width={40} height={40} />
+            </Col>
+            <Col gap={spacing.small}>
+              <StateLabel>80×80</StateLabel>
+              <Skeleton variant="rectangular" width={80} height={80} />
+            </Col>
+            <Col gap={spacing.small}>
+              <StateLabel>120×60</StateLabel>
+              <Skeleton variant="rectangular" width={120} height={60} />
+            </Col>
+            <Col gap={spacing.small}>
+              <StateLabel>200×20</StateLabel>
+              <Skeleton variant="rectangular" width={200} height={20} />
+            </Col>
+          </Row>
+
+          <Divider />
+
+          <Row gap={spacing.large} align="flex-end">
+            <Col gap={spacing.small}>
+              <StateLabel>원형 24</StateLabel>
+              <Skeleton variant="circular" width={24} height={24} />
+            </Col>
+            <Col gap={spacing.small}>
+              <StateLabel>원형 40</StateLabel>
+              <Skeleton variant="circular" width={40} height={40} />
+            </Col>
+            <Col gap={spacing.small}>
+              <StateLabel>원형 56</StateLabel>
+              <Skeleton variant="circular" width={56} height={56} />
+            </Col>
+            <Col gap={spacing.small}>
+              <StateLabel>원형 72</StateLabel>
+              <Skeleton variant="circular" width={72} height={72} />
+            </Col>
+          </Row>
+        </View>
+      </Section>
+    </View>
+}`,...p.parameters?.docs?.source}}};h.parameters={...h.parameters,docs:{...h.parameters?.docs,source:{originalSource:`{
+  name: '실전 예시',
+  render: () => <View style={{
+    gap: spacing['3xlarge']
+  }}>
+      <Section title="실전 예시 — 카드 스켈레톤" description="실제 UI 레이아웃에 맞춰 Skeleton을 조합한 예시입니다.">
+        <CompareGrid items={[{
+        label: '프로필 카드',
+        content: <View style={{
+          padding: spacing.large,
+          borderRadius: radius.medium,
+          borderWidth: 1,
+          borderColor: coolNeutral[96],
+          width: 260,
+          gap: spacing.medium
+        }}>
+                  <Row gap={spacing.medium} align="center">
+                    <Skeleton variant="circular" width={48} height={48} />
+                    <View style={{
+              flex: 1,
+              gap: spacing.small
+            }}>
+                      <Skeleton variant="text" width={120} />
+                      <Skeleton variant="text" width={80} height={12} />
+                    </View>
+                  </Row>
+                  <Skeleton variant="text" />
+                  <Skeleton variant="text" width="80%" />
+                </View>
+      }, {
+        label: '미디어 카드',
+        content: <View style={{
+          borderRadius: radius.medium,
+          borderWidth: 1,
+          borderColor: coolNeutral[96],
+          width: 260,
+          overflow: 'hidden'
+        }}>
+                  <Skeleton variant="rectangular" height={140} borderRadius={0} />
+                  <View style={{
+            padding: spacing.large,
+            gap: spacing.small
+          }}>
+                    <Skeleton variant="text" width="90%" />
+                    <Skeleton variant="text" width="60%" height={12} />
+                    <View style={{
+              marginTop: spacing.small
+            }}>
+                      <Skeleton variant="rectangular" height={36} borderRadius={radius.small} />
+                    </View>
+                  </View>
+                </View>
+      }, {
+        label: '리스트 아이템',
+        content: <View style={{
+          width: 260,
+          gap: spacing.medium
+        }}>
+                  {[0, 1, 2].map(i => <Row key={i} gap={spacing.medium} align="center">
+                      <Skeleton variant="circular" width={36} height={36} />
+                      <View style={{
+              flex: 1,
+              gap: spacing.xsmall
+            }}>
+                        <Skeleton variant="text" width="70%" />
+                        <Skeleton variant="text" width="40%" height={12} />
+                      </View>
+                      <Skeleton variant="rectangular" width={60} height={28} borderRadius={radius.small} />
+                    </Row>)}
+                </View>
+      }]} />
+      </Section>
+    </View>
+}`,...h.parameters?.docs?.source}}};w.parameters={...w.parameters,docs:{...w.parameters?.docs,source:{originalSource:`{
+  name: '디자인 스펙',
+  render: () => <View style={{
+    gap: spacing['3xlarge']
+  }}>
+      <Section title="디자인 스펙" description="디자이너와 개발자를 위한 Skeleton 토큰 상세 스펙입니다.">
+        <SpecTable title="기본값" rows={[{
+        label: '배경색',
+        value: coolNeutral[96],
+        token: 'coolNeutral[96]'
+      }, {
+        label: '쉬머 하이라이트',
+        value: coolNeutral[90],
+        token: 'coolNeutral[90]'
+      }, {
+        label: '애니메이션 주기',
+        value: '1.5s',
+        token: '—'
+      }]} />
+
+        <Divider />
+
+        <SpecTable title="Text 변형" rows={[{
+        label: '높이',
+        value: '16px',
+        token: '—'
+      }, {
+        label: '너비',
+        value: '100%',
+        token: '—'
+      }, {
+        label: '모서리 반경',
+        value: '4px',
+        token: '—'
+      }]} />
+
+        <SpecTable title="Circular 변형" rows={[{
+        label: '높이',
+        value: '40px',
+        token: '—'
+      }, {
+        label: '너비',
+        value: '40px',
+        token: '—'
+      }, {
+        label: '모서리 반경',
+        value: '9999px',
+        token: 'radius.full'
+      }]} />
+
+        <SpecTable title="Rectangular 변형" rows={[{
+        label: '높이',
+        value: '100px',
+        token: '—'
+      }, {
+        label: '너비',
+        value: '100%',
+        token: '—'
+      }, {
+        label: '모서리 반경',
+        value: \`\${radius.small}px\`,
+        token: 'radius.small'
+      }]} />
+      </Section>
+    </View>
+}`,...w.parameters?.docs?.source}}};v.parameters={...v.parameters,docs:{...v.parameters?.docs,source:{originalSource:`{
+  name: '사용 가이드',
+  render: () => <View style={{
+    gap: spacing['3xlarge']
+  }}>
+      <Section title="사용 가이드" description="개발자를 위한 Skeleton 컴포넌트 사용 예시입니다.">
+        <CodeBlock title="Import" code={\`import { Skeleton } from '@design-system/components/Skeleton';\`} />
+
+        <CodeBlock title="기본 사용" code={\`<Skeleton variant="rectangular" />
+<Skeleton variant="text" />
+<Skeleton variant="circular" />\`} />
+
+        <CodeBlock title="커스텀 크기" code={\`<Skeleton
+  variant="rectangular"
+  width={200}
+  height={120}
+  borderRadius={16}
+/>\`} />
+
+        <CodeBlock title="카드 스켈레톤 조합" code={\`<View style={{ flexDirection: 'row', gap: 12, alignItems: 'center' }}>
+  <Skeleton variant="circular" width={48} height={48} />
+  <View style={{ flex: 1, gap: 8 }}>
+    <Skeleton variant="text" width={120} />
+    <Skeleton variant="text" width={80} height={12} />
+  </View>
+</View>\`} />
+      </Section>
+    </View>
+}`,...v.parameters?.docs?.source}}};const _=["Playground","Variants","CustomSizes","CardExample","DesignSpec","Usage"];export{h as CardExample,p as CustomSizes,w as DesignSpec,g as Playground,v as Usage,u as Variants,_ as __namedExportsOrder,I as default};
