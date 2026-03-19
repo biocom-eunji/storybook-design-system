@@ -420,9 +420,21 @@ export const LINK = {
     <CaretIcon />
     <span className="emoji">♻️</span>
     <span className="title">Refactored</span>
-    <span className="count">3</span>
+    <span className="count">6</span>
   </summary>
   <div className="toggle-body">
+    <div className="change-item">
+      <span className="name-plain">토큰 네이밍 통일</span>
+      <span className="desc">문서(GridTokens/NamingConvention)의 camelCase 오기재를 theme.ts 실제 키(<code>spacing['2xlarge']</code>)와 동기화, Modal <code>borderRadius: spacing.medium</code> → <code>radius.medium</code> 수정</span>
+    </div>
+    <div className="change-item">
+      <span className="name-plain">하드코딩 제거</span>
+      <span className="desc">TabBar/Chip/TextButton/ProgressBar의 하드코딩 px → 토큰 교체 (5건), <code>palette.white</code> → <code>coolNeutral[100]</code> 전체 완전 전환 (12건)</span>
+    </div>
+    <div className="change-item">
+      <span className="name-plain">Grid Tokens</span>
+      <span className="desc">BaseRow 공통 컴포넌트 추출, 컴포넌트 토큰에 짧은 별칭(button.small.height) 추가, SubHeader로 Button/Chip/ActionArea/InputField 서브 그룹 분리</span>
+    </div>
     <div className="change-item">
       <span className="name-plain">Shadow</span>
       <span className="desc">Shadow & Elevation → Shadow로 이름 변경</span>
@@ -433,7 +445,7 @@ export const LINK = {
     </div>
     <div className="change-item">
       <span className="name"><a href={LINK.Button}>Button</a></span>
-      <span className="desc"><code>palette.white</code> → <code>coolNeutral[100]</code> 전환, 디자인 스펙 폰트 크기 → 폰트 스타일(Label 2, Body 2, Headline) 표기</span>
+      <span className="desc">디자인 스펙 폰트 크기 → 폰트 스타일(Label 2, Body 2, Headline) 표기</span>
     </div>
   </div>
 </details>
