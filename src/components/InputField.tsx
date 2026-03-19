@@ -70,7 +70,7 @@ export interface InputFieldProps {
 // ─── Constants ───────────────────────────────────────────
 
 const ICON_SIZE = 20;
-const SINGLE_LINE_HEIGHT = 48;
+const SINGLE_LINE_HEIGHT = spacing['4xlarge']; // 48px
 
 const TRAILING_ICON_MAP = {
   clear:   { name: 'x-circle',        color: coolNeutral[80] },
