@@ -264,7 +264,7 @@ export const Ex = ({ children }) => <code className="do-example">{children}</cod
     <li>아이콘 이름: <strong>kebab-case</strong> — <code>check-circle</code>, <code>shopping-cart-simple</code></li>
     <li>색상 토큰: <strong>카테고리 + 역할</strong> — <code>text</code> + <code>Primary</code> = <code>textPrimary</code></li>
     <li>시각적 속성(색상명, 크기값)을 이름에 포함하지 않음</li>
-    <li>그리드 토큰: <strong>camelCase</strong> — <code>spacing['2xlarge']</code>, <code>screenMargin.default</code>, <code>inputField.minHeight</code></li>
+    <li>그리드 토큰: <strong>camelCase</strong> — <code>spacing['2xlarge']</code>, <code>screenMargin.default</code>, <code>buttonToken.size.medium.height</code></li>
     <li>줄임말 대신 전체 단어 사용 — <code>background</code> not <code>bg</code></li>
     <li>샘플 아이콘 슬롯에는 <code>&lt;Icon name="null" /&gt;</code> 사용</li>
   </ul>
@@ -381,7 +381,7 @@ export const Ex = ({ children }) => <code className="do-example">{children}</cod
       <td className="category">그리드 토큰</td>
       <td>camelCase. <code>객체.속성</code> 패턴. 소문자로 시작.</td>
       <td>
-        <Do><Ex>screenMargin.default</Ex><Ex>inputField.minHeight</Ex><Ex>actionAreaToken.gap</Ex></Do>
+        <Do><Ex>screenMargin.default</Ex><Ex>buttonToken.size.medium.height</Ex><Ex>actionAreaToken.gap</Ex></Do>
         <Dont><Ex>InputField.minHeight</Ex><Ex>SCREEN_MARGIN</Ex><Ex>action-area-gap</Ex></Dont>
       </td>
     </tr>

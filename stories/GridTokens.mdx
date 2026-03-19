@@ -265,26 +265,26 @@ export const SubHeader = ({ label }) => (
     <SectionHeader title="Component" description="컴포넌트별 크기 · 간격" />
 
     <SubHeader label="Button" />
-    <SpacingRow token="buttonToken.size.small.height"              alias="button.small.height"   px={36} role="높이" />
-    <SpacingRow token="buttonToken.size.small.paddingHorizontal"   alias="button.small.paddingX" px={14} role="좌우 패딩" />
-    <SpacingRow token="buttonToken.size.medium.height"             alias="button.medium.height"  px={44} role="높이" />
-    <SpacingRow token="buttonToken.size.medium.paddingHorizontal"  alias="button.medium.paddingX" px={18} role="좌우 패딩" />
-    <SpacingRow token="buttonToken.size.large.height"              alias="button.large.height"   px={52} role="높이" />
-    <SpacingRow token="buttonToken.size.large.paddingHorizontal"   alias="button.large.paddingX" px={24} role="좌우 패딩" />
+    <SpacingRow token="buttonToken.size.small.height"             px={36} role="높이" />
+    <SpacingRow token="buttonToken.size.small.paddingHorizontal"  px={14} role="좌우 패딩" />
+    <SpacingRow token="buttonToken.size.medium.height"            px={44} role="높이" />
+    <SpacingRow token="buttonToken.size.medium.paddingHorizontal" px={18} role="좌우 패딩" />
+    <SpacingRow token="buttonToken.size.large.height"             px={52} role="높이" />
+    <SpacingRow token="buttonToken.size.large.paddingHorizontal"  px={24} role="좌우 패딩" />
 
     <SubHeader label="Chip" />
-    <SpacingRow token="chipToken.size.xsmall.height"  alias="chip.xsmall.height"  px={24} role="높이" />
-    <SpacingRow token="chipToken.size.small.height"   alias="chip.small.height"   px={28} role="높이" />
-    <SpacingRow token="chipToken.size.medium.height"  alias="chip.medium.height"  px={32} role="높이" />
-    <SpacingRow token="chipToken.size.large.height"   alias="chip.large.height"   px={38} role="높이" />
+    <SpacingRow token="chipToken.size.xsmall.height"  px={24} role="높이" />
+    <SpacingRow token="chipToken.size.small.height"   px={28} role="높이" />
+    <SpacingRow token="chipToken.size.medium.height"  px={32} role="높이" />
+    <SpacingRow token="chipToken.size.large.height"   px={38} role="높이" />
 
     <SubHeader label="ActionArea" />
-    <SpacingRow token="actionAreaToken.padding"  alias="actionArea.padding"  px={16} role="좌우 패딩" />
-    <SpacingRow token="actionAreaToken.gap"      alias="actionArea.gap"      px={8}  role="버튼 간 간격" />
+    <SpacingRow token="actionAreaToken.padding"  px={16} role="좌우 패딩" />
+    <SpacingRow token="actionAreaToken.gap"      px={8}  role="버튼 간 간격" />
 
     <SubHeader label="InputField" />
-    <SpacingRow token="inputField.minHeight"  px={48}  role="단일 행 최소 높이" />
-    <SpacingRow token="inputField.paddingX"   px={16}  role="좌우 패딩 (spacing.large)" />
+    <SpacingRow token="SINGLE_LINE_HEIGHT"     px={48}  role="단일 행 최소 높이 (컴포넌트 상수)" />
+    <SpacingRow token="spacing.large"          px={16}  role="좌우 패딩 (paddingHorizontal)" />
 
     {/* ── Radius ── */}
     <SectionHeader title="Radius" description="모서리 반경(border-radius)" />
