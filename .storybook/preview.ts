@@ -5,6 +5,7 @@ import React from 'react';
 import { View } from 'react-native';
 import type { Preview } from '@storybook/react-vite';
 import { create } from 'storybook/theming/create';
+import './global.css';
 
 const biocomTheme = create({
   base: 'light',
