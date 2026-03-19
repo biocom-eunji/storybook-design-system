@@ -478,7 +478,7 @@ export const buttonToken = {
     primary: {
       solid: {
         background: mint[45],
-        content: palette.white,
+        content: coolNeutral[100],
         backgroundPressed: mint[30],
         backgroundHovered: mint[40],
         backgroundDisabled: coolNeutral[96],
@@ -551,7 +551,7 @@ export const chipToken = {
   variant: {
     solid: {
       inactive: { background: coolNeutral[97], content: coolNeutral[40] },
-      active:   { background: coolNeutral[10], content: palette.white },
+      active:   { background: coolNeutral[10], content: coolNeutral[100] },
       disabled: { background: coolNeutral[97], content: coolNeutral[80] },
     },
     outlined: {

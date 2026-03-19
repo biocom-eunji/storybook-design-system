@@ -215,7 +215,7 @@ export const DesignSpec: Story = {
           rows={[
             { label: '높이', value: `${buttonToken.size.small.height}px`, token: 'buttonToken.size.small.height' },
             { label: '좌우 패딩', value: `${buttonToken.size.small.paddingHorizontal}px`, token: 'buttonToken.size.small.paddingHorizontal' },
-            { label: '폰트 크기', value: `${buttonToken.size.small.fontSize}px`, token: 'fontSize.small' },
+            { label: '폰트 스타일', value: `Label 2 (${buttonToken.size.small.fontSize}px)`, token: 'textStyle.label2' },
             { label: '모서리 반경', value: `${buttonToken.size.small.radius}px`, token: 'radius.small' },
           ]}
         />
@@ -225,7 +225,7 @@ export const DesignSpec: Story = {
           rows={[
             { label: '높이', value: `${buttonToken.size.medium.height}px`, token: 'buttonToken.size.medium.height' },
             { label: '좌우 패딩', value: `${buttonToken.size.medium.paddingHorizontal}px`, token: 'buttonToken.size.medium.paddingHorizontal' },
-            { label: '폰트 크기', value: `${buttonToken.size.medium.fontSize}px`, token: 'fontSize.medium' },
+            { label: '폰트 스타일', value: `Body 2 (${buttonToken.size.medium.fontSize}px)`, token: 'textStyle.body2' },
             { label: '모서리 반경', value: `${buttonToken.size.medium.radius}px`, token: 'radius.medium' },
           ]}
         />
@@ -235,7 +235,7 @@ export const DesignSpec: Story = {
           rows={[
             { label: '높이', value: `${buttonToken.size.large.height}px`, token: 'buttonToken.size.large.height' },
             { label: '좌우 패딩', value: `${buttonToken.size.large.paddingHorizontal}px`, token: 'buttonToken.size.large.paddingHorizontal' },
-            { label: '폰트 크기', value: `${buttonToken.size.large.fontSize}px`, token: 'fontSize.large' },
+            { label: '폰트 스타일', value: `Headline (${buttonToken.size.large.fontSize}px)`, token: 'textStyle.headline' },
             { label: '모서리 반경', value: `${buttonToken.size.large.radius}px`, token: 'radius.medium' },
           ]}
         />
