@@ -4,6 +4,23 @@
 
 ---
 
+## v1.2.0 (2026-03-19)
+
+### ✨ Features
+
+- **Grid Palette** 페이지 추가 — 4px 배수 원시 값 시각화 (막대 비교), 20px 컬럼 그리드 설명, Figma 그리드 단축키(macOS ⌃G / Windows Ctrl+Shift+4)
+- **Grid Tokens** 페이지 추가 — Spacing/Component/Radius 카테고리별 시맨틱 토큰 매핑 표, Color Tokens와 동일한 4열 레이아웃(Token Name/Preview/Value/Role), 클릭 복사
+- **Pretendard Variable** 웹폰트 전역 적용 — `@font-face` 가변 폰트 선언(weight 100-900), `public/fonts/` 배치, `staticDirs` 설정
+
+### ♻️ Refactored
+
+- **Shadow & Elevation** → **Shadow**로 이름 변경
+- **Spacing & Grid** 페이지 삭제 — Grid Palette + Grid Tokens로 대체
+- **Button** — `palette.white` → `coolNeutral[100]` 전환, 디자인 스펙 폰트 크기 → 폰트 스타일(Label 2, Body 2, Headline) 표기
+- **Grid Tokens Radius** — 시각화를 채워진 민트 정사각형 우상단 radius로 변경
+
+---
+
 ## v1.1.0 (2026-03-18)
 
 ### 🔧 Enhanced

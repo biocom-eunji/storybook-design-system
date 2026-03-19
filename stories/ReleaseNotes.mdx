@@ -384,6 +384,63 @@ export const LINK = {
 </div>
 
 {/* ══════════════════════════════════════════════════════ */}
+{/* v1.2.0 — 2026-03-19                                   */}
+{/* ══════════════════════════════════════════════════════ */}
+
+<div className="version-header">
+  <span className="version-badge minor">v1.2.0</span>
+  <span className="version-date">2026-03-19</span>
+</div>
+
+<details className="toggle-card" open>
+  <summary>
+    <CaretIcon />
+    <span className="emoji">✨</span>
+    <span className="title">Features</span>
+    <span className="count">3</span>
+  </summary>
+  <div className="toggle-body">
+    <div className="change-item">
+      <span className="name-plain">Grid Palette</span>
+      <span className="desc">4px 배수 원시 값 시각화 (막대 비교), 20px 컬럼 그리드 설명, Figma 그리드 단축키(macOS/Windows)</span>
+    </div>
+    <div className="change-item">
+      <span className="name-plain">Grid Tokens</span>
+      <span className="desc">Spacing/Component/Radius 카테고리별 시맨틱 토큰 매핑 표, Color Tokens와 동일한 4열 레이아웃, 클릭 복사</span>
+    </div>
+    <div className="change-item">
+      <span className="name-plain">Pretendard Variable</span>
+      <span className="desc">웹폰트 전역 적용 — <code>@font-face</code> 가변 폰트 선언(weight 100-900), 모든 컴포넌트에 자동 적용</span>
+    </div>
+  </div>
+</details>
+
+<details className="toggle-card">
+  <summary>
+    <CaretIcon />
+    <span className="emoji">♻️</span>
+    <span className="title">Refactored</span>
+    <span className="count">3</span>
+  </summary>
+  <div className="toggle-body">
+    <div className="change-item">
+      <span className="name-plain">Shadow</span>
+      <span className="desc">Shadow & Elevation → Shadow로 이름 변경</span>
+    </div>
+    <div className="change-item">
+      <span className="name-plain">Spacing & Grid</span>
+      <span className="desc">페이지 삭제 — Grid Palette + Grid Tokens로 대체</span>
+    </div>
+    <div className="change-item">
+      <span className="name"><a href={LINK.Button}>Button</a></span>
+      <span className="desc"><code>palette.white</code> → <code>coolNeutral[100]</code> 전환, 디자인 스펙 폰트 크기 → 폰트 스타일(Label 2, Body 2, Headline) 표기</span>
+    </div>
+  </div>
+</details>
+
+<hr className="version-divider" />
+
+{/* ══════════════════════════════════════════════════════ */}
 {/* v1.1.0 — 2026-03-18                                   */}
 {/* ══════════════════════════════════════════════════════ */}
 
