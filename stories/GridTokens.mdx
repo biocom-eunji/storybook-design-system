@@ -230,40 +230,40 @@ export const SectionHeader = ({ title, description }) => (
   </thead>
   <tbody>
     <SectionHeader title="Spacing" description="기본 스페이싱 스케일 — 간격, 패딩, 마진" />
-    <GridTokenRow token="spacing.xsmall"       value={4}  role="아이콘-텍스트 간격, 인라인 최소 간격" />
-    <GridTokenRow token="spacing.small"        value={8}  role="컴포넌트 내부 패딩, 관련 요소 간 간격" />
-    <GridTokenRow token="spacing.medium"       value={12} role="카드 내부 패딩, 섹션 내 요소 간격" />
-    <GridTokenRow token="spacing.large"        value={16} role="화면 좌우 마진, 섹션 간 기본 간격" />
-    <GridTokenRow token="spacing.xlarge"       value={20} role="넓은 요소 간격, BottomSheet 콘텐츠 패딩" />
-    <GridTokenRow token="spacing['2xlarge']"   value={24} role="섹션 간 큰 간격" />
-    <GridTokenRow token="spacing['3xlarge']"   value={32} role="페이지 섹션 구분" />
-    <GridTokenRow token="spacing['4xlarge']"   value={48} role="최대 여백, 헤더-콘텐츠 간격" />
-    <GridTokenRow token="screenMargin.default" value={16} role="일반 화면 좌우 여백" />
-    <GridTokenRow token="screenMargin.compact" value={12} role="모달, 바텀시트 좁은 영역" />
-    <GridTokenRow token="screenMargin.wide"    value={20} role="넓은 화면, 태블릿" />
+    <GridTokenRow token="spacing.xsmall"        value={4}  role="아이콘-텍스트 간격, 인라인 최소 간격" />
+    <GridTokenRow token="spacing.small"         value={8}  role="컴포넌트 내부 패딩, 관련 요소 간 간격" />
+    <GridTokenRow token="spacing.medium"        value={12} role="카드 내부 패딩, 섹션 내 요소 간격" />
+    <GridTokenRow token="spacing.large"         value={16} role="화면 좌우 마진, 섹션 간 기본 간격" />
+    <GridTokenRow token="spacing.xlarge"        value={20} role="넓은 요소 간격, BottomSheet 콘텐츠 패딩" />
+    <GridTokenRow token="spacing.twoXlarge"     value={24} role="섹션 간 큰 간격" />
+    <GridTokenRow token="spacing.threeXlarge"   value={32} role="페이지 섹션 구분" />
+    <GridTokenRow token="spacing.fourXlarge"    value={48} role="최대 여백, 헤더-콘텐츠 간격" />
+    <GridTokenRow token="screenMargin.default"  value={16} role="일반 화면 좌우 여백" />
+    <GridTokenRow token="screenMargin.compact"  value={12} role="모달, 바텀시트 좁은 영역" />
+    <GridTokenRow token="screenMargin.wide"     value={20} role="넓은 화면, 태블릿" />
 
     <SectionHeader title="Component" description="컴포넌트별 내부 spacing 매핑" />
-    <GridTokenRow token="buttonToken.size.small.height"            value={36} role="Small 버튼 높이" />
-    <GridTokenRow token="buttonToken.size.small.paddingHorizontal" value={14} role="Small 좌우 패딩" />
-    <GridTokenRow token="buttonToken.size.medium.height"           value={44} role="Medium 버튼 높이" />
-    <GridTokenRow token="buttonToken.size.medium.paddingHorizontal" value={18} role="Medium 좌우 패딩" />
-    <GridTokenRow token="buttonToken.size.large.height"            value={52} role="Large 버튼 높이" />
-    <GridTokenRow token="buttonToken.size.large.paddingHorizontal" value={24} role="Large 좌우 패딩" />
-    <GridTokenRow token="chipToken.size.xsmall.height"             value={24} role="XSmall 칩 높이" />
-    <GridTokenRow token="chipToken.size.small.height"              value={28} role="Small 칩 높이" />
-    <GridTokenRow token="chipToken.size.medium.height"             value={32} role="Medium 칩 높이" />
-    <GridTokenRow token="chipToken.size.large.height"              value={38} role="Large 칩 높이" />
-    <GridTokenRow token="actionAreaToken.padding"                  value={16} role="ActionArea 좌우 패딩" />
-    <GridTokenRow token="actionAreaToken.gap"                      value={8}  role="버튼 간 간격" />
-    <GridTokenRow token="InputField.minHeight"                     value={48} role="단일 행 인풋 최소 높이" />
+    <GridTokenRow token="buttonToken.size.small.height"              value={36} role="Small 버튼 높이" />
+    <GridTokenRow token="buttonToken.size.small.paddingHorizontal"   value={14} role="Small 좌우 패딩" />
+    <GridTokenRow token="buttonToken.size.medium.height"             value={44} role="Medium 버튼 높이" />
+    <GridTokenRow token="buttonToken.size.medium.paddingHorizontal"  value={18} role="Medium 좌우 패딩" />
+    <GridTokenRow token="buttonToken.size.large.height"              value={52} role="Large 버튼 높이" />
+    <GridTokenRow token="buttonToken.size.large.paddingHorizontal"   value={24} role="Large 좌우 패딩" />
+    <GridTokenRow token="chipToken.size.xsmall.height"               value={24} role="XSmall 칩 높이" />
+    <GridTokenRow token="chipToken.size.small.height"                value={28} role="Small 칩 높이" />
+    <GridTokenRow token="chipToken.size.medium.height"               value={32} role="Medium 칩 높이" />
+    <GridTokenRow token="chipToken.size.large.height"                value={38} role="Large 칩 높이" />
+    <GridTokenRow token="actionAreaToken.padding"                    value={16} role="ActionArea 좌우 패딩" />
+    <GridTokenRow token="actionAreaToken.gap"                        value={8}  role="버튼 간 간격" />
+    <GridTokenRow token="inputField.minHeight"                       value={48} role="단일 행 인풋 최소 높이" />
 
     <SectionHeader title="Radius" description="모서리 반경(border-radius)" />
-    <RadiusTokenRow token="radius.xsmall" value={4}    role="소형 태그, 코드 블록" />
-    <RadiusTokenRow token="radius.small"  value={8}    role="Small 버튼, Small 칩" />
-    <RadiusTokenRow token="radius.medium" value={12}   role="Medium/Large 버튼, 인풋, 카드" />
-    <RadiusTokenRow token="radius.large"  value={16}   role="모달, 바텀시트 상단" />
-    <RadiusTokenRow token="radius.xlarge" value={24}   role="BottomSheet, 대형 카드" />
-    <RadiusTokenRow token="radius.full"   value={9999} role="원형 (배지, 아바타, 토글)" />
+    <RadiusTokenRow token="radius.xsmall"  value={4}    role="소형 태그, 코드 블록" />
+    <RadiusTokenRow token="radius.small"   value={8}    role="Small 버튼, Small 칩" />
+    <RadiusTokenRow token="radius.medium"  value={12}   role="Medium/Large 버튼, 인풋, 카드" />
+    <RadiusTokenRow token="radius.large"   value={16}   role="모달, 바텀시트 상단" />
+    <RadiusTokenRow token="radius.xlarge"  value={24}   role="BottomSheet, 대형 카드" />
+    <RadiusTokenRow token="radius.full"    value={9999} role="원형 (배지, 아바타, 토글)" />
   </tbody>
 </table>
 
@@ -280,6 +280,9 @@ export const SectionHeader = ({ title, description }) => (
     {'\n'}
     <span className="comment">// 기본 스페이싱 토큰 사용</span>{'\n'}
     {'<View style={{ padding: '}<span className="token">spacing.large</span>{', gap: '}<span className="token">spacing.small</span>{' }}>'}{'\n'}
+    {'\n'}
+    <span className="comment">// 숫자 접두사 키는 camelCase로 접근</span>{'\n'}
+    {'<View style={{ marginBottom: '}<span className="token">spacing.twoXlarge</span>{' }}>'}<span className="comment">{'  '}// 24px</span>{'\n'}
     {'\n'}
     <span className="comment">// 컴포넌트 토큰에서 크기 참조</span>{'\n'}
     {'const height = '}<span className="token">buttonToken.size.medium.height</span>;{'  '}<span className="comment">// 44px</span>{'\n'}
