@@ -8,7 +8,7 @@ import {
   type TextStyle,
   type PressableStateCallbackType,
 } from 'react-native';
-import { textButtonToken, fontWeight } from '../tokens/theme';
+import { textButtonToken, fontWeight, spacing } from '../tokens/theme';
 import { renderIcon } from './utils';
 
 export type TextButtonColor = 'primary' | 'assistive';
@@ -54,7 +54,7 @@ export function TextButton({
         {
           flexDirection: 'row',
           alignItems: 'center',
-          gap: 4,
+          gap: spacing.xsmall,
         } satisfies ViewStyle,
       ]}
     >

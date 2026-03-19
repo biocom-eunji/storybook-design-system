@@ -98,7 +98,7 @@ const styles = StyleSheet.create({
   iconPlaceholder: {
     width: 24,
     height: 24,
-    borderRadius: 12,
+    borderRadius: radius.medium,
   } as ViewStyle,
   label: {
     fontSize: fontSize.xsmall,

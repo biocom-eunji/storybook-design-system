@@ -8,7 +8,7 @@ import {
   type ViewStyle,
   type TextStyle,
 } from 'react-native';
-import { coolNeutral, mint, palette, fontWeight } from '../tokens/theme';
+import { coolNeutral, mint,  fontWeight } from '../tokens/theme';
 
 export type AvatarSize = 'small' | 'medium' | 'large' | 'xlarge';
 
@@ -85,7 +85,7 @@ export function Avatar({
               height: onlineDotSize + borderWidth * 2,
               borderRadius: (onlineDotSize + borderWidth * 2) / 2,
               borderWidth,
-              borderColor: palette.white,
+              borderColor: coolNeutral[100],
               backgroundColor: mint[45],
             },
           ]}

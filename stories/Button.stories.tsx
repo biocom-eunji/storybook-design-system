@@ -247,7 +247,7 @@ export const DesignSpec: Story = {
           title="Primary Solid 컬러"
           rows={[
             { label: '배경색', value: mint[45], token: 'mint[45]' },
-            { label: '텍스트 색상', value: '#FFFFFF', token: 'palette.white' },
+            { label: '텍스트 색상', value: '#FFFFFF', token: 'coolNeutral[100]' },
             { label: '눌림 배경', value: mint[30], token: 'mint[30]' },
             { label: '비활성화 배경', value: coolNeutral[96], token: 'coolNeutral[96]' },
             { label: '비활성화 텍스트', value: coolNeutral[80], token: 'coolNeutral[80]' },

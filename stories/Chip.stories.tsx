@@ -263,7 +263,7 @@ export const DesignSpec: Story = {
             { label: 'Inactive 배경', value: coolNeutral[97], token: 'coolNeutral[97]' },
             { label: 'Inactive 텍스트', value: coolNeutral[40], token: 'coolNeutral[40]' },
             { label: 'Active 배경', value: coolNeutral[10], token: 'coolNeutral[10]' },
-            { label: 'Active 텍스트', value: '#FFFFFF', token: 'palette.white' },
+            { label: 'Active 텍스트', value: '#FFFFFF', token: 'coolNeutral[100]' },
             { label: 'Disabled 배경', value: coolNeutral[97], token: 'coolNeutral[97]' },
             { label: 'Disabled 텍스트', value: coolNeutral[80], token: 'coolNeutral[80]' },
           ]}

@@ -252,7 +252,7 @@ export function InputField({
 
 const styles = StyleSheet.create({
   root: {
-    gap: spacing.xsmall + 2, // 6px
+    gap: 6, // 라벨-인풋-헬퍼 간격 (4px 그리드 예외)
   },
   label: {
     fontSize: fontSize.small,

@@ -72,7 +72,7 @@ export function Radio({
             width: s.inner,
             height: s.inner,
             borderRadius: s.inner / 2,
-            backgroundColor: palette.white,
+            backgroundColor: coolNeutral[100],
           }} />
         )}
       </View>

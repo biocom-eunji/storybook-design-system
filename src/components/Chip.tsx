@@ -9,7 +9,7 @@ import {
   type PressableStateCallbackType,
   type ImageSourcePropType,
 } from 'react-native';
-import { chipToken, fontWeight } from '../tokens/theme';
+import { chipToken, fontWeight, spacing } from '../tokens/theme';
 import { renderIcon } from './utils';
 
 export type ChipVariant = 'solid' | 'outlined';
@@ -54,7 +54,7 @@ export function Chip({
       alignItems: 'center',
       justifyContent: 'center',
       flexDirection: 'row',
-      gap: 4,
+      gap: spacing.xsmall,
       backgroundColor: variantToken.background,
     };
 
