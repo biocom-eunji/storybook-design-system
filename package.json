@@ -6,17 +6,38 @@
     "start": "expo start",
     "android": "expo start --android",
     "ios": "expo start --ios",
-    "web": "expo start --web"
+    "web": "expo start --web",
+    "storybook": "storybook dev -p 6006",
+    "build-storybook": "storybook build",
+    "deploy": "storybook build && npx gh-pages -d storybook-static --dotfiles --no-history && npx chromatic --project-token=chpt_a2aa7504369e0a9 --auto-accept-changes",
+    "deploy:pages": "storybook build && npx gh-pages -d storybook-static --dotfiles --no-history",
+    "deploy:chromatic": "npx chromatic --project-token=chpt_a2aa7504369e0a9 --auto-accept-changes"
   },
   "dependencies": {
     "expo": "~55.0.6",
     "expo-status-bar": "~55.0.4",
-    "react": "19.2.0",
-    "react-native": "0.83.2"
+    "react-native": "0.83.2",
+    "react-native-svg": "^15.15.3",
+    "react-native-svg-web": "^1.0.9",
+    "react-native-web": "^0.21.2"
   },
   "devDependencies": {
+    "@chromatic-com/storybook": "^5.0.1",
+    "@storybook/addon-a11y": "^10.2.19",
+    "@storybook/addon-docs": "^10.2.19",
+    "@storybook/addon-onboarding": "^10.2.19",
+    "@storybook/addon-vitest": "^10.2.19",
+    "@storybook/react-vite": "^10.2.19",
     "@types/react": "~19.2.2",
-    "typescript": "~5.9.2"
+    "@vitest/browser-playwright": "^4.1.0",
+    "@vitest/coverage-v8": "^4.1.0",
+    "chromatic": "^15.3.0",
+    "playwright": "^1.58.2",
+    "react": "^19.2.4",
+    "react-dom": "^19.2.4",
+    "storybook": "^10.2.19",
+    "typescript": "~5.9.2",
+    "vitest": "^4.1.0"
   },
   "private": true
 }

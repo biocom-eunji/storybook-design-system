@@ -1,0 +1,422 @@
+import React, { useState } from 'react';
+import { View } from 'react-native';
+import type { Meta, StoryObj } from '@storybook/react-vite';
+import { Checkbox } from '../src/components/Checkbox';
+import { CheckMark } from '../src/components/CheckMark';
+import { Section, StateLabel, Row, Col, SpecTable, CodeBlock, CompareGrid, Divider } from './storyHelpers';
+import { coolNeutral, mint, fontSize, fontWeight, spacing, radius } from '../src/tokens/theme';
+
+const meta: Meta<typeof Checkbox> = {
+  title: 'Input/Checkbox',
+  component: Checkbox,
+  argTypes: {
+    state: { control: 'select', options: ['unchecked', 'checked', 'indeterminate'], description: '체크박스 상태' },
+    size: { control: 'select', options: ['small', 'medium'], description: '체크박스 크기' },
+    label: { control: 'text', description: '라벨 텍스트' },
+    sublabel: { control: 'text', description: '보조 라벨 텍스트' },
+    disabled: { control: 'boolean', description: '비활성화 상태' },
+    bold: { control: 'boolean', description: '라벨 굵게 표시' },
+    tight: { control: 'boolean', description: '좁은 간격 모드' },
+  },
+  tags: ['autodocs'],
+};
+
+export default meta;
+type Story = StoryObj<typeof Checkbox>;
+
+// ─── 1. Playground ───────────────────────────────────────────
+
+export const Playground: Story = {
+  args: {
+    state: 'checked',
+    size: 'medium',
+    label: '동의합니다',
+    sublabel: '보조 설명 텍스트',
+    disabled: false,
+    bold: false,
+    tight: false,
+  },
+};
+
+// ─── 2. 세 가지 상태 ────────────────────────────────────────
+
+export const ThreeStates: Story = {
+  name: '세 가지 상태',
+  render: () => (
+    <Section
+      title="세 가지 상태"
+      description="체크박스는 unchecked, checked, indeterminate 세 가지 상태를 가집니다."
+    >
+      <CompareGrid
+        items={[
+          {
+            label: 'Unchecked (미선택)',
+            content: (
+              <Col gap={spacing.xsmall}>
+                <StateLabel>미선택</StateLabel>
+                <Checkbox state="unchecked" label="미선택 상태" />
+              </Col>
+            ),
+          },
+          {
+            label: 'Checked (선택)',
+            content: (
+              <Col gap={spacing.xsmall}>
+                <StateLabel>선택</StateLabel>
+                <Checkbox state="checked" label="선택 상태" />
+              </Col>
+            ),
+          },
+          {
+            label: 'Indeterminate (부분 선택)',
+            content: (
+              <Col gap={spacing.xsmall}>
+                <StateLabel>부분 선택</StateLabel>
+                <Checkbox state="indeterminate" label="부분 선택 상태" />
+              </Col>
+            ),
+          },
+        ]}
+      />
+    </Section>
+  ),
+};
+
+// ─── 3. 모든 변형 ───────────────────────────────────────────
+
+export const AllVariants: Story = {
+  name: '모든 변형',
+  render: () => {
+    const states: Array<{ state: 'unchecked' | 'checked' | 'indeterminate'; label: string }> = [
+      { state: 'unchecked', label: '미선택' },
+      { state: 'checked', label: '선택' },
+      { state: 'indeterminate', label: '부분 선택' },
+    ];
+    return (
+      <Section
+        title="모든 변형"
+        description="3가지 상태 x 활성/비활성 x 2가지 사이즈의 전체 조합입니다."
+      >
+        <Col gap={spacing['3xlarge']}>
+          {/* Small */}
+          <Col gap={spacing.large}>
+            <StateLabel>Small 사이즈</StateLabel>
+            <Row gap={spacing['3xlarge']} wrap align="flex-start">
+              <Col gap={spacing.small}>
+                <StateLabel>활성</StateLabel>
+                <CompareGrid
+                  items={states.map(s => ({
+                    label: s.label,
+                    content: <Checkbox state={s.state} size="small" />,
+                  }))}
+                />
+              </Col>
+              <Col gap={spacing.small}>
+                <StateLabel>비활성</StateLabel>
+                <CompareGrid
+                  items={states.map(s => ({
+                    label: s.label,
+                    content: <Checkbox state={s.state} size="small" disabled />,
+                  }))}
+                />
+              </Col>
+            </Row>
+          </Col>
+
+          <Divider />
+
+          {/* Medium */}
+          <Col gap={spacing.large}>
+            <StateLabel>Medium 사이즈</StateLabel>
+            <Row gap={spacing['3xlarge']} wrap align="flex-start">
+              <Col gap={spacing.small}>
+                <StateLabel>활성</StateLabel>
+                <CompareGrid
+                  items={states.map(s => ({
+                    label: s.label,
+                    content: <Checkbox state={s.state} size="medium" />,
+                  }))}
+                />
+              </Col>
+              <Col gap={spacing.small}>
+                <StateLabel>비활성</StateLabel>
+                <CompareGrid
+                  items={states.map(s => ({
+                    label: s.label,
+                    content: <Checkbox state={s.state} size="medium" disabled />,
+                  }))}
+                />
+              </Col>
+            </Row>
+          </Col>
+        </Col>
+      </Section>
+    );
+  },
+};
+
+// ─── 4. 라벨 옵션 ───────────────────────────────────────────
+
+export const LabelOptions: Story = {
+  name: '라벨 옵션',
+  render: () => (
+    <Section title="라벨 옵션" description="라벨, 보조 라벨, bold, tight 등 다양한 라벨 구성을 확인합니다.">
+      <Col gap={spacing['2xlarge']}>
+        <Col gap={spacing.small}>
+          <StateLabel>라벨만</StateLabel>
+          <Checkbox state="checked" label="라벨만 있는 체크박스" />
+          <Checkbox state="unchecked" label="라벨만 있는 체크박스" />
+        </Col>
+
+        <Divider />
+
+        <Col gap={spacing.small}>
+          <StateLabel>라벨 + 보조 라벨</StateLabel>
+          <Checkbox state="checked" label="메인 라벨" sublabel="보조 설명이 여기에 표시됩니다" />
+          <Checkbox state="unchecked" label="메인 라벨" sublabel="보조 설명이 여기에 표시됩니다" />
+        </Col>
+
+        <Divider />
+
+        <Col gap={spacing.small}>
+          <StateLabel>Bold 라벨</StateLabel>
+          <Row gap={spacing['2xlarge']} wrap>
+            <Checkbox state="checked" label="일반 라벨" sublabel="기본 굵기" />
+            <Checkbox state="checked" label="굵은 라벨" sublabel="bold 적용" bold />
+          </Row>
+        </Col>
+
+        <Divider />
+
+        <Col gap={spacing.small}>
+          <StateLabel>Tight 모드</StateLabel>
+          <View style={{ maxWidth: 300 }}>
+            <Col gap={spacing.small}>
+              <Checkbox state="checked" label="좁은 간격" sublabel="tight 모드에서는 간격이 줄어듭니다" tight />
+              <Checkbox state="unchecked" label="좁은 간격" sublabel="tight 모드에서는 간격이 줄어듭니다" tight />
+            </Col>
+          </View>
+        </Col>
+      </Col>
+    </Section>
+  ),
+};
+
+// ─── 5. 부모-자식 연동 ──────────────────────────────────────
+
+export const ParentChild: Story = {
+  name: '부모-자식 연동',
+  render: () => {
+    const [items, setItems] = useState([false, true, false]);
+    const allChecked = items.every(Boolean);
+    const someChecked = items.some(Boolean);
+    const parentState: 'checked' | 'indeterminate' | 'unchecked' = allChecked
+      ? 'checked'
+      : someChecked
+        ? 'indeterminate'
+        : 'unchecked';
+
+    const toggleAll = () => {
+      const next = !allChecked;
+      setItems(items.map(() => next));
+    };
+
+    const toggleItem = (i: number) =>
+      setItems(prev => { const n = [...prev]; n[i] = !n[i]; return n; });
+
+    const children = ['이용약관 동의', '개인정보 수집 동의', '마케팅 수신 동의'];
+
+    return (
+      <Section
+        title="부모-자식 연동"
+        description="부모 체크박스가 자식의 상태에 따라 indeterminate로 전환됩니다. 직접 클릭해 보세요."
+      >
+        <Col gap={spacing.xsmall}>
+          <Checkbox
+            state={parentState}
+            label="전체 동의"
+            bold
+            onPress={toggleAll}
+          />
+          <View style={{ paddingLeft: spacing['2xlarge'] }}>
+            <Col gap={spacing.xsmall}>
+              {children.map((name, i) => (
+                <Checkbox
+                  key={i}
+                  state={items[i] ? 'checked' : 'unchecked'}
+                  label={name}
+                  onPress={() => toggleItem(i)}
+                />
+              ))}
+            </Col>
+          </View>
+        </Col>
+      </Section>
+    );
+  },
+};
+
+// ─── 6. 디자인 스펙 ─────────────────────────────────────────
+
+export const DesignSpec: Story = {
+  name: '디자인 스펙',
+  render: () => (
+    <Section title="디자인 스펙" description="디자이너를 위한 사이즈 및 컬러 토큰 명세입니다.">
+      <Col gap={spacing['2xlarge']}>
+        <SpecTable
+          title="Small 사이즈"
+          rows={[
+            { label: '박스 크기', value: '18px', token: '—' },
+            { label: '모서리 반경', value: `${radius.xsmall}px`, token: 'radius.xsmall' },
+            { label: '라벨 간격', value: `${spacing.small}px`, token: 'spacing.small' },
+            { label: '라벨 폰트 크기', value: `${fontSize.small}px`, token: 'fontSize.small' },
+          ]}
+        />
+        <SpecTable
+          title="Medium 사이즈"
+          rows={[
+            { label: '박스 크기', value: '22px', token: '—' },
+            { label: '모서리 반경', value: '5px', token: '—' },
+            { label: '라벨 간격', value: '10px', token: '—' },
+            { label: '라벨 폰트 크기', value: `${fontSize.medium}px`, token: 'fontSize.medium' },
+          ]}
+        />
+        <SpecTable
+          title="컬러"
+          rows={[
+            { label: '미선택 테두리', value: coolNeutral[90], token: 'coolNeutral[90]' },
+            { label: '선택/부분선택 채움', value: mint[45], token: 'mint[45]' },
+            { label: '비활성 상태', value: mint[90], token: 'mint[90]' },
+          ]}
+        />
+      </Col>
+    </Section>
+  ),
+};
+
+// ─── 7. 사용 가이드 ─────────────────────────────────────────
+
+export const Usage: Story = {
+  name: '사용 가이드',
+  render: () => (
+    <Section title="사용 가이드" description="개발자를 위한 코드 사용 예시입니다.">
+      <Col gap={spacing.large}>
+        <CodeBlock
+          title="기본 사용"
+          code={`<Checkbox state="unchecked" onPress={() => {}} />`}
+        />
+        <CodeBlock
+          title="라벨과 함께 사용"
+          code={`<Checkbox
+  state="checked"
+  label="동의합니다"
+  sublabel="보조 설명 텍스트"
+  onPress={() => handleToggle()}
+/>`}
+        />
+        <CodeBlock
+          title="Indeterminate 상태 (부모-자식 패턴)"
+          code={`const allChecked = items.every(Boolean);
+const someChecked = items.some(Boolean);
+const parentState = allChecked
+  ? 'checked'
+  : someChecked
+    ? 'indeterminate'
+    : 'unchecked';
+
+<Checkbox
+  state={parentState}
+  label="전체 선택"
+  bold
+  onPress={() => {
+    const next = !allChecked;
+    setItems(items.map(() => next));
+  }}
+/>`}
+        />
+        <CodeBlock
+          title="사이즈 변경"
+          code={`<Checkbox state="checked" size="small" label="작은 체크박스" />
+<Checkbox state="checked" size="medium" label="중간 체크박스" />`}
+        />
+        <CodeBlock
+          title="Bold 라벨"
+          code={`<Checkbox state="checked" label="굵은 라벨" bold />`}
+        />
+        <CodeBlock
+          title="비활성화"
+          code={`<Checkbox state="checked" disabled label="비활성 체크박스" />`}
+        />
+      </Col>
+    </Section>
+  ),
+};
+
+// ─── 8. CheckMark ───────────────────────────────────────────
+
+export const CheckMarkSection: Story = {
+  name: 'CheckMark',
+  render: () => {
+    const [items, setItems] = useState([false, true, false, false]);
+    const labels = [
+      { label: '알림 수신 동의', sublabel: '마케팅 및 서비스 알림을 수신합니다' },
+      { label: '이메일 수신 동의', sublabel: '이메일로 소식을 받아봅니다' },
+      { label: 'SMS 수신 동의', sublabel: '문자로 소식을 받아봅니다' },
+      { label: '야간 알림 동의', sublabel: '21시~08시 사이 알림을 수신합니다' },
+    ];
+    const toggle = (i: number) =>
+      setItems(prev => { const n = [...prev]; n[i] = !n[i]; return n; });
+
+    return (
+      <Col gap={spacing['3xlarge']}>
+        <Section
+          title="CheckMark"
+          description="체크 아이콘만 사용하는 간결한 선택 컴포넌트입니다. 박스 없이 체크 표시만으로 선택 상태를 나타냅니다."
+        >
+          <Row gap={spacing['3xlarge']} wrap align="flex-start">
+            <Col gap={spacing.large}>
+              <StateLabel>활성</StateLabel>
+              <CompareGrid
+                items={[
+                  { label: '미선택', content: <CheckMark checked={false} size="medium" /> },
+                  { label: '선택', content: <CheckMark checked size="medium" /> },
+                ]}
+              />
+            </Col>
+            <Col gap={spacing.large}>
+              <StateLabel>비활성</StateLabel>
+              <CompareGrid
+                items={[
+                  { label: '미선택', content: <CheckMark checked={false} size="medium" disabled /> },
+                  { label: '선택', content: <CheckMark checked size="medium" disabled /> },
+                ]}
+              />
+            </Col>
+          </Row>
+        </Section>
+
+        <Section title="CheckMark 인터랙티브" description="직접 클릭해 보세요.">
+          <Col gap={spacing.xsmall}>
+            {labels.map((opt, i) => (
+              <CheckMark
+                key={i}
+                checked={items[i]}
+                label={opt.label}
+                sublabel={opt.sublabel}
+                onPress={() => toggle(i)}
+              />
+            ))}
+          </Col>
+        </Section>
+
+        <Section title="CheckMark 사용 가이드">
+          <CodeBlock
+            title="기본 사용"
+            code={`<CheckMark checked={false} onPress={() => {}} />
+<CheckMark checked label="항목" sublabel="설명" />`}
+          />
+        </Section>
+      </Col>
+    );
+  },
+};

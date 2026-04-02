@@ -1,0 +1,220 @@
+import React from 'react';
+import { Meta } from '@storybook/addon-docs/blocks';
+
+<Meta title="Design Tokens/Shadow" />
+
+<style>
+  {`
+    .shadow-page {
+      max-width: 900px;
+      margin: 0 auto;
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    }
+    .shadow-page h2 {
+      font-size: 28px;
+      font-weight: 700;
+      color: #171719;
+      margin: 0 0 8px;
+      padding-bottom: 12px;
+      border-bottom: 2px solid #22C3BC;
+    }
+    .shadow-page > p {
+      font-size: 15px;
+      color: #5A5C63;
+      margin: 0 0 40px;
+    }
+    .section-divider {
+      border: none;
+      border-top: 1px solid #E1E2E4;
+      margin: 16px 0 48px;
+    }
+    .shadow-page h3 {
+      font-size: 20px;
+      font-weight: 700;
+      color: #171719;
+      margin: 0 0 4px;
+    }
+    .shadow-page h3 + p {
+      font-size: 14px;
+      color: #70737C;
+      margin: 0 0 16px;
+    }
+    .shadow-page table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 16px 0 32px;
+      font-size: 14px;
+    }
+    .shadow-page th {
+      text-align: left;
+      padding: 10px 12px;
+      background: #F7F7F8;
+      border-bottom: 2px solid #E1E2E4;
+      color: #46474C;
+      font-weight: 600;
+      font-size: 13px;
+    }
+    .shadow-page td {
+      padding: 10px 12px;
+      border-bottom: 1px solid #EAEBEC;
+      color: #292A2D;
+      vertical-align: middle;
+    }
+    .shadow-page code {
+      font-family: 'SF Mono', 'Fira Code', monospace;
+      font-size: 13px;
+      background: #F4F4F5;
+      padding: 2px 6px;
+      border-radius: 4px;
+      color: #5A5C63;
+    }
+    .usage-card {
+      background: linear-gradient(135deg, #FBFEFE 0%, #E9FBFA 100%);
+      border: 1px solid #D4F7F6;
+      border-radius: 12px;
+      padding: 20px 24px;
+      margin: 16px 0 32px;
+      overflow-x: auto;
+    }
+    .usage-card pre {
+      margin: 0;
+      font-family: 'SF Mono', 'Fira Code', monospace;
+      font-size: 13px;
+      line-height: 1.7;
+      color: #37383C;
+    }
+    .usage-card .comment { color: #70737C; }
+    .usage-card .token { color: #22C3BC; }
+  `}
+</style>
+
+<div className="shadow-page">
+
+<h2>Shadow</h2>
+<p>컴포넌트의 깊이감을 표현하는 그림자 단계입니다.</p>
+
+## Shadow Levels
+
+<h3>그림자 단계</h3>
+<p>3단계 그림자로 UI 요소의 깊이를 표현합니다.</p>
+
+<div style={{ display: 'flex', gap: 24, marginBottom: 48 }}>
+  <div style={{
+    flex: 1,
+    height: 120,
+    backgroundColor: '#FFFFFF',
+    borderRadius: 16,
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center',
+    justifyContent: 'center',
+    boxShadow: '0px 1px 4px rgba(0, 0, 0, 0.06)',
+  }}>
+    <span style={{ fontSize: 15, fontWeight: 600, color: '#171719' }}>Level 1</span>
+    <span style={{ fontSize: 12, color: '#70737C', marginTop: 4 }}>Subtle</span>
+    <span style={{ fontSize: 11, color: '#989BA2', marginTop: 8, textAlign: 'center', padding: '0 12px' }}>카드, 구분선 대체, 미세한 깊이감</span>
+  </div>
+  <div style={{
+    flex: 1,
+    height: 120,
+    backgroundColor: '#FFFFFF',
+    borderRadius: 16,
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center',
+    justifyContent: 'center',
+    boxShadow: '0px 2px 8px rgba(0, 0, 0, 0.1)',
+  }}>
+    <span style={{ fontSize: 15, fontWeight: 600, color: '#171719' }}>Level 2</span>
+    <span style={{ fontSize: 12, color: '#70737C', marginTop: 4 }}>Medium</span>
+    <span style={{ fontSize: 11, color: '#989BA2', marginTop: 8, textAlign: 'center', padding: '0 12px' }}>플로팅 요소, 드롭다운, 호버 카드</span>
+  </div>
+  <div style={{
+    flex: 1,
+    height: 120,
+    backgroundColor: '#FFFFFF',
+    borderRadius: 16,
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center',
+    justifyContent: 'center',
+    boxShadow: '0px 4px 16px rgba(0, 0, 0, 0.15)',
+  }}>
+    <span style={{ fontSize: 15, fontWeight: 600, color: '#171719' }}>Level 3</span>
+    <span style={{ fontSize: 12, color: '#70737C', marginTop: 4 }}>Strong</span>
+    <span style={{ fontSize: 11, color: '#989BA2', marginTop: 8, textAlign: 'center', padding: '0 12px' }}>모달, 바텀시트, 최상위 레이어</span>
+  </div>
+</div>
+
+<hr className="section-divider" />
+
+## Spec Table
+
+<h3>그림자 스펙</h3>
+<p>각 레벨의 상세 값입니다. React Native의 shadow 속성과 Android의 elevation 값을 함께 제공합니다.</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>레벨</th>
+      <th>shadowOffset</th>
+      <th>shadowOpacity</th>
+      <th>shadowRadius</th>
+      <th>elevation</th>
+      <th>용도</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code>level1</code></td>
+      <td>0, 1</td>
+      <td>0.06</td>
+      <td>4</td>
+      <td>2</td>
+      <td>카드, 리스트 아이템</td>
+    </tr>
+    <tr>
+      <td><code>level2</code></td>
+      <td>0, 2</td>
+      <td>0.10</td>
+      <td>8</td>
+      <td>4</td>
+      <td>플로팅 버튼, 드롭다운</td>
+    </tr>
+    <tr>
+      <td><code>level3</code></td>
+      <td>0, 4</td>
+      <td>0.15</td>
+      <td>16</td>
+      <td>8</td>
+      <td>모달, 바텀시트</td>
+    </tr>
+  </tbody>
+</table>
+
+<hr className="section-divider" />
+
+### Usage
+
+<p>테마에서 <code>shadow</code> 토큰을 가져와 컴포넌트에 적용합니다.</p>
+
+<div className="usage-card">
+  <pre>
+    <span className="comment">// theme.ts에서 import</span>{'\n'}
+    import {'{ '}<span className="token">shadow</span>{' }'} from '../tokens/theme';{'\n'}
+    {'\n'}
+    <span className="comment">// 스타일 객체로 직접 사용</span>{'\n'}
+    {'const modalStyle = {'}{'\n'}
+    {'  backgroundColor: \'#FFFFFF\','}{'\n'}
+    {'  borderRadius: 16,'}{'\n'}
+    {'  ...'}<span className="token">shadow.level3</span>,{'\n'}
+    {'};'}{'\n'}
+    {'\n'}
+    <span className="comment">// React Native에서 사용</span>{'\n'}
+    {'<'}<span className="token">View</span> style={'{'}[styles.container, <span className="token">shadow.level2</span>]{'}'}{'>'}{'\n'}
+    {'  <'}<span className="token">Text</span>{'>'}플로팅 카드{'</'}<span className="token">Text</span>{'>'}{'\n'}
+    {'</'}<span className="token">View</span>{'>'}{'\n'}
+  </pre>
+</div>
+
+</div>
