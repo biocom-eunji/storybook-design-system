@@ -4,6 +4,14 @@
 
 ---
 
+## v1.3.5 (2026-04-14)
+
+### Removed
+
+- **TextButton** 아이콘 조합 기능 전체 삭제 — `leadingIcon`, `trailingIcon` props 제거, `iconSize` 토큰 제거, 아이콘 조합 스토리 삭제
+
+---
+
 ## v1.3.4 (2026-04-14)
 
 ### Changed

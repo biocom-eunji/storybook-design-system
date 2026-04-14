@@ -2,14 +2,12 @@ import React from 'react';
 import {
   Pressable,
   Text,
-  View,
   ActivityIndicator,
   type ViewStyle,
   type TextStyle,
   type PressableStateCallbackType,
 } from 'react-native';
 import { textButtonToken, fontWeight, spacing } from '../tokens/theme';
-import { renderIcon } from './utils';
 
 export type TextButtonColor = 'primary' | 'assistive';
 export type TextButtonSize = 'small' | 'medium';
@@ -21,8 +19,6 @@ export interface TextButtonProps {
   size?: TextButtonSize;
   disabled?: boolean;
   loading?: boolean;
-  leadingIcon?: React.ReactNode;
-  trailingIcon?: React.ReactNode;
 }
 
 export function TextButton({
@@ -32,8 +28,6 @@ export function TextButton({
   size = 'medium',
   disabled = false,
   loading = false,
-  leadingIcon,
-  trailingIcon,
 }: TextButtonProps) {
   const sizeToken = textButtonToken.size[size];
   const colorToken = textButtonToken.color[color];
@@ -74,13 +68,7 @@ export function TextButton({
           return <ActivityIndicator size="small" color={contentColor} />;
         }
 
-        return (
-          <>
-            {renderIcon(leadingIcon, sizeToken.iconSize, contentColor)}
-            <Text style={textStyle}>{label}</Text>
-            {renderIcon(trailingIcon, sizeToken.iconSize, contentColor)}
-          </>
-        );
+        return <Text style={textStyle}>{label}</Text>;
       }}
     </Pressable>
   );

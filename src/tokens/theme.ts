@@ -521,8 +521,8 @@ export const buttonToken = {
 /** Text Button: 배경색이나 테두리가 없는 버튼 */
 export const textButtonToken = {
   size: {
-    small:  { fontSize: textStyle.label2.fontSize, lineHeight: textStyle.label2.lineHeight, letterSpacing: textStyle.label2.letterSpacing, iconSize: 16 },
-    medium: { fontSize: textStyle.body2.fontSize, lineHeight: textStyle.body2.lineHeight, letterSpacing: textStyle.body2.letterSpacing, iconSize: 20 },
+    small:  { fontSize: textStyle.label2.fontSize, lineHeight: textStyle.label2.lineHeight, letterSpacing: textStyle.label2.letterSpacing },
+    medium: { fontSize: textStyle.body2.fontSize, lineHeight: textStyle.body2.lineHeight, letterSpacing: textStyle.body2.letterSpacing },
   },
   color: {
     primary: {

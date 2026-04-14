@@ -2,7 +2,6 @@ import React from 'react';
 import { View } from 'react-native';
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import { TextButton } from '../src/components/TextButton';
-import { Icon } from '../src/components/Icon';
 import { Section, StateLabel, Row, Col, SpecTable, CodeBlock, CompareGrid, Divider } from './storyHelpers';
 import { spacing, coolNeutral, mint } from '../src/tokens/theme';
 
@@ -66,15 +65,6 @@ export const AllVariants: Story = {
                 <TextButton label="텍스트" color="primary" size="small" />
               </Col>
               <Col gap={spacing.xsmall}>
-                <StateLabel>아이콘 포함</StateLabel>
-                <TextButton
-                  label="텍스트"
-                  color="primary"
-                  size="medium"
-                  leadingIcon={<Icon name="null" />}
-                />
-              </Col>
-              <Col gap={spacing.xsmall}>
                 <StateLabel>비활성화</StateLabel>
                 <TextButton label="텍스트" color="primary" size="medium" disabled />
               </Col>
@@ -94,15 +84,6 @@ export const AllVariants: Story = {
               <Col gap={spacing.xsmall}>
                 <StateLabel>Small</StateLabel>
                 <TextButton label="텍스트" color="assistive" size="small" />
-              </Col>
-              <Col gap={spacing.xsmall}>
-                <StateLabel>아이콘 포함</StateLabel>
-                <TextButton
-                  label="텍스트"
-                  color="assistive"
-                  size="medium"
-                  leadingIcon={<Icon name="null" />}
-                />
               </Col>
               <Col gap={spacing.xsmall}>
                 <StateLabel>비활성화</StateLabel>
@@ -171,80 +152,7 @@ export const States: Story = {
   ),
 };
 
-// ─── 4. 아이콘 조합 ─────────────────────────────────────────
-
-export const WithIcons: Story = {
-  name: '아이콘 조합',
-  render: () => (
-    <View style={{ gap: spacing['3xlarge'] }}>
-      <Section title="아이콘 조합" description="Leading, Trailing 또는 양쪽 모두에 아이콘을 배치할 수 있습니다.">
-        <Col gap={spacing['2xlarge']}>
-          <Col gap={spacing.medium}>
-            <StateLabel>LEADING 아이콘</StateLabel>
-            <Row gap={spacing.xlarge}>
-              <TextButton
-                label="텍스트"
-                color="primary"
-                size="medium"
-                leadingIcon={<Icon name="null" />}
-              />
-              <TextButton
-                label="텍스트"
-                color="assistive"
-                size="medium"
-                leadingIcon={<Icon name="null" />}
-              />
-            </Row>
-          </Col>
-
-          <Divider />
-
-          <Col gap={spacing.medium}>
-            <StateLabel>TRAILING 아이콘</StateLabel>
-            <Row gap={spacing.xlarge}>
-              <TextButton
-                label="텍스트"
-                color="primary"
-                size="medium"
-                trailingIcon={<Icon name="null" />}
-              />
-              <TextButton
-                label="텍스트"
-                color="assistive"
-                size="medium"
-                trailingIcon={<Icon name="null" />}
-              />
-            </Row>
-          </Col>
-
-          <Divider />
-
-          <Col gap={spacing.medium}>
-            <StateLabel>양쪽 아이콘</StateLabel>
-            <Row gap={spacing.xlarge}>
-              <TextButton
-                label="텍스트"
-                color="primary"
-                size="medium"
-                leadingIcon={<Icon name="null" />}
-                trailingIcon={<Icon name="null" />}
-              />
-              <TextButton
-                label="텍스트"
-                color="assistive"
-                size="medium"
-                leadingIcon={<Icon name="null" />}
-                trailingIcon={<Icon name="null" />}
-              />
-            </Row>
-          </Col>
-        </Col>
-      </Section>
-    </View>
-  ),
-};
-
-// ─── 5. 디자인 스펙 ─────────────────────────────────────────
+// ─── 4. 디자인 스펙 ─────────────────────────────────────────
 
 export const DesignSpec: Story = {
   name: '디자인 스펙',
@@ -299,8 +207,7 @@ export const Usage: Story = {
         <Col gap={spacing.large}>
           <CodeBlock
             title="Import"
-            code={`import { TextButton } from '@design-system/components/TextButton';
-import { Icon } from '@design-system/components/Icon';`}
+            code={`import { TextButton } from '@design-system/components/TextButton';`}
           />
 
           <CodeBlock
@@ -316,15 +223,6 @@ import { Icon } from '@design-system/components/Icon';`}
           <CodeBlock
             title="Small 사이즈"
             code={`<TextButton label="더보기" size="small" />`}
-          />
-
-          <CodeBlock
-            title="아이콘 포함"
-            code={`<TextButton
-  label="다음"
-  trailingIcon={<Icon name="null" />}
-  onPress={handleNext}
-/>`}
           />
 
           <CodeBlock
