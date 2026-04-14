@@ -374,14 +374,101 @@ export const LINK = {
     <p className="label">아이콘</p>
   </div>
   <div className="stat-card">
-    <p className="num">27</p>
-    <p className="label">시맨틱 토큰</p>
+    <p className="num">26</p>
+    <p className="label">단위 테스트</p>
   </div>
   <div className="stat-card">
-    <p className="num">11</p>
-    <p className="label">텍스트 스타일</p>
+    <p className="num">CI</p>
+    <p className="label">자동화 파이프라인</p>
   </div>
 </div>
+
+{/* ══════════════════════════════════════════════════════ */}
+{/* v1.3.1 — 2026-04-14                                   */}
+{/* ══════════════════════════════════════════════════════ */}
+
+<div className="version-header">
+  <span className="version-badge minor">v1.3.1</span>
+  <span className="version-date">2026-04-14</span>
+</div>
+
+<details className="toggle-card" open>
+  <summary>
+    <CaretIcon />
+    <span className="emoji">✨</span>
+    <span className="title">Features</span>
+    <span className="count">1</span>
+  </summary>
+  <div className="toggle-body">
+    <div className="change-item">
+      <span className="name"><a href={LINK.ColorTokens}>backgroundDisabled</a></span>
+      <span className="desc">비활성화 배경용 시맨틱 컬러 토큰 추가. <code>coolNeutral[96]</code> (#E1E2E4) 참조.</span>
+    </div>
+  </div>
+</details>
+
+<hr className="version-divider" />
+
+{/* ══════════════════════════════════════════════════════ */}
+{/* v1.3.0 — 2026-03-19                                   */}
+{/* ══════════════════════════════════════════════════════ */}
+
+<div className="version-header">
+  <span className="version-badge minor">v1.3.0</span>
+  <span className="version-date">2026-03-19</span>
+</div>
+
+<details className="toggle-card">
+  <summary>
+    <CaretIcon />
+    <span className="emoji">✨</span>
+    <span className="title">Features</span>
+    <span className="count">3</span>
+  </summary>
+  <div className="toggle-body">
+    <div className="change-item">
+      <span className="name-plain">README.md</span>
+      <span className="desc">프로젝트 소개, 로컬 설치/실행 방법, 배포 가이드, 프로젝트 구조, 기술 스택, 기여 방법 문서화</span>
+    </div>
+    <div className="change-item">
+      <span className="name-plain">GitHub Actions CI</span>
+      <span className="desc">PR/push 시 자동 실행 — TypeScript 체크 → Vitest 테스트 → Storybook 빌드 → Chromatic 배포</span>
+    </div>
+    <div className="change-item">
+      <span className="name-plain">Vitest 단위 테스트</span>
+      <span className="desc">Button(8개), InputField(10개), Checkbox(8개) 총 26개 테스트 작성. props 렌더링, 이벤트 핸들링, 접근성, 상태 변형 검증</span>
+    </div>
+  </div>
+</details>
+
+<details className="toggle-card">
+  <summary>
+    <CaretIcon />
+    <span className="emoji">🔧</span>
+    <span className="title">Infra</span>
+    <span className="count">4</span>
+  </summary>
+  <div className="toggle-body">
+    <div className="change-item">
+      <span className="name-plain">vitest.config.ts</span>
+      <span className="desc">jsdom 환경 설정, <code>@vitejs/plugin-react</code> JSX 자동 런타임, react-native-web/SVG alias</span>
+    </div>
+    <div className="change-item">
+      <span className="name-plain">테스트 setup</span>
+      <span className="desc"><code>@testing-library/react</code> + <code>@testing-library/jest-dom</code> 연동, <code>__DEV__</code> 전역 변수 설정</span>
+    </div>
+    <div className="change-item">
+      <span className="name-plain">CI 워크플로우</span>
+      <span className="desc"><code>.github/workflows/ci.yml</code> — Node 20, npm ci, tsc --noEmit, vitest run, build-storybook, Chromatic</span>
+    </div>
+    <div className="change-item">
+      <span className="name-plain">devDependencies</span>
+      <span className="desc"><code>jsdom</code>, <code>@testing-library/react</code>, <code>@testing-library/jest-dom</code>, <code>@vitejs/plugin-react@^4</code> 추가</span>
+    </div>
+  </div>
+</details>
+
+<hr className="version-divider" />
 
 {/* ══════════════════════════════════════════════════════ */}
 {/* v1.2.0 — 2026-03-19                                   */}

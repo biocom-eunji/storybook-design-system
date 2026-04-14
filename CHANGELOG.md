@@ -4,6 +4,35 @@
 
 ---
 
+## v1.3.1 (2026-04-14)
+
+### Added
+
+- **backgroundDisabled** 시맨틱 컬러 토큰 추가 — `coolNeutral[96]` (#E1E2E4) 참조, 비활성화 상태 컴포넌트 배경용
+
+---
+
+## v1.3.0 (2026-03-19)
+
+### ✨ Features
+
+- **README.md** 추가 — 프로젝트 소개, 로컬 설치/실행 방법, 배포 가이드, 프로젝트 구조, 기술 스택, 기여 방법 문서화
+- **GitHub Actions CI** 추가 — PR/push 시 TypeScript 체크 → Vitest 테스트 → Storybook 빌드 → Chromatic 배포 자동화 파이프라인
+- **Vitest 단위 테스트** 도입 — Button(8개), InputField(10개), Checkbox(8개) 총 26개 테스트 작성
+
+### 🔧 Infra
+
+- **vitest.config.ts** 추가 — jsdom 환경, `@vitejs/plugin-react` JSX 자동 런타임, react-native-web alias 설정
+- **테스트 setup** — `@testing-library/react`, `@testing-library/jest-dom` 연동
+- **CI 워크플로우** — `ci.yml` (Node 20, npm ci → tsc → vitest → build-storybook → chromatic)
+
+### 📝 Docs
+
+- **CHANGELOG** v1.3.0 이력 추가
+- **Release Notes** v1.3.0 섹션 추가
+
+---
+
 ## v1.2.0 (2026-03-19)
 
 ### ✨ Features

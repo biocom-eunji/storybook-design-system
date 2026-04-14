@@ -431,6 +431,8 @@ export const semanticColor = {
   backgroundBrandPressed: _role.brandPressed,
   /** 상태 배경 (에러/성공/경고 — 흰색 통일) */
   backgroundStatus: _surface.primary,
+  /** 비활성화 배경 (Disabled 상태 컴포넌트) */
+  backgroundDisabled: coolNeutral[96],
 
   // ── Border ────────────────────────────────────────────
   /** 기본·비활성화 테두리, 구분선 */
