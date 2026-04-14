@@ -42,8 +42,13 @@ yarn-error.*
 
 # Storybook
 storybook-static/
+build-storybook.log
+debug-storybook.log
 
 # Design source files
 *.png
 *.xlsx
 vitest.shims.d.ts
+
+# Fonts (use public/fonts/ for serving)
+/PretendardVariable.woff2
