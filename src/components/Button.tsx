@@ -40,7 +40,7 @@ export function Button({
   const contentColor = disabled ? colorToken.contentDisabled : colorToken.content;
 
   const getContainerStyle = ({ pressed }: PressableStateCallbackType): ViewStyle => {
-    let bg = colorToken.background;
+    let bg: string = colorToken.background;
     if (disabled) bg = colorToken.backgroundDisabled;
     else if (pressed) bg = colorToken.backgroundPressed;
 
