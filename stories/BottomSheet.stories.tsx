@@ -159,7 +159,7 @@ export const DesignSpec: Story = {
         <SpecTable
           title="시트"
           rows={[
-            { label: '배경색', value: '#FFFFFF', token: 'semanticColor.backgroundPrimary' },
+            { label: '배경색', value: '#FFFFFF', token: 'semanticColor.backgroundStatus' },
             { label: '상단 반경', value: '20px', token: 'radius.xlarge' },
             { label: '하단 여백', value: 'safeAreaBottom prop', token: 'useSafeAreaInsets().bottom' },
           ]}

@@ -4,6 +4,14 @@
 
 ---
 
+## v1.3.2 (2026-04-14)
+
+### Removed
+
+- **backgroundPrimary** 시맨틱 컬러 토큰 제거 — 기존 참조 5개를 `backgroundStatus`로 교체 (Modal, TabBar, InputField, BottomSheet, ActionArea)
+
+---
+
 ## v1.3.1 (2026-04-14)
 
 ### Added

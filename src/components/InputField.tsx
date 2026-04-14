@@ -134,7 +134,7 @@ export function InputField({
   const containerStyle: ViewStyle = {
     ...styles.container,
     borderColor,
-    backgroundColor: disabled ? semanticColor.backgroundSecondary : semanticColor.backgroundPrimary,
+    backgroundColor: disabled ? semanticColor.backgroundSecondary : semanticColor.backgroundStatus,
     paddingVertical: multiline ? spacing.medium : 0,
     minHeight: multiline ? minHeight : SINGLE_LINE_HEIGHT,
     flexDirection: multiline ? 'column' : 'row',

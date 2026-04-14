@@ -84,7 +84,7 @@ const styles = StyleSheet.create({
     bottom: 0,
   } as ViewStyle,
   dialog: {
-    backgroundColor: semanticColor.backgroundPrimary,
+    backgroundColor: semanticColor.backgroundStatus,
     borderRadius: radius.xlarge,
     width: 300,
     padding: spacing['2xlarge'],

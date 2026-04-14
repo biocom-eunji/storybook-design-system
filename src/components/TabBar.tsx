@@ -80,7 +80,7 @@ const styles = StyleSheet.create({
   } as ViewStyle,
   default: {
     height: 60,
-    backgroundColor: semanticColor.backgroundPrimary,
+    backgroundColor: semanticColor.backgroundStatus,
     borderTopWidth: 1,
     borderTopColor: semanticColor.borderDefault,
     paddingBottom: spacing.xsmall,

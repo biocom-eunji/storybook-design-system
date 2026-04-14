@@ -129,7 +129,7 @@ export const IconMapping: Story = {
           { label: '비활성 아이콘', value: semanticColor.iconDisabled, token: 'semanticColor.iconDisabled' },
           { label: '활성 텍스트', value: semanticColor.textBrand, token: 'semanticColor.textBrand' },
           { label: '비활성 텍스트', value: semanticColor.textSecondary, token: 'semanticColor.textSecondary' },
-          { label: '배경', value: semanticColor.backgroundPrimary, token: 'semanticColor.backgroundPrimary' },
+          { label: '배경', value: semanticColor.backgroundStatus, token: 'semanticColor.backgroundStatus' },
           { label: '구분선', value: semanticColor.borderDefault, token: 'semanticColor.borderDefault' },
         ]}
       />
@@ -148,7 +148,7 @@ export const DesignSpec: Story = {
           title="컨테이너"
           rows={[
             { label: '높이', value: '60px', token: '—' },
-            { label: '배경색', value: semanticColor.backgroundPrimary, token: 'semanticColor.backgroundPrimary' },
+            { label: '배경색', value: semanticColor.backgroundStatus, token: 'semanticColor.backgroundStatus' },
             { label: '상단 테두리', value: semanticColor.borderDefault, token: 'semanticColor.borderDefault' },
             { label: '하단 패딩', value: `${spacing.xsmall}px`, token: 'spacing.xsmall' },
           ]}

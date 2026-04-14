@@ -384,6 +384,32 @@ export const LINK = {
 </div>
 
 {/* ══════════════════════════════════════════════════════ */}
+{/* v1.3.2 — 2026-04-14                                   */}
+{/* ══════════════════════════════════════════════════════ */}
+
+<div className="version-header">
+  <span className="version-badge minor">v1.3.2</span>
+  <span className="version-date">2026-04-14</span>
+</div>
+
+<details className="toggle-card" open>
+  <summary>
+    <CaretIcon />
+    <span className="emoji">♻️</span>
+    <span className="title">Refactored</span>
+    <span className="count">1</span>
+  </summary>
+  <div className="toggle-body">
+    <div className="change-item">
+      <span className="name"><a href={LINK.ColorTokens}>backgroundPrimary</a></span>
+      <span className="desc">시맨틱 컬러 토큰 제거. 기존 참조 5개(Modal, TabBar, InputField, BottomSheet, ActionArea)를 <code>backgroundStatus</code>로 교체.</span>
+    </div>
+  </div>
+</details>
+
+<hr className="version-divider" />
+
+{/* ══════════════════════════════════════════════════════ */}
 {/* v1.3.1 — 2026-04-14                                   */}
 {/* ══════════════════════════════════════════════════════ */}
 
@@ -392,7 +418,7 @@ export const LINK = {
   <span className="version-date">2026-04-14</span>
 </div>
 
-<details className="toggle-card" open>
+<details className="toggle-card">
   <summary>
     <CaretIcon />
     <span className="emoji">✨</span>

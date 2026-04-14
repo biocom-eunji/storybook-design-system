@@ -290,7 +290,7 @@ export const DesignSpec: Story = {
             { label: '하단 패딩', value: '12px + safeAreaBottom', token: 'spacing.medium + safeAreaBottom' },
             { label: '버튼 간격', value: '8px', token: 'actionAreaToken.gap (spacing.small)' },
             { label: '구분선 색상', value: coolNeutral[96], token: 'coolNeutral[96]' },
-            { label: '배경색', value: '#FFFFFF', token: 'semanticColor.backgroundPrimary' },
+            { label: '배경색', value: '#FFFFFF', token: 'semanticColor.backgroundStatus' },
           ]}
         />
         <SpecTable

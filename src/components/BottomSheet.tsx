@@ -140,7 +140,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#000000',
   } as ViewStyle,
   sheet: {
-    backgroundColor: semanticColor.backgroundPrimary,
+    backgroundColor: semanticColor.backgroundStatus,
     borderTopLeftRadius: radius.xlarge,
     borderTopRightRadius: radius.xlarge,
   } as ViewStyle,

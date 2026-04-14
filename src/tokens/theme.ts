@@ -417,8 +417,6 @@ export const semanticColor = {
   textWarning: _role.warning,
 
   // ── Background ────────────────────────────────────────
-  /** 기본 화면 배경색 */
-  backgroundPrimary: _surface.primary,
   /** 보조 배경색 (카드, 섹션 구분) */
   backgroundSecondary: _surface.secondary,
   /** 3단계 배경색 (인풋 비활성, 칩 등) */
