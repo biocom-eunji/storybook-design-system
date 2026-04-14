@@ -4,6 +4,19 @@
 
 ---
 
+## v1.3.4 (2026-04-14)
+
+### Changed
+
+- **TextButton** 컬러를 `semanticColor` 토큰 참조로 변경 — palette 직접 참조 대신 시맨틱 레이어 인용
+  - primary.content: `mint[45]` → `semanticColor.textBrand`
+  - primary.contentDisabled: `coolNeutral[80]` → `semanticColor.textTertiary`
+  - assistive.content: `coolNeutral[50]` → `semanticColor.textSecondary`
+  - assistive.contentDisabled: `coolNeutral[80]` → `semanticColor.textTertiary`
+  - Pressed/Hovered: 시맨틱 토큰 미존재로 palette 직접 참조 유지
+
+---
+
 ## v1.3.3 (2026-04-14)
 
 ### Changed

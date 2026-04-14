@@ -269,18 +269,18 @@ export const DesignSpec: Story = {
           <SpecTable
             title="Primary 컬러"
             rows={[
-              { label: '기본 콘텐츠', value: '#22C3BC', token: 'mint[45]' },
-              { label: '눌림 콘텐츠', value: mint[30], token: 'mint[30]' },
-              { label: '비활성화 콘텐츠', value: coolNeutral[80], token: 'coolNeutral[80]' },
+              { label: '기본 콘텐츠', value: '#22C3BC', token: 'semanticColor.textBrand' },
+              { label: '눌림 콘텐츠', value: mint[30], token: 'mint[30] (palette 직접 참조)' },
+              { label: '비활성화 콘텐츠', value: coolNeutral[80], token: 'semanticColor.textTertiary' },
             ]}
           />
 
           <SpecTable
             title="Assistive 컬러"
             rows={[
-              { label: '기본 콘텐츠', value: '#70737C', token: 'coolNeutral[50]' },
-              { label: '눌림 콘텐츠', value: coolNeutral[30], token: 'coolNeutral[30]' },
-              { label: '비활성화 콘텐츠', value: coolNeutral[80], token: 'coolNeutral[80]' },
+              { label: '기본 콘텐츠', value: '#70737C', token: 'semanticColor.textSecondary' },
+              { label: '눌림 콘텐츠', value: coolNeutral[30], token: 'coolNeutral[30] (palette 직접 참조)' },
+              { label: '비활성화 콘텐츠', value: coolNeutral[80], token: 'semanticColor.textTertiary' },
             ]}
           />
         </Col>

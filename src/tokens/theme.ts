@@ -526,16 +526,16 @@ export const textButtonToken = {
   },
   color: {
     primary: {
-      content: mint[45],
-      contentPressed: mint[30],
-      contentHovered: mint[40],
-      contentDisabled: coolNeutral[80],
+      content: semanticColor.textBrand,           // mint[45]
+      contentPressed: mint[30],                    // palette 직접 참조 (시맨틱 토큰 미존재)
+      contentHovered: mint[40],                    // palette 직접 참조 (시맨틱 토큰 미존재)
+      contentDisabled: semanticColor.textTertiary, // coolNeutral[80]
     },
     assistive: {
-      content: coolNeutral[50],
-      contentPressed: coolNeutral[30],
-      contentHovered: coolNeutral[40],
-      contentDisabled: coolNeutral[80],
+      content: semanticColor.textSecondary,        // coolNeutral[50]
+      contentPressed: coolNeutral[30],             // palette 직접 참조 (시맨틱 토큰 미존재)
+      contentHovered: coolNeutral[40],             // palette 직접 참조 (시맨틱 토큰 미존재)
+      contentDisabled: semanticColor.textTertiary, // coolNeutral[80]
     },
   },
 } as const;
