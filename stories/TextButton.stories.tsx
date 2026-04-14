@@ -255,9 +255,13 @@ export const DesignSpec: Story = {
           <SpecTable
             title="사이즈별 스펙"
             rows={[
-              { label: 'Small - fontSize', value: '13', token: 'textButtonToken.size.small.fontSize' },
+              { label: 'Small - fontSize', value: '13', token: 'textStyle.label2.fontSize' },
+              { label: 'Small - lineHeight', value: '18', token: 'textStyle.label2.lineHeight' },
+              { label: 'Small - letterSpacing', value: '0.25', token: 'textStyle.label2.letterSpacing' },
               { label: 'Small - iconSize', value: '16', token: 'textButtonToken.size.small.iconSize' },
-              { label: 'Medium - fontSize', value: '15', token: 'textButtonToken.size.medium.fontSize' },
+              { label: 'Medium - fontSize', value: '15', token: 'textStyle.body2.fontSize' },
+              { label: 'Medium - lineHeight', value: '22', token: 'textStyle.body2.lineHeight' },
+              { label: 'Medium - letterSpacing', value: '0.14', token: 'textStyle.body2.letterSpacing' },
               { label: 'Medium - iconSize', value: '20', token: 'textButtonToken.size.medium.iconSize' },
             ]}
           />

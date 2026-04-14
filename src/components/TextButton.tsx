@@ -63,6 +63,8 @@ export function TextButton({
 
         const textStyle: TextStyle = {
           fontSize: sizeToken.fontSize,
+          lineHeight: sizeToken.lineHeight,
+          letterSpacing: sizeToken.letterSpacing,
           fontWeight: fontWeight.medium,
           color: contentColor,
           textDecorationLine: 'underline',

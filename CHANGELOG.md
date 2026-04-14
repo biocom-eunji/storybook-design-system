@@ -4,6 +4,16 @@
 
 ---
 
+## v1.3.3 (2026-04-14)
+
+### Changed
+
+- **TextButton** 서체 스타일을 Typography `textStyle` 참조로 변경 — `lineHeight`, `letterSpacing` 적용
+  - Small: `textStyle.label2` (13px · 18px · 0.25)
+  - Medium: `textStyle.body2` (15px · 22px · 0.14)
+
+---
+
 ## v1.3.2 (2026-04-14)
 
 ### Removed
