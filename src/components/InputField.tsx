@@ -13,13 +13,12 @@ import {
 import { Icon } from './Icon';
 import {
   coolNeutral,
-  mint,
-  red,
   fontSize,
   fontWeight,
   semanticColor,
   spacing,
   radius,
+  textStyle,
 } from '../tokens/theme';
 
 // ─── Types ───────────────────────────────────────────────
@@ -73,10 +72,10 @@ const ICON_SIZE = 20;
 const SINGLE_LINE_HEIGHT = spacing['4xlarge']; // 48px
 
 const TRAILING_ICON_MAP = {
-  clear:   { name: 'x-circle',        color: coolNeutral[80] },
-  error:   { name: 'warning',         color: red[70] },
-  success: { name: 'check-circle',    color: mint[45] },
-  search:  { name: 'magnifying-glass', color: coolNeutral[50] },
+  clear:   { name: 'x-circle',        color: semanticColor.iconDisabled },
+  error:   { name: 'warning',         color: semanticColor.iconError },
+  success: { name: 'check-circle',    color: semanticColor.iconSuccess },
+  search:  { name: 'magnifying-glass', color: semanticColor.iconSecondary },
 } as const;
 
 // ─── Component ───────────────────────────────────────────
@@ -255,9 +254,11 @@ const styles = StyleSheet.create({
     gap: 6, // 라벨-인풋-헬퍼 간격 (4px 그리드 예외)
   },
   label: {
-    fontSize: fontSize.small,
-    fontWeight: fontWeight.medium,
-    color: coolNeutral[30],
+    fontSize: textStyle.label2.fontSize,
+    fontWeight: textStyle.label2.fontWeight,
+    lineHeight: textStyle.label2.lineHeight,
+    letterSpacing: textStyle.label2.letterSpacing,
+    color: coolNeutral[30], // 시맨틱 토큰 미존재 — palette 직접 참조
   },
   container: {
     borderWidth: 1,
@@ -266,16 +267,19 @@ const styles = StyleSheet.create({
   },
   input: {
     flex: 1,
-    fontSize: fontSize.medium,
-    fontWeight: fontWeight.regular,
+    fontSize: textStyle.body2.fontSize,
+    fontWeight: textStyle.body2.fontWeight,
+    letterSpacing: textStyle.body2.letterSpacing,
     outlineStyle: 'none' as any,
   },
   trailingSlot: {
     marginLeft: spacing.small,
   },
   trailingTextLabel: {
-    fontSize: fontSize.small,
+    fontSize: textStyle.label2.fontSize,
     fontWeight: fontWeight.semibold,
+    lineHeight: textStyle.label2.lineHeight,
+    letterSpacing: textStyle.label2.letterSpacing,
     color: semanticColor.textSecondary,
   },
   trailingTextFocused: {
@@ -297,11 +301,15 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   bottomMessage: {
-    fontSize: fontSize.small,
+    fontSize: textStyle.label2.fontSize,
+    lineHeight: textStyle.label2.lineHeight,
+    letterSpacing: textStyle.label2.letterSpacing,
     flex: 1,
   },
   charCounter: {
-    fontSize: fontSize.small,
+    fontSize: textStyle.label2.fontSize,
+    lineHeight: textStyle.label2.lineHeight,
+    letterSpacing: textStyle.label2.letterSpacing,
     color: semanticColor.textPrimary,
   },
   charCounterError: {

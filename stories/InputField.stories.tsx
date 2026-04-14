@@ -538,32 +538,41 @@ export const DesignSpec: Story = {
           <SpecTable
             title="상태별 테두리 컬러"
             rows={[
-              { label: '비활성 (Inactive) 테두리', value: coolNeutral[96], token: 'coolNeutral[96]' },
-              { label: '입력됨 (Active) 테두리', value: coolNeutral[90], token: 'coolNeutral[90]' },
-              { label: '포커스 (Focus) 테두리', value: mint[45], token: 'mint[45]' },
-              { label: '에러 (Error) 테두리', value: red[70], token: 'red[70]' },
-              { label: '비활성화 (Disabled) 테두리', value: coolNeutral[96], token: 'coolNeutral[96]' },
+              { label: '비활성 (Inactive) 테두리', value: coolNeutral[96], token: 'semanticColor.borderDefault' },
+              { label: '입력됨 (Active) 테두리', value: coolNeutral[90], token: 'semanticColor.borderActive' },
+              { label: '포커스 (Focus) 테두리', value: mint[45], token: 'semanticColor.borderFocus' },
+              { label: '에러 (Error) 테두리', value: red[70], token: 'semanticColor.borderError' },
+              { label: '비활성화 (Disabled) 테두리', value: coolNeutral[96], token: 'semanticColor.borderDisabled' },
             ]}
           />
 
           <SpecTable
             title="메시지 컬러"
             rows={[
-              { label: '도움말 텍스트', value: coolNeutral[50], token: 'coolNeutral[50]' },
-              { label: '에러 메시지', value: red[70], token: 'red[70]' },
-              { label: '성공 메시지', value: mint[45], token: 'mint[45]' },
+              { label: '도움말 텍스트', value: coolNeutral[50], token: 'semanticColor.textSecondary' },
+              { label: '에러 메시지', value: red[70], token: 'semanticColor.textError' },
+              { label: '성공 메시지', value: mint[45], token: 'semanticColor.textSuccess' },
+            ]}
+          />
+
+          <SpecTable
+            title="아이콘 컬러"
+            rows={[
+              { label: 'Clear 아이콘', value: coolNeutral[80], token: 'semanticColor.iconDisabled' },
+              { label: 'Error 아이콘', value: red[70], token: 'semanticColor.iconError' },
+              { label: 'Success 아이콘', value: mint[45], token: 'semanticColor.iconSuccess' },
+              { label: 'Search 아이콘', value: coolNeutral[50], token: 'semanticColor.iconSecondary' },
             ]}
           />
 
           <SpecTable
             title="텍스트 스타일"
             rows={[
-              { label: '라벨 fontSize', value: `${fontSize.small}`, token: 'fontSize.small (13)' },
-              { label: '라벨 fontWeight', value: fontWeight.medium, token: 'fontWeight.medium (500)' },
-              { label: '라벨 색상', value: coolNeutral[30], token: 'coolNeutral[30]' },
-              { label: '입력 텍스트 fontSize', value: `${fontSize.medium}`, token: 'fontSize.medium (15)' },
-              { label: '입력 텍스트 색상', value: coolNeutral[17], token: 'coolNeutral[17]' },
-              { label: '플레이스홀더 색상', value: coolNeutral[80], token: 'coolNeutral[80]' },
+              { label: '라벨', value: 'textStyle.label2', token: '13px / 500 / 18px / 0.25' },
+              { label: '라벨 색상', value: coolNeutral[30], token: 'coolNeutral[30] (palette 직접 참조)' },
+              { label: '입력 텍스트', value: 'textStyle.body2', token: '15px / 400 / 22px / 0.14' },
+              { label: '입력 텍스트 색상', value: coolNeutral[17], token: 'semanticColor.textPrimary' },
+              { label: '플레이스홀더 색상', value: coolNeutral[80], token: 'semanticColor.textPlaceholder' },
             ]}
           />
 

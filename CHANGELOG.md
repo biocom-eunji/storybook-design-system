@@ -4,6 +4,16 @@
 
 ---
 
+## v1.3.6 (2026-04-14)
+
+### Changed
+
+- **InputField** 서체를 `textStyle` 토큰 참조로 변경 — label/bottomMessage/charCounter에 `textStyle.label2`, input에 `textStyle.body2` (lineHeight, letterSpacing 적용)
+- **InputField** 아이콘 컬러를 `semanticColor.icon*` 토큰 참조로 변경 — clear→iconDisabled, error→iconError, success→iconSuccess, search→iconSecondary
+- **InputField** 디자인 스펙에 아이콘 컬러 섹션 추가, 토큰 참조명 일괄 업데이트
+
+---
+
 ## v1.3.5 (2026-04-14)
 
 ### Removed

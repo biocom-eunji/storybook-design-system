@@ -384,6 +384,36 @@ export const LINK = {
 </div>
 
 {/* ══════════════════════════════════════════════════════ */}
+{/* v1.3.6 — 2026-04-14                                   */}
+{/* ══════════════════════════════════════════════════════ */}
+
+<div className="version-header">
+  <span className="version-badge minor">v1.3.6</span>
+  <span className="version-date">2026-04-14</span>
+</div>
+
+<details className="toggle-card" open>
+  <summary>
+    <CaretIcon />
+    <span className="emoji">♻️</span>
+    <span className="title">Refactored</span>
+    <span className="count">2</span>
+  </summary>
+  <div className="toggle-body">
+    <div className="change-item">
+      <span className="name"><a href={LINK.InputField}>InputField 서체</a></span>
+      <span className="desc"><code>textStyle</code> 토큰 참조로 변경. label/message/counter → <code>textStyle.label2</code>, input → <code>textStyle.body2</code>. lineHeight, letterSpacing 적용.</span>
+    </div>
+    <div className="change-item">
+      <span className="name"><a href={LINK.InputField}>InputField 컬러</a></span>
+      <span className="desc">아이콘 컬러를 <code>semanticColor.icon*</code> 참조로 변경. clear→iconDisabled, error→iconError, success→iconSuccess, search→iconSecondary.</span>
+    </div>
+  </div>
+</details>
+
+<hr className="version-divider" />
+
+{/* ══════════════════════════════════════════════════════ */}
 {/* v1.3.5 — 2026-04-14                                   */}
 {/* ══════════════════════════════════════════════════════ */}
 
