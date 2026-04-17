@@ -1,0 +1,1139 @@
+import React from 'react';
+import { Meta } from '@storybook/addon-docs/blocks';
+
+<Meta title="Getting Started/Release Notes" />
+
+<style>
+  {`
+    /* ── Base ── */
+    .release-page {
+      max-width: 900px;
+      margin: 0 auto;
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      color: #37383C;
+    }
+
+    /* ── Page Header ── */
+    .release-page h2.page-title {
+      font-size: 28px;
+      font-weight: 700;
+      color: #171719;
+      margin: 0 0 8px;
+      padding-bottom: 12px;
+      border-bottom: 2px solid #22C3BC;
+    }
+    .release-page > p.page-desc {
+      font-size: 14px;
+      color: #70737C;
+      margin: 0 0 32px;
+      line-height: 1.7;
+    }
+
+    /* ── Stat Grid ── */
+    .stat-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 12px;
+      margin: 0 0 48px;
+    }
+    .stat-card {
+      background: #F7F7F8;
+      border-radius: 12px;
+      padding: 20px;
+      text-align: center;
+    }
+    .stat-card .num {
+      font-size: 28px;
+      font-weight: 700;
+      color: #22C3BC;
+      margin: 0;
+    }
+    .stat-card .label {
+      font-size: 12px;
+      color: #70737C;
+      margin: 4px 0 0;
+    }
+
+    /* ── Version Header ── */
+    .version-header {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin: 0 0 20px;
+    }
+    .version-badge {
+      display: inline-block;
+      background: #22C3BC;
+      color: #FFFFFF;
+      font-size: 14px;
+      font-weight: 700;
+      padding: 5px 16px;
+      border-radius: 20px;
+    }
+    .version-badge.minor {
+      background: #171719;
+    }
+    .version-date {
+      font-size: 13px;
+      color: #989BA2;
+      font-weight: 500;
+    }
+    .version-divider {
+      border: none;
+      border-top: 1px solid #E1E2E4;
+      margin: 48px 0 32px;
+    }
+
+    /* ── Toggle Card (details/summary) ── */
+    .toggle-card {
+      border: 1px solid #E1E2E4;
+      border-radius: 12px;
+      margin: 0 0 12px;
+      overflow: hidden;
+    }
+    .toggle-card summary {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 14px 20px;
+      background: #F7F7F8;
+      cursor: pointer;
+      list-style: none;
+      user-select: none;
+      transition: background 0.15s;
+    }
+    .toggle-card summary:hover {
+      background: #EAEBEC;
+    }
+    .toggle-card summary::-webkit-details-marker {
+      display: none;
+    }
+    .toggle-card summary .caret {
+      flex-shrink: 0;
+      width: 16px;
+      height: 16px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .toggle-card summary .caret .caret-right {
+      display: block;
+    }
+    .toggle-card summary .caret .caret-down {
+      display: none;
+    }
+    .toggle-card[open] summary .caret .caret-right {
+      display: none;
+    }
+    .toggle-card[open] summary .caret .caret-down {
+      display: block;
+    }
+    .toggle-card[open] summary {
+      border-bottom: 1px solid #E1E2E4;
+    }
+    .toggle-card summary .emoji {
+      font-size: 15px;
+      flex-shrink: 0;
+    }
+    .toggle-card summary .title {
+      font-size: 14px;
+      font-weight: 700;
+      color: #171719;
+    }
+    .toggle-card summary .count {
+      font-size: 11px;
+      font-weight: 600;
+      color: #22C3BC;
+      background: #E9FBF5;
+      padding: 2px 8px;
+      border-radius: 10px;
+      margin-left: auto;
+      flex-shrink: 0;
+    }
+
+    .toggle-body {
+      padding: 16px 20px;
+    }
+
+    /* ── Component Tags ── */
+    .component-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin: 0 0 12px;
+    }
+    .component-tag {
+      display: inline-block;
+      font-size: 11px;
+      font-weight: 600;
+      padding: 3px 10px;
+      border-radius: 12px;
+      background: #F4F4F5;
+      color: #70737C;
+    }
+    .component-tag.new {
+      background: #E9FBF5;
+      color: #22C289;
+    }
+    .component-tag.updated {
+      background: #EBF5FF;
+      color: #3182F6;
+    }
+
+    /* ── Change Item (name + desc 2-col) ── */
+    .change-item {
+      display: flex;
+      gap: 12px;
+      padding: 8px 0;
+      border-bottom: 1px solid #F4F4F5;
+      font-size: 13px;
+      line-height: 1.65;
+    }
+    .change-item:last-child {
+      border-bottom: none;
+      padding-bottom: 0;
+    }
+    .change-item:first-child {
+      padding-top: 0;
+    }
+    .change-item .name {
+      min-width: 96px;
+      flex-shrink: 0;
+    }
+    .change-item .name a {
+      font-weight: 600;
+      color: #22C3BC;
+      text-decoration: underline;
+      text-underline-offset: 2px;
+      transition: color 0.15s;
+    }
+    .change-item .name a:hover {
+      color: #17827D;
+    }
+    .change-item .name a:visited {
+      color: #22C3BC;
+    }
+    .change-item .name-plain {
+      font-weight: 600;
+      color: #171719;
+      white-space: nowrap;
+      min-width: 96px;
+      flex-shrink: 0;
+    }
+    .change-item .desc {
+      color: #5A5C63;
+    }
+    .change-item code {
+      background: #F4F4F5;
+      padding: 1px 5px;
+      border-radius: 4px;
+      font-size: 12px;
+      color: #46474C;
+    }
+
+    /* ── Migration Block ── */
+    .migration-block {
+      margin: 8px 0 0;
+      border-radius: 8px;
+      overflow: hidden;
+      border: 1px solid #E1E2E4;
+    }
+    .migration-block .migration-row {
+      display: flex;
+    }
+    .migration-block .migration-col {
+      flex: 1;
+      padding: 12px 16px;
+    }
+    .migration-block .migration-col:first-child {
+      background: #FFF0F0;
+      border-right: 1px solid #E1E2E4;
+    }
+    .migration-block .migration-col:last-child {
+      background: #E9FBF5;
+    }
+    .migration-block .migration-label {
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      margin: 0 0 6px;
+    }
+    .migration-block .migration-col:first-child .migration-label {
+      color: #EF4452;
+    }
+    .migration-block .migration-col:last-child .migration-label {
+      color: #22C289;
+    }
+    .migration-block pre {
+      margin: 0;
+      font-family: 'SF Mono', 'Fira Code', monospace;
+      font-size: 12px;
+      line-height: 1.6;
+      color: #37383C;
+      white-space: pre-wrap;
+      word-break: break-word;
+    }
+
+    /* ── Simple List ── */
+    .simple-list {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+    .simple-list li {
+      font-size: 13px;
+      color: #5A5C63;
+      line-height: 1.65;
+      padding: 8px 0 8px 16px;
+      position: relative;
+      border-bottom: 1px solid #F4F4F5;
+    }
+    .simple-list li:last-child {
+      border-bottom: none;
+      padding-bottom: 0;
+    }
+    .simple-list li:first-child {
+      padding-top: 0;
+    }
+    .simple-list li::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 15px;
+      width: 4px;
+      height: 4px;
+      border-radius: 50%;
+      background: #C2C4C8;
+    }
+    .simple-list li:first-child::before {
+      top: 7px;
+    }
+    .simple-list li code {
+      background: #F4F4F5;
+      padding: 1px 5px;
+      border-radius: 4px;
+      font-size: 12px;
+      color: #46474C;
+    }
+  `}
+</style>
+
+export const CaretIcon = () => (
+  <span className="caret">
+    <svg className="caret-right" width="14" height="14" viewBox="0 0 256 256" fill="none">
+      <path d="M184.49,136.49l-80,80a12,12,0,0,1-17-17L159,128,87.51,56.49a12,12,0,1,1,17-17l80,80A12,12,0,0,1,184.49,136.49Z" fill="#989BA2" />
+    </svg>
+    <svg className="caret-down" width="14" height="14" viewBox="0 0 256 256" fill="none">
+      <path d="M216.49,104.49l-80,80a12,12,0,0,1-17,0l-80-80a12,12,0,0,1,17-17L128,159l71.51-71.52a12,12,0,0,1,17,17Z" fill="#989BA2" />
+    </svg>
+  </span>
+);
+
+export const SB = '?path=/docs/';
+export const LINK = {
+  BottomSheet: `${SB}feedback-bottomsheet--docs`,
+  ActionArea:  `${SB}navigation-actionarea--docs`,
+  InputField:  `${SB}input-inputfield--docs`,
+  Typography:  `${SB}design-tokens-typography--docs`,
+  Button:      `${SB}general-button--docs`,
+  TextButton:  `${SB}general-textbutton--docs`,
+  Chip:        `${SB}input-chip--docs`,
+  Icon:        `${SB}general-icon--docs`,
+  Checkbox:    `${SB}input-checkbox--docs`,
+  Radio:       `${SB}input-radio--docs`,
+  Switch:      `${SB}input-switch--docs`,
+  Toast:       `${SB}feedback-toast--docs`,
+  Modal:       `${SB}feedback-modal--docs`,
+  TabBar:      `${SB}navigation-tabbar--docs`,
+  Badge:       `${SB}data-display-badge--docs`,
+  Avatar:      `${SB}data-display-avatar--docs`,
+  Divider:     `${SB}data-display-divider--docs`,
+  ProgressBar: `${SB}feedback-progressbar--docs`,
+  Skeleton:    `${SB}feedback-skeleton--docs`,
+  ColorPalette:`${SB}design-tokens-color-palette--docs`,
+  ColorTokens: `${SB}design-tokens-color-tokens--docs`,
+  NamingConv:  `${SB}getting-started-naming-convention--docs`,
+  Intro:       `${SB}getting-started-introduction--docs`,
+};
+
+<div className="release-page">
+
+<h2 className="page-title">Release Notes</h2>
+<p className="page-desc">
+  바이오컴 디자인 시스템의 변경 이력입니다. 카테고리를 클릭하면 상세 내역을 확인할 수 있습니다. 컴포넌트 이름을 클릭하면 해당 페이지로 이동합니다.
+</p>
+
+<div className="stat-grid">
+  <div className="stat-card">
+    <p className="num">19</p>
+    <p className="label">컴포넌트</p>
+  </div>
+  <div className="stat-card">
+    <p className="num">74</p>
+    <p className="label">아이콘</p>
+  </div>
+  <div className="stat-card">
+    <p className="num">26</p>
+    <p className="label">단위 테스트</p>
+  </div>
+  <div className="stat-card">
+    <p className="num">CI</p>
+    <p className="label">자동화 파이프라인</p>
+  </div>
+</div>
+
+{/* ══════════════════════════════════════════════════════ */}
+{/* v1.3.1 — 2026-04-14                                   */}
+{/* ══════════════════════════════════════════════════════ */}
+
+<div className="version-header">
+  <span className="version-badge minor">v1.3.1</span>
+  <span className="version-date">2026-04-14</span>
+</div>
+
+<details className="toggle-card" open>
+  <summary>
+    <CaretIcon />
+    <span className="emoji">✨</span>
+    <span className="title">Features</span>
+    <span className="count">1</span>
+  </summary>
+  <div className="toggle-body">
+    <div className="change-item">
+      <span className="name"><a href={LINK.ColorTokens}>backgroundDisabled</a></span>
+      <span className="desc">비활성화 배경용 시맨틱 컬러 토큰 추가. <code>coolNeutral[96]</code> (#E1E2E4) 참조</span>
+    </div>
+  </div>
+</details>
+
+<details className="toggle-card" open>
+  <summary>
+    <CaretIcon />
+    <span className="emoji">♻️</span>
+    <span className="title">Refactored</span>
+    <span className="count">9</span>
+  </summary>
+  <div className="toggle-body">
+    <div className="component-tags">
+      <span className="component-tag updated">Button</span>
+      <span className="component-tag updated">TextButton</span>
+      <span className="component-tag updated">InputField</span>
+    </div>
+
+    <div className="change-item">
+      <span className="name"><a href={LINK.Button}>Button 전면 교체</a></span>
+      <span className="desc">Figma 컴포넌트 기반 재작성. 서체를 <code>textStyle</code> 참조로 변경 — S: <code>label2</code>, M: <code>body2</code>, L: <code>headline</code></span>
+    </div>
+    <div className="change-item">
+      <span className="name"><a href={LINK.Button}>Button Assistive Outlined</a></span>
+      <span className="desc">텍스트 색상 <code>coolNeutral[40]</code> → <code>semanticColor.textPrimary</code> (coolNeutral[17])로 변경</span>
+    </div>
+    <div className="change-item">
+      <span className="name"><a href={LINK.Button}>Button Assistive Solid</a></span>
+      <span className="desc">활성화/비활성화 배경색 <code>coolNeutral[97]</code> → <code>semanticColor.backgroundDisabled</code> (coolNeutral[96])로 변경</span>
+    </div>
+    <div className="change-item">
+      <span className="name"><a href={LINK.TextButton}>TextButton 서체</a></span>
+      <span className="desc"><code>textStyle</code> 토큰 참조로 변경. Small: <code>textStyle.label2</code>, Medium: <code>textStyle.body2</code>. lineHeight, letterSpacing 적용</span>
+    </div>
+    <div className="change-item">
+      <span className="name"><a href={LINK.TextButton}>TextButton 컬러</a></span>
+      <span className="desc"><code>semanticColor</code> 토큰 참조로 변경. content → <code>textBrand</code>/<code>textSecondary</code>, disabled → <code>textTertiary</code></span>
+    </div>
+    <div className="change-item">
+      <span className="name"><a href={LINK.TextButton}>TextButton 아이콘</a></span>
+      <span className="desc">아이콘 조합 기능 전체 삭제. <code>leadingIcon</code>, <code>trailingIcon</code> props, <code>iconSize</code> 토큰 제거</span>
+    </div>
+    <div className="change-item">
+      <span className="name"><a href={LINK.InputField}>InputField 서체</a></span>
+      <span className="desc"><code>textStyle</code> 토큰 참조로 변경. label/message/counter → <code>textStyle.label2</code>, input → <code>textStyle.body2</code></span>
+    </div>
+    <div className="change-item">
+      <span className="name"><a href={LINK.InputField}>InputField 컬러</a></span>
+      <span className="desc">아이콘 컬러를 <code>semanticColor.icon*</code> 참조로 변경. clear→iconDisabled, error→iconError, success→iconSuccess, search→iconSecondary</span>
+    </div>
+    <div className="change-item">
+      <span className="name-plain">레거시 토큰 정리</span>
+      <span className="desc"><code>colors.ts</code>, <code>typography.ts</code>, <code>spacing.ts</code> 삭제. 모든 토큰이 <code>theme.ts</code>에 통합됨</span>
+    </div>
+  </div>
+</details>
+
+<details className="toggle-card">
+  <summary>
+    <CaretIcon />
+    <span className="emoji">⚠️</span>
+    <span className="title">Breaking Changes</span>
+    <span className="count">1</span>
+  </summary>
+  <div className="toggle-body">
+    <div className="change-item">
+      <span className="name"><a href={LINK.ColorTokens}>backgroundPrimary</a></span>
+      <span className="desc">시맨틱 컬러 토큰 제거. 기존 참조 5개(Modal, TabBar, InputField, BottomSheet, ActionArea)를 <code>backgroundStatus</code>로 교체</span>
+    </div>
+  </div>
+</details>
+
+<hr className="version-divider" />
+
+{/* ══════════════════════════════════════════════════════ */}
+{/* v1.3.0 — 2026-03-19                                   */}
+{/* ══════════════════════════════════════════════════════ */}
+
+<div className="version-header">
+  <span className="version-badge minor">v1.3.0</span>
+  <span className="version-date">2026-03-19</span>
+</div>
+
+<details className="toggle-card">
+  <summary>
+    <CaretIcon />
+    <span className="emoji">✨</span>
+    <span className="title">Features</span>
+    <span className="count">3</span>
+  </summary>
+  <div className="toggle-body">
+    <div className="change-item">
+      <span className="name-plain">README.md</span>
+      <span className="desc">프로젝트 소개, 로컬 설치/실행 방법, 배포 가이드, 프로젝트 구조, 기술 스택, 기여 방법 문서화</span>
+    </div>
+    <div className="change-item">
+      <span className="name-plain">GitHub Actions CI</span>
+      <span className="desc">PR/push 시 자동 실행 — TypeScript 체크 → Vitest 테스트 → Storybook 빌드 → Chromatic 배포</span>
+    </div>
+    <div className="change-item">
+      <span className="name-plain">Vitest 단위 테스트</span>
+      <span className="desc">Button(8개), InputField(10개), Checkbox(8개) 총 26개 테스트 작성. props 렌더링, 이벤트 핸들링, 접근성, 상태 변형 검증</span>
+    </div>
+  </div>
+</details>
+
+<details className="toggle-card">
+  <summary>
+    <CaretIcon />
+    <span className="emoji">🔧</span>
+    <span className="title">Infra</span>
+    <span className="count">4</span>
+  </summary>
+  <div className="toggle-body">
+    <div className="change-item">
+      <span className="name-plain">vitest.config.ts</span>
+      <span className="desc">jsdom 환경 설정, <code>@vitejs/plugin-react</code> JSX 자동 런타임, react-native-web/SVG alias</span>
+    </div>
+    <div className="change-item">
+      <span className="name-plain">테스트 setup</span>
+      <span className="desc"><code>@testing-library/react</code> + <code>@testing-library/jest-dom</code> 연동, <code>__DEV__</code> 전역 변수 설정</span>
+    </div>
+    <div className="change-item">
+      <span className="name-plain">CI 워크플로우</span>
+      <span className="desc"><code>.github/workflows/ci.yml</code> — Node 20, npm ci, tsc --noEmit, vitest run, build-storybook, Chromatic</span>
+    </div>
+    <div className="change-item">
+      <span className="name-plain">devDependencies</span>
+      <span className="desc"><code>jsdom</code>, <code>@testing-library/react</code>, <code>@testing-library/jest-dom</code>, <code>@vitejs/plugin-react@^4</code> 추가</span>
+    </div>
+  </div>
+</details>
+
+<hr className="version-divider" />
+
+{/* ══════════════════════════════════════════════════════ */}
+{/* v1.2.0 — 2026-03-19                                   */}
+{/* ══════════════════════════════════════════════════════ */}
+
+<div className="version-header">
+  <span className="version-badge minor">v1.2.0</span>
+  <span className="version-date">2026-03-19</span>
+</div>
+
+<details className="toggle-card" open>
+  <summary>
+    <CaretIcon />
+    <span className="emoji">✨</span>
+    <span className="title">Features</span>
+    <span className="count">3</span>
+  </summary>
+  <div className="toggle-body">
+    <div className="change-item">
+      <span className="name-plain">Grid Palette</span>
+      <span className="desc">4px 배수 원시 값 시각화 (막대 비교), 20px 컬럼 그리드 설명, Figma 그리드 단축키(macOS/Windows)</span>
+    </div>
+    <div className="change-item">
+      <span className="name-plain">Grid Tokens</span>
+      <span className="desc">Spacing/Component/Radius 카테고리별 시맨틱 토큰 매핑 표, Color Tokens와 동일한 4열 레이아웃, 클릭 복사</span>
+    </div>
+    <div className="change-item">
+      <span className="name-plain">Pretendard Variable</span>
+      <span className="desc">웹폰트 전역 적용 — <code>@font-face</code> 가변 폰트 선언(weight 100-900), 모든 컴포넌트에 자동 적용</span>
+    </div>
+  </div>
+</details>
+
+<details className="toggle-card">
+  <summary>
+    <CaretIcon />
+    <span className="emoji">♻️</span>
+    <span className="title">Refactored</span>
+    <span className="count">8</span>
+  </summary>
+  <div className="toggle-body">
+    <div className="change-item">
+      <span className="name-plain">Grid Palette 확장</span>
+      <span className="desc">컴포넌트 토큰에서 사용 중이나 Palette에 없던 4px 배수 값 7개 추가 (14/18/28/36/38/44/52px). Palette 10개 → 17개, Grid Tokens와 완전 1:1 매핑</span>
+    </div>
+    <div className="change-item">
+      <span className="name-plain">Grid Tokens 별칭 제거</span>
+      <span className="desc">이중 표기(alias) 완전 제거, theme.ts 실제 키만 표시. <code>SINGLE_LINE_HEIGHT</code> → <code>spacing['4xlarge']</code> 토큰 참조로 통일</span>
+    </div>
+    <div className="change-item">
+      <span className="name-plain">토큰 네이밍 통일</span>
+      <span className="desc">문서의 camelCase 오기재를 theme.ts 실제 키(<code>spacing['2xlarge']</code>)와 동기화, Modal <code>borderRadius: spacing.medium</code> → <code>radius.medium</code></span>
+    </div>
+    <div className="change-item">
+      <span className="name-plain">하드코딩 제거</span>
+      <span className="desc">TabBar/Chip/TextButton/ProgressBar의 하드코딩 px → 토큰 교체 (5건), <code>palette.white</code> → <code>coolNeutral[100]</code> 완전 전환 (12건)</span>
+    </div>
+    <div className="change-item">
+      <span className="name-plain">Grid Tokens</span>
+      <span className="desc">BaseRow 공통 컴포넌트 추출, SubHeader로 Button/Chip/ActionArea/InputField 서브 그룹 분리</span>
+    </div>
+    <div className="change-item">
+      <span className="name-plain">Shadow</span>
+      <span className="desc">Shadow & Elevation → Shadow로 이름 변경</span>
+    </div>
+    <div className="change-item">
+      <span className="name-plain">Spacing & Grid</span>
+      <span className="desc">페이지 삭제 — Grid Palette + Grid Tokens로 대체</span>
+    </div>
+    <div className="change-item">
+      <span className="name"><a href={LINK.Button}>Button</a></span>
+      <span className="desc">디자인 스펙 폰트 크기 → 폰트 스타일(Label 2, Body 2, Headline) 표기</span>
+    </div>
+  </div>
+</details>
+
+<hr className="version-divider" />
+
+{/* ══════════════════════════════════════════════════════ */}
+{/* v1.1.0 — 2026-03-18                                   */}
+{/* ══════════════════════════════════════════════════════ */}
+
+<div className="version-header">
+  <span className="version-badge minor">v1.1.0</span>
+  <span className="version-date">2026-03-18</span>
+</div>
+
+<details className="toggle-card" open>
+  <summary>
+    <CaretIcon />
+    <span className="emoji">🔧</span>
+    <span className="title">Enhanced</span>
+    <span className="count">6</span>
+  </summary>
+  <div className="toggle-body">
+    <div className="component-tags">
+      <span className="component-tag updated">BottomSheet</span>
+      <span className="component-tag updated">ActionArea</span>
+      <span className="component-tag updated">InputField</span>
+      <span className="component-tag updated">Typography</span>
+      <span className="component-tag updated">Button</span>
+    </div>
+
+    <div className="change-item">
+      <span className="name"><a href={LINK.BottomSheet}>BottomSheet</a></span>
+      <span className="desc"><code>position: absolute</code> → <code>&lt;Modal&gt;</code> 전환, 300ms 슬라이드업 애니메이션, <code>safeAreaBottom</code> prop으로 Safe Area 대응</span>
+    </div>
+    <div className="migration-block">
+      <div className="migration-row">
+        <div className="migration-col">
+          <p className="migration-label">AS-IS</p>
+          <pre>{`<View style={{ position: 'absolute' }}>
+  <Pressable style={styles.backdrop} />
+  <View style={styles.sheet}>
+    {children}
+  </View>
+</View>`}</pre>
+        </div>
+        <div className="migration-col">
+          <p className="migration-label">TO-BE</p>
+          <pre>{`<Modal visible={visible} transparent>
+  <Animated.View style={styles.backdrop} />
+  <Animated.View style={styles.sheet}>
+    {children}
+  </Animated.View>
+</Modal>`}</pre>
+        </div>
+      </div>
+    </div>
+
+    <div className="change-item">
+      <span className="name"><a href={LINK.ActionArea}>ActionArea</a></span>
+      <span className="desc"><code>safeAreaBottom</code> prop 추가, Cancel/Tertiary 변형 제거 → 3가지(Strong/Neutral/Compact)로 간소화</span>
+    </div>
+    <div className="migration-block">
+      <div className="migration-row">
+        <div className="migration-col">
+          <p className="migration-label">AS-IS</p>
+          <pre>{`<ActionArea
+  variant="cancel"
+  primary={{ label: '삭제' }}
+  secondary={{ label: '취소' }}
+  tertiary={{ label: '임시 저장' }}
+/>`}</pre>
+        </div>
+        <div className="migration-col">
+          <p className="migration-label">TO-BE</p>
+          <pre>{`<ActionArea
+  variant="neutral"
+  primary={{ label: '삭제' }}
+  secondary={{ label: '취소' }}
+  safeAreaBottom={insets.bottom}
+/>`}</pre>
+        </div>
+      </div>
+    </div>
+
+    <div className="change-item">
+      <span className="name"><a href={LINK.InputField}>InputField</a></span>
+      <span className="desc"><code>keyboardType</code>, <code>secureTextEntry</code>, <code>autoCapitalize</code> 1급 props 승격, 키보드 타입별 데모 8종, KeyboardAvoidingView 가이드</span>
+    </div>
+    <div className="migration-block">
+      <div className="migration-row">
+        <div className="migration-col">
+          <p className="migration-label">AS-IS</p>
+          <pre>{`<InputField
+  label="이메일"
+  textInputProps={{
+    keyboardType: 'email-address',
+    autoCapitalize: 'none',
+  }}
+/>`}</pre>
+        </div>
+        <div className="migration-col">
+          <p className="migration-label">TO-BE</p>
+          <pre>{`<InputField
+  label="이메일"
+  keyboardType="email-address"
+  autoCapitalize="none"
+/>`}</pre>
+        </div>
+      </div>
+    </div>
+
+    <div className="change-item">
+      <span className="name"><a href={LINK.Typography}>Typography</a></span>
+      <span className="desc">피그마 11개 시맨틱 텍스트 스타일 1:1 매칭, lineHeight/letterSpacing RN 절대 px 값으로 수정</span>
+    </div>
+    <div className="migration-block">
+      <div className="migration-row">
+        <div className="migration-col">
+          <p className="migration-label">AS-IS</p>
+          <pre>{`<Text style={{
+  fontSize: fontSize.xlarge,
+  fontWeight: fontWeight.semibold,
+  lineHeight: lineHeight.xlarge,
+}}>
+  소제목
+</Text>`}</pre>
+        </div>
+        <div className="migration-col">
+          <p className="migration-label">TO-BE</p>
+          <pre>{`import { textStyle } from '../tokens/theme';
+
+<Text style={textStyle.heading}>
+  소제목
+</Text>`}</pre>
+        </div>
+      </div>
+    </div>
+
+    <div className="change-item">
+      <span className="name"><a href={LINK.Button}>Button</a></span>
+      <span className="desc">Cancel 변형 보조 버튼 <code>solid</code> → <code>outlined</code> 통일</span>
+    </div>
+    <div className="change-item">
+      <span className="name-plain">SpecTable</span>
+      <span className="desc">셀 겹침 수정 — 셀 간 gap 추가, flexShrink 적용, 최소 폭 700px 확보</span>
+    </div>
+  </div>
+</details>
+
+<details className="toggle-card">
+  <summary>
+    <CaretIcon />
+    <span className="emoji">♻️</span>
+    <span className="title">Refactored</span>
+    <span className="count">9</span>
+  </summary>
+  <div className="toggle-body">
+    <div className="change-item">
+      <span className="name"><a href={LINK.ColorTokens}>Color Tokens</a></span>
+      <span className="desc">Role Primitives(<code>_surface</code>, <code>_content</code>, <code>_line</code>, <code>_role</code>) 도입으로 다크모드 확장 대비. 토큰 38개 → 27개 정리</span>
+    </div>
+    <div className="migration-block">
+      <div className="migration-row">
+        <div className="migration-col">
+          <p className="migration-label">AS-IS (38개, 직접 참조)</p>
+          <pre>{`textError: red[70],
+borderError: red[70],
+iconError: red[70],
+statusError: red[70],
+// 같은 값을 4곳에서 중복 정의`}</pre>
+        </div>
+        <div className="migration-col">
+          <p className="migration-label">TO-BE (27개, 역할 프리미티브)</p>
+          <pre>{`const _role = { error: red[70] };
+
+textError: _role.error,
+borderError: _role.error,
+iconError: _role.error,
+// 단일 소스 → 다크모드 시 _role만 교체`}</pre>
+        </div>
+      </div>
+    </div>
+    <div className="change-item">
+      <span className="name"><a href={LINK.ColorPalette}>Color Palette</a></span>
+      <span className="desc"><code>neutral</code> 팔레트 삭제, <code>coolNeutral</code> 단일 무채색 통합, <code>coolNeutral[100]</code> #FFFFFF 추가</span>
+    </div>
+    <div className="migration-block">
+      <div className="migration-row">
+        <div className="migration-col">
+          <p className="migration-label">AS-IS</p>
+          <pre>{`import { neutral, coolNeutral } from '../tokens/theme';
+neutral[50]      // #737373`}</pre>
+        </div>
+        <div className="migration-col">
+          <p className="migration-label">TO-BE</p>
+          <pre>{`import { coolNeutral } from '../tokens/theme';
+coolNeutral[50]  // #70737C
+// neutral 삭제됨`}</pre>
+        </div>
+      </div>
+    </div>
+    <div className="change-item">
+      <span className="name-plain">시맨틱 토큰 병합</span>
+      <span className="desc"><code>textTertiary+Placeholder</code>, <code>borderDefault+Disabled</code>, <code>borderFocus+Brand</code>, <code>statusSuccess+Info</code> 통합. <code>backgroundError/Success/Warning</code> → <code>backgroundStatus</code>. <code>backgroundBrandDisabled</code>/Status 섹션 삭제</span>
+    </div>
+    <div className="change-item">
+      <span className="name"><a href={LINK.InputField}>InputField</a></span>
+      <span className="desc">매직넘버 → 토큰, 인라인 → StyleSheet, 아이콘 4개 → <code>TRAILING_ICON_MAP</code>, 중복 함수 추출</span>
+    </div>
+    <div className="change-item">
+      <span className="name"><a href={LINK.Button}>Button</a></span>
+      <span className="desc">정적 스타일 StyleSheet 분리, <code>contentColor</code> 변수 추출</span>
+    </div>
+    <div className="change-item">
+      <span className="name"><a href={LINK.ActionArea}>ActionArea</a></span>
+      <span className="desc"><code>ButtonRow</code> 공통 컴포넌트 추출, <code>ActionButtonProps</code> 타입 추출</span>
+    </div>
+    <div className="change-item">
+      <span className="name-plain">theme.ts</span>
+      <span className="desc"><code>fontWeight</code>에 <code>as const</code>, <code>palette.white</code> → <code>coolNeutral[100]</code> 전환</span>
+    </div>
+    <div className="change-item">
+      <span className="name-plain">접근성 (16/18)</span>
+      <span className="desc">Button/TextButton/Chip/Toast/Modal/BottomSheet/Badge/Avatar/ProgressBar/Divider에 <code>accessibilityRole</code>, <code>accessibilityState</code>, <code>accessibilityLabel</code>, <code>accessibilityValue</code> 추가. Checkbox 매직넘버 → 토큰 교체</span>
+    </div>
+  </div>
+</details>
+
+<details className="toggle-card">
+  <summary>
+    <CaretIcon />
+    <span className="emoji">📝</span>
+    <span className="title">Docs</span>
+    <span className="count">6</span>
+  </summary>
+  <div className="toggle-body">
+    <div className="change-item">
+      <span className="name"><a href={LINK.ColorPalette}>Color Palette</a></span>
+      <span className="desc">Neutral+Cool Neutral → Mono 통합, 섹션명 정리 (Brand/Semantic/Extended), Orange 포인트·Purple 업셀링 설명 변경, coolNeutral100 추가</span>
+    </div>
+    <div className="change-item">
+      <span className="name"><a href={LINK.ColorTokens}>Color Tokens</a></span>
+      <span className="desc">제목 변경, Usage 맨 밑 이동, Value에 팔레트명 표기(coolNeutral17, mint45 등), 토큰 수 27개 반영</span>
+    </div>
+    <div className="change-item">
+      <span className="name"><a href={LINK.NamingConv}>Naming Conv.</a></span>
+      <span className="desc">Quick Reference 상단 이동, 헬퍼 추출(34% 코드 감소), 테이블 하단 테두리 추가</span>
+    </div>
+    <div className="change-item">
+      <span className="name-plain">Design Tokens</span>
+      <span className="desc">전체 Usage 섹션 스타일/레이아웃 통일 (민트 그라데이션, usage-card 패턴)</span>
+    </div>
+    <div className="change-item">
+      <span className="name-plain">Release Notes</span>
+      <span className="desc">caret SVG 토글, 컴포넌트 하이퍼링크, AS-IS/TO-BE 마이그레이션 스니펫</span>
+    </div>
+    <div className="change-item">
+      <span className="name-plain">CHANGELOG</span>
+      <span className="desc">v1.1.0 변경 이력 동기화</span>
+    </div>
+  </div>
+</details>
+
+<details className="toggle-card">
+  <summary>
+    <CaretIcon />
+    <span className="emoji">🔧</span>
+    <span className="title">Infra</span>
+    <span className="count">2</span>
+  </summary>
+  <div className="toggle-body">
+    <div className="change-item">
+      <span className="name-plain">Chromatic</span>
+      <span className="desc">Chromatic 설치 및 연동, 시각적 회귀 테스트 환경 구축</span>
+    </div>
+    <div className="change-item">
+      <span className="name-plain">Deploy Script</span>
+      <span className="desc"><code>npm run deploy</code> 통합 스크립트 추가 (GitHub Pages + Chromatic 동시 배포)</span>
+    </div>
+  </div>
+</details>
+
+<hr className="version-divider" />
+
+{/* ══════════════════════════════════════════════════════ */}
+{/* v1.0.0                                                */}
+{/* ══════════════════════════════════════════════════════ */}
+
+<div className="version-header">
+  <span className="version-badge">v1.0.0</span>
+  <span className="version-date">2026-03-17</span>
+</div>
+
+<details className="toggle-card">
+  <summary>
+    <CaretIcon />
+    <span className="emoji">✨</span>
+    <span className="title">Features</span>
+    <span className="count">19</span>
+  </summary>
+  <div className="toggle-body">
+    <div className="component-tags">
+      <span className="component-tag new">Button</span>
+      <span className="component-tag new">TextButton</span>
+      <span className="component-tag new">Chip</span>
+      <span className="component-tag new">Icon</span>
+      <span className="component-tag new">InputField</span>
+      <span className="component-tag new">Checkbox</span>
+      <span className="component-tag new">CheckMark</span>
+      <span className="component-tag new">Radio</span>
+      <span className="component-tag new">Switch</span>
+      <span className="component-tag new">Toast</span>
+      <span className="component-tag new">Modal</span>
+      <span className="component-tag new">BottomSheet</span>
+      <span className="component-tag new">TabBar</span>
+      <span className="component-tag new">ActionArea</span>
+      <span className="component-tag new">Badge</span>
+      <span className="component-tag new">Avatar</span>
+      <span className="component-tag new">Divider</span>
+      <span className="component-tag new">ProgressBar</span>
+      <span className="component-tag new">Skeleton</span>
+    </div>
+    <div className="change-item">
+      <span className="name"><a href={LINK.Button}>Button</a></span>
+      <span className="desc">Solid/Outlined 변형, Primary/Assistive 컬러, S/M/L 3단계 크기, 로딩 상태 지원</span>
+    </div>
+    <div className="change-item">
+      <span className="name"><a href={LINK.TextButton}>TextButton</a></span>
+      <span className="desc">배경 없는 텍스트 전용 버튼, 밑줄 스타일, 아이콘 조합 지원</span>
+    </div>
+    <div className="change-item">
+      <span className="name"><a href={LINK.Chip}>Chip</a></span>
+      <span className="desc">Solid/Outlined 변형, XS/S/M/L 4단계 크기, 활성/비활성/비활성화 상태</span>
+    </div>
+    <div className="change-item">
+      <span className="name"><a href={LINK.Icon}>Icon</a></span>
+      <span className="desc">Normal(43개), Color(12개), Circle(12개), Mini(7개) 총 74개 아이콘, 검색 및 클릭 복사</span>
+    </div>
+    <div className="change-item">
+      <span className="name"><a href={LINK.InputField}>InputField</a></span>
+      <span className="desc">4가지 상태(비활성/입력됨/포커스/에러), 글자 수 카운터, 후행 아이콘/텍스트 조합</span>
+    </div>
+    <div className="change-item">
+      <span className="name"><a href={LINK.Checkbox}>Checkbox</a></span>
+      <span className="desc">미선택/선택/부분선택 3가지 상태, 부모-자식 연동 패턴</span>
+    </div>
+    <div className="change-item">
+      <span className="name"><a href={LINK.Checkbox}>CheckMark</a></span>
+      <span className="desc">체크 아이콘만 사용하는 간결한 선택 컴포넌트</span>
+    </div>
+    <div className="change-item">
+      <span className="name"><a href={LINK.Radio}>Radio</a></span>
+      <span className="desc">라디오 그룹 패턴, 라벨/보조라벨/Tight 모드 지원</span>
+    </div>
+    <div className="change-item">
+      <span className="name"><a href={LINK.Switch}>Switch</a></span>
+      <span className="desc">iOS/Normal 플랫폼별 디자인, S/M 크기</span>
+    </div>
+    <div className="change-item">
+      <span className="name"><a href={LINK.Toast}>Toast</a></span>
+      <span className="desc">성공/경고/에러 3가지 변형, 자동 닫힘, 액션 버튼 지원</span>
+    </div>
+    <div className="change-item">
+      <span className="name"><a href={LINK.Modal}>Modal</a></span>
+      <span className="desc">확인 대화상자, 위험 액션(빨간 버튼), 커스텀 콘텐츠</span>
+    </div>
+    <div className="change-item">
+      <span className="name"><a href={LINK.BottomSheet}>BottomSheet</a></span>
+      <span className="desc">하단 시트, 드래그 핸들바, 닫기 버튼 옵션</span>
+    </div>
+    <div className="change-item">
+      <span className="name"><a href={LINK.TabBar}>TabBar</a></span>
+      <span className="desc">바이오컴 기본 5탭(콘텐츠/목표/메인/AI/쇼핑), 아이콘 연동</span>
+    </div>
+    <div className="change-item">
+      <span className="name"><a href={LINK.ActionArea}>ActionArea</a></span>
+      <span className="desc">화면 하단 액션 영역, Strong/Neutral/Compact 3가지 변형</span>
+    </div>
+    <div className="change-item">
+      <span className="name"><a href={LINK.Badge}>Badge</a></span>
+      <span className="desc">숫자/상태 배지, Filled/Outlined/Dot 변형</span>
+    </div>
+    <div className="change-item">
+      <span className="name"><a href={LINK.Avatar}>Avatar</a></span>
+      <span className="desc">프로필 이미지, 이니셜 폴백, 온라인 상태 표시</span>
+    </div>
+    <div className="change-item">
+      <span className="name"><a href={LINK.Divider}>Divider</a></span>
+      <span className="desc">수평/수직 구분선, 두께/색상/인셋 커스텀</span>
+    </div>
+    <div className="change-item">
+      <span className="name"><a href={LINK.ProgressBar}>ProgressBar</a></span>
+      <span className="desc">수평 진행률 표시, 3단계 크기, 4가지 컬러</span>
+    </div>
+    <div className="change-item">
+      <span className="name"><a href={LINK.Skeleton}>Skeleton</a></span>
+      <span className="desc">로딩 플레이스홀더, 텍스트/원형/사각형 변형, 시머 애니메이션</span>
+    </div>
+  </div>
+</details>
+
+<details className="toggle-card">
+  <summary>
+    <CaretIcon />
+    <span className="emoji">🎨</span>
+    <span className="title">Design System</span>
+    <span className="count">11</span>
+  </summary>
+  <div className="toggle-body">
+    <div className="change-item">
+      <span className="name"><a href={LINK.ColorPalette}>컬러 팔레트</a></span>
+      <span className="desc">13종 색상 카테고리, 단계별 HEX 코드 정의</span>
+    </div>
+    <div className="change-item">
+      <span className="name"><a href={LINK.ColorTokens}>시맨틱 토큰</a></span>
+      <span className="desc">Text/Background/Border/Icon/Status 38개 역할 기반 토큰 구축</span>
+    </div>
+    <div className="change-item">
+      <span className="name"><a href={LINK.Typography}>타이포그래피</a></span>
+      <span className="desc">Pretendard Variable 기반 11개 텍스트 위계 정의</span>
+    </div>
+    <div className="change-item">
+      <span className="name-plain">스페이싱/반경</span>
+      <span className="desc">xsmall(4)~4xlarge(48) 스페이싱, xsmall(4)~full(9999) 반경 토큰</span>
+    </div>
+    <div className="change-item">
+      <span className="name-plain">인터랙션</span>
+      <span className="desc">pressOpacity, overlayOpacity 공통 상수 추가</span>
+    </div>
+    <div className="change-item">
+      <span className="name-plain">컴포넌트 토큰</span>
+      <span className="desc">Button, TextButton, Chip, ActionArea 별 크기/컬러/변형 토큰</span>
+    </div>
+    <div className="change-item">
+      <span className="name"><a href={LINK.NamingConv}>네이밍 컨벤션</a></span>
+      <span className="desc">5가지 원칙, 4개 카테고리별 Do/Don't 규칙 수립</span>
+    </div>
+    <div className="change-item">
+      <span className="name-plain">토큰 리네이밍</span>
+      <span className="desc">축약형(xs, sm) → 전체 단어(xsmall, small) 전체 통일</span>
+    </div>
+    <div className="change-item">
+      <span className="name-plain">에러 색상</span>
+      <span className="desc">Red[70] (#EF7676) 통일</span>
+    </div>
+    <div className="change-item">
+      <span className="name-plain">팔레트 리네이밍</span>
+      <span className="desc">Orange → Yellow, RedOrange → Orange</span>
+    </div>
+    <div className="change-item">
+      <span className="name-plain">브랜드 테마</span>
+      <span className="desc">사이드바/도구바 민트 색상(#22C3BC) 적용</span>
+    </div>
+  </div>
+</details>
+
+<details className="toggle-card">
+  <summary>
+    <CaretIcon />
+    <span className="emoji">🐛</span>
+    <span className="title">Fixes</span>
+    <span className="count">10</span>
+  </summary>
+  <div className="toggle-body">
+    <ul className="simple-list">
+      <li>GitHub Pages 배포 시 모듈 로드 실패 오류 해결</li>
+      <li>Jekyll <code>_</code> 접두사 파일 무시 문제 해결</li>
+      <li><code>__DEV__</code> 미정의 오류 해결</li>
+      <li>Typography 다운로드 버튼 텍스트 색상 수정</li>
+      <li>InputField 포커스 시 브라우저 기본 파란 outline 제거</li>
+      <li>InputField 글자 수 카운터 실시간 업데이트 및 초과 시 에러색 전환</li>
+      <li>Chip/Badge 가로 크기 hug contents 동작으로 수정</li>
+      <li>SVG 직접 그리기 코드를 Icon 컴포넌트로 통일</li>
+      <li>하드코딩된 색상값을 디자인 토큰으로 전체 교체</li>
+      <li>미사용 import 정리</li>
+    </ul>
+  </div>
+</details>
+
+<details className="toggle-card">
+  <summary>
+    <CaretIcon />
+    <span className="emoji">📝</span>
+    <span className="title">Docs</span>
+    <span className="count">9</span>
+  </summary>
+  <div className="toggle-body">
+    <div className="change-item">
+      <span className="name"><a href={LINK.Intro}>Introduction</a></span>
+      <span className="desc">디자인 시스템 철학, 비전, 목표</span>
+    </div>
+    <div className="change-item">
+      <span className="name"><a href={LINK.ColorPalette}>Color Palette</a></span>
+      <span className="desc">13종 팔레트 HEX 코드, 클릭 복사</span>
+    </div>
+    <div className="change-item">
+      <span className="name"><a href={LINK.ColorTokens}>Color Tokens</a></span>
+      <span className="desc">38개 시맨틱 토큰, 팔레트 출처 태그, 클릭 복사</span>
+    </div>
+    <div className="change-item">
+      <span className="name"><a href={LINK.Typography}>Typography</a></span>
+      <span className="desc">11개 텍스트 스펙 표, 미리보기, 폰트 다운로드 링크</span>
+    </div>
+    <div className="change-item">
+      <span className="name"><a href={LINK.NamingConv}>Naming Conv.</a></span>
+      <span className="desc">5가지 원칙, Do/Don't 규칙표</span>
+    </div>
+    <div className="change-item">
+      <span className="name-plain">스토리 구조</span>
+      <span className="desc">모든 컴포넌트를 Playground / 모든 변형 / 디자인 스펙 / 사용 가이드 패턴으로 통일</span>
+    </div>
+    <div className="change-item">
+      <span className="name-plain">사이드바</span>
+      <span className="desc">Getting Started → Design Tokens → General → Input → Feedback → Navigation → Data Display 정리</span>
+    </div>
+    <div className="change-item">
+      <span className="name-plain">접근성</span>
+      <span className="desc">6개 컴포넌트에 accessibilityRole, accessibilityState props 추가</span>
+    </div>
+    <div className="change-item">
+      <span className="name-plain">JSDoc</span>
+      <span className="desc">12개 컴포넌트 인터페이스에 한글 설명 추가</span>
+    </div>
+  </div>
+</details>
+
+</div>
