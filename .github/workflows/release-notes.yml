@@ -63,15 +63,20 @@ jobs:
           DOCS=""
           BREAKING=""
 
+          # 정규식을 변수에 저장 (bash [[ =~ ]] 에서 괄호 파싱 오류 방지)
+          RE_SCOPED='^([a-z]+)\(([^)]*)\):[[:space:]](.+)$'
+          RE_PLAIN='^([a-z]+):[[:space:]](.+)$'
+          RE_BREAKING='^([a-z]+)(\([^)]*\))?![:]'
+
           while IFS= read -r msg; do
             [ -z "$msg" ] && continue
 
             # type(scope): description 파싱
-            if [[ "$msg" =~ ^([a-z]+)\(([^)]*)\):\ (.+)$ ]]; then
+            if [[ "$msg" =~ $RE_SCOPED ]]; then
               TYPE="${BASH_REMATCH[1]}"
               SCOPE="${BASH_REMATCH[2]}"
               DESC="${BASH_REMATCH[3]}"
-            elif [[ "$msg" =~ ^([a-z]+):\ (.+)$ ]]; then
+            elif [[ "$msg" =~ $RE_PLAIN ]]; then
               TYPE="${BASH_REMATCH[1]}"
               SCOPE=""
               DESC="${BASH_REMATCH[2]}"
@@ -79,8 +84,8 @@ jobs:
               continue
             fi
 
-            # BREAKING CHANGE 감지
-            if [[ "$msg" == *"BREAKING CHANGE"* ]] || [[ "$msg" == *"!"* ]]; then
+            # BREAKING CHANGE 감지 (feat!: 또는 메시지 내 BREAKING CHANGE)
+            if [[ "$msg" =~ $RE_BREAKING ]] || [[ "$msg" == *"BREAKING CHANGE"* ]]; then
               BREAKING="${BREAKING}|${SCOPE}|${DESC}"
               continue
             fi
