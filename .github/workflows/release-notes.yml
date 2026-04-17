@@ -46,7 +46,8 @@ jobs:
             if [ -n "$LAST_TAG" ]; then
               COMMITS=$(git log --pretty=format:"%s" ${LAST_TAG}..HEAD)
             else
-              COMMITS=$(git log --pretty=format:"%s" HEAD~20..HEAD)
+              # 태그 없을 경우 전체 커밋 사용 (--reverse로 시간순)
+              COMMITS=$(git log --pretty=format:"%s")
             fi
           else
             BASE_SHA=${{ github.event.pull_request.base.sha }}
