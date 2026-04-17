@@ -1,6 +1,6 @@
 import React from 'react';
 import { View, Text, type ViewStyle, type TextStyle } from 'react-native';
-import { coolNeutral, mint, green, red, yellow, fontSize, fontWeight, spacing } from '../tokens/theme';
+import { fontSize, fontWeight, spacing, semanticColor } from '../tokens/theme';
 
 export type ProgressBarSize = 'small' | 'medium' | 'large';
 export type ProgressBarColor = 'primary' | 'success' | 'error' | 'warning';
@@ -22,10 +22,10 @@ const heights: Record<ProgressBarSize, number> = {
 };
 
 const fillColors: Record<ProgressBarColor, string> = {
-  primary: mint[45],
-  success: green[45],
-  error: red[70],
-  warning: yellow[50],
+  primary: semanticColor.backgroundBrand,
+  success: semanticColor.backgroundSuccess,
+  error: semanticColor.backgroundError,
+  warning: semanticColor.backgroundWarning,
 };
 
 export function ProgressBar({
@@ -43,14 +43,14 @@ export function ProgressBar({
   const labelStyle: TextStyle = {
     fontSize: fontSize.xsmall,
     fontWeight: fontWeight.semibold,
-    color: coolNeutral[17],
+    color: semanticColor.textPrimary,
     textAlign: 'right',
     marginBottom: spacing.xsmall,
   };
 
   const trackStyle: ViewStyle = {
     height,
-    backgroundColor: coolNeutral[96],
+    backgroundColor: semanticColor.backgroundDisabled,
     borderRadius,
     overflow: 'hidden',
   };

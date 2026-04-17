@@ -1,7 +1,7 @@
 import React from 'react';
 import { View, StyleSheet, type ViewStyle } from 'react-native';
 import { Button, type ButtonProps } from './Button';
-import { actionAreaToken, coolNeutral, spacing, semanticColor } from '../tokens/theme';
+import { actionAreaToken, spacing, semanticColor } from '../tokens/theme';
 
 export type ActionAreaVariant = 'strong' | 'neutral' | 'compact';
 
@@ -110,7 +110,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: actionAreaToken.padding,
     paddingTop: spacing.medium,
     gap: actionAreaToken.gap,
-    borderTopColor: coolNeutral[96],
+    borderTopColor: semanticColor.borderDefault,
   },
   row: {
     flexDirection: 'row',

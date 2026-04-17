@@ -12,7 +12,6 @@ import {
 } from 'react-native';
 import { Icon } from './Icon';
 import {
-  coolNeutral,
   fontSize,
   fontWeight,
   semanticColor,
@@ -258,7 +257,7 @@ const styles = StyleSheet.create({
     fontWeight: textStyle.label2.fontWeight,
     lineHeight: textStyle.label2.lineHeight,
     letterSpacing: textStyle.label2.letterSpacing,
-    color: coolNeutral[30], // 시맨틱 토큰 미존재 — palette 직접 참조
+    color: semanticColor.textLabel,
   },
   container: {
     borderWidth: 1,

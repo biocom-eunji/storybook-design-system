@@ -1,6 +1,6 @@
 import React from 'react';
 import { View, type ViewStyle } from 'react-native';
-import { coolNeutral, radius } from '../tokens/theme';
+import { radius, semanticColor } from '../tokens/theme';
 
 export type SkeletonVariant = 'text' | 'circular' | 'rectangular';
 
@@ -49,7 +49,7 @@ export function Skeleton({
     width: resolvedWidth as any,
     height: resolvedHeight,
     borderRadius: resolvedBorderRadius,
-    backgroundColor: coolNeutral[96],
+    backgroundColor: semanticColor.backgroundDisabled,
     overflow: 'hidden',
   };
 
@@ -72,7 +72,7 @@ export function Skeleton({
           left: 0,
           right: 0,
           bottom: 0,
-          background: `linear-gradient(90deg, ${coolNeutral[96]} 0%, ${coolNeutral[90]} 50%, ${coolNeutral[96]} 100%)`,
+          background: `linear-gradient(90deg, ${semanticColor.backgroundDisabled} 0%, ${semanticColor.backgroundOff} 50%, ${semanticColor.backgroundDisabled} 100%)`,
           animation: 'skeleton-shimmer 1.5s ease-in-out infinite',
         }}
       />

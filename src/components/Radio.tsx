@@ -1,6 +1,6 @@
 import React from 'react';
 import { Pressable, View, Text, type ViewStyle, type TextStyle } from 'react-native';
-import { coolNeutral, mint, fontWeight, interaction, palette } from '../tokens/theme';
+import { fontWeight, interaction, spacing, radius, semanticColor } from '../tokens/theme';
 
 export type RadioSize = 'small' | 'medium';
 
@@ -30,15 +30,15 @@ export function Radio({
 }: RadioProps) {
   const s = sizeMap[size];
   const borderColor = disabled
-    ? coolNeutral[90]
+    ? semanticColor.borderActive
     : checked
-      ? mint[45]
-      : coolNeutral[90];
+      ? semanticColor.borderFocus
+      : semanticColor.borderActive;
   const fillColor = disabled
-    ? coolNeutral[80]
-    : mint[45];
-  const labelColor = disabled ? coolNeutral[80] : coolNeutral[17];
-  const subColor = disabled ? coolNeutral[80] : coolNeutral[50];
+    ? semanticColor.iconDisabled
+    : semanticColor.backgroundBrand;
+  const labelColor = disabled ? semanticColor.textTertiary : semanticColor.textPrimary;
+  const subColor = disabled ? semanticColor.textTertiary : semanticColor.textSecondary;
 
   return (
     <Pressable
@@ -51,10 +51,10 @@ export function Radio({
         alignItems: 'center',
         gap: label ? s.gap : 0,
         opacity: pressed && !disabled ? interaction.pressOpacity : 1,
-        paddingVertical: tight ? 8 : 12,
-        paddingHorizontal: tight ? 12 : 0,
-        backgroundColor: tight ? coolNeutral[99] : 'transparent',
-        borderRadius: tight ? 12 : 0,
+        paddingVertical: tight ? spacing.small : spacing.medium,
+        paddingHorizontal: tight ? spacing.medium : 0,
+        backgroundColor: tight ? semanticColor.backgroundSecondary : 'transparent',
+        borderRadius: tight ? radius.medium : 0,
       })}
     >
       <View style={{
@@ -72,7 +72,7 @@ export function Radio({
             width: s.inner,
             height: s.inner,
             borderRadius: s.inner / 2,
-            backgroundColor: coolNeutral[100],
+            backgroundColor: semanticColor.iconOnColor,
           }} />
         )}
       </View>

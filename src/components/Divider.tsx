@@ -1,6 +1,6 @@
 import React from 'react';
 import { View, type ViewStyle } from 'react-native';
-import { coolNeutral } from '../tokens/theme';
+import { semanticColor } from '../tokens/theme';
 
 export type DividerDirection = 'horizontal' | 'vertical';
 
@@ -16,7 +16,7 @@ export interface DividerProps {
 export function Divider({
   direction = 'horizontal',
   thickness = 1,
-  color = coolNeutral[96],
+  color = semanticColor.borderDefault,
   spacing: spacingValue = 0,
   inset = 0,
 }: DividerProps) {

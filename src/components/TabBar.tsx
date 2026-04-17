@@ -1,6 +1,6 @@
 import React from 'react';
 import { View, Text, Pressable, StyleSheet, type ViewStyle, type TextStyle } from 'react-native';
-import { coolNeutral, mint, fontSize, fontWeight, spacing, radius, semanticColor, interaction } from '../tokens/theme';
+import { fontSize, fontWeight, spacing, radius, semanticColor, interaction } from '../tokens/theme';
 import { Icon } from './Icon';
 
 export interface TabItem {
@@ -52,7 +52,7 @@ export function TabBar({
               <View
                 style={[
                   styles.iconPlaceholder,
-                  { backgroundColor: isActive ? semanticColor.iconBrand : coolNeutral[90] },
+                  { backgroundColor: isActive ? semanticColor.iconBrand : semanticColor.iconInactive },
                 ]}
               />
             )}

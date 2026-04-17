@@ -1,6 +1,6 @@
 import React from 'react';
 import { View, Text, Pressable, StyleSheet, type ViewStyle, type TextStyle } from 'react-native';
-import { coolNeutral, mint, red, fontSize, fontWeight, spacing, semanticColor, radius } from '../tokens/theme';
+import { fontSize, fontWeight, spacing, semanticColor, radius } from '../tokens/theme';
 
 export interface ModalAction {
   label: string;
@@ -92,12 +92,12 @@ const styles = StyleSheet.create({
   title: {
     fontSize: fontSize.large,
     fontWeight: fontWeight.bold,
-    color: coolNeutral[17],
+    color: semanticColor.textPrimary,
     textAlign: 'center',
   } as TextStyle,
   description: {
     fontSize: fontSize.medium,
-    color: coolNeutral[50],
+    color: semanticColor.textSecondary,
     textAlign: 'center',
     marginTop: spacing.small,
   } as TextStyle,
@@ -111,27 +111,27 @@ const styles = StyleSheet.create({
   primaryButton: {
     height: 48,
     borderRadius: radius.medium,
-    backgroundColor: mint[45],
+    backgroundColor: semanticColor.backgroundBrand,
     alignItems: 'center',
     justifyContent: 'center',
   } as ViewStyle,
   destructiveButton: {
-    backgroundColor: red[70],
+    backgroundColor: semanticColor.backgroundError,
   } as ViewStyle,
   primaryButtonText: {
-    color: coolNeutral[100],
+    color: semanticColor.textOnColor,
     fontSize: fontSize.medium,
     fontWeight: fontWeight.semibold,
   } as TextStyle,
   secondaryButton: {
     height: 48,
     borderRadius: radius.medium,
-    backgroundColor: coolNeutral[97],
+    backgroundColor: semanticColor.backgroundTertiary,
     alignItems: 'center',
     justifyContent: 'center',
   } as ViewStyle,
   secondaryButtonText: {
-    color: coolNeutral[40],
+    color: semanticColor.textQuaternary,
     fontSize: fontSize.medium,
     fontWeight: fontWeight.semibold,
   } as TextStyle,

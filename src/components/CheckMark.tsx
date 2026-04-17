@@ -1,7 +1,7 @@
 import React from 'react';
 import { Pressable, View, Text } from 'react-native';
 import { Icon } from './Icon';
-import { coolNeutral, mint, fontWeight, interaction } from '../tokens/theme';
+import { fontWeight, interaction, spacing, radius, semanticColor } from '../tokens/theme';
 
 export type CheckMarkSize = 'small' | 'medium';
 
@@ -31,12 +31,12 @@ export function CheckMark({
 }: CheckMarkProps) {
   const s = sizeMap[size];
   const color = disabled
-    ? coolNeutral[80]
+    ? semanticColor.iconDisabled
     : checked
-      ? mint[45]
-      : coolNeutral[90];
-  const labelColor = disabled ? coolNeutral[80] : coolNeutral[17];
-  const subColor = disabled ? coolNeutral[80] : coolNeutral[50];
+      ? semanticColor.iconBrand
+      : semanticColor.iconInactive;
+  const labelColor = disabled ? semanticColor.textTertiary : semanticColor.textPrimary;
+  const subColor = disabled ? semanticColor.textTertiary : semanticColor.textSecondary;
 
   return (
     <Pressable
@@ -49,10 +49,10 @@ export function CheckMark({
         alignItems: 'center',
         gap: label ? s.gap : 0,
         opacity: pressed && !disabled ? interaction.pressOpacity : 1,
-        paddingVertical: tight ? 8 : 12,
-        paddingHorizontal: tight ? 12 : 0,
-        backgroundColor: tight ? coolNeutral[99] : 'transparent',
-        borderRadius: tight ? 12 : 0,
+        paddingVertical: tight ? spacing.small : spacing.medium,
+        paddingHorizontal: tight ? spacing.medium : 0,
+        backgroundColor: tight ? semanticColor.backgroundSecondary : 'transparent',
+        borderRadius: tight ? radius.medium : 0,
       })}
     >
       <Icon name="check" size={s.icon} color={color} />

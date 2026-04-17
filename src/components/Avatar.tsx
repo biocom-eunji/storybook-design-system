@@ -8,7 +8,7 @@ import {
   type ViewStyle,
   type TextStyle,
 } from 'react-native';
-import { coolNeutral, mint,  fontWeight } from '../tokens/theme';
+import { fontWeight, semanticColor } from '../tokens/theme';
 
 export type AvatarSize = 'small' | 'medium' | 'large' | 'xlarge';
 
@@ -43,7 +43,7 @@ export function Avatar({
     width: containerSize,
     height: containerSize,
     borderRadius: containerSize / 2,
-    backgroundColor: coolNeutral[97],
+    backgroundColor: semanticColor.backgroundTertiary,
     alignItems: 'center',
     justifyContent: 'center',
     overflow: 'hidden',
@@ -52,7 +52,7 @@ export function Avatar({
   const initialStyle: TextStyle = {
     fontSize: sizeToken.fontSize,
     fontWeight: fontWeight.medium,
-    color: coolNeutral[50],
+    color: semanticColor.textSecondary,
   };
 
   const initial = name ? name.charAt(0).toUpperCase() : '?';
@@ -85,8 +85,8 @@ export function Avatar({
               height: onlineDotSize + borderWidth * 2,
               borderRadius: (onlineDotSize + borderWidth * 2) / 2,
               borderWidth,
-              borderColor: coolNeutral[100],
-              backgroundColor: mint[45],
+              borderColor: semanticColor.backgroundStatus,
+              backgroundColor: semanticColor.backgroundBrand,
             },
           ]}
         />

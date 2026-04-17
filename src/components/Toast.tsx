@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { View, Text, Pressable, type ViewStyle, type TextStyle } from 'react-native';
 import { Icon } from './Icon';
-import { coolNeutral, mint, red, yellow, fontSize, fontWeight, radius, spacing, palette } from '../tokens/theme';
+import { fontSize, fontWeight, radius, spacing, semanticColor } from '../tokens/theme';
 
 export type ToastVariant = 'success' | 'error' | 'warning';
 export type ToastPosition = 'top' | 'bottom';
@@ -25,15 +25,15 @@ export interface ToastProps {
 // ─── Status Icons (Toast.png 디자인 기반) ────────────────
 
 const SuccessIcon = () => (
-  <Icon name="check-circle" size={24} color={mint[45]} />
+  <Icon name="check-circle" size={24} color={semanticColor.iconSuccess} />
 );
 
 const WarningIcon = () => (
-  <Icon name="warning" size={24} color={yellow[50]} />
+  <Icon name="warning" size={24} color={semanticColor.iconWarning} />
 );
 
 const ErrorIcon = () => (
-  <Icon name="x-circle" size={24} color={red[70]} />
+  <Icon name="x-circle" size={24} color={semanticColor.iconError} />
 );
 
 const iconMap: Record<ToastVariant, React.FC> = {
@@ -73,7 +73,7 @@ export function Toast({
   };
 
   const toastStyle: ViewStyle = {
-    backgroundColor: coolNeutral[50],
+    backgroundColor: semanticColor.backgroundToast,
     borderRadius: radius.medium,
     paddingHorizontal: spacing.large,
     paddingVertical: spacing.medium,
@@ -83,14 +83,14 @@ export function Toast({
   };
 
   const messageStyle: TextStyle = {
-    color: coolNeutral[100],
+    color: semanticColor.textOnColor,
     fontSize: fontSize.medium,
     fontWeight: fontWeight.medium,
     flex: 1,
   };
 
   const actionTextStyle: TextStyle = {
-    color: mint[80],
+    color: semanticColor.textAction,
     fontSize: fontSize.small,
     fontWeight: fontWeight.semibold,
     marginLeft: spacing.small,

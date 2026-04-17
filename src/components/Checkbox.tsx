@@ -1,7 +1,7 @@
 import React from 'react';
 import { Pressable, View, Text } from 'react-native';
 import Svg, { Path, Rect } from 'react-native-svg';
-import { coolNeutral, mint, fontWeight, interaction, spacing, radius } from '../tokens/theme';
+import { fontWeight, interaction, spacing, radius, semanticColor } from '../tokens/theme';
 
 export type CheckboxSize = 'small' | 'medium';
 export type CheckboxState = 'unchecked' | 'checked' | 'indeterminate';
@@ -38,13 +38,13 @@ export function Checkbox({
   const isFilled = isChecked || isIndeterminate;
 
   const bgColor = disabled
-    ? (isFilled ? mint[90] : 'transparent')
-    : (isFilled ? mint[45] : 'transparent');
+    ? (isFilled ? semanticColor.backgroundBrandDisabled : 'transparent')
+    : (isFilled ? semanticColor.backgroundBrand : 'transparent');
   const borderColor = disabled
-    ? coolNeutral[90]
-    : (isFilled ? mint[45] : coolNeutral[90]);
-  const labelColor = disabled ? coolNeutral[80] : coolNeutral[17];
-  const subColor = disabled ? coolNeutral[80] : coolNeutral[50];
+    ? semanticColor.borderActive
+    : (isFilled ? semanticColor.borderFocus : semanticColor.borderActive);
+  const labelColor = disabled ? semanticColor.textTertiary : semanticColor.textPrimary;
+  const subColor = disabled ? semanticColor.textTertiary : semanticColor.textSecondary;
 
   return (
     <Pressable
@@ -59,7 +59,7 @@ export function Checkbox({
         opacity: pressed && !disabled ? interaction.pressOpacity : 1,
         paddingVertical: tight ? spacing.small : spacing.medium,
         paddingHorizontal: tight ? spacing.medium : 0,
-        backgroundColor: tight ? coolNeutral[99] : 'transparent',
+        backgroundColor: tight ? semanticColor.backgroundSecondary : 'transparent',
         borderRadius: tight ? radius.medium : 0,
       })}
     >
@@ -77,13 +77,13 @@ export function Checkbox({
           <Svg width={s.box * 0.7} height={s.box * 0.7} viewBox="0 0 256 256" fill="none">
             <Path
               d="M232.49,80.49l-128,128a12,12,0,0,1-17,0l-56-56a12,12,0,1,1,17-17L96,183,215.51,63.51a12,12,0,0,1,17,17Z"
-              fill="#FFFFFF"
+              fill={semanticColor.iconOnColor}
             />
           </Svg>
         )}
         {isIndeterminate && (
           <Svg width={s.box * 0.6} height={s.box * 0.6} viewBox="0 0 256 256" fill="none">
-            <Rect x="40" y="112" width="176" height="32" rx="12" fill="#FFFFFF" />
+            <Rect x="40" y="112" width="176" height="32" rx="12" fill={semanticColor.iconOnColor} />
           </Svg>
         )}
       </View>
