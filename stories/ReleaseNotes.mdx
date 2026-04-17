@@ -384,140 +384,6 @@ export const LINK = {
 </div>
 
 {/* ══════════════════════════════════════════════════════ */}
-{/* v1.3.6 — 2026-04-14                                   */}
-{/* ══════════════════════════════════════════════════════ */}
-
-<div className="version-header">
-  <span className="version-badge minor">v1.3.6</span>
-  <span className="version-date">2026-04-14</span>
-</div>
-
-<details className="toggle-card" open>
-  <summary>
-    <CaretIcon />
-    <span className="emoji">♻️</span>
-    <span className="title">Refactored</span>
-    <span className="count">2</span>
-  </summary>
-  <div className="toggle-body">
-    <div className="change-item">
-      <span className="name"><a href={LINK.InputField}>InputField 서체</a></span>
-      <span className="desc"><code>textStyle</code> 토큰 참조로 변경. label/message/counter → <code>textStyle.label2</code>, input → <code>textStyle.body2</code>. lineHeight, letterSpacing 적용.</span>
-    </div>
-    <div className="change-item">
-      <span className="name"><a href={LINK.InputField}>InputField 컬러</a></span>
-      <span className="desc">아이콘 컬러를 <code>semanticColor.icon*</code> 참조로 변경. clear→iconDisabled, error→iconError, success→iconSuccess, search→iconSecondary.</span>
-    </div>
-  </div>
-</details>
-
-<hr className="version-divider" />
-
-{/* ══════════════════════════════════════════════════════ */}
-{/* v1.3.5 — 2026-04-14                                   */}
-{/* ══════════════════════════════════════════════════════ */}
-
-<div className="version-header">
-  <span className="version-badge minor">v1.3.5</span>
-  <span className="version-date">2026-04-14</span>
-</div>
-
-<details className="toggle-card" open>
-  <summary>
-    <CaretIcon />
-    <span className="emoji">♻️</span>
-    <span className="title">Refactored</span>
-    <span className="count">1</span>
-  </summary>
-  <div className="toggle-body">
-    <div className="change-item">
-      <span className="name"><a href={LINK.TextButton}>TextButton</a></span>
-      <span className="desc">아이콘 조합 기능 전체 삭제. <code>leadingIcon</code>, <code>trailingIcon</code> props 제거, <code>iconSize</code> 토큰 제거, 아이콘 조합 스토리 삭제.</span>
-    </div>
-  </div>
-</details>
-
-<hr className="version-divider" />
-
-{/* ══════════════════════════════════════════════════════ */}
-{/* v1.3.4 — 2026-04-14                                   */}
-{/* ══════════════════════════════════════════════════════ */}
-
-<div className="version-header">
-  <span className="version-badge minor">v1.3.4</span>
-  <span className="version-date">2026-04-14</span>
-</div>
-
-<details className="toggle-card" open>
-  <summary>
-    <CaretIcon />
-    <span className="emoji">♻️</span>
-    <span className="title">Refactored</span>
-    <span className="count">1</span>
-  </summary>
-  <div className="toggle-body">
-    <div className="change-item">
-      <span className="name"><a href={LINK.TextButton}>TextButton</a></span>
-      <span className="desc">컬러를 <code>semanticColor</code> 토큰 참조로 변경. content → <code>textBrand</code>/<code>textSecondary</code>, disabled → <code>textTertiary</code>. Pressed/Hovered는 시맨틱 토큰 미존재로 palette 유지.</span>
-    </div>
-  </div>
-</details>
-
-<hr className="version-divider" />
-
-{/* ══════════════════════════════════════════════════════ */}
-{/* v1.3.3 — 2026-04-14                                   */}
-{/* ══════════════════════════════════════════════════════ */}
-
-<div className="version-header">
-  <span className="version-badge minor">v1.3.3</span>
-  <span className="version-date">2026-04-14</span>
-</div>
-
-<details className="toggle-card">
-  <summary>
-    <CaretIcon />
-    <span className="emoji">♻️</span>
-    <span className="title">Refactored</span>
-    <span className="count">1</span>
-  </summary>
-  <div className="toggle-body">
-    <div className="change-item">
-      <span className="name"><a href={LINK.TextButton}>TextButton</a></span>
-      <span className="desc">서체 스타일을 Typography <code>textStyle</code> 참조로 변경. <code>lineHeight</code>, <code>letterSpacing</code> 적용 — Small: <code>textStyle.label2</code>, Medium: <code>textStyle.body2</code></span>
-    </div>
-  </div>
-</details>
-
-<hr className="version-divider" />
-
-{/* ══════════════════════════════════════════════════════ */}
-{/* v1.3.2 — 2026-04-14                                   */}
-{/* ══════════════════════════════════════════════════════ */}
-
-<div className="version-header">
-  <span className="version-badge minor">v1.3.2</span>
-  <span className="version-date">2026-04-14</span>
-</div>
-
-<details className="toggle-card">
-  <summary>
-    <CaretIcon />
-    <span className="emoji">♻️</span>
-    <span className="title">Refactored</span>
-    <span className="count">1</span>
-  </summary>
-  <div className="toggle-body">
-    <div className="change-item">
-      <span className="name"><a href={LINK.ColorTokens}>backgroundPrimary</a></span>
-      <span className="desc">시맨틱 컬러 토큰 제거. 기존 참조 5개(Modal, TabBar, InputField, BottomSheet, ActionArea)를 <code>backgroundStatus</code>로 교체.</span>
-    </div>
-  </div>
-</details>
-
-<hr className="version-divider" />
-
-{/* ══════════════════════════════════════════════════════ */}
 {/* v1.3.1 — 2026-04-14                                   */}
 {/* ══════════════════════════════════════════════════════ */}
 
@@ -526,7 +392,7 @@ export const LINK = {
   <span className="version-date">2026-04-14</span>
 </div>
 
-<details className="toggle-card">
+<details className="toggle-card" open>
   <summary>
     <CaretIcon />
     <span className="emoji">✨</span>
@@ -536,7 +402,75 @@ export const LINK = {
   <div className="toggle-body">
     <div className="change-item">
       <span className="name"><a href={LINK.ColorTokens}>backgroundDisabled</a></span>
-      <span className="desc">비활성화 배경용 시맨틱 컬러 토큰 추가. <code>coolNeutral[96]</code> (#E1E2E4) 참조.</span>
+      <span className="desc">비활성화 배경용 시맨틱 컬러 토큰 추가. <code>coolNeutral[96]</code> (#E1E2E4) 참조</span>
+    </div>
+  </div>
+</details>
+
+<details className="toggle-card" open>
+  <summary>
+    <CaretIcon />
+    <span className="emoji">♻️</span>
+    <span className="title">Refactored</span>
+    <span className="count">9</span>
+  </summary>
+  <div className="toggle-body">
+    <div className="component-tags">
+      <span className="component-tag updated">Button</span>
+      <span className="component-tag updated">TextButton</span>
+      <span className="component-tag updated">InputField</span>
+    </div>
+
+    <div className="change-item">
+      <span className="name"><a href={LINK.Button}>Button 전면 교체</a></span>
+      <span className="desc">Figma 컴포넌트 기반 재작성. 서체를 <code>textStyle</code> 참조로 변경 — S: <code>label2</code>, M: <code>body2</code>, L: <code>headline</code></span>
+    </div>
+    <div className="change-item">
+      <span className="name"><a href={LINK.Button}>Button Assistive Outlined</a></span>
+      <span className="desc">텍스트 색상 <code>coolNeutral[40]</code> → <code>semanticColor.textPrimary</code> (coolNeutral[17])로 변경</span>
+    </div>
+    <div className="change-item">
+      <span className="name"><a href={LINK.Button}>Button Assistive Solid</a></span>
+      <span className="desc">활성화/비활성화 배경색 <code>coolNeutral[97]</code> → <code>semanticColor.backgroundDisabled</code> (coolNeutral[96])로 변경</span>
+    </div>
+    <div className="change-item">
+      <span className="name"><a href={LINK.TextButton}>TextButton 서체</a></span>
+      <span className="desc"><code>textStyle</code> 토큰 참조로 변경. Small: <code>textStyle.label2</code>, Medium: <code>textStyle.body2</code>. lineHeight, letterSpacing 적용</span>
+    </div>
+    <div className="change-item">
+      <span className="name"><a href={LINK.TextButton}>TextButton 컬러</a></span>
+      <span className="desc"><code>semanticColor</code> 토큰 참조로 변경. content → <code>textBrand</code>/<code>textSecondary</code>, disabled → <code>textTertiary</code></span>
+    </div>
+    <div className="change-item">
+      <span className="name"><a href={LINK.TextButton}>TextButton 아이콘</a></span>
+      <span className="desc">아이콘 조합 기능 전체 삭제. <code>leadingIcon</code>, <code>trailingIcon</code> props, <code>iconSize</code> 토큰 제거</span>
+    </div>
+    <div className="change-item">
+      <span className="name"><a href={LINK.InputField}>InputField 서체</a></span>
+      <span className="desc"><code>textStyle</code> 토큰 참조로 변경. label/message/counter → <code>textStyle.label2</code>, input → <code>textStyle.body2</code></span>
+    </div>
+    <div className="change-item">
+      <span className="name"><a href={LINK.InputField}>InputField 컬러</a></span>
+      <span className="desc">아이콘 컬러를 <code>semanticColor.icon*</code> 참조로 변경. clear→iconDisabled, error→iconError, success→iconSuccess, search→iconSecondary</span>
+    </div>
+    <div className="change-item">
+      <span className="name-plain">레거시 토큰 정리</span>
+      <span className="desc"><code>colors.ts</code>, <code>typography.ts</code>, <code>spacing.ts</code> 삭제. 모든 토큰이 <code>theme.ts</code>에 통합됨</span>
+    </div>
+  </div>
+</details>
+
+<details className="toggle-card">
+  <summary>
+    <CaretIcon />
+    <span className="emoji">⚠️</span>
+    <span className="title">Breaking Changes</span>
+    <span className="count">1</span>
+  </summary>
+  <div className="toggle-body">
+    <div className="change-item">
+      <span className="name"><a href={LINK.ColorTokens}>backgroundPrimary</a></span>
+      <span className="desc">시맨틱 컬러 토큰 제거. 기존 참조 5개(Modal, TabBar, InputField, BottomSheet, ActionArea)를 <code>backgroundStatus</code>로 교체</span>
     </div>
   </div>
 </details>

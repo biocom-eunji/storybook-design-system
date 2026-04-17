@@ -4,60 +4,28 @@
 
 ---
 
-## v1.3.6 (2026-04-14)
-
-### Changed
-
-- **InputField** 서체를 `textStyle` 토큰 참조로 변경 — label/bottomMessage/charCounter에 `textStyle.label2`, input에 `textStyle.body2` (lineHeight, letterSpacing 적용)
-- **InputField** 아이콘 컬러를 `semanticColor.icon*` 토큰 참조로 변경 — clear→iconDisabled, error→iconError, success→iconSuccess, search→iconSecondary
-- **InputField** 디자인 스펙에 아이콘 컬러 섹션 추가, 토큰 참조명 일괄 업데이트
-
----
-
-## v1.3.5 (2026-04-14)
-
-### Removed
-
-- **TextButton** 아이콘 조합 기능 전체 삭제 — `leadingIcon`, `trailingIcon` props 제거, `iconSize` 토큰 제거, 아이콘 조합 스토리 삭제
-
----
-
-## v1.3.4 (2026-04-14)
-
-### Changed
-
-- **TextButton** 컬러를 `semanticColor` 토큰 참조로 변경 — palette 직접 참조 대신 시맨틱 레이어 인용
-  - primary.content: `mint[45]` → `semanticColor.textBrand`
-  - primary.contentDisabled: `coolNeutral[80]` → `semanticColor.textTertiary`
-  - assistive.content: `coolNeutral[50]` → `semanticColor.textSecondary`
-  - assistive.contentDisabled: `coolNeutral[80]` → `semanticColor.textTertiary`
-  - Pressed/Hovered: 시맨틱 토큰 미존재로 palette 직접 참조 유지
-
----
-
-## v1.3.3 (2026-04-14)
-
-### Changed
-
-- **TextButton** 서체 스타일을 Typography `textStyle` 참조로 변경 — `lineHeight`, `letterSpacing` 적용
-  - Small: `textStyle.label2` (13px · 18px · 0.25)
-  - Medium: `textStyle.body2` (15px · 22px · 0.14)
-
----
-
-## v1.3.2 (2026-04-14)
-
-### Removed
-
-- **backgroundPrimary** 시맨틱 컬러 토큰 제거 — 기존 참조 5개를 `backgroundStatus`로 교체 (Modal, TabBar, InputField, BottomSheet, ActionArea)
-
----
-
 ## v1.3.1 (2026-04-14)
 
 ### Added
 
 - **backgroundDisabled** 시맨틱 컬러 토큰 추가 — `coolNeutral[96]` (#E1E2E4) 참조, 비활성화 상태 컴포넌트 배경용
+
+### Changed
+
+- **Button** Figma 컴포넌트 기반 전면 교체 — 서체를 `textStyle` 참조로 변경 (S: label2, M: body2, L: headline)
+- **Button** Assistive Outlined 텍스트 색상 `coolNeutral[40]` → `semanticColor.textPrimary`
+- **Button** Assistive Solid 배경색 `coolNeutral[97]` → `semanticColor.backgroundDisabled`
+- **TextButton** 서체를 `textStyle` 토큰 참조로 변경 — Small: `textStyle.label2`, Medium: `textStyle.body2`
+- **TextButton** 컬러를 `semanticColor` 토큰 참조로 변경 — content→textBrand/textSecondary, disabled→textTertiary
+- **InputField** 서체를 `textStyle` 토큰 참조로 변경 — label/message/counter→`textStyle.label2`, input→`textStyle.body2`
+- **InputField** 아이콘 컬러를 `semanticColor.icon*` 토큰 참조로 변경
+- 레거시 토큰 파일 정리 — `colors.ts`, `typography.ts`, `spacing.ts` 삭제 (`theme.ts`에 통합)
+
+### Removed
+
+- **backgroundPrimary** 시맨틱 컬러 토큰 제거 — 기존 참조 5개를 `backgroundStatus`로 교체
+- **TextButton** 아이콘 조합 기능 전체 삭제 — `leadingIcon`, `trailingIcon` props, `iconSize` 토큰 제거
+- **Button.test.tsx** 삭제 — Figma 기반 컴포넌트 재작성에 따른 기존 테스트 제거
 
 ---
 
