@@ -415,6 +415,12 @@ export const semanticColor = {
   textSuccess: _role.success,
   /** 경고 상태 텍스트 */
   textWarning: _role.warning,
+  /** 4단계 텍스트 (보조 버튼, 비활성 수치 등) */
+  textQuaternary: coolNeutral[40],
+  /** 라벨 텍스트 (입력 필드 등) */
+  textLabel: coolNeutral[30],
+  /** 다크 배경 위 액션 텍스트 (토스트 등) */
+  textAction: mint[80],
 
   // ── Background ────────────────────────────────────────
   /** 보조 배경색 (카드, 섹션 구분) */
@@ -423,6 +429,8 @@ export const semanticColor = {
   backgroundTertiary: _surface.tertiary,
   /** 반전 배경 (다크 영역, 활성 칩) */
   backgroundInverse: _surface.inverse,
+  /** 비활성 트랙, OFF 상태 배경 */
+  backgroundOff: coolNeutral[90],
   /** 브랜드 배경색 (CTA 버튼, 강조 영역) */
   backgroundBrand: _role.brand,
   /** 브랜드 배경 눌림 */
@@ -431,6 +439,16 @@ export const semanticColor = {
   backgroundStatus: _surface.primary,
   /** 비활성화 배경 (Disabled 상태 컴포넌트) */
   backgroundDisabled: coolNeutral[96],
+  /** 브랜드 비활성화 배경 (체크박스 등) */
+  backgroundBrandDisabled: mint[90],
+  /** 에러 배경 (위험 버튼, ProgressBar error) */
+  backgroundError: _role.error,
+  /** 경고 배경 (ProgressBar warning) */
+  backgroundWarning: _role.warning,
+  /** 성공 배경 (ProgressBar success) */
+  backgroundSuccess: green[45],
+  /** 토스트 배경 */
+  backgroundToast: coolNeutral[50],
 
   // ── Border ────────────────────────────────────────────
   /** 기본·비활성화 테두리, 구분선 */
@@ -461,6 +479,10 @@ export const semanticColor = {
   iconError: _role.error,
   /** 성공 아이콘 */
   iconSuccess: _role.success,
+  /** 경고 아이콘 */
+  iconWarning: _role.warning,
+  /** 미선택/비활성 아이콘 (체크마크, 탭바 등) */
+  iconInactive: coolNeutral[90],
 } as const;
 
 export type SemanticColor = typeof semanticColor;
@@ -497,16 +519,16 @@ export const buttonToken = {
     },
     assistive: {
       solid: {
-        background: coolNeutral[97],
+        background: semanticColor.backgroundDisabled,
         content: coolNeutral[17],
         backgroundPressed: coolNeutral[90],
         backgroundHovered: coolNeutral[95],
-        backgroundDisabled: coolNeutral[97],
+        backgroundDisabled: semanticColor.backgroundDisabled,
         contentDisabled: coolNeutral[80],
       },
       outlined: {
         background: 'transparent',
-        content: coolNeutral[40],
+        content: semanticColor.textPrimary,
         border: coolNeutral[90],
         backgroundPressed: coolNeutral[97],
         backgroundHovered: coolNeutral[99],
@@ -573,6 +595,35 @@ export const actionAreaToken = {
   gap: spacing.small,
 } as const;
 
+// ─── Flat Spacing (기본 + screenMargin + 컴포넌트 사이즈 플랫 병합) ──
+
+export const spacingFlat = {
+  ...spacing,
+
+  // 화면 여백
+  screenMarginDefault: screenMargin.default,
+  screenMarginCompact: screenMargin.compact,
+  screenMarginWide: screenMargin.wide,
+
+  // Button
+  buttonHeightSmall: buttonToken.size.small.height,
+  buttonHeightMedium: buttonToken.size.medium.height,
+  buttonHeightLarge: buttonToken.size.large.height,
+  buttonPaddingHorizontalSmall: buttonToken.size.small.paddingHorizontal,
+  buttonPaddingHorizontalMedium: buttonToken.size.medium.paddingHorizontal,
+  buttonPaddingHorizontalLarge: buttonToken.size.large.paddingHorizontal,
+
+  // Chip
+  chipHeightXSmall: chipToken.size.xsmall.height,
+  chipHeightSmall: chipToken.size.small.height,
+  chipHeightMedium: chipToken.size.medium.height,
+  chipHeightLarge: chipToken.size.large.height,
+
+  // ActionArea
+  actionAreaPadding: actionAreaToken.padding,
+  actionAreaGap: actionAreaToken.gap,
+} as const;
+
 // ─── Theme (통합) ────────────────────────────────────────
 
 export const theme = {
@@ -583,7 +634,9 @@ export const theme = {
   fontWeight,
   lineHeight,
   textStyle,
-  spacing,
+  /** @alias textStyle — theme.typography.body1.fontSize 형태로 접근 가능 */
+  typography: textStyle,
+  spacing: spacingFlat,
   radius,
   shadow,
   screenMargin,
