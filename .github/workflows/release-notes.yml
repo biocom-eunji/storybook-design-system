@@ -1,0 +1,318 @@
+name: Auto Release Notes
+
+on:
+  pull_request:
+    types: [closed]
+    branches: [main]
+  workflow_dispatch:
+    inputs:
+      dry_run:
+        description: '테스트 모드 (커밋/릴리즈 생략)'
+        type: boolean
+        default: true
+
+permissions:
+  contents: write
+  pull-requests: read
+
+jobs:
+  update-release-notes:
+    if: >-
+      github.event_name == 'workflow_dispatch' ||
+      github.event.pull_request.merged == true
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+          fetch-depth: 0
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      # ── 1. PR 커밋 파싱 ──────────────────────────────────
+      - name: Parse conventional commits
+        id: parse
+        env:
+          PR_BODY: ${{ github.event.pull_request.body || '' }}
+          PR_TITLE: ${{ github.event.pull_request.title || 'manual run' }}
+        run: |
+          # workflow_dispatch: 최근 태그~HEAD, PR: base..merge_commit
+          if [ "${{ github.event_name }}" = "workflow_dispatch" ]; then
+            LAST_TAG=$(git describe --tags --abbrev=0 2>/dev/null || echo "")
+            if [ -n "$LAST_TAG" ]; then
+              COMMITS=$(git log --pretty=format:"%s" ${LAST_TAG}..HEAD)
+            else
+              COMMITS=$(git log --pretty=format:"%s" HEAD~20..HEAD)
+            fi
+          else
+            BASE_SHA=${{ github.event.pull_request.base.sha }}
+            HEAD_SHA=${{ github.event.pull_request.merge_commit_sha }}
+            COMMITS=$(git log --pretty=format:"%s" ${BASE_SHA}..${HEAD_SHA})
+          fi
+
+          # 카테고리별 분류
+          FEATURES=""
+          FIXES=""
+          REFACTORS=""
+          INFRA=""
+          DOCS=""
+          BREAKING=""
+
+          while IFS= read -r msg; do
+            [ -z "$msg" ] && continue
+
+            # type(scope): description 파싱
+            if [[ "$msg" =~ ^([a-z]+)\(([^)]*)\):\ (.+)$ ]]; then
+              TYPE="${BASH_REMATCH[1]}"
+              SCOPE="${BASH_REMATCH[2]}"
+              DESC="${BASH_REMATCH[3]}"
+            elif [[ "$msg" =~ ^([a-z]+):\ (.+)$ ]]; then
+              TYPE="${BASH_REMATCH[1]}"
+              SCOPE=""
+              DESC="${BASH_REMATCH[2]}"
+            else
+              continue
+            fi
+
+            # BREAKING CHANGE 감지
+            if [[ "$msg" == *"BREAKING CHANGE"* ]] || [[ "$msg" == *"!"* ]]; then
+              BREAKING="${BREAKING}|${SCOPE}|${DESC}"
+              continue
+            fi
+
+            case "$TYPE" in
+              feat)     FEATURES="${FEATURES}|${SCOPE}|${DESC}" ;;
+              fix)      FIXES="${FIXES}|${SCOPE}|${DESC}" ;;
+              refactor) REFACTORS="${REFACTORS}|${SCOPE}|${DESC}" ;;
+              ci|build) INFRA="${INFRA}|${SCOPE}|${DESC}" ;;
+              docs)     DOCS="${DOCS}|${SCOPE}|${DESC}" ;;
+            esac
+          done <<< "$COMMITS"
+
+          # 카운트 계산
+          count_items() { [ -z "$1" ] && echo 0 || echo "$1" | tr '|' '\n' | grep -c '|' || echo 0; }
+
+          feat_count=$([ -z "$FEATURES" ] && echo 0 || echo "$FEATURES" | awk -F'|' '{print NF/2}' | head -1)
+          fix_count=$([ -z "$FIXES" ] && echo 0 || echo "$FIXES" | awk -F'|' '{print NF/2}' | head -1)
+          refactor_count=$([ -z "$REFACTORS" ] && echo 0 || echo "$REFACTORS" | awk -F'|' '{print NF/2}' | head -1)
+
+          # 멀티라인 output
+          {
+            echo "features<<EOFFEATURES"
+            echo "$FEATURES"
+            echo "EOFFEATURES"
+            echo "fixes<<EOFFIXES"
+            echo "$FIXES"
+            echo "EOFFIXES"
+            echo "refactors<<EOFREFACTORS"
+            echo "$REFACTORS"
+            echo "EOFREFACTORS"
+            echo "infra<<EOFINFRA"
+            echo "$INFRA"
+            echo "EOFINFRA"
+            echo "docs<<EOFDOCS"
+            echo "$DOCS"
+            echo "EOFDOCS"
+            echo "breaking<<EOFBREAKING"
+            echo "$BREAKING"
+            echo "EOFBREAKING"
+            echo "has_changes=$([ -n "$FEATURES$FIXES$REFACTORS$INFRA$DOCS$BREAKING" ] && echo true || echo false)"
+          } >> "$GITHUB_OUTPUT"
+
+      # ── 2. 버전 결정 (semver) ────────────────────────────
+      - name: Determine version bump
+        if: steps.parse.outputs.has_changes == 'true'
+        id: version
+        run: |
+          CURRENT=$(node -p "require('./package.json').version")
+          IFS='.' read -r MAJOR MINOR PATCH <<< "$CURRENT"
+
+          BREAKING="${{ steps.parse.outputs.breaking }}"
+          FEATURES="${{ steps.parse.outputs.features }}"
+          FIXES="${{ steps.parse.outputs.fixes }}"
+
+          if [ -n "$BREAKING" ]; then
+            MAJOR=$((MAJOR + 1)); MINOR=0; PATCH=0
+            BUMP="major"
+          elif [ -n "$FEATURES" ]; then
+            MINOR=$((MINOR + 1)); PATCH=0
+            BUMP="minor"
+          else
+            PATCH=$((PATCH + 1))
+            BUMP="patch"
+          fi
+
+          NEXT="${MAJOR}.${MINOR}.${PATCH}"
+          TODAY=$(date +%Y-%m-%d)
+
+          echo "current=$CURRENT" >> "$GITHUB_OUTPUT"
+          echo "next=$NEXT" >> "$GITHUB_OUTPUT"
+          echo "date=$TODAY" >> "$GITHUB_OUTPUT"
+          echo "bump=$BUMP" >> "$GITHUB_OUTPUT"
+          echo "::notice::Version bump: v${CURRENT} → v${NEXT} (${BUMP})"
+
+      # ── 3. CHANGELOG.md 업데이트 ─────────────────────────
+      - name: Update CHANGELOG.md
+        if: >-
+          steps.parse.outputs.has_changes == 'true' &&
+          inputs.dry_run != true
+        run: |
+          VERSION="${{ steps.version.outputs.next }}"
+          DATE="${{ steps.version.outputs.date }}"
+          FEATURES="${{ steps.parse.outputs.features }}"
+          FIXES="${{ steps.parse.outputs.fixes }}"
+          REFACTORS="${{ steps.parse.outputs.refactors }}"
+          INFRA="${{ steps.parse.outputs.infra }}"
+          DOCS="${{ steps.parse.outputs.docs }}"
+          BREAKING="${{ steps.parse.outputs.breaking }}"
+
+          # 엔트리 생성
+          ENTRY="## v${VERSION} (${DATE})"
+          ENTRY="${ENTRY}\n"
+
+          # scope|desc 파이프 구분자를 마크다운으로 변환
+          format_items() {
+            local data="$1"
+            [ -z "$data" ] && return
+            echo "$data" | tr '|' '\n' | paste - - | while IFS=$'\t' read -r scope desc; do
+              [ -z "$scope" ] && continue
+              if [ -n "$desc" ]; then
+                echo "- **${scope}** ${desc}"
+              fi
+            done
+          }
+
+          if [ -n "$FEATURES" ]; then
+            ENTRY="${ENTRY}\n### Added\n"
+            ENTRY="${ENTRY}\n$(format_items "$FEATURES")"
+          fi
+
+          if [ -n "$REFACTORS" ]; then
+            ENTRY="${ENTRY}\n\n### Changed\n"
+            ENTRY="${ENTRY}\n$(format_items "$REFACTORS")"
+          fi
+
+          if [ -n "$FIXES" ]; then
+            ENTRY="${ENTRY}\n\n### Fixed\n"
+            ENTRY="${ENTRY}\n$(format_items "$FIXES")"
+          fi
+
+          if [ -n "$INFRA" ]; then
+            ENTRY="${ENTRY}\n\n### Infra\n"
+            ENTRY="${ENTRY}\n$(format_items "$INFRA")"
+          fi
+
+          if [ -n "$BREAKING" ]; then
+            ENTRY="${ENTRY}\n\n### ⚠️ Breaking Changes\n"
+            ENTRY="${ENTRY}\n$(format_items "$BREAKING")"
+          fi
+
+          ENTRY="${ENTRY}\n\n---\n"
+
+          # 기존 CHANGELOG 첫 번째 --- 뒤에 삽입
+          if grep -q "^---$" CHANGELOG.md; then
+            sed -i "0,/^---$/!b; /^---$/a\\
+          \\
+          $(echo -e "$ENTRY" | sed 's/$/\\/' | sed '$ s/\\$//')" CHANGELOG.md
+          else
+            echo -e "${ENTRY}\n$(cat CHANGELOG.md)" > CHANGELOG.md
+          fi
+
+      # ── 4. package.json 버전 업데이트 ────────────────────
+      - name: Bump package.json version
+        if: >-
+          steps.parse.outputs.has_changes == 'true' &&
+          inputs.dry_run != true
+        run: |
+          npm version ${{ steps.version.outputs.next }} --no-git-tag-version
+
+      # ── 5. 커밋 & 푸시 ──────────────────────────────────
+      - name: Commit and push release notes
+        if: >-
+          steps.parse.outputs.has_changes == 'true' &&
+          inputs.dry_run != true
+        run: |
+          VERSION="${{ steps.version.outputs.next }}"
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add CHANGELOG.md package.json package-lock.json
+          git commit -m "docs(changelog): Release Notes v${VERSION} 업데이트
+
+          [automated] Conventional Commits 기반 자동 생성"
+          git push origin main
+
+      # ── 6. GitHub Release 생성 ──────────────────────────
+      - name: Create GitHub Release
+        if: >-
+          steps.parse.outputs.has_changes == 'true' &&
+          inputs.dry_run != true
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          VERSION="${{ steps.version.outputs.next }}"
+          BUMP="${{ steps.version.outputs.bump }}"
+
+          # 릴리즈 노트 본문 생성
+          BODY="## What's Changed\n\n"
+          BODY="${BODY}**Version bump**: \`${{ steps.version.outputs.current }}\` → \`${VERSION}\` (${BUMP})\n\n"
+          BODY="${BODY}**PR**: #${{ github.event.pull_request.number }} ${{ github.event.pull_request.title }}\n\n"
+          BODY="${BODY}See [CHANGELOG.md](CHANGELOG.md) for full details."
+
+          PRERELEASE=""
+          [ "$BUMP" = "major" ] && PRERELEASE="" || PRERELEASE=""
+
+          echo -e "$BODY" | gh release create "v${VERSION}" \
+            --title "v${VERSION}" \
+            --notes-file - \
+            --target main
+
+      # ── 7. 요약 출력 ────────────────────────────────────
+      - name: Summary
+        if: steps.parse.outputs.has_changes == 'true'
+        run: |
+          VERSION="${{ steps.version.outputs.next }}"
+          DRY_RUN="${{ inputs.dry_run }}"
+
+          if [ "$DRY_RUN" = "true" ]; then
+            echo "## 🧪 Dry Run — Release v${VERSION}" >> $GITHUB_STEP_SUMMARY
+            echo "" >> $GITHUB_STEP_SUMMARY
+            echo "> 테스트 모드: 파싱만 실행, 커밋/릴리즈 생략" >> $GITHUB_STEP_SUMMARY
+          else
+            echo "## 🎉 Release v${VERSION}" >> $GITHUB_STEP_SUMMARY
+          fi
+
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "| 항목 | 상태 |" >> $GITHUB_STEP_SUMMARY
+          echo "|---|---|" >> $GITHUB_STEP_SUMMARY
+          echo "| Version | \`v${{ steps.version.outputs.current }}\` → \`v${VERSION}\` |" >> $GITHUB_STEP_SUMMARY
+          echo "| Bump | ${{ steps.version.outputs.bump }} |" >> $GITHUB_STEP_SUMMARY
+
+          if [ "$DRY_RUN" = "true" ]; then
+            echo "| CHANGELOG.md | ⏭️ 스킵 (dry run) |" >> $GITHUB_STEP_SUMMARY
+            echo "| package.json | ⏭️ 스킵 (dry run) |" >> $GITHUB_STEP_SUMMARY
+            echo "| GitHub Release | ⏭️ 스킵 (dry run) |" >> $GITHUB_STEP_SUMMARY
+          else
+            echo "| CHANGELOG.md | ✅ 업데이트 |" >> $GITHUB_STEP_SUMMARY
+            echo "| package.json | ✅ v${VERSION} |" >> $GITHUB_STEP_SUMMARY
+            echo "| GitHub Release | ✅ 생성 |" >> $GITHUB_STEP_SUMMARY
+          fi
+
+          # 파싱 결과 항상 표시
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "### 파싱 결과" >> $GITHUB_STEP_SUMMARY
+          echo "| 카테고리 | 항목 |" >> $GITHUB_STEP_SUMMARY
+          echo "|---|---|" >> $GITHUB_STEP_SUMMARY
+          FEATURES="${{ steps.parse.outputs.features }}"
+          FIXES="${{ steps.parse.outputs.fixes }}"
+          REFACTORS="${{ steps.parse.outputs.refactors }}"
+          DOCS="${{ steps.parse.outputs.docs }}"
+          INFRA="${{ steps.parse.outputs.infra }}"
+          [ -n "$FEATURES" ] && echo "| Features | ✅ |" >> $GITHUB_STEP_SUMMARY
+          [ -n "$REFACTORS" ] && echo "| Refactored | ✅ |" >> $GITHUB_STEP_SUMMARY
+          [ -n "$FIXES" ] && echo "| Fixes | ✅ |" >> $GITHUB_STEP_SUMMARY
+          [ -n "$DOCS" ] && echo "| Docs | ✅ |" >> $GITHUB_STEP_SUMMARY
+          [ -n "$INFRA" ] && echo "| Infra | ✅ |" >> $GITHUB_STEP_SUMMARY
