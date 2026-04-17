@@ -26,15 +26,15 @@ type Story = StoryObj<typeof BottomSheet>;
 const OpenButton = ({ label, onPress }: { label: string; onPress: () => void }) => (
   <Pressable
     onPress={onPress}
-    style={{ backgroundColor: mint[45], paddingHorizontal: spacing.xlarge, paddingVertical: spacing.medium, borderRadius: radius.medium, alignSelf: 'flex-start' }}
+    style={{ backgroundColor: semanticColor.backgroundBrand, paddingHorizontal: spacing.xlarge, paddingVertical: spacing.medium, borderRadius: radius.medium, alignSelf: 'flex-start' }}
   >
-    <Text style={{ color: '#FFFFFF', fontSize: fontSize.medium, fontWeight: fontWeight.semibold }}>{label}</Text>
+    <Text style={{ color: semanticColor.textOnColor, fontSize: fontSize.medium, fontWeight: fontWeight.semibold }}>{label}</Text>
   </Pressable>
 );
 
 const ListItem = ({ label }: { label: string }) => (
-  <Pressable style={{ paddingVertical: spacing.medium, borderBottomWidth: 1, borderBottomColor: coolNeutral[96] }}>
-    <Text style={{ fontSize: fontSize.medium, color: coolNeutral[17] }}>{label}</Text>
+  <Pressable style={{ paddingVertical: spacing.medium, borderBottomWidth: 1, borderBottomColor: semanticColor.borderDefault }}>
+    <Text style={{ fontSize: fontSize.medium, color: semanticColor.textPrimary }}>{label}</Text>
   </Pressable>
 );
 

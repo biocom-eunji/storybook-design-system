@@ -716,7 +716,7 @@ function WriteScreen() {
       behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
       keyboardVerticalOffset={Platform.OS === 'ios' ? 88 : 0}
     >
-      <ScrollView contentContainerStyle={{ padding: 16 }}>
+      <ScrollView contentContainerStyle={{ padding: spacing.large }}>
         <InputField label="제목" />
         <InputField
           label="본문"

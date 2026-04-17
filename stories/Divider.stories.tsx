@@ -61,10 +61,10 @@ export const Directions: Story = {
       <Col gap={spacing.xlarge}>
         <Col gap={spacing.small}>
           <StateLabel>Horizontal (기본)</StateLabel>
-          <View style={{ backgroundColor: coolNeutral[99], padding: spacing.large, borderRadius: radius.small }}>
-            <Text style={{ fontSize: fontSize.small, color: coolNeutral[50], marginBottom: spacing.small }}>위쪽 콘텐츠</Text>
+          <View style={{ backgroundColor: semanticColor.backgroundSecondary, padding: spacing.large, borderRadius: radius.small }}>
+            <Text style={{ fontSize: fontSize.small, color: semanticColor.textSecondary, marginBottom: spacing.small }}>위쪽 콘텐츠</Text>
             <DividerComponent />
-            <Text style={{ fontSize: fontSize.small, color: coolNeutral[50], marginTop: spacing.small }}>아래쪽 콘텐츠</Text>
+            <Text style={{ fontSize: fontSize.small, color: semanticColor.textSecondary, marginTop: spacing.small }}>아래쪽 콘텐츠</Text>
           </View>
         </Col>
 
@@ -73,16 +73,16 @@ export const Directions: Story = {
           <View style={{
             flexDirection: 'row',
             alignItems: 'center',
-            backgroundColor: coolNeutral[99],
+            backgroundColor: semanticColor.backgroundSecondary,
             padding: spacing.large,
             borderRadius: radius.small,
             height: 60,
           }}>
-            <Text style={{ fontSize: fontSize.small, color: coolNeutral[50] }}>왼쪽</Text>
+            <Text style={{ fontSize: fontSize.small, color: semanticColor.textSecondary }}>왼쪽</Text>
             <View style={{ marginHorizontal: spacing.medium, height: '100%' }}>
               <DividerComponent direction="vertical" />
             </View>
-            <Text style={{ fontSize: fontSize.small, color: coolNeutral[50] }}>오른쪽</Text>
+            <Text style={{ fontSize: fontSize.small, color: semanticColor.textSecondary }}>오른쪽</Text>
           </View>
         </Col>
       </Col>
@@ -165,21 +165,21 @@ export const Inset: Story = {
       title="인셋 (들여쓰기)"
       description="inset prop으로 왼쪽 들여쓰기를 적용할 수 있습니다. 리스트 구분선에 유용합니다."
     >
-      <View style={{ backgroundColor: coolNeutral[99], borderRadius: radius.small, overflow: 'hidden' }}>
+      <View style={{ backgroundColor: semanticColor.backgroundSecondary, borderRadius: radius.small, overflow: 'hidden' }}>
         <View style={{ padding: spacing.large }}>
-          <Text style={{ fontSize: fontSize.medium, color: coolNeutral[17] }}>전체 너비 (inset: 0)</Text>
+          <Text style={{ fontSize: fontSize.medium, color: semanticColor.textPrimary }}>전체 너비 (inset: 0)</Text>
         </View>
         <DividerComponent />
         <View style={{ padding: spacing.large }}>
-          <Text style={{ fontSize: fontSize.medium, color: coolNeutral[17] }}>들여쓰기 16px</Text>
+          <Text style={{ fontSize: fontSize.medium, color: semanticColor.textPrimary }}>들여쓰기 16px</Text>
         </View>
         <DividerComponent inset={spacing.large} />
         <View style={{ padding: spacing.large }}>
-          <Text style={{ fontSize: fontSize.medium, color: coolNeutral[17] }}>들여쓰기 48px</Text>
+          <Text style={{ fontSize: fontSize.medium, color: semanticColor.textPrimary }}>들여쓰기 48px</Text>
         </View>
         <DividerComponent inset={spacing['4xlarge']} />
         <View style={{ padding: spacing.large }}>
-          <Text style={{ fontSize: fontSize.medium, color: coolNeutral[17] }}>마지막 항목</Text>
+          <Text style={{ fontSize: fontSize.medium, color: semanticColor.textPrimary }}>마지막 항목</Text>
         </View>
       </View>
     </Section>

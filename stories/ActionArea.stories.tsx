@@ -3,7 +3,7 @@ import { View, Text } from 'react-native';
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import { ActionArea } from '../src/components/ActionArea';
 import { Section, StateLabel, Row, Col, SpecTable, CodeBlock, Divider } from './storyHelpers';
-import { coolNeutral, mint, fontSize, fontWeight, spacing, radius } from '../src/tokens/theme';
+import { coolNeutral, fontSize, fontWeight, spacing, radius, semanticColor } from '../src/tokens/theme';
 
 // ─── Safe Area 시뮬레이터 ─────────────────────────────────
 
@@ -20,13 +20,13 @@ const DeviceFrame = ({
   width?: number;
 }) => (
   <View style={{ maxWidth: width, borderRadius: radius.large, overflow: 'hidden', borderWidth: 1, borderColor: coolNeutral[95] }}>
-    <View style={{ height: 80, backgroundColor: coolNeutral[99], justifyContent: 'center', alignItems: 'center' }}>
-      <Text style={{ fontSize: fontSize.xsmall, color: coolNeutral[70] }}>화면 콘텐츠 영역</Text>
+    <View style={{ height: 80, backgroundColor: semanticColor.backgroundSecondary, justifyContent: 'center', alignItems: 'center' }}>
+      <Text style={{ fontSize: fontSize.xsmall, color: semanticColor.textSecondary }}>화면 콘텐츠 영역</Text>
     </View>
     {children}
     {safeArea && (
-      <View style={{ height: SAFE_AREA_BOTTOM, backgroundColor: coolNeutral[99], alignItems: 'center', justifyContent: 'center' }}>
-        <View style={{ width: 120, height: 4, borderRadius: 2, backgroundColor: coolNeutral[90] }} />
+      <View style={{ height: SAFE_AREA_BOTTOM, backgroundColor: semanticColor.backgroundSecondary, alignItems: 'center', justifyContent: 'center' }}>
+        <View style={{ width: 120, height: 4, borderRadius: 2, backgroundColor: semanticColor.backgroundOff }} />
       </View>
     )}
   </View>
@@ -48,8 +48,8 @@ const meta: Meta<typeof ActionArea> = {
   decorators: [
     (Story) => (
       <View style={{ maxWidth: 400, borderRadius: radius.large, overflow: 'hidden', borderWidth: 1, borderColor: coolNeutral[95] }}>
-        <View style={{ height: 200, backgroundColor: coolNeutral[99], justifyContent: 'center', alignItems: 'center' }}>
-          <Text style={{ fontSize: fontSize.small, color: coolNeutral[70] }}>화면 콘텐츠 영역</Text>
+        <View style={{ height: 200, backgroundColor: semanticColor.backgroundSecondary, justifyContent: 'center', alignItems: 'center' }}>
+          <Text style={{ fontSize: fontSize.small, color: semanticColor.textSecondary }}>화면 콘텐츠 영역</Text>
         </View>
         <Story />
       </View>
@@ -88,7 +88,7 @@ export const AllVariants: Story = {
         {/* Strong */}
         <Col gap={spacing.small}>
           <StateLabel>STRONG — CTA 강조형</StateLabel>
-          <Text style={{ fontSize: fontSize.xsmall, color: coolNeutral[50], marginBottom: spacing.small }}>
+          <Text style={{ fontSize: fontSize.xsmall, color: semanticColor.textSecondary, marginBottom: spacing.small }}>
             메인 액션 하나만 크게 노출합니다. 결제, 가입 완료 등 핵심 전환 화면에 사용합니다.
           </Text>
           <DeviceFrame>
@@ -105,7 +105,7 @@ export const AllVariants: Story = {
         {/* Neutral */}
         <Col gap={spacing.small}>
           <StateLabel>NEUTRAL — 보조/메인 복합</StateLabel>
-          <Text style={{ fontSize: fontSize.xsmall, color: coolNeutral[50], marginBottom: spacing.small }}>
+          <Text style={{ fontSize: fontSize.xsmall, color: semanticColor.textSecondary, marginBottom: spacing.small }}>
             보조 버튼과 메인 버튼을 함께 노출합니다. 메인 버튼이 2:1 비율로 강조됩니다.
           </Text>
           <DeviceFrame>
@@ -123,7 +123,7 @@ export const AllVariants: Story = {
         {/* Compact */}
         <Col gap={spacing.small}>
           <StateLabel>COMPACT — 작은 크기 복합</StateLabel>
-          <Text style={{ fontSize: fontSize.xsmall, color: coolNeutral[50], marginBottom: spacing.small }}>
+          <Text style={{ fontSize: fontSize.xsmall, color: semanticColor.textSecondary, marginBottom: spacing.small }}>
             Medium 사이즈 버튼으로 공간을 절약합니다. 모달, 바텀시트 등에 적합합니다.
           </Text>
           <DeviceFrame>
@@ -189,7 +189,7 @@ export const States: Story = {
       <Row gap={spacing['2xlarge']} wrap align="flex-start">
         <Col gap={spacing.small}>
           <StateLabel>기본</StateLabel>
-          <View style={{ width: 320, backgroundColor: coolNeutral[99], borderRadius: radius.large, overflow: 'hidden' }}>
+          <View style={{ width: 320, backgroundColor: semanticColor.backgroundSecondary, borderRadius: radius.large, overflow: 'hidden' }}>
             <ActionArea
               variant="neutral"
               primary={{ label: '확인' }}
@@ -200,7 +200,7 @@ export const States: Story = {
         </Col>
         <Col gap={spacing.small}>
           <StateLabel>메인 버튼 비활성화</StateLabel>
-          <View style={{ width: 320, backgroundColor: coolNeutral[99], borderRadius: radius.large, overflow: 'hidden' }}>
+          <View style={{ width: 320, backgroundColor: semanticColor.backgroundSecondary, borderRadius: radius.large, overflow: 'hidden' }}>
             <ActionArea
               variant="neutral"
               primary={{ label: '확인', disabled: true }}
@@ -211,7 +211,7 @@ export const States: Story = {
         </Col>
         <Col gap={spacing.small}>
           <StateLabel>메인 버튼 로딩</StateLabel>
-          <View style={{ width: 320, backgroundColor: coolNeutral[99], borderRadius: radius.large, overflow: 'hidden' }}>
+          <View style={{ width: 320, backgroundColor: semanticColor.backgroundSecondary, borderRadius: radius.large, overflow: 'hidden' }}>
             <ActionArea
               variant="neutral"
               primary={{ label: '확인', loading: true }}
@@ -238,7 +238,7 @@ export const Options: Story = {
       <Row gap={spacing['2xlarge']} wrap align="flex-start">
         <Col gap={spacing.small}>
           <StateLabel>구분선 있음 (기본)</StateLabel>
-          <View style={{ width: 320, backgroundColor: coolNeutral[99], borderRadius: radius.large, overflow: 'hidden' }}>
+          <View style={{ width: 320, backgroundColor: semanticColor.backgroundSecondary, borderRadius: radius.large, overflow: 'hidden' }}>
             <View style={{ height: 40 }} />
             <ActionArea
               variant="strong"
@@ -249,7 +249,7 @@ export const Options: Story = {
         </Col>
         <Col gap={spacing.small}>
           <StateLabel>구분선 없음</StateLabel>
-          <View style={{ width: 320, backgroundColor: coolNeutral[99], borderRadius: radius.large, overflow: 'hidden' }}>
+          <View style={{ width: 320, backgroundColor: semanticColor.backgroundSecondary, borderRadius: radius.large, overflow: 'hidden' }}>
             <View style={{ height: 40 }} />
             <ActionArea
               variant="strong"
@@ -260,7 +260,7 @@ export const Options: Story = {
         </Col>
         <Col gap={spacing.small}>
           <StateLabel>투명 배경</StateLabel>
-          <View style={{ width: 320, backgroundColor: coolNeutral[97], borderRadius: radius.large, overflow: 'hidden' }}>
+          <View style={{ width: 320, backgroundColor: semanticColor.backgroundTertiary, borderRadius: radius.large, overflow: 'hidden' }}>
             <View style={{ height: 40 }} />
             <ActionArea
               variant="strong"

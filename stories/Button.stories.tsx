@@ -3,7 +3,7 @@ import { View } from 'react-native';
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import { Button } from '../src/components/Button';
 import { Section, StateLabel, Row, Col, SpecTable, CodeBlock, CompareGrid, Divider } from './storyHelpers';
-import { coolNeutral, mint, fontSize, fontWeight, spacing, radius, buttonToken, chipToken } from '../src/tokens/theme';
+import { coolNeutral, mint, fontSize, fontWeight, spacing, radius, buttonToken } from '../src/tokens/theme';
 
 const meta: Meta<typeof Button> = {
   title: 'General/Button',
@@ -59,64 +59,56 @@ export const AllVariants: Story = {
       >
         {/* Header */}
         <Row gap={spacing['4xlarge']} align="flex-start">
-          <View style={{ width: 200 }} />
-          <View style={{ width: 140, alignItems: 'center' }}>
-            <StateLabel>Primary</StateLabel>
+          <View style={{ width: 120 }} />
+          <View style={{ width: 100, alignItems: 'center' }}>
+            <StateLabel>Solid</StateLabel>
           </View>
-          <View style={{ width: 140, alignItems: 'center' }}>
+          <View style={{ width: 100, alignItems: 'center' }}>
+            <StateLabel>Assistive</StateLabel>
+          </View>
+          <View style={{ width: 100, alignItems: 'center' }}>
+            <StateLabel>Outlined</StateLabel>
+          </View>
+          <View style={{ width: 100, alignItems: 'center' }}>
             <StateLabel>Assistive</StateLabel>
           </View>
         </Row>
 
         <View style={{ gap: spacing.xlarge, marginTop: spacing.large }}>
-          {/* Solid */}
+          {/* 활성화 */}
           <Row gap={spacing['4xlarge']} align="center">
-            <View style={{ width: 200 }}>
-              <StateLabel>Solid</StateLabel>
+            <View style={{ width: 120 }}>
+              <StateLabel>활성화</StateLabel>
             </View>
-            <View style={{ width: 140, alignItems: 'center' }}>
+            <View style={{ width: 100, alignItems: 'center' }}>
               <Button label="확인" variant="solid" color="primary" />
             </View>
-            <View style={{ width: 140, alignItems: 'center' }}>
+            <View style={{ width: 100, alignItems: 'center' }}>
               <Button label="확인" variant="solid" color="assistive" />
             </View>
-          </Row>
-
-          {/* Solid Disabled */}
-          <Row gap={spacing['4xlarge']} align="center">
-            <View style={{ width: 200 }}>
-              <StateLabel>Solid (비활성화)</StateLabel>
-            </View>
-            <View style={{ width: 140, alignItems: 'center' }}>
-              <Button label="확인" variant="solid" color="primary" disabled />
-            </View>
-            <View style={{ width: 140, alignItems: 'center' }}>
-              <Button label="확인" variant="solid" color="assistive" disabled />
-            </View>
-          </Row>
-
-          {/* Outlined */}
-          <Row gap={spacing['4xlarge']} align="center">
-            <View style={{ width: 200 }}>
-              <StateLabel>Outlined</StateLabel>
-            </View>
-            <View style={{ width: 140, alignItems: 'center' }}>
+            <View style={{ width: 100, alignItems: 'center' }}>
               <Button label="확인" variant="outlined" color="primary" />
             </View>
-            <View style={{ width: 140, alignItems: 'center' }}>
+            <View style={{ width: 100, alignItems: 'center' }}>
               <Button label="확인" variant="outlined" color="assistive" />
             </View>
           </Row>
 
-          {/* Outlined Disabled */}
+          {/* 비활성화 */}
           <Row gap={spacing['4xlarge']} align="center">
-            <View style={{ width: 200 }}>
-              <StateLabel>Outlined (비활성화)</StateLabel>
+            <View style={{ width: 120 }}>
+              <StateLabel>비활성화</StateLabel>
             </View>
-            <View style={{ width: 140, alignItems: 'center' }}>
+            <View style={{ width: 100, alignItems: 'center' }}>
+              <Button label="확인" variant="solid" color="primary" disabled />
+            </View>
+            <View style={{ width: 100, alignItems: 'center' }}>
+              <Button label="확인" variant="solid" color="assistive" disabled />
+            </View>
+            <View style={{ width: 100, alignItems: 'center' }}>
               <Button label="확인" variant="outlined" color="primary" disabled />
             </View>
-            <View style={{ width: 140, alignItems: 'center' }}>
+            <View style={{ width: 100, alignItems: 'center' }}>
               <Button label="확인" variant="outlined" color="assistive" disabled />
             </View>
           </Row>
@@ -209,14 +201,14 @@ export const DesignSpec: Story = {
         title="디자인 스펙"
         description="디자이너와 개발자를 위한 버튼 토큰 상세 스펙입니다."
       >
-        {/* Size specs */}
         <SpecTable
           title="Small (36px)"
           rows={[
             { label: '높이', value: `${buttonToken.size.small.height}px`, token: 'buttonToken.size.small.height' },
             { label: '좌우 패딩', value: `${buttonToken.size.small.paddingHorizontal}px`, token: 'buttonToken.size.small.paddingHorizontal' },
-            { label: '폰트 스타일', value: `Label 2 (${buttonToken.size.small.fontSize}px)`, token: 'textStyle.label2' },
+            { label: '폰트 스타일', value: 'textStyle.label2 (13px)', token: 'textStyle.label2' },
             { label: '모서리 반경', value: `${buttonToken.size.small.radius}px`, token: 'radius.small' },
+
           ]}
         />
 
@@ -225,8 +217,9 @@ export const DesignSpec: Story = {
           rows={[
             { label: '높이', value: `${buttonToken.size.medium.height}px`, token: 'buttonToken.size.medium.height' },
             { label: '좌우 패딩', value: `${buttonToken.size.medium.paddingHorizontal}px`, token: 'buttonToken.size.medium.paddingHorizontal' },
-            { label: '폰트 스타일', value: `Body 2 (${buttonToken.size.medium.fontSize}px)`, token: 'textStyle.body2' },
+            { label: '폰트 스타일', value: 'textStyle.body2 (15px)', token: 'textStyle.body2' },
             { label: '모서리 반경', value: `${buttonToken.size.medium.radius}px`, token: 'radius.medium' },
+
           ]}
         />
 
@@ -235,57 +228,55 @@ export const DesignSpec: Story = {
           rows={[
             { label: '높이', value: `${buttonToken.size.large.height}px`, token: 'buttonToken.size.large.height' },
             { label: '좌우 패딩', value: `${buttonToken.size.large.paddingHorizontal}px`, token: 'buttonToken.size.large.paddingHorizontal' },
-            { label: '폰트 스타일', value: `Headline (${buttonToken.size.large.fontSize}px)`, token: 'textStyle.headline' },
+            { label: '폰트 스타일', value: 'textStyle.headline (17px)', token: 'textStyle.headline' },
             { label: '모서리 반경', value: `${buttonToken.size.large.radius}px`, token: 'radius.medium' },
+
           ]}
         />
 
         <Divider />
 
-        {/* Color specs — Primary Solid */}
         <SpecTable
           title="Primary Solid 컬러"
           rows={[
-            { label: '배경색', value: mint[45], token: 'mint[45]' },
-            { label: '텍스트 색상', value: '#FFFFFF', token: 'coolNeutral[100]' },
+            { label: '배경색', value: mint[45], token: 'semanticColor.backgroundBrand' },
+            { label: '텍스트 색상', value: '#FFFFFF', token: 'semanticColor.textOnColor' },
             { label: '눌림 배경', value: mint[30], token: 'mint[30]' },
-            { label: '비활성화 배경', value: coolNeutral[96], token: 'coolNeutral[96]' },
-            { label: '비활성화 텍스트', value: coolNeutral[80], token: 'coolNeutral[80]' },
+            { label: '비활성화 배경', value: coolNeutral[96], token: 'semanticColor.backgroundDisabled' },
+            { label: '비활성화 텍스트', value: coolNeutral[80], token: 'semanticColor.textTertiary' },
           ]}
         />
 
-        {/* Color specs — Primary Outlined */}
         <SpecTable
           title="Primary Outlined 컬러"
           rows={[
-            { label: '배경색', value: 'transparent', token: "— (transparent)" },
-            { label: '텍스트 색상', value: mint[45], token: 'mint[45]' },
-            { label: '테두리 색상', value: mint[45], token: 'mint[45]' },
-            { label: '비활성화 텍스트', value: coolNeutral[80], token: 'coolNeutral[80]' },
-            { label: '비활성화 테두리', value: coolNeutral[96], token: 'coolNeutral[96]' },
+            { label: '배경색', value: 'transparent', token: '— (transparent)' },
+            { label: '텍스트 색상', value: mint[45], token: 'semanticColor.textBrand' },
+            { label: '테두리 색상', value: mint[45], token: 'semanticColor.borderFocus' },
+            { label: '비활성화 텍스트', value: coolNeutral[80], token: 'semanticColor.textTertiary' },
+            { label: '비활성화 테두리', value: coolNeutral[96], token: 'semanticColor.borderDefault' },
           ]}
         />
 
-        {/* Color specs — Assistive Solid */}
         <SpecTable
           title="Assistive Solid 컬러"
           rows={[
-            { label: '배경색', value: coolNeutral[97], token: 'coolNeutral[97]' },
-            { label: '텍스트 색상', value: coolNeutral[17], token: 'coolNeutral[17]' },
+            { label: '배경색', value: coolNeutral[96], token: 'semanticColor.backgroundDisabled' },
+            { label: '텍스트 색상', value: coolNeutral[17], token: 'semanticColor.textPrimary' },
             { label: '눌림 배경', value: coolNeutral[90], token: 'coolNeutral[90]' },
-            { label: '비활성화 텍스트', value: coolNeutral[80], token: 'coolNeutral[80]' },
+            { label: '비활성화 배경', value: coolNeutral[96], token: 'semanticColor.backgroundDisabled' },
+            { label: '비활성화 텍스트', value: coolNeutral[80], token: 'semanticColor.textTertiary' },
           ]}
         />
 
-        {/* Color specs — Assistive Outlined */}
         <SpecTable
           title="Assistive Outlined 컬러"
           rows={[
-            { label: '배경색', value: 'transparent', token: "— (transparent)" },
-            { label: '텍스트 색상', value: coolNeutral[40], token: 'coolNeutral[40]' },
-            { label: '테두리 색상', value: coolNeutral[90], token: 'coolNeutral[90]' },
-            { label: '비활성화 텍스트', value: coolNeutral[80], token: 'coolNeutral[80]' },
-            { label: '비활성화 테두리', value: coolNeutral[96], token: 'coolNeutral[96]' },
+            { label: '배경색', value: 'transparent', token: '— (transparent)' },
+            { label: '텍스트 색상', value: coolNeutral[17], token: 'semanticColor.textPrimary' },
+            { label: '테두리 색상', value: coolNeutral[90], token: 'semanticColor.borderActive' },
+            { label: '비활성화 텍스트', value: coolNeutral[80], token: 'semanticColor.textTertiary' },
+            { label: '비활성화 테두리', value: coolNeutral[96], token: 'semanticColor.borderDefault' },
           ]}
         />
       </Section>
@@ -325,6 +316,7 @@ export const Usage: Story = {
   onPress={handleSave}
 />`}
         />
+
       </Section>
     </View>
   ),

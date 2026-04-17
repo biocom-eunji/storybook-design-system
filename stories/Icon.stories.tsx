@@ -16,6 +16,7 @@ import {
   fontWeight,
   spacing,
   radius,
+  semanticColor,
 } from '../src/tokens/theme';
 
 // ─── Meta ────────────────────────────────────────────────
@@ -106,7 +107,7 @@ const IconGrid = ({ names, iconStyle }: { names: string[]; iconStyle: IconStyle 
 
   if (names.length === 0) {
     return (
-      <Text style={{ fontSize: fontSize.small, color: coolNeutral[70], paddingVertical: spacing['2xlarge'] }}>
+      <Text style={{ fontSize: fontSize.small, color: semanticColor.textSecondary, paddingVertical: spacing['2xlarge'] }}>
         검색 결과가 없습니다.
       </Text>
     );
@@ -205,12 +206,12 @@ export const AllIcons: Story = {
 
         {/* Search */}
         <View style={styles.searchWrap}>
-          <Icon name="magnifying-glass" size={16} color={coolNeutral[70]} />
+          <Icon name="magnifying-glass" size={16} color={semanticColor.iconSecondary} />
           <TextInput
             value={query}
             onChangeText={setQuery}
             placeholder="아이콘 이름으로 검색..."
-            placeholderTextColor={coolNeutral[80]}
+            placeholderTextColor={semanticColor.textTertiary}
             style={styles.searchInput}
           />
           {query.length > 0 && (
@@ -243,8 +244,8 @@ export const AllIcons: Story = {
 
         {total === 0 && q.length > 0 && (
           <View style={styles.emptyState}>
-            <Text style={{ fontSize: fontSize.large, color: coolNeutral[80], marginBottom: spacing.small }}>검색 결과 없음</Text>
-            <Text style={{ fontSize: fontSize.small, color: coolNeutral[70] }}>
+            <Text style={{ fontSize: fontSize.large, color: semanticColor.textTertiary, marginBottom: spacing.small }}>검색 결과 없음</Text>
+            <Text style={{ fontSize: fontSize.small, color: semanticColor.textSecondary }}>
               "{query}"에 해당하는 아이콘이 없습니다.
             </Text>
           </View>
@@ -273,13 +274,13 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     gap: spacing.small,
     borderRadius: radius.medium,
-    backgroundColor: coolNeutral[99],
+    backgroundColor: semanticColor.backgroundSecondary,
     borderWidth: 1,
     borderColor: 'transparent',
     cursor: 'pointer' as any,
   },
   cardPressed: {
-    backgroundColor: coolNeutral[97],
+    backgroundColor: semanticColor.backgroundTertiary,
     transform: [{ scale: 0.96 }],
   },
   cardCopied: {
@@ -294,13 +295,13 @@ const styles = StyleSheet.create({
   cardName: {
     fontSize: fontSize.xsmall,
     fontWeight: fontWeight.medium,
-    color: coolNeutral[50],
+    color: semanticColor.textSecondary,
     textAlign: 'center',
   },
   copiedText: {
     fontSize: fontSize.xsmall,
     fontWeight: fontWeight.semibold,
-    color: mint[45],
+    color: semanticColor.textBrand,
     textAlign: 'center',
   },
 
@@ -317,18 +318,18 @@ const styles = StyleSheet.create({
   sectionTitle: {
     fontSize: fontSize.large,
     fontWeight: fontWeight.bold,
-    color: coolNeutral[17],
+    color: semanticColor.textPrimary,
   },
   sectionDesc: {
     fontSize: fontSize.small,
-    color: coolNeutral[50],
+    color: semanticColor.textSecondary,
     marginBottom: spacing.small,
   },
   usageHint: {
     fontSize: fontSize.xsmall,
     fontFamily: 'monospace',
-    color: coolNeutral[70],
-    backgroundColor: coolNeutral[99],
+    color: semanticColor.textSecondary,
+    backgroundColor: semanticColor.backgroundSecondary,
     paddingVertical: spacing.xsmall,
     paddingHorizontal: spacing.small,
     borderRadius: radius.xsmall,
@@ -348,7 +349,7 @@ const styles = StyleSheet.create({
   },
   divider: {
     height: 1,
-    backgroundColor: coolNeutral[96],
+    backgroundColor: semanticColor.borderDefault,
     marginBottom: spacing['3xlarge'],
   },
 
@@ -365,7 +366,7 @@ const styles = StyleSheet.create({
   },
   gallerySubtitle: {
     fontSize: fontSize.medium,
-    color: coolNeutral[50],
+    color: semanticColor.textSecondary,
   },
 
   // Search
@@ -373,7 +374,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     gap: spacing.small,
-    backgroundColor: coolNeutral[99],
+    backgroundColor: semanticColor.backgroundSecondary,
     borderWidth: 1,
     borderColor: coolNeutral[95],
     borderRadius: radius.medium,
@@ -384,13 +385,13 @@ const styles = StyleSheet.create({
   searchInput: {
     flex: 1,
     fontSize: fontSize.medium,
-    color: coolNeutral[17],
+    color: semanticColor.textPrimary,
     outlineStyle: 'none' as any,
   },
   resultCount: {
     fontSize: fontSize.small,
     fontWeight: fontWeight.medium,
-    color: coolNeutral[50],
+    color: semanticColor.textSecondary,
     marginBottom: spacing.large,
   },
 

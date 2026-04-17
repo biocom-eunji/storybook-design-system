@@ -3,7 +3,7 @@ import { View, Text, Pressable } from 'react-native';
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import { ProgressBar } from '../src/components/ProgressBar';
 import { Section, StateLabel, Row, Col, SpecTable, CodeBlock, Divider } from './storyHelpers';
-import { coolNeutral, mint, green, red, yellow, fontSize, fontWeight, spacing, radius } from '../src/tokens/theme';
+import { coolNeutral, mint, green, red, yellow, fontSize, fontWeight, spacing, radius, semanticColor } from '../src/tokens/theme';
 
 const meta: Meta<typeof ProgressBar> = {
   title: 'Feedback/ProgressBar',
@@ -159,7 +159,7 @@ export const Interactive: Story = {
                   key={val}
                   onPress={() => setProgress(val)}
                   style={{
-                    backgroundColor: progress === val ? mint[45] : coolNeutral[97],
+                    backgroundColor: progress === val ? semanticColor.backgroundBrand : semanticColor.backgroundTertiary,
                     paddingHorizontal: spacing.medium,
                     paddingVertical: spacing.small,
                     borderRadius: radius.small,
@@ -169,7 +169,7 @@ export const Interactive: Story = {
                     style={{
                       fontSize: fontSize.small,
                       fontWeight: fontWeight.semibold,
-                      color: progress === val ? '#FFFFFF' : coolNeutral[40],
+                      color: progress === val ? semanticColor.textOnColor : semanticColor.textQuaternary,
                     }}
                   >
                     {Math.round(val * 100)}%

@@ -3,7 +3,7 @@ import { View, Text } from 'react-native';
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import { TabBar, BIOCOM_TABS } from '../src/components/TabBar';
 import { Section, StateLabel, Col, SpecTable, CodeBlock, Divider } from './storyHelpers';
-import { coolNeutral, mint, fontSize, fontWeight, spacing, radius, semanticColor } from '../src/tokens/theme';
+import { fontSize, fontWeight, spacing, radius, semanticColor } from '../src/tokens/theme';
 
 const meta: Meta<typeof TabBar> = {
   title: 'Navigation/TabBar',
@@ -23,7 +23,7 @@ type Story = StoryObj<typeof TabBar>;
 
 const PreviewContainer = ({ children }: { children: React.ReactNode }) => (
   <View style={{
-    backgroundColor: coolNeutral[99],
+    backgroundColor: semanticColor.backgroundSecondary,
     paddingTop: spacing['3xlarge'],
     borderRadius: radius.medium,
     overflow: 'hidden',
@@ -68,7 +68,7 @@ export const BiocomTabBar: Story = {
           />
         </PreviewContainer>
         <View style={{ marginTop: spacing.medium }}>
-          <Text style={{ fontSize: fontSize.small, color: coolNeutral[50] }}>
+          <Text style={{ fontSize: fontSize.small, color: semanticColor.textSecondary }}>
             현재 활성 탭: <Text style={{ fontWeight: fontWeight.bold, color: semanticColor.textBrand }}>{activeTab}</Text>
           </Text>
         </View>

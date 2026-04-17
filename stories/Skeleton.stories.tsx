@@ -3,7 +3,7 @@ import { View, Text } from 'react-native';
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import { Skeleton } from '../src/components/Skeleton';
 import { Section, StateLabel, Row, Col, SpecTable, CodeBlock, CompareGrid, Divider } from './storyHelpers';
-import { coolNeutral, mint, fontSize, fontWeight, spacing, radius } from '../src/tokens/theme';
+import { coolNeutral, fontSize, fontWeight, spacing, radius, semanticColor } from '../src/tokens/theme';
 
 const meta: Meta<typeof Skeleton> = {
   title: 'Feedback/Skeleton',
@@ -143,7 +143,7 @@ export const CardExample: Story = {
                     padding: spacing.large,
                     borderRadius: radius.medium,
                     borderWidth: 1,
-                    borderColor: coolNeutral[96],
+                    borderColor: semanticColor.borderDefault,
                     width: 260,
                     gap: spacing.medium,
                   }}
@@ -167,7 +167,7 @@ export const CardExample: Story = {
                   style={{
                     borderRadius: radius.medium,
                     borderWidth: 1,
-                    borderColor: coolNeutral[96],
+                    borderColor: semanticColor.borderDefault,
                     width: 260,
                     overflow: 'hidden',
                   }}

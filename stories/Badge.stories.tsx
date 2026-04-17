@@ -189,11 +189,11 @@ export const WrappingExample: Story = {
               width: 48,
               height: 48,
               borderRadius: radius.medium,
-              backgroundColor: coolNeutral[97],
+              backgroundColor: semanticColor.backgroundTertiary,
               alignItems: 'center',
               justifyContent: 'center',
             }}>
-              <Text style={{ fontSize: fontSize.xlarge, color: coolNeutral[50] }}>A</Text>
+              <Text style={{ fontSize: fontSize.xlarge, color: semanticColor.textSecondary }}>A</Text>
             </View>
           </Badge>
         </Col>
@@ -205,11 +205,11 @@ export const WrappingExample: Story = {
               width: 48,
               height: 48,
               borderRadius: radius.medium,
-              backgroundColor: coolNeutral[97],
+              backgroundColor: semanticColor.backgroundTertiary,
               alignItems: 'center',
               justifyContent: 'center',
             }}>
-              <Text style={{ fontSize: fontSize.xlarge, color: coolNeutral[50] }}>B</Text>
+              <Text style={{ fontSize: fontSize.xlarge, color: semanticColor.textSecondary }}>B</Text>
             </View>
           </Badge>
         </Col>
@@ -221,11 +221,11 @@ export const WrappingExample: Story = {
               width: 48,
               height: 48,
               borderRadius: radius.medium,
-              backgroundColor: coolNeutral[97],
+              backgroundColor: semanticColor.backgroundTertiary,
               alignItems: 'center',
               justifyContent: 'center',
             }}>
-              <Text style={{ fontSize: fontSize.xlarge, color: coolNeutral[50] }}>C</Text>
+              <Text style={{ fontSize: fontSize.xlarge, color: semanticColor.textSecondary }}>C</Text>
             </View>
           </Badge>
         </Col>
@@ -237,11 +237,11 @@ export const WrappingExample: Story = {
               width: 48,
               height: 48,
               borderRadius: radius.medium,
-              backgroundColor: coolNeutral[97],
+              backgroundColor: semanticColor.backgroundTertiary,
               alignItems: 'center',
               justifyContent: 'center',
             }}>
-              <Text style={{ fontSize: fontSize.xlarge, color: coolNeutral[50] }}>D</Text>
+              <Text style={{ fontSize: fontSize.xlarge, color: semanticColor.textSecondary }}>D</Text>
             </View>
           </Badge>
         </Col>

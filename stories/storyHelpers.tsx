@@ -1,8 +1,7 @@
 import React, { useState } from 'react';
 import { View, Text, Pressable, StyleSheet } from 'react-native';
 import {
-  coolNeutral, mint,
-  fontSize, fontWeight, spacing, radius,
+  fontSize, fontWeight, spacing, radius, semanticColor,
 } from '../src/tokens/theme';
 
 // ─── Section ─────────────────────────────────────────────
@@ -90,8 +89,8 @@ export const SpecTable = ({
               <View style={{
                 width: 14, height: 14, borderRadius: 3,
                 backgroundColor: row.value,
-                borderWidth: row.value === '#FFFFFF' ? 1 : 0,
-                borderColor: coolNeutral[90],
+                borderWidth: row.value === semanticColor.textOnColor ? 1 : 0,
+                borderColor: semanticColor.borderActive,
                 marginTop: 2,
                 flexShrink: 0,
               }} />
@@ -112,9 +111,9 @@ export const ColorChip = ({ color, label }: { color: string; label?: string }) =
     <View style={{
       width: 20, height: 20, borderRadius: 4,
       backgroundColor: color,
-      borderWidth: 1, borderColor: coolNeutral[95],
+      borderWidth: 1, borderColor: semanticColor.borderDefault,
     }} />
-    <Text style={{ fontSize: fontSize.xsmall, fontFamily: 'monospace', color: coolNeutral[40] }}>
+    <Text style={{ fontSize: fontSize.xsmall, fontFamily: 'monospace', color: semanticColor.textQuaternary }}>
       {label || color}
     </Text>
   </View>
@@ -211,11 +210,11 @@ const h = StyleSheet.create({
   sectionTitle: {
     fontSize: fontSize.xlarge,
     fontWeight: fontWeight.bold,
-    color: coolNeutral[10],
+    color: semanticColor.textPrimary,
   },
   sectionDesc: {
     fontSize: fontSize.small,
-    color: coolNeutral[50],
+    color: semanticColor.textSecondary,
     lineHeight: 20,
     marginBottom: spacing.xlarge,
   },
@@ -224,7 +223,7 @@ const h = StyleSheet.create({
   stateLabel: {
     fontSize: fontSize.xsmall,
     fontWeight: fontWeight.semibold,
-    color: coolNeutral[50],
+    color: semanticColor.textSecondary,
     letterSpacing: 0.3,
     marginBottom: 2,
   },
@@ -236,13 +235,13 @@ const h = StyleSheet.create({
   specTitle: {
     fontSize: fontSize.small,
     fontWeight: fontWeight.bold,
-    color: coolNeutral[17],
+    color: semanticColor.textPrimary,
     marginBottom: spacing.small,
   },
   specTable: {
     borderRadius: radius.medium,
     borderWidth: 1,
-    borderColor: coolNeutral[95],
+    borderColor: semanticColor.borderDefault,
     overflow: 'hidden',
     minWidth: 700,
   },
@@ -255,27 +254,27 @@ const h = StyleSheet.create({
     gap: spacing.medium,
   },
   specRowAlt: {
-    backgroundColor: coolNeutral[99],
+    backgroundColor: semanticColor.backgroundSecondary,
   },
   specHeader: {
-    backgroundColor: coolNeutral[97],
+    backgroundColor: semanticColor.backgroundTertiary,
     borderBottomWidth: 1,
-    borderBottomColor: coolNeutral[95],
+    borderBottomColor: semanticColor.borderDefault,
     minHeight: 36,
     alignItems: 'center',
   },
   specHeaderText: {
     fontSize: fontSize.xsmall,
     fontWeight: fontWeight.bold,
-    color: coolNeutral[40],
+    color: semanticColor.textQuaternary,
   },
   specCell: {
     fontSize: fontSize.small,
-    color: coolNeutral[50],
+    color: semanticColor.textSecondary,
     flexShrink: 1,
   },
   specLabelCell: {
-    color: coolNeutral[17],
+    color: semanticColor.textPrimary,
     fontWeight: fontWeight.medium,
   },
   specMono: {
@@ -284,7 +283,7 @@ const h = StyleSheet.create({
     flexShrink: 1,
   },
   specTokenCell: {
-    color: mint[40],
+    color: semanticColor.textBrand,
   },
 
   // Code Block
@@ -294,11 +293,11 @@ const h = StyleSheet.create({
   codeTitle: {
     fontSize: fontSize.xsmall,
     fontWeight: fontWeight.semibold,
-    color: coolNeutral[40],
+    color: semanticColor.textQuaternary,
     marginBottom: spacing.xsmall,
   },
   codeBlock: {
-    backgroundColor: coolNeutral[7],
+    backgroundColor: semanticColor.backgroundInverse,
     borderRadius: radius.medium,
     paddingVertical: spacing.large,
     paddingHorizontal: spacing.xlarge,
@@ -313,7 +312,7 @@ const h = StyleSheet.create({
   codeText: {
     fontSize: fontSize.small,
     fontFamily: 'monospace',
-    color: mint[80],
+    color: semanticColor.textAction,
     lineHeight: 22,
     flex: 1,
   },
@@ -327,10 +326,10 @@ const h = StyleSheet.create({
   codeCopy: {
     fontSize: fontSize.xsmall,
     fontWeight: fontWeight.medium,
-    color: coolNeutral[60],
+    color: semanticColor.textSecondary,
   },
   codeCopied: {
-    color: mint[45],
+    color: semanticColor.textBrand,
     fontWeight: fontWeight.semibold,
   },
 
@@ -351,7 +350,7 @@ const h = StyleSheet.create({
   // Divider
   divider: {
     height: 1,
-    backgroundColor: coolNeutral[96],
+    backgroundColor: semanticColor.borderDefault,
     marginVertical: spacing['2xlarge'],
   },
 });

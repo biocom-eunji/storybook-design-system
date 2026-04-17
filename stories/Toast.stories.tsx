@@ -3,7 +3,7 @@ import { View, Text, Pressable } from 'react-native';
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import { Toast } from '../src/components/Toast';
 import { Section, StateLabel, Row, Col, SpecTable, CodeBlock, Divider } from './storyHelpers';
-import { coolNeutral, mint, red, yellow, fontSize, fontWeight, spacing, radius } from '../src/tokens/theme';
+import { coolNeutral, mint, red, yellow, fontSize, fontWeight, spacing, radius, semanticColor } from '../src/tokens/theme';
 
 const meta: Meta<typeof Toast> = {
   title: 'Feedback/Toast',
@@ -40,14 +40,14 @@ export const Playground: Story = {
         <Pressable
           onPress={() => setVisible(true)}
           style={{
-            backgroundColor: mint[45],
+            backgroundColor: semanticColor.backgroundBrand,
             paddingHorizontal: spacing.xlarge,
             paddingVertical: spacing.medium,
             borderRadius: radius.medium,
             alignSelf: 'flex-start',
           }}
         >
-          <Text style={{ color: '#FFFFFF', fontSize: fontSize.small, fontWeight: fontWeight.semibold }}>
+          <Text style={{ color: semanticColor.textOnColor, fontSize: fontSize.small, fontWeight: fontWeight.semibold }}>
             토스트 표시
           </Text>
         </Pressable>
@@ -77,19 +77,19 @@ export const Variants: Story = {
         <View style={{ gap: spacing['2xlarge'] }}>
           <Col gap={spacing.small}>
             <StateLabel>SUCCESS (성공)</StateLabel>
-            <View style={{ height: 100, position: 'relative', backgroundColor: coolNeutral[99], borderRadius: radius.small }}>
+            <View style={{ height: 100, position: 'relative', backgroundColor: semanticColor.backgroundSecondary, borderRadius: radius.small }}>
               <Toast message="메시지에 마침표를 찍어요." variant="success" visible position="bottom" />
             </View>
           </Col>
           <Col gap={spacing.small}>
             <StateLabel>WARNING (경고)</StateLabel>
-            <View style={{ height: 100, position: 'relative', backgroundColor: coolNeutral[99], borderRadius: radius.small }}>
+            <View style={{ height: 100, position: 'relative', backgroundColor: semanticColor.backgroundSecondary, borderRadius: radius.small }}>
               <Toast message="메시지에 마침표를 찍어요." variant="warning" visible position="bottom" />
             </View>
           </Col>
           <Col gap={spacing.small}>
             <StateLabel>ERROR (에러)</StateLabel>
-            <View style={{ height: 100, position: 'relative', backgroundColor: coolNeutral[99], borderRadius: radius.small }}>
+            <View style={{ height: 100, position: 'relative', backgroundColor: semanticColor.backgroundSecondary, borderRadius: radius.small }}>
               <Toast message="메시지에 마침표를 찍어요." variant="error" visible position="bottom" />
             </View>
           </Col>
@@ -112,7 +112,7 @@ export const WithAction: Story = {
         <View style={{ gap: spacing.large }}>
           <Col gap={spacing.small}>
             <StateLabel>실행 취소</StateLabel>
-            <View style={{ height: 100, position: 'relative', backgroundColor: coolNeutral[99], borderRadius: radius.small }}>
+            <View style={{ height: 100, position: 'relative', backgroundColor: semanticColor.backgroundSecondary, borderRadius: radius.small }}>
               <Toast
                 message="항목이 삭제되었습니다."
                 variant="success"
@@ -123,7 +123,7 @@ export const WithAction: Story = {
           </Col>
           <Col gap={spacing.small}>
             <StateLabel>다시 시도</StateLabel>
-            <View style={{ height: 100, position: 'relative', backgroundColor: coolNeutral[99], borderRadius: radius.small }}>
+            <View style={{ height: 100, position: 'relative', backgroundColor: semanticColor.backgroundSecondary, borderRadius: radius.small }}>
               <Toast
                 message="전송에 실패했습니다."
                 variant="error"
@@ -156,21 +156,21 @@ export const Interactive: Story = {
         <Row gap={spacing.small} wrap>
           <Pressable
             onPress={() => show('success')}
-            style={{ backgroundColor: mint[45], paddingHorizontal: spacing.large, paddingVertical: spacing.small, borderRadius: radius.small }}
+            style={{ backgroundColor: semanticColor.backgroundBrand, paddingHorizontal: spacing.large, paddingVertical: spacing.small, borderRadius: radius.small }}
           >
-            <Text style={{ color: '#FFFFFF', fontSize: fontSize.small, fontWeight: fontWeight.semibold }}>성공</Text>
+            <Text style={{ color: semanticColor.textOnColor, fontSize: fontSize.small, fontWeight: fontWeight.semibold }}>성공</Text>
           </Pressable>
           <Pressable
             onPress={() => show('warning')}
-            style={{ backgroundColor: yellow[50], paddingHorizontal: spacing.large, paddingVertical: spacing.small, borderRadius: radius.small }}
+            style={{ backgroundColor: semanticColor.backgroundWarning, paddingHorizontal: spacing.large, paddingVertical: spacing.small, borderRadius: radius.small }}
           >
-            <Text style={{ color: '#FFFFFF', fontSize: fontSize.small, fontWeight: fontWeight.semibold }}>경고</Text>
+            <Text style={{ color: semanticColor.textOnColor, fontSize: fontSize.small, fontWeight: fontWeight.semibold }}>경고</Text>
           </Pressable>
           <Pressable
             onPress={() => show('error')}
-            style={{ backgroundColor: red[70], paddingHorizontal: spacing.large, paddingVertical: spacing.small, borderRadius: radius.small }}
+            style={{ backgroundColor: semanticColor.backgroundError, paddingHorizontal: spacing.large, paddingVertical: spacing.small, borderRadius: radius.small }}
           >
-            <Text style={{ color: '#FFFFFF', fontSize: fontSize.small, fontWeight: fontWeight.semibold }}>에러</Text>
+            <Text style={{ color: semanticColor.textOnColor, fontSize: fontSize.small, fontWeight: fontWeight.semibold }}>에러</Text>
           </Pressable>
         </Row>
         <View style={{ height: 100, position: 'relative', marginTop: spacing.large }}>

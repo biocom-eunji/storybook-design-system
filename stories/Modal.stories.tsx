@@ -20,7 +20,7 @@ export default meta;
 type Story = StoryObj<typeof Modal>;
 
 const PreviewContainer = ({ children }: { children: React.ReactNode }) => (
-  <View style={{ height: 400, backgroundColor: coolNeutral[99], position: 'relative', overflow: 'hidden', borderRadius: radius.medium, justifyContent: 'center', alignItems: 'center' }}>
+  <View style={{ height: 400, backgroundColor: semanticColor.backgroundSecondary, position: 'relative', overflow: 'hidden', borderRadius: radius.medium, justifyContent: 'center', alignItems: 'center' }}>
     {children}
   </View>
 );
@@ -39,9 +39,9 @@ export const Playground: Story = {
       <View style={{ gap: spacing.large }}>
         <Pressable
           onPress={() => setVisible(true)}
-          style={{ backgroundColor: mint[45], paddingHorizontal: spacing.xlarge, paddingVertical: spacing.medium, borderRadius: radius.medium, alignSelf: 'flex-start' }}
+          style={{ backgroundColor: semanticColor.backgroundBrand, paddingHorizontal: spacing.xlarge, paddingVertical: spacing.medium, borderRadius: radius.medium, alignSelf: 'flex-start' }}
         >
-          <Text style={{ color: '#FFFFFF', fontSize: fontSize.medium, fontWeight: fontWeight.semibold }}>모달 열기</Text>
+          <Text style={{ color: semanticColor.textOnColor, fontSize: fontSize.medium, fontWeight: fontWeight.semibold }}>모달 열기</Text>
         </Pressable>
         <PreviewContainer>
           <Modal
@@ -118,18 +118,18 @@ export const CustomContent: Story = {
           secondaryAction={{ label: '취소', onPress: () => {} }}
         >
           <View style={{ gap: spacing.medium, marginTop: spacing.medium }}>
-            <Text style={{ fontSize: fontSize.small, color: coolNeutral[50], textAlign: 'center' }}>
+            <Text style={{ fontSize: fontSize.small, color: semanticColor.textSecondary, textAlign: 'center' }}>
               서비스 개선을 위해 의견을 보내주세요.
             </Text>
             <View style={{
               borderWidth: 1,
-              borderColor: coolNeutral[96],
+              borderColor: semanticColor.borderDefault,
               borderRadius: radius.small,
               padding: spacing.medium,
               minHeight: 80,
-              backgroundColor: coolNeutral[99],
+              backgroundColor: semanticColor.backgroundSecondary,
             }}>
-              <Text style={{ fontSize: fontSize.medium, color: coolNeutral[80] }}>의견을 입력하세요...</Text>
+              <Text style={{ fontSize: fontSize.medium, color: semanticColor.textTertiary }}>의견을 입력하세요...</Text>
             </View>
           </View>
         </Modal>
