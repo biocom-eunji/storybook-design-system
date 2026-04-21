@@ -1,246 +1,306 @@
 import React, { useState } from 'react';
-import { View, Text, Pressable } from 'react-native';
+import { View, Pressable, Text } from 'react-native';
 import type { Meta, StoryObj } from '@storybook/react-vite';
-import { Toast } from '../src/components/Toast';
-import { Section, StateLabel, Row, Col, SpecTable, CodeBlock, Divider } from './storyHelpers';
-import { coolNeutral, mint, red, yellow, fontSize, fontWeight, spacing, radius, semanticColor } from '../src/tokens/theme';
+import { Icon } from '../src/components/Icon';
+import {
+  Section, StateLabel, Row, Col, CodeBlock, CompareGrid, Divider,
+} from './storyHelpers';
+import { TokenSpecTable } from '../src/storybook-components/TokenSpecTable';
+import {
+  spacing, semanticColor, radius, opacity, textStyle, fontSize, fontWeight,
+} from '../src/tokens/theme';
 
-const meta: Meta<typeof Toast> = {
-  title: 'Feedback/Toast',
-  component: Toast,
-  argTypes: {
-    message: { control: 'text', description: '토스트 메시지 텍스트' },
-    variant: {
-      control: 'select',
-      options: ['success', 'error', 'warning'],
-      description: '상태 변형',
-    },
-    visible: { control: 'boolean', description: '표시 여부' },
-    duration: { control: 'number', description: '자동 닫힘 시간(ms)' },
-    position: {
-      control: 'select',
-      options: ['top', 'bottom'],
-      description: '위치',
-    },
+// ─── 토큰 매핑 테이블 (Single Source of Truth) ──────────────
+
+const VARIANT_TOKEN_MAP = {
+  success: {
+    icon:     'color/icon/success',
+    iconVal:  semanticColor.iconSuccess,
+    iconName: 'check-circle',
   },
+  warning: {
+    icon:     'color/icon/warning',
+    iconVal:  semanticColor.iconWarning,
+    iconName: 'warning',
+  },
+  error: {
+    icon:     'color/icon/error',
+    iconVal:  semanticColor.iconError,
+    iconName: 'x-circle',
+  },
+} as const;
+
+const COMMON_TOKEN_MAP = {
+  background:    { token: 'color/background/toast',   value: semanticColor.backgroundToast },
+  messageText:   { token: 'color/text/onColor',       value: semanticColor.textOnColor },
+  actionText:    { token: 'color/text/action',        value: semanticColor.textAction },
+  paddingH:      { token: 'spacing/large',            value: spacing.large },
+  paddingV:      { token: 'spacing/medium',           value: spacing.medium },
+  gap:           { token: 'spacing/medium',           value: spacing.medium },
+  radius:        { token: 'borderRadius/medium',      value: radius.medium },
+} as const;
+
+// ─── 인라인 Toast 미리보기 (position: static) ────────────────
+// 실제 Toast 컴포넌트는 absolute 위치를 사용하므로,
+// 스토리북 문서에서 나열용으로 static 미리보기 컴포넌트를 사용
+
+type ToastVariant = 'success' | 'warning' | 'error';
+
+function ToastPreview({
+  message,
+  variant = 'success',
+  actionLabel,
+}: {
+  message: string;
+  variant?: ToastVariant;
+  actionLabel?: string;
+}) {
+  const vt = VARIANT_TOKEN_MAP[variant];
+  return (
+    <View style={{
+      backgroundColor: semanticColor.backgroundToast,
+      borderRadius: radius.medium,
+      paddingHorizontal: spacing.large,
+      paddingVertical: spacing.medium,
+      flexDirection: 'row',
+      alignItems: 'center',
+      gap: spacing.medium,
+    }}>
+      <Icon name={vt.iconName} size={24} color={vt.iconVal} />
+      <Text style={{
+        color: semanticColor.textOnColor,
+        fontSize: fontSize.medium,
+        fontWeight: fontWeight.medium,
+        flex: 1,
+      }}>{message}</Text>
+      {actionLabel && (
+        <Text style={{
+          color: semanticColor.textAction,
+          fontSize: fontSize.small,
+          fontWeight: fontWeight.semibold,
+          marginLeft: spacing.small,
+        }}>{actionLabel}</Text>
+      )}
+    </View>
+  );
+}
+
+// ─── Meta ────────────────────────────────────────────────────
+
+const meta: Meta = {
+  title: 'Feedback/Toast',
   tags: ['autodocs'],
 };
 
 export default meta;
-type Story = StoryObj<typeof Toast>;
+type Story = StoryObj;
 
 // ─── 1. Playground ───────────────────────────────────────────
 
 export const Playground: Story = {
-  name: 'Playground',
-  render: function PlaygroundRender() {
-    const [visible, setVisible] = useState(false);
+  render: () => (
+    <View style={{ gap: spacing['3xlarge'] }}>
+      <Section
+        title="Playground"
+        description="Toast 기본 미리보기입니다."
+      >
+        <ToastPreview message="변경사항이 저장되었습니다." variant="success" />
+      </Section>
+    </View>
+  ),
+  parameters: {
+    docs: {
+      description: {
+        story: '**적용 토큰**: `color/background/toast`, `color/text/onColor`, `color/icon/success`, `Body 2`, `borderRadius/medium`',
+      },
+    },
+  },
+};
+
+// ─── 2. Variant별 ────────────────────────────────────────────
+
+export const Variants: Story = {
+  name: 'Variant별',
+  render: () => (
+    <View style={{ gap: spacing['3xlarge'] }}>
+      <Section
+        title="Variant별"
+        description="success, warning, error 세 가지 타입을 확인합니다."
+      >
+        <View style={{ gap: spacing.xlarge }}>
+          <Col gap={spacing.small}>
+            <StateLabel>success</StateLabel>
+            <ToastPreview message="저장되었습니다." variant="success" />
+          </Col>
+          <Col gap={spacing.small}>
+            <StateLabel>warning</StateLabel>
+            <ToastPreview message="네트워크가 불안정합니다." variant="warning" />
+          </Col>
+          <Col gap={spacing.small}>
+            <StateLabel>error</StateLabel>
+            <ToastPreview message="저장에 실패했습니다." variant="error" />
+          </Col>
+        </View>
+      </Section>
+    </View>
+  ),
+  parameters: {
+    docs: {
+      description: {
+        story: [
+          '**Success**: `color/icon/success` (민트)',
+          '**Warning**: `color/icon/warning` (옐로우)',
+          '**Error**: `color/icon/error` (레드)',
+          '**공통 배경**: `color/background/toast`',
+        ].join('\n\n'),
+      },
+    },
+  },
+};
+
+// ─── 3. Action 버튼 ──────────────────────────────────────────
+
+export const WithAction: Story = {
+  name: 'Action 버튼',
+  render: () => (
+    <View style={{ gap: spacing['3xlarge'] }}>
+      <Section
+        title="Action 버튼"
+        description="오른쪽에 액션 텍스트 버튼을 포함한 Toast입니다."
+      >
+        <View style={{ gap: spacing.xlarge }}>
+          <Col gap={spacing.small}>
+            <StateLabel>Success + Action</StateLabel>
+            <ToastPreview message="기록이 삭제되었습니다." variant="success" actionLabel="되돌리기" />
+          </Col>
+          <Col gap={spacing.small}>
+            <StateLabel>Error + Action</StateLabel>
+            <ToastPreview message="저장에 실패했습니다." variant="error" actionLabel="재시도" />
+          </Col>
+        </View>
+      </Section>
+    </View>
+  ),
+  parameters: {
+    docs: {
+      description: {
+        story: '**Action 텍스트**: `color/text/action` · `Label 1` · fontWeight semibold',
+      },
+    },
+  },
+};
+
+// ─── 4. 인터랙티브 데모 ──────────────────────────────────────
+
+export const Interactive: Story = {
+  name: '인터랙티브 데모',
+  render: () => {
+    const [toasts, setToasts] = useState<Array<{ id: number; message: string; variant: ToastVariant }>>([]);
+
+    const show = (variant: ToastVariant, message: string) => {
+      const id = Date.now();
+      setToasts(prev => [...prev, { id, message, variant }]);
+      setTimeout(() => setToasts(prev => prev.filter(t => t.id !== id)), 3000);
+    };
+
     return (
-      <View style={{ height: 200 }}>
-        <Pressable
-          onPress={() => setVisible(true)}
-          style={{
-            backgroundColor: semanticColor.backgroundBrand,
-            paddingHorizontal: spacing.xlarge,
-            paddingVertical: spacing.medium,
-            borderRadius: radius.medium,
-            alignSelf: 'flex-start',
-          }}
+      <View style={{ gap: spacing['3xlarge'] }}>
+        <Section
+          title="인터랙티브 데모"
+          description="버튼을 클릭하여 Toast를 표시합니다. 3초 후 자동으로 사라집니다."
         >
-          <Text style={{ color: semanticColor.textOnColor, fontSize: fontSize.small, fontWeight: fontWeight.semibold }}>
-            토스트 표시
-          </Text>
-        </Pressable>
-        <Toast
-          message="메시지에 마침표를 찍어요."
-          variant="success"
-          visible={visible}
-          duration={3000}
-          onDismiss={() => setVisible(false)}
-          position="bottom"
-        />
+          <Row gap={spacing.medium} wrap>
+            <Pressable
+              onPress={() => show('success', '저장되었습니다.')}
+              style={{ backgroundColor: semanticColor.backgroundBrand, paddingHorizontal: spacing.large, paddingVertical: spacing.small, borderRadius: radius.small }}
+            >
+              <Text style={{ color: semanticColor.textOnColor, fontWeight: fontWeight.semibold }}>Success</Text>
+            </Pressable>
+            <Pressable
+              onPress={() => show('warning', '네트워크가 불안정합니다.')}
+              style={{ backgroundColor: semanticColor.backgroundWarning, paddingHorizontal: spacing.large, paddingVertical: spacing.small, borderRadius: radius.small }}
+            >
+              <Text style={{ color: semanticColor.textPrimary, fontWeight: fontWeight.semibold }}>Warning</Text>
+            </Pressable>
+            <Pressable
+              onPress={() => show('error', '저장에 실패했습니다.')}
+              style={{ backgroundColor: semanticColor.backgroundError, paddingHorizontal: spacing.large, paddingVertical: spacing.small, borderRadius: radius.small }}
+            >
+              <Text style={{ color: semanticColor.textOnColor, fontWeight: fontWeight.semibold }}>Error</Text>
+            </Pressable>
+          </Row>
+
+          <View style={{ gap: spacing.small, marginTop: spacing.xlarge }}>
+            {toasts.map(t => (
+              <ToastPreview key={t.id} message={t.message} variant={t.variant} />
+            ))}
+          </View>
+        </Section>
       </View>
     );
   },
 };
 
-// ─── 2. 변형 ─────────────────────────────────────────────────
+// ─── 5. 디자인 스펙 ──────────────────────────────────────────
 
-export const Variants: Story = {
-  name: '변형',
-  render: () => (
-    <View style={{ gap: spacing['3xlarge'] }}>
-      <Section
-        title="변형"
-        description="variant별로 왼쪽 아이콘이 달라집니다. 성공(민트 체크), 경고(노란 삼각형), 에러(빨간 느낌표)를 제공합니다."
-      >
-        <View style={{ gap: spacing['2xlarge'] }}>
-          <Col gap={spacing.small}>
-            <StateLabel>SUCCESS (성공)</StateLabel>
-            <View style={{ height: 100, position: 'relative', backgroundColor: semanticColor.backgroundSecondary, borderRadius: radius.small }}>
-              <Toast message="메시지에 마침표를 찍어요." variant="success" visible position="bottom" />
-            </View>
-          </Col>
-          <Col gap={spacing.small}>
-            <StateLabel>WARNING (경고)</StateLabel>
-            <View style={{ height: 100, position: 'relative', backgroundColor: semanticColor.backgroundSecondary, borderRadius: radius.small }}>
-              <Toast message="메시지에 마침표를 찍어요." variant="warning" visible position="bottom" />
-            </View>
-          </Col>
-          <Col gap={spacing.small}>
-            <StateLabel>ERROR (에러)</StateLabel>
-            <View style={{ height: 100, position: 'relative', backgroundColor: semanticColor.backgroundSecondary, borderRadius: radius.small }}>
-              <Toast message="메시지에 마침표를 찍어요." variant="error" visible position="bottom" />
-            </View>
-          </Col>
-        </View>
-      </Section>
-    </View>
-  ),
-};
-
-// ─── 3. 액션 버튼 ────────────────────────────────────────────
-
-export const WithAction: Story = {
-  name: '액션 버튼',
-  render: () => (
-    <View style={{ gap: spacing['3xlarge'] }}>
-      <Section
-        title="액션 버튼"
-        description="action prop으로 토스트에 인터랙티브 버튼을 추가할 수 있습니다."
-      >
-        <View style={{ gap: spacing.large }}>
-          <Col gap={spacing.small}>
-            <StateLabel>실행 취소</StateLabel>
-            <View style={{ height: 100, position: 'relative', backgroundColor: semanticColor.backgroundSecondary, borderRadius: radius.small }}>
-              <Toast
-                message="항목이 삭제되었습니다."
-                variant="success"
-                visible
-                action={{ label: '실행 취소', onPress: () => {} }}
-              />
-            </View>
-          </Col>
-          <Col gap={spacing.small}>
-            <StateLabel>다시 시도</StateLabel>
-            <View style={{ height: 100, position: 'relative', backgroundColor: semanticColor.backgroundSecondary, borderRadius: radius.small }}>
-              <Toast
-                message="전송에 실패했습니다."
-                variant="error"
-                visible
-                action={{ label: '다시 시도', onPress: () => {} }}
-              />
-            </View>
-          </Col>
-        </View>
-      </Section>
-    </View>
-  ),
-};
-
-// ─── 4. 인터랙티브 데모 ─────────────────────────────────────
-
-export const Interactive: Story = {
-  name: '인터랙티브 데모',
+export const DesignSpec: Story = {
+  name: '디자인 스펙',
   render: () => {
-    const [variant, setVariant] = useState<'success' | 'warning' | 'error'>('success');
-    const [visible, setVisible] = useState(false);
-
-    const show = (v: typeof variant) => {
-      setVariant(v);
-      setVisible(true);
-    };
+    const variants = ['success', 'warning', 'error'] as const;
 
     return (
-      <Section title="인터랙티브 데모" description="버튼을 눌러 각 변형의 토스트를 직접 확인해보세요. 3초 후 자동으로 사라집니다.">
-        <Row gap={spacing.small} wrap>
-          <Pressable
-            onPress={() => show('success')}
-            style={{ backgroundColor: semanticColor.backgroundBrand, paddingHorizontal: spacing.large, paddingVertical: spacing.small, borderRadius: radius.small }}
-          >
-            <Text style={{ color: semanticColor.textOnColor, fontSize: fontSize.small, fontWeight: fontWeight.semibold }}>성공</Text>
-          </Pressable>
-          <Pressable
-            onPress={() => show('warning')}
-            style={{ backgroundColor: semanticColor.backgroundWarning, paddingHorizontal: spacing.large, paddingVertical: spacing.small, borderRadius: radius.small }}
-          >
-            <Text style={{ color: semanticColor.textOnColor, fontSize: fontSize.small, fontWeight: fontWeight.semibold }}>경고</Text>
-          </Pressable>
-          <Pressable
-            onPress={() => show('error')}
-            style={{ backgroundColor: semanticColor.backgroundError, paddingHorizontal: spacing.large, paddingVertical: spacing.small, borderRadius: radius.small }}
-          >
-            <Text style={{ color: semanticColor.textOnColor, fontSize: fontSize.small, fontWeight: fontWeight.semibold }}>에러</Text>
-          </Pressable>
-        </Row>
-        <View style={{ height: 100, position: 'relative', marginTop: spacing.large }}>
-          <Toast
-            message="메시지에 마침표를 찍어요."
-            variant={variant}
-            visible={visible}
-            duration={3000}
-            onDismiss={() => setVisible(false)}
+      <View style={{ gap: spacing['3xlarge'] }}>
+        <Section
+          title="디자인 스펙"
+          description="Figma 시맨틱 토큰 기준 Toast 전체 스펙입니다."
+          badge="디자인"
+        >
+          {variants.map(variant => (
+            <View key={variant}>
+              <TokenSpecTable
+                title={`variant: ${variant}`}
+                rows={[
+                  { property: '배경색',         token: COMMON_TOKEN_MAP.background.token,  value: COMMON_TOKEN_MAP.background.value,  type: 'color' },
+                  { property: '아이콘',         token: VARIANT_TOKEN_MAP[variant].icon,     value: VARIANT_TOKEN_MAP[variant].iconVal, type: 'color' },
+                  { property: '메시지 텍스트',   token: COMMON_TOKEN_MAP.messageText.token, value: COMMON_TOKEN_MAP.messageText.value, type: 'color' },
+                  { property: '액션 텍스트',     token: COMMON_TOKEN_MAP.actionText.token,  value: COMMON_TOKEN_MAP.actionText.value,  type: 'color' },
+                ]}
+              />
+              <Divider />
+            </View>
+          ))}
+
+          <TokenSpecTable
+            title="공통 레이아웃"
+            rows={[
+              { property: '좌우 패딩',       token: COMMON_TOKEN_MAP.paddingH.token, value: COMMON_TOKEN_MAP.paddingH.value, type: 'size' },
+              { property: '상하 패딩',       token: COMMON_TOKEN_MAP.paddingV.token, value: COMMON_TOKEN_MAP.paddingV.value, type: 'size' },
+              { property: '아이콘-텍스트 간격', token: COMMON_TOKEN_MAP.gap.token,    value: COMMON_TOKEN_MAP.gap.value,     type: 'size' },
+              { property: '코너 라디우스',   token: COMMON_TOKEN_MAP.radius.token,    value: COMMON_TOKEN_MAP.radius.value,  type: 'size' },
+              { property: '메시지 타이포',   token: 'Body 2',  value: `${textStyle.body2.fontSize}px / ${textStyle.body2.lineHeight}px / ${textStyle.body2.fontWeight}`, type: 'typography' },
+              { property: '액션 타이포',     token: 'Label 1', value: `${textStyle.label1.fontSize}px / ${textStyle.label1.lineHeight}px / ${textStyle.label1.fontWeight}`, type: 'typography' },
+            ]}
           />
-        </View>
-      </Section>
+
+          <Divider />
+
+          <TokenSpecTable
+            title="애니메이션 (권장값)"
+            rows={[
+              { property: '등장 시작 opacity', token: 'opacity/0',   value: opacity[0],   type: 'opacity' },
+              { property: '등장 끝 opacity',   token: 'opacity/100', value: opacity[100], type: 'opacity' },
+              { property: 'Duration',          token: '—',           value: '250ms' },
+              { property: 'Easing',            token: '—',           value: 'cubic-bezier(0.4, 0, 0.2, 1)' },
+              { property: '자동 닫힘 기본값',   token: '—',           value: '3000ms' },
+            ]}
+          />
+        </Section>
+      </View>
     );
   },
 };
 
-// ─── 5. 디자인 스펙 ─────────────────────────────────────────
-
-export const DesignSpec: Story = {
-  name: '디자인 스펙',
-  render: () => (
-    <View style={{ gap: spacing['3xlarge'] }}>
-      <Section
-        title="디자인 스펙"
-        description="디자이너와 개발자를 위한 Toast 토큰 상세 스펙입니다."
-      >
-        <SpecTable
-          title="레이아웃"
-          rows={[
-            { label: '배경색', value: coolNeutral[50], token: 'coolNeutral[50]' },
-            { label: '텍스트 색상', value: '#FFFFFF', token: 'coolNeutral[100]' },
-            { label: '폰트 크기', value: `${fontSize.medium}px`, token: 'fontSize.medium' },
-            { label: '폰트 굵기', value: fontWeight.medium, token: 'fontWeight.medium' },
-            { label: '모서리 반경', value: `${radius.medium}px`, token: 'radius.medium' },
-            { label: '좌우 패딩', value: `${spacing.large}px`, token: 'spacing.large' },
-            { label: '상하 패딩', value: `${spacing.medium}px`, token: 'spacing.medium' },
-            { label: '아이콘-텍스트 간격', value: `${spacing.medium}px`, token: 'spacing.medium' },
-            { label: '좌우 마진', value: `${spacing.large}px`, token: 'spacing.large' },
-          ]}
-        />
-
-        <Divider />
-
-        <SpecTable
-          title="상태별 아이콘"
-          rows={[
-            { label: 'Success 아이콘', value: '민트 원 + 흰색 체크', token: `mint[45] (${mint[45]})` },
-            { label: 'Warning 아이콘', value: '노란 삼각형 + 흰색 느낌표', token: `yellow[50] (${yellow[50]})` },
-            { label: 'Error 아이콘', value: '빨간 원 + 흰색 느낌표', token: `red[70] (${red[70]})` },
-            { label: 'Default 아이콘', value: '민트 원 + 흰색 느낌표', token: `mint[45] (${mint[45]})` },
-            { label: '아이콘 크기', value: '24×24px', token: '—' },
-          ]}
-        />
-
-        <Divider />
-
-        <SpecTable
-          title="액션 버튼"
-          rows={[
-            { label: '텍스트 색상', value: mint[80], token: 'mint[80]' },
-            { label: '폰트 크기', value: `${fontSize.small}px`, token: 'fontSize.small' },
-            { label: '폰트 굵기', value: fontWeight.semibold, token: 'fontWeight.semibold' },
-          ]}
-        />
-      </Section>
-    </View>
-  ),
-};
-
-// ─── 6. 사용 가이드 ─────────────────────────────────────────
+// ─── 6. 사용 가이드 ──────────────────────────────────────────
 
 export const Usage: Story = {
   name: '사용 가이드',
@@ -249,6 +309,7 @@ export const Usage: Story = {
       <Section
         title="사용 가이드"
         description="개발자를 위한 Toast 컴포넌트 사용 예시입니다."
+        badge="개발"
       >
         <CodeBlock
           title="Import"
@@ -263,34 +324,37 @@ export const Usage: Story = {
   message="저장되었습니다."
   variant="success"
   visible={visible}
+  duration={3000}
   onDismiss={() => setVisible(false)}
 />`}
         />
 
         <CodeBlock
-          title="액션 버튼 포함"
+          title="Action 버튼 포함"
           code={`<Toast
-  message="항목이 삭제되었습니다."
-  variant="error"
+  message="기록이 삭제되었습니다."
+  variant="success"
   visible={visible}
+  duration={5000}
   onDismiss={() => setVisible(false)}
   action={{
-    label: '실행 취소',
+    label: '되돌리기',
     onPress: handleUndo,
   }}
 />`}
         />
 
         <CodeBlock
-          title="상단 위치 + 경고"
-          code={`<Toast
-  message="네트워크 연결 불안정"
-  variant="warning"
-  visible={visible}
-  position="top"
-  duration={5000}
-  onDismiss={() => setVisible(false)}
-/>`}
+          title="Variant별 사용"
+          code={`<Toast message="완료!" variant="success" visible={true} />
+<Toast message="주의!" variant="warning" visible={true} />
+<Toast message="실패!" variant="error" visible={true} />`}
+        />
+
+        <CodeBlock
+          title="위치 지정"
+          code={`<Toast message="상단 Toast" position="top" visible={true} />
+<Toast message="하단 Toast" position="bottom" visible={true} />`}
         />
       </Section>
     </View>

@@ -1,0 +1,492 @@
+{
+  "Primitives": {
+    "Mono": {
+      "coolNeutral100": { "value": "#FFFFFF", "type": "color", "description": "가장 밝은 중성색 (White)" },
+      "coolNeutral99":  { "value": "#F7F7F8", "type": "color", "description": "거의 흰색에 가까운 중성 배경" },
+      "coolNeutral98":  { "value": "#F4F4F5", "type": "color", "description": "매우 밝은 중성 배경" },
+      "coolNeutral97":  { "value": "#EAEBEC", "type": "color", "description": "밝은 중성 배경 (3단계)" },
+      "coolNeutral96":  { "value": "#E1E2E4", "type": "color", "description": "밝은 중성 테두리/비활성 배경" },
+      "coolNeutral95":  { "value": "#DBDCDF", "type": "color", "description": "밝은 중성 구분선" },
+      "coolNeutral90":  { "value": "#C2C4C8", "type": "color", "description": "중간 밝은 중성 (OFF 상태, 비활성 아이콘)" },
+      "coolNeutral80":  { "value": "#AEB0B6", "type": "color", "description": "중간 중성 (비활성 텍스트, 힌트)" },
+      "coolNeutral70":  { "value": "#989BA2", "type": "color", "description": "중간 어두운 중성" },
+      "coolNeutral60":  { "value": "#878A93", "type": "color", "description": "중간 어두운 중성 (보조 정보)" },
+      "coolNeutral50":  { "value": "#70737C", "type": "color", "description": "중간 중성 (보조 텍스트, 토스트 배경)" },
+      "coolNeutral40":  { "value": "#5A5C63", "type": "color", "description": "어두운 중성 (4단계 텍스트)" },
+      "coolNeutral30":  { "value": "#46474C", "type": "color", "description": "어두운 중성 (라벨 텍스트)" },
+      "coolNeutral25":  { "value": "#37383C", "type": "color", "description": "매우 어두운 중성" },
+      "coolNeutral23":  { "value": "#333438", "type": "color", "description": "매우 어두운 중성" },
+      "coolNeutral22":  { "value": "#2E2F33", "type": "color", "description": "매우 어두운 중성" },
+      "coolNeutral20":  { "value": "#292A2D", "type": "color", "description": "매우 어두운 중성" },
+      "coolNeutral17":  { "value": "#212225", "type": "color", "description": "기본 본문 텍스트 색상" },
+      "coolNeutral15":  { "value": "#1B1C1E", "type": "color", "description": "매우 어두운 중성" },
+      "coolNeutral10":  { "value": "#171719", "type": "color", "description": "반전 배경 (다크 영역)" },
+      "coolNeutral7":   { "value": "#141415", "type": "color", "description": "가장 어두운 중성" },
+      "coolNeutral5":   { "value": "#0F0F10", "type": "color", "description": "가장 어두운 중성 (Near Black)" }
+    },
+    "Brand": {
+      "mint99": { "value": "#FBFEFE", "type": "color", "description": "민트 가장 밝은 톤" },
+      "mint95": { "value": "#E9FBFA", "type": "color", "description": "민트 밝은 톤" },
+      "mint90": { "value": "#D4F7F6", "type": "color", "description": "민트 90 (브랜드 비활성 배경)" },
+      "mint80": { "value": "#A8F0EC", "type": "color", "description": "민트 80 (다크 배경 위 액션 텍스트)" },
+      "mint70": { "value": "#7DE8E3", "type": "color", "description": "민트 70" },
+      "mint60": { "value": "#52E0DA", "type": "color", "description": "민트 60" },
+      "mint45": { "value": "#22C3BC", "type": "color", "description": "브랜드 기본 색상 (CTA, 강조)" },
+      "mint40": { "value": "#1FADA7", "type": "color", "description": "브랜드 호버 색상" },
+      "mint30": { "value": "#17827D", "type": "color", "description": "브랜드 눌림 색상" },
+      "mint20": { "value": "#0F5753", "type": "color", "description": "민트 20" },
+      "mint10": { "value": "#082B2A", "type": "color", "description": "민트 가장 어두운 톤" }
+    },
+    "Semantic": {
+      "red99":     { "value": "#FEFAFA", "type": "color", "description": "레드 가장 밝은 톤" },
+      "red95":     { "value": "#FCE8E8", "type": "color", "description": "레드 밝은 톤" },
+      "red90":     { "value": "#FAD1D1", "type": "color", "description": "레드 90" },
+      "red80":     { "value": "#F5A3A3", "type": "color", "description": "레드 80" },
+      "red70":     { "value": "#EF7676", "type": "color", "description": "에러 상태 색상" },
+      "red60":     { "value": "#EA4848", "type": "color", "description": "레드 60" },
+      "red50":     { "value": "#E51A1A", "type": "color", "description": "레드 기본" },
+      "red40":     { "value": "#B71515", "type": "color", "description": "레드 어두운 톤" },
+      "red30":     { "value": "#891010", "type": "color", "description": "레드 30" },
+      "red20":     { "value": "#5C0A0A", "type": "color", "description": "레드 20" },
+      "red10":     { "value": "#2E0505", "type": "color", "description": "레드 가장 어두운 톤" },
+      "yellow99":  { "value": "#FFFEFA", "type": "color", "description": "옐로우 가장 밝은 톤" },
+      "yellow95":  { "value": "#FFFAE5", "type": "color", "description": "옐로우 밝은 톤" },
+      "yellow90":  { "value": "#FFF5CC", "type": "color", "description": "옐로우 90" },
+      "yellow80":  { "value": "#FFEC99", "type": "color", "description": "옐로우 80" },
+      "yellow70":  { "value": "#FFE266", "type": "color", "description": "옐로우 70" },
+      "yellow60":  { "value": "#FFD833", "type": "color", "description": "옐로우 60" },
+      "yellow50":  { "value": "#FFCE00", "type": "color", "description": "경고 상태 색상" },
+      "yellow40":  { "value": "#CCA500", "type": "color", "description": "옐로우 어두운 톤" },
+      "yellow30":  { "value": "#997C00", "type": "color", "description": "옐로우 30" },
+      "yellow20":  { "value": "#665300", "type": "color", "description": "옐로우 20" },
+      "yellow10":  { "value": "#332900", "type": "color", "description": "옐로우 가장 어두운 톤" },
+      "green99":   { "value": "#FBFEFD", "type": "color", "description": "그린 가장 밝은 톤" },
+      "green95":   { "value": "#E9FBF5", "type": "color", "description": "그린 밝은 톤" },
+      "green90":   { "value": "#D4F7EB", "type": "color", "description": "그린 90" },
+      "green80":   { "value": "#A8F0D6", "type": "color", "description": "그린 80" },
+      "green70":   { "value": "#7DE8C2", "type": "color", "description": "그린 70" },
+      "green60":   { "value": "#52E0AD", "type": "color", "description": "그린 60" },
+      "green45":   { "value": "#22C289", "type": "color", "description": "성공 배경 색상" },
+      "green40":   { "value": "#1FAD7A", "type": "color", "description": "그린 어두운 톤" },
+      "green30":   { "value": "#17825C", "type": "color", "description": "그린 30" },
+      "green20":   { "value": "#0F573D", "type": "color", "description": "그린 20" },
+      "green10":   { "value": "#082B1F", "type": "color", "description": "그린 가장 어두운 톤" }
+    },
+    "Accent": {
+      "khaki99":     { "value": "#FDFDFC", "type": "color", "description": "카키 가장 밝은 톤" },
+      "khaki95":     { "value": "#F4F7EE", "type": "color", "description": "카키 밝은 톤" },
+      "khaki90":     { "value": "#E9EFDC", "type": "color", "description": "카키 90" },
+      "khaki80":     { "value": "#D3DEBA", "type": "color", "description": "카키 80" },
+      "khaki70":     { "value": "#BDCE97", "type": "color", "description": "카키 70" },
+      "khaki60":     { "value": "#A7BE74", "type": "color", "description": "카키 60" },
+      "khaki50":     { "value": "#91AD52", "type": "color", "description": "카키 기본" },
+      "khaki40":     { "value": "#748B41", "type": "color", "description": "카키 어두운 톤" },
+      "khaki30":     { "value": "#576831", "type": "color", "description": "카키 30" },
+      "khaki20":     { "value": "#3A4521", "type": "color", "description": "카키 20" },
+      "khaki10":     { "value": "#1D2310", "type": "color", "description": "카키 가장 어두운 톤" },
+      "orange99":    { "value": "#FFFCFA", "type": "color", "description": "오렌지 가장 밝은 톤" },
+      "orange95":    { "value": "#FFF2E5", "type": "color", "description": "오렌지 밝은 톤" },
+      "orange90":    { "value": "#FFE5CC", "type": "color", "description": "오렌지 90" },
+      "orange80":    { "value": "#FFCB99", "type": "color", "description": "오렌지 80" },
+      "orange70":    { "value": "#FFB166", "type": "color", "description": "오렌지 70" },
+      "orange60":    { "value": "#FF9733", "type": "color", "description": "오렌지 60" },
+      "orange50":    { "value": "#FF7D00", "type": "color", "description": "오렌지 기본" },
+      "orange40":    { "value": "#CC6400", "type": "color", "description": "오렌지 어두운 톤" },
+      "orange30":    { "value": "#994B00", "type": "color", "description": "오렌지 30" },
+      "orange20":    { "value": "#663200", "type": "color", "description": "오렌지 20" },
+      "orange10":    { "value": "#331900", "type": "color", "description": "오렌지 가장 어두운 톤" },
+      "pink99":      { "value": "#FFFAFC", "type": "color", "description": "핑크 가장 밝은 톤" },
+      "pink95":      { "value": "#FFE5EE", "type": "color", "description": "핑크 밝은 톤" },
+      "pink80":      { "value": "#FF99B9", "type": "color", "description": "핑크 80" },
+      "pink75":      { "value": "#FF80A8", "type": "color", "description": "핑크 75" },
+      "pink70":      { "value": "#FF6696", "type": "color", "description": "핑크 70" },
+      "pink60":      { "value": "#FF3374", "type": "color", "description": "핑크 60" },
+      "pink50":      { "value": "#FF0051", "type": "color", "description": "핑크 기본" },
+      "pink40":      { "value": "#CC0041", "type": "color", "description": "핑크 어두운 톤" },
+      "pink30":      { "value": "#990030", "type": "color", "description": "핑크 30" },
+      "pink20":      { "value": "#660020", "type": "color", "description": "핑크 20" },
+      "pink10":      { "value": "#330010", "type": "color", "description": "핑크 가장 어두운 톤" },
+      "purple99":    { "value": "#FEFBFF", "type": "color", "description": "퍼플 가장 밝은 톤" },
+      "purple95":    { "value": "#F9EDFF", "type": "color", "description": "퍼플 밝은 톤" },
+      "purple90":    { "value": "#F2D6FF", "type": "color", "description": "퍼플 90" },
+      "purple80":    { "value": "#E9BAFF", "type": "color", "description": "퍼플 80" },
+      "purple70":    { "value": "#DE96FF", "type": "color", "description": "퍼플 70" },
+      "purple60":    { "value": "#D478FF", "type": "color", "description": "퍼플 60" },
+      "purple50":    { "value": "#CB59FF", "type": "color", "description": "퍼플 기본" },
+      "purple40":    { "value": "#AD36E3", "type": "color", "description": "퍼플 어두운 톤" },
+      "purple30":    { "value": "#861CB8", "type": "color", "description": "퍼플 30" },
+      "purple20":    { "value": "#580A7D", "type": "color", "description": "퍼플 20" },
+      "purple10":    { "value": "#290247", "type": "color", "description": "퍼플 가장 어두운 톤" },
+      "violet99":    { "value": "#FBFAFF", "type": "color", "description": "바이올렛 가장 밝은 톤" },
+      "violet95":    { "value": "#F0ECFE", "type": "color", "description": "바이올렛 밝은 톤" },
+      "violet90":    { "value": "#DBD3FE", "type": "color", "description": "바이올렛 90" },
+      "violet80":    { "value": "#C0B0FF", "type": "color", "description": "바이올렛 80" },
+      "violet70":    { "value": "#9E86FC", "type": "color", "description": "바이올렛 70" },
+      "violet60":    { "value": "#7D5EF7", "type": "color", "description": "바이올렛 60" },
+      "violet50":    { "value": "#6541F2", "type": "color", "description": "바이올렛 기본" },
+      "violet40":    { "value": "#4F29E5", "type": "color", "description": "바이올렛 어두운 톤" },
+      "violet30":    { "value": "#3A16C9", "type": "color", "description": "바이올렛 30" },
+      "violet20":    { "value": "#23098F", "type": "color", "description": "바이올렛 20" },
+      "violet10":    { "value": "#11024D", "type": "color", "description": "바이올렛 가장 어두운 톤" },
+      "lightBlue99": { "value": "#F7FDFF", "type": "color", "description": "라이트블루 가장 밝은 톤" },
+      "lightBlue95": { "value": "#E5F6FE", "type": "color", "description": "라이트블루 밝은 톤" },
+      "lightBlue90": { "value": "#C4ECFE", "type": "color", "description": "라이트블루 90" },
+      "lightBlue80": { "value": "#A1E1FF", "type": "color", "description": "라이트블루 80" },
+      "lightBlue70": { "value": "#70D2FF", "type": "color", "description": "라이트블루 70" },
+      "lightBlue60": { "value": "#3DC2FF", "type": "color", "description": "라이트블루 60" },
+      "lightBlue50": { "value": "#00AEFF", "type": "color", "description": "라이트블루 기본" },
+      "lightBlue40": { "value": "#008DCF", "type": "color", "description": "라이트블루 어두운 톤" },
+      "lightBlue30": { "value": "#006796", "type": "color", "description": "라이트블루 30" },
+      "lightBlue20": { "value": "#004261", "type": "color", "description": "라이트블루 20" },
+      "lightBlue10": { "value": "#002130", "type": "color", "description": "라이트블루 가장 어두운 톤" },
+      "cyan99":      { "value": "#F7FEFF", "type": "color", "description": "시안 가장 밝은 톤" },
+      "cyan95":      { "value": "#DEFAFF", "type": "color", "description": "시안 밝은 톤" },
+      "cyan90":      { "value": "#B5F4FF", "type": "color", "description": "시안 90" },
+      "cyan80":      { "value": "#8AEDFF", "type": "color", "description": "시안 80" },
+      "cyan70":      { "value": "#57DFF7", "type": "color", "description": "시안 70" },
+      "cyan60":      { "value": "#28D0ED", "type": "color", "description": "시안 60" },
+      "cyan50":      { "value": "#00BDDE", "type": "color", "description": "시안 기본" },
+      "cyan40":      { "value": "#0098B2", "type": "color", "description": "시안 어두운 톤" },
+      "cyan30":      { "value": "#006F82", "type": "color", "description": "시안 30" },
+      "cyan20":      { "value": "#004854", "type": "color", "description": "시안 20" },
+      "cyan10":      { "value": "#00252B", "type": "color", "description": "시안 가장 어두운 톤" }
+    },
+
+    "fontSize": {
+      "xsmall":  { "value": "12", "type": "fontSizes", "description": "12px — 캡션, 보조 설명, 날짜 등 작은 정보" },
+      "small":   { "value": "13", "type": "fontSizes", "description": "13px — 소형 버튼, 태그, 필터 칩 텍스트" },
+      "medium":  { "value": "15", "type": "fontSizes", "description": "15px — 보조 본문, 세부 설명" },
+      "large":   { "value": "17", "type": "fontSizes", "description": "17px — 리스트 헤더, 탭 섹션 제목" },
+      "xlarge":  { "value": "20", "type": "fontSizes", "description": "20px — 소제목, 섹션 구분" },
+      "2xlarge": { "value": "24", "type": "fontSizes", "description": "24px — 카드/모달 타이틀" },
+      "3xlarge": { "value": "28", "type": "fontSizes", "description": "28px — 페이지 상단 헤더" },
+      "4xlarge": { "value": "32", "type": "fontSizes", "description": "32px — 서비스 핵심 타이틀" }
+    },
+    "fontWeight": {
+      "regular":  { "value": "400", "type": "fontWeights", "description": "Regular — 일반 본문, 캡션" },
+      "medium":   { "value": "500", "type": "fontWeights", "description": "Medium — 버튼 텍스트, 라벨" },
+      "semibold": { "value": "600", "type": "fontWeights", "description": "SemiBold — 소제목, 헤드라인" },
+      "bold":     { "value": "700", "type": "fontWeights", "description": "Bold — 타이틀 (H1~H3)" }
+    },
+    "lineHeight": {
+      "xsmall":  { "value": "16", "type": "lineHeights", "description": "16px — 캡션용 행간" },
+      "small":   { "value": "18", "type": "lineHeights", "description": "18px — 소형 라벨용 행간" },
+      "medium":  { "value": "20", "type": "lineHeights", "description": "20px — 라벨용 행간" },
+      "large":   { "value": "22", "type": "lineHeights", "description": "22px — 보조 본문용 행간" },
+      "xlarge":  { "value": "24", "type": "lineHeights", "description": "24px — 본문 및 헤드라인용 행간" },
+      "2xlarge": { "value": "28", "type": "lineHeights", "description": "28px — heading용 행간" },
+      "3xlarge": { "value": "32", "type": "lineHeights", "description": "32px — title3용 행간" },
+      "4xlarge": { "value": "38", "type": "lineHeights", "description": "38px — title2용 행간" },
+      "5xlarge": { "value": "44", "type": "lineHeights", "description": "44px — title1용 행간" }
+    },
+    "spacing": {
+      "xsmall":  { "value": "4",  "type": "spacing", "description": "4px — 최소 간격" },
+      "small":   { "value": "8",  "type": "spacing", "description": "8px — 소형 간격" },
+      "medium":  { "value": "12", "type": "spacing", "description": "12px — 중간 간격" },
+      "large":   { "value": "16", "type": "spacing", "description": "16px — 기본 간격" },
+      "xlarge":  { "value": "20", "type": "spacing", "description": "20px — 넓은 간격" },
+      "2xlarge": { "value": "24", "type": "spacing", "description": "24px — 대형 간격" },
+      "3xlarge": { "value": "32", "type": "spacing", "description": "32px — 초대형 간격" },
+      "4xlarge": { "value": "48", "type": "spacing", "description": "48px — 최대 간격" }
+    },
+    "borderRadius": {
+      "xsmall": { "value": "4",    "type": "borderRadius", "description": "4px — 최소 라운딩" },
+      "small":  { "value": "8",    "type": "borderRadius", "description": "8px — 소형 라운딩" },
+      "medium": { "value": "12",   "type": "borderRadius", "description": "12px — 중간 라운딩" },
+      "large":  { "value": "16",   "type": "borderRadius", "description": "16px — 대형 라운딩" },
+      "xlarge": { "value": "24",   "type": "borderRadius", "description": "24px — 초대형 라운딩" },
+      "full":   { "value": "9999", "type": "borderRadius", "description": "9999px — 완전 원형" }
+    }
+  },
+
+  "Semantics": {
+    "surface": {
+      "primary":   { "value": "{Primitives.Mono.coolNeutral100}", "type": "color", "description": "Figma: Background/Normal/Normal — 기본 표면 색상" },
+      "secondary": { "value": "{Primitives.Mono.coolNeutral99}",  "type": "color", "description": "Figma: Background/Normal/Alternative — 보조 표면 색상 (카드, 섹션 구분)" },
+      "tertiary":  { "value": "{Primitives.Mono.coolNeutral97}",  "type": "color", "description": "3단계 표면 색상 (인풋 비활성, 칩)" },
+      "inverse":   { "value": "{Primitives.Mono.coolNeutral10}",  "type": "color", "description": "반전 표면 (다크 영역, 활성 칩)" }
+    },
+    "content": {
+      "strong":    { "value": "{Primitives.Mono.coolNeutral5}",          "type": "color", "description": "Figma: Label/Strong — 최강조 텍스트 (#000000)" },
+      "primary":   { "value": "{Primitives.Mono.coolNeutral10}",  "type": "color", "description": "Figma: Label/Normal — 기본 콘텐츠 색상 (#171719)" },
+      "secondary": { "value": "{Primitives.Mono.coolNeutral25}",  "type": "color", "description": "Figma: Label/Alternative — 보조 콘텐츠 색상 (#37383C)" },
+      "tertiary":  { "value": "{Primitives.Mono.coolNeutral80}",  "type": "color", "description": "비활성 콘텐츠 색상" },
+      "onColor":   { "value": "{Primitives.Mono.coolNeutral100}", "type": "color", "description": "색상 배경 위 콘텐츠" }
+    },
+    "line": {
+      "default": { "value": "{Primitives.Mono.coolNeutral50}", "type": "color", "description": "Figma: Line/Normal/Normal — 기본 구분선 (#70737C)" },
+      "active":  { "value": "{Primitives.Mono.coolNeutral90}", "type": "color", "description": "활성 구분선" }
+    },
+    "role": {
+      "brand":        { "value": "{Primitives.Brand.mint45}",      "type": "color", "description": "브랜드 색상 — 다크모드 전환 시 이 값만 교체" },
+      "brandPressed": { "value": "{Primitives.Brand.mint30}",      "type": "color", "description": "브랜드 눌림 색상" },
+      "error":        { "value": "{Primitives.Semantic.red70}",    "type": "color", "description": "에러 역할 색상" },
+      "success":      { "value": "{Primitives.Brand.mint45}",      "type": "color", "description": "성공 역할 색상" },
+      "warning":      { "value": "{Primitives.Semantic.yellow50}", "type": "color", "description": "경고 역할 색상" }
+    },
+
+    "color": {
+      "text": {
+        "strong":      { "value": "{Semantics.content.strong}",    "type": "color", "description": "Figma: Label/Strong — 최강조 텍스트 (#000000)" },
+        "primary":     { "value": "{Semantics.content.primary}",   "type": "color", "description": "Figma: Label/Normal — 기본 본문 및 타이틀 텍스트 (#171719)" },
+        "secondary":   { "value": "{Semantics.content.secondary}", "type": "color", "description": "Figma: Label/Alternative — 보조 설명, 부가 정보 텍스트 (#37383C)" },
+        "tertiary":    { "value": "{Semantics.content.tertiary}",  "type": "color", "description": "비활성화 텍스트, 힌트, 플레이스홀더" },
+        "placeholder": { "value": "{Semantics.color.text.tertiary}", "type": "color", "description": "플레이스홀더 텍스트 (textTertiary alias)" },
+        "onColor":     { "value": "{Semantics.content.onColor}",  "type": "color", "description": "색상 배경 위 텍스트 (버튼, 배지 등)" },
+        "brand":       { "value": "{Semantics.role.brand}",       "type": "color", "description": "브랜드 강조 텍스트 (링크, 포커스)" },
+        "error":       { "value": "{Semantics.role.error}",       "type": "color", "description": "에러 상태 텍스트" },
+        "success":     { "value": "{Semantics.role.success}",     "type": "color", "description": "성공 상태 텍스트" },
+        "warning":     { "value": "{Semantics.role.warning}",     "type": "color", "description": "경고 상태 텍스트" },
+        "quaternary":  { "value": "{Primitives.Mono.coolNeutral40}",  "type": "color", "description": "4단계 텍스트 (보조 버튼, 비활성 수치)" },
+        "label":       { "value": "{Primitives.Mono.coolNeutral30}",  "type": "color", "description": "라벨 텍스트 (입력 필드 등)" },
+        "action":      { "value": "{Primitives.Brand.mint80}",        "type": "color", "description": "다크 배경 위 액션 텍스트 (토스트 등)" }
+      },
+      "background": {
+        "primary":        { "value": "{Semantics.surface.primary}",   "type": "color", "description": "기본 배경색" },
+        "secondary":      { "value": "{Semantics.surface.secondary}", "type": "color", "description": "보조 배경색 (카드, 섹션 구분)" },
+        "tertiary":       { "value": "{Semantics.surface.tertiary}",  "type": "color", "description": "3단계 배경색 (인풋 비활성, 칩)" },
+        "inverse":        { "value": "{Semantics.surface.inverse}",   "type": "color", "description": "반전 배경 (다크 영역, 활성 칩)" },
+        "off":            { "value": "{Primitives.Mono.coolNeutral90}",   "type": "color", "description": "비활성 트랙, OFF 상태 배경" },
+        "brand":          { "value": "{Semantics.role.brand}",            "type": "color", "description": "브랜드 배경색 (CTA 버튼, 강조 영역)" },
+        "brandPressed":   { "value": "{Semantics.role.brandPressed}",     "type": "color", "description": "브랜드 배경 눌림 상태" },
+        "status":         { "value": "{Semantics.surface.primary}",       "type": "color", "description": "상태 배경 (에러/성공/경고 — 흰색 통일)" },
+        "disabled":       { "value": "{Primitives.Mono.coolNeutral96}",   "type": "color", "description": "비활성화 배경 (Disabled 컴포넌트)" },
+        "brandDisabled":  { "value": "{Primitives.Brand.mint90}",         "type": "color", "description": "브랜드 비활성화 배경 (체크박스 등)" },
+        "error":          { "value": "{Semantics.role.error}",            "type": "color", "description": "에러 배경 (위험 버튼, ProgressBar error)" },
+        "warning":        { "value": "{Semantics.role.warning}",          "type": "color", "description": "경고 배경 (ProgressBar warning)" },
+        "success":        { "value": "{Primitives.Semantic.green45}",     "type": "color", "description": "성공 배경 (ProgressBar success)" },
+        "toast":          { "value": "{Primitives.Mono.coolNeutral50}",   "type": "color", "description": "토스트 배경" }
+      },
+      "border": {
+        "default":  { "value": "{Semantics.line.default}",            "type": "color", "description": "기본 및 비활성화 테두리, 구분선" },
+        "disabled": { "value": "{Semantics.color.border.default}",    "type": "color", "description": "비활성화 테두리 (borderDefault alias)" },
+        "active":   { "value": "{Semantics.line.active}",             "type": "color", "description": "입력됨 상태 테두리" },
+        "focus":    { "value": "{Semantics.role.brand}",              "type": "color", "description": "포커스 및 브랜드 강조 테두리" },
+        "error":    { "value": "{Semantics.role.error}",              "type": "color", "description": "에러 상태 테두리" },
+        "success":  { "value": "{Semantics.role.success}",            "type": "color", "description": "성공 상태 테두리" }
+      },
+      "icon": {
+        "primary":   { "value": "{Semantics.content.primary}",        "type": "color", "description": "기본 아이콘 색상" },
+        "secondary": { "value": "{Semantics.content.secondary}",      "type": "color", "description": "보조 아이콘 색상" },
+        "disabled":  { "value": "{Semantics.content.tertiary}",       "type": "color", "description": "비활성화 아이콘" },
+        "brand":     { "value": "{Semantics.role.brand}",             "type": "color", "description": "브랜드 아이콘" },
+        "onColor":   { "value": "{Semantics.content.onColor}",        "type": "color", "description": "색상 배경 위 아이콘" },
+        "error":     { "value": "{Semantics.role.error}",             "type": "color", "description": "에러 아이콘" },
+        "success":   { "value": "{Semantics.role.success}",           "type": "color", "description": "성공 아이콘" },
+        "warning":   { "value": "{Semantics.role.warning}",           "type": "color", "description": "경고 아이콘" },
+        "inactive":  { "value": "{Primitives.Mono.coolNeutral90}",    "type": "color", "description": "미선택/비활성 아이콘 (체크마크, 탭바)" }
+      }
+    },
+
+    "fontSize": {
+      "xsmall":  { "value": "{Primitives.fontSize.xsmall}",  "type": "fontSizes", "description": "캡션, 보조 설명, 날짜 등 작은 정보" },
+      "small":   { "value": "{Primitives.fontSize.small}",   "type": "fontSizes", "description": "소형 버튼, 태그, 필터 칩 텍스트" },
+      "medium":  { "value": "{Primitives.fontSize.medium}",  "type": "fontSizes", "description": "보조 본문, 세부 설명" },
+      "large":   { "value": "{Primitives.fontSize.large}",   "type": "fontSizes", "description": "리스트 헤더, 탭 섹션 제목" },
+      "xlarge":  { "value": "{Primitives.fontSize.xlarge}",  "type": "fontSizes", "description": "소제목, 섹션 구분, 강조 중간 타이틀" },
+      "2xlarge": { "value": "{Primitives.fontSize.2xlarge}", "type": "fontSizes", "description": "카드/모달 타이틀, 하위 페이지 대제목" },
+      "3xlarge": { "value": "{Primitives.fontSize.3xlarge}", "type": "fontSizes", "description": "페이지 상단 헤더, 주요 섹션 대제목" },
+      "4xlarge": { "value": "{Primitives.fontSize.4xlarge}", "type": "fontSizes", "description": "서비스 핵심 타이틀, 온보딩 메인 문구" }
+    },
+    "fontWeight": {
+      "regular":  { "value": "{Primitives.fontWeight.regular}",  "type": "fontWeights", "description": "일반 본문, 캡션, 보조 설명" },
+      "medium":   { "value": "{Primitives.fontWeight.medium}",   "type": "fontWeights", "description": "버튼 텍스트, 라벨, 태그" },
+      "semibold": { "value": "{Primitives.fontWeight.semibold}", "type": "fontWeights", "description": "소제목, 헤드라인" },
+      "bold":     { "value": "{Primitives.fontWeight.bold}",     "type": "fontWeights", "description": "타이틀 (H1~H3)" }
+    },
+    "lineHeight": {
+      "xsmall":  { "value": "{Primitives.lineHeight.xsmall}",  "type": "lineHeights", "description": "캡션용 행간 (12px 텍스트)" },
+      "small":   { "value": "{Primitives.lineHeight.small}",   "type": "lineHeights", "description": "소형 라벨용 행간 (13px 텍스트)" },
+      "medium":  { "value": "{Primitives.lineHeight.medium}",  "type": "lineHeights", "description": "라벨용 행간 (14px 텍스트)" },
+      "large":   { "value": "{Primitives.lineHeight.large}",   "type": "lineHeights", "description": "보조 본문용 행간 (15px 텍스트)" },
+      "xlarge":  { "value": "{Primitives.lineHeight.xlarge}",  "type": "lineHeights", "description": "본문 및 헤드라인용 행간 (16-17px 텍스트)" },
+      "2xlarge": { "value": "{Primitives.lineHeight.2xlarge}", "type": "lineHeights", "description": "heading용 행간 (20px 텍스트)" },
+      "3xlarge": { "value": "{Primitives.lineHeight.3xlarge}", "type": "lineHeights", "description": "title3용 행간 (24px 텍스트)" },
+      "4xlarge": { "value": "{Primitives.lineHeight.4xlarge}", "type": "lineHeights", "description": "title2용 행간 (28px 텍스트)" },
+      "5xlarge": { "value": "{Primitives.lineHeight.5xlarge}", "type": "lineHeights", "description": "title1용 행간 (32px 텍스트)" }
+    },
+    "spacing": {
+      "xsmall":  { "value": "{Primitives.spacing.xsmall}",  "type": "spacing", "description": "최소 간격 (아이콘-텍스트 등)" },
+      "small":   { "value": "{Primitives.spacing.small}",   "type": "spacing", "description": "소형 간격 (인접 요소 간)" },
+      "medium":  { "value": "{Primitives.spacing.medium}",  "type": "spacing", "description": "중간 간격 (카드 내부 패딩 등)" },
+      "large":   { "value": "{Primitives.spacing.large}",   "type": "spacing", "description": "기본 간격 (섹션 간격, 화면 마진)" },
+      "xlarge":  { "value": "{Primitives.spacing.xlarge}",  "type": "spacing", "description": "넓은 간격 (섹션 구분)" },
+      "2xlarge": { "value": "{Primitives.spacing.2xlarge}", "type": "spacing", "description": "대형 간격 (주요 영역 구분)" },
+      "3xlarge": { "value": "{Primitives.spacing.3xlarge}", "type": "spacing", "description": "초대형 간격 (페이지 상단 여백)" },
+      "4xlarge": { "value": "{Primitives.spacing.4xlarge}", "type": "spacing", "description": "최대 간격 (레이아웃 대구간)" }
+    },
+    "borderRadius": {
+      "xsmall": { "value": "{Primitives.borderRadius.xsmall}", "type": "borderRadius", "description": "최소 라운딩 (태그, 칩 xsmall)" },
+      "small":  { "value": "{Primitives.borderRadius.small}",  "type": "borderRadius", "description": "소형 라운딩 (버튼 small, 칩)" },
+      "medium": { "value": "{Primitives.borderRadius.medium}", "type": "borderRadius", "description": "중간 라운딩 (버튼 medium/large, 카드)" },
+      "large":  { "value": "{Primitives.borderRadius.large}",  "type": "borderRadius", "description": "대형 라운딩 (모달, 바텀시트)" },
+      "xlarge": { "value": "{Primitives.borderRadius.xlarge}", "type": "borderRadius", "description": "초대형 라운딩 (필 형태 요소)" },
+      "full":   { "value": "{Primitives.borderRadius.full}",   "type": "borderRadius", "description": "완전 원형 (아바타, 원형 버튼)" }
+    }
+  },
+
+  "Components": {
+    "button": {
+      "size": {
+        "small": {
+          "height":            { "value": "36",  "type": "sizing",       "description": "버튼 Small 높이" },
+          "paddingHorizontal": { "value": "14",  "type": "spacing",      "description": "버튼 Small 좌우 패딩" },
+          "fontSize":          { "value": "{Semantics.fontSize.small}",  "type": "fontSizes",    "description": "버튼 Small 폰트 사이즈" },
+          "iconSize":          { "value": "16",  "type": "sizing",       "description": "버튼 Small 아이콘 사이즈" },
+          "radius":            { "value": "{Semantics.borderRadius.small}", "type": "borderRadius", "description": "버튼 Small 라운딩" }
+        },
+        "medium": {
+          "height":            { "value": "44",  "type": "sizing",       "description": "버튼 Medium 높이" },
+          "paddingHorizontal": { "value": "18",  "type": "spacing",      "description": "버튼 Medium 좌우 패딩" },
+          "fontSize":          { "value": "{Semantics.fontSize.medium}", "type": "fontSizes",    "description": "버튼 Medium 폰트 사이즈" },
+          "iconSize":          { "value": "20",  "type": "sizing",       "description": "버튼 Medium 아이콘 사이즈" },
+          "radius":            { "value": "{Semantics.borderRadius.medium}", "type": "borderRadius", "description": "버튼 Medium 라운딩" }
+        },
+        "large": {
+          "height":            { "value": "52",  "type": "sizing",       "description": "버튼 Large 높이" },
+          "paddingHorizontal": { "value": "24",  "type": "spacing",      "description": "버튼 Large 좌우 패딩" },
+          "fontSize":          { "value": "{Semantics.fontSize.large}",  "type": "fontSizes",    "description": "버튼 Large 폰트 사이즈" },
+          "iconSize":          { "value": "24",  "type": "sizing",       "description": "버튼 Large 아이콘 사이즈" },
+          "radius":            { "value": "{Semantics.borderRadius.medium}", "type": "borderRadius", "description": "버튼 Large 라운딩" }
+        }
+      },
+      "color": {
+        "primary": {
+          "solid": {
+            "background":         { "value": "{Semantics.role.brand}",                    "type": "color", "description": "Primary Solid 배경색" },
+            "content":            { "value": "{Semantics.content.onColor}",               "type": "color", "description": "Primary Solid 콘텐츠 색상" },
+            "backgroundPressed":  { "value": "{Semantics.role.brandPressed}",             "type": "color", "description": "Primary Solid 눌림 배경" },
+            "backgroundHovered":  { "value": "{Primitives.Brand.mint40}",                 "type": "color", "description": "Primary Solid 호버 배경" },
+            "backgroundDisabled": { "value": "{Semantics.color.background.disabled}",     "type": "color", "description": "Primary Solid 비활성 배경" },
+            "contentDisabled":    { "value": "{Semantics.content.tertiary}",              "type": "color", "description": "Primary Solid 비활성 콘텐츠" }
+          },
+          "outlined": {
+            "background":         { "value": "transparent",                                "type": "color", "description": "Primary Outlined 배경 (투명)" },
+            "content":            { "value": "{Semantics.role.brand}",                     "type": "color", "description": "Primary Outlined 콘텐츠 색상" },
+            "border":             { "value": "{Semantics.role.brand}",                     "type": "color", "description": "Primary Outlined 테두리" },
+            "backgroundPressed":  { "value": "{Primitives.Brand.mint99}",                  "type": "color", "description": "Primary Outlined 눌림 배경" },
+            "backgroundHovered":  { "value": "{Primitives.Brand.mint99}",                  "type": "color", "description": "Primary Outlined 호버 배경" },
+            "backgroundDisabled": { "value": "transparent",                                "type": "color", "description": "Primary Outlined 비활성 배경" },
+            "contentDisabled":    { "value": "{Semantics.content.tertiary}",               "type": "color", "description": "Primary Outlined 비활성 콘텐츠" },
+            "borderDisabled":     { "value": "{Semantics.line.default}",                   "type": "color", "description": "Primary Outlined 비활성 테두리" }
+          }
+        },
+        "assistive": {
+          "solid": {
+            "background":         { "value": "{Semantics.color.background.disabled}",      "type": "color", "description": "Assistive Solid 배경색" },
+            "content":            { "value": "{Semantics.content.primary}",                "type": "color", "description": "Assistive Solid 콘텐츠 색상" },
+            "backgroundPressed":  { "value": "{Primitives.Mono.coolNeutral90}",            "type": "color", "description": "Assistive Solid 눌림 배경" },
+            "backgroundHovered":  { "value": "{Primitives.Mono.coolNeutral95}",            "type": "color", "description": "Assistive Solid 호버 배경" },
+            "backgroundDisabled": { "value": "{Semantics.color.background.disabled}",      "type": "color", "description": "Assistive Solid 비활성 배경" },
+            "contentDisabled":    { "value": "{Semantics.content.tertiary}",               "type": "color", "description": "Assistive Solid 비활성 콘텐츠" }
+          },
+          "outlined": {
+            "background":         { "value": "transparent",                                "type": "color", "description": "Assistive Outlined 배경 (투명)" },
+            "content":            { "value": "{Semantics.color.text.primary}",             "type": "color", "description": "Assistive Outlined 콘텐츠 색상" },
+            "border":             { "value": "{Semantics.line.active}",                    "type": "color", "description": "Assistive Outlined 테두리" },
+            "backgroundPressed":  { "value": "{Primitives.Mono.coolNeutral97}",            "type": "color", "description": "Assistive Outlined 눌림 배경" },
+            "backgroundHovered":  { "value": "{Primitives.Mono.coolNeutral99}",            "type": "color", "description": "Assistive Outlined 호버 배경" },
+            "backgroundDisabled": { "value": "transparent",                                "type": "color", "description": "Assistive Outlined 비활성 배경" },
+            "contentDisabled":    { "value": "{Semantics.content.tertiary}",               "type": "color", "description": "Assistive Outlined 비활성 콘텐츠" },
+            "borderDisabled":     { "value": "{Semantics.line.default}",                   "type": "color", "description": "Assistive Outlined 비활성 테두리" }
+          }
+        }
+      }
+    },
+    "textButton": {
+      "size": {
+        "small": {
+          "fontSize":   { "value": "{Semantics.fontSize.small}",      "type": "fontSizes",   "description": "TextButton Small 폰트 사이즈 (13px)" },
+          "lineHeight": { "value": "{Semantics.lineHeight.small}",    "type": "lineHeights", "description": "TextButton Small 행간" }
+        },
+        "medium": {
+          "fontSize":   { "value": "{Semantics.fontSize.medium}",     "type": "fontSizes",   "description": "TextButton Medium 폰트 사이즈 (15px)" },
+          "lineHeight": { "value": "{Semantics.lineHeight.large}",    "type": "lineHeights", "description": "TextButton Medium 행간" }
+        }
+      },
+      "color": {
+        "primary": {
+          "content":         { "value": "{Semantics.color.text.brand}",    "type": "color", "description": "TextButton Primary 콘텐츠" },
+          "contentPressed":  { "value": "{Semantics.role.brandPressed}",   "type": "color", "description": "TextButton Primary 눌림" },
+          "contentHovered":  { "value": "{Primitives.Brand.mint40}",       "type": "color", "description": "TextButton Primary 호버" },
+          "contentDisabled": { "value": "{Semantics.color.text.tertiary}", "type": "color", "description": "TextButton Primary 비활성" }
+        },
+        "assistive": {
+          "content":         { "value": "{Semantics.color.text.secondary}",  "type": "color", "description": "TextButton Assistive 콘텐츠" },
+          "contentPressed":  { "value": "{Primitives.Mono.coolNeutral30}",   "type": "color", "description": "TextButton Assistive 눌림" },
+          "contentHovered":  { "value": "{Primitives.Mono.coolNeutral40}",   "type": "color", "description": "TextButton Assistive 호버" },
+          "contentDisabled": { "value": "{Semantics.color.text.tertiary}",   "type": "color", "description": "TextButton Assistive 비활성" }
+        }
+      }
+    },
+    "chip": {
+      "size": {
+        "xsmall": {
+          "height":            { "value": "24", "type": "sizing",       "description": "Chip XSmall 높이" },
+          "paddingHorizontal": { "value": "8",  "type": "spacing",      "description": "Chip XSmall 좌우 패딩" },
+          "fontSize":          { "value": "{Semantics.fontSize.xsmall}", "type": "fontSizes",    "description": "Chip XSmall 폰트 사이즈" },
+          "iconSize":          { "value": "12", "type": "sizing",       "description": "Chip XSmall 아이콘 사이즈" },
+          "radius":            { "value": "{Semantics.borderRadius.xsmall}", "type": "borderRadius", "description": "Chip XSmall 라운딩" }
+        },
+        "small": {
+          "height":            { "value": "28", "type": "sizing",       "description": "Chip Small 높이" },
+          "paddingHorizontal": { "value": "10", "type": "spacing",      "description": "Chip Small 좌우 패딩" },
+          "fontSize":          { "value": "{Semantics.fontSize.xsmall}", "type": "fontSizes",    "description": "Chip Small 폰트 사이즈" },
+          "iconSize":          { "value": "14", "type": "sizing",       "description": "Chip Small 아이콘 사이즈" },
+          "radius":            { "value": "{Semantics.borderRadius.small}", "type": "borderRadius", "description": "Chip Small 라운딩" }
+        },
+        "medium": {
+          "height":            { "value": "32", "type": "sizing",       "description": "Chip Medium 높이" },
+          "paddingHorizontal": { "value": "12", "type": "spacing",      "description": "Chip Medium 좌우 패딩" },
+          "fontSize":          { "value": "{Semantics.fontSize.small}",  "type": "fontSizes",    "description": "Chip Medium 폰트 사이즈" },
+          "iconSize":          { "value": "16", "type": "sizing",       "description": "Chip Medium 아이콘 사이즈" },
+          "radius":            { "value": "{Semantics.borderRadius.small}", "type": "borderRadius", "description": "Chip Medium 라운딩" }
+        },
+        "large": {
+          "height":            { "value": "38", "type": "sizing",       "description": "Chip Large 높이" },
+          "paddingHorizontal": { "value": "14", "type": "spacing",      "description": "Chip Large 좌우 패딩" },
+          "fontSize":          { "value": "{Semantics.fontSize.medium}", "type": "fontSizes",    "description": "Chip Large 폰트 사이즈" },
+          "iconSize":          { "value": "18", "type": "sizing",       "description": "Chip Large 아이콘 사이즈" },
+          "radius":            { "value": "{Semantics.borderRadius.medium}", "type": "borderRadius", "description": "Chip Large 라운딩" }
+        }
+      },
+      "variant": {
+        "solid": {
+          "inactive": {
+            "background": { "value": "{Semantics.surface.tertiary}",       "type": "color", "description": "Chip Solid 비활성 배경" },
+            "content":    { "value": "{Primitives.Mono.coolNeutral40}",    "type": "color", "description": "Chip Solid 비활성 콘텐츠" }
+          },
+          "active": {
+            "background": { "value": "{Semantics.surface.inverse}",        "type": "color", "description": "Chip Solid 활성 배경" },
+            "content":    { "value": "{Semantics.content.onColor}",        "type": "color", "description": "Chip Solid 활성 콘텐츠" }
+          },
+          "disabled": {
+            "background": { "value": "{Semantics.surface.tertiary}",       "type": "color", "description": "Chip Solid 비활성화 배경" },
+            "content":    { "value": "{Semantics.content.tertiary}",       "type": "color", "description": "Chip Solid 비활성화 콘텐츠" }
+          }
+        },
+        "outlined": {
+          "inactive": {
+            "background": { "value": "transparent",                        "type": "color", "description": "Chip Outlined 비활성 배경" },
+            "content":    { "value": "{Primitives.Mono.coolNeutral40}",    "type": "color", "description": "Chip Outlined 비활성 콘텐츠" },
+            "border":     { "value": "{Semantics.line.active}",            "type": "color", "description": "Chip Outlined 비활성 테두리" }
+          },
+          "active": {
+            "background": { "value": "transparent",                        "type": "color", "description": "Chip Outlined 활성 배경" },
+            "content":    { "value": "{Semantics.role.brand}",             "type": "color", "description": "Chip Outlined 활성 콘텐츠" },
+            "border":     { "value": "{Semantics.role.brand}",             "type": "color", "description": "Chip Outlined 활성 테두리" }
+          },
+          "disabled": {
+            "background": { "value": "transparent",                        "type": "color", "description": "Chip Outlined 비활성화 배경" },
+            "content":    { "value": "{Semantics.content.tertiary}",       "type": "color", "description": "Chip Outlined 비활성화 콘텐츠" },
+            "border":     { "value": "{Semantics.line.default}",           "type": "color", "description": "Chip Outlined 비활성화 테두리" }
+          }
+        }
+      }
+    },
+    "actionArea": {
+      "padding": { "value": "{Semantics.spacing.large}", "type": "spacing", "description": "ActionArea 내부 패딩" },
+      "gap":     { "value": "{Semantics.spacing.small}",  "type": "spacing", "description": "ActionArea 버튼 간 간격" }
+    }
+  }
+}

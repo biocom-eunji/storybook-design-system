@@ -351,6 +351,9 @@ export const LINK = {
   Divider:     `${SB}data-display-divider--docs`,
   ProgressBar: `${SB}feedback-progressbar--docs`,
   Skeleton:    `${SB}feedback-skeleton--docs`,
+  TextField:   `${SB}input-textfield--docs`,
+  Opacity:     `${SB}design-tokens-opacity--docs`,
+  Shadow:      `${SB}design-tokens-shadow--docs`,
   ColorPalette:`${SB}design-tokens-color-palette--docs`,
   ColorTokens: `${SB}design-tokens-color-tokens--docs`,
   NamingConv:  `${SB}getting-started-naming-convention--docs`,
@@ -384,6 +387,138 @@ export const LINK = {
 </div>
 
 {/* ══════════════════════════════════════════════════════ */}
+{/* v1.4.0 — 2026-04-21                                   */}
+{/* ══════════════════════════════════════════════════════ */}
+
+<div className="version-header">
+  <span className="version-badge minor">v1.4.0</span>
+  <span className="version-date">2026-04-21</span>
+</div>
+
+<details className="toggle-card" open>
+  <summary>
+    <CaretIcon />
+    <span className="emoji">✨</span>
+    <span className="title">Features</span>
+    <span className="count">4</span>
+  </summary>
+  <div className="toggle-body">
+    <div className="component-tags">
+      <span className="component-tag new">TextField</span>
+      <span className="component-tag new">TokenSpecTable</span>
+      <span className="component-tag new">Opacity</span>
+      <span className="component-tag new">figma-tokens.json</span>
+    </div>
+
+    <div className="change-item">
+      <span className="name"><a href={LINK.TextField}>TextField</a></span>
+      <span className="desc">다중행 입력 전용 스토리 신규 추가. <code>InputField</code>의 <code>multiline</code> 모드 분리 문서화</span>
+    </div>
+    <div className="change-item">
+      <span className="name"><a href={LINK.Opacity}>Opacity Tokens</a></span>
+      <span className="desc">Figma Opacity 15단계 스케일 카탈로그 스토리 신규 추가. 체크무늬 배경 시각화 포함</span>
+    </div>
+    <div className="change-item">
+      <span className="name-plain">TokenSpecTable</span>
+      <span className="desc">3열 구조(속성/시맨틱 토큰/값) 재사용 컴포넌트 신규 생성. 색상 스와치 + opacity 시각화 지원</span>
+    </div>
+    <div className="change-item">
+      <span className="name-plain">figma-tokens.json</span>
+      <span className="desc">Figma Tokens Studio용 JSON 파일 신규 생성. Primitives(Mono/Brand/Semantic/Accent) → Semantics → Components 3단계 구조</span>
+    </div>
+  </div>
+</details>
+
+<details className="toggle-card" open>
+  <summary>
+    <CaretIcon />
+    <span className="emoji">♻️</span>
+    <span className="title">Refactored</span>
+    <span className="count">12</span>
+  </summary>
+  <div className="toggle-body">
+    <div className="component-tags">
+      <span className="component-tag updated">Button</span>
+      <span className="component-tag updated">TextButton</span>
+      <span className="component-tag updated">InputField</span>
+      <span className="component-tag updated">Checkbox</span>
+      <span className="component-tag updated">Radio</span>
+      <span className="component-tag updated">Switch</span>
+      <span className="component-tag updated">Chip</span>
+      <span className="component-tag updated">Toast</span>
+      <span className="component-tag updated">Modal</span>
+      <span className="component-tag updated">Shadow</span>
+    </div>
+
+    <div className="change-item">
+      <span className="name"><a href={LINK.Button}>Button</a></span>
+      <span className="desc">스토리 전면 재생성. <code>TokenSpecTable</code> 기반 디자인 스펙, 하드코딩 hex/px 0건 달성</span>
+    </div>
+    <div className="change-item">
+      <span className="name"><a href={LINK.TextButton}>TextButton</a></span>
+      <span className="desc">스토리 전면 재생성. <code>TokenSpecTable</code> 기반 디자인 스펙, color/size 토큰 매핑 문서화</span>
+    </div>
+    <div className="change-item">
+      <span className="name"><a href={LINK.InputField}>InputField</a></span>
+      <span className="desc">스토리 전면 재생성. 상태별(Default/Focus/Filled/Error/Success/Disabled) 토큰 스펙 문서화</span>
+    </div>
+    <div className="change-item">
+      <span className="name"><a href={LINK.Checkbox}>Checkbox</a></span>
+      <span className="desc">스토리 전면 재생성. 인터랙티브 전체선택/개별선택 데모, indeterminate 상태 포함</span>
+    </div>
+    <div className="change-item">
+      <span className="name"><a href={LINK.Radio}>Radio</a></span>
+      <span className="desc">스토리 전면 재생성. RadioGroup 패턴 데모, Outer/Inner 토큰 분리 문서화</span>
+    </div>
+    <div className="change-item">
+      <span className="name"><a href={LINK.Switch}>Switch</a></span>
+      <span className="desc">스토리 전면 재생성. 설정 화면 패턴 인터랙티브 데모, Track/Thumb 토큰 문서화</span>
+    </div>
+    <div className="change-item">
+      <span className="name"><a href={LINK.Chip}>Chip</a></span>
+      <span className="desc">스토리 전면 재생성. Filter Chip 패턴 데모, 텍스트 토큰 <code>color/text/secondary</code>/<code>tertiary</code>로 정규화</span>
+    </div>
+    <div className="change-item">
+      <span className="name"><a href={LINK.Toast}>Toast</a></span>
+      <span className="desc">스토리 전면 재생성. 인라인 미리보기 방식으로 전환, opacity 토큰 참조 적용</span>
+    </div>
+    <div className="change-item">
+      <span className="name"><a href={LINK.Modal}>Modal</a></span>
+      <span className="desc">스토리 전면 재생성. 인라인 미리보기 + 인터랙티브 데모, <code>Button</code>/<code>InputField</code> import 재사용</span>
+    </div>
+    <div className="change-item">
+      <span className="name"><a href={LINK.Shadow}>Shadow</a></span>
+      <span className="desc">Level 1 삭제, Level 2→Level 1, Level 3→Level 2로 명칭 변경. 스펙 테이블 업데이트</span>
+    </div>
+    <div className="change-item">
+      <span className="name-plain">storyHelpers</span>
+      <span className="desc"><code>opacity: 0.85</code> 하드코딩 → <code>opacity[88]</code> 토큰 참조로 교체</span>
+    </div>
+    <div className="change-item">
+      <span className="name-plain">storySort</span>
+      <span className="desc">사이드바 정렬에 <code>TextField</code>, <code>Opacity</code> 추가</span>
+    </div>
+  </div>
+</details>
+
+<details className="toggle-card" open>
+  <summary>
+    <CaretIcon />
+    <span className="emoji">🔧</span>
+    <span className="title">Infra</span>
+    <span className="count">1</span>
+  </summary>
+  <div className="toggle-body">
+    <div className="change-item">
+      <span className="name-plain">public/</span>
+      <span className="desc">Storybook <code>staticDirs</code> 참조 누락으로 인한 실행 오류 해결. 빈 <code>public/</code> 디렉토리 생성</span>
+    </div>
+  </div>
+</details>
+
+<hr className="version-divider" />
+
+{/* ══════════════════════════════════════════════════════ */}
 {/* v1.3.1 — 2026-04-14                                   */}
 {/* ══════════════════════════════════════════════════════ */}
 
@@ -392,7 +527,7 @@ export const LINK = {
   <span className="version-date">2026-04-14</span>
 </div>
 
-<details className="toggle-card" open>
+<details className="toggle-card">
   <summary>
     <CaretIcon />
     <span className="emoji">✨</span>

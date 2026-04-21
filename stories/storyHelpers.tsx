@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { View, Text, Pressable, StyleSheet } from 'react-native';
 import {
-  fontSize, fontWeight, spacing, radius, semanticColor,
+  fontSize, fontWeight, spacing, radius, semanticColor, opacity,
 } from '../src/tokens/theme';
 
 // ─── Section ─────────────────────────────────────────────
@@ -307,7 +307,7 @@ const h = StyleSheet.create({
     cursor: 'pointer' as any,
   },
   codeBlockPressed: {
-    opacity: 0.85,
+    opacity: opacity[88],
   },
   codeText: {
     fontSize: fontSize.small,

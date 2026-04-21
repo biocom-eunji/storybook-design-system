@@ -2,8 +2,34 @@ import React from 'react';
 import { View } from 'react-native';
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import { TextButton } from '../src/components/TextButton';
-import { Section, StateLabel, Row, Col, SpecTable, CodeBlock, CompareGrid, Divider } from './storyHelpers';
-import { spacing, coolNeutral, mint } from '../src/tokens/theme';
+import {
+  Section, StateLabel, Row, Col, CodeBlock, CompareGrid, Divider,
+} from './storyHelpers';
+import { TokenSpecTable } from '../src/storybook-components/TokenSpecTable';
+import { spacing, textButtonToken } from '../src/tokens/theme';
+
+// ─── 토큰 매핑 테이블 (Single Source of Truth) ──────────────
+// Figma 시맨틱 토큰명과 theme.ts textButtonToken의 1:1 매핑
+
+const TOKEN_MAP = {
+  primary: {
+    content:         'color/text/brand',
+    contentPressed:  'role/brandPressed',
+    contentDisabled: 'color/text/tertiary',
+  },
+  assistive: {
+    content:         'color/text/secondary',
+    contentPressed:  'Mono/coolNeutral30',
+    contentDisabled: 'color/text/tertiary',
+  },
+} as const;
+
+const SIZE_TOKEN_MAP = {
+  small:  { typography: 'Label 2', fontSize: 'fontSize/small',  lineHeight: 'lineHeight/small' },
+  medium: { typography: 'Body 2',  fontSize: 'fontSize/medium', lineHeight: 'lineHeight/large' },
+} as const;
+
+// ─── Meta ────────────────────────────────────────────────────
 
 const meta: Meta<typeof TextButton> = {
   title: 'General/TextButton',
@@ -12,16 +38,25 @@ const meta: Meta<typeof TextButton> = {
     color: {
       control: 'select',
       options: ['primary', 'assistive'],
-      description: '버튼 컬러',
+      description: '텍스트 버튼 컬러 (Figma: Color)',
     },
     size: {
       control: 'select',
       options: ['small', 'medium'],
-      description: '버튼 크기',
+      description: '텍스트 버튼 크기 (Figma: Size)',
     },
-    label: { control: 'text', description: '버튼 텍스트' },
-    disabled: { control: 'boolean', description: '비활성화 상태' },
-    loading: { control: 'boolean', description: '로딩 상태' },
+    disabled: {
+      control: 'boolean',
+      description: '비활성화 상태 (Figma: Disable)',
+    },
+    loading: {
+      control: 'boolean',
+      description: '로딩 상태',
+    },
+    label: {
+      control: 'text',
+      description: '버튼 텍스트',
+    },
   },
   tags: ['autodocs'],
 };
@@ -29,212 +64,290 @@ const meta: Meta<typeof TextButton> = {
 export default meta;
 type Story = StoryObj<typeof TextButton>;
 
-// ─── 1. Playground ──────────────────────────────────────────
+// ─── 1. Playground ───────────────────────────────────────────
 
 export const Playground: Story = {
   args: {
-    label: '텍스트 버튼',
+    label: '더보기',
     color: 'primary',
     size: 'medium',
     disabled: false,
     loading: false,
   },
+  parameters: {
+    docs: {
+      description: {
+        story: '**적용 토큰**: `color/text/brand`, `Body 2`, 배경 없음 (transparent), 밑줄 스타일',
+      },
+    },
+  },
 };
 
-// ─── 2. 모든 변형 ──────────────────────────────────────────
+// ─── 2. 모든 변형 (Color × Size 매트릭스) ────────────────────
 
 export const AllVariants: Story = {
   name: '모든 변형',
   render: () => (
     <View style={{ gap: spacing['3xlarge'] }}>
       <Section
-        title="TextButton"
-        description="배경이나 테두리 없이 텍스트만으로 동작하는 버튼입니다."
+        title="모든 변형"
+        description="color(primary/assistive) × size(small/medium)의 모든 조합을 확인합니다."
       >
-        <Col gap={spacing['2xlarge']}>
-          {/* Primary */}
-          <Col gap={spacing.medium}>
-            <StateLabel>PRIMARY</StateLabel>
-            <Row gap={spacing.xlarge}>
-              <Col gap={spacing.xsmall}>
-                <StateLabel>Medium</StateLabel>
-                <TextButton label="텍스트" color="primary" size="medium" />
+        <Row gap={spacing['2xlarge']} wrap>
+          {(['primary', 'assistive'] as const).map(color =>
+            (['small', 'medium'] as const).map(size => (
+              <Col key={`${color}-${size}`} gap={spacing.small}>
+                <StateLabel>{`${color} / ${size}`}</StateLabel>
+                <Row gap={spacing.large}>
+                  <TextButton label="더보기" color={color} size={size} />
+                  <TextButton label="더보기" color={color} size={size} disabled />
+                </Row>
               </Col>
-              <Col gap={spacing.xsmall}>
-                <StateLabel>Small</StateLabel>
-                <TextButton label="텍스트" color="primary" size="small" />
-              </Col>
-              <Col gap={spacing.xsmall}>
-                <StateLabel>비활성화</StateLabel>
-                <TextButton label="텍스트" color="primary" size="medium" disabled />
-              </Col>
-            </Row>
-          </Col>
-
-          <Divider />
-
-          {/* Assistive */}
-          <Col gap={spacing.medium}>
-            <StateLabel>ASSISTIVE</StateLabel>
-            <Row gap={spacing.xlarge}>
-              <Col gap={spacing.xsmall}>
-                <StateLabel>Medium</StateLabel>
-                <TextButton label="텍스트" color="assistive" size="medium" />
-              </Col>
-              <Col gap={spacing.xsmall}>
-                <StateLabel>Small</StateLabel>
-                <TextButton label="텍스트" color="assistive" size="small" />
-              </Col>
-              <Col gap={spacing.xsmall}>
-                <StateLabel>비활성화</StateLabel>
-                <TextButton label="텍스트" color="assistive" size="medium" disabled />
-              </Col>
-            </Row>
-          </Col>
-        </Col>
+            ))
+          )}
+        </Row>
       </Section>
     </View>
   ),
+  parameters: {
+    docs: {
+      description: {
+        story: [
+          '**Primary**: `color/text/brand` (민트)',
+          '**Assistive**: `color/text/secondary` (그레이)',
+          '**Disabled 공통**: `color/text/tertiary`',
+        ].join('\n\n'),
+      },
+    },
+  },
 };
 
-// ─── 3. 상태 ────────────────────────────────────────────────
+// ─── 3. 크기 비교 ────────────────────────────────────────────
+
+export const Sizes: Story = {
+  name: '크기 비교',
+  render: () => (
+    <View style={{ gap: spacing['3xlarge'] }}>
+      <Section
+        title="크기 비교"
+        description="Small(Label 2)과 Medium(Body 2) 두 가지 크기를 비교합니다."
+      >
+        <Row gap={spacing.xlarge} align="flex-end">
+          {(['small', 'medium'] as const).map(size => (
+            <Col key={size} gap={spacing.small}>
+              <StateLabel>{`${size} — ${SIZE_TOKEN_MAP[size].typography}`}</StateLabel>
+              <TextButton label="더보기" color="primary" size={size} />
+            </Col>
+          ))}
+        </Row>
+      </Section>
+    </View>
+  ),
+  parameters: {
+    docs: {
+      description: {
+        story: [
+          '**Small**: `Label 2` (13px · Medium · lineHeight 18px)',
+          '**Medium**: `Body 2` (15px · Regular · lineHeight 22px)',
+        ].join('\n\n'),
+      },
+    },
+  },
+};
+
+// ─── 4. 상태 ─────────────────────────────────────────────────
 
 export const States: Story = {
   name: '상태',
   render: () => (
     <View style={{ gap: spacing['3xlarge'] }}>
-      <Section title="상태별 비교" description="각 상태에서의 TextButton 모습을 비교합니다.">
-        <Col gap={spacing['2xlarge']}>
-          <Col gap={spacing.medium}>
-            <StateLabel>PRIMARY</StateLabel>
-            <CompareGrid
-              items={[
-                {
-                  label: '기본',
-                  content: <TextButton label="텍스트" color="primary" />,
-                },
-                {
-                  label: '비활성화',
-                  content: <TextButton label="텍스트" color="primary" disabled />,
-                },
-                {
-                  label: '로딩',
-                  content: <TextButton label="텍스트" color="primary" loading />,
-                },
-              ]}
-            />
-          </Col>
+      <Section
+        title="상태"
+        description="기본, 비활성화, 로딩 상태를 확인합니다. 눌림(Pressed) 상태는 인터랙션으로 확인하세요."
+      >
+        <CompareGrid
+          items={[
+            {
+              label: 'Primary 기본',
+              content: <TextButton label="더보기" color="primary" size="medium" />,
+            },
+            {
+              label: 'Primary 비활성화',
+              content: <TextButton label="더보기" color="primary" size="medium" disabled />,
+            },
+            {
+              label: 'Primary 로딩',
+              content: <TextButton label="더보기" color="primary" size="medium" loading />,
+            },
+          ]}
+        />
 
-          <Divider />
+        <Divider />
 
-          <Col gap={spacing.medium}>
-            <StateLabel>ASSISTIVE</StateLabel>
-            <CompareGrid
-              items={[
-                {
-                  label: '기본',
-                  content: <TextButton label="텍스트" color="assistive" />,
-                },
-                {
-                  label: '비활성화',
-                  content: <TextButton label="텍스트" color="assistive" disabled />,
-                },
-                {
-                  label: '로딩',
-                  content: <TextButton label="텍스트" color="assistive" loading />,
-                },
-              ]}
-            />
-          </Col>
-        </Col>
+        <CompareGrid
+          items={[
+            {
+              label: 'Assistive 기본',
+              content: <TextButton label="더보기" color="assistive" size="medium" />,
+            },
+            {
+              label: 'Assistive 비활성화',
+              content: <TextButton label="더보기" color="assistive" size="medium" disabled />,
+            },
+            {
+              label: 'Assistive 로딩',
+              content: <TextButton label="더보기" color="assistive" size="medium" loading />,
+            },
+          ]}
+        />
       </Section>
     </View>
   ),
+  parameters: {
+    docs: {
+      description: {
+        story: [
+          '**기본 Primary**: `color/text/brand`',
+          '**눌림 Primary**: `role/brandPressed`',
+          '**비활성화**: `color/text/tertiary`',
+          '**로딩**: content 토큰 색상으로 ActivityIndicator 표시',
+        ].join('\n\n'),
+      },
+    },
+  },
 };
 
-// ─── 4. 디자인 스펙 ─────────────────────────────────────────
+// ─── 5. 프리셋 ───────────────────────────────────────────────
+
+export const PrimaryMedium: Story = {
+  name: 'Primary / Medium',
+  args: { label: '더보기', color: 'primary', size: 'medium' },
+  parameters: { docs: { description: { story: '`color/text/brand` · `Body 2` · 밑줄' } } },
+};
+
+export const PrimarySmall: Story = {
+  name: 'Primary / Small',
+  args: { label: '더보기', color: 'primary', size: 'small' },
+  parameters: { docs: { description: { story: '`color/text/brand` · `Label 2` · 밑줄' } } },
+};
+
+export const AssistiveMedium: Story = {
+  name: 'Assistive / Medium',
+  args: { label: '더보기', color: 'assistive', size: 'medium' },
+  parameters: { docs: { description: { story: '`color/text/secondary` · `Body 2` · 밑줄' } } },
+};
+
+export const AssistiveSmall: Story = {
+  name: 'Assistive / Small',
+  args: { label: '더보기', color: 'assistive', size: 'small' },
+  parameters: { docs: { description: { story: '`color/text/secondary` · `Label 2` · 밑줄' } } },
+};
+
+// ─── 6. 디자인 스펙 ──────────────────────────────────────────
 
 export const DesignSpec: Story = {
   name: '디자인 스펙',
-  render: () => (
-    <View style={{ gap: spacing['3xlarge'] }}>
-      <Section title="디자인 스펙" description="TextButton 컴포넌트의 디자인 토큰 명세입니다.">
-        <Col gap={spacing['2xlarge']}>
-          <SpecTable
-            title="사이즈별 스펙"
-            rows={[
-              { label: 'Small - fontSize', value: '13', token: 'textStyle.label2.fontSize' },
-              { label: 'Small - lineHeight', value: '18', token: 'textStyle.label2.lineHeight' },
-              { label: 'Small - letterSpacing', value: '0.25', token: 'textStyle.label2.letterSpacing' },
-              { label: 'Small - iconSize', value: '16', token: 'textButtonToken.size.small.iconSize' },
-              { label: 'Medium - fontSize', value: '15', token: 'textStyle.body2.fontSize' },
-              { label: 'Medium - lineHeight', value: '22', token: 'textStyle.body2.lineHeight' },
-              { label: 'Medium - letterSpacing', value: '0.14', token: 'textStyle.body2.letterSpacing' },
-              { label: 'Medium - iconSize', value: '20', token: 'textButtonToken.size.medium.iconSize' },
-            ]}
-          />
+  render: () => {
+    const colors = ['primary', 'assistive'] as const;
+    const sizes = ['small', 'medium'] as const;
 
-          <SpecTable
-            title="Primary 컬러"
-            rows={[
-              { label: '기본 콘텐츠', value: '#22C3BC', token: 'semanticColor.textBrand' },
-              { label: '눌림 콘텐츠', value: mint[30], token: 'mint[30] (palette 직접 참조)' },
-              { label: '비활성화 콘텐츠', value: coolNeutral[80], token: 'semanticColor.textTertiary' },
-            ]}
-          />
+    return (
+      <View style={{ gap: spacing['3xlarge'] }}>
+        <Section
+          title="디자인 스펙"
+          description="Figma 시맨틱 토큰 기준 TextButton 전체 조합 스펙입니다."
+          badge="디자인"
+        >
+          {colors.map(color => {
+            const ct = textButtonToken.color[color];
+            return (
+              <View key={color}>
+                <TokenSpecTable
+                  title={`color: ${color}`}
+                  rows={[
+                    { property: '배경색',           token: '—',                              value: 'transparent' },
+                    { property: '텍스트',           token: TOKEN_MAP[color].content,          value: ct.content,         type: 'color' },
+                    { property: '텍스트 (눌림)',     token: TOKEN_MAP[color].contentPressed,   value: ct.contentPressed,  type: 'color' },
+                    { property: '텍스트 (비활성)',   token: TOKEN_MAP[color].contentDisabled,  value: ct.contentDisabled, type: 'color' },
+                    { property: '텍스트 장식',       token: '—',                              value: 'underline' },
+                    { property: '아이콘-텍스트 간격', token: 'spacing/xsmall',                 value: spacing.xsmall,     type: 'size' },
+                  ]}
+                />
+                <Divider />
+              </View>
+            );
+          })}
 
-          <SpecTable
-            title="Assistive 컬러"
-            rows={[
-              { label: '기본 콘텐츠', value: '#70737C', token: 'semanticColor.textSecondary' },
-              { label: '눌림 콘텐츠', value: coolNeutral[30], token: 'coolNeutral[30] (palette 직접 참조)' },
-              { label: '비활성화 콘텐츠', value: coolNeutral[80], token: 'semanticColor.textTertiary' },
-            ]}
-          />
-        </Col>
-      </Section>
-    </View>
-  ),
+          {sizes.map(size => (
+            <TokenSpecTable
+              key={size}
+              title={`크기: ${size}`}
+              rows={[
+                { property: 'fontSize',   token: SIZE_TOKEN_MAP[size].fontSize,   value: textButtonToken.size[size].fontSize,   type: 'size' },
+                { property: 'lineHeight', token: SIZE_TOKEN_MAP[size].lineHeight,  value: textButtonToken.size[size].lineHeight, type: 'size' },
+                { property: '타이포',      token: SIZE_TOKEN_MAP[size].typography, value: SIZE_TOKEN_MAP[size].typography },
+              ]}
+            />
+          ))}
+        </Section>
+      </View>
+    );
+  },
+  parameters: {
+    docs: {
+      description: {
+        story: '디자이너·개발자를 위한 Figma 시맨틱 토큰 기준 전체 조합 스펙 문서입니다.',
+      },
+    },
+  },
 };
 
-// ─── 6. 사용 가이드 ─────────────────────────────────────────
+// ─── 7. 사용 가이드 ──────────────────────────────────────────
 
 export const Usage: Story = {
   name: '사용 가이드',
   render: () => (
     <View style={{ gap: spacing['3xlarge'] }}>
-      <Section title="사용 가이드" description="TextButton 컴포넌트의 import 및 사용 예시입니다.">
-        <Col gap={spacing.large}>
-          <CodeBlock
-            title="Import"
-            code={`import { TextButton } from '@design-system/components/TextButton';`}
-          />
+      <Section
+        title="사용 가이드"
+        description="개발자를 위한 TextButton 컴포넌트 사용 예시입니다."
+        badge="개발"
+      >
+        <CodeBlock
+          title="Import"
+          code={`import { TextButton } from '@design-system/components/TextButton';`}
+        />
 
-          <CodeBlock
-            title="기본 사용"
-            code={`<TextButton label="확인" onPress={handlePress} />`}
-          />
+        <CodeBlock
+          title="기본 사용"
+          code={`<TextButton label="더보기" onPress={handlePress} />`}
+        />
 
-          <CodeBlock
-            title="Assistive 스타일"
-            code={`<TextButton label="취소" color="assistive" onPress={handleCancel} />`}
-          />
+        <CodeBlock
+          title="Color 조합"
+          code={`<TextButton label="더보기" color="primary" />
+<TextButton label="건너뛰기" color="assistive" />`}
+        />
 
-          <CodeBlock
-            title="Small 사이즈"
-            code={`<TextButton label="더보기" size="small" />`}
-          />
+        <CodeBlock
+          title="크기 지정"
+          code={`<TextButton label="Small" size="small" />
+<TextButton label="Medium" size="medium" />`}
+        />
 
-          <CodeBlock
-            title="비활성화 상태"
-            code={`<TextButton label="제출" disabled />`}
-          />
+        <CodeBlock
+          title="비활성화 & 로딩"
+          code={`<TextButton label="더보기" disabled />
+<TextButton label="로딩 중..." loading />`}
+        />
 
-          <CodeBlock
-            title="로딩 상태"
-            code={`<TextButton label="저장 중" loading />`}
-          />
-        </Col>
+        <CodeBlock
+          title="Button과 함께 사용 (ActionArea 패턴)"
+          code={`<View style={{ flexDirection: 'row', gap: spacing.medium, alignItems: 'center' }}>
+  <Button label="확인" variant="solid" color="primary" />
+  <TextButton label="건너뛰기" color="assistive" />
+</View>`}
+        />
       </Section>
     </View>
   ),

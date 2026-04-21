@@ -1,144 +1,329 @@
 import React, { useState } from 'react';
-import { View, Text, Pressable, TextInput } from 'react-native';
+import { View, Text } from 'react-native';
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import { Modal } from '../src/components/Modal';
-import { Section, StateLabel, Col, SpecTable, CodeBlock, Divider } from './storyHelpers';
-import { coolNeutral, mint, red, fontSize, fontWeight, spacing, radius, semanticColor } from '../src/tokens/theme';
+import { Button } from '../src/components/Button';
+import { InputField } from '../src/components/InputField';
+import { Section, CodeBlock, Divider } from './storyHelpers';
+import { TokenSpecTable } from '../src/storybook-components/TokenSpecTable';
+import {
+  spacing, semanticColor, radius, opacity, textStyle, shadow,
+  fontSize, fontWeight, palette, buttonToken,
+} from '../src/tokens/theme';
 
-const meta: Meta<typeof Modal> = {
+// ─── 토큰 매핑 테이블 (Single Source of Truth) ──────────────
+
+const CONTAINER_TOKEN_MAP = {
+  background:  { token: 'color/background/primary',  value: semanticColor.backgroundStatus },
+  radius:      { token: 'borderRadius/medium',        value: radius.medium },
+  shadow:      { token: 'Level 2',                    value: `offset(0,${shadow.level2.shadowOffset.height}) blur(${shadow.level2.shadowRadius}) opacity(${shadow.level2.shadowOpacity})` },
+  titleColor:  { token: 'color/text/primary',         value: semanticColor.textPrimary },
+  descColor:   { token: 'color/text/secondary',       value: semanticColor.textSecondary },
+  padding:     { token: 'spacing/2xlarge',             value: spacing['2xlarge'] },
+  buttonGap:   { token: 'spacing/small',               value: spacing.small },
+} as const;
+
+const SCRIM_TOKEN_MAP = {
+  background: { token: 'black',        value: palette.black },
+  opacity:    { token: 'opacity/43',    value: opacity[43] },
+} as const;
+
+// ─── 인라인 Modal 미리보기 (position: static) ────────────────
+
+function ModalPreview({
+  title,
+  description,
+  children,
+  primaryLabel,
+  secondaryLabel,
+  destructive,
+}: {
+  title?: string;
+  description?: string;
+  children?: React.ReactNode;
+  primaryLabel?: string;
+  secondaryLabel?: string;
+  destructive?: boolean;
+}) {
+  return (
+    <View style={{
+      backgroundColor: semanticColor.backgroundStatus,
+      borderRadius: radius.medium,
+      padding: spacing['2xlarge'],
+      width: 300,
+      shadowColor: palette.black,
+      shadowOffset: { width: 0, height: shadow.level2.shadowOffset.height },
+      shadowOpacity: shadow.level2.shadowOpacity,
+      shadowRadius: shadow.level2.shadowRadius,
+      elevation: shadow.level2.elevation,
+    }}>
+      {title && (
+        <Text style={{
+          fontSize: fontSize.large,
+          fontWeight: fontWeight.bold,
+          color: semanticColor.textPrimary,
+          textAlign: 'center',
+        }}>{title}</Text>
+      )}
+      {children ? (
+        <View style={{ marginTop: spacing.small }}>{children}</View>
+      ) : (
+        description && (
+          <Text style={{
+            fontSize: fontSize.medium,
+            color: semanticColor.textSecondary,
+            textAlign: 'center',
+            marginTop: spacing.small,
+          }}>{description}</Text>
+        )
+      )}
+      {(primaryLabel || secondaryLabel) && (
+        <View style={{ marginTop: spacing['2xlarge'], gap: spacing.small }}>
+          {primaryLabel && (
+            <View style={{
+              height: buttonToken.size.medium.height,
+              borderRadius: buttonToken.size.medium.radius,
+              backgroundColor: destructive ? semanticColor.backgroundError : semanticColor.backgroundBrand,
+              alignItems: 'center',
+              justifyContent: 'center',
+            }}>
+              <Text style={{
+                color: semanticColor.textOnColor,
+                fontSize: fontSize.medium,
+                fontWeight: fontWeight.semibold,
+              }}>{primaryLabel}</Text>
+            </View>
+          )}
+          {secondaryLabel && (
+            <Button label={secondaryLabel} variant="solid" color="assistive" size="medium" />
+          )}
+        </View>
+      )}
+    </View>
+  );
+}
+
+// ─── Meta ────────────────────────────────────────────────────
+
+const meta: Meta = {
   title: 'Feedback/Modal',
-  component: Modal,
-  argTypes: {
-    visible: { control: 'boolean', description: '표시 여부' },
-    title: { control: 'text', description: '대화상자 타이틀' },
-    description: { control: 'text', description: '본문 텍스트' },
-  },
   tags: ['autodocs'],
 };
 
 export default meta;
-type Story = StoryObj<typeof Modal>;
-
-const PreviewContainer = ({ children }: { children: React.ReactNode }) => (
-  <View style={{ height: 400, backgroundColor: semanticColor.backgroundSecondary, position: 'relative', overflow: 'hidden', borderRadius: radius.medium, justifyContent: 'center', alignItems: 'center' }}>
-    {children}
-  </View>
-);
+type Story = StoryObj;
 
 // ─── 1. Playground ───────────────────────────────────────────
 
 export const Playground: Story = {
-  args: {
-    visible: true,
-    title: '알림',
-    description: '변경 사항을 저장하시겠습니까?',
+  render: () => (
+    <View style={{ gap: spacing['3xlarge'] }}>
+      <Section
+        title="Playground"
+        description="Modal 기본 미리보기입니다."
+      >
+        <ModalPreview
+          title="변경사항 저장"
+          description="저장하지 않은 변경사항이 있습니다. 저장하시겠습니까?"
+          primaryLabel="저장"
+          secondaryLabel="취소"
+        />
+      </Section>
+    </View>
+  ),
+  parameters: {
+    docs: {
+      description: {
+        story: '**적용 토큰**: `color/background/primary`, `color/text/primary`, `borderRadius/medium`, `spacing/2xlarge`, `Level 2` shadow',
+      },
+    },
   },
-  render: (args) => {
-    const [visible, setVisible] = useState(args.visible);
+};
+
+// ─── 2. Confirmation ─────────────────────────────────────────
+
+export const Confirmation: Story = {
+  name: 'Confirmation',
+  render: () => (
+    <View style={{ gap: spacing['3xlarge'] }}>
+      <Section
+        title="Confirmation Modal"
+        description="기본 확인/취소 대화상자입니다."
+      >
+        <ModalPreview
+          title="로그아웃"
+          description="정말 로그아웃 하시겠습니까?"
+          primaryLabel="로그아웃"
+          secondaryLabel="취소"
+        />
+      </Section>
+    </View>
+  ),
+};
+
+// ─── 3. Destructive ──────────────────────────────────────────
+
+export const Destructive: Story = {
+  name: 'Destructive (위험 액션)',
+  render: () => (
+    <View style={{ gap: spacing['3xlarge'] }}>
+      <Section
+        title="Destructive Modal"
+        description="삭제 등 되돌릴 수 없는 작업 확인 시 사용합니다. Primary 버튼에 에러 색상이 적용됩니다."
+      >
+        <ModalPreview
+          title="계정 삭제"
+          description="계정을 삭제하면 모든 데이터가 영구적으로 제거됩니다. 이 작업은 되돌릴 수 없습니다."
+          primaryLabel="삭제"
+          secondaryLabel="취소"
+          destructive
+        />
+      </Section>
+    </View>
+  ),
+  parameters: {
+    docs: {
+      description: {
+        story: '**Destructive 버튼**: `color/background/error` · `color/text/onColor`',
+      },
+    },
+  },
+};
+
+// ─── 4. Form Modal ───────────────────────────────────────────
+
+export const FormModal: Story = {
+  name: 'Form Modal',
+  render: () => (
+    <View style={{ gap: spacing['3xlarge'] }}>
+      <Section
+        title="Form Modal"
+        description="InputField 컴포넌트를 포함한 모달입니다. 실제 InputField를 import하여 사용합니다."
+      >
+        <ModalPreview title="피드백 보내기" primaryLabel="전송" secondaryLabel="취소">
+          <View style={{ gap: spacing.medium }}>
+            <InputField label="제목" placeholder="피드백 제목을 입력하세요." />
+            <InputField
+              label="내용"
+              placeholder="상세 내용을 작성해주세요."
+              multiline
+              minHeight={80}
+              maxCharCount={200}
+            />
+          </View>
+        </ModalPreview>
+      </Section>
+    </View>
+  ),
+  parameters: {
+    docs: {
+      description: {
+        story: '**내부 컴포넌트**: `InputField` (multiline) import 사용. Modal 자체 토큰과 InputField 토큰이 각각 독립 적용.',
+      },
+    },
+  },
+};
+
+// ─── 5. Title Only ───────────────────────────────────────────
+
+export const TitleOnly: Story = {
+  name: 'Title Only',
+  render: () => (
+    <View style={{ gap: spacing['3xlarge'] }}>
+      <Section
+        title="Title Only"
+        description="설명 없이 제목과 버튼만 포함된 간단한 모달입니다."
+      >
+        <ModalPreview
+          title="알림을 켤까요?"
+          primaryLabel="켜기"
+          secondaryLabel="나중에"
+        />
+      </Section>
+    </View>
+  ),
+};
+
+// ─── 6. 단일 버튼 ────────────────────────────────────────────
+
+export const SingleAction: Story = {
+  name: '단일 버튼',
+  render: () => (
+    <View style={{ gap: spacing['3xlarge'] }}>
+      <Section
+        title="단일 버튼 Modal"
+        description="확인 버튼만 있는 알림형 모달입니다."
+      >
+        <ModalPreview
+          title="업데이트 완료"
+          description="앱이 최신 버전으로 업데이트되었습니다."
+          primaryLabel="확인"
+        />
+      </Section>
+    </View>
+  ),
+};
+
+// ─── 7. 인터랙티브 데모 ──────────────────────────────────────
+
+export const Interactive: Story = {
+  name: '인터랙티브 데모',
+  render: () => {
+    const [visible, setVisible] = useState(false);
+    const [formVisible, setFormVisible] = useState(false);
+
     return (
-      <View style={{ gap: spacing.large }}>
-        <Pressable
-          onPress={() => setVisible(true)}
-          style={{ backgroundColor: semanticColor.backgroundBrand, paddingHorizontal: spacing.xlarge, paddingVertical: spacing.medium, borderRadius: radius.medium, alignSelf: 'flex-start' }}
+      <View style={{ gap: spacing['3xlarge'] }}>
+        <Section
+          title="인터랙티브 데모"
+          description="버튼을 클릭하여 실제 Modal 컴포넌트를 열어봅니다."
         >
-          <Text style={{ color: semanticColor.textOnColor, fontSize: fontSize.medium, fontWeight: fontWeight.semibold }}>모달 열기</Text>
-        </Pressable>
-        <PreviewContainer>
-          <Modal
-            {...args}
-            visible={visible}
-            onClose={() => setVisible(false)}
-            primaryAction={{ label: '확인', onPress: () => setVisible(false) }}
-            secondaryAction={{ label: '취소', onPress: () => setVisible(false) }}
-          />
-        </PreviewContainer>
+          <View style={{ flexDirection: 'row', gap: spacing.medium }}>
+            <Button
+              label="Confirmation Modal"
+              variant="solid"
+              color="primary"
+              size="small"
+              onPress={() => setVisible(true)}
+            />
+            <Button
+              label="Form Modal"
+              variant="outlined"
+              color="primary"
+              size="small"
+              onPress={() => setFormVisible(true)}
+            />
+          </View>
+
+          <View style={{ height: 400, position: 'relative', marginTop: spacing.xlarge }}>
+            <Modal
+              visible={visible}
+              onClose={() => setVisible(false)}
+              title="로그아웃"
+              description="정말 로그아웃 하시겠습니까?"
+              primaryAction={{ label: '로그아웃', onPress: () => setVisible(false) }}
+              secondaryAction={{ label: '취소', onPress: () => setVisible(false) }}
+            />
+            <Modal
+              visible={formVisible}
+              onClose={() => setFormVisible(false)}
+              title="피드백 보내기"
+              primaryAction={{ label: '전송', onPress: () => setFormVisible(false) }}
+              secondaryAction={{ label: '취소', onPress: () => setFormVisible(false) }}
+            >
+              <View style={{ gap: spacing.medium }}>
+                <InputField label="제목" placeholder="피드백 제목" />
+                <InputField label="내용" placeholder="상세 내용" multiline minHeight={80} />
+              </View>
+            </Modal>
+          </View>
+        </Section>
       </View>
     );
   },
 };
 
-// ─── 2. 기본 대화상자 ──────────────────────────────────────────
-
-export const Default: Story = {
-  name: '기본 대화상자',
-  render: () => (
-    <Section
-      title="기본 대화상자"
-      description="타이틀, 설명, 버튼이 포함된 기본 모달입니다."
-    >
-      <PreviewContainer>
-        <Modal
-          visible
-          title="변경 사항 저장"
-          description="저장하지 않으면 변경 사항이 모두 사라집니다."
-          primaryAction={{ label: '저장', onPress: () => {} }}
-          secondaryAction={{ label: '취소', onPress: () => {} }}
-        />
-      </PreviewContainer>
-    </Section>
-  ),
-};
-
-// ─── 3. 위험 액션 ───────────────────────────────────────────
-
-export const Destructive: Story = {
-  name: '위험 액션',
-  render: () => (
-    <Section
-      title="위험 액션"
-      description="삭제 등 되돌릴 수 없는 작업에 대한 경고 모달입니다. Primary 버튼이 빨간색으로 표시됩니다."
-    >
-      <PreviewContainer>
-        <Modal
-          visible
-          title="계정 삭제"
-          description="정말로 계정을 삭제하시겠습니까? 이 작업은 되돌릴 수 없습니다."
-          primaryAction={{ label: '삭제', onPress: () => {}, destructive: true }}
-          secondaryAction={{ label: '취소', onPress: () => {} }}
-        />
-      </PreviewContainer>
-    </Section>
-  ),
-};
-
-// ─── 4. 커스텀 콘텐츠 ──────────────────────────────────────────
-
-export const CustomContent: Story = {
-  name: '커스텀 콘텐츠',
-  render: () => (
-    <Section
-      title="커스텀 콘텐츠"
-      description="children을 통해 description 대신 커스텀 콘텐츠를 렌더링할 수 있습니다."
-    >
-      <PreviewContainer>
-        <Modal
-          visible
-          title="피드백 보내기"
-          primaryAction={{ label: '보내기', onPress: () => {} }}
-          secondaryAction={{ label: '취소', onPress: () => {} }}
-        >
-          <View style={{ gap: spacing.medium, marginTop: spacing.medium }}>
-            <Text style={{ fontSize: fontSize.small, color: semanticColor.textSecondary, textAlign: 'center' }}>
-              서비스 개선을 위해 의견을 보내주세요.
-            </Text>
-            <View style={{
-              borderWidth: 1,
-              borderColor: semanticColor.borderDefault,
-              borderRadius: radius.small,
-              padding: spacing.medium,
-              minHeight: 80,
-              backgroundColor: semanticColor.backgroundSecondary,
-            }}>
-              <Text style={{ fontSize: fontSize.medium, color: semanticColor.textTertiary }}>의견을 입력하세요...</Text>
-            </View>
-          </View>
-        </Modal>
-      </PreviewContainer>
-    </Section>
-  ),
-};
-
-// ─── 5. 디자인 스펙 ─────────────────────────────────────────
+// ─── 8. 디자인 스펙 ──────────────────────────────────────────
 
 export const DesignSpec: Story = {
   name: '디자인 스펙',
@@ -146,75 +331,55 @@ export const DesignSpec: Story = {
     <View style={{ gap: spacing['3xlarge'] }}>
       <Section
         title="디자인 스펙"
-        description="Modal 컴포넌트의 디자인 토큰 상세 스펙입니다."
+        description="Figma 시맨틱 토큰 기준 Modal 컨테이너 스펙입니다. 내부 Button/InputField의 토큰은 각 컴포넌트 문서를 참조하세요."
+        badge="디자인"
       >
-        <SpecTable
-          title="오버레이"
+        <TokenSpecTable
+          title="modal / container"
           rows={[
-            { label: '배경색', value: 'rgba(0,0,0,0.4)', token: '—' },
-            { label: '정렬', value: 'center / center', token: '—' },
+            { property: 'Container 배경색',  token: CONTAINER_TOKEN_MAP.background.token,  value: CONTAINER_TOKEN_MAP.background.value,  type: 'color' },
+            { property: 'Container 라디우스', token: CONTAINER_TOKEN_MAP.radius.token,      value: CONTAINER_TOKEN_MAP.radius.value,      type: 'size' },
+            { property: 'Container 그림자',   token: CONTAINER_TOKEN_MAP.shadow.token,      value: CONTAINER_TOKEN_MAP.shadow.value },
+            { property: 'Title 색상',         token: CONTAINER_TOKEN_MAP.titleColor.token,  value: CONTAINER_TOKEN_MAP.titleColor.value,  type: 'color' },
+            { property: 'Description 색상',   token: CONTAINER_TOKEN_MAP.descColor.token,   value: CONTAINER_TOKEN_MAP.descColor.value,   type: 'color' },
+            { property: 'Title 타이포',       token: 'Headline', value: `${textStyle.headline.fontSize}px / ${textStyle.headline.lineHeight}px / ${textStyle.headline.fontWeight}`, type: 'typography' },
+            { property: 'Description 타이포', token: 'Body 2',   value: `${textStyle.body2.fontSize}px / ${textStyle.body2.lineHeight}px / ${textStyle.body2.fontWeight}`,          type: 'typography' },
+            { property: '전체 패딩',          token: CONTAINER_TOKEN_MAP.padding.token,     value: CONTAINER_TOKEN_MAP.padding.value,     type: 'size' },
+            { property: '버튼 간격',          token: CONTAINER_TOKEN_MAP.buttonGap.token,   value: CONTAINER_TOKEN_MAP.buttonGap.value,   type: 'size' },
           ]}
         />
 
-        <SpecTable
-          title="대화상자"
+        <Divider />
+
+        <TokenSpecTable
+          title="modal / scrim"
           rows={[
-            { label: '배경색', value: '#FFFFFF', token: 'coolNeutral[100]' },
-            { label: '모서리 반경', value: '20px', token: '—' },
-            { label: '너비', value: '300px', token: '—' },
-            { label: '패딩', value: `${spacing['2xlarge']}px`, token: 'spacing.2xl' },
+            { property: 'Scrim 배경색',  token: SCRIM_TOKEN_MAP.background.token, value: SCRIM_TOKEN_MAP.background.value, type: 'color' },
+            { property: 'Scrim opacity', token: SCRIM_TOKEN_MAP.opacity.token,    value: SCRIM_TOKEN_MAP.opacity.value,    type: 'opacity' },
           ]}
         />
 
-        <SpecTable
-          title="타이틀"
+        <Divider />
+
+        <TokenSpecTable
+          title="modal / animation (권장값)"
           rows={[
-            { label: '폰트 크기', value: `${fontSize.large}px`, token: 'fontSize.large' },
-            { label: '폰트 굵기', value: fontWeight.bold, token: 'fontWeight.bold' },
-            { label: '색상', value: coolNeutral[17], token: 'coolNeutral[17]' },
-            { label: '정렬', value: 'center', token: '—' },
+            { property: '등장 시작 opacity', token: 'opacity/0',   value: opacity[0],   type: 'opacity' },
+            { property: '등장 끝 opacity',   token: 'opacity/100', value: opacity[100], type: 'opacity' },
+            { property: 'Duration',          token: '—',           value: '200ms' },
+            { property: 'Easing',            token: '—',           value: 'cubic-bezier(0.4, 0, 0.2, 1)' },
           ]}
         />
 
-        <SpecTable
-          title="설명"
-          rows={[
-            { label: '폰트 크기', value: `${fontSize.medium}px`, token: 'fontSize.medium' },
-            { label: '색상', value: coolNeutral[50], token: 'coolNeutral[50]' },
-            { label: '상단 마진', value: `${spacing.small}px`, token: 'spacing.small' },
-            { label: '정렬', value: 'center', token: '—' },
-          ]}
-        />
+        <Divider />
 
-        <SpecTable
-          title="Primary 버튼"
+        <TokenSpecTable
+          title="내부 컴포넌트 참조"
           rows={[
-            { label: '높이', value: '48px', token: '—' },
-            { label: '모서리 반경', value: `${spacing.medium}px`, token: 'spacing.medium' },
-            { label: '배경색', value: mint[45], token: 'mint[45]' },
-            { label: '배경색 (위험)', value: red[70], token: 'red[70]' },
-            { label: '텍스트 색상', value: '#FFFFFF', token: 'coolNeutral[100]' },
-            { label: '폰트 크기', value: `${fontSize.medium}px`, token: 'fontSize.medium' },
-            { label: '폰트 굵기', value: fontWeight.semibold, token: 'fontWeight.semibold' },
-          ]}
-        />
-
-        <SpecTable
-          title="Secondary 버튼"
-          rows={[
-            { label: '높이', value: '48px', token: '—' },
-            { label: '모서리 반경', value: `${spacing.medium}px`, token: 'spacing.medium' },
-            { label: '배경색', value: coolNeutral[97], token: 'coolNeutral[97]' },
-            { label: '텍스트 색상', value: coolNeutral[40], token: 'coolNeutral[40]' },
-          ]}
-        />
-
-        <SpecTable
-          title="버튼 영역"
-          rows={[
-            { label: '상단 마진', value: `${spacing['2xlarge']}px`, token: 'spacing.2xl' },
-            { label: '간격', value: `${spacing.small}px`, token: 'spacing.small' },
-            { label: '정렬', value: '수직 (primary 위, secondary 아래)', token: '—' },
+            { property: 'Primary 버튼',   token: 'Button (solid/primary)',   value: '→ General/Button 문서 참조' },
+            { property: 'Secondary 버튼', token: 'Button (solid/assistive)', value: '→ General/Button 문서 참조' },
+            { property: 'InputField',     token: 'InputField',               value: '→ Input/InputField 문서 참조' },
+            { property: 'TextField',      token: 'InputField (multiline)',   value: '→ Input/TextField 문서 참조' },
           ]}
         />
       </Section>
@@ -222,7 +387,7 @@ export const DesignSpec: Story = {
   ),
 };
 
-// ─── 6. 사용 가이드 ─────────────────────────────────────────
+// ─── 9. 사용 가이드 ──────────────────────────────────────────
 
 export const Usage: Story = {
   name: '사용 가이드',
@@ -231,32 +396,35 @@ export const Usage: Story = {
       <Section
         title="사용 가이드"
         description="개발자를 위한 Modal 컴포넌트 사용 예시입니다."
+        badge="개발"
       >
         <CodeBlock
           title="Import"
-          code={`import { Modal } from '@design-system/components/Modal';`}
+          code={`import { Modal } from '@design-system/components/Modal';
+import { Button } from '@design-system/components/Button';
+import { InputField } from '@design-system/components/InputField';`}
         />
 
         <CodeBlock
-          title="기본 사용"
+          title="기본 Confirmation"
           code={`const [visible, setVisible] = useState(false);
 
 <Modal
   visible={visible}
   onClose={() => setVisible(false)}
-  title="알림"
-  description="변경 사항을 저장하시겠습니까?"
+  title="변경사항 저장"
+  description="저장하지 않은 변경사항이 있습니다."
   primaryAction={{ label: '저장', onPress: handleSave }}
   secondaryAction={{ label: '취소', onPress: () => setVisible(false) }}
 />`}
         />
 
         <CodeBlock
-          title="위험 액션"
+          title="Destructive (위험 액션)"
           code={`<Modal
   visible={visible}
   onClose={() => setVisible(false)}
-  title="삭제 확인"
+  title="계정 삭제"
   description="이 작업은 되돌릴 수 없습니다."
   primaryAction={{ label: '삭제', onPress: handleDelete, destructive: true }}
   secondaryAction={{ label: '취소', onPress: () => setVisible(false) }}
@@ -264,33 +432,23 @@ export const Usage: Story = {
         />
 
         <CodeBlock
-          title="커스텀 콘텐츠"
+          title="Form Modal (InputField 포함)"
           code={`<Modal
   visible={visible}
   onClose={() => setVisible(false)}
-  title="피드백"
-  primaryAction={{ label: '보내기', onPress: handleSubmit }}
+  title="피드백 보내기"
+  primaryAction={{ label: '전송', onPress: handleSubmit }}
+  secondaryAction={{ label: '취소', onPress: () => setVisible(false) }}
 >
-  <TextInput placeholder="의견을 입력하세요" />
+  <InputField label="제목" placeholder="피드백 제목" />
+  <InputField
+    label="내용"
+    placeholder="상세 내용"
+    multiline
+    maxCharCount={200}
+  />
 </Modal>`}
         />
-
-        <Divider />
-
-        <Col gap={spacing.small}>
-          <StateLabel>Props</StateLabel>
-          <SpecTable
-            rows={[
-              { label: 'visible', value: 'boolean', token: '표시 여부 (필수)' },
-              { label: 'onClose', value: '() => void', token: '배경 탭 시 닫기 콜백' },
-              { label: 'title', value: 'string', token: '대화상자 타이틀' },
-              { label: 'description', value: 'string', token: '본문 텍스트' },
-              { label: 'children', value: 'ReactNode', token: '커스텀 콘텐츠 (description 대체)' },
-              { label: 'primaryAction', value: '{ label, onPress, destructive? }', token: '주 버튼' },
-              { label: 'secondaryAction', value: '{ label, onPress }', token: '보조 버튼' },
-            ]}
-          />
-        </Col>
       </Section>
     </View>
   ),

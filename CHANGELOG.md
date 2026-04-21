@@ -4,6 +4,33 @@
 
 ---
 
+## v1.4.0 (2026-04-21)
+
+### Added
+- Figma Tokens Studio용 JSON 파일 (`figma-tokens.json`) — Primitives/Semantics/Components 3단계
+- TokenSpecTable 재사용 컴포넌트 — 3열 구조(속성/시맨틱 토큰/값) + 색상 스와치 + opacity 시각화
+- TextField 스토리 신규 추가 (InputField multiline 분리 문서화)
+- Opacity 토큰 카탈로그 스토리 신규 추가 (15단계 시각화)
+
+### Changed
+- Button 스토리 전면 재생성 — TokenSpecTable 기반 디자인 스펙
+- TextButton 스토리 전면 재생성 — TokenSpecTable 기반 디자인 스펙
+- InputField 스토리 전면 재생성 — 상태별 토큰 스펙 문서화
+- Checkbox 스토리 전면 재생성 — 인터랙티브 전체선택 데모
+- Radio 스토리 전면 재생성 — RadioGroup 패턴 데모
+- Switch 스토리 전면 재생성 — 설정 화면 패턴 데모
+- Chip 스토리 전면 재생성 — Filter Chip 패턴 데모
+- Toast 스토리 전면 재생성 — 인라인 미리보기 방식 전환
+- Modal 스토리 전면 재생성 — Button/InputField import 재사용
+- Shadow Level 1 삭제, Level 2→1, Level 3→2 명칭 변경
+- storyHelpers opacity 하드코딩 → 토큰 참조 교체
+- storySort에 TextField, Opacity 추가
+
+### Fixed
+- Storybook staticDirs `public/` 디렉토리 누락 오류 해결
+
+---
+
 ## v1.3.1 (2026-04-14)
 
 ### Added

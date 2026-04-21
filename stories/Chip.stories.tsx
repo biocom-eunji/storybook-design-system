@@ -1,10 +1,57 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { View } from 'react-native';
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import { Chip } from '../src/components/Chip';
-import { Icon } from '../src/components/Icon';
-import { Section, StateLabel, Row, Col, SpecTable, CodeBlock, Divider } from './storyHelpers';
-import { coolNeutral, mint, fontSize, fontWeight, spacing, radius, buttonToken, chipToken } from '../src/tokens/theme';
+import {
+  Section, StateLabel, Row, Col, CodeBlock, CompareGrid, Divider,
+} from './storyHelpers';
+import { TokenSpecTable } from '../src/storybook-components/TokenSpecTable';
+import { spacing, chipToken, semanticColor } from '../src/tokens/theme';
+
+// ─── 토큰 매핑 테이블 (Single Source of Truth) ──────────────
+
+const COLOR_TOKEN_MAP = {
+  solid: {
+    inactive: {
+      background: 'color/background/tertiary',
+      content:    'color/text/secondary',
+    },
+    active: {
+      background: 'color/background/inverse',
+      content:    'color/text/onColor',
+    },
+    disabled: {
+      background: 'color/background/tertiary',
+      content:    'color/text/tertiary',
+    },
+  },
+  outlined: {
+    inactive: {
+      background: 'transparent',
+      content:    'color/text/secondary',
+      border:     'color/border/active',
+    },
+    active: {
+      background: 'transparent',
+      content:    'color/text/brand',
+      border:     'color/border/focus',
+    },
+    disabled: {
+      background: 'transparent',
+      content:    'color/text/tertiary',
+      border:     'color/border/default',
+    },
+  },
+} as const;
+
+const SIZE_TOKEN_MAP = {
+  xsmall: { height: 'component/chip/size/xsmall/height', paddingH: 'component/chip/size/xsmall/paddingH', typography: 'Caption',  radius: 'borderRadius/xsmall' },
+  small:  { height: 'component/chip/size/small/height',  paddingH: 'component/chip/size/small/paddingH',  typography: 'Caption',  radius: 'borderRadius/small' },
+  medium: { height: 'component/chip/size/medium/height', paddingH: 'component/chip/size/medium/paddingH', typography: 'Label 2',  radius: 'borderRadius/small' },
+  large:  { height: 'component/chip/size/large/height',  paddingH: 'component/chip/size/large/paddingH',  typography: 'Body 2',   radius: 'borderRadius/medium' },
+} as const;
+
+// ─── Meta ────────────────────────────────────────────────────
 
 const meta: Meta<typeof Chip> = {
   title: 'Input/Chip',
@@ -13,16 +60,25 @@ const meta: Meta<typeof Chip> = {
     variant: {
       control: 'select',
       options: ['solid', 'outlined'],
-      description: '칩 스타일 변형',
+      description: '칩 스타일 변형 (Figma: Variant)',
     },
     size: {
       control: 'select',
       options: ['xsmall', 'small', 'medium', 'large'],
-      description: '칩 크기',
+      description: '칩 크기 (Figma: Size)',
     },
-    active: { control: 'boolean', description: '활성화 상태' },
-    disabled: { control: 'boolean', description: '비활성화 상태' },
-    label: { control: 'text', description: '칩 텍스트' },
+    active: {
+      control: 'boolean',
+      description: '선택 상태 (Figma: Active)',
+    },
+    disabled: {
+      control: 'boolean',
+      description: '비활성화',
+    },
+    label: {
+      control: 'text',
+      description: '칩 텍스트',
+    },
   },
   tags: ['autodocs'],
 };
@@ -34,260 +90,224 @@ type Story = StoryObj<typeof Chip>;
 
 export const Playground: Story = {
   args: {
-    label: '텍스트',
+    label: '카테고리',
     variant: 'solid',
     size: 'medium',
     active: false,
     disabled: false,
   },
+  parameters: {
+    docs: {
+      description: {
+        story: '**적용 토큰**: `color/background/tertiary`, `color/text/quaternary`, `Label 2`, `borderRadius/small`',
+      },
+    },
+  },
 };
 
-// ─── 2. 모든 변형 ───────────────────────────────────────────
+// ─── 2. 모든 변형 (Variant × State 매트릭스) ─────────────────
 
 export const AllVariants: Story = {
   name: '모든 변형',
   render: () => (
     <View style={{ gap: spacing['3xlarge'] }}>
       <Section
-        title="칩 변형 전체 보기"
-        description="variant(solid/outlined)와 상태(inactive/active/disabled)의 모든 조합을 확인할 수 있습니다."
+        title="모든 변형"
+        description="variant(solid/outlined) × state(inactive/active/disabled)의 모든 조합을 확인합니다."
       >
-        {/* Solid Row */}
-        <View style={{ gap: spacing.xlarge }}>
-          <Row gap={spacing['2xlarge']} align="flex-start">
-            <Col gap={spacing.small}>
-              <StateLabel>Solid — 비활성</StateLabel>
-              <Chip label="텍스트" variant="solid" />
-            </Col>
-            <Col gap={spacing.small}>
-              <StateLabel>Solid — 활성</StateLabel>
-              <Chip label="텍스트" variant="solid" active />
-            </Col>
-            <Col gap={spacing.small}>
-              <StateLabel>Solid — 비활성화</StateLabel>
-              <Chip label="텍스트" variant="solid" disabled />
-            </Col>
-          </Row>
-
-          {/* Outlined Row */}
-          <Row gap={spacing['2xlarge']} align="flex-start">
-            <Col gap={spacing.small}>
-              <StateLabel>Outlined — 비활성</StateLabel>
-              <Chip label="텍스트" variant="outlined" />
-            </Col>
-            <Col gap={spacing.small}>
-              <StateLabel>Outlined — 활성</StateLabel>
-              <Chip label="텍스트" variant="outlined" active />
-            </Col>
-            <Col gap={spacing.small}>
-              <StateLabel>Outlined — 비활성화</StateLabel>
-              <Chip label="텍스트" variant="outlined" disabled />
-            </Col>
-          </Row>
-        </View>
+        {(['solid', 'outlined'] as const).map(variant => (
+          <View key={variant} style={{ marginBottom: spacing.xlarge }}>
+            <StateLabel>{variant}</StateLabel>
+            <Row gap={spacing.medium} wrap>
+              <Chip label="비선택" variant={variant} size="medium" />
+              <Chip label="선택됨" variant={variant} size="medium" active />
+              <Chip label="비활성" variant={variant} size="medium" disabled />
+            </Row>
+          </View>
+        ))}
       </Section>
     </View>
   ),
+  parameters: {
+    docs: {
+      description: {
+        story: [
+          '**Solid Inactive**: `color/background/tertiary` + `color/text/quaternary`',
+          '**Solid Active**: `color/background/inverse` + `color/text/onColor`',
+          '**Outlined Active**: `transparent` + `color/text/brand` + `color/border/focus`',
+          '**Disabled 공통**: `color/text/tertiary`',
+        ].join('\n\n'),
+      },
+    },
+  },
 };
 
-// ─── 3. 크기 비교 ───────────────────────────────────────────
+// ─── 3. 크기 비교 ────────────────────────────────────────────
 
 export const Sizes: Story = {
   name: '크기 비교',
   render: () => (
-    <Section
-      title="크기 비교"
-      description="XSmall, Small, Medium, Large 네 가지 크기를 나란히 비교합니다."
-    >
-      <Row gap={spacing['2xlarge']} align="flex-end">
-        <Col gap={spacing.small}>
-          <StateLabel>{`XS — ${chipToken.size.xsmall.height}px`}</StateLabel>
-          <Chip label="텍스트" size="xsmall" />
-        </Col>
-        <Col gap={spacing.small}>
-          <StateLabel>{`S — ${chipToken.size.small.height}px`}</StateLabel>
-          <Chip label="텍스트" size="small" />
-        </Col>
-        <Col gap={spacing.small}>
-          <StateLabel>{`M — ${chipToken.size.medium.height}px`}</StateLabel>
-          <Chip label="텍스트" size="medium" />
-        </Col>
-        <Col gap={spacing.small}>
-          <StateLabel>{`L — ${chipToken.size.large.height}px`}</StateLabel>
-          <Chip label="텍스트" size="large" />
-        </Col>
-      </Row>
-    </Section>
-  ),
-};
-
-// ─── 4. 아이콘 조합 ─────────────────────────────────────────
-
-export const WithIcons: Story = {
-  name: '아이콘 조합',
-  render: () => (
     <View style={{ gap: spacing['3xlarge'] }}>
       <Section
-        title="아이콘 조합"
-        description="leadingIcon, trailingIcon 또는 양쪽 모두 아이콘을 배치할 수 있습니다."
+        title="크기 비교"
+        description="XSmall(24px), Small(28px), Medium(32px), Large(38px) 네 가지 크기를 비교합니다."
       >
-        <View style={{ gap: spacing.xlarge }}>
-          <Row gap={spacing['2xlarge']} align="flex-start">
-            <Col gap={spacing.small}>
-              <StateLabel>Leading 아이콘</StateLabel>
-              <Chip
-                label="선택됨"
-                variant="solid"
-                active
-                leadingIcon={<Icon name="null" size={chipToken.size.medium.iconSize} />}
-              />
+        <Row gap={spacing.medium} align="flex-end" wrap>
+          {(['xsmall', 'small', 'medium', 'large'] as const).map(size => (
+            <Col key={size} gap={spacing.small}>
+              <StateLabel>{`${size} — ${chipToken.size[size].height}px`}</StateLabel>
+              <Chip label="카테고리" variant="solid" size={size} active />
             </Col>
-            <Col gap={spacing.small}>
-              <StateLabel>Trailing 아이콘</StateLabel>
-              <Chip
-                label="삭제"
-                variant="outlined"
-                trailingIcon={<Icon name="null" size={chipToken.size.medium.iconSize} />}
-              />
-            </Col>
-            <Col gap={spacing.small}>
-              <StateLabel>양쪽 아이콘</StateLabel>
-              <Chip
-                label="필터"
-                variant="outlined"
-                active
-                leadingIcon={<Icon name="null" size={chipToken.size.medium.iconSize} />}
-                trailingIcon={<Icon name="null" size={chipToken.size.medium.iconSize} />}
-              />
-            </Col>
-          </Row>
-
-          {/* Icon chips in different sizes */}
-          <Row gap={spacing.large} align="flex-end">
-            <Col gap={spacing.small}>
-              <StateLabel>XS + 아이콘</StateLabel>
-              <Chip
-                label="태그"
-                size="xsmall"
-                leadingIcon={<Icon name="null" size={chipToken.size.xsmall.iconSize} />}
-              />
-            </Col>
-            <Col gap={spacing.small}>
-              <StateLabel>S + 아이콘</StateLabel>
-              <Chip
-                label="태그"
-                size="small"
-                leadingIcon={<Icon name="null" size={chipToken.size.small.iconSize} />}
-              />
-            </Col>
-            <Col gap={spacing.small}>
-              <StateLabel>M + 아이콘</StateLabel>
-              <Chip
-                label="태그"
-                size="medium"
-                leadingIcon={<Icon name="null" size={chipToken.size.medium.iconSize} />}
-              />
-            </Col>
-            <Col gap={spacing.small}>
-              <StateLabel>L + 아이콘</StateLabel>
-              <Chip
-                label="태그"
-                size="large"
-                leadingIcon={<Icon name="null" size={chipToken.size.large.iconSize} />}
-              />
-            </Col>
-          </Row>
-        </View>
+          ))}
+        </Row>
       </Section>
     </View>
   ),
+  parameters: {
+    docs: {
+      description: {
+        story: [
+          '**XSmall**: height 24 · `Caption` · `borderRadius/xsmall`',
+          '**Small**: height 28 · `Caption` · `borderRadius/small`',
+          '**Medium**: height 32 · `Label 2` · `borderRadius/small`',
+          '**Large**: height 38 · `Body 2` · `borderRadius/medium`',
+        ].join('\n\n'),
+      },
+    },
+  },
 };
 
-// ─── 5. 디자인 스펙 ─────────────────────────────────────────
+// ─── 4. 인터랙티브 데모 (Filter Chip 패턴) ───────────────────
+
+export const Interactive: Story = {
+  name: '인터랙티브 데모',
+  render: () => {
+    const [selected, setSelected] = useState<string[]>(['식단']);
+    const categories = ['식단', '수면', '운동', '영양제', '수분'];
+
+    const toggle = (cat: string) => {
+      setSelected(prev =>
+        prev.includes(cat) ? prev.filter(c => c !== cat) : [...prev, cat]
+      );
+    };
+
+    return (
+      <View style={{ gap: spacing['3xlarge'] }}>
+        <Section
+          title="인터랙티브 데모"
+          description="Filter Chip 패턴입니다. 복수 선택 가능합니다."
+        >
+          <View style={{ gap: spacing.xlarge }}>
+            <Col gap={spacing.small}>
+              <StateLabel>Solid</StateLabel>
+              <Row gap={spacing.small} wrap>
+                {categories.map(cat => (
+                  <Chip
+                    key={cat}
+                    label={cat}
+                    variant="solid"
+                    size="medium"
+                    active={selected.includes(cat)}
+                    onPress={() => toggle(cat)}
+                  />
+                ))}
+              </Row>
+            </Col>
+
+            <Divider />
+
+            <Col gap={spacing.small}>
+              <StateLabel>Outlined</StateLabel>
+              <Row gap={spacing.small} wrap>
+                {categories.map(cat => (
+                  <Chip
+                    key={cat}
+                    label={cat}
+                    variant="outlined"
+                    size="medium"
+                    active={selected.includes(cat)}
+                    onPress={() => toggle(cat)}
+                  />
+                ))}
+              </Row>
+            </Col>
+          </View>
+        </Section>
+      </View>
+    );
+  },
+};
+
+// ─── 5. 디자인 스펙 ──────────────────────────────────────────
 
 export const DesignSpec: Story = {
   name: '디자인 스펙',
-  render: () => (
-    <View style={{ gap: spacing['3xlarge'] }}>
-      <Section
-        title="디자인 스펙"
-        description="디자이너와 개발자를 위한 칩 토큰 상세 스펙입니다."
-      >
-        {/* Size specs */}
-        <SpecTable
-          title="XSmall (24px)"
-          rows={[
-            { label: '높이', value: `${chipToken.size.xsmall.height}px`, token: 'chipToken.size.xsmall.height' },
-            { label: '좌우 패딩', value: `${chipToken.size.xsmall.paddingHorizontal}px`, token: 'chipToken.size.xsmall.paddingHorizontal' },
-            { label: '폰트 크기', value: `${chipToken.size.xsmall.fontSize}px`, token: 'fontSize.xsmall' },
-            { label: '모서리 반경', value: `${chipToken.size.xsmall.radius}px`, token: 'radius.xsmall' },
-          ]}
-        />
+  render: () => {
+    const variants = ['solid', 'outlined'] as const;
+    const states = ['inactive', 'active', 'disabled'] as const;
+    const sizes = ['xsmall', 'small', 'medium', 'large'] as const;
 
-        <SpecTable
-          title="Small (28px)"
-          rows={[
-            { label: '높이', value: `${chipToken.size.small.height}px`, token: 'chipToken.size.small.height' },
-            { label: '좌우 패딩', value: `${chipToken.size.small.paddingHorizontal}px`, token: 'chipToken.size.small.paddingHorizontal' },
-            { label: '폰트 크기', value: `${chipToken.size.small.fontSize}px`, token: 'fontSize.xsmall' },
-            { label: '모서리 반경', value: `${chipToken.size.small.radius}px`, token: 'radius.small' },
-          ]}
-        />
+    const resolve: Record<string, string> = {
+      'color/background/tertiary':  semanticColor.backgroundTertiary,
+      'color/background/inverse':   semanticColor.backgroundInverse,
+      'color/background/disabled':  semanticColor.backgroundDisabled,
+      'color/text/onColor':         semanticColor.textOnColor,
+      'color/text/brand':           semanticColor.textBrand,
+      'color/border/active':        semanticColor.borderActive,
+      'color/border/focus':         semanticColor.borderFocus,
+      'color/border/default':       semanticColor.borderDefault,
+      'color/text/secondary':         semanticColor.textSecondary,
+      'color/text/tertiary':         semanticColor.textTertiary,
+    };
+    const r = (token: string) => resolve[token] ?? token;
 
-        <SpecTable
-          title="Medium (32px)"
-          rows={[
-            { label: '높이', value: `${chipToken.size.medium.height}px`, token: 'chipToken.size.medium.height' },
-            { label: '좌우 패딩', value: `${chipToken.size.medium.paddingHorizontal}px`, token: 'chipToken.size.medium.paddingHorizontal' },
-            { label: '폰트 크기', value: `${chipToken.size.medium.fontSize}px`, token: 'fontSize.small' },
-            { label: '모서리 반경', value: `${chipToken.size.medium.radius}px`, token: 'radius.small' },
-          ]}
-        />
+    return (
+      <View style={{ gap: spacing['3xlarge'] }}>
+        <Section
+          title="디자인 스펙"
+          description="Figma 시맨틱 토큰 기준 Chip 전체 조합 스펙입니다."
+          badge="디자인"
+        >
+          {variants.map(variant =>
+            states.map(state => {
+              const ct = COLOR_TOKEN_MAP[variant][state];
+              const rows = [
+                { property: '배경색',   token: ct.background, value: r(ct.background), type: 'color' as const },
+                { property: '텍스트',   token: ct.content,    value: r(ct.content),    type: 'color' as const },
+              ];
+              if ('border' in ct) {
+                rows.push({ property: '테두리', token: ct.border, value: r(ct.border), type: 'color' as const });
+              }
+              return (
+                <View key={`${variant}-${state}`}>
+                  <TokenSpecTable title={`${variant} / ${state}`} rows={rows} />
+                  <Divider />
+                </View>
+              );
+            })
+          )}
 
-        <SpecTable
-          title="Large (38px)"
-          rows={[
-            { label: '높이', value: `${chipToken.size.large.height}px`, token: 'chipToken.size.large.height' },
-            { label: '좌우 패딩', value: `${chipToken.size.large.paddingHorizontal}px`, token: 'chipToken.size.large.paddingHorizontal' },
-            { label: '폰트 크기', value: `${chipToken.size.large.fontSize}px`, token: 'fontSize.medium' },
-            { label: '모서리 반경', value: `${chipToken.size.large.radius}px`, token: 'radius.medium' },
-          ]}
-        />
-
-        <Divider />
-
-        {/* Color state specs — Solid */}
-        <SpecTable
-          title="Solid 컬러 상태"
-          rows={[
-            { label: 'Inactive 배경', value: coolNeutral[97], token: 'coolNeutral[97]' },
-            { label: 'Inactive 텍스트', value: coolNeutral[40], token: 'coolNeutral[40]' },
-            { label: 'Active 배경', value: coolNeutral[10], token: 'coolNeutral[10]' },
-            { label: 'Active 텍스트', value: '#FFFFFF', token: 'coolNeutral[100]' },
-            { label: 'Disabled 배경', value: coolNeutral[97], token: 'coolNeutral[97]' },
-            { label: 'Disabled 텍스트', value: coolNeutral[80], token: 'coolNeutral[80]' },
-          ]}
-        />
-
-        {/* Color state specs — Outlined */}
-        <SpecTable
-          title="Outlined 컬러 상태"
-          rows={[
-            { label: 'Inactive 배경', value: 'transparent', token: '— (transparent)' },
-            { label: 'Inactive 텍스트', value: coolNeutral[40], token: 'coolNeutral[40]' },
-            { label: 'Inactive 테두리', value: coolNeutral[90], token: 'coolNeutral[90]' },
-            { label: 'Active 텍스트', value: mint[45], token: 'mint[45]' },
-            { label: 'Active 테두리', value: mint[45], token: 'mint[45]' },
-            { label: 'Disabled 텍스트', value: coolNeutral[80], token: 'coolNeutral[80]' },
-            { label: 'Disabled 테두리', value: coolNeutral[96], token: 'coolNeutral[96]' },
-          ]}
-        />
-      </Section>
-    </View>
-  ),
+          {sizes.map(size => (
+            <TokenSpecTable
+              key={size}
+              title={`크기: ${size}`}
+              rows={[
+                { property: '높이',         token: SIZE_TOKEN_MAP[size].height,   value: chipToken.size[size].height,            type: 'size' },
+                { property: '좌우 패딩',     token: SIZE_TOKEN_MAP[size].paddingH, value: chipToken.size[size].paddingHorizontal, type: 'size' },
+                { property: '코너 라디우스', token: SIZE_TOKEN_MAP[size].radius,   value: chipToken.size[size].radius,            type: 'size' },
+                { property: '아이콘 크기',   token: '—',                           value: chipToken.size[size].iconSize,          type: 'size' },
+                { property: '타이포',       token: SIZE_TOKEN_MAP[size].typography, value: SIZE_TOKEN_MAP[size].typography },
+                { property: '아이콘-텍스트 간격', token: 'spacing/xsmall',          value: spacing.xsmall,                        type: 'size' },
+              ]}
+            />
+          ))}
+        </Section>
+      </View>
+    );
+  },
 };
 
-// ─── 6. 사용 가이드 ─────────────────────────────────────────
+// ─── 6. 사용 가이드 ──────────────────────────────────────────
 
 export const Usage: Story = {
   name: '사용 가이드',
@@ -296,30 +316,55 @@ export const Usage: Story = {
       <Section
         title="사용 가이드"
         description="개발자를 위한 Chip 컴포넌트 사용 예시입니다."
+        badge="개발"
       >
         <CodeBlock
           title="Import"
-          code={`import { Chip } from '@design-system/components/Chip';
-import { Icon } from '@design-system/components/Icon';`}
+          code={`import { Chip } from '@design-system/components/Chip';`}
         />
 
         <CodeBlock
           title="기본 사용"
-          code={`<Chip label="카테고리" onPress={handleSelect} />`}
+          code={`<Chip label="카테고리" onPress={handlePress} />`}
         />
 
         <CodeBlock
-          title="모든 Props 예시"
-          code={`<Chip
-  label="필터"
-  variant="outlined"
-  size="medium"
-  active={isSelected}
-  disabled={false}
-  leadingIcon={<Icon name="null" size={16} />}
-  trailingIcon={<Icon name="null" size={16} />}
-  onPress={handleToggle}
-/>`}
+          title="Variant + Active 조합"
+          code={`<Chip label="식단" variant="solid" active />
+<Chip label="수면" variant="outlined" active />
+<Chip label="운동" variant="solid" disabled />`}
+        />
+
+        <CodeBlock
+          title="Filter Chip 패턴 (복수 선택)"
+          code={`const [selected, setSelected] = useState<string[]>([]);
+
+const toggle = (cat: string) => {
+  setSelected(prev =>
+    prev.includes(cat)
+      ? prev.filter(c => c !== cat)
+      : [...prev, cat]
+  );
+};
+
+{categories.map(cat => (
+  <Chip
+    key={cat}
+    label={cat}
+    variant="solid"
+    size="medium"
+    active={selected.includes(cat)}
+    onPress={() => toggle(cat)}
+  />
+))}`}
+        />
+
+        <CodeBlock
+          title="크기 지정"
+          code={`<Chip label="XS" size="xsmall" />
+<Chip label="S" size="small" />
+<Chip label="M" size="medium" />
+<Chip label="L" size="large" />`}
         />
       </Section>
     </View>

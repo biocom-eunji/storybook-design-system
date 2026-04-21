@@ -32,9 +32,9 @@ const preview: Preview = {
       storySort: {
         order: [
           'Getting Started', ['Introduction', 'Release Notes', 'Naming Convention'],
-          'Design Tokens', ['Color Palette', 'Color Tokens', 'Typography', 'Grid Palette', 'Grid Tokens', 'Shadow'],
+          'Design Tokens', ['Color Palette', 'Color Tokens', 'Typography', 'Grid Palette', 'Grid Tokens', 'Shadow', 'Opacity'],
           'General', ['Button', 'TextButton', 'Icon'],
-          'Input', ['InputField', 'Checkbox', 'Radio', 'Switch', 'Chip'],
+          'Input', ['InputField', 'TextField', 'Checkbox', 'Radio', 'Switch', 'Chip'],
           'Feedback', ['Toast', 'Modal', 'BottomSheet', 'ProgressBar', 'Skeleton'],
           'Navigation', ['TabBar', 'ActionArea'],
           'Data Display', ['Badge', 'Avatar', 'Divider'],

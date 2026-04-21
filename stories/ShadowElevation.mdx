@@ -96,7 +96,7 @@ import { Meta } from '@storybook/addon-docs/blocks';
 ## Shadow Levels
 
 <h3>그림자 단계</h3>
-<p>3단계 그림자로 UI 요소의 깊이를 표현합니다.</p>
+<p>2단계 그림자로 UI 요소의 깊이를 표현합니다.</p>
 
 <div style={{ display: 'flex', gap: 24, marginBottom: 48 }}>
   <div style={{
@@ -108,24 +108,9 @@ import { Meta } from '@storybook/addon-docs/blocks';
     flexDirection: 'column',
     alignItems: 'center',
     justifyContent: 'center',
-    boxShadow: '0px 1px 4px rgba(0, 0, 0, 0.06)',
-  }}>
-    <span style={{ fontSize: 15, fontWeight: 600, color: '#171719' }}>Level 1</span>
-    <span style={{ fontSize: 12, color: '#70737C', marginTop: 4 }}>Subtle</span>
-    <span style={{ fontSize: 11, color: '#989BA2', marginTop: 8, textAlign: 'center', padding: '0 12px' }}>카드, 구분선 대체, 미세한 깊이감</span>
-  </div>
-  <div style={{
-    flex: 1,
-    height: 120,
-    backgroundColor: '#FFFFFF',
-    borderRadius: 16,
-    display: 'flex',
-    flexDirection: 'column',
-    alignItems: 'center',
-    justifyContent: 'center',
     boxShadow: '0px 2px 8px rgba(0, 0, 0, 0.1)',
   }}>
-    <span style={{ fontSize: 15, fontWeight: 600, color: '#171719' }}>Level 2</span>
+    <span style={{ fontSize: 15, fontWeight: 600, color: '#171719' }}>Level 1</span>
     <span style={{ fontSize: 12, color: '#70737C', marginTop: 4 }}>Medium</span>
     <span style={{ fontSize: 11, color: '#989BA2', marginTop: 8, textAlign: 'center', padding: '0 12px' }}>플로팅 요소, 드롭다운, 호버 카드</span>
   </div>
@@ -140,7 +125,7 @@ import { Meta } from '@storybook/addon-docs/blocks';
     justifyContent: 'center',
     boxShadow: '0px 4px 16px rgba(0, 0, 0, 0.15)',
   }}>
-    <span style={{ fontSize: 15, fontWeight: 600, color: '#171719' }}>Level 3</span>
+    <span style={{ fontSize: 15, fontWeight: 600, color: '#171719' }}>Level 2</span>
     <span style={{ fontSize: 12, color: '#70737C', marginTop: 4 }}>Strong</span>
     <span style={{ fontSize: 11, color: '#989BA2', marginTop: 8, textAlign: 'center', padding: '0 12px' }}>모달, 바텀시트, 최상위 레이어</span>
   </div>
@@ -167,14 +152,6 @@ import { Meta } from '@storybook/addon-docs/blocks';
   <tbody>
     <tr>
       <td><code>level1</code></td>
-      <td>0, 1</td>
-      <td>0.06</td>
-      <td>4</td>
-      <td>2</td>
-      <td>카드, 리스트 아이템</td>
-    </tr>
-    <tr>
-      <td><code>level2</code></td>
       <td>0, 2</td>
       <td>0.10</td>
       <td>8</td>
@@ -182,7 +159,7 @@ import { Meta } from '@storybook/addon-docs/blocks';
       <td>플로팅 버튼, 드롭다운</td>
     </tr>
     <tr>
-      <td><code>level3</code></td>
+      <td><code>level2</code></td>
       <td>0, 4</td>
       <td>0.15</td>
       <td>16</td>
@@ -207,11 +184,11 @@ import { Meta } from '@storybook/addon-docs/blocks';
     {'const modalStyle = {'}{'\n'}
     {'  backgroundColor: \'#FFFFFF\','}{'\n'}
     {'  borderRadius: 16,'}{'\n'}
-    {'  ...'}<span className="token">shadow.level3</span>,{'\n'}
+    {'  ...'}<span className="token">shadow.level2</span>,{'\n'}
     {'};'}{'\n'}
     {'\n'}
     <span className="comment">// React Native에서 사용</span>{'\n'}
-    {'<'}<span className="token">View</span> style={'{'}[styles.container, <span className="token">shadow.level2</span>]{'}'}{'>'}{'\n'}
+    {'<'}<span className="token">View</span> style={'{'}[styles.container, <span className="token">shadow.level1</span>]{'}'}{'>'}{'\n'}
     {'  <'}<span className="token">Text</span>{'>'}플로팅 카드{'</'}<span className="token">Text</span>{'>'}{'\n'}
     {'</'}<span className="token">View</span>{'>'}{'\n'}
   </pre>
