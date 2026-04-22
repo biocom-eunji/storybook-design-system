@@ -1,7 +1,7 @@
 import React from 'react';
 import { Meta } from '@storybook/addon-docs/blocks';
 
-<Meta title="Design Tokens/Grid Tokens" />
+<Meta title="Semantics/Spacing" />
 
 export const BaseRow = ({ token, alias, value, preview, role }) => {
   const [copied, setCopied] = React.useState(false);
@@ -230,9 +230,9 @@ export const SubHeader = ({ label }) => (
 
 <div className="grid-tokens-page">
 
-<h2 className="page-title">Grid Tokens</h2>
+<h2 className="page-title">Spacing</h2>
 <p className="page-desc">
-  컴포넌트에서 실제 사용 중인 시맨틱 Grid/Spacing 토큰입니다. 토큰을 클릭하면 코드가 클립보드에 복사됩니다.
+  Figma Semantics/spacing 변수와 1:1 매핑되는 간격 토큰입니다. 토큰을 클릭하면 코드가 클립보드에 복사됩니다.
 </p>
 
 <table className="grid-tokens-table">
@@ -286,14 +286,6 @@ export const SubHeader = ({ label }) => (
     <SpacingRow token="spacing['4xlarge']"     px={48}  role="단일 행 최소 높이" />
     <SpacingRow token="spacing.large"          px={16}  role="좌우 패딩 (paddingHorizontal)" />
 
-    {/* ── Radius ── */}
-    <SectionHeader title="Radius" description="모서리 반경(border-radius)" />
-    <RadiusRow token="radius.xsmall"  px={4}    role="소형 태그, 코드 블록" />
-    <RadiusRow token="radius.small"   px={8}    role="Small 버튼, Small 칩" />
-    <RadiusRow token="radius.medium"  px={12}   role="Medium/Large 버튼, 인풋, 카드" />
-    <RadiusRow token="radius.large"   px={16}   role="모달, 바텀시트 상단" />
-    <RadiusRow token="radius.xlarge"  px={24}   role="BottomSheet, 대형 카드" />
-    <RadiusRow token="radius.full"    px={9999} role="원형 (배지, 아바타, 토글)" />
   </tbody>
 </table>
 
@@ -301,12 +293,12 @@ export const SubHeader = ({ label }) => (
 
 ### Usage
 
-<p>컴포넌트에서 spacing/radius 토큰을 사용하는 예시입니다.</p>
+<p>컴포넌트에서 spacing 토큰을 사용하는 예시입니다.</p>
 
 <div className="usage-card">
   <pre>
     <span className="comment">// theme.ts에서 import</span>{'\n'}
-    import {'{ '}<span className="token">spacing</span>, <span className="token">radius</span>, <span className="token">buttonToken</span>{' }'} from '../tokens/theme';{'\n'}
+    import {'{ '}<span className="token">spacing</span>, <span className="token">buttonToken</span>{' }'} from '../tokens/theme';{'\n'}
     {'\n'}
     <span className="comment">// 기본 스페이싱</span>{'\n'}
     {'<View style={{ padding: '}<span className="token">spacing.large</span>{', gap: '}<span className="token">spacing.small</span>{' }}>'}{'\n'}
@@ -314,9 +306,6 @@ export const SubHeader = ({ label }) => (
     <span className="comment">// 컴포넌트 토큰</span>{'\n'}
     {'const h = '}<span className="token">buttonToken.size.medium.height</span>;{'     '}<span className="comment">// 44px</span>{'\n'}
     {'const px = '}<span className="token">buttonToken.size.medium.paddingHorizontal</span>;{'  '}<span className="comment">// 18px</span>{'\n'}
-    {'\n'}
-    <span className="comment">// 반경</span>{'\n'}
-    {'<View style={{ borderRadius: '}<span className="token">radius.medium</span>{' }}>'}<span className="comment">{'  '}// 12px</span>{'\n'}
   </pre>
 </div>
 

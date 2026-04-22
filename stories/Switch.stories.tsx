@@ -57,14 +57,14 @@ type Story = StoryObj<typeof Switch>;
 // ─── 1. Playground ───────────────────────────────────────────
 
 export const Playground: Story = {
-  args: {
-    active: true,
-    disabled: false,
+  render: () => {
+    const [active, setActive] = useState(false);
+    return <Switch active={active} onPress={() => setActive(!active)} />;
   },
   parameters: {
     docs: {
       description: {
-        story: '**적용 토큰**: Track `color/background/brand`, Thumb `color/text/onColor`, 라디우스 `borderRadius/full`',
+        story: '**적용 토큰**: Track `color/background/brand`, Thumb `color/text/onColor`, 라디우스 `borderRadius/full`. 클릭하여 on/off를 토글합니다.',
       },
     },
   },
@@ -223,7 +223,7 @@ export const DesignSpec: Story = {
               { property: 'Thumb 크기',       token: '—',                value: '28×28',                      type: 'size' },
               { property: 'Track 라디우스',   token: 'borderRadius/full', value: radius.full,                  type: 'size' },
               { property: 'Thumb 라디우스',   token: 'borderRadius/full', value: radius.full,                  type: 'size' },
-              { property: 'Thumb 그림자',     token: 'shadow/level1',     value: `offset(0,${shadow.level1.shadowOffset.height}) blur(${shadow.level1.shadowRadius}) opacity(${shadow.level1.shadowOpacity})` },
+              { property: 'Thumb 그림자',     token: 'shadow/level2',     value: `offset(0,${shadow.level2.shadowOffset.height}) blur(${shadow.level2.shadowRadius}) opacity(${shadow.level2.shadowOpacity})` },
               { property: 'Thumb 이동 방식',  token: '—',                value: 'alignSelf (flex-start ↔ flex-end)' },
             ]}
           />

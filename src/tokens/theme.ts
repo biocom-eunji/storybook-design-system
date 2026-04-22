@@ -318,13 +318,15 @@ export const radius = {
 
 /** 그림자 단계 토큰 — 카드, 모달, 바텀시트 등에 사용 */
 export const shadow = {
+  /** Level 1 — Subtle / 카드, 버튼 hover 등 가벼운 고도감 */
   level1: {
     shadowColor: '#000000',
-    shadowOffset: { width: 0, height: 1 },
-    shadowOpacity: 0.06,
+    shadowOffset: { width: 0, height: 0 },
+    shadowOpacity: 0.08,
     shadowRadius: 4,
-    elevation: 2,
+    elevation: 1,
   },
+  /** Level 2 — Medium / 플로팅 요소, 드롭다운, 호버 카드 */
   level2: {
     shadowColor: '#000000',
     shadowOffset: { width: 0, height: 2 },
@@ -332,6 +334,7 @@ export const shadow = {
     shadowRadius: 8,
     elevation: 4,
   },
+  /** Level 3 — Strong / 모달, 바텀시트, 최상위 레이어 */
   level3: {
     shadowColor: '#000000',
     shadowOffset: { width: 0, height: 4 },
@@ -387,8 +390,9 @@ const _role = {
   brand:        mint[45],
   brandPressed: mint[30],
   error:        red[70],
-  success:      mint[45],
-  warning:      yellow[50],
+  success:      green[45],
+  warning:      orange[60],
+  caution:      yellow[50],
 } as const;
 
 // ─── Semantic Color Tokens ───────────────────────────────
@@ -413,8 +417,10 @@ export const semanticColor = {
   textError: _role.error,
   /** 성공 상태 텍스트 */
   textSuccess: _role.success,
-  /** 경고 상태 텍스트 */
+  /** 경고 상태 텍스트 (주황) */
   textWarning: _role.warning,
+  /** 주의 상태 텍스트 (노랑) */
+  textCaution: _role.caution,
   /** 4단계 텍스트 (보조 버튼, 비활성 수치 등) */
   textQuaternary: coolNeutral[40],
   /** 라벨 텍스트 (입력 필드 등) */
@@ -443,8 +449,10 @@ export const semanticColor = {
   backgroundBrandDisabled: mint[90],
   /** 에러 배경 (위험 버튼, ProgressBar error) */
   backgroundError: _role.error,
-  /** 경고 배경 (ProgressBar warning) */
+  /** 경고 배경 (주황) */
   backgroundWarning: _role.warning,
+  /** 주의 배경 (노랑) */
+  backgroundCaution: _role.caution,
   /** 성공 배경 (ProgressBar success) */
   backgroundSuccess: green[45],
   /** 토스트 배경 */
@@ -479,8 +487,10 @@ export const semanticColor = {
   iconError: _role.error,
   /** 성공 아이콘 */
   iconSuccess: _role.success,
-  /** 경고 아이콘 */
+  /** 경고 아이콘 (주황) */
   iconWarning: _role.warning,
+  /** 주의 아이콘 (노랑) */
+  iconCaution: _role.caution,
   /** 미선택/비활성 아이콘 (체크마크, 탭바 등) */
   iconInactive: coolNeutral[90],
 } as const;

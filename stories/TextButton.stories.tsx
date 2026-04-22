@@ -32,7 +32,7 @@ const SIZE_TOKEN_MAP = {
 // ─── Meta ────────────────────────────────────────────────────
 
 const meta: Meta<typeof TextButton> = {
-  title: 'General/TextButton',
+  title: 'Actions/TextButton',
   component: TextButton,
   argTypes: {
     color: {

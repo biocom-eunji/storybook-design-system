@@ -22,7 +22,7 @@ import {
 // ─── Meta ────────────────────────────────────────────────
 
 const meta: Meta<typeof Icon> = {
-  title: 'General/Icon',
+  title: 'Foundation/Icon',
   component: Icon,
   argTypes: {
     name: { control: 'text', description: '아이콘 이름' },

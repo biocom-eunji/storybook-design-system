@@ -19,8 +19,8 @@ const VARIANT_TOKEN_MAP = {
     iconName: 'check-circle',
   },
   warning: {
-    icon:     'color/icon/warning',
-    iconVal:  semanticColor.iconWarning,
+    icon:     'role/caution',
+    iconVal:  semanticColor.iconCaution,
     iconName: 'warning',
   },
   error: {
@@ -98,20 +98,49 @@ type Story = StoryObj;
 // ─── 1. Playground ───────────────────────────────────────────
 
 export const Playground: Story = {
-  render: () => (
-    <View style={{ gap: spacing['3xlarge'] }}>
-      <Section
-        title="Playground"
-        description="Toast 기본 미리보기입니다."
-      >
-        <ToastPreview message="변경사항이 저장되었습니다." variant="success" />
-      </Section>
-    </View>
-  ),
+  render: () => {
+    const [visible, setVisible] = useState(false);
+    const [variant, setVariant] = useState<ToastVariant>('success');
+    const messages: Record<ToastVariant, string> = {
+      success: '저장되었습니다.',
+      warning: '네트워크가 불안정합니다.',
+      error: '저장에 실패했습니다.',
+    };
+
+    const show = (v: ToastVariant) => {
+      setVariant(v);
+      setVisible(true);
+      setTimeout(() => setVisible(false), 3000);
+    };
+
+    return (
+      <View style={{ gap: spacing.xlarge }}>
+        <Row gap={spacing.small} wrap>
+          <Pressable onPress={() => show('success')} style={{ backgroundColor: semanticColor.backgroundSuccess, paddingHorizontal: spacing.large, paddingVertical: spacing.small, borderRadius: radius.small }}>
+            <Text style={{ color: semanticColor.textOnColor, fontWeight: fontWeight.semibold, fontSize: fontSize.small }}>Success</Text>
+          </Pressable>
+          <Pressable onPress={() => show('warning')} style={{ backgroundColor: semanticColor.backgroundCaution, paddingHorizontal: spacing.large, paddingVertical: spacing.small, borderRadius: radius.small }}>
+            <Text style={{ color: semanticColor.textPrimary, fontWeight: fontWeight.semibold, fontSize: fontSize.small }}>Warning</Text>
+          </Pressable>
+          <Pressable onPress={() => show('error')} style={{ backgroundColor: semanticColor.backgroundError, paddingHorizontal: spacing.large, paddingVertical: spacing.small, borderRadius: radius.small }}>
+            <Text style={{ color: semanticColor.textOnColor, fontWeight: fontWeight.semibold, fontSize: fontSize.small }}>Error</Text>
+          </Pressable>
+        </Row>
+        <div style={{
+          overflow: 'hidden',
+          transition: 'max-height 0.3s ease, opacity 0.3s ease',
+          maxHeight: visible ? 80 : 0,
+          opacity: visible ? 1 : 0,
+        }}>
+          <ToastPreview message={messages[variant]} variant={variant} />
+        </div>
+      </View>
+    );
+  },
   parameters: {
     docs: {
       description: {
-        story: '**적용 토큰**: `color/background/toast`, `color/text/onColor`, `color/icon/success`, `Body 2`, `borderRadius/medium`',
+        story: '**적용 토큰**: `color/background/toast`, `color/text/onColor`, `color/icon/success`, `Body 2`, `borderRadius/medium`. 버튼을 클릭하면 Toast가 애니메이션과 함께 나타납니다.',
       },
     },
   },
@@ -149,7 +178,7 @@ export const Variants: Story = {
       description: {
         story: [
           '**Success**: `color/icon/success` (민트)',
-          '**Warning**: `color/icon/warning` (옐로우)',
+          '**Warning**: `role/caution` (옐로우)',
           '**Error**: `color/icon/error` (레드)',
           '**공통 배경**: `color/background/toast`',
         ].join('\n\n'),
@@ -212,13 +241,13 @@ export const Interactive: Story = {
           <Row gap={spacing.medium} wrap>
             <Pressable
               onPress={() => show('success', '저장되었습니다.')}
-              style={{ backgroundColor: semanticColor.backgroundBrand, paddingHorizontal: spacing.large, paddingVertical: spacing.small, borderRadius: radius.small }}
+              style={{ backgroundColor: semanticColor.backgroundSuccess, paddingHorizontal: spacing.large, paddingVertical: spacing.small, borderRadius: radius.small }}
             >
               <Text style={{ color: semanticColor.textOnColor, fontWeight: fontWeight.semibold }}>Success</Text>
             </Pressable>
             <Pressable
               onPress={() => show('warning', '네트워크가 불안정합니다.')}
-              style={{ backgroundColor: semanticColor.backgroundWarning, paddingHorizontal: spacing.large, paddingVertical: spacing.small, borderRadius: radius.small }}
+              style={{ backgroundColor: semanticColor.backgroundCaution, paddingHorizontal: spacing.large, paddingVertical: spacing.small, borderRadius: radius.small }}
             >
               <Text style={{ color: semanticColor.textPrimary, fontWeight: fontWeight.semibold }}>Warning</Text>
             </Pressable>

@@ -6,7 +6,7 @@ import { TokenSpecTable } from '../src/storybook-components/TokenSpecTable';
 import { opacity, spacing } from '../src/tokens/theme';
 
 const meta: Meta = {
-  title: 'Design Tokens/Opacity',
+  title: 'Primitives/Opacity',
   tags: ['autodocs'],
 };
 

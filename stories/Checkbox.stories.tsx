@@ -100,16 +100,34 @@ type Story = StoryObj<typeof Checkbox>;
 // ─── 1. Playground ───────────────────────────────────────────
 
 export const Playground: Story = {
-  args: {
-    state: 'checked',
-    size: 'medium',
-    label: '이용약관에 동의합니다.',
-    disabled: false,
+  render: () => {
+    const [checked1, setChecked1] = useState(true);
+    const [checked2, setChecked2] = useState(false);
+    const [checked3, setChecked3] = useState(false);
+    return (
+      <View style={{ gap: spacing.small }}>
+        <Checkbox
+          state={checked1 ? 'checked' : 'unchecked'}
+          label="이용약관에 동의합니다."
+          onPress={() => setChecked1(!checked1)}
+        />
+        <Checkbox
+          state={checked2 ? 'checked' : 'unchecked'}
+          label="개인정보 처리방침에 동의합니다."
+          onPress={() => setChecked2(!checked2)}
+        />
+        <Checkbox
+          state={checked3 ? 'checked' : 'unchecked'}
+          label="마케팅 수신 동의 (선택)"
+          onPress={() => setChecked3(!checked3)}
+        />
+      </View>
+    );
   },
   parameters: {
     docs: {
       description: {
-        story: '**적용 토큰**: `color/background/brand`, `color/icon/onColor`, `color/text/primary`, `Label 2`',
+        story: '**적용 토큰**: `color/background/brand`, `color/icon/onColor`, `color/text/primary`, `Label 2`. 클릭하여 체크를 토글합니다.',
       },
     },
   },

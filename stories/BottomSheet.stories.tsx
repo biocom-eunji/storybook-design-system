@@ -1,142 +1,353 @@
 import React, { useState } from 'react';
-import { View, Text, Pressable } from 'react-native';
+import { View, Text, ScrollView } from 'react-native';
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import { BottomSheet } from '../src/components/BottomSheet';
-import { Section, StateLabel, Col, SpecTable, CodeBlock, CompareGrid, Divider } from './storyHelpers';
-import { coolNeutral, mint, fontSize, fontWeight, spacing, radius, semanticColor } from '../src/tokens/theme';
+import { Button } from '../src/components/Button';
+import { TextField } from '../src/components/TextField';
+import { Checkbox } from '../src/components/Checkbox';
+import { Section, CodeBlock, Divider } from './storyHelpers';
+import { TokenSpecTable } from '../src/storybook-components/TokenSpecTable';
+import {
+  spacing, semanticColor, radius, opacity, textStyle, shadow,
+  fontSize, fontWeight, palette,
+} from '../src/tokens/theme';
 
-const meta: Meta<typeof BottomSheet> = {
-  title: 'Feedback/BottomSheet',
-  component: BottomSheet,
-  argTypes: {
-    visible: { control: 'boolean', description: '표시 여부' },
-    title: { control: 'text', description: '헤더 타이틀' },
-    showHandle: { control: 'boolean', description: '드래그 핸들바 표시' },
-    showCloseButton: { control: 'boolean', description: '닫기 버튼 표시' },
-    safeAreaBottom: { control: { type: 'range', min: 0, max: 48, step: 4 }, description: 'Safe Area 하단 여백 (px)' },
-  },
+// ─── 토큰 매핑 테이블 (Single Source of Truth) ──────────────
+
+const CONTAINER_TOKEN_MAP = {
+  background:   { token: 'color/background/primary',  value: semanticColor.backgroundStatus },
+  radiusTop:    { token: 'borderRadius/xlarge',        value: radius.xlarge },
+  titleColor:   { token: 'color/text/primary',         value: semanticColor.textPrimary },
+  paddingH:     { token: 'spacing/xlarge',             value: spacing.xlarge },
+  paddingV:     { token: 'spacing/large',              value: spacing.large },
+  contentPadB:  { token: 'spacing/xlarge',             value: spacing.xlarge },
+} as const;
+
+const HANDLE_TOKEN_MAP = {
+  background:   { token: 'color/background/off',       value: semanticColor.backgroundOff },
+  radius:       { token: 'borderRadius/full',           value: radius.full },
+  topMargin:    { token: 'spacing/medium',              value: spacing.medium },
+} as const;
+
+const SCRIM_TOKEN_MAP = {
+  background:   { token: 'black',                      value: palette.black },
+  opacity:      { token: 'opacity/43',                  value: opacity[43] },
+} as const;
+
+// ─── 인라인 BottomSheet 미리보기 (position: static) ──────────
+
+function SheetPreview({
+  title,
+  children,
+  showHandle = true,
+  showClose = false,
+}: {
+  title?: string;
+  children?: React.ReactNode;
+  showHandle?: boolean;
+  showClose?: boolean;
+}) {
+  return (
+    <View style={{
+      maxWidth: 375,
+      backgroundColor: `rgba(0,0,0,${opacity[52]})`,
+      borderTopLeftRadius: radius.medium,
+      borderTopRightRadius: radius.medium,
+      overflow: 'hidden',
+    }}>
+      <View style={{ height: 80 }} />
+      <View style={{
+        backgroundColor: semanticColor.backgroundStatus,
+        borderTopLeftRadius: radius.xlarge,
+        borderTopRightRadius: radius.xlarge,
+      }}>
+        {showHandle && (
+          <View style={{ alignItems: 'center', marginTop: spacing.medium }}>
+            <View style={{
+              width: 40,
+              height: 4,
+              borderRadius: 2,
+              backgroundColor: semanticColor.backgroundOff,
+            }} />
+          </View>
+        )}
+        {showClose && (
+          <View style={{
+            position: 'absolute',
+            right: spacing.large,
+            top: spacing.large,
+            width: 24,
+            height: 24,
+            alignItems: 'center',
+            justifyContent: 'center',
+          }}>
+            <Text style={{ fontSize: fontSize.large, color: semanticColor.textSecondary }}>{'\u2715'}</Text>
+          </View>
+        )}
+        {title && (
+          <Text style={{
+            fontSize: fontSize.large,
+            fontWeight: fontWeight.bold,
+            color: semanticColor.textPrimary,
+            paddingHorizontal: spacing.xlarge,
+            paddingVertical: spacing.large,
+          }}>{title}</Text>
+        )}
+        <View style={{ paddingHorizontal: spacing.xlarge, paddingBottom: spacing.xlarge }}>
+          {children}
+        </View>
+      </View>
+    </View>
+  );
+}
+
+// ─── Meta ────────────────────────────────────────────────────
+
+const meta: Meta = {
+  title: 'Overlay/BottomSheet',
   tags: ['autodocs'],
 };
 
 export default meta;
-type Story = StoryObj<typeof BottomSheet>;
-
-// ─── 공통 헬퍼 ────────────────────────────────────────────
-
-const OpenButton = ({ label, onPress }: { label: string; onPress: () => void }) => (
-  <Pressable
-    onPress={onPress}
-    style={{ backgroundColor: semanticColor.backgroundBrand, paddingHorizontal: spacing.xlarge, paddingVertical: spacing.medium, borderRadius: radius.medium, alignSelf: 'flex-start' }}
-  >
-    <Text style={{ color: semanticColor.textOnColor, fontSize: fontSize.medium, fontWeight: fontWeight.semibold }}>{label}</Text>
-  </Pressable>
-);
-
-const ListItem = ({ label }: { label: string }) => (
-  <Pressable style={{ paddingVertical: spacing.medium, borderBottomWidth: 1, borderBottomColor: semanticColor.borderDefault }}>
-    <Text style={{ fontSize: fontSize.medium, color: semanticColor.textPrimary }}>{label}</Text>
-  </Pressable>
-);
+type Story = StoryObj;
 
 // ─── 1. Playground ───────────────────────────────────────────
 
 export const Playground: Story = {
-  args: {
-    visible: false,
-    title: '바텀시트 제목',
-    showHandle: true,
-    showCloseButton: false,
-    safeAreaBottom: 0,
-  },
-  render: (args) => {
-    const [visible, setVisible] = useState(false);
-    return (
-      <View style={{ gap: spacing.large }}>
-        <OpenButton label="바텀시트 열기" onPress={() => setVisible(true)} />
-        <BottomSheet
-          {...args}
-          visible={visible}
-          onClose={() => setVisible(false)}
-        >
-          <ListItem label="옵션 1" />
-          <ListItem label="옵션 2" />
-          <ListItem label="옵션 3" />
-        </BottomSheet>
-      </View>
-    );
-  },
-};
-
-// ─── 2. 기본 사용 ───────────────────────────────────────────
-
-export const Default: Story = {
-  name: '기본 사용',
-  render: () => {
-    const [visible, setVisible] = useState(false);
-    return (
-      <Section
-        title="기본 사용"
-        description="타이틀과 리스트 콘텐츠가 포함된 기본 바텀시트입니다. 버튼을 눌러 확인하세요."
-      >
-        <OpenButton label="기본 바텀시트 열기" onPress={() => setVisible(true)} />
-        <BottomSheet visible={visible} title="메뉴 선택" onClose={() => setVisible(false)}>
-          <ListItem label="프로필 편집" />
-          <ListItem label="알림 설정" />
-          <ListItem label="로그아웃" />
-          <ListItem label="고객센터" />
-        </BottomSheet>
-      </Section>
-    );
-  },
-};
-
-// ─── 3. 핸들바/닫기버튼 옵션 ──────────────────────────────────
-
-const OptionDemo = ({
-  label,
-  showHandle,
-  showCloseButton,
-}: {
-  label: string;
-  showHandle: boolean;
-  showCloseButton: boolean;
-}) => {
-  const [visible, setVisible] = useState(false);
-  return (
-    <View style={{ gap: spacing.small }}>
-      <OpenButton label={label} onPress={() => setVisible(true)} />
-      <BottomSheet
-        visible={visible}
-        title={label}
-        showHandle={showHandle}
-        showCloseButton={showCloseButton}
-        onClose={() => setVisible(false)}
-      >
-        <ListItem label="항목 A" />
-        <ListItem label="항목 B" />
-      </BottomSheet>
-    </View>
-  );
-};
-
-export const HandleAndCloseOptions: Story = {
-  name: '핸들바/닫기버튼 옵션',
   render: () => (
-    <Section
-      title="핸들바/닫기버튼 옵션"
-      description="핸들바와 닫기 버튼 조합에 따른 헤더 스타일 변화를 확인합니다. 각 버튼을 눌러 비교하세요."
-    >
-      <View style={{ flexDirection: 'row', flexWrap: 'wrap', gap: spacing.medium }}>
-        <OptionDemo label="핸들바만 (기본)" showHandle showCloseButton={false} />
-        <OptionDemo label="닫기 버튼만" showHandle={false} showCloseButton />
-        <OptionDemo label="핸들바 + 닫기" showHandle showCloseButton />
-        <OptionDemo label="둘 다 없음" showHandle={false} showCloseButton={false} />
-      </View>
-    </Section>
+    <View style={{ gap: spacing['3xlarge'] }}>
+      <Section
+        title="Playground"
+        description="BottomSheet 기본 미리보기입니다."
+      >
+        <SheetPreview title="옵션 선택" showHandle>
+          <View style={{ gap: spacing.medium }}>
+            <Text style={{ fontSize: fontSize.medium, color: semanticColor.textSecondary }}>
+              아래에서 원하는 옵션을 선택해주세요.
+            </Text>
+            <Button label="확인" variant="solid" color="primary" size="medium" />
+            <Button label="취소" variant="solid" color="assistive" size="medium" />
+          </View>
+        </SheetPreview>
+      </Section>
+    </View>
+  ),
+  parameters: {
+    docs: {
+      description: {
+        story: '**적용 토큰**: `color/background/primary`, `borderRadius/xlarge` (상단만), `spacing/xlarge`, Handle `color/background/off`',
+      },
+    },
+  },
+};
+
+// ─── 2. Handle 유/무 ─────────────────────────────────────────
+
+export const HandleVariants: Story = {
+  name: 'Handle 유/무',
+  render: () => (
+    <View style={{ gap: spacing['3xlarge'] }}>
+      <Section
+        title="Handle 유/무"
+        description="Drag handle bar 표시 여부를 비교합니다."
+      >
+        <View style={{ gap: spacing.xlarge }}>
+          <View>
+            <Text style={{ fontSize: fontSize.xsmall, fontWeight: fontWeight.semibold, color: semanticColor.textSecondary, marginBottom: spacing.small }}>Handle 표시</Text>
+            <SheetPreview title="제목" showHandle>
+              <Text style={{ fontSize: fontSize.medium, color: semanticColor.textSecondary }}>Handle이 있는 시트</Text>
+            </SheetPreview>
+          </View>
+          <View>
+            <Text style={{ fontSize: fontSize.xsmall, fontWeight: fontWeight.semibold, color: semanticColor.textSecondary, marginBottom: spacing.small }}>Handle 숨김</Text>
+            <SheetPreview title="제목" showHandle={false}>
+              <Text style={{ fontSize: fontSize.medium, color: semanticColor.textSecondary }}>Handle이 없는 시트</Text>
+            </SheetPreview>
+          </View>
+        </View>
+      </Section>
+    </View>
   ),
 };
 
-// ─── 4. 디자인 스펙 ─────────────────────────────────────────
+// ─── 3. CloseButton ──────────────────────────────────────────
+
+export const WithCloseButton: Story = {
+  name: 'Close 버튼',
+  render: () => (
+    <View style={{ gap: spacing['3xlarge'] }}>
+      <Section
+        title="Close 버튼"
+        description="우상단에 닫기 버튼이 포함된 시트입니다."
+      >
+        <SheetPreview title="알림 설정" showHandle showClose>
+          <Text style={{ fontSize: fontSize.medium, color: semanticColor.textSecondary }}>
+            알림 관련 옵션을 설정할 수 있습니다.
+          </Text>
+        </SheetPreview>
+      </Section>
+    </View>
+  ),
+};
+
+// ─── 4. Action Sheet ─────────────────────────────────────────
+
+export const ActionSheet: Story = {
+  name: 'Action Sheet',
+  render: () => (
+    <View style={{ gap: spacing['3xlarge'] }}>
+      <Section
+        title="Action Sheet"
+        description="확인/취소 버튼이 포함된 기본 액션 시트입니다. 실제 Button 컴포넌트를 사용합니다."
+      >
+        <SheetPreview title="기록 삭제" showHandle>
+          <View style={{ gap: spacing.medium }}>
+            <Text style={{ fontSize: fontSize.medium, color: semanticColor.textSecondary }}>
+              이 기록을 삭제하시겠습니까? 삭제된 기록은 복구할 수 없습니다.
+            </Text>
+            <View style={{ gap: spacing.small, marginTop: spacing.small }}>
+              <Button label="삭제" variant="solid" color="primary" size="medium" />
+              <Button label="취소" variant="solid" color="assistive" size="medium" />
+            </View>
+          </View>
+        </SheetPreview>
+      </Section>
+    </View>
+  ),
+};
+
+// ─── 5. Form Sheet ───────────────────────────────────────────
+
+export const FormSheet: Story = {
+  name: 'Form Sheet',
+  render: () => (
+    <View style={{ gap: spacing['3xlarge'] }}>
+      <Section
+        title="Form Sheet"
+        description="TextField를 포함한 폼 시트입니다. 실제 TextField 컴포넌트를 import하여 사용합니다."
+      >
+        <SheetPreview title="목표 설정" showHandle>
+          <View style={{ gap: spacing.medium }}>
+            <TextField label="목표명" placeholder="예: 하루 물 2L 마시기" />
+            <TextField label="메모" placeholder="상세 설명 (선택)" multiline minHeight={60} />
+            <View style={{ gap: spacing.small, marginTop: spacing.small }}>
+              <Button label="저장" variant="solid" color="primary" size="medium" />
+              <Button label="취소" variant="solid" color="assistive" size="medium" />
+            </View>
+          </View>
+        </SheetPreview>
+      </Section>
+    </View>
+  ),
+  parameters: {
+    docs: {
+      description: {
+        story: '**내부 컴포넌트**: `TextField`, `Button` import 사용. BottomSheet 자체 토큰과 내부 컴포넌트 토큰이 각각 독립 적용.',
+      },
+    },
+  },
+};
+
+// ─── 6. List Sheet ───────────────────────────────────────────
+
+export const ListSheet: Story = {
+  name: 'List Sheet',
+  render: () => {
+    const options = ['식단 기록', '수면 기록', '운동 기록', '영양제 기록', '수분 기록'];
+    return (
+      <View style={{ gap: spacing['3xlarge'] }}>
+        <Section
+          title="List Sheet"
+          description="여러 옵션 목록을 포함한 시트입니다."
+        >
+          <SheetPreview title="기록 추가" showHandle>
+            <View style={{ gap: 0 }}>
+              {options.map((opt, i) => (
+                <View key={opt} style={{
+                  paddingVertical: spacing.medium,
+                  borderBottomWidth: i < options.length - 1 ? 1 : 0,
+                  borderBottomColor: semanticColor.borderDefault,
+                }}>
+                  <Text style={{ fontSize: fontSize.medium, fontWeight: fontWeight.medium, color: semanticColor.textPrimary }}>{opt}</Text>
+                </View>
+              ))}
+            </View>
+          </SheetPreview>
+        </Section>
+      </View>
+    );
+  },
+};
+
+// ─── 7. Checkbox Sheet ───────────────────────────────────────
+
+export const CheckboxSheet: Story = {
+  name: 'Checkbox Sheet',
+  render: () => (
+    <View style={{ gap: spacing['3xlarge'] }}>
+      <Section
+        title="Checkbox Sheet"
+        description="약관 동의 등 Checkbox를 포함한 시트입니다. 실제 Checkbox 컴포넌트를 사용합니다."
+      >
+        <SheetPreview title="이용약관 동의" showHandle>
+          <View style={{ gap: spacing.small }}>
+            <Checkbox state="checked" label="전체 동의" bold />
+            <View style={{ height: 1, backgroundColor: semanticColor.borderDefault }} />
+            <Checkbox state="checked" label="이용약관 동의 (필수)" />
+            <Checkbox state="checked" label="개인정보 처리방침 동의 (필수)" />
+            <Checkbox state="unchecked" label="마케팅 수신 동의 (선택)" sublabel="이벤트, 혜택 정보를 받아볼 수 있습니다." />
+            <View style={{ marginTop: spacing.medium }}>
+              <Button label="동의하고 계속하기" variant="solid" color="primary" size="large" />
+            </View>
+          </View>
+        </SheetPreview>
+      </Section>
+    </View>
+  ),
+};
+
+// ─── 8. 인터랙티브 데모 ──────────────────────────────────────
+
+export const Interactive: Story = {
+  name: '인터랙티브 데모',
+  render: () => {
+    const [visible, setVisible] = useState(false);
+    const [formVisible, setFormVisible] = useState(false);
+
+    return (
+      <View style={{ gap: spacing['3xlarge'] }}>
+        <Section
+          title="인터랙티브 데모"
+          description="버튼을 클릭하여 실제 BottomSheet 컴포넌트를 열어봅니다."
+        >
+          <View style={{ flexDirection: 'row', gap: spacing.medium }}>
+            <Button label="Action Sheet" variant="solid" color="primary" size="small" onPress={() => setVisible(true)} />
+            <Button label="Form Sheet" variant="outlined" color="primary" size="small" onPress={() => setFormVisible(true)} />
+          </View>
+
+          <BottomSheet visible={visible} onClose={() => setVisible(false)} title="기록 삭제" showHandle>
+            <View style={{ gap: spacing.medium }}>
+              <Text style={{ fontSize: fontSize.medium, color: semanticColor.textSecondary }}>
+                이 기록을 삭제하시겠습니까?
+              </Text>
+              <Button label="삭제" variant="solid" color="primary" size="medium" onPress={() => setVisible(false)} />
+              <Button label="취소" variant="solid" color="assistive" size="medium" onPress={() => setVisible(false)} />
+            </View>
+          </BottomSheet>
+
+          <BottomSheet visible={formVisible} onClose={() => setFormVisible(false)} title="목표 설정" showHandle>
+            <View style={{ gap: spacing.medium }}>
+              <TextField label="목표명" placeholder="예: 하루 물 2L 마시기" />
+              <Button label="저장" variant="solid" color="primary" size="medium" onPress={() => setFormVisible(false)} />
+            </View>
+          </BottomSheet>
+        </Section>
+      </View>
+    );
+  },
+};
+
+// ─── 9. 디자인 스펙 ──────────────────────────────────────────
 
 export const DesignSpec: Story = {
   name: '디자인 스펙',
@@ -144,62 +355,66 @@ export const DesignSpec: Story = {
     <View style={{ gap: spacing['3xlarge'] }}>
       <Section
         title="디자인 스펙"
-        description="BottomSheet 컴포넌트의 디자인 토큰 상세 스펙입니다."
+        description="Figma 시맨틱 토큰 기준 BottomSheet 컨테이너 스펙입니다. 내부 Button/TextField/Checkbox의 토큰은 각 컴포넌트 문서를 참조하세요."
+        badge="디자인"
       >
-        <SpecTable
-          title="오버레이"
+        <TokenSpecTable
+          title="bottom sheet / container"
           rows={[
-            { label: '구현', value: '<Modal transparent>', token: 'React Native Modal' },
-            { label: '배경색', value: '#000000', token: '—' },
-            { label: '배경 투명도', value: '0.4', token: 'BACKDROP_OPACITY' },
-            { label: '애니메이션', value: '300ms slide up', token: 'ANIMATION_DURATION' },
+            { property: 'Container 배경색',      token: CONTAINER_TOKEN_MAP.background.token,  value: CONTAINER_TOKEN_MAP.background.value,  type: 'color' },
+            { property: 'Container 상단 라디우스', token: CONTAINER_TOKEN_MAP.radiusTop.token,   value: CONTAINER_TOKEN_MAP.radiusTop.value,   type: 'size' },
+            { property: 'Title 색상',             token: CONTAINER_TOKEN_MAP.titleColor.token,  value: CONTAINER_TOKEN_MAP.titleColor.value,  type: 'color' },
+            { property: 'Title 타이포',           token: 'Headline', value: `${textStyle.headline.fontSize}px / ${textStyle.headline.lineHeight}px / ${textStyle.headline.fontWeight}`, type: 'typography' },
+            { property: '좌우 패딩',              token: CONTAINER_TOKEN_MAP.paddingH.token,    value: CONTAINER_TOKEN_MAP.paddingH.value,    type: 'size' },
+            { property: 'Title 상하 패딩',        token: CONTAINER_TOKEN_MAP.paddingV.token,    value: CONTAINER_TOKEN_MAP.paddingV.value,    type: 'size' },
+            { property: 'Content 하단 패딩',      token: CONTAINER_TOKEN_MAP.contentPadB.token, value: CONTAINER_TOKEN_MAP.contentPadB.value, type: 'size' },
           ]}
         />
 
-        <SpecTable
-          title="시트"
+        <Divider />
+
+        <TokenSpecTable
+          title="bottom sheet / drag handle"
           rows={[
-            { label: '배경색', value: '#FFFFFF', token: 'semanticColor.backgroundStatus' },
-            { label: '상단 반경', value: '20px', token: 'radius.xlarge' },
-            { label: '하단 여백', value: 'safeAreaBottom prop', token: 'useSafeAreaInsets().bottom' },
+            { property: 'Handle 배경색',   token: HANDLE_TOKEN_MAP.background.token, value: HANDLE_TOKEN_MAP.background.value, type: 'color' },
+            { property: 'Handle 라디우스',  token: HANDLE_TOKEN_MAP.radius.token,     value: HANDLE_TOKEN_MAP.radius.value,    type: 'size' },
+            { property: 'Handle 상단 여백', token: HANDLE_TOKEN_MAP.topMargin.token,   value: HANDLE_TOKEN_MAP.topMargin.value, type: 'size' },
+            { property: 'Handle 너비',     token: '—', value: '40' },
+            { property: 'Handle 높이',     token: '—', value: '4' },
           ]}
         />
 
-        <SpecTable
-          title="핸들바"
+        <Divider />
+
+        <TokenSpecTable
+          title="bottom sheet / scrim"
           rows={[
-            { label: '너비', value: '40px', token: '—' },
-            { label: '높이', value: '4px', token: '—' },
-            { label: '모서리 반경', value: '2px', token: '—' },
-            { label: '배경색', value: coolNeutral[90], token: 'coolNeutral[90]' },
-            { label: '상단 마진', value: `${spacing.medium}px`, token: 'spacing.medium' },
+            { property: 'Scrim 배경색',  token: SCRIM_TOKEN_MAP.background.token, value: SCRIM_TOKEN_MAP.background.value, type: 'color' },
+            { property: 'Scrim opacity', token: SCRIM_TOKEN_MAP.opacity.token,    value: SCRIM_TOKEN_MAP.opacity.value,    type: 'opacity' },
           ]}
         />
 
-        <SpecTable
-          title="타이틀"
+        <Divider />
+
+        <TokenSpecTable
+          title="bottom sheet / animation (권장값)"
           rows={[
-            { label: '폰트 크기', value: `${fontSize.large}px`, token: 'fontSize.large' },
-            { label: '폰트 굵기', value: fontWeight.bold, token: 'fontWeight.bold' },
-            { label: '색상', value: coolNeutral[17], token: 'coolNeutral[17]' },
-            { label: '좌우 패딩', value: `${spacing.xlarge}px`, token: 'spacing.xlarge' },
-            { label: '상하 패딩', value: `${spacing.large}px`, token: 'spacing.large' },
+            { property: '등장 시작 opacity',  token: 'opacity/0',   value: opacity[0],   type: 'opacity' },
+            { property: '등장 끝 opacity',    token: 'opacity/100', value: opacity[100], type: 'opacity' },
+            { property: '등장 방향',          token: '—',           value: 'translateY(100%) → translateY(0)' },
+            { property: 'Duration',           token: '—',           value: '300ms' },
+            { property: 'Easing',             token: '—',           value: 'cubic-bezier(0.32, 0.72, 0, 1)' },
           ]}
         />
 
-        <SpecTable
-          title="닫기 버튼"
-          rows={[
-            { label: '위치', value: 'right: 16, top: 16', token: 'spacing.large' },
-            { label: '색상', value: coolNeutral[50], token: 'coolNeutral[50]' },
-          ]}
-        />
+        <Divider />
 
-        <SpecTable
-          title="콘텐츠 영역"
+        <TokenSpecTable
+          title="내부 컴포넌트 참조"
           rows={[
-            { label: '좌우 패딩', value: `${spacing.xlarge}px`, token: 'spacing.xlarge' },
-            { label: '하단 패딩', value: `${spacing.xlarge}px`, token: 'spacing.xlarge' },
+            { property: 'Button',     token: 'Button (solid)',         value: '→ General/Button 문서 참조' },
+            { property: 'TextField', token: 'TextField',             value: '→ Input/TextField 문서 참조' },
+            { property: 'Checkbox',   token: 'Checkbox',               value: '→ Input/Checkbox 문서 참조' },
           ]}
         />
       </Section>
@@ -207,7 +422,7 @@ export const DesignSpec: Story = {
   ),
 };
 
-// ─── 5. 사용 가이드 ─────────────────────────────────────────
+// ─── 10. 사용 가이드 ─────────────────────────────────────────
 
 export const Usage: Story = {
   name: '사용 가이드',
@@ -216,76 +431,53 @@ export const Usage: Story = {
       <Section
         title="사용 가이드"
         description="개발자를 위한 BottomSheet 컴포넌트 사용 예시입니다."
+        badge="개발"
       >
         <CodeBlock
           title="Import"
-          code={`import { BottomSheet } from '@design-system/components/BottomSheet';`}
+          code={`import { BottomSheet } from '@design-system/components/BottomSheet';
+import { Button } from '@design-system/components/Button';`}
         />
 
         <CodeBlock
-          title="기본 사용"
+          title="기본 Action Sheet"
           code={`const [visible, setVisible] = useState(false);
 
 <BottomSheet
   visible={visible}
   onClose={() => setVisible(false)}
-  title="메뉴 선택"
+  title="기록 삭제"
+  showHandle
 >
-  <MenuItem label="프로필 편집" />
-  <MenuItem label="알림 설정" />
+  <Text>이 기록을 삭제하시겠습니까?</Text>
+  <Button label="삭제" onPress={handleDelete} />
+  <Button label="취소" variant="solid" color="assistive" onPress={() => setVisible(false)} />
 </BottomSheet>`}
         />
 
         <CodeBlock
-          title="Safe Area 적용 (react-native-safe-area-context)"
+          title="Form Sheet"
+          code={`<BottomSheet visible={visible} onClose={close} title="목표 설정" showHandle>
+  <TextField label="목표명" placeholder="예: 하루 물 2L" />
+  <TextField label="메모" multiline minHeight={60} />
+  <Button label="저장" onPress={handleSave} />
+</BottomSheet>`}
+        />
+
+        <CodeBlock
+          title="Safe Area 대응"
           code={`import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
-function MyScreen() {
-  const insets = useSafeAreaInsets();
-  const [visible, setVisible] = useState(false);
+const { bottom } = useSafeAreaInsets();
 
-  return (
-    <BottomSheet
-      visible={visible}
-      onClose={() => setVisible(false)}
-      title="설정"
-      safeAreaBottom={insets.bottom}
-    >
-      {/* 콘텐츠 */}
-    </BottomSheet>
-  );
-}`}
-        />
-
-        <CodeBlock
-          title="닫기 버튼 사용"
-          code={`<BottomSheet
+<BottomSheet
   visible={visible}
-  onClose={() => setVisible(false)}
-  title="설정"
-  showHandle={false}
-  showCloseButton
+  onClose={close}
+  safeAreaBottom={bottom}
 >
-  {/* 콘텐츠 */}
+  {children}
 </BottomSheet>`}
         />
-
-        <Divider />
-
-        <Col gap={spacing.small}>
-          <StateLabel>Props</StateLabel>
-          <SpecTable
-            rows={[
-              { label: 'visible', value: 'boolean', token: '표시 여부 (필수)' },
-              { label: 'onClose', value: '() => void', token: '닫기 콜백' },
-              { label: 'title', value: 'string', token: '헤더 타이틀' },
-              { label: 'children', value: 'ReactNode', token: '콘텐츠 (필수)' },
-              { label: 'showHandle', value: 'boolean', token: '핸들바 표시 (기본: true)' },
-              { label: 'showCloseButton', value: 'boolean', token: '닫기 버튼 표시 (기본: false)' },
-              { label: 'safeAreaBottom', value: 'number', token: 'Safe Area 하단 여백 (기본: 0)' },
-            ]}
-          />
-        </Col>
       </Section>
     </View>
   ),

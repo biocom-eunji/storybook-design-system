@@ -4,6 +4,53 @@
 
 ---
 
+## v2.0.0 (2026-04-22)
+
+### Added
+- AppBar 컴포넌트 (BackButton/CloseButton/IconAction 서브 컴포넌트)
+- Tabs 컴포넌트 (S/M/L, hug/fill)
+- PageIndicator 컴포넌트 (normal/white, fade 감쇠)
+- SegmentedControl 컴포넌트 (S/M/L)
+- FAB 컴포넌트 (regular/extended, primary/secondary)
+- Tooltip 컴포넌트 (4방향 position + align)
+- Card 컴포넌트 (썸네일 + 제목 + 캡션, Skeleton)
+- ListCard 컴포넌트 (가로 리스트 카드, Skeleton)
+- List 컴포넌트 (Compound: Item + ExpandableItem)
+- FrequencyChip 컴포넌트 (4단계 severity)
+- LevelIndicator 컴포넌트 (4구간 상태 막대 그래프)
+- Brand Logo 페이지 (Getting Started)
+- BorderRadius 토큰 카탈로그 (Semantics)
+- Shadow Level 1 신규 추가 (0 0 4px rgba(0,0,0,0.08))
+- role/warning 토큰 신규 (orange[60])
+- role/caution 토큰 신규 (yellow[50])
+- semanticColor.backgroundCaution/textCaution/iconCaution 추가
+
+### Changed (Breaking)
+- InputField → TextField (한 줄 입력)
+- TextField → TextArea (여러 줄 입력)
+- Tab → Tabs
+- TabBar → BottomNavigation
+- Dot → PageIndicator
+- GENERAL → ACTIONS 카테고리 변경
+- Icon: ACTIONS → FOUNDATION 이동
+- Modal, BottomSheet: FEEDBACK → OVERLAY 이동
+- role/warning: yellow[50] → orange[60] (주황)
+- role/success: mint[45] → green[45]
+- Shadow Level 리넘버링 (기존 L1→L2, L2→L3)
+
+### Changed
+- 모든 컴포넌트 Playground에 인터랙티브 useState 추가
+- Divider 스토리 시맨틱 토큰 교체
+- Toast Success/Warning 버튼 role 색상 적용
+- Storybook 좌측 상단 biocom 로고 적용
+- Color Palette에서 Opacity 섹션 삭제 (별도 페이지로 분리)
+
+### Removed
+- ActionArea 스토리
+- Avatar 스토리
+
+---
+
 ## v1.4.0 (2026-04-21)
 
 ### Added

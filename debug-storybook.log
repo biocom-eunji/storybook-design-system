@@ -1,18 +1,17 @@
-[19:09:02.943] [INFO] storybook v10.2.19
-[19:09:03.047] [DEBUG] Getting package.json info for /Users/eunji/Desktop/claude_test/design-system/package.json...
-[19:09:03.391] [INFO] Starting...
-[19:09:03.613] [ERROR] [38;2;241;97;97mError: Build failed with 2 errors:
-.storybook/manager.ts:1:23: ERROR: Could not resolve "@storybook/manager-api"
-.storybook/manager.ts:2:23: ERROR: Could not resolve "@storybook/theming/create"[39m
-    at failureErrorWithLog (./node_modules/esbuild/lib/main.js:1748:15)
-    at ./node_modules/esbuild/lib/main.js:1207:25
-    at runOnEndCallbacks (./node_modules/esbuild/lib/main.js:1588:45)
-    at buildResponseToResult (./node_modules/esbuild/lib/main.js:1205:7)
-    at ./node_modules/esbuild/lib/main.js:1232:16
-    at responseCallbacks.<computed> (./node_modules/esbuild/lib/main.js:884:9)
-    at handleIncomingPacket (./node_modules/esbuild/lib/main.js:939:12)
-    at Socket.readFromStdout (./node_modules/esbuild/lib/main.js:862:7)
-    at Socket.emit (node:events:508:28)
-    at addChunk (node:internal/streams/readable:563:12)
-[19:09:03.614] [WARN] Broken build, fix the error above.
+[14:04:37.837] [INFO] storybook v10.2.19
+[14:04:38.974] [DEBUG] Getting package.json info for /Users/eunji/Desktop/design-system/package.json...
+[14:04:39.358] [ERROR] [38;2;241;97;97mError: Failed to load static files, no such directory: [36m./public[39m
+Make sure this directory exists.[39m
+    at parseStaticDir (file://./node_modules/storybook/dist/_node-chunks/chunk-FJZ625UU.js:116:11)
+    at file://./node_modules/storybook/dist/core-server/presets/common-preset.js:1717:48
+    at Array.map (<anonymous>)
+    at Object.favicon (file://./node_modules/storybook/dist/core-server/presets/common-preset.js:1712:193)
+    at async useStatics (file://./node_modules/storybook/dist/_node-chunks/chunk-FJZ625UU.js:72:83)
+    at async Promise.all (index 2)
+    at async storybookDevServer (file://./node_modules/storybook/dist/core-server/index.js:7282:141)
+    at async buildOrThrow (file://./node_modules/storybook/dist/core-server/index.js:4506:12)
+    at async buildDevStandalone (file://./node_modules/storybook/dist/core-server/index.js:7710:41)
+    at async withTelemetry (file://./node_modules/storybook/dist/_node-chunks/chunk-FJZ625UU.js:218:12)
+[14:04:39.360] [WARN] Broken build, fix the error above.
 You may need to refresh the browser.
+[14:04:44.773] [PROMPT] Would you like to send anonymous crash reports to improve Storybook and fix bugs faster? {"choice":true}

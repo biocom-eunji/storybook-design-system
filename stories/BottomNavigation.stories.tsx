@@ -1,13 +1,13 @@
 import React, { useState } from 'react';
 import { View, Text } from 'react-native';
 import type { Meta, StoryObj } from '@storybook/react-vite';
-import { TabBar, BIOCOM_TABS } from '../src/components/TabBar';
+import { BottomNavigation, BIOCOM_TABS } from '../src/components/BottomNavigation';
 import { Section, StateLabel, Col, SpecTable, CodeBlock, Divider } from './storyHelpers';
 import { fontSize, fontWeight, spacing, radius, semanticColor } from '../src/tokens/theme';
 
-const meta: Meta<typeof TabBar> = {
-  title: 'Navigation/TabBar',
-  component: TabBar,
+const meta: Meta<typeof BottomNavigation> = {
+  title: 'Navigation/BottomNavigation',
+  component: BottomNavigation,
   argTypes: {
     activeTab: {
       control: 'select',
@@ -19,7 +19,7 @@ const meta: Meta<typeof TabBar> = {
 };
 
 export default meta;
-type Story = StoryObj<typeof TabBar>;
+type Story = StoryObj<typeof BottomNavigation>;
 
 const PreviewContainer = ({ children }: { children: React.ReactNode }) => (
   <View style={{
@@ -39,7 +39,7 @@ export const Playground: Story = {
     const [activeTab, setActiveTab] = useState('main');
     return (
       <PreviewContainer>
-        <TabBar
+        <BottomNavigation
           tabs={BIOCOM_TABS}
           activeTab={activeTab}
           onTabPress={setActiveTab}
@@ -51,7 +51,7 @@ export const Playground: Story = {
 
 // ─── 2. 바이오컴 탭바 ───────────────────────────────────────
 
-export const BiocomTabBar: Story = {
+export const BiocomBottomNavigation: Story = {
   name: '바이오컴 탭바',
   render: () => {
     const [activeTab, setActiveTab] = useState('main');
@@ -61,7 +61,7 @@ export const BiocomTabBar: Story = {
         description="콘텐츠 · 목표 · 메인 · AI · 쇼핑 — 바이오컴 서비스의 기본 하단 내비게이션입니다."
       >
         <PreviewContainer>
-          <TabBar
+          <BottomNavigation
             tabs={BIOCOM_TABS}
             activeTab={activeTab}
             onTabPress={setActiveTab}
@@ -91,7 +91,7 @@ export const ActiveStates: Story = {
           <Col key={tab.key} gap={spacing.small}>
             <StateLabel>{`${tab.label} 활성`}</StateLabel>
             <PreviewContainer>
-              <TabBar tabs={BIOCOM_TABS} activeTab={tab.key} />
+              <BottomNavigation tabs={BIOCOM_TABS} activeTab={tab.key} />
             </PreviewContainer>
           </Col>
         ))}
@@ -142,7 +142,7 @@ export const IconMapping: Story = {
 export const DesignSpec: Story = {
   name: '디자인 스펙',
   render: () => (
-    <Section title="디자인 스펙" description="TabBar 컴포넌트의 레이아웃 토큰 명세입니다.">
+    <Section title="디자인 스펙" description="BottomNavigation 컴포넌트의 레이아웃 토큰 명세입니다.">
       <Col gap={spacing.xlarge}>
         <SpecTable
           title="컨테이너"
@@ -172,18 +172,18 @@ export const DesignSpec: Story = {
 export const Usage: Story = {
   name: '사용 가이드',
   render: () => (
-    <Section title="사용 가이드" description="개발자를 위한 TabBar 컴포넌트 사용 예시입니다.">
+    <Section title="사용 가이드" description="개발자를 위한 BottomNavigation 컴포넌트 사용 예시입니다.">
       <Col gap={spacing.large}>
         <CodeBlock
           title="Import"
-          code={`import { TabBar, BIOCOM_TABS } from '@design-system/components/TabBar';`}
+          code={`import { BottomNavigation, BIOCOM_TABS } from '@design-system/components/BottomNavigation';`}
         />
 
         <CodeBlock
           title="바이오컴 기본 탭바 (가장 간단한 사용법)"
           code={`const [activeTab, setActiveTab] = useState('main');
 
-<TabBar
+<BottomNavigation
   tabs={BIOCOM_TABS}
   activeTab={activeTab}
   onTabPress={setActiveTab}
@@ -192,7 +192,7 @@ export const Usage: Story = {
 
         <CodeBlock
           title="커스텀 탭 구성"
-          code={`<TabBar
+          code={`<BottomNavigation
   tabs={[
     { key: 'contents', label: '콘텐츠', icon: 'stack' },
     { key: 'goal', label: '목표', icon: 'streak' },

@@ -332,32 +332,45 @@ export const CaretIcon = () => (
 
 export const SB = '?path=/docs/';
 export const LINK = {
-  BottomSheet: `${SB}feedback-bottomsheet--docs`,
-  ActionArea:  `${SB}navigation-actionarea--docs`,
-  InputField:  `${SB}input-inputfield--docs`,
-  Typography:  `${SB}design-tokens-typography--docs`,
-  Button:      `${SB}general-button--docs`,
-  TextButton:  `${SB}general-textbutton--docs`,
-  Chip:        `${SB}input-chip--docs`,
-  Icon:        `${SB}general-icon--docs`,
-  Checkbox:    `${SB}input-checkbox--docs`,
-  Radio:       `${SB}input-radio--docs`,
-  Switch:      `${SB}input-switch--docs`,
-  Toast:       `${SB}feedback-toast--docs`,
-  Modal:       `${SB}feedback-modal--docs`,
-  TabBar:      `${SB}navigation-tabbar--docs`,
-  Badge:       `${SB}data-display-badge--docs`,
-  Avatar:      `${SB}data-display-avatar--docs`,
-  Divider:     `${SB}data-display-divider--docs`,
-  ProgressBar: `${SB}feedback-progressbar--docs`,
-  Skeleton:    `${SB}feedback-skeleton--docs`,
-  TextField:   `${SB}input-textfield--docs`,
-  Opacity:     `${SB}design-tokens-opacity--docs`,
-  Shadow:      `${SB}design-tokens-shadow--docs`,
-  ColorPalette:`${SB}design-tokens-color-palette--docs`,
-  ColorTokens: `${SB}design-tokens-color-tokens--docs`,
-  NamingConv:  `${SB}getting-started-naming-convention--docs`,
-  Intro:       `${SB}getting-started-introduction--docs`,
+  // Actions
+  Button:           `${SB}actions-button--docs`,
+  TextButton:       `${SB}actions-textbutton--docs`,
+  FAB:              `${SB}actions-fab--docs`,
+  // Foundation
+  Icon:             `${SB}foundation-icon--docs`,
+  // Input
+  TextField:        `${SB}input-textfield--docs`,
+  TextArea:         `${SB}input-textarea--docs`,
+  Checkbox:         `${SB}input-checkbox--docs`,
+  Radio:            `${SB}input-radio--docs`,
+  Switch:           `${SB}input-switch--docs`,
+  Chip:             `${SB}input-chip--docs`,
+  SegmentedControl: `${SB}input-segmentedcontrol--docs`,
+  // Feedback
+  Toast:            `${SB}feedback-toast--docs`,
+  ProgressBar:      `${SB}feedback-progressbar--docs`,
+  Skeleton:         `${SB}feedback-skeleton--docs`,
+  // Overlay
+  Modal:            `${SB}overlay-modal--docs`,
+  BottomSheet:      `${SB}overlay-bottomsheet--docs`,
+  Tooltip:          `${SB}overlay-tooltip--docs`,
+  // Navigation
+  AppBar:           `${SB}navigation-appbar--docs`,
+  Tabs:             `${SB}navigation-tabs--docs`,
+  BottomNavigation: `${SB}navigation-bottomnavigation--docs`,
+  PageIndicator:    `${SB}navigation-pageindicator--docs`,
+  // Data Display
+  Card:             `${SB}data-display-card--docs`,
+  ListCard:         `${SB}data-display-listcard--docs`,
+  List:             `${SB}data-display-list--docs`,
+  FrequencyChip:    `${SB}data-display-frequencychip--docs`,
+  LevelIndicator:   `${SB}data-display-levelindicator--docs`,
+  Badge:            `${SB}data-display-badge--docs`,
+  Divider:          `${SB}data-display-divider--docs`,
+  // Tokens
+  Opacity:          `${SB}primitives-opacity--docs`,
+  Shadow:           `${SB}semantics-shadow--docs`,
+  BrandLogo:        `${SB}getting-started-brand-logo--docs`,
 };
 
 <div className="release-page">
@@ -369,7 +382,7 @@ export const LINK = {
 
 <div className="stat-grid">
   <div className="stat-card">
-    <p className="num">19</p>
+    <p className="num">30</p>
     <p className="label">컴포넌트</p>
   </div>
   <div className="stat-card">
@@ -387,6 +400,182 @@ export const LINK = {
 </div>
 
 {/* ══════════════════════════════════════════════════════ */}
+{/* v2.0.0 — 2026-04-22                                   */}
+{/* ══════════════════════════════════════════════════════ */}
+
+<div className="version-header">
+  <span className="version-badge">v2.0.0</span>
+  <span className="version-date">2026-04-22</span>
+</div>
+
+<details className="toggle-card" open>
+  <summary>
+    <CaretIcon />
+    <span className="emoji">✨</span>
+    <span className="title">Features</span>
+    <span className="count">13</span>
+  </summary>
+  <div className="toggle-body">
+    <div className="component-tags">
+      <span className="component-tag new">AppBar</span>
+      <span className="component-tag new">Tabs</span>
+      <span className="component-tag new">PageIndicator</span>
+      <span className="component-tag new">SegmentedControl</span>
+      <span className="component-tag new">FAB</span>
+      <span className="component-tag new">Tooltip</span>
+      <span className="component-tag new">Card</span>
+      <span className="component-tag new">ListCard</span>
+      <span className="component-tag new">List</span>
+      <span className="component-tag new">FrequencyChip</span>
+      <span className="component-tag new">LevelIndicator</span>
+      <span className="component-tag new">Brand Logo</span>
+      <span className="component-tag new">BorderRadius</span>
+    </div>
+
+    <div className="change-item">
+      <span className="name"><a href={LINK.AppBar}>AppBar</a></span>
+      <span className="desc">화면 상단 네비게이션 바. BackButton/CloseButton/IconAction 서브 컴포넌트 포함</span>
+    </div>
+    <div className="change-item">
+      <span className="name"><a href={LINK.Tabs}>Tabs</a></span>
+      <span className="desc">콘텐츠 전환용 텍스트 탭. S/M/L 크기, hug/fill 리사이즈 지원</span>
+    </div>
+    <div className="change-item">
+      <span className="name"><a href={LINK.PageIndicator}>PageIndicator</a></span>
+      <span className="desc">캐러셀 페이지 인디케이터. normal/white variant, fade 감쇠 패턴</span>
+    </div>
+    <div className="change-item">
+      <span className="name"><a href={LINK.SegmentedControl}>SegmentedControl</a></span>
+      <span className="desc">옵션 선택 폼 컨트롤. S/M/L 크기, Level 1 그림자 활성 세그먼트</span>
+    </div>
+    <div className="change-item">
+      <span className="name"><a href={LINK.FAB}>FAB</a></span>
+      <span className="desc">Floating Action Button. regular(원형)/extended(pill) variant</span>
+    </div>
+    <div className="change-item">
+      <span className="name"><a href={LINK.Tooltip}>Tooltip</a></span>
+      <span className="desc">추가 정보 팝업. 4방향 position + align 조합, discriminated union 타입</span>
+    </div>
+    <div className="change-item">
+      <span className="name"><a href={LINK.Card}>Card</a></span>
+      <span className="desc">세로 카드. 썸네일 + 제목 + 캡션, Skeleton 재사용</span>
+    </div>
+    <div className="change-item">
+      <span className="name"><a href={LINK.ListCard}>ListCard</a></span>
+      <span className="desc">가로 리스트 카드. 썸네일 + 텍스트 + trailing, Skeleton 재사용</span>
+    </div>
+    <div className="change-item">
+      <span className="name"><a href={LINK.List}>List</a></span>
+      <span className="desc">Compound 컴포넌트 (List.Item + List.ExpandableItem). 설정 화면 패턴</span>
+    </div>
+    <div className="change-item">
+      <span className="name"><a href={LINK.FrequencyChip}>FrequencyChip</a></span>
+      <span className="desc">수치 데이터 원형 칩. 4단계 severity 색상 + halo 링</span>
+    </div>
+    <div className="change-item">
+      <span className="name"><a href={LINK.LevelIndicator}>LevelIndicator</a></span>
+      <span className="desc">상태 레벨 막대 그래프. 4구간 색상 + 활성 구간 말풍선</span>
+    </div>
+    <div className="change-item">
+      <span className="name"><a href={LINK.BrandLogo}>Brand Logo</a></span>
+      <span className="desc">로고 사용 가이드. 3종 색상 변형, 최소 크기, Clear Space, Do/Don't, 다운로드</span>
+    </div>
+    <div className="change-item">
+      <span className="name-plain">BorderRadius 페이지</span>
+      <span className="desc">Semantics/Border Radius 토큰 카탈로그 신규 추가</span>
+    </div>
+  </div>
+</details>
+
+<details className="toggle-card" open>
+  <summary>
+    <CaretIcon />
+    <span className="emoji">⚠️</span>
+    <span className="title">Breaking Changes</span>
+    <span className="count">8</span>
+  </summary>
+  <div className="toggle-body">
+    <div className="change-item">
+      <span className="name-plain">InputField → TextField</span>
+      <span className="desc">한 줄 입력 필드 이름 변경</span>
+    </div>
+    <div className="change-item">
+      <span className="name-plain">TextField → TextArea</span>
+      <span className="desc">여러 줄 입력 필드 이름 변경</span>
+    </div>
+    <div className="change-item">
+      <span className="name-plain">Tab → Tabs</span>
+      <span className="desc">콘텐츠 전환 탭 이름 변경 (복수형)</span>
+    </div>
+    <div className="change-item">
+      <span className="name-plain">TabBar → BottomNavigation</span>
+      <span className="desc">하단 네비게이션 바 이름 변경</span>
+    </div>
+    <div className="change-item">
+      <span className="name-plain">Dot → PageIndicator</span>
+      <span className="desc">페이지 인디케이터 이름 변경</span>
+    </div>
+    <div className="change-item">
+      <span className="name-plain">GENERAL → ACTIONS</span>
+      <span className="desc">카테고리 이름 변경. Icon은 FOUNDATION으로 이동</span>
+    </div>
+    <div className="change-item">
+      <span className="name-plain">OVERLAY 카테고리 신설</span>
+      <span className="desc">Modal, BottomSheet가 FEEDBACK에서 OVERLAY로 이동</span>
+    </div>
+    <div className="change-item">
+      <span className="name-plain">role/warning → role/caution</span>
+      <span className="desc">기존 warning(노랑)이 caution으로 변경. 새 role/warning은 orange[60](주황)</span>
+    </div>
+  </div>
+</details>
+
+<details className="toggle-card" open>
+  <summary>
+    <CaretIcon />
+    <span className="emoji">♻️</span>
+    <span className="title">Refactored</span>
+    <span className="count">8</span>
+  </summary>
+  <div className="toggle-body">
+    <div className="change-item">
+      <span className="name-plain">Shadow 3단계</span>
+      <span className="desc">신규 Level 1(Subtle) 추가, 기존 Level 1→2, Level 2→3 리넘버링</span>
+    </div>
+    <div className="change-item">
+      <span className="name-plain">role/success</span>
+      <span className="desc"><code>mint[45]</code> → <code>green[45]</code> (#22C289) 변경</span>
+    </div>
+    <div className="change-item">
+      <span className="name-plain">role/warning + role/caution</span>
+      <span className="desc">warning을 <code>orange[60]</code>(주황)으로 변경, 기존 노랑은 caution으로 분리</span>
+    </div>
+    <div className="change-item">
+      <span className="name-plain">Playground 인터랙션</span>
+      <span className="desc">모든 컴포넌트 Playground에 useState 기반 인터랙션 추가</span>
+    </div>
+    <div className="change-item">
+      <span className="name-plain">카테고리 재편</span>
+      <span className="desc">Primitives / Semantics / Foundation / Actions / Input / Feedback / Overlay / Navigation / Data Display</span>
+    </div>
+    <div className="change-item">
+      <span className="name-plain">ActionArea, Avatar</span>
+      <span className="desc">스토리북에서 삭제</span>
+    </div>
+    <div className="change-item">
+      <span className="name-plain">Divider 스토리</span>
+      <span className="desc">Primitive 직접 참조 → 시맨틱 토큰으로 교체, 색상 비교 스토리 삭제</span>
+    </div>
+    <div className="change-item">
+      <span className="name-plain">Storybook 로고</span>
+      <span className="desc">좌측 상단에 biocom SVG 로고 적용</span>
+    </div>
+  </div>
+</details>
+
+<hr className="version-divider" />
+
+{/* ══════════════════════════════════════════════════════ */}
 {/* v1.4.0 — 2026-04-21                                   */}
 {/* ══════════════════════════════════════════════════════ */}
 
@@ -395,7 +584,7 @@ export const LINK = {
   <span className="version-date">2026-04-21</span>
 </div>
 
-<details className="toggle-card" open>
+<details className="toggle-card">
   <summary>
     <CaretIcon />
     <span className="emoji">✨</span>

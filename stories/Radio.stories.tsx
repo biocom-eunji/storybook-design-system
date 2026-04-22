@@ -83,16 +83,20 @@ type Story = StoryObj<typeof Radio>;
 // ─── 1. Playground ───────────────────────────────────────────
 
 export const Playground: Story = {
-  args: {
-    checked: true,
-    size: 'medium',
-    label: '옵션 A',
-    disabled: false,
+  render: () => {
+    const [selected, setSelected] = useState('a');
+    return (
+      <View style={{ gap: spacing.small }}>
+        <Radio checked={selected === 'a'} label="옵션 A" onPress={() => setSelected('a')} />
+        <Radio checked={selected === 'b'} label="옵션 B" onPress={() => setSelected('b')} />
+        <Radio checked={selected === 'c'} label="옵션 C" onPress={() => setSelected('c')} />
+      </View>
+    );
   },
   parameters: {
     docs: {
       description: {
-        story: '**적용 토큰**: `color/background/brand`, `color/icon/onColor`, `color/text/primary`',
+        story: '**적용 토큰**: `color/background/brand`, `color/icon/onColor`, `color/text/primary`. 클릭하여 선택을 변경합니다.',
       },
     },
   },

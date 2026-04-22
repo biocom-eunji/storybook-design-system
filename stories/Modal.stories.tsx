@@ -3,12 +3,12 @@ import { View, Text } from 'react-native';
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import { Modal } from '../src/components/Modal';
 import { Button } from '../src/components/Button';
-import { InputField } from '../src/components/InputField';
+import { TextField } from '../src/components/TextField';
 import { Section, CodeBlock, Divider } from './storyHelpers';
 import { TokenSpecTable } from '../src/storybook-components/TokenSpecTable';
 import {
   spacing, semanticColor, radius, opacity, textStyle, shadow,
-  fontSize, fontWeight, palette, buttonToken,
+  fontSize, fontWeight, palette,
 } from '../src/tokens/theme';
 
 // ─── 토큰 매핑 테이블 (Single Source of Truth) ──────────────
@@ -16,7 +16,7 @@ import {
 const CONTAINER_TOKEN_MAP = {
   background:  { token: 'color/background/primary',  value: semanticColor.backgroundStatus },
   radius:      { token: 'borderRadius/medium',        value: radius.medium },
-  shadow:      { token: 'Level 2',                    value: `offset(0,${shadow.level2.shadowOffset.height}) blur(${shadow.level2.shadowRadius}) opacity(${shadow.level2.shadowOpacity})` },
+  shadow:      { token: 'Level 3',                    value: `offset(0,${shadow.level3.shadowOffset.height}) blur(${shadow.level3.shadowRadius}) opacity(${shadow.level3.shadowOpacity})` },
   titleColor:  { token: 'color/text/primary',         value: semanticColor.textPrimary },
   descColor:   { token: 'color/text/secondary',       value: semanticColor.textSecondary },
   padding:     { token: 'spacing/2xlarge',             value: spacing['2xlarge'] },
@@ -36,14 +36,12 @@ function ModalPreview({
   children,
   primaryLabel,
   secondaryLabel,
-  destructive,
 }: {
   title?: string;
   description?: string;
   children?: React.ReactNode;
   primaryLabel?: string;
   secondaryLabel?: string;
-  destructive?: boolean;
 }) {
   return (
     <View style={{
@@ -52,10 +50,10 @@ function ModalPreview({
       padding: spacing['2xlarge'],
       width: 300,
       shadowColor: palette.black,
-      shadowOffset: { width: 0, height: shadow.level2.shadowOffset.height },
-      shadowOpacity: shadow.level2.shadowOpacity,
-      shadowRadius: shadow.level2.shadowRadius,
-      elevation: shadow.level2.elevation,
+      shadowOffset: { width: 0, height: shadow.level3.shadowOffset.height },
+      shadowOpacity: shadow.level3.shadowOpacity,
+      shadowRadius: shadow.level3.shadowRadius,
+      elevation: shadow.level3.elevation,
     }}>
       {title && (
         <Text style={{
@@ -80,19 +78,7 @@ function ModalPreview({
       {(primaryLabel || secondaryLabel) && (
         <View style={{ marginTop: spacing['2xlarge'], gap: spacing.small }}>
           {primaryLabel && (
-            <View style={{
-              height: buttonToken.size.medium.height,
-              borderRadius: buttonToken.size.medium.radius,
-              backgroundColor: destructive ? semanticColor.backgroundError : semanticColor.backgroundBrand,
-              alignItems: 'center',
-              justifyContent: 'center',
-            }}>
-              <Text style={{
-                color: semanticColor.textOnColor,
-                fontSize: fontSize.medium,
-                fontWeight: fontWeight.semibold,
-              }}>{primaryLabel}</Text>
-            </View>
+            <Button label={primaryLabel} variant="solid" color="primary" size="medium" />
           )}
           {secondaryLabel && (
             <Button label={secondaryLabel} variant="solid" color="assistive" size="medium" />
@@ -106,7 +92,7 @@ function ModalPreview({
 // ─── Meta ────────────────────────────────────────────────────
 
 const meta: Meta = {
-  title: 'Feedback/Modal',
+  title: 'Overlay/Modal',
   tags: ['autodocs'],
 };
 
@@ -117,24 +103,25 @@ type Story = StoryObj;
 
 export const Playground: Story = {
   render: () => (
-    <View style={{ gap: spacing['3xlarge'] }}>
-      <Section
-        title="Playground"
-        description="Modal 기본 미리보기입니다."
-      >
-        <ModalPreview
-          title="변경사항 저장"
-          description="저장하지 않은 변경사항이 있습니다. 저장하시겠습니까?"
-          primaryLabel="저장"
-          secondaryLabel="취소"
-        />
-      </Section>
+    <View style={{
+      backgroundColor: `rgba(0,0,0,${opacity[52]})`,
+      borderRadius: radius.medium,
+      padding: spacing['3xlarge'],
+      alignItems: 'center',
+      justifyContent: 'center',
+    }}>
+      <ModalPreview
+        title="변경사항 저장"
+        description="저장하지 않은 변경사항이 있습니다. 저장하시겠습니까?"
+        primaryLabel="저장"
+        secondaryLabel="취소"
+      />
     </View>
   ),
   parameters: {
     docs: {
       description: {
-        story: '**적용 토큰**: `color/background/primary`, `color/text/primary`, `borderRadius/medium`, `spacing/2xlarge`, `Level 2` shadow',
+        story: '**적용 토큰**: `color/background/primary`, `color/text/primary`, `borderRadius/medium`, `spacing/2xlarge`, `Level 3` shadow',
       },
     },
   },
@@ -176,7 +163,6 @@ export const Destructive: Story = {
           description="계정을 삭제하면 모든 데이터가 영구적으로 제거됩니다. 이 작업은 되돌릴 수 없습니다."
           primaryLabel="삭제"
           secondaryLabel="취소"
-          destructive
         />
       </Section>
     </View>
@@ -198,12 +184,12 @@ export const FormModal: Story = {
     <View style={{ gap: spacing['3xlarge'] }}>
       <Section
         title="Form Modal"
-        description="InputField 컴포넌트를 포함한 모달입니다. 실제 InputField를 import하여 사용합니다."
+        description="TextField 컴포넌트를 포함한 모달입니다. 실제 TextField를 import하여 사용합니다."
       >
         <ModalPreview title="피드백 보내기" primaryLabel="전송" secondaryLabel="취소">
           <View style={{ gap: spacing.medium }}>
-            <InputField label="제목" placeholder="피드백 제목을 입력하세요." />
-            <InputField
+            <TextField label="제목" placeholder="피드백 제목을 입력하세요." />
+            <TextField
               label="내용"
               placeholder="상세 내용을 작성해주세요."
               multiline
@@ -218,7 +204,7 @@ export const FormModal: Story = {
   parameters: {
     docs: {
       description: {
-        story: '**내부 컴포넌트**: `InputField` (multiline) import 사용. Modal 자체 토큰과 InputField 토큰이 각각 독립 적용.',
+        story: '**내부 컴포넌트**: `TextField` (multiline) import 사용. Modal 자체 토큰과 TextField 토큰이 각각 독립 적용.',
       },
     },
   },
@@ -312,8 +298,8 @@ export const Interactive: Story = {
               secondaryAction={{ label: '취소', onPress: () => setFormVisible(false) }}
             >
               <View style={{ gap: spacing.medium }}>
-                <InputField label="제목" placeholder="피드백 제목" />
-                <InputField label="내용" placeholder="상세 내용" multiline minHeight={80} />
+                <TextField label="제목" placeholder="피드백 제목" />
+                <TextField label="내용" placeholder="상세 내용" multiline minHeight={80} />
               </View>
             </Modal>
           </View>
@@ -331,7 +317,7 @@ export const DesignSpec: Story = {
     <View style={{ gap: spacing['3xlarge'] }}>
       <Section
         title="디자인 스펙"
-        description="Figma 시맨틱 토큰 기준 Modal 컨테이너 스펙입니다. 내부 Button/InputField의 토큰은 각 컴포넌트 문서를 참조하세요."
+        description="Figma 시맨틱 토큰 기준 Modal 컨테이너 스펙입니다. 내부 Button/TextField의 토큰은 각 컴포넌트 문서를 참조하세요."
         badge="디자인"
       >
         <TokenSpecTable
@@ -378,8 +364,8 @@ export const DesignSpec: Story = {
           rows={[
             { property: 'Primary 버튼',   token: 'Button (solid/primary)',   value: '→ General/Button 문서 참조' },
             { property: 'Secondary 버튼', token: 'Button (solid/assistive)', value: '→ General/Button 문서 참조' },
-            { property: 'InputField',     token: 'InputField',               value: '→ Input/InputField 문서 참조' },
-            { property: 'TextField',      token: 'InputField (multiline)',   value: '→ Input/TextField 문서 참조' },
+            { property: 'TextField',     token: 'TextField',               value: '→ Input/TextField 문서 참조' },
+            { property: 'TextArea',       token: 'TextField (multiline)',    value: '→ Input/TextArea 문서 참조' },
           ]}
         />
       </Section>
@@ -402,7 +388,7 @@ export const Usage: Story = {
           title="Import"
           code={`import { Modal } from '@design-system/components/Modal';
 import { Button } from '@design-system/components/Button';
-import { InputField } from '@design-system/components/InputField';`}
+import { TextField } from '@design-system/components/TextField';`}
         />
 
         <CodeBlock
@@ -432,7 +418,7 @@ import { InputField } from '@design-system/components/InputField';`}
         />
 
         <CodeBlock
-          title="Form Modal (InputField 포함)"
+          title="Form Modal (TextField 포함)"
           code={`<Modal
   visible={visible}
   onClose={() => setVisible(false)}
@@ -440,8 +426,8 @@ import { InputField } from '@design-system/components/InputField';`}
   primaryAction={{ label: '전송', onPress: handleSubmit }}
   secondaryAction={{ label: '취소', onPress: () => setVisible(false) }}
 >
-  <InputField label="제목" placeholder="피드백 제목" />
-  <InputField
+  <TextField label="제목" placeholder="피드백 제목" />
+  <TextField
     label="내용"
     placeholder="상세 내용"
     multiline

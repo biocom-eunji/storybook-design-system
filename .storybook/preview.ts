@@ -31,13 +31,16 @@ const preview: Preview = {
     options: {
       storySort: {
         order: [
-          'Getting Started', ['Introduction', 'Release Notes', 'Naming Convention'],
-          'Design Tokens', ['Color Palette', 'Color Tokens', 'Typography', 'Grid Palette', 'Grid Tokens', 'Shadow', 'Opacity'],
-          'General', ['Button', 'TextButton', 'Icon'],
-          'Input', ['InputField', 'TextField', 'Checkbox', 'Radio', 'Switch', 'Chip'],
-          'Feedback', ['Toast', 'Modal', 'BottomSheet', 'ProgressBar', 'Skeleton'],
-          'Navigation', ['TabBar', 'ActionArea'],
-          'Data Display', ['Badge', 'Avatar', 'Divider'],
+          'Getting Started', ['Introduction', 'Release Notes', 'Naming Convention', 'Brand Logo'],
+          'Primitives', ['Color', 'Grid', 'Opacity'],
+          'Semantics', ['Color', 'Typography', 'Spacing', 'Border Radius', 'Shadow'],
+          'Foundation', ['Icon'],
+          'Actions', ['Button', 'TextButton', 'FAB'],
+          'Input', ['TextField', 'TextArea', 'Checkbox', 'Radio', 'Switch', 'Chip', 'SegmentedControl'],
+          'Feedback', ['Toast', 'ProgressBar', 'Skeleton'],
+          'Overlay', ['Modal', 'BottomSheet', 'Tooltip'],
+          'Navigation', ['AppBar', 'Tabs', 'BottomNavigation', 'PageIndicator'],
+          'Data Display', ['Card', 'ListCard', 'List', 'FrequencyChip', 'LevelIndicator', 'Badge', 'Divider'],
         ],
       },
     },

@@ -89,17 +89,28 @@ type Story = StoryObj<typeof Chip>;
 // ─── 1. Playground ───────────────────────────────────────────
 
 export const Playground: Story = {
-  args: {
-    label: '카테고리',
-    variant: 'solid',
-    size: 'medium',
-    active: false,
-    disabled: false,
+  render: () => {
+    const [selected, setSelected] = useState<string | null>(null);
+    const categories = ['식단', '수면', '운동', '영양제'];
+    return (
+      <Row gap={spacing.small} wrap>
+        {categories.map(cat => (
+          <Chip
+            key={cat}
+            label={cat}
+            variant="solid"
+            size="medium"
+            active={selected === cat}
+            onPress={() => setSelected(selected === cat ? null : cat)}
+          />
+        ))}
+      </Row>
+    );
   },
   parameters: {
     docs: {
       description: {
-        story: '**적용 토큰**: `color/background/tertiary`, `color/text/quaternary`, `Label 2`, `borderRadius/small`',
+        story: '**적용 토큰**: `color/background/tertiary`, `color/text/secondary`, `Label 2`, `borderRadius/small`. 클릭하여 활성/비활성을 토글합니다.',
       },
     },
   },

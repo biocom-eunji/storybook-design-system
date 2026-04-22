@@ -2,8 +2,9 @@ import React from 'react';
 import { View, Text } from 'react-native';
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import { Divider as DividerComponent } from '../src/components/Divider';
-import { Section, StateLabel, Col, SpecTable, CodeBlock, Divider as DividerLine } from './storyHelpers';
-import { coolNeutral, mint, red, yellow, fontSize, fontWeight, spacing, radius, semanticColor } from '../src/tokens/theme';
+import { Section, StateLabel, Col, CodeBlock, Divider as DividerLine } from './storyHelpers';
+import { TokenSpecTable } from '../src/storybook-components/TokenSpecTable';
+import { fontSize, spacing, radius, semanticColor } from '../src/tokens/theme';
 
 const meta: Meta<typeof DividerComponent> = {
   title: 'Data Display/Divider',
@@ -16,7 +17,7 @@ const meta: Meta<typeof DividerComponent> = {
     },
     thickness: {
       control: 'number',
-      description: '선 두께 (px)',
+      description: '선 두께',
     },
     color: {
       control: 'color',
@@ -24,11 +25,11 @@ const meta: Meta<typeof DividerComponent> = {
     },
     spacing: {
       control: 'number',
-      description: '양쪽 여백 (px)',
+      description: '양쪽 여백',
     },
     inset: {
       control: 'number',
-      description: '왼쪽 들여쓰기 (px)',
+      description: '왼쪽 들여쓰기',
     },
   },
   tags: ['autodocs'],
@@ -43,7 +44,7 @@ export const Playground: Story = {
   args: {
     direction: 'horizontal',
     thickness: 1,
-    color: coolNeutral[96],
+    color: semanticColor.borderDefault,
     spacing: 0,
     inset: 0,
   },
@@ -100,63 +101,18 @@ export const Thickness: Story = {
       description="thickness 값을 조절하여 선의 두께를 변경할 수 있습니다."
     >
       <Col gap={spacing.xlarge}>
-        <Col gap={spacing.small}>
-          <StateLabel>1px (기본)</StateLabel>
-          <DividerComponent thickness={1} />
-        </Col>
-        <Col gap={spacing.small}>
-          <StateLabel>2px</StateLabel>
-          <DividerComponent thickness={2} />
-        </Col>
-        <Col gap={spacing.small}>
-          <StateLabel>4px</StateLabel>
-          <DividerComponent thickness={4} />
-        </Col>
-        <Col gap={spacing.small}>
-          <StateLabel>8px</StateLabel>
-          <DividerComponent thickness={8} />
-        </Col>
+        {[1, 2, 4, 8].map(t => (
+          <Col key={t} gap={spacing.small}>
+            <StateLabel>{`${t}px`}</StateLabel>
+            <DividerComponent thickness={t} />
+          </Col>
+        ))}
       </Col>
     </Section>
   ),
 };
 
-// ─── 4. 색상 ─────────────────────────────────────────────────
-
-export const Colors: Story = {
-  name: '색상',
-  render: () => (
-    <Section
-      title="색상"
-      description="color prop으로 선 색상을 커스터마이즈할 수 있습니다."
-    >
-      <Col gap={spacing.xlarge}>
-        <Col gap={spacing.small}>
-          <StateLabel>{`기본 — coolNeutral[96]`}</StateLabel>
-          <DividerComponent thickness={2} />
-        </Col>
-        <Col gap={spacing.small}>
-          <StateLabel>{`coolNeutral[90]`}</StateLabel>
-          <DividerComponent thickness={2} color={coolNeutral[90]} />
-        </Col>
-        <Col gap={spacing.small}>
-          <StateLabel>{`mint[45]`}</StateLabel>
-          <DividerComponent thickness={2} color={mint[45]} />
-        </Col>
-        <Col gap={spacing.small}>
-          <StateLabel>{`red[70]`}</StateLabel>
-          <DividerComponent thickness={2} color={red[70]} />
-        </Col>
-        <Col gap={spacing.small}>
-          <StateLabel>{`yellow[50]`}</StateLabel>
-          <DividerComponent thickness={2} color={yellow[50]} />
-        </Col>
-      </Col>
-    </Section>
-  ),
-};
-
-// ─── 5. 인셋 ─────────────────────────────────────────────────
+// ─── 4. 인셋 ─────────────────────────────────────────────────
 
 export const Inset: Story = {
   name: '인셋',
@@ -194,36 +150,17 @@ export const DesignSpec: Story = {
     <View style={{ gap: spacing['3xlarge'] }}>
       <Section
         title="디자인 스펙"
-        description="디자이너와 개발자를 위한 Divider 토큰 상세 스펙입니다."
+        description="Divider 토큰 스펙입니다."
+        badge="디자인"
       >
-        <SpecTable
+        <TokenSpecTable
           title="기본 스펙"
           rows={[
-            { label: '기본 두께', value: '1px', token: '—' },
-            { label: '기본 색상', value: coolNeutral[96], token: 'coolNeutral[96]' },
-            { label: '기본 방향', value: 'horizontal', token: '—' },
-            { label: '기본 여백', value: '0px', token: '—' },
-            { label: '기본 인셋', value: '0px', token: '—' },
-          ]}
-        />
-
-        <DividerLine />
-
-        <SpecTable
-          title="Horizontal 레이아웃"
-          rows={[
-            { label: '높이', value: 'thickness 값', token: '—' },
-            { label: '너비', value: '100%', token: '—' },
-            { label: '여백 방향', value: 'marginVertical', token: '—' },
-          ]}
-        />
-
-        <SpecTable
-          title="Vertical 레이아웃"
-          rows={[
-            { label: '너비', value: 'thickness 값', token: '—' },
-            { label: '높이', value: '100%', token: '—' },
-            { label: '여백 방향', value: 'marginHorizontal', token: '—' },
+            { property: '기본 두께',   token: '—',                    value: 1,  type: 'size' },
+            { property: '기본 색상',   token: 'color/border/default', value: semanticColor.borderDefault, type: 'color' },
+            { property: '기본 방향',   token: '—',                    value: 'horizontal' },
+            { property: '기본 여백',   token: '—',                    value: 0,  type: 'size' },
+            { property: '기본 인셋',   token: '—',                    value: 0,  type: 'size' },
           ]}
         />
       </Section>
@@ -240,6 +177,7 @@ export const Usage: Story = {
       <Section
         title="사용 가이드"
         description="개발자를 위한 Divider 컴포넌트 사용 예시입니다."
+        badge="개발"
       >
         <CodeBlock
           title="Import"
@@ -253,25 +191,24 @@ export const Usage: Story = {
 
         <CodeBlock
           title="리스트 구분선 (인셋)"
-          code={`<Divider inset={16} />`}
+          code={`<Divider inset={spacing.large} />`}
         />
 
         <CodeBlock
           title="세로 구분선"
           code={`<View style={{ flexDirection: 'row', height: 40 }}>
   <Text>왼쪽</Text>
-  <Divider direction="vertical" spacing={12} />
+  <Divider direction="vertical" spacing={spacing.medium} />
   <Text>오른쪽</Text>
 </View>`}
         />
 
         <CodeBlock
-          title="커스텀 스타일"
+          title="커스텀 색상"
           code={`<Divider
   thickness={2}
-  color={coolNeutral[90]}
-  spacing={16}
-  inset={24}
+  color={semanticColor.borderFocus}
+  spacing={spacing.large}
 />`}
         />
       </Section>

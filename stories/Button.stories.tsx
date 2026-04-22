@@ -59,7 +59,7 @@ const SIZE_TOKEN_MAP = {
 // ─── Meta ────────────────────────────────────────────────────
 
 const meta: Meta<typeof Button> = {
-  title: 'General/Button',
+  title: 'Actions/Button',
   component: Button,
   argTypes: {
     variant: {

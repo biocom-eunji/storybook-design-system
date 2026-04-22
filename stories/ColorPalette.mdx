@@ -1,7 +1,7 @@
 import React from 'react';
 import { Meta } from '@storybook/addon-docs/blocks';
 
-<Meta title="Design Tokens/Color Palette" />
+<Meta title="Primitives/Color" />
 
 export const Swatch = ({ token, hex, desc }) => {
   const [copied, setCopied] = React.useState(false);
@@ -309,26 +309,5 @@ export const PaletteRow = ({ title, description, children }) => (
   <Swatch token="khaki10" hex="#1D2310" desc="최고 다크" />
 </PaletteRow>
 
-<hr className="section-divider" />
-
-## Opacity
-
-<PaletteRow title="Opacity" description="투명도 토큰. 오버레이, 디머, 비활성 상태 등에 사용됩니다. 개발에서는 opacity 값(0~1)으로 적용합니다.">
-  <Swatch token="opacity0"   hex="#FFFFFF" desc="투명 (0%)" />
-  <Swatch token="opacity5"   hex="#F3F3F3" desc="미세한 틴트 (5%)" />
-  <Swatch token="opacity8"   hex="#ECECED" desc="서브틀 (8%)" />
-  <Swatch token="opacity12"  hex="#E3E3E3" desc="호버 오버레이 (12%)" />
-  <Swatch token="opacity16"  hex="#DADADA" desc="프레스 오버레이 (16%)" />
-  <Swatch token="opacity22"  hex="#CCCCCC" desc="비활성 (22%)" />
-  <Swatch token="opacity28"  hex="#BEBEBF" desc="디바이더 (28%)" />
-  <Swatch token="opacity35"  hex="#AEAEAE" desc="보더 (35%)" />
-  <Swatch token="opacity43"  hex="#9B9B9C" desc="플레이스홀더 (43%)" />
-  <Swatch token="opacity52"  hex="#868687" desc="보조 텍스트 (52%)" />
-  <Swatch token="opacity61"  hex="#717173" desc="본문 텍스트 (61%)" />
-  <Swatch token="opacity74"  hex="#535355" desc="강조 텍스트 (74%)" />
-  <Swatch token="opacity88"  hex="#333335" desc="타이틀 (88%)" />
-  <Swatch token="opacity97"  hex="#1E1E20" desc="헤딩 (97%)" />
-  <Swatch token="opacity100" hex="#171719" desc="불투명 (100%)" />
-</PaletteRow>
 
 </div>

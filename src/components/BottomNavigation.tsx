@@ -9,8 +9,8 @@ export interface TabItem {
   icon?: string;
 }
 
-/** TabBar — 하단 탭 내비게이션 */
-export interface TabBarProps {
+/** BottomNavigation — 하단 탭 내비게이션 */
+export interface BottomNavigationProps {
   tabs: TabItem[];
   activeTab: string;
   onTabPress?: (key: string) => void;
@@ -25,11 +25,11 @@ export const BIOCOM_TABS: TabItem[] = [
   { key: 'shop', label: '쇼핑', icon: 'shopping-cart-simple' },
 ];
 
-export function TabBar({
+export function BottomNavigation({
   tabs,
   activeTab,
   onTabPress,
-}: TabBarProps) {
+}: BottomNavigationProps) {
   return (
     <View style={[styles.container, styles.default]}>
       {tabs.map((tab) => {

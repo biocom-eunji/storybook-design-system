@@ -22,9 +22,9 @@ import {
 
 // ─── Types ───────────────────────────────────────────────
 
-export type InputFieldStatus = 'default' | 'error' | 'success';
+export type TextFieldStatus = 'default' | 'error' | 'success';
 
-export interface InputFieldProps {
+export interface TextFieldProps {
   /** 라벨 텍스트 */
   label?: string;
   /** 플레이스홀더 */
@@ -79,7 +79,7 @@ const TRAILING_ICON_MAP = {
 
 // ─── Component ───────────────────────────────────────────
 
-export function InputField({
+export function TextField({
   label,
   placeholder = '텍스트를 입력해 주세요.',
   value: valueProp,
@@ -99,7 +99,7 @@ export function InputField({
   secureTextEntry,
   autoCapitalize,
   textInputProps,
-}: InputFieldProps) {
+}: TextFieldProps) {
   const [isFocused, setIsFocused] = useState(false);
   const [internalValue, setInternalValue] = useState(valueProp ?? '');
   const inputRef = useRef<TextInput>(null);
@@ -111,7 +111,7 @@ export function InputField({
   const value = valueProp ?? internalValue;
   const charCount = value?.length ?? 0;
   const hasValue = charCount > 0;
-  const status: InputFieldStatus = errorMessage ? 'error' : successMessage ? 'success' : 'default';
+  const status: TextFieldStatus = errorMessage ? 'error' : successMessage ? 'success' : 'default';
   const isOverLimit = maxCharCount != null && charCount > maxCharCount;
 
   const handleChangeText = (text: string) => {
