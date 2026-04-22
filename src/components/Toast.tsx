@@ -29,7 +29,7 @@ const SuccessIcon = () => (
 );
 
 const WarningIcon = () => (
-  <Icon name="warning" size={24} color={semanticColor.iconWarning} />
+  <Icon name="warning" size={24} color={semanticColor.iconCaution} />
 );
 
 const ErrorIcon = () => (
