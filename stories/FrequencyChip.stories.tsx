@@ -29,7 +29,7 @@ export const Playground: Story = {
     <Row gap={spacing.medium} align="center">
       <FrequencyChip value={8} severity="critical" />
       <FrequencyChip value={5} severity="warning" />
-      <FrequencyChip value={2} severity="moderate" />
+      <FrequencyChip value={2} severity="caution" />
       <FrequencyChip value={0} severity="safe" />
     </Row>
   ),

@@ -18,9 +18,9 @@ const TOKEN_MAP = {
 } as const;
 
 const SIZE_TOKEN_MAP = {
-  S: { typo: 'Body 2',   height: 40 },
-  M: { typo: 'Headline',  height: 48 },
-  L: { typo: 'Heading',   height: 56 },
+  small:  { typo: 'Body 2',   height: 40 },
+  medium: { typo: 'Headline',  height: 48 },
+  large:  { typo: 'Heading',   height: 56 },
 } as const;
 
 // ─── 공통 데이터 ─────────────────────────────────────────────
@@ -81,7 +81,7 @@ export const Playground: Story = {
     const [value, setValue] = useState('tab1');
     return (
       <View style={{ maxWidth: 400 }}>
-        <Tabs items={defaultItems} value={value} onChange={setValue} size="M" resize="hug" />
+        <Tabs items={defaultItems} value={value} onChange={setValue} size="medium" resize="hug" />
       </View>
     );
   },
@@ -141,11 +141,11 @@ export const ResizeModes: Story = {
         <View style={{ gap: spacing.xlarge, maxWidth: 400 }}>
           <Col gap={spacing.small}>
             <StateLabel>hug — 텍스트 너비만큼</StateLabel>
-            <Tabs items={defaultItems} value="tab1" size="M" resize="hug" />
+            <Tabs items={defaultItems} value="tab1" size="medium" resize="hug" />
           </Col>
           <Col gap={spacing.small}>
             <StateLabel>fill — 균등 분할</StateLabel>
-            <Tabs items={defaultItems} value="tab1" size="M" resize="fill" />
+            <Tabs items={defaultItems} value="tab1" size="medium" resize="fill" />
           </Col>
         </View>
       </Section>
@@ -166,11 +166,11 @@ export const ManyTabs: Story = {
         <View style={{ gap: spacing.xlarge, maxWidth: 400 }}>
           <Col gap={spacing.small}>
             <StateLabel>hug</StateLabel>
-            <Tabs items={manyItems} value="tab1" size="M" resize="hug" />
+            <Tabs items={manyItems} value="tab1" size="medium" resize="hug" />
           </Col>
           <Col gap={spacing.small}>
             <StateLabel>fill</StateLabel>
-            <Tabs items={manyItems} value="tab1" size="M" resize="fill" />
+            <Tabs items={manyItems} value="tab1" size="medium" resize="fill" />
           </Col>
         </View>
       </Section>
@@ -189,7 +189,7 @@ export const Disabled: Story = {
         description="특정 탭이 비활성화된 상태입니다. 클릭 불가하며 색상이 흐려집니다."
       >
         <View style={{ maxWidth: 400 }}>
-          <Tabs items={disabledItems} value="tab1" size="M" resize="hug" />
+          <Tabs items={disabledItems} value="tab1" size="medium" resize="hug" />
         </View>
       </Section>
     </View>
@@ -218,15 +218,15 @@ export const Controlled: Story = {
           <View style={{ gap: spacing.xlarge, maxWidth: 400 }}>
             <Col gap={spacing.small}>
               <StateLabel>hug / Medium</StateLabel>
-              <Tabs items={defaultItems} value={value} onChange={setValue} size="M" resize="hug" />
+              <Tabs items={defaultItems} value={value} onChange={setValue} size="medium" resize="hug" />
             </Col>
             <Col gap={spacing.small}>
               <StateLabel>fill / Medium</StateLabel>
-              <Tabs items={defaultItems} value={value} onChange={setValue} size="M" resize="fill" />
+              <Tabs items={defaultItems} value={value} onChange={setValue} size="medium" resize="fill" />
             </Col>
             <Col gap={spacing.small}>
               <StateLabel>fill / Large (6개 탭)</StateLabel>
-              <Tabs items={manyItems} value={value} onChange={setValue} size="L" resize="fill" />
+              <Tabs items={manyItems} value={value} onChange={setValue} size="large" resize="fill" />
             </Col>
           </View>
         </Section>
@@ -315,7 +315,7 @@ export const Usage: Story = {
   ]}
   value={activeTab}
   onChange={setActiveTab}
-  size="M"
+  size="medium"
   resize="hug"
 />`}
         />

@@ -16,7 +16,7 @@ const TOKEN_MAP = {
     activeOpacity:  { token: 'opacity/100',           value: opacity[100] },
     inactiveOpacity:{ token: 'opacity/16',            value: opacity[16] },
   },
-  white: {
+  inverse: {
     color:          { token: 'color/icon/onColor',   value: semanticColor.iconOnColor },
     activeOpacity:  { token: 'opacity/100',           value: opacity[100] },
     inactiveOpacity:{ token: 'opacity/52',            value: opacity[52] },
@@ -92,7 +92,7 @@ export const Variants: Story = {
               padding: spacing.large,
               borderRadius: spacing.small,
             }}>
-              <PageIndicator variant="white" size="medium" total={5} current={0} />
+              <PageIndicator variant="inverse" size="medium" total={5} current={0} />
             </View>
           </Col>
         </View>
@@ -158,13 +158,13 @@ export const Matrix: Story = {
           <Col gap={spacing.small}>
             <StateLabel>white / medium</StateLabel>
             <View style={{ backgroundColor: semanticColor.backgroundInverse, padding: spacing.large, borderRadius: spacing.small }}>
-              <PageIndicator variant="white" size="medium" total={5} current={0} />
+              <PageIndicator variant="inverse" size="medium" total={5} current={0} />
             </View>
           </Col>
           <Col gap={spacing.small}>
             <StateLabel>white / small</StateLabel>
             <View style={{ backgroundColor: semanticColor.backgroundInverse, padding: spacing.large, borderRadius: spacing.small }}>
-              <PageIndicator variant="white" size="small" total={5} current={0} />
+              <PageIndicator variant="inverse" size="small" total={5} current={0} />
             </View>
           </Col>
         </View>
@@ -216,7 +216,7 @@ export const Interactive: Story = {
             <Col gap={spacing.small}>
               <StateLabel>white (클릭 가능)</StateLabel>
               <View style={{ backgroundColor: semanticColor.backgroundInverse, padding: spacing.large, borderRadius: spacing.small }}>
-                <PageIndicator variant="white" size="medium" total={7} current={current} onChange={setCurrent} />
+                <PageIndicator variant="inverse" size="medium" total={7} current={current} onChange={setCurrent} />
               </View>
             </Col>
           </View>
@@ -310,7 +310,7 @@ export const Usage: Story = {
         <CodeBlock
           title="어두운 배경 위 (white variant)"
           code={`<View style={{ backgroundColor: semanticColor.backgroundInverse }}>
-  <PageIndicator variant="white" total={5} current={currentPage} />
+  <PageIndicator variant="inverse" total={5} current={currentPage} />
 </View>`}
         />
 
