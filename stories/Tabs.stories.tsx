@@ -261,12 +261,12 @@ export const DesignSpec: Story = {
         <TokenSpecTable
           title="크기별 스펙"
           rows={[
-            { property: 'S — 높이',     token: '—',         value: SIZE_TOKEN_MAP.S.height, type: 'size' },
-            { property: 'S — 타이포',   token: 'Body 2',    value: `${textStyle.body2.fontSize}px / ${textStyle.body2.lineHeight}px / ${textStyle.body2.fontWeight}`, type: 'typography' },
-            { property: 'M — 높이',     token: '—',         value: SIZE_TOKEN_MAP.M.height, type: 'size' },
-            { property: 'M — 타이포',   token: 'Headline',  value: `${textStyle.headline.fontSize}px / ${textStyle.headline.lineHeight}px / ${textStyle.headline.fontWeight}`, type: 'typography' },
-            { property: 'L — 높이',     token: '—',         value: SIZE_TOKEN_MAP.L.height, type: 'size' },
-            { property: 'L — 타이포',   token: 'Heading',   value: `${textStyle.heading.fontSize}px / ${textStyle.heading.lineHeight}px / ${textStyle.heading.fontWeight}`, type: 'typography' },
+            { property: 'Small — 높이',   token: '—',         value: SIZE_TOKEN_MAP.small.height, type: 'size' },
+            { property: 'Small — 타이포', token: 'Body 2',    value: `${textStyle.body2.fontSize}px / ${textStyle.body2.lineHeight}px / ${textStyle.body2.fontWeight}`, type: 'typography' },
+            { property: 'Medium — 높이',  token: '—',         value: SIZE_TOKEN_MAP.medium.height, type: 'size' },
+            { property: 'Medium — 타이포',token: 'Headline',  value: `${textStyle.headline.fontSize}px / ${textStyle.headline.lineHeight}px / ${textStyle.headline.fontWeight}`, type: 'typography' },
+            { property: 'Large — 높이',   token: '—',         value: SIZE_TOKEN_MAP.large.height, type: 'size' },
+            { property: 'Large — 타이포', token: 'Heading',   value: `${textStyle.heading.fontSize}px / ${textStyle.heading.lineHeight}px / ${textStyle.heading.fontWeight}`, type: 'typography' },
           ]}
         />
 

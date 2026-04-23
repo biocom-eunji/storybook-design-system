@@ -40,7 +40,7 @@ const OPACITY_CONFIG = {
     inactive: opacity[16],
     color: semanticColor.iconPrimary,
   },
-  white: {
+  inverse: {
     active: opacity[100],
     inactive: opacity[52],
     color: semanticColor.iconOnColor,
