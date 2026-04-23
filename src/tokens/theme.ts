@@ -360,6 +360,8 @@ export const gridUnit = 4 as const;
 export const interaction = {
   /** Pressable 눌림 시 투명도 */
   pressOpacity: 0.7,
+  /** 비활성화 상태 전체 투명도 */
+  disabledOpacity: 0.4,
   /** 오버레이(바텀시트, 모달) 배경 투명도 */
   overlayOpacity: 0.4,
 } as const;
@@ -375,10 +377,12 @@ const _surface = {
 } as const;
 
 const _content = {
-  primary:  coolNeutral[17],
-  secondary: coolNeutral[50],
-  tertiary: coolNeutral[80],
-  onColor:  coolNeutral[100],
+  primary:    coolNeutral[17],
+  secondary:  coolNeutral[50],
+  tertiary:   coolNeutral[80],
+  quaternary: coolNeutral[40],
+  label:      coolNeutral[30],
+  onColor:    coolNeutral[100],
 } as const;
 
 const _line = {
@@ -422,13 +426,15 @@ export const semanticColor = {
   /** 주의 상태 텍스트 (노랑) */
   textCaution: _role.caution,
   /** 4단계 텍스트 (보조 버튼, 비활성 수치 등) */
-  textQuaternary: coolNeutral[40],
+  textQuaternary: _content.quaternary,
   /** 라벨 텍스트 (입력 필드 등) */
-  textLabel: coolNeutral[30],
+  textLabel: _content.label,
   /** 다크 배경 위 액션 텍스트 (토스트 등) */
   textAction: mint[80],
 
   // ── Background ────────────────────────────────────────
+  /** 기본 배경색 */
+  backgroundPrimary: _surface.primary,
   /** 보조 배경색 (카드, 섹션 구분) */
   backgroundSecondary: _surface.secondary,
   /** 3단계 배경색 (인풋 비활성, 칩 등) */
@@ -441,8 +447,6 @@ export const semanticColor = {
   backgroundBrand: _role.brand,
   /** 브랜드 배경 눌림 */
   backgroundBrandPressed: _role.brandPressed,
-  /** 상태 배경 (에러/성공/경고 — 흰색 통일) */
-  backgroundStatus: _surface.primary,
   /** 비활성화 배경 (Disabled 상태 컴포넌트) */
   backgroundDisabled: coolNeutral[96],
   /** 브랜드 비활성화 배경 (체크박스 등) */
@@ -454,15 +458,15 @@ export const semanticColor = {
   /** 주의 배경 (노랑) */
   backgroundCaution: _role.caution,
   /** 성공 배경 (ProgressBar success) */
-  backgroundSuccess: green[45],
+  backgroundSuccess: _role.success,
   /** 토스트 배경 */
   backgroundToast: coolNeutral[50],
+  /** 오버레이 스크림 (모달, 바텀시트 dim 배경) */
+  backgroundScrim: 'rgba(0,0,0,0.4)',
 
   // ── Border ────────────────────────────────────────────
   /** 기본·비활성화 테두리, 구분선 */
   borderDefault: _line.default,
-  /** @alias borderDefault (하위 호환) */
-  borderDisabled: _line.default,
   /** 입력됨 상태 테두리 */
   borderActive: _line.active,
   /** 포커스·브랜드 강조 테두리 */
@@ -493,6 +497,30 @@ export const semanticColor = {
   iconCaution: _role.caution,
   /** 미선택/비활성 아이콘 (체크마크, 탭바 등) */
   iconInactive: coolNeutral[90],
+
+  // ── Accent (대시보드/차트 전용) ───────────────────────────
+  /** 바이올렛 액센트 */
+  accentViolet: violet[60],
+  /** 퍼플 액센트 */
+  accentPurple: purple[40],
+  /** 그린 액센트 */
+  accentGreen: green[45],
+  /** 라이트블루 액센트 */
+  accentLightBlue: lightBlue[50],
+  /** 민트 액센트 */
+  accentMint: mint[45],
+  /** 레드 액센트 */
+  accentRed: red[60],
+
+  // ── Subtle Background (halo, 연한 배경) ──────────────────
+  /** 성공 연한 배경 (halo, Tag 등) */
+  backgroundSuccessSubtle: green[90],
+  /** 주의 연한 배경 */
+  backgroundCautionSubtle: yellow[90],
+  /** 경고 연한 배경 */
+  backgroundWarningSubtle: orange[90],
+  /** 에러 연한 배경 */
+  backgroundErrorSubtle: red[90],
 } as const;
 
 export type SemanticColor = typeof semanticColor;
