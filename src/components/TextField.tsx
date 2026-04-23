@@ -11,6 +11,7 @@ import {
   type TextStyle,
 } from 'react-native';
 import { Icon } from './Icon';
+import { BaseInput } from './_internal/BaseInput';
 import {
   fontSize,
   fontWeight,
@@ -119,34 +120,17 @@ export function TextField({
     onChangeText?.(text);
   };
 
-  // ─── Derived styles ─────────────────────────────────
+  // ─── Derived values ─────────────────────────────────
 
   const borderColor = (() => {
-    if (disabled) return semanticColor.borderDisabled;
+    if (disabled) return semanticColor.borderDefault;
     if (status === 'error') return semanticColor.borderError;
     if (isFocused) return semanticColor.borderFocus;
     if (hasValue) return semanticColor.borderActive;
     return semanticColor.borderDefault;
   })();
 
-  const containerStyle: ViewStyle = {
-    ...styles.container,
-    borderColor,
-    backgroundColor: disabled ? semanticColor.backgroundSecondary : semanticColor.backgroundStatus,
-    paddingVertical: multiline ? spacing.medium : 0,
-    minHeight: multiline ? minHeight : SINGLE_LINE_HEIGHT,
-    flexDirection: multiline ? 'column' : 'row',
-    alignItems: multiline ? 'stretch' : 'center',
-  };
-
-  const inputStyle: TextStyle = {
-    ...styles.input,
-    color: disabled ? semanticColor.textTertiary : semanticColor.textPrimary,
-    paddingVertical: multiline ? 0 : spacing.medium,
-    textAlignVertical: multiline ? 'top' : 'center',
-  };
-
-  // ─── Sub-renders ────────────────────────────────────
+  const resolvedTrailingIcon = trailingIcon ?? (status === 'error' ? 'error' : undefined);
 
   const bottomMessage = errorMessage || successMessage || helperText;
   const bottomMessageColor = errorMessage
@@ -155,84 +139,140 @@ export function TextField({
       ? semanticColor.textSuccess
       : semanticColor.textSecondary;
 
-  const resolvedTrailingIcon = trailingIcon ?? (status === 'error' ? 'error' : undefined);
+  // ─── Trailing elements builder ──────────────────────
 
-  const renderTrailingIcon = () => {
-    if (!resolvedTrailingIcon) return null;
-    const { name, color } = TRAILING_ICON_MAP[resolvedTrailingIcon];
-    const icon = <Icon name={name} size={ICON_SIZE} color={color} />;
+  const buildTrailing = () => {
+    const elements: React.ReactNode[] = [];
 
-    if (resolvedTrailingIcon === 'clear') {
-      return (
-        <Pressable onPress={onClear} hitSlop={8} style={styles.trailingSlot}>
-          {icon}
+    if (resolvedTrailingIcon) {
+      const { name, color } = TRAILING_ICON_MAP[resolvedTrailingIcon];
+      const icon = <Icon name={name} size={ICON_SIZE} color={color} />;
+      if (resolvedTrailingIcon === 'clear') {
+        elements.push(
+          <Pressable key="trail-icon" onPress={onClear} hitSlop={8} style={styles.trailingSlot}>
+            {icon}
+          </Pressable>
+        );
+      } else {
+        elements.push(<View key="trail-icon" style={styles.trailingSlot}>{icon}</View>);
+      }
+    }
+
+    if (trailingText) {
+      elements.push(
+        <Pressable key="trail-text" onPress={onTrailingTextPress} hitSlop={8} style={styles.trailingSlot}>
+          <Text style={[styles.trailingTextLabel, isFocused && styles.trailingTextFocused]}>
+            {trailingText}
+          </Text>
         </Pressable>
       );
     }
-    return <View style={styles.trailingSlot}>{icon}</View>;
+
+    return elements.length > 0 ? <>{elements}</> : undefined;
   };
 
-  const renderTrailingText = () => {
-    if (!trailingText) return null;
+  // ─── Multiline (구조가 다르므로 직접 렌더링) ────────
+
+  if (multiline) {
+    const multiContainerStyle: ViewStyle = {
+      ...styles.container,
+      borderColor,
+      backgroundColor: disabled ? semanticColor.backgroundSecondary : semanticColor.backgroundPrimary,
+      paddingVertical: spacing.medium,
+      minHeight,
+      flexDirection: 'column',
+      alignItems: 'stretch',
+    };
+
+    const multiInputStyle: TextStyle = {
+      ...styles.input,
+      color: disabled ? semanticColor.textTertiary : semanticColor.textPrimary,
+      paddingVertical: 0,
+      textAlignVertical: 'top',
+    };
+
     return (
-      <Pressable onPress={onTrailingTextPress} hitSlop={8} style={styles.trailingSlot}>
-        <Text style={[styles.trailingTextLabel, isFocused && styles.trailingTextFocused]}>
-          {trailingText}
-        </Text>
-      </Pressable>
-    );
-  };
+      <View style={styles.root}>
+        {label && <Text style={styles.label}>{label}</Text>}
 
-  const renderCharCounter = () => {
-    if (maxCharCount == null) return null;
-    return (
-      <Text style={[styles.charCounter, isOverLimit && styles.charCounterError]}>
-        {charCount}/{maxCharCount}
-      </Text>
-    );
-  };
+        <Pressable
+          onPress={() => { if (!disabled) inputRef.current?.focus(); }}
+          style={multiContainerStyle}
+        >
+          <TextInput
+            ref={inputRef}
+            value={value}
+            onChangeText={handleChangeText}
+            placeholder={placeholder}
+            placeholderTextColor={semanticColor.textPlaceholder}
+            editable={!disabled}
+            multiline
+            keyboardType={keyboardType}
+            secureTextEntry={secureTextEntry}
+            autoCapitalize={autoCapitalize}
+            accessibilityLabel={label}
+            onFocus={() => setIsFocused(true)}
+            onBlur={() => setIsFocused(false)}
+            style={multiInputStyle}
+            {...textInputProps}
+          />
 
-  // ─── Render ──────────────────────────────────────────
+          <View style={styles.multilineFooter}>
+            {maxCharCount != null ? (
+              <Text style={[styles.charCounter, isOverLimit && styles.charCounterError]}>
+                {charCount}/{maxCharCount}
+              </Text>
+            ) : <View />}
+            <View style={styles.multilineTrailing}>
+              {buildTrailing()}
+            </View>
+          </View>
+        </Pressable>
+
+        <View style={styles.bottomRow}>
+          {bottomMessage ? (
+            <Text style={[styles.bottomMessage, { color: bottomMessageColor }]}>
+              {bottomMessage}
+            </Text>
+          ) : <View />}
+        </View>
+      </View>
+    );
+  }
+
+  // ─── Single-line: BaseInput 기반 ────────────────────
+
+  const singleContainerStyle: ViewStyle = {
+    borderWidth: 1,
+    borderColor,
+    borderRadius: radius.medium,
+    paddingHorizontal: spacing.large,
+    backgroundColor: disabled ? semanticColor.backgroundSecondary : semanticColor.backgroundPrimary,
+    minHeight: SINGLE_LINE_HEIGHT,
+  };
 
   return (
     <View style={styles.root}>
       {label && <Text style={styles.label}>{label}</Text>}
 
-      <Pressable
-        onPress={() => { if (!disabled) inputRef.current?.focus(); }}
-        style={containerStyle}
-      >
-        <TextInput
-          ref={inputRef}
-          value={value}
-          onChangeText={handleChangeText}
-          placeholder={placeholder}
-          placeholderTextColor={semanticColor.textPlaceholder}
-          editable={!disabled}
-          multiline={multiline}
-          keyboardType={keyboardType}
-          secureTextEntry={secureTextEntry}
-          autoCapitalize={autoCapitalize}
-          accessibilityLabel={label}
-          onFocus={() => setIsFocused(true)}
-          onBlur={() => setIsFocused(false)}
-          style={inputStyle}
-          {...textInputProps}
-        />
-
-        {!multiline && renderTrailingIcon()}
-        {!multiline && renderTrailingText()}
-
-        {multiline && (
-          <View style={styles.multilineFooter}>
-            {renderCharCounter() ?? <View />}
-            <View style={styles.multilineTrailing}>
-              {renderTrailingIcon()}
-              {renderTrailingText()}
-            </View>
-          </View>
-        )}
-      </Pressable>
+      <BaseInput
+        value={value}
+        onChangeText={handleChangeText}
+        placeholder={placeholder}
+        disabled={disabled}
+        trailing={buildTrailing()}
+        onFocus={() => setIsFocused(true)}
+        onBlur={() => setIsFocused(false)}
+        containerStyle={singleContainerStyle}
+        accessibilityLabel={label}
+        textInputProps={{
+          keyboardType,
+          secureTextEntry,
+          autoCapitalize,
+          ...textInputProps,
+          style: { paddingVertical: spacing.medium } as TextStyle,
+        }}
+      />
 
       <View style={styles.bottomRow}>
         {bottomMessage ? (
@@ -240,7 +280,11 @@ export function TextField({
             {bottomMessage}
           </Text>
         ) : <View />}
-        {!multiline && renderCharCounter()}
+        {maxCharCount != null && (
+          <Text style={[styles.charCounter, isOverLimit && styles.charCounterError]}>
+            {charCount}/{maxCharCount}
+          </Text>
+        )}
       </View>
     </View>
   );
@@ -250,7 +294,7 @@ export function TextField({
 
 const styles = StyleSheet.create({
   root: {
-    gap: 6, // 라벨-인풋-헬퍼 간격 (4px 그리드 예외)
+    gap: 6,
   },
   label: {
     fontSize: textStyle.label2.fontSize,

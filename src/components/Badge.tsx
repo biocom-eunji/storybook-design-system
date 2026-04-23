@@ -1,6 +1,6 @@
 import React from 'react';
 import { View, Text, StyleSheet, type ViewStyle, type TextStyle } from 'react-native';
-import { radius, spacing, semanticColor } from '../tokens/theme';
+import { radius, spacing, fontWeight, semanticColor } from '../tokens/theme';
 
 export type BadgeVariant = 'filled' | 'outlined' | 'dot';
 export type BadgeColor = 'primary' | 'error' | 'success' | 'warning';
@@ -21,13 +21,13 @@ export interface BadgeProps {
 const colorMap = {
   primary: semanticColor.backgroundBrand,
   error: semanticColor.backgroundError,
-  success: semanticColor.backgroundBrand,
+  success: semanticColor.backgroundSuccess,
   warning: semanticColor.backgroundWarning,
 } as const;
 
 const sizeMap = {
-  small: { height: 16, minWidth: 16, fontSize: 10, dotSize: 6 },
-  medium: { height: 20, minWidth: 20, fontSize: 11, dotSize: 8 },
+  small: { height: 16, minWidth: 16, fontSize: 12, dotSize: 6 },
+  medium: { height: 20, minWidth: 20, fontSize: 12, dotSize: 8 },
 } as const;
 
 export function Badge({
@@ -69,7 +69,7 @@ export function Badge({
         ...(variant === 'filled'
           ? { backgroundColor: themeColor }
           : {
-              backgroundColor: semanticColor.backgroundStatus,
+              backgroundColor: semanticColor.backgroundPrimary,
               borderWidth: 1,
               borderColor: themeColor,
             }),
@@ -77,7 +77,7 @@ export function Badge({
 
   const textStyle: TextStyle = {
     fontSize: sizeToken.fontSize,
-    fontWeight: '600',
+    fontWeight: fontWeight.semibold,
     color: variant === 'filled' ? semanticColor.textOnColor : themeColor,
     textAlign: 'center',
   };

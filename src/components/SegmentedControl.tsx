@@ -76,7 +76,7 @@ export function SegmentedControl({
           ...styles.segment,
           borderRadius: config.segmentRadius,
           ...(isActive ? {
-            backgroundColor: semanticColor.backgroundStatus,
+            backgroundColor: semanticColor.backgroundPrimary,
             ...shadow.level1,
           } : {}),
         };

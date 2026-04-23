@@ -1,11 +1,10 @@
 import React from 'react';
 import { View, Text, StyleSheet, type ViewStyle, type TextStyle } from 'react-native';
-import { fontWeight, textStyle, green, yellow, orange, red, semanticColor } from '../tokens/theme';
-// halo 색상은 Primitive 참조 (시맨틱 토큰에 halo 전용 없음)
+import { fontWeight, textStyle, semanticColor } from '../tokens/theme';
 
 // ─── Types ──────────────────────────────────────────────────
 
-export type FrequencyChipSeverity = 'safe' | 'moderate' | 'warning' | 'critical';
+export type FrequencyChipSeverity = 'safe' | 'caution' | 'warning' | 'critical';
 
 /** FrequencyChip — 수치 데이터를 원형 칩으로 시각화하는 컴포넌트 */
 export interface FrequencyChipProps {
@@ -26,15 +25,15 @@ const BORDER_WIDTH = 2;
 const BORDER_RADIUS = CHIP_SIZE / 2;
 
 const SEVERITY_COLORS: Record<FrequencyChipSeverity, { main: string; halo: string }> = {
-  safe:     { main: semanticColor.backgroundSuccess, halo: green[90] },
-  moderate: { main: semanticColor.backgroundCaution, halo: yellow[90] },
-  warning:  { main: semanticColor.backgroundWarning, halo: orange[90] },
-  critical: { main: semanticColor.backgroundError, halo: red[90] },
+  safe:     { main: semanticColor.backgroundSuccess, halo: semanticColor.backgroundSuccessSubtle },
+  caution:  { main: semanticColor.backgroundCaution, halo: semanticColor.backgroundCautionSubtle },
+  warning:  { main: semanticColor.backgroundWarning, halo: semanticColor.backgroundWarningSubtle },
+  critical: { main: semanticColor.backgroundError,   halo: semanticColor.backgroundErrorSubtle },
 };
 
 const SEVERITY_LABELS: Record<FrequencyChipSeverity, string> = {
   safe: '안전',
-  moderate: '양호',
+  caution: '양호',
   warning: '주의',
   critical: '위험',
 };

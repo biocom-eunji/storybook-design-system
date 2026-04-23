@@ -1,11 +1,11 @@
 import React from 'react';
 import { Pressable, View, type ViewStyle } from 'react-native';
-import { semanticColor, interaction, palette } from '../tokens/theme';
+import { semanticColor, interaction, shadow } from '../tokens/theme';
 
 /** Switch — 켜짐/꺼짐 두 가지 상태를 전환하는 토글 */
 export interface SwitchProps {
   /** 켜짐 상태 */
-  active?: boolean;
+  checked?: boolean;
   /** 토글 콜백 */
   onPress?: () => void;
   /** 비활성화 (회색 처리) */
@@ -18,31 +18,25 @@ const THUMB_SIZE = 28;
 const PAD = (TRACK_H - THUMB_SIZE) / 2;
 
 export function Switch({
-  active = false,
+  checked = false,
   onPress,
   disabled = false,
 }: SwitchProps) {
   const trackColor = disabled
     ? semanticColor.backgroundDisabled
-    : active
+    : checked
       ? semanticColor.backgroundBrand
       : semanticColor.backgroundOff;
 
   const thumbShadow: ViewStyle = disabled
     ? {}
-    : {
-        shadowColor: palette.black,
-        shadowOffset: { width: 0, height: 1 },
-        shadowOpacity: 0.15,
-        shadowRadius: 2,
-        elevation: 2,
-      };
+    : shadow.level1;
 
   return (
     <Pressable
       onPress={disabled ? undefined : onPress}
       accessibilityRole="switch"
-      accessibilityState={{ checked: active }}
+      accessibilityState={{ checked }}
       style={({ pressed }) => ({
         opacity: pressed && !disabled ? interaction.pressOpacity : 1,
       })}
@@ -62,8 +56,8 @@ export function Switch({
             width: THUMB_SIZE,
             height: THUMB_SIZE,
             borderRadius: THUMB_SIZE / 2,
-            backgroundColor: semanticColor.textOnColor,
-            alignSelf: active ? 'flex-end' : 'flex-start',
+            backgroundColor: semanticColor.backgroundPrimary,
+            alignSelf: checked ? 'flex-end' : 'flex-start',
             ...thumbShadow,
           }}
         />

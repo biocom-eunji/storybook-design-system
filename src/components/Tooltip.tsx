@@ -6,8 +6,8 @@ import { semanticColor, fontWeight, textStyle, spacing, radius, opacity, shadow 
 
 export type TooltipSize = 'small' | 'medium';
 export type TooltipPosition = 'top' | 'right' | 'bottom' | 'left';
-export type TooltipAlignVertical = 'leading' | 'center' | 'trailing';
-export type TooltipAlignHorizontal = 'top' | 'center' | 'bottom';
+export type TooltipAlignHorizontal = 'leading' | 'center' | 'trailing';
+export type TooltipAlignVertical = 'top' | 'center' | 'bottom';
 
 export type TooltipProps = {
   /** 툴팁 내용 */

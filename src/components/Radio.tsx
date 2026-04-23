@@ -1,6 +1,6 @@
 import React from 'react';
 import { Pressable, View, Text, type ViewStyle, type TextStyle } from 'react-native';
-import { fontWeight, interaction, spacing, radius, semanticColor } from '../tokens/theme';
+import { fontWeight, interaction, spacing, radius, semanticColor, textStyle } from '../tokens/theme';
 
 export type RadioSize = 'small' | 'medium';
 
@@ -15,8 +15,8 @@ export interface RadioProps {
 }
 
 const sizeMap = {
-  small: { outer: 18, inner: 8, gap: 8, fontSize: 14, subFontSize: 13 },
-  medium: { outer: 22, inner: 10, gap: 10, fontSize: 15, subFontSize: 14 },
+  small: { outer: 18, inner: 8, gap: spacing.small, fontSize: textStyle.label1.fontSize, subFontSize: textStyle.label2.fontSize },
+  medium: { outer: 22, inner: 10, gap: spacing.medium, fontSize: textStyle.body2.fontSize, subFontSize: textStyle.label1.fontSize },
 };
 
 export function Radio({
@@ -61,7 +61,7 @@ export function Radio({
         width: s.outer,
         height: s.outer,
         borderRadius: s.outer / 2,
-        borderWidth: checked ? 0 : 1.5,
+        borderWidth: checked ? 0 : 1,
         borderColor,
         backgroundColor: checked ? fillColor : 'transparent',
         alignItems: 'center',
@@ -82,7 +82,7 @@ export function Radio({
             {label}
           </Text>
           {sublabel && (
-            <Text style={{ fontSize: s.subFontSize, fontWeight: fontWeight.regular, color: subColor, marginTop: 2 }}>
+            <Text style={{ fontSize: s.subFontSize, fontWeight: fontWeight.regular, color: subColor }}>
               {sublabel}
             </Text>
           )}

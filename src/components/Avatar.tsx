@@ -85,7 +85,7 @@ export function Avatar({
               height: onlineDotSize + borderWidth * 2,
               borderRadius: (onlineDotSize + borderWidth * 2) / 2,
               borderWidth,
-              borderColor: semanticColor.backgroundStatus,
+              borderColor: semanticColor.backgroundPrimary,
               backgroundColor: semanticColor.backgroundBrand,
             },
           ]}

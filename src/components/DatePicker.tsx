@@ -126,7 +126,7 @@ const CELL_SIZE = 40;
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: semanticColor.backgroundStatus,
+    backgroundColor: semanticColor.backgroundPrimary,
     borderRadius: radius.medium,
     padding: spacing.large,
   } as ViewStyle,
@@ -162,7 +162,7 @@ const styles = StyleSheet.create({
     textAlign: 'center',
   } as TextStyle,
   sundayLabel: {
-    color: semanticColor.backgroundError,
+    color: semanticColor.textError,
   } as TextStyle,
   grid: {
     flexDirection: 'row',
@@ -208,6 +208,6 @@ const styles = StyleSheet.create({
     color: semanticColor.textTertiary,
   } as TextStyle,
   sundayText: {
-    color: semanticColor.backgroundError,
+    color: semanticColor.textError,
   } as TextStyle,
 });

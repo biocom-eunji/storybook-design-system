@@ -1,5 +1,6 @@
 import React from 'react';
 import { Pressable, Text, View, StyleSheet, type ViewStyle, type TextStyle } from 'react-native';
+import { Icon } from './Icon';
 import {
   semanticColor, fontWeight, textStyle, spacing, radius, shadow, interaction,
 } from '../tokens/theme';
@@ -15,8 +16,8 @@ export interface FABProps {
   variant?: FABVariant;
   /** 색상 */
   color?: FABColor;
-  /** 아이콘 (24×24 ReactNode) */
-  icon: React.ReactNode;
+  /** 아이콘 이름 (iconRegistry 경유) */
+  iconName: string;
   /** 라벨 텍스트 (extended에서만 표시) */
   label?: string;
   /** 클릭 콜백 */
@@ -56,7 +57,7 @@ const COLOR_CONFIG = {
 export function FAB({
   variant = 'regular',
   color = 'primary',
-  icon,
+  iconName,
   label,
   onPress,
   disabled = false,
@@ -72,7 +73,7 @@ export function FAB({
     if (!isExtended && label) {
       console.warn('FAB: regular variant에 label을 전달했습니다. label은 extended에서만 표시됩니다.');
     }
-    if (isExtended && icon && !label) {
+    if (isExtended && iconName && !label) {
       console.warn('FAB: extended variant에 label이 없습니다. 아이콘만 사용하려면 regular variant를 권장합니다.');
     }
     if (!isExtended && !ariaLabel) {
@@ -106,10 +107,7 @@ export function FAB({
       ]}
     >
       <View style={[styles.content, isExtended && { gap: ICON_LABEL_GAP }]}>
-        {React.isValidElement(icon)
-          ? React.cloneElement(icon as React.ReactElement<any>, { color: colorToken.content })
-          : icon
-        }
+        <Icon name={iconName} size={ICON_SIZE} color={colorToken.content} />
         {isExtended && label && (
           <Text style={[styles.label, { color: colorToken.content }]} numberOfLines={1}>
             {label}

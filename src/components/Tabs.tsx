@@ -2,7 +2,7 @@ import React from 'react';
 import { View, Text, Pressable, StyleSheet, type ViewStyle, type TextStyle } from 'react-native';
 import { semanticColor, fontWeight, textStyle, spacing } from '../tokens/theme';
 
-export type TabsSize = 'S' | 'M' | 'L';
+export type TabsSize = 'small' | 'medium' | 'large';
 export type TabsResize = 'hug' | 'fill';
 
 export interface TabsItem {
@@ -21,7 +21,7 @@ export interface TabsProps {
 }
 
 const SIZE_MAP = {
-  S: {
+  small: {
     height: 40,
     fontSize: textStyle.body2.fontSize,
     lineHeight: textStyle.body2.lineHeight,
@@ -29,7 +29,7 @@ const SIZE_MAP = {
     fontWeight: fontWeight.regular,
     activeFontWeight: fontWeight.semibold,
   },
-  M: {
+  medium: {
     height: 48,
     fontSize: textStyle.headline.fontSize,
     lineHeight: textStyle.headline.lineHeight,
@@ -37,7 +37,7 @@ const SIZE_MAP = {
     fontWeight: fontWeight.regular,
     activeFontWeight: fontWeight.semibold,
   },
-  L: {
+  large: {
     height: 56,
     fontSize: textStyle.heading.fontSize,
     lineHeight: textStyle.heading.lineHeight,
@@ -49,14 +49,14 @@ const SIZE_MAP = {
 
 const INDICATOR_HEIGHT = 2;
 const TAB_GAP = 24;
-const TAB_PY = 12;
+const TAB_PY = spacing.medium;
 const TAB_MIN_W = 32;
 
 export function Tabs({
   items,
   value,
   onChange,
-  size = 'M',
+  size = 'medium',
   resize = 'hug',
 }: TabsProps) {
   const sizeToken = SIZE_MAP[size];

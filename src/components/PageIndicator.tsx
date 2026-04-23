@@ -2,7 +2,7 @@ import React from 'react';
 import { View, Pressable, StyleSheet, type ViewStyle } from 'react-native';
 import { semanticColor, opacity } from '../tokens/theme';
 
-export type PageIndicatorVariant = 'normal' | 'white';
+export type PageIndicatorVariant = 'normal' | 'inverse';
 export type PageIndicatorSize = 'small' | 'medium';
 
 /** Dot — 캐러셀 페이지 인디케이터 */

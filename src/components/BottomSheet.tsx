@@ -9,7 +9,7 @@ import {
   useWindowDimensions,
   type ViewStyle,
 } from 'react-native';
-import { fontSize, fontWeight, spacing, semanticColor, radius, palette } from '../tokens/theme';
+import { fontSize, fontWeight, spacing, semanticColor, radius } from '../tokens/theme';
 
 /** BottomSheet — 하단에서 올라오는 시트 */
 export interface BottomSheetProps {
@@ -137,10 +137,10 @@ const styles = StyleSheet.create({
   } as ViewStyle,
   backdrop: {
     ...StyleSheet.absoluteFillObject,
-    backgroundColor: palette.black,
+    backgroundColor: semanticColor.backgroundScrim,
   } as ViewStyle,
   sheet: {
-    backgroundColor: semanticColor.backgroundStatus,
+    backgroundColor: semanticColor.backgroundPrimary,
     borderTopLeftRadius: radius.xlarge,
     borderTopRightRadius: radius.xlarge,
   } as ViewStyle,

@@ -9,8 +9,8 @@ import {
   type PressableStateCallbackType,
   type ImageSourcePropType,
 } from 'react-native';
-import { chipToken, fontWeight, spacing } from '../tokens/theme';
-import { renderIcon } from './utils';
+import { chipToken, fontWeight, spacing, interaction } from '../tokens/theme';
+import { Icon } from './Icon';
 
 export type ChipVariant = 'solid' | 'outlined';
 export type ChipSize = 'xsmall' | 'small' | 'medium' | 'large';
@@ -23,8 +23,10 @@ export interface ChipProps {
   size?: ChipSize;
   active?: boolean;
   disabled?: boolean;
-  leadingIcon?: React.ReactNode;
-  trailingIcon?: React.ReactNode;
+  /** 좌측 아이콘 이름 (iconRegistry 경유) */
+  leadingIconName?: string;
+  /** 우측 아이콘 이름 (iconRegistry 경유) */
+  trailingIconName?: string;
   thumbnail?: ImageSourcePropType;
 }
 
@@ -35,8 +37,8 @@ export function Chip({
   size = 'medium',
   active = false,
   disabled = false,
-  leadingIcon,
-  trailingIcon,
+  leadingIconName,
+  trailingIconName,
   thumbnail,
 }: ChipProps) {
   const sizeToken = chipToken.size[size];
@@ -64,11 +66,11 @@ export function Chip({
     }
 
     if (!disabled && state.pressed) {
-      base.opacity = 0.7;
+      base.opacity = interaction.pressOpacity;
     }
 
     if (thumbnail) {
-      base.paddingLeft = 4;
+      base.paddingLeft = spacing.xsmall;
     }
 
     return [base];
@@ -100,9 +102,9 @@ export function Chip({
           }}
         />
       )}
-      {renderIcon(leadingIcon, sizeToken.iconSize, iconColor)}
+      {leadingIconName && <Icon name={leadingIconName} size={sizeToken.iconSize} color={iconColor} />}
       <Text style={textStyle}>{label}</Text>
-      {renderIcon(trailingIcon, sizeToken.iconSize, iconColor)}
+      {trailingIconName && <Icon name={trailingIconName} size={sizeToken.iconSize} color={iconColor} />}
     </Pressable>
   );
 }

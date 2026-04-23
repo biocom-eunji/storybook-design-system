@@ -72,7 +72,7 @@ const styles = StyleSheet.create({
     left: 0,
     right: 0,
     bottom: 0,
-    backgroundColor: 'rgba(0,0,0,0.4)',
+    backgroundColor: semanticColor.backgroundScrim,
     justifyContent: 'center',
     alignItems: 'center',
   } as ViewStyle,
@@ -84,7 +84,7 @@ const styles = StyleSheet.create({
     bottom: 0,
   } as ViewStyle,
   dialog: {
-    backgroundColor: semanticColor.backgroundStatus,
+    backgroundColor: semanticColor.backgroundPrimary,
     borderRadius: radius.xlarge,
     width: 300,
     padding: spacing['2xlarge'],

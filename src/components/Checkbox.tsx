@@ -1,7 +1,7 @@
 import React from 'react';
 import { Pressable, View, Text } from 'react-native';
 import Svg, { Path, Rect } from 'react-native-svg';
-import { fontWeight, interaction, spacing, radius, semanticColor } from '../tokens/theme';
+import { fontWeight, interaction, spacing, radius, semanticColor, textStyle } from '../tokens/theme';
 
 export type CheckboxSize = 'small' | 'medium';
 export type CheckboxState = 'unchecked' | 'checked' | 'indeterminate';
@@ -18,8 +18,8 @@ export interface CheckboxProps {
 }
 
 const sizeMap = {
-  small: { box: 18, iconVB: 256, radius: 4, gap: 8, fontSize: 14, subFontSize: 13 },
-  medium: { box: 22, iconVB: 256, radius: 5, gap: 10, fontSize: 15, subFontSize: 14 },
+  small: { box: 18, iconVB: 256, radius: 4, gap: spacing.small, fontSize: textStyle.label1.fontSize, subFontSize: textStyle.label2.fontSize },
+  medium: { box: 22, iconVB: 256, radius: 5, gap: spacing.medium, fontSize: textStyle.body2.fontSize, subFontSize: textStyle.label1.fontSize },
 };
 
 export function Checkbox({
@@ -67,7 +67,7 @@ export function Checkbox({
         width: s.box,
         height: s.box,
         borderRadius: s.radius,
-        borderWidth: isFilled ? 0 : 1.5,
+        borderWidth: isFilled ? 0 : 1,
         borderColor,
         backgroundColor: bgColor,
         alignItems: 'center',
@@ -97,7 +97,7 @@ export function Checkbox({
             {label}
           </Text>
           {sublabel && (
-            <Text style={{ fontSize: s.subFontSize, fontWeight: fontWeight.regular, color: subColor, marginTop: 2 }}>
+            <Text style={{ fontSize: s.subFontSize, fontWeight: fontWeight.regular, color: subColor }}>
               {sublabel}
             </Text>
           )}

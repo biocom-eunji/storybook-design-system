@@ -13,8 +13,10 @@ export interface CircularProgressProps {
   size?: number;
   /** 링 두께 */
   strokeWidth?: number;
-  /** 색상 */
+  /** 색상 프리셋 */
   color?: CircularProgressColor;
+  /** 직접 색상 지정 (color 프리셋 대신 사용) */
+  strokeColor?: string;
   /** 중앙 텍스트 표시 */
   showLabel?: boolean;
   /** 커스텀 라벨 (기본: 퍼센트) */
@@ -33,6 +35,7 @@ export function CircularProgress({
   size = 80,
   strokeWidth = 6,
   color = 'primary',
+  strokeColor,
   showLabel = true,
   label,
 }: CircularProgressProps) {
@@ -41,6 +44,7 @@ export function CircularProgress({
   const circumference = 2 * Math.PI * r;
   const strokeDashoffset = circumference * (1 - clamped);
   const displayLabel = label ?? `${Math.round(clamped * 100)}%`;
+  const resolvedColor = strokeColor ?? COLOR_MAP[color];
 
   const fontSize = size >= 80 ? textStyle.headline.fontSize :
                    size >= 56 ? textStyle.label1.fontSize :
@@ -66,7 +70,7 @@ export function CircularProgress({
           cx={size / 2}
           cy={size / 2}
           r={r}
-          stroke={COLOR_MAP[color]}
+          stroke={resolvedColor}
           strokeWidth={strokeWidth}
           fill="none"
           strokeDasharray={circumference}

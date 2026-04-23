@@ -11,9 +11,9 @@ export interface TabItem {
 
 /** BottomNavigation — 하단 탭 내비게이션 */
 export interface BottomNavigationProps {
-  tabs: TabItem[];
-  activeTab: string;
-  onTabPress?: (key: string) => void;
+  items: TabItem[];
+  value: string;
+  onChange?: (key: string) => void;
 }
 
 /** 바이오컴 기본 탭 구성 (Bottom Navigation.png 기반) */
@@ -26,14 +26,14 @@ export const BIOCOM_TABS: TabItem[] = [
 ];
 
 export function BottomNavigation({
-  tabs,
-  activeTab,
-  onTabPress,
+  items,
+  value,
+  onChange,
 }: BottomNavigationProps) {
   return (
     <View style={[styles.container, styles.default]}>
-      {tabs.map((tab) => {
-        const isActive = tab.key === activeTab;
+      {items.map((tab) => {
+        const isActive = tab.key === value;
         const iconColor = isActive ? semanticColor.iconBrand : semanticColor.iconDisabled;
         const textColor = isActive ? semanticColor.textBrand : semanticColor.textSecondary;
 
@@ -41,7 +41,7 @@ export function BottomNavigation({
           <Pressable
             key={tab.key}
             style={({ pressed }) => [styles.tab, pressed && styles.tabPressed]}
-            onPress={() => onTabPress?.(tab.key)}
+            onPress={() => onChange?.(tab.key)}
             accessibilityRole="tab"
             accessibilityState={{ selected: isActive }}
             accessibilityLabel={tab.label}
@@ -80,7 +80,7 @@ const styles = StyleSheet.create({
   } as ViewStyle,
   default: {
     height: 60,
-    backgroundColor: semanticColor.backgroundStatus,
+    backgroundColor: semanticColor.backgroundPrimary,
     borderTopWidth: 1,
     borderTopColor: semanticColor.borderDefault,
     paddingBottom: spacing.xsmall,

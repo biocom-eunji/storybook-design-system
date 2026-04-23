@@ -11,7 +11,7 @@ import {
 import { buttonToken, fontWeight, textStyle } from '../tokens/theme';
 
 export type ButtonVariant = 'solid' | 'outlined';
-export type ButtonColor = 'primary' | 'assistive';
+export type ButtonColorScheme = 'primary' | 'assistive';
 export type ButtonSize = 'small' | 'medium' | 'large';
 
 /** Button — 사용자가 원하는 동작을 수행할 수 있도록 돕는 버튼 */
@@ -22,8 +22,8 @@ export interface ButtonProps {
   onPress?: () => void;
   /** 버튼 스타일 변형 */
   variant?: ButtonVariant;
-  /** 버튼 컬러 */
-  color?: ButtonColor;
+  /** 버튼 컬러 스킴 */
+  colorScheme?: ButtonColorScheme;
   /** 버튼 크기 */
   size?: ButtonSize;
   /** 비활성화 상태 */
@@ -42,13 +42,13 @@ export function Button({
   label,
   onPress,
   variant = 'solid',
-  color = 'primary',
+  colorScheme = 'primary',
   size = 'medium',
   disabled = false,
   loading = false,
 }: ButtonProps) {
   const sizeToken = buttonToken.size[size];
-  const colorToken = buttonToken.color[color][variant];
+  const colorToken = buttonToken.color[colorScheme][variant];
 
   const contentColor = disabled ? colorToken.contentDisabled : colorToken.content;
 

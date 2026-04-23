@@ -8,12 +8,15 @@ import {
   type IconStyle,
   type SvgElement,
 } from './iconRegistry';
+import { phosphorMap, type PhosphorIconName, type IconVariant } from './phosphorMap';
 
 export interface IconProps {
   /** 아이콘 이름 */
   name: string;
   /** 아이콘 카테고리: normal | color | circle | mini */
   style?: IconStyle;
+  /** Phosphor weight (normal 카테고리에서만 적용) */
+  variant?: IconVariant;
   /** 아이콘 크기 (width = height), 카테고리별 기본값 적용 */
   size?: number;
   /** 직접 색상 지정 — 생략하면 레지스트리에 정의된 기본 색상 사용 */
@@ -29,15 +32,36 @@ const DEFAULT_SIZES: Record<IconStyle, number> = {
   mini: 20,
 };
 
-export function Icon({ name, style = 'normal', size, color, active }: IconProps) {
+export function Icon({
+  name,
+  style = 'normal',
+  variant = 'regular',
+  size,
+  color,
+  active,
+}: IconProps) {
   const resolvedSize = size ?? DEFAULT_SIZES[style];
 
   if (style === 'normal') {
-    const entry = normalIcons[name];
+    // Phosphor 라이브러리 매핑이 있으면 직접 렌더링
+    const entry = phosphorMap[name as PhosphorIconName];
+    if (entry) {
+      const { component: PhosphorComponent, defaultWeight } = entry;
+      const resolvedWeight = variant !== 'regular' ? variant : defaultWeight;
+      return (
+        <PhosphorComponent
+          size={resolvedSize}
+          color={color ?? '#212225'}
+          weight={resolvedWeight}
+        />
+      );
+    }
 
-    if (!entry) {
+    // Fallback: 기존 iconRegistry (커스텀 아이콘)
+    const registryEntry = normalIcons[name];
+    if (!registryEntry) {
       if (__DEV__) {
-        console.warn(`[Icon] "${name}" is not a registered normal icon name.`);
+        console.warn(`[Icon] "${name}" is not a registered icon name.`);
       }
       return null;
     }
@@ -45,14 +69,14 @@ export function Icon({ name, style = 'normal', size, color, active }: IconProps)
     let fillColor: string;
     if (color) {
       fillColor = color;
-    } else if (active !== undefined && entry.activeColor && entry.inactiveColor) {
-      fillColor = active ? entry.activeColor : entry.inactiveColor;
+    } else if (active !== undefined && registryEntry.activeColor && registryEntry.inactiveColor) {
+      fillColor = active ? registryEntry.activeColor : registryEntry.inactiveColor;
     } else {
-      fillColor = entry.defaultColor;
+      fillColor = registryEntry.defaultColor;
     }
 
-    const vb = entry.viewBox ?? '0 0 256 256';
-    const pathList = entry.paths ?? (entry.path ? [entry.path] : []);
+    const vb = registryEntry.viewBox ?? '0 0 256 256';
+    const pathList = registryEntry.paths ?? (registryEntry.path ? [registryEntry.path] : []);
 
     return (
       <Svg width={resolvedSize} height={resolvedSize} viewBox={vb} fill="none">
@@ -63,7 +87,7 @@ export function Icon({ name, style = 'normal', size, color, active }: IconProps)
     );
   }
 
-  // Color, Circle, Mini
+  // Color, Circle, Mini — 기존 레지스트리 유지
   const registry =
     style === 'color'
       ? colorIcons
@@ -91,18 +115,21 @@ export function Icon({ name, style = 'normal', size, color, active }: IconProps)
 
 function renderElement(el: SvgElement, key: number, colorOverride?: string) {
   const { tag, ...props } = el;
+  const overridden = colorOverride
+    ? { ...props, ...(props.fill ? { fill: colorOverride } : {}), ...(props.stroke ? { stroke: colorOverride } : {}) }
+    : props;
 
   switch (tag) {
     case 'path':
-      return <Path key={key} {...props} />;
+      return <Path key={key} {...overridden} />;
     case 'circle':
-      return <Circle key={key} {...props} />;
+      return <Circle key={key} {...overridden} />;
     case 'rect':
-      return <Rect key={key} {...props} />;
+      return <Rect key={key} {...overridden} />;
     case 'ellipse':
-      return <Ellipse key={key} {...props} />;
+      return <Ellipse key={key} {...overridden} />;
     case 'line':
-      return <Line key={key} {...props} />;
+      return <Line key={key} {...overridden} />;
     default:
       return null;
   }

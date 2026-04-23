@@ -1,5 +1,5 @@
-import React from 'react';
-import { View, type ViewStyle } from 'react-native';
+import React, { useEffect, useRef } from 'react';
+import { View, Animated, type ViewStyle } from 'react-native';
 import { radius, semanticColor } from '../tokens/theme';
 
 export type SkeletonVariant = 'text' | 'circular' | 'rectangular';
@@ -38,12 +38,26 @@ export function Skeleton({
       case 'circular':
         return radius.full;
       case 'text':
-        return 4;
+        return radius.xsmall;
       case 'rectangular':
       default:
         return radius.small;
     }
   })();
+
+  const shimmerAnim = useRef(new Animated.Value(0)).current;
+
+  useEffect(() => {
+    const animation = Animated.loop(
+      Animated.timing(shimmerAnim, {
+        toValue: 1,
+        duration: 1500,
+        useNativeDriver: true,
+      }),
+    );
+    animation.start();
+    return () => animation.stop();
+  }, [shimmerAnim]);
 
   const containerStyle: ViewStyle = {
     width: resolvedWidth as any,
@@ -53,27 +67,22 @@ export function Skeleton({
     overflow: 'hidden',
   };
 
+  const translateX = shimmerAnim.interpolate({
+    inputRange: [0, 1],
+    outputRange: [-200, 200],
+  });
+
   return (
     <View style={containerStyle}>
-      <style
-        dangerouslySetInnerHTML={{
-          __html: `
-@keyframes skeleton-shimmer {
-  0% { transform: translateX(-100%); }
-  100% { transform: translateX(100%); }
-}
-          `,
-        }}
-      />
-      <div
+      <Animated.View
         style={{
           position: 'absolute',
           top: 0,
-          left: 0,
-          right: 0,
           bottom: 0,
-          background: `linear-gradient(90deg, ${semanticColor.backgroundDisabled} 0%, ${semanticColor.backgroundOff} 50%, ${semanticColor.backgroundDisabled} 100%)`,
-          animation: 'skeleton-shimmer 1.5s ease-in-out infinite',
+          width: '100%',
+          backgroundColor: semanticColor.backgroundOff,
+          opacity: 0.3,
+          transform: [{ translateX }],
         }}
       />
     </View>

@@ -67,7 +67,7 @@ export function ActionArea({
   const containerStyle: ViewStyle = {
     ...styles.container,
     paddingBottom: spacing.medium + safeAreaBottom,
-    backgroundColor: transparent ? 'transparent' : semanticColor.backgroundStatus,
+    backgroundColor: transparent ? 'transparent' : semanticColor.backgroundPrimary,
     borderTopWidth: divider ? 1 : 0,
   };
 

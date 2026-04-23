@@ -9,13 +9,13 @@ import {
 } from 'react-native';
 import { textButtonToken, fontWeight, spacing } from '../tokens/theme';
 
-export type TextButtonColor = 'primary' | 'assistive';
+export type TextButtonColorScheme = 'primary' | 'assistive';
 export type TextButtonSize = 'small' | 'medium';
 
 export interface TextButtonProps {
   label: string;
   onPress?: () => void;
-  color?: TextButtonColor;
+  colorScheme?: TextButtonColorScheme;
   size?: TextButtonSize;
   disabled?: boolean;
   loading?: boolean;
@@ -24,13 +24,13 @@ export interface TextButtonProps {
 export function TextButton({
   label,
   onPress,
-  color = 'primary',
+  colorScheme = 'primary',
   size = 'medium',
   disabled = false,
   loading = false,
 }: TextButtonProps) {
   const sizeToken = textButtonToken.size[size];
-  const colorToken = textButtonToken.color[color];
+  const colorToken = textButtonToken.color[colorScheme];
 
   const getContentColor = (state: PressableStateCallbackType): string => {
     if (disabled) return colorToken.contentDisabled;

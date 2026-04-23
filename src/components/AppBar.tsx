@@ -99,7 +99,7 @@ export function AppBar({
 
   return (
     <View
-      style={[styles.container, { backgroundColor: semanticColor.backgroundStatus }]}
+      style={[styles.container, { backgroundColor: semanticColor.backgroundPrimary }]}
       accessibilityRole="header"
     >
       {isCenter ? (
