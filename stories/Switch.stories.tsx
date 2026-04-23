@@ -39,7 +39,7 @@ const meta: Meta<typeof Switch> = {
   title: 'Input/Switch',
   component: Switch,
   argTypes: {
-    active: {
+    checked: {
       control: 'boolean',
       description: '켜짐/꺼짐 상태 (Figma: Checked)',
     },
@@ -58,8 +58,8 @@ type Story = StoryObj<typeof Switch>;
 
 export const Playground: Story = {
   render: () => {
-    const [active, setActive] = useState(false);
-    return <Switch active={active} onPress={() => setActive(!active)} />;
+    const [checked, setActive] = useState(false);
+    return <Switch checked={checked} onPress={() => setActive(!checked)} />;
   },
   parameters: {
     docs: {
@@ -82,10 +82,10 @@ export const AllStates: Story = {
       >
         <CompareGrid
           items={[
-            { label: 'Off', content: <Switch active={false} /> },
-            { label: 'On', content: <Switch active={true} /> },
-            { label: 'Off (Disabled)', content: <Switch active={false} disabled /> },
-            { label: 'On (Disabled)', content: <Switch active={true} disabled /> },
+            { label: 'Off', content: <Switch checked={false} /> },
+            { label: 'On', content: <Switch checked={true} /> },
+            { label: 'Off (Disabled)', content: <Switch checked={false} disabled /> },
+            { label: 'On (Disabled)', content: <Switch checked={true} disabled /> },
           ]}
         />
       </Section>
@@ -106,15 +106,15 @@ export const AllStates: Story = {
 
 // ─── 3. 인터랙티브 데모 ──────────────────────────────────────
 
-export const Interactive: Story = {
+export const Interchecked: Story = {
   name: '인터랙티브 데모',
   render: () => {
     const [notifications, setNotifications] = useState(true);
     const [darkMode, setDarkMode] = useState(false);
     const [biometric, setBiometric] = useState(false);
 
-    const SwitchRow = ({ label, sublabel, active, onPress, disabled }: {
-      label: string; sublabel?: string; active: boolean; onPress: () => void; disabled?: boolean;
+    const SwitchRow = ({ label, sublabel, checked, onPress, disabled }: {
+      label: string; sublabel?: string; checked: boolean; onPress: () => void; disabled?: boolean;
     }) => (
       <View style={{
         flexDirection: 'row',
@@ -138,7 +138,7 @@ export const Interactive: Story = {
             }}>{sublabel}</Text>
           )}
         </View>
-        <Switch active={active} onPress={onPress} disabled={disabled} />
+        <Switch checked={checked} onPress={onPress} disabled={disabled} />
       </View>
     );
 
@@ -152,20 +152,20 @@ export const Interactive: Story = {
             <SwitchRow
               label="푸시 알림"
               sublabel="건강 리포트, 식단 알림 등"
-              active={notifications}
+              checked={notifications}
               onPress={() => setNotifications(!notifications)}
             />
             <SwitchRow
               label="다크 모드"
               sublabel="준비 중 (v2 예정)"
-              active={darkMode}
+              checked={darkMode}
               onPress={() => setDarkMode(!darkMode)}
               disabled
             />
             <SwitchRow
               label="생체 인증"
               sublabel="Face ID / 지문으로 빠른 로그인"
-              active={biometric}
+              checked={biometric}
               onPress={() => setBiometric(!biometric)}
             />
           </View>
@@ -180,7 +180,7 @@ export const Interactive: Story = {
 export const DesignSpec: Story = {
   name: '디자인 스펙',
   render: () => {
-    const activeStates = ['off', 'on'] as const;
+    const checkedStates = ['off', 'on'] as const;
     const disabledStates = ['default', 'disabled'] as const;
 
     const resolve: Record<string, string> = {
@@ -198,13 +198,13 @@ export const DesignSpec: Story = {
           description="Figma 시맨틱 토큰 기준 Switch 전체 조합 스펙입니다."
           badge="디자인"
         >
-          {activeStates.map(active =>
+          {checkedStates.map(checked =>
             disabledStates.map(dis => {
-              const t = TRACK_TOKEN_MAP[active][dis];
+              const t = TRACK_TOKEN_MAP[checked][dis];
               return (
-                <View key={`${active}-${dis}`}>
+                <View key={`${checked}-${dis}`}>
                   <TokenSpecTable
-                    title={`${active} / ${dis}`}
+                    title={`${checked} / ${dis}`}
                     rows={[
                       { property: 'Track 배경',   token: t.trackBg, value: r(t.trackBg), type: 'color' },
                       { property: 'Thumb 배경',   token: t.thumbBg, value: r(t.thumbBg), type: 'color' },
@@ -260,11 +260,11 @@ export const Usage: Story = {
 
         <CodeBlock
           title="기본 사용"
-          code={`const [active, setActive] = useState(false);
+          code={`const [checked, setActive] = useState(false);
 
 <Switch
-  active={active}
-  onPress={() => setActive(!active)}
+  checked={checked}
+  onPress={() => setActive(!checked)}
 />`}
         />
 
@@ -279,14 +279,14 @@ export const Usage: Story = {
       건강 리포트, 식단 알림 등
     </Text>
   </View>
-  <Switch active={isEnabled} onPress={toggle} />
+  <Switch checked={isEnabled} onPress={toggle} />
 </View>`}
         />
 
         <CodeBlock
           title="비활성화"
-          code={`<Switch active={false} disabled />
-<Switch active={true} disabled />`}
+          code={`<Switch checked={false} disabled />
+<Switch checked={true} disabled />`}
         />
       </Section>
     </View>

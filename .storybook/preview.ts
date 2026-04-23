@@ -31,16 +31,15 @@ const preview: Preview = {
     options: {
       storySort: {
         order: [
-          'Getting Started', ['Introduction', 'Release Notes', 'Naming Convention', 'Brand Logo'],
-          'Primitives', ['Color', 'Grid', 'Opacity'],
-          'Semantics', ['Color', 'Typography', 'Spacing', 'Border Radius', 'Shadow'],
-          'Foundation', ['Icon'],
+          'Getting Started', ['Guide', 'Introduction', 'Release Notes', 'Naming Convention', 'Brand Logo'],
+          'Primitives Palette', ['Color', 'Grid', 'Opacity'],
+          'Semantics Token', ['Color', 'Typography', 'Spacing', 'Border Radius', 'Shadow', 'Icon'],
           'Actions', ['Button', 'TextButton', 'FAB'],
-          'Input', ['TextField', 'TextArea', 'SearchBar', 'DatePicker', 'Checkbox', 'Radio', 'Switch', 'Chip', 'SegmentedControl'],
+          'Input', ['TextField', 'TextArea', 'SearchBar', 'DatePicker', 'TimePicker', 'Stepper', 'LikertScale', 'Checkbox', 'Radio', 'RadioCard', 'Switch', 'Chip', 'SegmentedControl'],
           'Feedback', ['Toast', 'ProgressBar', 'CircularProgress', 'Skeleton', 'EmptyState'],
           'Overlay', ['Modal', 'BottomSheet', 'Tooltip'],
           'Navigation', ['AppBar', 'Tabs', 'BottomNavigation', 'PageIndicator'],
-          'Data Display', ['Card', 'ListCard', 'List', 'FrequencyChip', 'LevelIndicator', 'Avatar', 'Badge', 'Divider'],
+          'Data Display', ['Card', 'ListCard', 'StatCard', 'List', 'FrequencyChip', 'LevelIndicator', 'Avatar', 'Badge', 'Tag', 'Divider'],
         ],
       },
     },

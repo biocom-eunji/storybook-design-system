@@ -1,7 +1,7 @@
 import React from 'react';
 import { Meta } from '@storybook/addon-docs/blocks';
 
-<Meta title="Semantics/Color" />
+<Meta title="Semantics Token/Color" />
 
 export const TokenRow = ({ token, hex, source, role }) => {
   const [copied, setCopied] = React.useState(false);
@@ -229,8 +229,10 @@ export const SectionHeader = ({ title, description }) => (
     <TokenRow token="content/strong"    hex="#0F0F10" source="Mono/coolNeutral5"   role="최강조 콘텐츠 색상." />
     <TokenRow token="content/primary"   hex="#171719" source="Mono/coolNeutral10"  role="기본 콘텐츠 색상." />
     <TokenRow token="content/secondary" hex="#70737C" source="Mono/coolNeutral50"  role="보조 콘텐츠 색상." />
-    <TokenRow token="content/tertiary"  hex="#AEB0B6" source="Mono/coolNeutral80"  role="비활성 콘텐츠 색상." />
-    <TokenRow token="content/onColor"   hex="#FFFFFF" source="Mono/coolNeutral100" role="색상 배경 위 콘텐츠." />
+    <TokenRow token="content/tertiary"   hex="#AEB0B6" source="Mono/coolNeutral80"  role="비활성 콘텐츠 색상." />
+    <TokenRow token="content/quaternary" hex="#5A5C63" source="Mono/coolNeutral40" role="4단계 콘텐츠 색상." />
+    <TokenRow token="content/label"      hex="#46474C" source="Mono/coolNeutral30" role="라벨 콘텐츠 색상." />
+    <TokenRow token="content/onColor"    hex="#FFFFFF" source="Mono/coolNeutral100" role="색상 배경 위 콘텐츠." />
 
     <SectionHeader title="Line" description="구분선·테두리의 기본 역할 토큰" />
     <TokenRow token="line/default"      hex="#E1E2E4" source="Mono/coolNeutral96"  role="기본 구분선." />
@@ -249,8 +251,8 @@ export const SectionHeader = ({ title, description }) => (
     <TokenRow token="textSecondary"   hex="#70737C" source="content/secondary" role="보조 설명, 부가 정보, 캡션 텍스트." />
     <TokenRow token="textTertiary"    hex="#AEB0B6" source="content/tertiary"  role="비활성화 텍스트, 힌트." />
     <TokenRow token="textPlaceholder" hex="#AEB0B6" source="color/text/tertiary" role="입력 필드 플레이스홀더 (textTertiary alias)." />
-    <TokenRow token="textQuaternary"  hex="#5A5C63" source="coolNeutral40"     role="4단계 텍스트 (보조 버튼, 비활성 수치)." />
-    <TokenRow token="textLabel"       hex="#46474C" source="coolNeutral30"     role="라벨 텍스트 (입력 필드 등)." />
+    <TokenRow token="textQuaternary"  hex="#5A5C63" source="content/quaternary" role="4단계 텍스트 (보조 버튼, 비활성 수치)." />
+    <TokenRow token="textLabel"       hex="#46474C" source="content/label"      role="라벨 텍스트 (입력 필드 등)." />
     <TokenRow token="textOnColor"     hex="#FFFFFF" source="content/onColor"   role="색상 배경 위 텍스트 (버튼, 배지 등)." />
     <TokenRow token="textBrand"       hex="#22C3BC" source="role/brand"        role="링크, 포커스, 브랜드 강조 텍스트." />
     <TokenRow token="textError"       hex="#EF7676" source="role/error"        role="에러·유효성 실패 메시지." />
@@ -260,25 +262,28 @@ export const SectionHeader = ({ title, description }) => (
     <TokenRow token="textAction"      hex="#A8F0EC" source="Brand/mint80"      role="다크 배경 위 액션 텍스트 (토스트 등)." />
 
     <SectionHeader title="Background" description="배경에 적용하는 색상 토큰" />
-    <TokenRow token="backgroundPrimary"      hex="#FFFFFF" source="surface/primary"   role="기본 배경색." />
+    <TokenRow token="backgroundPrimary"       hex="#FFFFFF" source="surface/primary"   role="기본 배경색." />
     <TokenRow token="backgroundSecondary"    hex="#F7F7F8" source="surface/secondary" role="카드, 섹션 구분 배경색." />
     <TokenRow token="backgroundTertiary"     hex="#EAEBEC" source="surface/tertiary"  role="인풋 비활성, 칩 기본 배경." />
     <TokenRow token="backgroundInverse"      hex="#171719" source="surface/inverse"   role="다크 영역, 활성 칩 배경." />
-    <TokenRow token="backgroundBrand"        hex="#22C3BC" source="role/brand"         role="CTA 버튼, 강조 영역 배경." />
-    <TokenRow token="backgroundBrandPressed" hex="#17827D" source="role/brandPressed"  role="브랜드 배경 눌림 상태." />
-    <TokenRow token="backgroundBrandDisabled" hex="#D4F7F6" source="Brand/mint90"     role="브랜드 비활성화 배경 (체크박스 등)." />
-    <TokenRow token="backgroundStatus"       hex="#FFFFFF" source="surface/primary"   role="에러/성공/경고 상태 배경 (흰색 통일)." />
-    <TokenRow token="backgroundDisabled"     hex="#E1E2E4" source="coolNeutral96"     role="비활성화 배경 (Disabled 상태 컴포넌트)." />
-    <TokenRow token="backgroundOff"          hex="#C2C4C8" source="coolNeutral90"     role="비활성 트랙, OFF 상태 배경." />
-    <TokenRow token="backgroundError"        hex="#EF7676" source="role/error"         role="에러 배경 (위험 버튼, ProgressBar error)." />
-    <TokenRow token="backgroundWarning"      hex="#FF9733" source="role/warning"       role="경고 배경 (주황)." />
+    <TokenRow token="backgroundOff"          hex="#C2C4C8" source="Mono/coolNeutral90" role="OFF 상태 배경." />
+    <TokenRow token="backgroundBrand"        hex="#22C3BC" source="role/brand"         role="브랜드 배경 (CTA 버튼)." />
+    <TokenRow token="backgroundBrandPressed" hex="#17827D" source="role/brandPressed"  role="브랜드 배경 눌림." />
+    <TokenRow token="backgroundDisabled"     hex="#E1E2E4" source="Mono/coolNeutral96" role="비활성화 배경." />
+    <TokenRow token="backgroundBrandDisabled" hex="#D4F7F6" source="Brand/mint90"     role="브랜드 비활성화 배경." />
+    <TokenRow token="backgroundError"        hex="#EF7676" source="role/error"         role="에러 배경." />
+    <TokenRow token="backgroundWarning"      hex="#FF9733" source="role/warning"       role="경고 배경." />
+    <TokenRow token="backgroundSuccess"      hex="#22C289" source="role/success"       role="성공 배경." />
+    <TokenRow token="backgroundToast"        hex="#878A93" source="Mono/coolNeutral60" role="토스트 배경." />
     <TokenRow token="backgroundCaution"      hex="#FFCE00" source="role/caution"       role="주의 배경 (노랑)." />
-    <TokenRow token="backgroundSuccess"      hex="#22C289" source="role/success"       role="성공 배경 (ProgressBar success)." />
-    <TokenRow token="backgroundToast"        hex="#878A93" source="coolNeutral60"     role="토스트 배경." />
+    <TokenRow token="backgroundScrim"        hex="#333333" source="rgba(0,0,0,0.4)"   role="오버레이 스크림 (모달, 바텀시트 dim)." />
+    <TokenRow token="backgroundSuccessSubtle" hex="#D4F7EB" source="green[90]"       role="성공 연한 배경 (halo, Tag 등)." />
+    <TokenRow token="backgroundCautionSubtle" hex="#FFF5CC" source="yellow[90]"      role="주의 연한 배경." />
+    <TokenRow token="backgroundWarningSubtle" hex="#FFE5CC" source="orange[90]"      role="경고 연한 배경." />
+    <TokenRow token="backgroundErrorSubtle"   hex="#FAD1D1" source="red[90]"         role="에러 연한 배경." />
 
     <SectionHeader title="Border" description="테두리·구분선에 적용하는 색상 토큰" />
     <TokenRow token="borderDefault"  hex="#E1E2E4" source="line/default"  role="기본 테두리, 구분선." />
-    <TokenRow token="borderDisabled" hex="#E1E2E4" source="color/border/default" role="비활성화 테두리 (borderDefault alias)." />
     <TokenRow token="borderActive"   hex="#70737C" source="line/active"   role="입력됨 상태 테두리." />
     <TokenRow token="borderFocus"    hex="#22C3BC" source="role/brand"    role="포커스·브랜드 강조 테두리." />
     <TokenRow token="borderError"    hex="#EF7676" source="role/error"    role="에러 상태 테두리." />

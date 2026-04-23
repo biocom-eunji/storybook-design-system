@@ -14,7 +14,7 @@ import {
 // ─── 토큰 매핑 테이블 (Single Source of Truth) ──────────────
 
 const CONTAINER_TOKEN_MAP = {
-  background:  { token: 'color/background/primary',  value: semanticColor.backgroundStatus },
+  background:  { token: 'color/background/primary',  value: semanticColor.backgroundPrimary },
   radius:      { token: 'borderRadius/medium',        value: radius.medium },
   shadow:      { token: 'Level 3',                    value: `offset(0,${shadow.level3.shadowOffset.height}) blur(${shadow.level3.shadowRadius}) opacity(${shadow.level3.shadowOpacity})` },
   titleColor:  { token: 'color/text/primary',         value: semanticColor.textPrimary },
@@ -45,7 +45,7 @@ function ModalPreview({
 }) {
   return (
     <View style={{
-      backgroundColor: semanticColor.backgroundStatus,
+      backgroundColor: semanticColor.backgroundPrimary,
       borderRadius: radius.medium,
       padding: spacing['2xlarge'],
       width: 300,
@@ -130,7 +130,7 @@ export const Playground: Story = {
 // ─── 2. Confirmation ─────────────────────────────────────────
 
 export const Confirmation: Story = {
-  name: 'Confirmation',
+  name: '확인 다이얼로그',
   render: () => (
     <View style={{ gap: spacing['3xlarge'] }}>
       <Section
@@ -151,7 +151,7 @@ export const Confirmation: Story = {
 // ─── 3. Destructive ──────────────────────────────────────────
 
 export const Destructive: Story = {
-  name: 'Destructive (위험 액션)',
+  name: '위험 액션',
   render: () => (
     <View style={{ gap: spacing['3xlarge'] }}>
       <Section
@@ -179,7 +179,7 @@ export const Destructive: Story = {
 // ─── 4. Form Modal ───────────────────────────────────────────
 
 export const FormModal: Story = {
-  name: 'Form Modal',
+  name: '폼 모달',
   render: () => (
     <View style={{ gap: spacing['3xlarge'] }}>
       <Section
@@ -213,7 +213,7 @@ export const FormModal: Story = {
 // ─── 5. Title Only ───────────────────────────────────────────
 
 export const TitleOnly: Story = {
-  name: 'Title Only',
+  name: '제목만',
   render: () => (
     <View style={{ gap: spacing['3xlarge'] }}>
       <Section

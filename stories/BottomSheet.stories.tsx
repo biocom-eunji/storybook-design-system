@@ -15,7 +15,7 @@ import {
 // ─── 토큰 매핑 테이블 (Single Source of Truth) ──────────────
 
 const CONTAINER_TOKEN_MAP = {
-  background:   { token: 'color/background/primary',  value: semanticColor.backgroundStatus },
+  background:   { token: 'color/background/primary',  value: semanticColor.backgroundPrimary },
   radiusTop:    { token: 'borderRadius/xlarge',        value: radius.xlarge },
   titleColor:   { token: 'color/text/primary',         value: semanticColor.textPrimary },
   paddingH:     { token: 'spacing/xlarge',             value: spacing.xlarge },
@@ -57,7 +57,7 @@ function SheetPreview({
     }}>
       <View style={{ height: 80 }} />
       <View style={{
-        backgroundColor: semanticColor.backgroundStatus,
+        backgroundColor: semanticColor.backgroundPrimary,
         borderTopLeftRadius: radius.xlarge,
         borderTopRightRadius: radius.xlarge,
       }}>

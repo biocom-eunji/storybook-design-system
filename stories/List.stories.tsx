@@ -248,7 +248,7 @@ export const SettingsScreen: Story = {
             <Text style={{ fontSize: textStyle.label2.fontSize, fontWeight: '600', color: semanticColor.textSecondary, paddingHorizontal: spacing.large, paddingTop: spacing.large, paddingBottom: spacing.small }}>
               계정
             </Text>
-            <View style={{ backgroundColor: semanticColor.backgroundStatus }}>
+            <View style={{ backgroundColor: semanticColor.backgroundPrimary }}>
               <List>
                 <List.Item title="프로필" trailing={<Icon name="caret-right" size={20} color={semanticColor.iconSecondary} />} onPress={() => {}} />
                 <List.Item
@@ -266,7 +266,7 @@ export const SettingsScreen: Story = {
             <Text style={{ fontSize: textStyle.label2.fontSize, fontWeight: '600', color: semanticColor.textSecondary, paddingHorizontal: spacing.large, paddingTop: spacing.xlarge, paddingBottom: spacing.small }}>
               정보
             </Text>
-            <View style={{ backgroundColor: semanticColor.backgroundStatus }}>
+            <View style={{ backgroundColor: semanticColor.backgroundPrimary }}>
               <List>
                 <List.Item title="이용약관" trailing={<Icon name="caret-right" size={20} color={semanticColor.iconSecondary} />} onPress={() => {}} />
                 <List.Item title="개인정보 처리방침" trailing={<Icon name="caret-right" size={20} color={semanticColor.iconSecondary} />} onPress={() => {}} />

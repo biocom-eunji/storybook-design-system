@@ -13,7 +13,7 @@ const meta: Meta<typeof FrequencyChip> = {
   component: FrequencyChip,
   argTypes: {
     value: { control: { type: 'number', min: 0 }, description: '표시할 숫자' },
-    severity: { control: 'select', options: ['safe', 'moderate', 'warning', 'critical'], description: '심각도' },
+    severity: { control: 'select', options: ['safe', 'caution', 'warning', 'critical'], description: '심각도' },
     max: { control: 'number', description: '최대값 (초과 시 "99+"  표시)' },
   },
   tags: ['autodocs'],
@@ -43,7 +43,7 @@ export const Severities: Story = {
     <View style={{ gap: spacing['3xlarge'] }}>
       <Section title="Severity별" description="4단계 심각도를 색상으로 구분합니다.">
         <Row gap={spacing.xlarge} align="center">
-          {(['critical', 'warning', 'moderate', 'safe'] as const).map(sev => (
+          {(['critical', 'warning', 'caution', 'safe'] as const).map(sev => (
             <Col key={sev} gap={spacing.small}>
               <StateLabel>{sev}</StateLabel>
               <View style={{ alignItems: 'center' }}>
@@ -68,7 +68,7 @@ export const Values: Story = {
           {[0, 1, 5, 8, 15, 99, 100].map(v => (
             <Col key={v} gap={spacing.small}>
               <View style={{ alignItems: 'center' }}>
-                <FrequencyChip value={v} severity={v >= 8 ? 'critical' : v >= 5 ? 'warning' : v >= 2 ? 'moderate' : 'safe'} />
+                <FrequencyChip value={v} severity={v >= 8 ? 'critical' : v >= 5 ? 'warning' : v >= 2 ? 'caution' : 'safe'} />
               </View>
               <StateLabel>{v > 99 ? '99+' : String(v)}</StateLabel>
             </Col>
@@ -85,10 +85,10 @@ export const InContext: Story = {
   name: '실전 예시 (주간)',
   render: () => {
     const weekData = [
-      { day: '04/14', value: 3, severity: 'moderate' as const },
+      { day: '04/14', value: 3, severity: 'caution' as const },
       { day: '04/15', value: 0, severity: 'safe' as const },
       { day: '04/16', value: 7, severity: 'critical' as const },
-      { day: '04/17', value: 2, severity: 'moderate' as const },
+      { day: '04/17', value: 2, severity: 'caution' as const },
       { day: '04/18', value: 5, severity: 'warning' as const },
       { day: '04/19', value: 1, severity: 'safe' as const },
       { day: '04/20', value: 8, severity: 'critical' as const },
@@ -100,7 +100,7 @@ export const InContext: Story = {
           <View style={{
             maxWidth: 375,
             padding: spacing.large,
-            backgroundColor: semanticColor.backgroundStatus,
+            backgroundColor: semanticColor.backgroundPrimary,
             borderRadius: spacing.small,
             borderWidth: 1,
             borderColor: semanticColor.borderDefault,

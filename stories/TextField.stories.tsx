@@ -300,7 +300,7 @@ export const DesignSpec: Story = {
         >
           {states.map(state => {
             const stateColors: Record<string, string> = {
-              'color/background/primary':   semanticColor.backgroundStatus,
+              'color/background/primary':   semanticColor.backgroundPrimary,
               'color/background/secondary':  semanticColor.backgroundSecondary,
               'color/border/default':        semanticColor.borderDefault,
               'color/border/focus':          semanticColor.borderFocus,
@@ -313,7 +313,6 @@ export const DesignSpec: Story = {
               'color/icon/error':            semanticColor.iconError,
               'color/icon/success':          semanticColor.iconSuccess,
               'color/icon/disabled':         semanticColor.iconDisabled,
-              'color/text/primary':               semanticColor.textPrimary,
             };
             const resolve = (token: string) => stateColors[token] ?? token;
             const st = STATE_TOKEN_MAP[state];

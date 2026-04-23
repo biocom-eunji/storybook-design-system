@@ -12,7 +12,7 @@ import { spacing, semanticColor, radius, shadow, textStyle } from '../src/tokens
 
 const TOKEN_MAP = {
   containerBg:   { token: 'color/background/tertiary', value: semanticColor.backgroundTertiary },
-  activeBg:      { token: 'color/background/primary',  value: semanticColor.backgroundStatus },
+  activeBg:      { token: 'color/background/primary',  value: semanticColor.backgroundPrimary },
   activeShadow:  { token: 'Level 1',                    value: `offset(0,0) blur(${shadow.level1.shadowRadius}) opacity(${shadow.level1.shadowOpacity})` },
   activeText:    { token: 'color/text/primary',         value: semanticColor.textPrimary },
   inactiveText:  { token: 'color/text/secondary',       value: semanticColor.textSecondary },

@@ -9,7 +9,7 @@ const meta: Meta<typeof BottomNavigation> = {
   title: 'Navigation/BottomNavigation',
   component: BottomNavigation,
   argTypes: {
-    activeTab: {
+    value: {
       control: 'select',
       options: ['contents', 'goal', 'main', 'ai', 'shop'],
       description: '활성 탭 키',
@@ -36,13 +36,13 @@ const PreviewContainer = ({ children }: { children: React.ReactNode }) => (
 
 export const Playground: Story = {
   render: () => {
-    const [activeTab, setActiveTab] = useState('main');
+    const [value, setValue] = useState('main');
     return (
       <PreviewContainer>
         <BottomNavigation
-          tabs={BIOCOM_TABS}
-          activeTab={activeTab}
-          onTabPress={setActiveTab}
+          items={BIOCOM_TABS}
+          value={value}
+          onChange={setValue}
         />
       </PreviewContainer>
     );
@@ -54,7 +54,7 @@ export const Playground: Story = {
 export const BiocomBottomNavigation: Story = {
   name: '바이오컴 탭바',
   render: () => {
-    const [activeTab, setActiveTab] = useState('main');
+    const [value, setValue] = useState('main');
     return (
       <Section
         title="바이오컴 탭바"
@@ -62,14 +62,14 @@ export const BiocomBottomNavigation: Story = {
       >
         <PreviewContainer>
           <BottomNavigation
-            tabs={BIOCOM_TABS}
-            activeTab={activeTab}
-            onTabPress={setActiveTab}
+            items={BIOCOM_TABS}
+            value={value}
+            onChange={setValue}
           />
         </PreviewContainer>
         <View style={{ marginTop: spacing.medium }}>
           <Text style={{ fontSize: fontSize.small, color: semanticColor.textSecondary }}>
-            현재 활성 탭: <Text style={{ fontWeight: fontWeight.bold, color: semanticColor.textBrand }}>{activeTab}</Text>
+            현재 활성 탭: <Text style={{ fontWeight: fontWeight.bold, color: semanticColor.textBrand }}>{value}</Text>
           </Text>
         </View>
       </Section>
@@ -91,7 +91,7 @@ export const ActiveStates: Story = {
           <Col key={tab.key} gap={spacing.small}>
             <StateLabel>{`${tab.label} 활성`}</StateLabel>
             <PreviewContainer>
-              <BottomNavigation tabs={BIOCOM_TABS} activeTab={tab.key} />
+              <BottomNavigation items={BIOCOM_TABS} value={tab.key} />
             </PreviewContainer>
           </Col>
         ))}
@@ -129,7 +129,7 @@ export const IconMapping: Story = {
           { label: '비활성 아이콘', value: semanticColor.iconDisabled, token: 'semanticColor.iconDisabled' },
           { label: '활성 텍스트', value: semanticColor.textBrand, token: 'semanticColor.textBrand' },
           { label: '비활성 텍스트', value: semanticColor.textSecondary, token: 'semanticColor.textSecondary' },
-          { label: '배경', value: semanticColor.backgroundStatus, token: 'semanticColor.backgroundStatus' },
+          { label: '배경', value: semanticColor.backgroundPrimary, token: 'semanticColor.backgroundPrimary' },
           { label: '구분선', value: semanticColor.borderDefault, token: 'semanticColor.borderDefault' },
         ]}
       />
@@ -148,7 +148,7 @@ export const DesignSpec: Story = {
           title="컨테이너"
           rows={[
             { label: '높이', value: '60px', token: '—' },
-            { label: '배경색', value: semanticColor.backgroundStatus, token: 'semanticColor.backgroundStatus' },
+            { label: '배경색', value: semanticColor.backgroundPrimary, token: 'semanticColor.backgroundPrimary' },
             { label: '상단 테두리', value: semanticColor.borderDefault, token: 'semanticColor.borderDefault' },
             { label: '하단 패딩', value: `${spacing.xsmall}px`, token: 'spacing.xsmall' },
           ]}
@@ -181,27 +181,27 @@ export const Usage: Story = {
 
         <CodeBlock
           title="바이오컴 기본 탭바 (가장 간단한 사용법)"
-          code={`const [activeTab, setActiveTab] = useState('main');
+          code={`const [value, setValue] = useState('main');
 
 <BottomNavigation
-  tabs={BIOCOM_TABS}
-  activeTab={activeTab}
-  onTabPress={setActiveTab}
+  items={BIOCOM_TABS}
+  value={value}
+  onChange={setValue}
 />`}
         />
 
         <CodeBlock
           title="커스텀 탭 구성"
           code={`<BottomNavigation
-  tabs={[
+  items={[
     { key: 'contents', label: '콘텐츠', icon: 'stack' },
     { key: 'goal', label: '목표', icon: 'streak' },
     { key: 'main', label: '메인', icon: 'house' },
     { key: 'ai', label: 'AI', icon: 'heart' },
     { key: 'shop', label: '쇼핑', icon: 'shopping-cart-simple' },
   ]}
-  activeTab={activeTab}
-  onTabPress={setActiveTab}
+  value={value}
+  onChange={setValue}
 />`}
         />
       </Col>

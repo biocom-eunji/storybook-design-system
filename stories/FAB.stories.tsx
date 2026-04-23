@@ -2,18 +2,11 @@ import React from 'react';
 import { View, Text, ScrollView } from 'react-native';
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import { FAB } from '../src/components/FAB';
-import { Icon } from '../src/components/Icon';
 import {
   Section, StateLabel, Row, Col, CodeBlock, Divider,
 } from './storyHelpers';
 import { TokenSpecTable } from '../src/storybook-components/TokenSpecTable';
 import { spacing, semanticColor, radius, shadow, textStyle } from '../src/tokens/theme';
-
-// ─── 헬퍼 ────────────────────────────────────────────────────
-
-// Icon을 직접 전달 (래퍼 컴포넌트로 감싸면 cloneElement의 color 전달이 안 됨)
-const plusIcon = <Icon name="plus" size={24} />;
-const searchIcon = <Icon name="magnifying-glass" size={24} />;
 
 // ─── Meta ────────────────────────────────────────────────────
 
@@ -37,8 +30,8 @@ type Story = StoryObj<typeof FAB>;
 export const Playground: Story = {
   render: () => (
     <Row gap={spacing.xlarge} align="center">
-      <FAB icon={plusIcon} onPress={() => {}} accessibilityLabel="새 기록 추가" />
-      <FAB variant="extended" icon={plusIcon} label="작성하기" onPress={() => {}} />
+      <FAB iconName="plus" onPress={() => {}} accessibilityLabel="새 기록 추가" />
+      <FAB variant="extended" iconName="plus" label="작성하기" onPress={() => {}} />
     </Row>
   ),
   parameters: {
@@ -60,15 +53,15 @@ export const Regular: Story = {
         <Row gap={spacing.xlarge} align="center">
           <Col gap={spacing.small}>
             <StateLabel>Primary</StateLabel>
-            <FAB icon={plusIcon} onPress={() => {}} color="primary" accessibilityLabel="추가" />
+            <FAB iconName="plus" onPress={() => {}} color="primary" accessibilityLabel="추가" />
           </Col>
           <Col gap={spacing.small}>
             <StateLabel>Secondary</StateLabel>
-            <FAB icon={plusIcon} onPress={() => {}} color="secondary" accessibilityLabel="추가" />
+            <FAB iconName="plus" onPress={() => {}} color="secondary" accessibilityLabel="추가" />
           </Col>
           <Col gap={spacing.small}>
             <StateLabel>Disabled</StateLabel>
-            <FAB icon={plusIcon} onPress={() => {}} disabled accessibilityLabel="추가" />
+            <FAB iconName="plus" onPress={() => {}} disabled accessibilityLabel="추가" />
           </Col>
         </Row>
       </Section>
@@ -86,15 +79,15 @@ export const Extended: Story = {
         <View style={{ gap: spacing.xlarge }}>
           <Col gap={spacing.small}>
             <StateLabel>Primary</StateLabel>
-            <FAB variant="extended" icon={plusIcon} label="새 기록 작성" onPress={() => {}} color="primary" />
+            <FAB variant="extended" iconName="plus" label="새 기록 작성" onPress={() => {}} color="primary" />
           </Col>
           <Col gap={spacing.small}>
             <StateLabel>Secondary</StateLabel>
-            <FAB variant="extended" icon={plusIcon} label="새 기록 작성" onPress={() => {}} color="secondary" />
+            <FAB variant="extended" iconName="plus" label="새 기록 작성" onPress={() => {}} color="secondary" />
           </Col>
           <Col gap={spacing.small}>
             <StateLabel>Disabled</StateLabel>
-            <FAB variant="extended" icon={plusIcon} label="새 기록 작성" onPress={() => {}} disabled />
+            <FAB variant="extended" iconName="plus" label="새 기록 작성" onPress={() => {}} disabled />
           </Col>
         </View>
       </Section>
@@ -113,11 +106,11 @@ export const Colors: Story = {
           <Row gap={spacing['2xlarge']} align="center">
             <Col gap={spacing.small}>
               <StateLabel>Regular Primary</StateLabel>
-              <FAB icon={plusIcon} onPress={() => {}} color="primary" accessibilityLabel="추가" />
+              <FAB iconName="plus" onPress={() => {}} color="primary" accessibilityLabel="추가" />
             </Col>
             <Col gap={spacing.small}>
               <StateLabel>Regular Secondary</StateLabel>
-              <FAB icon={plusIcon} onPress={() => {}} color="secondary" accessibilityLabel="추가" />
+              <FAB iconName="plus" onPress={() => {}} color="secondary" accessibilityLabel="추가" />
             </Col>
           </Row>
 
@@ -125,11 +118,11 @@ export const Colors: Story = {
 
           <Col gap={spacing.small}>
             <StateLabel>Extended Primary</StateLabel>
-            <FAB variant="extended" icon={plusIcon} label="작성하기" onPress={() => {}} color="primary" />
+            <FAB variant="extended" iconName="plus" label="작성하기" onPress={() => {}} color="primary" />
           </Col>
           <Col gap={spacing.small}>
             <StateLabel>Extended Secondary</StateLabel>
-            <FAB variant="extended" icon={plusIcon} label="작성하기" onPress={() => {}} color="secondary" />
+            <FAB variant="extended" iconName="plus" label="작성하기" onPress={() => {}} color="secondary" />
           </Col>
         </View>
       </Section>
@@ -158,7 +151,7 @@ export const OnScreen: Story = {
           }}>
             <View style={{
               height: 56,
-              backgroundColor: semanticColor.backgroundStatus,
+              backgroundColor: semanticColor.backgroundPrimary,
               justifyContent: 'center',
               paddingHorizontal: spacing.large,
               borderBottomWidth: 1,
@@ -170,7 +163,7 @@ export const OnScreen: Story = {
               {Array.from({ length: 6 }, (_, i) => (
                 <View key={i} style={{
                   height: 64,
-                  backgroundColor: semanticColor.backgroundStatus,
+                  backgroundColor: semanticColor.backgroundPrimary,
                   borderRadius: spacing.small,
                   marginBottom: spacing.medium,
                   padding: spacing.large,
@@ -185,7 +178,7 @@ export const OnScreen: Story = {
               bottom: spacing.large,
               right: spacing.large,
             }}>
-              <FAB icon={plusIcon} onPress={() => {}} accessibilityLabel="새 기록 추가" />
+              <FAB iconName="plus" onPress={() => {}} accessibilityLabel="새 기록 추가" />
             </View>
           </View>
         </View>
@@ -255,14 +248,13 @@ export const Usage: Story = {
       <Section title="사용 가이드" description="개발자를 위한 FAB 사용 예시입니다." badge="개발">
         <CodeBlock
           title="Import"
-          code={`import { FAB } from '@design-system/components/FAB';
-import { Icon } from '@design-system/components/Icon';`}
+          code={`import { FAB } from '@design-system/components/FAB';`}
         />
 
         <CodeBlock
           title="Regular FAB (아이콘만)"
           code={`<FAB
-  icon={<Icon name="plus" size={24} />}
+  iconName="plus"
   onPress={handleCreate}
   accessibilityLabel="새 기록 추가"
 />`}
@@ -272,7 +264,7 @@ import { Icon } from '@design-system/components/Icon';`}
           title="Extended FAB (아이콘 + 라벨)"
           code={`<FAB
   variant="extended"
-  icon={<Icon name="plus" size={24} />}
+  iconName="plus"
   label="작성하기"
   onPress={handleCreate}
 />`}
@@ -291,7 +283,7 @@ import { Icon } from '@design-system/components/Icon';`}
     right: spacing.large,   // 16
   }}>
     <FAB
-      icon={<Icon name="plus" size={24} />}
+      iconName="plus"
       onPress={handleCreate}
       accessibilityLabel="새 기록 추가"
     />
@@ -303,7 +295,7 @@ import { Icon } from '@design-system/components/Icon';`}
           title="Secondary 색상"
           code={`<FAB
   color="secondary"
-  icon={<Icon name="magnifying-glass" size={24} />}
+  iconName="magnifying-glass"
   onPress={handleSearch}
   accessibilityLabel="검색"
 />`}

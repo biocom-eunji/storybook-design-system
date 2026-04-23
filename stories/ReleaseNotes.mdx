@@ -336,20 +336,28 @@ export const LINK = {
   Button:           `${SB}actions-button--docs`,
   TextButton:       `${SB}actions-textbutton--docs`,
   FAB:              `${SB}actions-fab--docs`,
-  // Foundation
-  Icon:             `${SB}foundation-icon--docs`,
+  // Semantics Token
+  Icon:             `${SB}semantics-token-icon--docs`,
   // Input
   TextField:        `${SB}input-textfield--docs`,
   TextArea:         `${SB}input-textarea--docs`,
+  SearchBar:        `${SB}input-searchbar--docs`,
+  DatePicker:       `${SB}input-datepicker--docs`,
+  TimePicker:       `${SB}input-timepicker--docs`,
+  Stepper:          `${SB}input-stepper--docs`,
+  LikertScale:      `${SB}input-likertscale--docs`,
   Checkbox:         `${SB}input-checkbox--docs`,
   Radio:            `${SB}input-radio--docs`,
+  RadioCard:        `${SB}input-radiocard--docs`,
   Switch:           `${SB}input-switch--docs`,
   Chip:             `${SB}input-chip--docs`,
   SegmentedControl: `${SB}input-segmentedcontrol--docs`,
   // Feedback
   Toast:            `${SB}feedback-toast--docs`,
   ProgressBar:      `${SB}feedback-progressbar--docs`,
+  CircularProgress: `${SB}feedback-circularprogress--docs`,
   Skeleton:         `${SB}feedback-skeleton--docs`,
+  EmptyState:       `${SB}feedback-emptystate--docs`,
   // Overlay
   Modal:            `${SB}overlay-modal--docs`,
   BottomSheet:      `${SB}overlay-bottomsheet--docs`,
@@ -362,15 +370,22 @@ export const LINK = {
   // Data Display
   Card:             `${SB}data-display-card--docs`,
   ListCard:         `${SB}data-display-listcard--docs`,
+  StatCard:         `${SB}data-display-statcard--docs`,
   List:             `${SB}data-display-list--docs`,
   FrequencyChip:    `${SB}data-display-frequencychip--docs`,
   LevelIndicator:   `${SB}data-display-levelindicator--docs`,
+  Avatar:           `${SB}data-display-avatar--docs`,
   Badge:            `${SB}data-display-badge--docs`,
+  Tag:              `${SB}data-display-tag--docs`,
   Divider:          `${SB}data-display-divider--docs`,
   // Tokens
-  Opacity:          `${SB}primitives-opacity--docs`,
-  Shadow:           `${SB}semantics-shadow--docs`,
+  Opacity:          `${SB}primitives-palette-opacity--docs`,
+  Shadow:           `${SB}semantics-token-shadow--docs`,
+  ColorTokens:      `${SB}semantics-token-color--docs`,
+  // Getting Started
+  Guide:            `${SB}getting-started-guide--docs`,
   BrandLogo:        `${SB}getting-started-brand-logo--docs`,
+  Intro:            `${SB}getting-started-introduction--docs`,
 };
 
 <div className="release-page">
@@ -382,7 +397,7 @@ export const LINK = {
 
 <div className="stat-grid">
   <div className="stat-card">
-    <p className="num">30</p>
+    <p className="num">35</p>
     <p className="label">컴포넌트</p>
   </div>
   <div className="stat-card">
@@ -390,7 +405,7 @@ export const LINK = {
     <p className="label">아이콘</p>
   </div>
   <div className="stat-card">
-    <p className="num">26</p>
+    <p className="num">18</p>
     <p className="label">단위 테스트</p>
   </div>
   <div className="stat-card">
@@ -398,6 +413,149 @@ export const LINK = {
     <p className="label">자동화 파이프라인</p>
   </div>
 </div>
+
+{/* ══════════════════════════════════════════════════════ */}
+{/* v2.1.0 — 2026-04-23                                   */}
+{/* ══════════════════════════════════════════════════════ */}
+
+<div className="version-header">
+  <span className="version-badge minor">v2.1.0</span>
+  <span className="version-date">2026-04-23</span>
+</div>
+
+<details className="toggle-card" open>
+  <summary>
+    <CaretIcon />
+    <span className="emoji">✨</span>
+    <span className="title">Features</span>
+    <span className="count">8</span>
+  </summary>
+  <div className="toggle-body">
+    <div className="component-tags">
+      <span className="component-tag new">StatCard</span>
+      <span className="component-tag new">LikertScale</span>
+      <span className="component-tag new">RadioCard</span>
+      <span className="component-tag new">Tag</span>
+      <span className="component-tag new">TimePicker</span>
+      <span className="component-tag new">Stepper</span>
+      <span className="component-tag new">Guide</span>
+    </div>
+
+    <div className="change-item">
+      <span className="name"><a href={LINK.StatCard}>StatCard</a></span>
+      <span className="desc">Compound 패턴 통계 카드. Header/Count/CircularProgress 서브 컴포넌트, 6종 accent 색상</span>
+    </div>
+    <div className="change-item">
+      <span className="name"><a href={LINK.LikertScale}>LikertScale</a></span>
+      <span className="desc">설문 척도 컴포넌트. neutral/bipolar 색상 모드, 3~7단계 지원</span>
+    </div>
+    <div className="change-item">
+      <span className="name"><a href={LINK.RadioCard}>RadioCard</a></span>
+      <span className="desc">카드형 라디오. RadioCardGroup compound 패턴, 아이콘/라벨/설명 슬롯</span>
+    </div>
+    <div className="change-item">
+      <span className="name"><a href={LINK.Tag}>Tag</a></span>
+      <span className="desc">상태 태그. level 1~5 색상 단계, outlined/filled variant</span>
+    </div>
+    <div className="change-item">
+      <span className="name"><a href={LINK.TimePicker}>TimePicker</a></span>
+      <span className="desc">시간 선택 컴포넌트. TimeValue 단일 객체 prop, AM/PM 토글</span>
+    </div>
+    <div className="change-item">
+      <span className="name"><a href={LINK.Stepper}>Stepper</a></span>
+      <span className="desc">수량 증감 컴포넌트. min/max 범위, 커스텀 step, 비활성화 상태</span>
+    </div>
+    <div className="change-item">
+      <span className="name"><a href={LINK.SearchBar}>SearchBar 디자인 스펙</a></span>
+      <span className="desc">상태별 토큰 매핑 테이블(default/filled/disabled) + 레이아웃 스펙 추가</span>
+    </div>
+    <div className="change-item">
+      <span className="name"><a href={LINK.Guide}>Guide</a></span>
+      <span className="desc">Figma 실무 가이드 페이지 신규 추가. 사용법 4단계, 스크린샷 5장 포함</span>
+    </div>
+  </div>
+</details>
+
+<details className="toggle-card" open>
+  <summary>
+    <CaretIcon />
+    <span className="emoji">♻️</span>
+    <span className="title">Refactored</span>
+    <span className="count">7</span>
+  </summary>
+  <div className="toggle-body">
+    <div className="component-tags">
+      <span className="component-tag updated">TextField</span>
+      <span className="component-tag updated">SearchBar</span>
+      <span className="component-tag updated">Icon</span>
+    </div>
+
+    <div className="change-item">
+      <span className="name-plain">BaseInput 공통 컴포넌트</span>
+      <span className="desc">TextField/SearchBar 중복 로직(value 관리, clear, focus/blur) 추출. <code>_internal/BaseInput</code> 내부 전용</span>
+    </div>
+    <div className="change-item">
+      <span className="name"><a href={LINK.TextField}>TextField</a></span>
+      <span className="desc">single-line을 BaseInput 래퍼로 전환. multiline은 기존 구조 유지</span>
+    </div>
+    <div className="change-item">
+      <span className="name"><a href={LINK.SearchBar}>SearchBar</a></span>
+      <span className="desc">BaseInput 래퍼로 전환. 93줄 → 68줄 (27% 감소)</span>
+    </div>
+    <div className="change-item">
+      <span className="name"><a href={LINK.Icon}>Phosphor 아이콘 통합</a></span>
+      <span className="desc">Normal 아이콘 37종을 phosphor-react-native 직접 렌더링으로 전환. defaultWeight 시스템 도입</span>
+    </div>
+    <div className="change-item">
+      <span className="name-plain">카테고리 이름 변경</span>
+      <span className="desc">Primitives → Primitives Palette, Semantics → Semantics Token, Icon을 Semantics Token으로 이동</span>
+    </div>
+    <div className="change-item">
+      <span className="name-plain">컴포넌트 인라인 스타일</span>
+      <span className="desc">palette 직접 참조를 semanticColor 토큰으로 일괄 전환</span>
+    </div>
+    <div className="change-item">
+      <span className="name"><a href={LINK.Intro}>Introduction</a></span>
+      <span className="desc">자동화 파이프라인, 리뷰 프로세스 섹션 추가</span>
+    </div>
+  </div>
+</details>
+
+<details className="toggle-card" open>
+  <summary>
+    <CaretIcon />
+    <span className="emoji">⚠️</span>
+    <span className="title">Breaking Changes</span>
+    <span className="count">1</span>
+  </summary>
+  <div className="toggle-body">
+    <div className="change-item">
+      <span className="name-plain">OTPInput 삭제</span>
+      <span className="desc">OTPInput 컴포넌트 및 스토리 제거</span>
+    </div>
+  </div>
+</details>
+
+<details className="toggle-card" open>
+  <summary>
+    <CaretIcon />
+    <span className="emoji">🔧</span>
+    <span className="title">Infra</span>
+    <span className="count">2</span>
+  </summary>
+  <div className="toggle-body">
+    <div className="change-item">
+      <span className="name-plain">Node.js 22</span>
+      <span className="desc">CI 워크플로우 Node.js 20 → 22 업그레이드</span>
+    </div>
+    <div className="change-item">
+      <span className="name-plain">Auto Release Notes</span>
+      <span className="desc">GitHub Actions 자동 릴리즈 노트 워크플로우 추가</span>
+    </div>
+  </div>
+</details>
+
+<hr className="version-divider" />
 
 {/* ══════════════════════════════════════════════════════ */}
 {/* v2.0.0 — 2026-04-22                                   */}
@@ -408,7 +566,7 @@ export const LINK = {
   <span className="version-date">2026-04-22</span>
 </div>
 
-<details className="toggle-card" open>
+<details className="toggle-card">
   <summary>
     <CaretIcon />
     <span className="emoji">✨</span>
@@ -530,7 +688,7 @@ export const LINK = {
   </div>
 </details>
 
-<details className="toggle-card" open>
+<details className="toggle-card">
   <summary>
     <CaretIcon />
     <span className="emoji">♻️</span>

@@ -31,7 +31,7 @@ const meta: Meta<typeof PageIndicator> = {
   argTypes: {
     variant: {
       control: 'select',
-      options: ['normal', 'white'],
+      options: ['normal', 'inverse'],
       description: '색상 변형 (Figma: Variant)',
     },
     size: {
@@ -237,7 +237,7 @@ export const DesignSpec: Story = {
         description="Figma 실측 기준 Dot 스펙입니다."
         badge="디자인"
       >
-        {(['normal', 'white'] as const).map(variant => (
+        {(['normal', 'inverse'] as const).map(variant => (
           <View key={variant}>
             <TokenSpecTable
               title={`variant: ${variant}`}

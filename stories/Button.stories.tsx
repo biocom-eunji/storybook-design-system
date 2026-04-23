@@ -67,7 +67,7 @@ const meta: Meta<typeof Button> = {
       options: ['solid', 'outlined'],
       description: '버튼 스타일 변형 (Figma: Variant)',
     },
-    color: {
+    colorScheme: {
       control: 'select',
       options: ['primary', 'assistive'],
       description: '버튼 컬러 (Figma: Color)',
@@ -102,7 +102,7 @@ export const Playground: Story = {
   args: {
     label: '확인',
     variant: 'solid',
-    color: 'primary',
+    colorScheme: 'primary',
     size: 'medium',
     disabled: false,
     loading: false,
@@ -132,8 +132,8 @@ export const AllVariants: Story = {
               <Col key={`${variant}-${color}`} gap={spacing.small}>
                 <StateLabel>{`${variant} / ${color}`}</StateLabel>
                 <Row gap={spacing.medium}>
-                  <Button label="확인" variant={variant} color={color} size="medium" />
-                  <Button label="확인" variant={variant} color={color} size="medium" disabled />
+                  <Button label="확인" variant={variant} colorScheme={color} size="medium" />
+                  <Button label="확인" variant={variant} colorScheme={color} size="medium" disabled />
                 </Row>
               </Col>
             ))
@@ -171,7 +171,7 @@ export const Sizes: Story = {
           {(['small', 'medium', 'large'] as const).map(size => (
             <Col key={size} gap={spacing.small}>
               <StateLabel>{`${size.charAt(0).toUpperCase()} — ${buttonToken.size[size].height}px`}</StateLabel>
-              <Button label="확인" variant="solid" color="primary" size={size} />
+              <Button label="확인" variant="solid" colorScheme="primary" size={size} />
             </Col>
           ))}
         </Row>
@@ -205,15 +205,15 @@ export const States: Story = {
           items={[
             {
               label: '기본',
-              content: <Button label="확인" variant="solid" color="primary" size="small" />,
+              content: <Button label="확인" variant="solid" colorScheme="primary" size="small" />,
             },
             {
               label: '비활성화',
-              content: <Button label="확인" variant="solid" color="primary" size="small" disabled />,
+              content: <Button label="확인" variant="solid" colorScheme="primary" size="small" disabled />,
             },
             {
               label: '로딩',
-              content: <Button label="확인" variant="solid" color="primary" size="small" loading />,
+              content: <Button label="확인" variant="solid" colorScheme="primary" size="small" loading />,
             },
           ]}
         />
@@ -224,15 +224,15 @@ export const States: Story = {
           items={[
             {
               label: 'Outlined 기본',
-              content: <Button label="확인" variant="outlined" color="primary" size="small" />,
+              content: <Button label="확인" variant="outlined" colorScheme="primary" size="small" />,
             },
             {
               label: 'Outlined 비활성화',
-              content: <Button label="확인" variant="outlined" color="primary" size="small" disabled />,
+              content: <Button label="확인" variant="outlined" colorScheme="primary" size="small" disabled />,
             },
             {
               label: 'Outlined 로딩',
-              content: <Button label="확인" variant="outlined" color="primary" size="small" loading />,
+              content: <Button label="확인" variant="outlined" colorScheme="primary" size="small" loading />,
             },
           ]}
         />
@@ -256,31 +256,31 @@ export const States: Story = {
 
 export const SolidPrimaryLarge: Story = {
   name: 'Solid / Primary / Large',
-  args: { label: '확인', variant: 'solid', color: 'primary', size: 'large' },
+  args: { label: '확인', variant: 'solid', colorScheme: 'primary', size: 'large' },
   parameters: { docs: { description: { story: '`color/background/brand` · `color/text/onColor` · `Headline` · `borderRadius/medium`' } } },
 };
 
 export const SolidPrimarySmall: Story = {
   name: 'Solid / Primary / Small',
-  args: { label: '확인', variant: 'solid', color: 'primary', size: 'small' },
+  args: { label: '확인', variant: 'solid', colorScheme: 'primary', size: 'small' },
   parameters: { docs: { description: { story: '`color/background/brand` · `color/text/onColor` · `Label 2` · `borderRadius/small`' } } },
 };
 
 export const SolidAssistiveMedium: Story = {
   name: 'Solid / Assistive / Medium',
-  args: { label: '확인', variant: 'solid', color: 'assistive', size: 'medium' },
+  args: { label: '확인', variant: 'solid', colorScheme: 'assistive', size: 'medium' },
   parameters: { docs: { description: { story: '`color/background/disabled` · `color/text/primary` · `Body 2` · `borderRadius/medium`' } } },
 };
 
 export const OutlinedPrimaryMedium: Story = {
   name: 'Outlined / Primary / Medium',
-  args: { label: '확인', variant: 'outlined', color: 'primary', size: 'medium' },
+  args: { label: '확인', variant: 'outlined', colorScheme: 'primary', size: 'medium' },
   parameters: { docs: { description: { story: '`transparent` + `color/border/focus` · `role/brand` · `Body 2` · `borderRadius/medium`' } } },
 };
 
 export const OutlinedAssistiveMedium: Story = {
   name: 'Outlined / Assistive / Medium',
-  args: { label: '확인', variant: 'outlined', color: 'assistive', size: 'medium' },
+  args: { label: '확인', variant: 'outlined', colorScheme: 'assistive', size: 'medium' },
   parameters: { docs: { description: { story: '`transparent` + `color/border/active` · `color/text/primary` · `Body 2` · `borderRadius/medium`' } } },
 };
 
@@ -297,7 +297,7 @@ export const DisabledAll: Story = {
             (['primary', 'assistive'] as const).map(color => (
               <Col key={`${variant}-${color}`} gap={spacing.small}>
                 <StateLabel>{`${variant} / ${color}`}</StateLabel>
-                <Button label="확인" variant={variant} color={color} size="medium" disabled />
+                <Button label="확인" variant={variant} colorScheme={color} size="medium" disabled />
               </Col>
             ))
           )}
@@ -399,9 +399,9 @@ export const Usage: Story = {
 
         <CodeBlock
           title="Variant + Color 조합"
-          code={`<Button label="확인" variant="solid" color="primary" />
-<Button label="취소" variant="outlined" color="assistive" />
-<Button label="삭제" variant="solid" color="primary" disabled />`}
+          code={`<Button label="확인" variant="solid" colorScheme="primary" />
+<Button label="취소" variant="outlined" colorScheme="assistive" />
+<Button label="삭제" variant="solid" colorScheme="primary" disabled />`}
         />
 
         <CodeBlock

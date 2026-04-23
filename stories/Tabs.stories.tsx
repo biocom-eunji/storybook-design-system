@@ -55,7 +55,7 @@ const meta: Meta<typeof Tabs> = {
   argTypes: {
     size: {
       control: 'select',
-      options: ['S', 'M', 'L'],
+      options: ['small', 'medium', 'large'],
       description: '탭 크기 (Figma: Size)',
     },
     resize: {
@@ -105,7 +105,7 @@ export const Sizes: Story = {
         description="Small(40px), Medium(48px), Large(56px) 세 가지 크기를 비교합니다."
       >
         <View style={{ gap: spacing.xlarge, maxWidth: 400 }}>
-          {(['S', 'M', 'L'] as const).map(size => (
+          {(['small', 'medium', 'large'] as const).map(size => (
             <Col key={size} gap={spacing.small}>
               <StateLabel>{`${size} — ${SIZE_TOKEN_MAP[size].height}px (${SIZE_TOKEN_MAP[size].typo})`}</StateLabel>
               <Tabs items={defaultItems} value="tab1" size={size} resize="hug" />

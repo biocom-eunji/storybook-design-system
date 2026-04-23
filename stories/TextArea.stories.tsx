@@ -268,7 +268,7 @@ export const DesignSpec: Story = {
         >
           {states.map(state => {
             const stateColors: Record<string, string> = {
-              'color/background/primary':   semanticColor.backgroundStatus,
+              'color/background/primary':   semanticColor.backgroundPrimary,
               'color/background/secondary':  semanticColor.backgroundSecondary,
               'color/border/default':        semanticColor.borderDefault,
               'color/border/focus':          semanticColor.borderFocus,

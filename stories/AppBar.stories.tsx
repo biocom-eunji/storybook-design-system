@@ -139,7 +139,7 @@ export const WithActions: Story = {
 // ─── 5. Full Example ─────────────────────────────────────────
 
 export const FullExample: Story = {
-  name: 'Full Example',
+  name: '전체 예시',
   render: () => (
     <View style={{ gap: spacing['3xlarge'] }}>
       <Section title="Full Example" description="leading + title + trailing 3개 + showDivider 전부 포함된 케이스입니다.">
@@ -209,7 +209,7 @@ export const LongTitle: Story = {
 // ─── 7. Transparent ──────────────────────────────────────────
 
 export const Transparent: Story = {
-  name: 'Transparent',
+  name: '투명 배경',
   render: () => (
     <View style={{ gap: spacing['3xlarge'] }}>
       <Section title="Transparent" description="배경 이미지 위에 투명 AppBar를 올린 케이스입니다.">
@@ -265,7 +265,7 @@ export const TitleAlignment: Story = {
 // ─── 9. CloseButton ──────────────────────────────────────────
 
 export const WithCloseButton: Story = {
-  name: 'CloseButton',
+  name: '닫기 버튼',
   render: () => (
     <View style={{ gap: spacing['3xlarge'] }}>
       <Section title="CloseButton" description="모달/풀스크린 닫기용 CloseButton 프리셋입니다.">
@@ -311,7 +311,7 @@ export const OnScreen: Story = {
             {Array.from({ length: 8 }, (_, i) => (
               <View key={i} style={{
                 height: 80,
-                backgroundColor: semanticColor.backgroundStatus,
+                backgroundColor: semanticColor.backgroundPrimary,
                 borderRadius: spacing.small,
                 marginBottom: spacing.medium,
                 padding: spacing.large,
@@ -343,7 +343,7 @@ export const DesignSpec: Story = {
         <TokenSpecTable
           title="색상 토큰"
           rows={[
-            { property: '배경 (default)',   token: 'color/background/status', value: semanticColor.backgroundStatus, type: 'color' },
+            { property: '배경 (default)',   token: 'color/background/status', value: semanticColor.backgroundPrimary, type: 'color' },
             { property: '배경 (transparent)', token: '—',                     value: 'transparent' },
             { property: '타이틀 텍스트',     token: 'color/text/primary',      value: semanticColor.textPrimary,      type: 'color' },
             { property: '아이콘',           token: 'color/icon/primary',       value: semanticColor.iconPrimary,      type: 'color' },

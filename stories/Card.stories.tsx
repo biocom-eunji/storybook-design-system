@@ -152,7 +152,7 @@ export const Grid: Story = {
         <View style={{
           width: 375,
           padding: spacing.large,
-          backgroundColor: semanticColor.backgroundStatus,
+          backgroundColor: semanticColor.backgroundPrimary,
           borderWidth: 1,
           borderColor: semanticColor.borderDefault,
           borderRadius: radius.small,

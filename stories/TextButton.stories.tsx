@@ -35,7 +35,7 @@ const meta: Meta<typeof TextButton> = {
   title: 'Actions/TextButton',
   component: TextButton,
   argTypes: {
-    color: {
+    colorScheme: {
       control: 'select',
       options: ['primary', 'assistive'],
       description: '텍스트 버튼 컬러 (Figma: Color)',
@@ -69,7 +69,7 @@ type Story = StoryObj<typeof TextButton>;
 export const Playground: Story = {
   args: {
     label: '더보기',
-    color: 'primary',
+    colorScheme: 'primary',
     size: 'medium',
     disabled: false,
     loading: false,
@@ -99,8 +99,8 @@ export const AllVariants: Story = {
               <Col key={`${color}-${size}`} gap={spacing.small}>
                 <StateLabel>{`${color} / ${size}`}</StateLabel>
                 <Row gap={spacing.large}>
-                  <TextButton label="더보기" color={color} size={size} />
-                  <TextButton label="더보기" color={color} size={size} disabled />
+                  <TextButton label="더보기" colorScheme={color} size={size} />
+                  <TextButton label="더보기" colorScheme={color} size={size} disabled />
                 </Row>
               </Col>
             ))
@@ -136,7 +136,7 @@ export const Sizes: Story = {
           {(['small', 'medium'] as const).map(size => (
             <Col key={size} gap={spacing.small}>
               <StateLabel>{`${size} — ${SIZE_TOKEN_MAP[size].typography}`}</StateLabel>
-              <TextButton label="더보기" color="primary" size={size} />
+              <TextButton label="더보기" colorScheme="primary" size={size} />
             </Col>
           ))}
         </Row>
@@ -169,15 +169,15 @@ export const States: Story = {
           items={[
             {
               label: 'Primary 기본',
-              content: <TextButton label="더보기" color="primary" size="medium" />,
+              content: <TextButton label="더보기" colorScheme="primary" size="medium" />,
             },
             {
               label: 'Primary 비활성화',
-              content: <TextButton label="더보기" color="primary" size="medium" disabled />,
+              content: <TextButton label="더보기" colorScheme="primary" size="medium" disabled />,
             },
             {
               label: 'Primary 로딩',
-              content: <TextButton label="더보기" color="primary" size="medium" loading />,
+              content: <TextButton label="더보기" colorScheme="primary" size="medium" loading />,
             },
           ]}
         />
@@ -188,15 +188,15 @@ export const States: Story = {
           items={[
             {
               label: 'Assistive 기본',
-              content: <TextButton label="더보기" color="assistive" size="medium" />,
+              content: <TextButton label="더보기" colorScheme="assistive" size="medium" />,
             },
             {
               label: 'Assistive 비활성화',
-              content: <TextButton label="더보기" color="assistive" size="medium" disabled />,
+              content: <TextButton label="더보기" colorScheme="assistive" size="medium" disabled />,
             },
             {
               label: 'Assistive 로딩',
-              content: <TextButton label="더보기" color="assistive" size="medium" loading />,
+              content: <TextButton label="더보기" colorScheme="assistive" size="medium" loading />,
             },
           ]}
         />
@@ -221,25 +221,25 @@ export const States: Story = {
 
 export const PrimaryMedium: Story = {
   name: 'Primary / Medium',
-  args: { label: '더보기', color: 'primary', size: 'medium' },
+  args: { label: '더보기', colorScheme: 'primary', size: 'medium' },
   parameters: { docs: { description: { story: '`color/text/brand` · `Body 2` · 밑줄' } } },
 };
 
 export const PrimarySmall: Story = {
   name: 'Primary / Small',
-  args: { label: '더보기', color: 'primary', size: 'small' },
+  args: { label: '더보기', colorScheme: 'primary', size: 'small' },
   parameters: { docs: { description: { story: '`color/text/brand` · `Label 2` · 밑줄' } } },
 };
 
 export const AssistiveMedium: Story = {
   name: 'Assistive / Medium',
-  args: { label: '더보기', color: 'assistive', size: 'medium' },
+  args: { label: '더보기', colorScheme: 'assistive', size: 'medium' },
   parameters: { docs: { description: { story: '`color/text/secondary` · `Body 2` · 밑줄' } } },
 };
 
 export const AssistiveSmall: Story = {
   name: 'Assistive / Small',
-  args: { label: '더보기', color: 'assistive', size: 'small' },
+  args: { label: '더보기', colorScheme: 'assistive', size: 'small' },
   parameters: { docs: { description: { story: '`color/text/secondary` · `Label 2` · 밑줄' } } },
 };
 
@@ -325,8 +325,8 @@ export const Usage: Story = {
 
         <CodeBlock
           title="Color 조합"
-          code={`<TextButton label="더보기" color="primary" />
-<TextButton label="건너뛰기" color="assistive" />`}
+          code={`<TextButton label="더보기" colorScheme="primary" />
+<TextButton label="건너뛰기" colorScheme="assistive" />`}
         />
 
         <CodeBlock
@@ -344,8 +344,8 @@ export const Usage: Story = {
         <CodeBlock
           title="Button과 함께 사용 (ActionArea 패턴)"
           code={`<View style={{ flexDirection: 'row', gap: spacing.medium, alignItems: 'center' }}>
-  <Button label="확인" variant="solid" color="primary" />
-  <TextButton label="건너뛰기" color="assistive" />
+  <Button label="확인" variant="solid" colorScheme="primary" />
+  <TextButton label="건너뛰기" colorScheme="assistive" />
 </View>`}
         />
       </Section>

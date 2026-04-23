@@ -146,7 +146,7 @@ export const ListExample: Story = {
           borderColor: semanticColor.borderDefault,
           borderRadius: radius.small,
           overflow: 'hidden',
-          backgroundColor: semanticColor.backgroundStatus,
+          backgroundColor: semanticColor.backgroundPrimary,
         }}>
           {sampleItems.map((item, i) => (
             <View key={i}>

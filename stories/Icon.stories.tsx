@@ -22,7 +22,7 @@ import {
 // ─── Meta ────────────────────────────────────────────────
 
 const meta: Meta<typeof Icon> = {
-  title: 'Foundation/Icon',
+  title: 'Semantics Token/Icon',
   component: Icon,
   argTypes: {
     name: { control: 'text', description: '아이콘 이름' },
@@ -68,22 +68,39 @@ interface IconCardProps {
   onCopy: (name: string, style: IconStyle) => void;
 }
 
+const DUAL_VARIANT_ICONS = ['info', 'star'];
+
 const IconCard = ({ name, iconStyle, copied, onCopy }: IconCardProps) => {
   const isCopied = copied === `${iconStyle}-${name}`;
   const previewSize = CATEGORY_META[iconStyle].size;
+  const isDual = iconStyle === 'normal' && DUAL_VARIANT_ICONS.includes(name);
 
   return (
     <Pressable
       onPress={() => onCopy(name, iconStyle)}
       style={({ pressed }) => [
         styles.card,
+        isDual && styles.cardWide,
         pressed && styles.cardPressed,
         isCopied && styles.cardCopied,
       ]}
     >
-      <View style={styles.iconArea}>
-        <Icon name={name} style={iconStyle} size={previewSize} />
-      </View>
+      {isDual ? (
+        <View style={styles.iconRow}>
+          <View style={styles.iconVariantCol}>
+            <Icon name={name} style={iconStyle} variant="regular" size={previewSize} />
+            <Text style={styles.variantLabel}>Regular</Text>
+          </View>
+          <View style={styles.iconVariantCol}>
+            <Icon name={name} style={iconStyle} variant="fill" size={previewSize} />
+            <Text style={styles.variantLabel}>Fill</Text>
+          </View>
+        </View>
+      ) : (
+        <View style={styles.iconArea}>
+          <Icon name={name} style={iconStyle} size={previewSize} />
+        </View>
+      )}
 
       {isCopied ? (
         <Text style={styles.copiedText}>복사 완료!</Text>
@@ -279,6 +296,9 @@ const styles = StyleSheet.create({
     borderColor: 'transparent',
     cursor: 'pointer' as any,
   },
+  cardWide: {
+    width: 160,
+  },
   cardPressed: {
     backgroundColor: semanticColor.backgroundTertiary,
     transform: [{ scale: 0.96 }],
@@ -291,6 +311,23 @@ const styles = StyleSheet.create({
     height: 40,
     alignItems: 'center',
     justifyContent: 'center',
+  },
+  iconRow: {
+    flexDirection: 'row',
+    gap: spacing.large,
+    height: 40,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  iconVariantCol: {
+    alignItems: 'center',
+    gap: spacing.xsmall,
+  },
+  variantLabel: {
+    fontSize: 10,
+    fontWeight: fontWeight.medium,
+    color: semanticColor.textTertiary,
+    textAlign: 'center',
   },
   cardName: {
     fontSize: fontSize.xsmall,

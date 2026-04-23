@@ -91,7 +91,7 @@ export const InContext: Story = {
         <View style={{
           maxWidth: 375,
           padding: spacing.xlarge,
-          backgroundColor: semanticColor.backgroundStatus,
+          backgroundColor: semanticColor.backgroundPrimary,
           borderRadius: spacing.small,
           borderWidth: 1,
           borderColor: semanticColor.borderDefault,

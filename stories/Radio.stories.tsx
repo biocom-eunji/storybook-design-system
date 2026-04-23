@@ -271,7 +271,7 @@ export const DesignSpec: Story = {
 
     const resolve: Record<string, string> = {
       'color/background/brand':    semanticColor.backgroundBrand,
-      'color/background/status':   semanticColor.backgroundStatus,
+      'color/background/status':   semanticColor.backgroundPrimary,
       'color/border/focus':        semanticColor.borderFocus,
       'color/border/active':       semanticColor.borderActive,
       'color/border/default':      semanticColor.borderDefault,
