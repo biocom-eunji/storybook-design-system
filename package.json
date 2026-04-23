@@ -16,6 +16,7 @@
   "dependencies": {
     "expo": "~55.0.6",
     "expo-status-bar": "~55.0.4",
+    "phosphor-react-native": "^3.0.4",
     "react-native": "0.83.2",
     "react-native-svg": "^15.15.3",
     "react-native-svg-web": "^1.0.9",
