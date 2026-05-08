@@ -8,7 +8,7 @@ import {
   type ViewStyle,
   type TextStyle,
 } from 'react-native';
-import { fontWeight, semanticColor } from '../tokens/theme';
+import { fontWeight, semanticColor, textStyle } from '../tokens/theme';
 
 export type AvatarSize = 'small' | 'medium' | 'large' | 'xlarge';
 
@@ -23,10 +23,10 @@ export interface AvatarProps {
 }
 
 const sizeMap = {
-  small: { container: 32, fontSize: 13, onlineDot: 8 },
-  medium: { container: 40, fontSize: 15, onlineDot: 10 },
-  large: { container: 56, fontSize: 20, onlineDot: 12 },
-  xlarge: { container: 80, fontSize: 28, onlineDot: 16 },
+  small: { container: 32, fontSize: textStyle.label2.fontSize, onlineDot: 8 },
+  medium: { container: 40, fontSize: textStyle.body2.fontSize, onlineDot: 10 },
+  large: { container: 56, fontSize: textStyle.heading.fontSize, onlineDot: 12 },
+  xlarge: { container: 80, fontSize: textStyle.title2.fontSize, onlineDot: 16 },
 } as const;
 
 export function Avatar({

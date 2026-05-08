@@ -113,7 +113,7 @@ export function LevelIndicator({
 
 const styles = StyleSheet.create({
   container: {
-    width: '100%' as any,
+    width: '100%',
   } as ViewStyle,
   labelRow: {
     flexDirection: 'row',

@@ -93,18 +93,18 @@ const styles = StyleSheet.create({
     alignItems: 'flex-start',
   } as ViewStyle,
   thumbWrap: {
-    width: '100%' as any,
+    width: '100%',
     borderRadius: THUMB_RADIUS,
     overflow: 'hidden',
     position: 'relative',
   } as ViewStyle,
   thumbImage: {
-    width: '100%' as any,
-    height: '100%' as any,
+    width: '100%',
+    height: '100%',
   } as ViewStyle,
   thumbPlaceholder: {
-    width: '100%' as any,
-    height: '100%' as any,
+    width: '100%',
+    height: '100%',
     backgroundColor: semanticColor.backgroundSecondary,
   } as ViewStyle,
   thumbBorder: {
@@ -118,7 +118,7 @@ const styles = StyleSheet.create({
     borderColor: semanticColor.borderDefault,
   } as ViewStyle,
   contentWrap: {
-    width: '100%' as any,
+    width: '100%',
     flexDirection: 'column',
   } as ViewStyle,
   titleText: {

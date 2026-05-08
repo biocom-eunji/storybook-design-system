@@ -123,6 +123,6 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
-    height: '100%' as any,
+    height: '100%',
   } as ViewStyle,
 });

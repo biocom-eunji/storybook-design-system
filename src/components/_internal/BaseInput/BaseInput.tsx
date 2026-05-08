@@ -1,5 +1,5 @@
 import React, { useState, useRef, useCallback } from 'react';
-import { TextInput, Pressable, StyleSheet, type TextStyle } from 'react-native';
+import { TextInput, Pressable, StyleSheet, Platform, type TextStyle } from 'react-native';
 import { Icon } from '../../Icon';
 import { semanticColor, textStyle } from '../../../tokens/theme';
 import type { BaseInputProps } from './types';
@@ -110,6 +110,6 @@ const styles = StyleSheet.create({
     fontWeight: textStyle.body2.fontWeight,
     letterSpacing: textStyle.body2.letterSpacing,
     padding: 0,
-    outlineStyle: 'none' as any,
+    ...(Platform.OS === 'web' ? ({ outlineStyle: 'none' } as any) : null),
   },
 });

@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { View, Text, Pressable, StyleSheet, type ViewStyle, type TextStyle } from 'react-native';
+import { View, Text, Pressable, StyleSheet, Platform, type ViewStyle, type TextStyle } from 'react-native';
 import { Icon } from './Icon';
 import { semanticColor, fontWeight, textStyle, spacing, interaction } from '../tokens/theme';
 
@@ -247,7 +247,7 @@ const styles = StyleSheet.create({
   } as ViewStyle,
   expandIcon: {
     marginLeft: spacing.small,
-    transition: 'transform 0.2s ease' as any,
+    ...(Platform.OS === 'web' ? { transition: 'transform 0.2s ease' } : {}),
   } as ViewStyle,
   expandIconRotated: {
     transform: [{ rotate: '180deg' }],

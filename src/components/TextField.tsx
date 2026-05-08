@@ -5,6 +5,7 @@ import {
   TextInput,
   Pressable,
   StyleSheet,
+  Platform,
   type TextInputProps,
   type KeyboardTypeOptions,
   type ViewStyle,
@@ -294,7 +295,7 @@ export function TextField({
 
 const styles = StyleSheet.create({
   root: {
-    gap: 6,
+    gap: spacing.small,
   },
   label: {
     fontSize: textStyle.label2.fontSize,
@@ -313,7 +314,7 @@ const styles = StyleSheet.create({
     fontSize: textStyle.body2.fontSize,
     fontWeight: textStyle.body2.fontWeight,
     letterSpacing: textStyle.body2.letterSpacing,
-    outlineStyle: 'none' as any,
+    ...(Platform.OS === 'web' ? ({ outlineStyle: 'none' } as any) : null),
   },
   trailingSlot: {
     marginLeft: spacing.small,

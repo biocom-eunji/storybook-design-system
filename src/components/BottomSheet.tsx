@@ -9,7 +9,7 @@ import {
   useWindowDimensions,
   type ViewStyle,
 } from 'react-native';
-import { fontSize, fontWeight, spacing, semanticColor, radius } from '../tokens/theme';
+import { fontSize, fontWeight, spacing, semanticColor, radius, interaction } from '../tokens/theme';
 
 /** BottomSheet — 하단에서 올라오는 시트 */
 export interface BottomSheetProps {
@@ -34,7 +34,7 @@ export interface BottomSheetProps {
 }
 
 const ANIMATION_DURATION = 300;
-const BACKDROP_OPACITY = 0.4;
+const BACKDROP_OPACITY = interaction.overlayOpacity;
 
 export function BottomSheet({
   visible,
@@ -151,7 +151,7 @@ const styles = StyleSheet.create({
   handle: {
     width: 40,
     height: 4,
-    borderRadius: 2,
+    borderRadius: radius.xsmall,
     backgroundColor: semanticColor.backgroundOff,
   } as ViewStyle,
   closeButton: {

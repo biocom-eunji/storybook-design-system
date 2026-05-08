@@ -9,6 +9,7 @@ import {
   type SvgElement,
 } from './iconRegistry';
 import { phosphorMap, type PhosphorIconName, type IconVariant } from './phosphorMap';
+import { semanticColor } from '../../tokens/theme';
 
 export interface IconProps {
   /** 아이콘 이름 */
@@ -51,7 +52,7 @@ export function Icon({
       return (
         <PhosphorComponent
           size={resolvedSize}
-          color={color ?? '#212225'}
+          color={color ?? semanticColor.iconPrimary}
           weight={resolvedWeight}
         />
       );

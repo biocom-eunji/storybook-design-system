@@ -5,7 +5,7 @@ import { actionAreaToken, spacing, semanticColor } from '../tokens/theme';
 
 export type ActionAreaVariant = 'strong' | 'neutral' | 'compact';
 
-type ActionButtonProps = Omit<ButtonProps, 'variant' | 'color' | 'size'> & {
+type ActionButtonProps = Omit<ButtonProps, 'variant' | 'colorScheme' | 'size'> & {
   label: string;
 };
 
@@ -45,11 +45,11 @@ const ButtonRow = ({
   <View style={styles.row}>
     {secondary && (
       <View style={styles.flex1}>
-        <Button {...secondary} variant="outlined" color="assistive" size={size} />
+        <Button {...secondary} variant="outlined" colorScheme="assistive" size={size} />
       </View>
     )}
     <View style={{ flex: primaryFlex }}>
-      <Button {...primary} variant="solid" color="primary" size={size} />
+      <Button {...primary} variant="solid" colorScheme="primary" size={size} />
     </View>
   </View>
 );
@@ -75,7 +75,7 @@ export function ActionArea({
     case 'strong':
       return (
         <View style={containerStyle}>
-          <Button {...primary} variant="solid" color="primary" size="large" />
+          <Button {...primary} variant="solid" colorScheme="primary" size="large" />
         </View>
       );
 

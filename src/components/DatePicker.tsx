@@ -146,7 +146,7 @@ const styles = StyleSheet.create({
     height: 36,
     alignItems: 'center',
     justifyContent: 'center',
-    borderRadius: 18,
+    borderRadius: radius.full,
   } as ViewStyle,
   pressed: {
     opacity: interaction.pressOpacity,
@@ -179,7 +179,7 @@ const styles = StyleSheet.create({
     height: 36,
     alignItems: 'center',
     justifyContent: 'center',
-    borderRadius: 18,
+    borderRadius: radius.full,
   } as ViewStyle,
   dayText: {
     fontSize: textStyle.label1.fontSize,

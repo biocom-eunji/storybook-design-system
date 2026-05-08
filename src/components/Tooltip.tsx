@@ -44,8 +44,8 @@ const SIZE_CONFIG = {
     maxWidth: 240,
   },
   small: {
-    paddingVertical: 6,
-    paddingHorizontal: spacing.small + 2, // 10
+    paddingVertical: spacing.small,
+    paddingHorizontal: spacing.medium,
     fontSize: textStyle.caption.fontSize,
     lineHeight: textStyle.caption.lineHeight,
     fontWeight: fontWeight.regular,

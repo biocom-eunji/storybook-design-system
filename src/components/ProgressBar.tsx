@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Text, type ViewStyle, type TextStyle } from 'react-native';
+import { View, Text, Platform, type ViewStyle, type TextStyle } from 'react-native';
 import { fontSize, fontWeight, spacing, semanticColor } from '../tokens/theme';
 
 export type ProgressBarSize = 'small' | 'medium' | 'large';
@@ -60,7 +60,7 @@ export function ProgressBar({
     width: `${clampedProgress * 100}%` as any,
     backgroundColor: fillColors[color],
     borderRadius,
-    ...(animated ? { transition: 'width 0.3s ease' } as any : {}),
+    ...(animated && Platform.OS === 'web' ? { transition: 'width 0.3s ease' } : {}),
   };
 
   return (

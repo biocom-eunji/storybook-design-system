@@ -1,5 +1,5 @@
 import React from 'react';
-import { Pressable, View, type ViewStyle } from 'react-native';
+import { Pressable, View, StyleSheet, type ViewStyle } from 'react-native';
 import { semanticColor, interaction, shadow } from '../tokens/theme';
 
 /** Switch — 켜짐/꺼짐 두 가지 상태를 전환하는 토글 */
@@ -41,27 +41,33 @@ export function Switch({
         opacity: pressed && !disabled ? interaction.pressOpacity : 1,
       })}
     >
-      <View
-        style={{
-          width: TRACK_W,
-          height: TRACK_H,
-          borderRadius: TRACK_H / 2,
-          backgroundColor: trackColor,
-          justifyContent: 'center',
-          paddingHorizontal: PAD,
-        }}
-      >
+      <View style={[styles.track, { backgroundColor: trackColor }]}>
         <View
-          style={{
-            width: THUMB_SIZE,
-            height: THUMB_SIZE,
-            borderRadius: THUMB_SIZE / 2,
-            backgroundColor: semanticColor.backgroundPrimary,
-            alignSelf: checked ? 'flex-end' : 'flex-start',
-            ...thumbShadow,
-          }}
+          style={[
+            styles.thumb,
+            {
+              alignSelf: checked ? 'flex-end' : 'flex-start',
+              ...thumbShadow,
+            },
+          ]}
         />
       </View>
     </Pressable>
   );
 }
+
+const styles = StyleSheet.create({
+  track: {
+    width: TRACK_W,
+    height: TRACK_H,
+    borderRadius: TRACK_H / 2,
+    justifyContent: 'center',
+    paddingHorizontal: PAD,
+  },
+  thumb: {
+    width: THUMB_SIZE,
+    height: THUMB_SIZE,
+    borderRadius: THUMB_SIZE / 2,
+    backgroundColor: semanticColor.backgroundPrimary,
+  },
+});

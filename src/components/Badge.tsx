@@ -1,6 +1,6 @@
 import React from 'react';
 import { View, Text, StyleSheet, type ViewStyle, type TextStyle } from 'react-native';
-import { radius, spacing, fontWeight, semanticColor } from '../tokens/theme';
+import { radius, spacing, fontWeight, semanticColor, textStyle } from '../tokens/theme';
 
 export type BadgeVariant = 'filled' | 'outlined' | 'dot';
 export type BadgeColor = 'primary' | 'error' | 'success' | 'warning';
@@ -26,8 +26,8 @@ const colorMap = {
 } as const;
 
 const sizeMap = {
-  small: { height: 16, minWidth: 16, fontSize: 12, dotSize: 6 },
-  medium: { height: 20, minWidth: 20, fontSize: 12, dotSize: 8 },
+  small: { height: 16, minWidth: 16, fontSize: textStyle.caption.fontSize, dotSize: 6 },
+  medium: { height: 20, minWidth: 20, fontSize: textStyle.caption.fontSize, dotSize: 8 },
 } as const;
 
 export function Badge({

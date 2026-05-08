@@ -1,5 +1,5 @@
 import React from 'react';
-import { Pressable, View, Text, type ViewStyle, type TextStyle } from 'react-native';
+import { Pressable, View, Text, StyleSheet } from 'react-native';
 import { fontWeight, interaction, spacing, radius, semanticColor, textStyle } from '../tokens/theme';
 
 export type RadioSize = 'small' | 'medium';
@@ -46,27 +46,29 @@ export function Radio({
       accessibilityRole="radio"
       accessibilityState={{ checked }}
       accessibilityLabel={label}
-      style={({ pressed }) => ({
-        flexDirection: 'row',
-        alignItems: 'center',
-        gap: label ? s.gap : 0,
-        opacity: pressed && !disabled ? interaction.pressOpacity : 1,
-        paddingVertical: tight ? spacing.small : spacing.medium,
-        paddingHorizontal: tight ? spacing.medium : 0,
-        backgroundColor: tight ? semanticColor.backgroundSecondary : 'transparent',
-        borderRadius: tight ? radius.medium : 0,
-      })}
+      style={({ pressed }) => [
+        styles.root,
+        {
+          gap: label ? s.gap : 0,
+          opacity: pressed && !disabled ? interaction.pressOpacity : 1,
+          paddingVertical: tight ? spacing.small : spacing.medium,
+          paddingHorizontal: tight ? spacing.medium : 0,
+          backgroundColor: tight ? semanticColor.backgroundSecondary : 'transparent',
+          borderRadius: tight ? radius.medium : 0,
+        },
+      ]}
     >
-      <View style={{
-        width: s.outer,
-        height: s.outer,
-        borderRadius: s.outer / 2,
-        borderWidth: checked ? 0 : 1,
-        borderColor,
-        backgroundColor: checked ? fillColor : 'transparent',
-        alignItems: 'center',
-        justifyContent: 'center',
-      }}>
+      <View style={[
+        styles.outer,
+        {
+          width: s.outer,
+          height: s.outer,
+          borderRadius: s.outer / 2,
+          borderWidth: checked ? 0 : 1,
+          borderColor,
+          backgroundColor: checked ? fillColor : 'transparent',
+        },
+      ]}>
         {checked && (
           <View style={{
             width: s.inner,
@@ -91,3 +93,14 @@ export function Radio({
     </Pressable>
   );
 }
+
+const styles = StyleSheet.create({
+  root: {
+    flexDirection: 'row',
+    alignItems: 'center',
+  },
+  outer: {
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+});

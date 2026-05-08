@@ -102,12 +102,12 @@ const styles = StyleSheet.create({
     flexShrink: 0,
   } as ViewStyle,
   thumbImage: {
-    width: '100%' as any,
-    height: '100%' as any,
+    width: '100%',
+    height: '100%',
   } as ViewStyle,
   thumbPlaceholder: {
-    width: '100%' as any,
-    height: '100%' as any,
+    width: '100%',
+    height: '100%',
     backgroundColor: semanticColor.backgroundSecondary,
   } as ViewStyle,
   thumbBorder: {

@@ -1,5 +1,14 @@
 import React from 'react';
-import { View, Text, Pressable, StyleSheet, type ViewStyle, type TextStyle } from 'react-native';
+import {
+  View,
+  Text,
+  Pressable,
+  StyleSheet,
+  Modal as RNModal,
+  Platform,
+  type ViewStyle,
+  type TextStyle,
+} from 'react-native';
 import { fontSize, fontWeight, spacing, semanticColor, radius } from '../tokens/theme';
 
 export interface ModalAction {
@@ -28,9 +37,7 @@ export function Modal({
   primaryAction,
   secondaryAction,
 }: ModalProps) {
-  if (!visible) return null;
-
-  return (
+  const content = (
     <View style={styles.overlay}>
       <Pressable style={styles.backdrop} onPress={onClose} accessibilityRole="none" />
       <View style={styles.dialog}>
@@ -62,6 +69,23 @@ export function Modal({
         )}
       </View>
     </View>
+  );
+
+  if (Platform.OS === 'web') {
+    if (!visible) return null;
+    return content;
+  }
+
+  return (
+    <RNModal
+      visible={visible}
+      transparent
+      animationType="fade"
+      onRequestClose={onClose}
+      statusBarTranslucent
+    >
+      {content}
+    </RNModal>
   );
 }
 

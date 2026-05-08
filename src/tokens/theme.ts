@@ -320,7 +320,7 @@ export const radius = {
 export const shadow = {
   /** Level 1 — Subtle / 카드, 버튼 hover 등 가벼운 고도감 */
   level1: {
-    shadowColor: '#000000',
+    shadowColor: palette.black,
     shadowOffset: { width: 0, height: 0 },
     shadowOpacity: 0.08,
     shadowRadius: 4,
@@ -328,7 +328,7 @@ export const shadow = {
   },
   /** Level 2 — Medium / 플로팅 요소, 드롭다운, 호버 카드 */
   level2: {
-    shadowColor: '#000000',
+    shadowColor: palette.black,
     shadowOffset: { width: 0, height: 2 },
     shadowOpacity: 0.1,
     shadowRadius: 8,
@@ -336,7 +336,7 @@ export const shadow = {
   },
   /** Level 3 — Strong / 모달, 바텀시트, 최상위 레이어 */
   level3: {
-    shadowColor: '#000000',
+    shadowColor: palette.black,
     shadowOffset: { width: 0, height: 4 },
     shadowOpacity: 0.15,
     shadowRadius: 16,

@@ -1,5 +1,5 @@
 import React from 'react';
-import { Pressable, View, Text } from 'react-native';
+import { Pressable, View, Text, StyleSheet } from 'react-native';
 import Svg, { Path, Rect } from 'react-native-svg';
 import { fontWeight, interaction, spacing, radius, semanticColor, textStyle } from '../tokens/theme';
 
@@ -18,8 +18,8 @@ export interface CheckboxProps {
 }
 
 const sizeMap = {
-  small: { box: 18, iconVB: 256, radius: 4, gap: spacing.small, fontSize: textStyle.label1.fontSize, subFontSize: textStyle.label2.fontSize },
-  medium: { box: 22, iconVB: 256, radius: 5, gap: spacing.medium, fontSize: textStyle.body2.fontSize, subFontSize: textStyle.label1.fontSize },
+  small: { box: 18, iconVB: 256, radius: radius.xsmall, gap: spacing.small, fontSize: textStyle.label1.fontSize, subFontSize: textStyle.label2.fontSize },
+  medium: { box: 22, iconVB: 256, radius: radius.xsmall, gap: spacing.medium, fontSize: textStyle.body2.fontSize, subFontSize: textStyle.label1.fontSize },
 };
 
 export function Checkbox({
@@ -52,27 +52,29 @@ export function Checkbox({
       accessibilityRole="checkbox"
       accessibilityState={{ checked: isChecked || isIndeterminate }}
       accessibilityLabel={label}
-      style={({ pressed }) => ({
-        flexDirection: 'row',
-        alignItems: 'center',
-        gap: label ? s.gap : 0,
-        opacity: pressed && !disabled ? interaction.pressOpacity : 1,
-        paddingVertical: tight ? spacing.small : spacing.medium,
-        paddingHorizontal: tight ? spacing.medium : 0,
-        backgroundColor: tight ? semanticColor.backgroundSecondary : 'transparent',
-        borderRadius: tight ? radius.medium : 0,
-      })}
+      style={({ pressed }) => [
+        styles.root,
+        {
+          gap: label ? s.gap : 0,
+          opacity: pressed && !disabled ? interaction.pressOpacity : 1,
+          paddingVertical: tight ? spacing.small : spacing.medium,
+          paddingHorizontal: tight ? spacing.medium : 0,
+          backgroundColor: tight ? semanticColor.backgroundSecondary : 'transparent',
+          borderRadius: tight ? radius.medium : 0,
+        },
+      ]}
     >
-      <View style={{
-        width: s.box,
-        height: s.box,
-        borderRadius: s.radius,
-        borderWidth: isFilled ? 0 : 1,
-        borderColor,
-        backgroundColor: bgColor,
-        alignItems: 'center',
-        justifyContent: 'center',
-      }}>
+      <View style={[
+        styles.box,
+        {
+          width: s.box,
+          height: s.box,
+          borderRadius: s.radius,
+          borderWidth: isFilled ? 0 : 1,
+          borderColor,
+          backgroundColor: bgColor,
+        },
+      ]}>
         {isChecked && (
           <Svg width={s.box * 0.7} height={s.box * 0.7} viewBox="0 0 256 256" fill="none">
             <Path
@@ -88,7 +90,7 @@ export function Checkbox({
         )}
       </View>
       {label && (
-        <View style={{ flex: 1 }}>
+        <View style={styles.labelWrap}>
           <Text style={{
             fontSize: s.fontSize,
             fontWeight: bold ? fontWeight.semibold : fontWeight.medium,
@@ -106,3 +108,17 @@ export function Checkbox({
     </Pressable>
   );
 }
+
+const styles = StyleSheet.create({
+  root: {
+    flexDirection: 'row',
+    alignItems: 'center',
+  },
+  box: {
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  labelWrap: {
+    flex: 1,
+  },
+});

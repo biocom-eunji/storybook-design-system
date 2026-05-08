@@ -3,7 +3,7 @@ import {
   Pressable,
   Text,
   ActivityIndicator,
-  type ViewStyle,
+  StyleSheet,
   type TextStyle,
   type PressableStateCallbackType,
 } from 'react-native';
@@ -44,13 +44,7 @@ export function TextButton({
       disabled={disabled || loading}
       accessibilityRole="button"
       accessibilityState={{ disabled: disabled || loading }}
-      style={(state) => [
-        {
-          flexDirection: 'row',
-          alignItems: 'center',
-          gap: spacing.xsmall,
-        } satisfies ViewStyle,
-      ]}
+      style={styles.pressable}
     >
       {(state) => {
         const contentColor = getContentColor(state);
@@ -59,17 +53,27 @@ export function TextButton({
           fontSize: sizeToken.fontSize,
           lineHeight: sizeToken.lineHeight,
           letterSpacing: sizeToken.letterSpacing,
-          fontWeight: fontWeight.medium,
           color: contentColor,
-          textDecorationLine: 'underline',
         };
 
         if (loading) {
           return <ActivityIndicator size="small" color={contentColor} />;
         }
 
-        return <Text style={textStyle}>{label}</Text>;
+        return <Text style={[styles.text, textStyle]}>{label}</Text>;
       }}
     </Pressable>
   );
 }
+
+const styles = StyleSheet.create({
+  pressable: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: spacing.xsmall,
+  },
+  text: {
+    fontWeight: fontWeight.medium,
+    textDecorationLine: 'underline',
+  },
+});

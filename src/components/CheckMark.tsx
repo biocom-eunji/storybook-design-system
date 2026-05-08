@@ -1,7 +1,7 @@
 import React from 'react';
 import { Pressable, View, Text } from 'react-native';
 import { Icon } from './Icon';
-import { fontWeight, interaction, spacing, radius, semanticColor } from '../tokens/theme';
+import { fontWeight, interaction, spacing, radius, semanticColor, textStyle } from '../tokens/theme';
 
 export type CheckMarkSize = 'small' | 'medium';
 
@@ -16,8 +16,18 @@ export interface CheckMarkProps {
 }
 
 const sizeMap = {
-  small: { icon: 18, gap: 8, fontSize: 14, subFontSize: 13 },
-  medium: { icon: 22, gap: 10, fontSize: 15, subFontSize: 14 },
+  small: {
+    icon: 18,
+    gap: spacing.small,
+    fontSize: textStyle.label1.fontSize,
+    subFontSize: textStyle.label2.fontSize,
+  },
+  medium: {
+    icon: 22,
+    gap: spacing.small,
+    fontSize: textStyle.body2.fontSize,
+    subFontSize: textStyle.label1.fontSize,
+  },
 };
 
 export function CheckMark({
@@ -62,7 +72,7 @@ export function CheckMark({
             {label}
           </Text>
           {sublabel && (
-            <Text style={{ fontSize: s.subFontSize, fontWeight: fontWeight.regular, color: subColor, marginTop: 2 }}>
+            <Text style={{ fontSize: s.subFontSize, fontWeight: fontWeight.regular, color: subColor, marginTop: spacing.xsmall }}>
               {sublabel}
             </Text>
           )}
