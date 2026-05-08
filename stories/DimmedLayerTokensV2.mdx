@@ -158,7 +158,7 @@ export const PaletteRow = ({ title, description, baseDark, children }) => (
 </table>
 
 <div className="platform-note">
-<strong>기존 <code>semanticColor.backgroundScrim</code> (rgba(0,0,0,0.4))과 차이</strong>: v1에서는 0.4 단일 값을 사용했으나, v2.3.0에서는 BK-20/60/80 3단으로 세분화. 모달/바텀시트의 표준 backdrop은 <strong>BK-60</strong>으로 마이그레이션을 권장합니다 (이번 PR에서는 컴포넌트 미수정 — 기존 0.4 유지).
+<strong>v2.4.0 마이그레이션 완료</strong>: <code>semanticColor.backgroundScrim</code>이 <code>bk60</code> (<code>rgba(0,0,0,0.6)</code>)을 참조하도록 변경되었습니다. Modal/BottomSheet 컴포넌트가 이를 자동으로 사용 → 시각 회귀 발생 (alpha 증가). BottomSheet 애니메이션의 multiplicative dilution(0.4 × 0.4 = 0.16) 버그도 함께 수정 (1로 변경).
 </div>
 
 ## 사용 예시

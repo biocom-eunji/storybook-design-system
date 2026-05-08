@@ -761,7 +761,7 @@ export const semanticColor = {
   backgroundSuccess: _role.success,
   /** 토스트 배경 */
   backgroundToast: coolNeutral[50],
-  /** 오버레이 스크림 (모달, 바텀시트 dim 배경) — v2.3.1: bk60 (0.4 → 0.6)으로 마이그레이션 */
+  /** 오버레이 스크림 (모달, 바텀시트 dim 배경) — v2.4.0: bk60 (0.4 → 0.6)으로 마이그레이션 */
   backgroundScrim: dimmedLayerTokensV2.bk60,
 
   // ── Border ────────────────────────────────────────────
