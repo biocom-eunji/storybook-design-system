@@ -4,6 +4,40 @@
 
 ---
 
+## v2.2.0 (2026-05-08)
+
+> Figma "4. Shadow" 캔버스 기반 그림자 토큰 v2 추가. **Level 4 신규** + spread 필드 보존.
+
+### Added
+
+- **`shadowTokensV2`** namespace export (`theme.ts`) — 4 level (1~4), Figma DROP_SHADOW 원본 미러링
+- **Level 4 그림자 신규** — bottom sheet 등 위로 향한 그림자 (offsetY: `-4`, opacity `0.10`, blur `16`, spread `4`)
+- **spread 필드 보존** — Figma 원본 spread 값을 토큰에 명시 (web/Storybook은 `boxShadow`로 spread 포함 렌더링)
+- **`color`에 alpha 포함** — `#00000014`/`#0000001A`/`#00000026` 등 8자리 hex 통일
+- **`figma-tokens.json` `Primitives.shadow`** — style-dictionary `boxShadow` 타입 4 level
+- **Storybook Shadow Tokens v2 페이지** (`stories/ShadowTokensV2.mdx`) — 4 level 시각 카드 + Spec Table + RN/Web 호환성 가이드
+- **기존 `shadow.level4`** 추가 — 기존 export에 level4 추가 (additive, 호환성 유지)
+
+### Changed
+
+- **theme.ts `shadow`에 `@deprecated` JSDoc** — `shadowTokensV2` 사용 권장. 기존 토큰은 RN 호환을 위해 spread 누락 채로 유지
+- **기존 `ShadowElevation.mdx`** — deprecation 배너 추가, v2 페이지로 유도
+
+### Migration
+
+| AS-IS (v1 shadow) | TO-BE (v2 shadowTokensV2) | 비고 |
+|---|---|---|
+| `shadow.level1` | `shadowTokensV2.level1` | 동일 시각, spread=0이라 차이 없음 |
+| `shadow.level2` | `shadowTokensV2.level2` | RN 시각 동일, web에서 spread=4 추가 그림자 |
+| `shadow.level3` | `shadowTokensV2.level3` | RN 시각 동일, web에서 spread=8 추가 그림자 |
+| (없음) | `shadowTokensV2.level4` | bottom sheet 등 위로 향한 그림자 |
+
+### React Native 호환성 노트
+
+React Native shadow API는 `spread`를 미지원. v2 토큰의 `spread` 필드는 web Storybook과 향후 cross-platform 디자인 도구용 메타데이터로 보존됩니다. RN 컴포넌트는 `offsetX/offsetY`/`opacity`/`blur`/`elevation`만 사용하세요.
+
+---
+
 ## v2.1.0 (2026-05-08)
 
 > 디자인 토큰 컬러 v2.0 전면 갱신 + v2.1 스토리·컴포넌트 통합 릴리즈. **Breaking Changes 포함** — 마이그레이션 가이드는 아래 참조.
