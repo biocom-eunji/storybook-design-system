@@ -5,6 +5,10 @@
 
 // ─── Color Palette ──────────────────────────────────────
 
+/**
+ * @deprecated v2.0: Use `colorTokensV2.Mono.neutral` (50/100/.../900) 대신 사용하세요.
+ *  v1 22단 스케일은 v2에서 10단으로 정리됨. 매핑은 PR 본문 참조.
+ */
 export const coolNeutral = {
   100: '#FFFFFF',
   99: '#F7F7F8',
@@ -30,6 +34,7 @@ export const coolNeutral = {
   5: '#0F0F10',
 } as const;
 
+/** @deprecated v2.0: Use `colorTokensV2.Accent.khaki` (50/100/.../900) — naming 역전 주의 */
 export const khaki = {
   99: '#FDFDFC',
   95: '#F4F7EE',
@@ -44,6 +49,7 @@ export const khaki = {
   10: '#1D2310',
 } as const;
 
+/** @deprecated v2.0: Use `colorTokensV2.Semantic.yellow` (50/100/.../900). yellow50은 의미 반전 — 강한 노랑은 yellow300 */
 export const yellow = {
   99: '#FFFEFA',
   95: '#FFFAE5',
@@ -58,6 +64,7 @@ export const yellow = {
   10: '#332900',
 } as const;
 
+/** @deprecated v2.0: orange는 Accent에서 Semantic으로 이동. `colorTokensV2.Semantic.orange` 참조 */
 export const orange = {
   99: '#FFFCFA',
   95: '#FFF2E5',
@@ -72,6 +79,7 @@ export const orange = {
   10: '#331900',
 } as const;
 
+/** @deprecated v2.0: Use `colorTokensV2.Semantic.red` (50/100/.../900). red50은 의미 반전 — 강한 빨강은 red500 */
 export const red = {
   99: '#FEFAFA',
   95: '#FCE8E8',
@@ -86,6 +94,7 @@ export const red = {
   10: '#2E0505',
 } as const;
 
+/** @deprecated v2.0: Use `colorTokensV2.Accent.pink` (50/100/.../900). pink50은 의미 반전 — 강한 핑크는 pink500 */
 export const pink = {
   99: '#FFFAFC',
   95: '#FFE5EE',
@@ -100,6 +109,7 @@ export const pink = {
   10: '#330010',
 } as const;
 
+/** @deprecated v2.0: Use `colorTokensV2.Accent.purple`. purple50은 의미 반전 — 강한 퍼플은 purple500 */
 export const purple = {
   99: '#FEFBFF',
   95: '#F9EDFF',
@@ -114,6 +124,7 @@ export const purple = {
   10: '#290247',
 } as const;
 
+/** @deprecated v2.0: Use `colorTokensV2.Accent.violet`. violet50은 의미 반전 — 강한 바이올렛은 violet500 */
 export const violet = {
   99: '#FBFAFF',
   95: '#F0ECFE',
@@ -128,6 +139,7 @@ export const violet = {
   10: '#11024D',
 } as const;
 
+/** @deprecated v2.0: Use `colorTokensV2.Accent.lightBlue`. lightBlue50은 의미 반전 — 강한 색은 lightBlue400 */
 export const lightBlue = {
   99: '#F7FDFF',
   95: '#E5F6FE',
@@ -142,6 +154,7 @@ export const lightBlue = {
   10: '#002130',
 } as const;
 
+/** @deprecated v2.0: Use `colorTokensV2.Accent.cyan`. cyan50은 의미 반전 — 강한 시안은 cyan400 */
 export const cyan = {
   99: '#F7FEFF',
   95: '#DEFAFF',
@@ -156,6 +169,7 @@ export const cyan = {
   10: '#00252B',
 } as const;
 
+/** @deprecated v2.0: Use `colorTokensV2.Mono.mint` (Brand 컬렉션 폐기, Mono로 이동). mint45=mint400 동일 hex */
 export const mint = {
   99: '#FBFEFE',
   95: '#E9FBFA',
@@ -170,6 +184,7 @@ export const mint = {
   10: '#082B2A',
 } as const;
 
+/** @deprecated v2.0: Use `colorTokensV2.Semantic.green`. green45 → green400 (값은 변경됨: #22C289 → #12BA7E) */
 export const green = {
   99: '#FBFEFD',
   95: '#E9FBF5',
@@ -183,6 +198,189 @@ export const green = {
   20: '#0F573D',
   10: '#082B1F',
 } as const;
+
+// ─── v2.0 컬러 토큰 ──────────────────────────────────────
+
+/**
+ * v2.0 컬러 토큰 — Figma Variables Primitives 구조 미러링
+ *
+ * - figma-tokens.json Primitives.{Mono|Semantic|Accent} 와 동일한 계층
+ * - shade 네이밍: 50(가장 옅음) → 900(가장 진함)
+ * - 8개 의미 반전 토큰(red50/yellow50/cyan50/khaki50/lightBlue50/pink50/purple50/violet50):
+ *   v1.x에서 강한 색이었으나 v2에서 옅은 색으로 재정의됨.
+ *   기존 강한 색이 필요하면 동일 스케일의 500/300/400 시리즈 참조.
+ *
+ * @see src/tokens/figma-tokens.json Primitives section
+ * @since v2.0 (2026-05-08)
+ */
+export const colorTokensV2 = {
+  Mono: {
+    /** v1 coolNeutral 대체 — 10단 그레이 스케일 */
+    neutral: {
+      50: '#F3F5F7',
+      100: '#E1E3E8',
+      200: '#C4C7CD',
+      300: '#ACAEB5',
+      400: '#8A8D94',
+      500: '#72747B',
+      600: '#5A5C63',
+      700: '#46474D',
+      800: '#2C2E32',
+      900: '#171719',
+    },
+    /** v1 Brand.mint를 Mono로 이동 — 400은 v1.x mint45와 동일(#22C3BC) */
+    mint: {
+      50: '#E4FCFC',
+      100: '#C2F7F6',
+      200: '#8BEAE5',
+      300: '#64D7D2',
+      400: '#22C3BC',
+      500: '#12A09A',
+      600: '#157D78',
+      700: '#105E5A',
+      800: '#093F3E',
+      900: '#082B2A',
+    },
+    WH: '#FFFFFF',
+    BK: '#000000',
+  },
+  Semantic: {
+    /** v1 green 재정의 — 400은 새 키컬러(#12BA7E) */
+    green: {
+      50: '#E9FBF5',
+      100: '#B5F7E1',
+      200: '#7AF0C6',
+      300: '#33D49A',
+      400: '#12BA7E',
+      500: '#0B9D69',
+      600: '#108159',
+      700: '#0A6343',
+      800: '#074730',
+      900: '#082B1F',
+    },
+    /** ⚠️ v2 의미 반전: red50=#FFE9E9(옅음). 강한 빨강은 red500(#D92020) 참조 */
+    red: {
+      50: '#FFE9E9',
+      100: '#FFC9C9',
+      200: '#FFA1A1',
+      300: '#F86F6F',
+      400: '#F04545',
+      500: '#D92020',
+      600: '#B51616',
+      700: '#8B0B0B',
+      800: '#5A0707',
+      900: '#2E0505',
+    },
+    /** ⚠️ v2 의미 반전: yellow50=#FFF8D8(옅음). 강한 노랑은 yellow300(#FFCE00, 동일 hex) 참조 */
+    yellow: {
+      50: '#FFF8D8',
+      100: '#FFEDA2',
+      200: '#FFE05F',
+      300: '#FFCE00',
+      400: '#F0B800',
+      500: '#E3A700',
+      600: '#C59000',
+      700: '#936C00',
+      800: '#604600',
+      900: '#3C2C00',
+    },
+    /** v2 신규 — Accent.orange에서 Semantic으로 이동 (warning 시멘틱 후보) */
+    orange: {
+      50: '#FFF2E5',
+      100: '#FFD1A4',
+      200: '#FFB166',
+      300: '#FF932B',
+      400: '#F67900',
+      500: '#DB6600',
+      600: '#B55400',
+      700: '#884200',
+      800: '#602D00',
+      900: '#361900',
+    },
+  },
+  Accent: {
+    /** ⚠️ v2 의미 반전: pink50=#FFE3ED(옅음). 강한 핑크는 pink500(#F81C62) 참조 */
+    pink: {
+      50: '#FFE3ED',
+      100: '#FFBACF',
+      200: '#FF9ABA',
+      300: '#FF729E',
+      400: '#FF417E',
+      500: '#F81C62',
+      600: '#D50A4A',
+      700: '#A40236',
+      800: '#77072A',
+      900: '#480419',
+    },
+    /** ⚠️ v2 의미 반전: purple50=#F7E6FF(옅음). 강한 퍼플은 purple500(#A924E5) 참조 */
+    purple: {
+      50: '#F7E6FF',
+      100: '#E9BAFF',
+      200: '#E09DFF',
+      300: '#D376FF',
+      400: '#C74CFF',
+      500: '#A924E5',
+      600: '#8A18C1',
+      700: '#6C1097',
+      800: '#510B74',
+      900: '#32024A',
+    },
+    /** ⚠️ v2 의미 반전: violet50=#F0ECFE(옅음). 강한 바이올렛은 violet500(#552CF4) 참조 */
+    violet: {
+      50: '#F0ECFE',
+      100: '#CBBFFF',
+      200: '#B09CFF',
+      300: '#8E70FF',
+      400: '#704CFF',
+      500: '#552CF4',
+      600: '#3C17CE',
+      700: '#2907B1',
+      800: '#1C057D',
+      900: '#0F004A',
+    },
+    /** ⚠️ v2 의미 반전: lightBlue50=#E5F6FE(옅음). 강한 라이트블루는 lightBlue400(#08B1FF) 참조 */
+    lightBlue: {
+      50: '#E5F6FE',
+      100: '#B9E9FF',
+      200: '#7ED6FF',
+      300: '#45C4FF',
+      400: '#08B1FF',
+      500: '#0090D7',
+      600: '#006FB5',
+      700: '#00538A',
+      800: '#003659',
+      900: '#00223C',
+    },
+    /** ⚠️ v2 의미 반전: cyan50=#E6FBFF(옅음). 강한 시안은 cyan400(#05BDDF) 참조 */
+    cyan: {
+      50: '#E6FBFF',
+      100: '#C0F6FF',
+      200: '#82E9FB',
+      300: '#37DAF8',
+      400: '#05BDDF',
+      500: '#00A5C2',
+      600: '#007E94',
+      700: '#005E6E',
+      800: '#003F49',
+      900: '#00252B',
+    },
+    /** ⚠️ v2 의미 반전: khaki50=#F4F7EE(옅음). 강한 카키는 khaki500(#6D8339) 참조 */
+    khaki: {
+      50: '#F4F7EE',
+      100: '#DCE6C5',
+      200: '#C4D49E',
+      300: '#A8C072',
+      400: '#87A349',
+      500: '#6D8339',
+      600: '#54642E',
+      700: '#3E4B1F',
+      800: '#303919',
+      900: '#202610',
+    },
+  },
+} as const;
+
+export type ColorTokensV2 = typeof colorTokensV2;
 
 /** 투명도 토큰 (Opacity) — 0 = 투명, 100 = 불투명 */
 export const opacity = {
@@ -221,6 +419,8 @@ export const palette = {
   opacity,
   white: '#FFFFFF',
   black: '#000000',
+  /** v2.0 신규 컬러 토큰 — colorTokensV2.{Mono|Semantic|Accent}.{scale}[shade] */
+  v2: colorTokensV2,
 } as const;
 
 // ─── Typography ──────────────────────────────────────────
