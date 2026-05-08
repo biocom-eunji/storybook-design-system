@@ -418,6 +418,90 @@ export const LINK = {
 </div>
 
 {/* ══════════════════════════════════════════════════════ */}
+{/* v2.4.0 — 2026-05-08                                   */}
+{/* ══════════════════════════════════════════════════════ */}
+
+<div className="version-header">
+  <span className="version-badge minor">v2.4.0</span>
+  <span className="version-date">2026-05-08</span>
+</div>
+
+<details className="toggle-card" open>
+  <summary>
+    <CaretIcon />
+    <span className="emoji">♻️</span>
+    <span className="title">Refactored</span>
+    <span className="count">3</span>
+  </summary>
+  <div className="toggle-body">
+    <div className="component-tags">
+      <span className="component-tag updated">backgroundScrim</span>
+      <span className="component-tag updated">Modal</span>
+      <span className="component-tag updated">BottomSheet</span>
+    </div>
+
+    <div className="change-item">
+      <span className="name-plain">semanticColor.backgroundScrim → bk60</span>
+      <span className="desc"><code>rgba(0,0,0,0.4)</code> → <code>dimmedLayerTokensV2.bk60</code> (<code>rgba(0,0,0,0.6)</code>) 참조로 변경. 단일 소스 원칙으로 v2.3.0 표준에 맞춰 마이그레이션</span>
+    </div>
+    <div className="change-item">
+      <span className="name"><a href={LINK.Modal}>Modal</a> backdrop</span>
+      <span className="desc">backgroundScrim 변경에 따라 backdrop alpha <code>0.4</code> → <code>0.6</code> (50% 더 진해짐). 컴포넌트 코드는 미수정</span>
+    </div>
+    <div className="change-item">
+      <span className="name"><a href={LINK.BottomSheet}>BottomSheet</a> backdrop + 애니메이션 버그 수정</span>
+      <span className="desc">기존: 정적 0.4 alpha × 애니메이션 0.4 = effective 0.16 (의도하지 않은 multiplicative 약화). 변경: backgroundScrim(<code>bk60</code>=0.6) × <code>BACKDROP_OPACITY = 1</code> = <strong>0.6</strong>. 애니메이션은 entrance/exit fade만 담당</span>
+    </div>
+  </div>
+</details>
+
+<details className="toggle-card" open>
+  <summary>
+    <CaretIcon />
+    <span className="emoji">⚠️</span>
+    <span className="title">Visual Regression</span>
+    <span className="count">2</span>
+  </summary>
+  <div className="toggle-body">
+    <div className="change-item">
+      <span className="name-plain">Modal backdrop</span>
+      <span className="desc">effective alpha <code>0.4 → 0.6</code> (+50%)</span>
+    </div>
+    <div className="change-item">
+      <span className="name-plain">BottomSheet backdrop</span>
+      <span className="desc">effective alpha <code>0.16 → 0.6</code> (+275%, 약화 버그 수정 포함)</span>
+    </div>
+
+    <div className="migration-block">
+      <div className="migration-row">
+        <div className="migration-col">
+          <p className="migration-label">Before (v2.3.0)</p>
+          <pre>{`// theme.ts
+backgroundScrim: 'rgba(0,0,0,0.4)'
+
+// BottomSheet.tsx
+const BACKDROP_OPACITY =
+  interaction.overlayOpacity; // 0.4
+// effective: 0.4 × 0.4 = 0.16`}</pre>
+        </div>
+        <div className="migration-col">
+          <p className="migration-label">After (v2.4.0)</p>
+          <pre>{`// theme.ts
+backgroundScrim: dimmedLayerTokensV2.bk60
+// = 'rgba(0,0,0,0.6)'
+
+// BottomSheet.tsx
+const BACKDROP_OPACITY = 1;
+// effective: 0.6 × 1 = 0.6 (BK-60)`}</pre>
+        </div>
+      </div>
+    </div>
+  </div>
+</details>
+
+<hr className="version-divider" />
+
+{/* ══════════════════════════════════════════════════════ */}
 {/* v2.3.0 — 2026-05-08                                   */}
 {/* ══════════════════════════════════════════════════════ */}
 
@@ -426,7 +510,7 @@ export const LINK = {
   <span className="version-date">2026-05-08</span>
 </div>
 
-<details className="toggle-card" open>
+<details className="toggle-card">
   <summary>
     <CaretIcon />
     <span className="emoji">✨</span>
@@ -453,7 +537,7 @@ export const LINK = {
   </div>
 </details>
 
-<details className="toggle-card" open>
+<details className="toggle-card">
   <summary>
     <CaretIcon />
     <span className="emoji">⚠️</span>

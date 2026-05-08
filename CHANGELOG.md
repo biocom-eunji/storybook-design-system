@@ -3,13 +3,35 @@
 바이오컴 디자인 시스템의 변경 이력입니다.
 
 ---
-\
-## v2.4.0 (2026-05-08)\
-\
-### Added\
-\
-\
-\
+
+## v2.4.0 (2026-05-08)
+
+> 모달/바텀시트 backdrop을 v2.3.0의 표준 `bk60`으로 마이그레이션. **시각 회귀 발생** (backdrop alpha 증가).
+
+### Changed
+
+- **`semanticColor.backgroundScrim`** — `rgba(0,0,0,0.4)` → `dimmedLayerTokensV2.bk60` (`rgba(0,0,0,0.6)`)
+  - **Modal**: 백드롭 alpha `0.4` → `0.6` (50% 더 진한 dim)
+  - **BottomSheet**: 백드롭 alpha `0.16` (= 0.4 × 0.4 multiplicative dilution) → **`0.6`** (3.75배 더 진한 dim)
+- **`BottomSheet` 애니메이션 보정** — `BACKDROP_OPACITY = interaction.overlayOpacity` (`0.4`) → `1`
+  - 기존: 정적 색의 0.4 alpha를 다시 0.4로 곱해 0.16으로 약화시키던 버그
+  - 변경: 색 토큰(0.6)에 인코딩된 alpha를 그대로 표현, 애니메이션은 entrance/exit 페이드만 담당
+- **`stories/ColorTokens.mdx`** — backgroundScrim 표기 `rgba(0,0,0,0.4)` → `rgba(0,0,0,0.6)` 동기화
+
+### 시각 회귀 영향
+
+| 컴포넌트 | 이전 effective alpha | 신규 effective alpha | 변화 |
+|---|---|---|---|
+| Modal | 0.4 | 0.6 | +50% |
+| BottomSheet | 0.16 | 0.6 | +275% |
+
+> Chromatic visual review에서 두 컴포넌트의 backdrop이 더 진하게 표시됨이 정상.
+
+### 후방 호환
+
+- `semanticColor.backgroundScrim` 키는 그대로 유지 — 기존 import 무수정
+- `interaction.overlayOpacity = 0.4`는 보존 (다른 곳에서 참조될 가능성)
+
 ---
 
 ## v2.3.0 (2026-05-08)
