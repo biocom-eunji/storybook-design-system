@@ -3,6 +3,45 @@
 바이오컴 디자인 시스템의 변경 이력입니다.
 
 ---
+\
+## v1.4.0 (2026-05-08)\
+\
+### Added\
+\
+- **theme.ts에 colorTokensV2 추가 + v1 스케일 @deprecated 표시** tokens\
+- **figma-tokens.json v2.0 컬러 전면 갱신** components\
+- **BaseInput 리팩토링 + 신규 컴포넌트 6종 + Phosphor 아이콘 통합** components\
+- **v2.0.0 — 신규 컴포넌트 13종 + 카테고리 재편 + 이름 변경** stories\
+- **v1.4.0 — 전체 스토리 재생성 + TokenSpecTable + figma-tokens.json** tokens\
+\
+### Changed\
+\
+- **하드코딩 색상/radius 토큰화 + StyleSheet 리팩토링** tokens\
+- **semanticColor 토큰 확장 및 역할 프리미티브 정리** stories\
+- **인라인 스타일을 semanticColor 토큰으로 전환** components\
+- **palette 직접 참조를 semanticColor 토큰으로 전환** tokens\
+- **semanticColor 토큰 확장 및 theme typography/spacing alias 추가** components\
+- **InputField 서체·컬러를 토큰 참조로 변경** components\
+- **TextButton 아이콘 조합 기능 전체 삭제** tokens\
+- **TextButton 컬러를 semanticColor 토큰 참조로 변경** components\
+- **TextButton 서체를 textStyle 토큰 참조로 변경** tokens\
+\
+### Fixed\
+\
+- **phosphor-react-native vitest 모킹 — TextField 테스트 ESM 파싱 실패 해결** types\
+- **TypeScript 컴파일 에러 42건 일괄 수정** components\
+- **PageIndicator OPACITY_CONFIG white→inverse 키 수정 및 Tabs 디자인 스펙 키 동기화** stories\
+- **Chromatic 컴포넌트 에러 8건 수정** workflows\
+- **bash 정규식 괄호 파싱 오류 수정** workflows\
+- **release-notes 커밋 범위를 안전하게 전체 로그로 변경** components\
+\
+### Infra\
+\
+- **@storybook/addon-vitest 제거** storybook\
+- **Chromatic 및 Vitest addon 설치** workflows\
+- **CI 및 Auto Release Notes 워크플로우 추가** workflows\
+\
+---
 
 ## v2.0.0 (2026-04-22)
 
