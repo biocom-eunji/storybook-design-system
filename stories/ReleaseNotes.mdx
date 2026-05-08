@@ -382,6 +382,7 @@ export const LINK = {
   Opacity:          `${SB}primitives-palette-opacity--docs`,
   Shadow:           `${SB}semantics-token-shadow--docs`,
   ColorTokens:      `${SB}semantics-token-color--docs`,
+  ColorTokensV2:    `${SB}primitives-palette-v2-0-color-tokens--docs`,
   // Getting Started
   Guide:            `${SB}getting-started-guide--docs`,
   BrandLogo:        `${SB}getting-started-brand-logo--docs`,
@@ -415,12 +416,12 @@ export const LINK = {
 </div>
 
 {/* ══════════════════════════════════════════════════════ */}
-{/* v2.1.0 — 2026-04-23                                   */}
+{/* v2.1.0 — 2026-05-08                                   */}
 {/* ══════════════════════════════════════════════════════ */}
 
 <div className="version-header">
   <span className="version-badge minor">v2.1.0</span>
-  <span className="version-date">2026-04-23</span>
+  <span className="version-date">2026-05-08</span>
 </div>
 
 <details className="toggle-card" open>
@@ -428,10 +429,11 @@ export const LINK = {
     <CaretIcon />
     <span className="emoji">✨</span>
     <span className="title">Features</span>
-    <span className="count">11</span>
+    <span className="count">13</span>
   </summary>
   <div className="toggle-body">
     <div className="component-tags">
+      <span className="component-tag new">ColorTokensV2</span>
       <span className="component-tag new">StatCard</span>
       <span className="component-tag new">LikertScale</span>
       <span className="component-tag new">RadioCard</span>
@@ -443,6 +445,10 @@ export const LINK = {
       <span className="component-tag updated">EmptyState</span>
     </div>
 
+    <div className="change-item">
+      <span className="name"><a href={LINK.ColorTokensV2}>v2.0 Color Tokens</a></span>
+      <span className="desc">Figma "2. Colors" 캔버스 기반 신규 컬러 시스템. <strong>122개 swatch</strong> (Mono/Semantic/Accent), 8개 의미 반전 ReversalNotice, Quaternary 접근성 경고 포함. <code>colorTokensV2.{`{Mono|Semantic|Accent}.{scale}[shade]`}</code> 형태로 접근</span>
+    </div>
     <div className="change-item">
       <span className="name"><a href={LINK.StatCard}>StatCard</a></span>
       <span className="desc">Compound 패턴 통계 카드. Header/Count/CircularProgress 서브 컴포넌트, 6종 accent 색상</span>
@@ -487,6 +493,10 @@ export const LINK = {
       <span className="name-plain">Figma 캔버스 시각화 17종</span>
       <span className="desc">SearchBar · DatePicker · TimePicker · Stepper · LikertScale · CircularProgress · EmptyState · Tabs · BottomNavigation · AppBar · FrequencyChip · StatCard · List · LevelIndicator · Avatar · Badge · Tag — 전체 Figma Variables 바인딩</span>
     </div>
+    <div className="change-item">
+      <span className="name-plain">ColorPalette deprecation 배너</span>
+      <span className="desc">v1 <code>ColorPalette.mdx</code> 상단에 v2.0 마이그레이션 안내 배너 추가</span>
+    </div>
   </div>
 </details>
 
@@ -495,16 +505,30 @@ export const LINK = {
     <CaretIcon />
     <span className="emoji">♻️</span>
     <span className="title">Refactored</span>
-    <span className="count">8</span>
+    <span className="count">11</span>
   </summary>
   <div className="toggle-body">
     <div className="component-tags">
+      <span className="component-tag updated">theme.ts</span>
+      <span className="component-tag updated">figma-tokens.json</span>
       <span className="component-tag updated">TextField</span>
       <span className="component-tag updated">SearchBar</span>
       <span className="component-tag updated">Icon</span>
       <span className="component-tag updated">EmptyState</span>
     </div>
 
+    <div className="change-item">
+      <span className="name-plain">theme.ts colorTokensV2 namespace</span>
+      <span className="desc">Figma Variables Primitives 구조 미러링 신규 export. <code>palette.v2</code>로도 접근 가능. v1 스케일 12종(coolNeutral/mint/red/...)에 <code>@deprecated</code> JSDoc 추가 → IDE strikethrough hint로 마이그레이션 타깃 가시화</span>
+    </div>
+    <div className="change-item">
+      <span className="name-plain">figma-tokens.json v2 재구성</span>
+      <span className="desc">style-dictionary 표준 <code>deprecated: true</code> + <code>comment</code> 필드로 v1 토큰 보존. 8개 충돌 토큰은 <code>_v1</code> 접미사로 분리 후 신규 값이 canonical 키 차지</span>
+    </div>
+    <div className="change-item">
+      <span className="name-plain">컴포넌트 토큰 하이진 (23종)</span>
+      <span className="desc"><code>'#000000'</code> 하드코딩 → <code>palette.black</code>, 숫자 리터럴 → <code>radius.*</code>, Pressable 스타일을 <code>StyleSheet.create()</code>로 분리</span>
+    </div>
     <div className="change-item">
       <span className="name-plain">BaseInput 공통 컴포넌트</span>
       <span className="desc">TextField/SearchBar 중복 로직(value 관리, clear, focus/blur) 추출. <code>_internal/BaseInput</code> 내부 전용</span>
@@ -545,12 +569,55 @@ export const LINK = {
     <CaretIcon />
     <span className="emoji">⚠️</span>
     <span className="title">Breaking Changes</span>
-    <span className="count">1</span>
+    <span className="count">7</span>
   </summary>
   <div className="toggle-body">
     <div className="change-item">
+      <span className="name-plain">shade 네이밍 역전</span>
+      <span className="desc"><code>99/95/.../10</code> → <code>50/100/.../900</code> (50=옅음, 900=진함). 모든 컬러 스케일에 적용</span>
+    </div>
+    <div className="change-item">
+      <span className="name-plain">Mono.coolNeutral 22단 → Mono.neutral 10단</span>
+      <span className="desc">기존 22개는 <code>deprecated: true</code> 마커로 보존. 신규 10단 (50/100/.../900)</span>
+    </div>
+    <div className="change-item">
+      <span className="name-plain">Brand.mint → Mono.mint 컬렉션 이동</span>
+      <span className="desc">Brand 컬렉션 폐기. <code>Brand.mint45</code> → <code>Mono.mint400</code> (동일 hex <code>#22C3BC</code>)</span>
+    </div>
+    <div className="change-item">
+      <span className="name-plain">Accent.orange → Semantic.orange 이동</span>
+      <span className="desc">warning 시멘틱 후보로 분류. 정확한 역할 결정은 Issue #3에서 진행 중</span>
+    </div>
+    <div className="change-item">
+      <span className="name-plain">Mono.WH / Mono.BK 분리</span>
+      <span className="desc">순수 흰색 <code>#FFFFFF</code> / 순수 검정 <code>#000000</code>을 별도 토큰으로 분리</span>
+    </div>
+    <div className="change-item">
+      <span className="name-plain">8개 의미 반전 토큰</span>
+      <span className="desc"><code>red50/yellow50/cyan50/khaki50/lightBlue50/pink50/purple50/violet50</code> — v1.x에서 강한 색이었으나 v2에서 옅은 색으로 재정의. 기존 강한 색은 <code>*500</code> 또는 <code>*_v1</code> 접미사 참조</span>
+    </div>
+    <div className="change-item">
       <span className="name-plain">OTPInput 삭제</span>
       <span className="desc">OTPInput 컴포넌트 및 스토리 제거</span>
+    </div>
+
+    <div className="migration-block">
+      <div className="migration-row">
+        <div className="migration-col">
+          <p className="migration-label">Before</p>
+          <pre>{`mint[45]      // #22C3BC
+yellow[50]    // #FFCE00 (warning)
+red[50]       // #E51A1A (강한 빨강)
+coolNeutral[10] // #171719`}</pre>
+        </div>
+        <div className="migration-col">
+          <p className="migration-label">After</p>
+          <pre>{`colorTokensV2.Mono.mint[400]      // #22C3BC ✓
+colorTokensV2.Semantic.yellow[300] // #FFCE00 ✓ (동일)
+colorTokensV2.Semantic.red[500]    // #D92020 (값 변경 주의)
+colorTokensV2.Mono.neutral[900]    // #171719 ✓`}</pre>
+        </div>
+      </div>
     </div>
   </div>
 </details>
@@ -559,10 +626,18 @@ export const LINK = {
   <summary>
     <CaretIcon />
     <span className="emoji">🔧</span>
-    <span className="title">Infra</span>
-    <span className="count">2</span>
+    <span className="title">Infra · Security</span>
+    <span className="count">5</span>
   </summary>
   <div className="toggle-body">
+    <div className="change-item">
+      <span className="name-plain">CHROMATIC_PROJECT_TOKEN 평문 노출 제거</span>
+      <span className="desc"><code>package.json</code> deploy 스크립트에서 <code>--project-token=...</code> 플래그 제거. <code>CHROMATIC_PROJECT_TOKEN</code> 환경변수 자동 인식 + <code>.env.example</code> 가이드 추가. <strong>⚠️ git history 노출 토큰 즉시 rotate 필요</strong></span>
+    </div>
+    <div className="change-item">
+      <span className="name-plain">vitest phosphor-react-native 모킹</span>
+      <span className="desc"><code>setup.ts</code>에서 NoopIcon으로 모킹하여 jsdom + vite 변환 파이프라인의 ESM 파싱 에러(SyntaxError: Unexpected token 'typeof') 해결</span>
+    </div>
     <div className="change-item">
       <span className="name-plain">Node.js 22</span>
       <span className="desc">CI 워크플로우 Node.js 20 → 22 업그레이드</span>
@@ -570,6 +645,10 @@ export const LINK = {
     <div className="change-item">
       <span className="name-plain">Auto Release Notes</span>
       <span className="desc">GitHub Actions 자동 릴리즈 노트 워크플로우 추가</span>
+    </div>
+    <div className="change-item">
+      <span className="name-plain">.gitignore</span>
+      <span className="desc"><code>*.zip</code> 패턴 추가, <code>src.zip</code> 제거</span>
     </div>
   </div>
 </details>
@@ -579,14 +658,21 @@ export const LINK = {
     <CaretIcon />
     <span className="emoji">🐛</span>
     <span className="title">Fixes</span>
-    <span className="count">4</span>
+    <span className="count">10</span>
   </summary>
   <div className="toggle-body">
     <ul className="simple-list">
+      <li><strong>TypeScript 컴파일 에러 42건 일괄 수정</strong>:</li>
+      <li>Tooltip type swap — <code>position: top/bottom</code> ↔ <code>align: TooltipAlignHorizontal</code>, <code>position: left/right</code> ↔ <code>align: TooltipAlignVertical</code> 페어링 정정</li>
+      <li>Card/ListCard <code>thumbImage</code> 스타일 타입 <code>ViewStyle</code> → <code>ImageStyle</code></li>
+      <li>PageIndicator <code>getPageIndicatorSize</code> sizeConfig union 타입 수용</li>
+      <li>Button stories 17건: <code>color="..."</code> → <code>colorScheme="..."</code> (BottomSheet/Modal/ProgressBar)</li>
+      <li>Switch stories 7건: <code>active=</code> → <code>checked=</code> (List)</li>
+      <li>Tag stories 2건: <code>{`{level}단계`}</code> → 템플릿 리터럴로 number→string 캐스팅</li>
+      <li>Chip/TextArea/Tooltip stories 12건 타입 정합 수정</li>
       <li>FrequencyChip <code>severity="moderate"</code> → <code>"caution"</code> prop 이름 변경 미반영 수정</li>
-      <li>PageIndicator <code>OPACITY_CONFIG</code> 키 <code>white</code> → <code>inverse</code> 동기화 수정</li>
-      <li>Tabs <code>SIZE_TOKEN_MAP</code> 키 <code>S/M/L</code> → <code>small/medium/large</code> 동기화 수정</li>
-      <li>TextField 스토리 <code>stateColors</code> 중복 키(<code>color/text/primary</code>) 제거</li>
+      <li>PageIndicator <code>OPACITY_CONFIG</code> 키 <code>white</code> → <code>inverse</code> 동기화</li>
+      <li>Tabs <code>SIZE_TOKEN_MAP</code> 키 <code>S/M/L</code> → <code>small/medium/large</code> 동기화</li>
     </ul>
   </div>
 </details>

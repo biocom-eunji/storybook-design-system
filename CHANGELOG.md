@@ -3,44 +3,78 @@
 바이오컴 디자인 시스템의 변경 이력입니다.
 
 ---
-\
-## v1.4.0 (2026-05-08)\
-\
-### Added\
-\
-- **theme.ts에 colorTokensV2 추가 + v1 스케일 @deprecated 표시** tokens\
-- **figma-tokens.json v2.0 컬러 전면 갱신** components\
-- **BaseInput 리팩토링 + 신규 컴포넌트 6종 + Phosphor 아이콘 통합** components\
-- **v2.0.0 — 신규 컴포넌트 13종 + 카테고리 재편 + 이름 변경** stories\
-- **v1.4.0 — 전체 스토리 재생성 + TokenSpecTable + figma-tokens.json** tokens\
-\
-### Changed\
-\
-- **하드코딩 색상/radius 토큰화 + StyleSheet 리팩토링** tokens\
-- **semanticColor 토큰 확장 및 역할 프리미티브 정리** stories\
-- **인라인 스타일을 semanticColor 토큰으로 전환** components\
-- **palette 직접 참조를 semanticColor 토큰으로 전환** tokens\
-- **semanticColor 토큰 확장 및 theme typography/spacing alias 추가** components\
-- **InputField 서체·컬러를 토큰 참조로 변경** components\
-- **TextButton 아이콘 조합 기능 전체 삭제** tokens\
-- **TextButton 컬러를 semanticColor 토큰 참조로 변경** components\
-- **TextButton 서체를 textStyle 토큰 참조로 변경** tokens\
-\
-### Fixed\
-\
-- **phosphor-react-native vitest 모킹 — TextField 테스트 ESM 파싱 실패 해결** types\
-- **TypeScript 컴파일 에러 42건 일괄 수정** components\
-- **PageIndicator OPACITY_CONFIG white→inverse 키 수정 및 Tabs 디자인 스펙 키 동기화** stories\
-- **Chromatic 컴포넌트 에러 8건 수정** workflows\
-- **bash 정규식 괄호 파싱 오류 수정** workflows\
-- **release-notes 커밋 범위를 안전하게 전체 로그로 변경** components\
-\
-### Infra\
-\
-- **@storybook/addon-vitest 제거** storybook\
-- **Chromatic 및 Vitest addon 설치** workflows\
-- **CI 및 Auto Release Notes 워크플로우 추가** workflows\
-\
+
+## v2.1.0 (2026-05-08)
+
+> 디자인 토큰 컬러 v2.0 전면 갱신 + v2.1 스토리·컴포넌트 통합 릴리즈. **Breaking Changes 포함** — 마이그레이션 가이드는 아래 참조.
+
+### ⚠️ Breaking Changes
+
+- **shade 네이밍 역전**: `99/95/.../10` → `50/100/.../900` (50=옅음, 900=진함)
+- **Mono.coolNeutral 22단 → Mono.neutral 10단**으로 정리. 기존 22개 토큰은 `deprecated: true` 마커로 보존
+- **Brand.mint → Mono.mint 컬렉션 이동**. `mint45` → `mint400` (동일 hex `#22C3BC`)
+- **Accent.orange → Semantic.orange 이동** (warning 시멘틱 후보 — Issue #3에서 결정 대기)
+- **Mono.WH (#FFFFFF) / Mono.BK (#000000) 별도 토큰 분리**
+- **8개 의미 반전 토큰**: `red50/yellow50/cyan50/khaki50/lightBlue50/pink50/purple50/violet50` — v1.x 강한 색이 v2에서 옅은 색으로 재정의됨. 기존 강한 색은 `*500` 또는 `*_v1` 접미사 참조
+
+### Added
+
+#### 디자인 토큰 v2.0
+- **`colorTokensV2`** namespace export (`theme.ts`) — Figma Variables Primitives 구조 미러링 (`Mono`/`Semantic`/`Accent`)
+- **122개 신규 swatch** (`figma-tokens.json`): Mono.neutral 10 + Mono.mint 10 + Mono.WH/BK 2 + Semantic 40 + Accent 60
+- **Storybook Color Tokens v2 페이지** (`stories/ColorTokensV2.mdx`) — 4 섹션 (Basic / Semantic / Accent / Contents), 8개 의미 반전 ReversalNotice, Quaternary 접근성 경고
+- `.figma-extracted-snapshot.json` — Figma 추출 원본 스냅샷 동봉
+
+#### v2.1 컴포넌트·스토리
+- **신규 컴포넌트 7종** — StatCard, LikertScale, RadioCard, Tag, TimePicker, Stepper, Guide
+- **신규 스토리 6종** — DesignSpec/InContext/States 섹션 패턴 정착
+- **Figma 캔버스 시각화 17종** — SearchBar, DatePicker, TimePicker, Stepper, LikertScale, CircularProgress, EmptyState 등 전체 Figma Variables 바인딩
+
+### Changed
+
+- **컴포넌트 토큰 하이진** (23종) — `'#000000'` 하드코딩 → `palette.black`, 숫자 리터럴 → `radius.*`, `Pressable` 스타일 `StyleSheet.create()` 분리
+- **theme.ts shadow level 1~3** — `shadowColor` 토큰 참조로 변경
+- **30개 스토리 고도화** — DesignSpec/InContext/States 추가, semanticColor 토큰 일괄 전환
+- **`palette` export에 `v2: colorTokensV2`** 추가 (`palette.v2.Mono.neutral[500]` 형태 접근)
+
+### Deprecated
+
+- **143개 v1 컬러 토큰** — `deprecated: true` + `comment` 필드로 보존. 컴포넌트 마이그레이션 전까지 참조 끊지 않음
+- **theme.ts v1 스케일 12종** — `coolNeutral`, `mint`, `red`, `yellow`, `green`, `orange`, `pink`, `purple`, `violet`, `lightBlue`, `cyan`, `khaki`에 `@deprecated` JSDoc 추가 → IDE에서 사용처 strikethrough hint로 마이그레이션 타깃 가시화
+- **8개 충돌 토큰**: 기존 `red50` 등은 `red50_v1` 접미사로 보존, 신규 값이 canonical 키 차지
+
+### Fixed
+
+- **TypeScript 컴파일 에러 42건** 일괄 수정
+  - Tooltip type swap (position top/bottom ↔ horizontal align, position left/right ↔ vertical align)
+  - Card/ListCard `thumbImage` 스타일 타입 `ViewStyle` → `ImageStyle`
+  - PageIndicator `getPageIndicatorSize` sizeConfig 파라미터 union 타입 수용
+  - Button stories 17건: `color="..."` → `colorScheme="..."`
+  - Switch stories 7건: `active={...}` → `checked={...}`
+  - Tag stories 2건: `{level}단계` → `` `${level}단계` `` (number→string)
+  - Chip/TextArea/Tooltip stories 12건 타입 정합 수정
+- **vitest TextField 테스트 ESM 파싱 실패** — `phosphor-react-native`를 setup.ts에서 NoopIcon으로 모킹
+
+### Infra · Security
+
+- **`CHROMATIC_PROJECT_TOKEN` 평문 노출 제거** — `package.json` deploy 스크립트에서 `--project-token=...` 플래그 제거, `CHROMATIC_PROJECT_TOKEN` 환경변수로 전환
+- **`.env.example` 신규 추가** — Chromatic 환경변수 설정 가이드
+- **`*.zip` `.gitignore` 추가**
+
+> **후속 조치 필수**: git history에 노출된 기존 토큰(`chpt_a2aa7504369e0a9`) rotate 필요
+
+### Migration
+
+| AS-IS (v1) | TO-BE (v2.1) | 비고 |
+|---|---|---|
+| `coolNeutral[100]` (#FFFFFF) | `Mono.WH` 또는 `colorTokensV2.Mono.WH` | 신규 별도 토큰 |
+| `coolNeutral[10]` (#171719) | `colorTokensV2.Mono.neutral[900]` | 동일 hex |
+| `coolNeutral[40]` (#5A5C63) | `colorTokensV2.Mono.neutral[600]` | 동일 hex |
+| `mint[45]` (#22C3BC) | `colorTokensV2.Mono.mint[400]` | 동일 hex (브랜드 키) |
+| `yellow[50]` (#FFCE00) | `colorTokensV2.Semantic.yellow[300]` | 동일 hex (warning) |
+| `red[50]` (#E51A1A) | ⚠️ `colorTokensV2.Semantic.red[500]` | hex 변경 (#D92020), 의미 반전 |
+| `Accent.orange.*` | `colorTokensV2.Semantic.orange.*` | 카테고리 이동 |
+
 ---
 
 ## v2.0.0 (2026-04-22)
