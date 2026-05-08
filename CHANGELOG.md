@@ -64,7 +64,7 @@ React Native shadow API는 `spread`를 미지원. v2 토큰의 `spread` 필드�
 #### 디자인 토큰 v2.0
 - **`colorTokensV2`** namespace export (`theme.ts`) — Figma Variables Primitives 구조 미러링 (`Mono`/`Semantic`/`Accent`)
 - **122개 신규 swatch** (`figma-tokens.json`): Mono.neutral 10 + Mono.mint 10 + Mono.WH/BK 2 + Semantic 40 + Accent 60
-- **Storybook Color Tokens v2 페이지** (`stories/ColorTokensV2.mdx`) — 4 섹션 (Basic / Semantic / Accent / Contents), 8개 의미 반전 ReversalNotice, Quaternary 접근성 경고
+- **Storybook Color Tokens v2 페이지** (`stories/ColorTokensV2.mdx`) — 3 섹션 (Basic / Semantic / Accent), 8개 의미 반전 ReversalNotice
 - `.figma-extracted-snapshot.json` — Figma 추출 원본 스냅샷 동봉
 
 #### v2.1 컴포넌트·스토리

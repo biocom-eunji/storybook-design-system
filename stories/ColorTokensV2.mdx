@@ -251,21 +251,4 @@ export const ReversalNotice = ({ tokenName, oldHex, newHex, migrationTo }) => (
   <Swatch token="900" hex="#202610" />
 </PaletteRow>
 
-<hr className="section-divider" />
-
-## Contents Colors
-<p style={{ fontSize: 13, color: '#5A5C63', margin: '0 0 16px' }}>Figma "Semantic Color Tokens / Contents" 카테고리 — 텍스트·콘텐츠 색상 5단계.</p>
-
-<PaletteRow title="Contents Hierarchy" description="텍스트 위계 — Primary(헤더) → Quaternary(장식) → on Color(반전)">
-  <Swatch token="Contents/Primary" hex="#171719" desc="본문 헤더, 핵심 정보" />
-  <Swatch token="Contents/Secondary" hex="#2C2E32" desc="본문 서브 텍스트" />
-  <Swatch token="Contents/Tertiary" hex="#72747B" desc="보조 텍스트, 설명" />
-  <Swatch token="Contents/Quaternary" hex="#ACAEB5" desc="⚠️ 장식/Disabled 전용 — 본문 사용 금지 (WCAG AA 미달)" warningText />
-  <Swatch token="Contents/on Color" hex="#FFFFFF" desc="컬러 배경 위 텍스트" />
-</PaletteRow>
-
-<div style={{ background: '#FCE8E8', border: '1px solid #EF7676', borderRadius: 8, padding: 12, marginTop: 8, fontSize: 13, color: '#5A0707' }}>
-<strong>⚠️ Quaternary (#ACAEB5) 접근성 주의</strong>: 흰색 배경 기준 대비 2.5:1로 WCAG AA(본문 4.5:1) 미달. <strong>본문 텍스트에 사용 금지</strong> — 장식, Disabled 상태, Placeholder 전용.
-</div>
-
 </div>
