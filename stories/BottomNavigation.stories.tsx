@@ -1,0 +1,296 @@
+import React, { useState } from 'react';
+import { View, Text } from 'react-native';
+import type { Meta, StoryObj } from '@storybook/react-vite';
+import { BottomNavigation, BIOCOM_TABS } from '../src/components/BottomNavigation';
+import { Section, StateLabel, Col, SpecTable, CodeBlock, Divider } from './storyHelpers';
+import { fontSize, fontWeight, spacing, radius, semanticColor } from '../src/tokens/theme';
+
+const meta: Meta<typeof BottomNavigation> = {
+  title: 'Navigation/BottomNavigation',
+  component: BottomNavigation,
+  argTypes: {
+    value: {
+      control: 'select',
+      options: ['contents', 'goal', 'main', 'ai', 'shop'],
+      description: '활성 탭 키',
+    },
+  },
+  tags: ['autodocs'],
+};
+
+export default meta;
+type Story = StoryObj<typeof BottomNavigation>;
+
+const PreviewContainer = ({ children }: { children: React.ReactNode }) => (
+  <View style={{
+    backgroundColor: semanticColor.backgroundSecondary,
+    paddingTop: spacing['3xlarge'],
+    borderRadius: radius.medium,
+    overflow: 'hidden',
+  }}>
+    {children}
+  </View>
+);
+
+// ─── 1. Playground ───────────────────────────────────────────
+
+export const Playground: Story = {
+  render: () => {
+    const [value, setValue] = useState('main');
+    return (
+      <PreviewContainer>
+        <BottomNavigation
+          items={BIOCOM_TABS}
+          value={value}
+          onChange={setValue}
+        />
+      </PreviewContainer>
+    );
+  },
+};
+
+// ─── 2. 바이오컴 탭바 ───────────────────────────────────────
+
+export const BiocomBottomNavigation: Story = {
+  name: '바이오컴 탭바',
+  render: () => {
+    const [value, setValue] = useState('main');
+    return (
+      <Section
+        title="바이오컴 탭바"
+        description="콘텐츠 · 목표 · 메인 · AI · 쇼핑 — 바이오컴 서비스의 기본 하단 내비게이션입니다."
+      >
+        <PreviewContainer>
+          <BottomNavigation
+            items={BIOCOM_TABS}
+            value={value}
+            onChange={setValue}
+          />
+        </PreviewContainer>
+        <View style={{ marginTop: spacing.medium }}>
+          <Text style={{ fontSize: fontSize.small, color: semanticColor.textSecondary }}>
+            현재 활성 탭: <Text style={{ fontWeight: fontWeight.bold, color: semanticColor.textBrand }}>{value}</Text>
+          </Text>
+        </View>
+      </Section>
+    );
+  },
+};
+
+// ─── 3. 탭별 활성 상태 ──────────────────────────────────────
+
+export const ActiveStates: Story = {
+  name: '탭별 활성 상태',
+  render: () => (
+    <Section
+      title="탭별 활성 상태"
+      description="각 탭이 활성화된 상태를 한눈에 비교합니다."
+    >
+      <Col gap={spacing.xlarge}>
+        {BIOCOM_TABS.map((tab) => (
+          <Col key={tab.key} gap={spacing.small}>
+            <StateLabel>{`${tab.label} 활성`}</StateLabel>
+            <PreviewContainer>
+              <BottomNavigation items={BIOCOM_TABS} value={tab.key} />
+            </PreviewContainer>
+          </Col>
+        ))}
+      </Col>
+    </Section>
+  ),
+};
+
+// ─── 4. 아이콘 매핑 ────────────────────────────────────────
+
+export const IconMapping: Story = {
+  name: '아이콘 매핑',
+  render: () => (
+    <Section
+      title="아이콘 매핑"
+      description="각 탭에 사용된 Icon 컴포넌트 이름입니다. 모두 기존 Icon 파운데이션에서 가져옵니다."
+    >
+      <SpecTable
+        title="탭 → 아이콘 매핑"
+        rows={[
+          { label: '콘텐츠', value: 'stack', token: '<Icon name="stack" />' },
+          { label: '목표', value: 'streak', token: '<Icon name="streak" />' },
+          { label: '메인', value: 'house', token: '<Icon name="house" />' },
+          { label: 'AI', value: 'heart', token: '<Icon name="heart" />' },
+          { label: '쇼핑', value: 'shopping-cart-simple', token: '<Icon name="shopping-cart-simple" />' },
+        ]}
+      />
+
+      <Divider />
+
+      <SpecTable
+        title="색상 토큰"
+        rows={[
+          { label: '활성 아이콘', value: semanticColor.iconBrand, token: 'semanticColor.iconBrand' },
+          { label: '비활성 아이콘', value: semanticColor.iconDisabled, token: 'semanticColor.iconDisabled' },
+          { label: '활성 텍스트', value: semanticColor.textBrand, token: 'semanticColor.textBrand' },
+          { label: '비활성 텍스트', value: semanticColor.textSecondary, token: 'semanticColor.textSecondary' },
+          { label: '배경', value: semanticColor.backgroundPrimary, token: 'semanticColor.backgroundPrimary' },
+          { label: '구분선', value: semanticColor.borderDefault, token: 'semanticColor.borderDefault' },
+        ]}
+      />
+    </Section>
+  ),
+};
+
+// ─── 5. 디자인 스펙 ─────────────────────────────────────────
+
+export const DesignSpec: Story = {
+  name: '디자인 스펙',
+  render: () => (
+    <Section title="디자인 스펙" description="BottomNavigation 컴포넌트의 레이아웃 토큰 명세입니다.">
+      <Col gap={spacing.xlarge}>
+        <SpecTable
+          title="컨테이너"
+          rows={[
+            { label: '높이', value: '60px', token: '—' },
+            { label: '배경색', value: semanticColor.backgroundPrimary, token: 'semanticColor.backgroundPrimary' },
+            { label: '상단 테두리', value: semanticColor.borderDefault, token: 'semanticColor.borderDefault' },
+            { label: '하단 패딩', value: `${spacing.xsmall}px`, token: 'spacing.xsmall' },
+          ]}
+        />
+        <SpecTable
+          title="탭 아이템"
+          rows={[
+            { label: '아이콘 크기', value: '24px', token: '—' },
+            { label: '라벨 폰트', value: `${fontSize.xsmall}px`, token: 'fontSize.xsmall' },
+            { label: '아이콘-라벨 간격', value: `${spacing.xsmall}px`, token: 'spacing.xsmall' },
+            { label: '상단 패딩', value: `${spacing.small}px`, token: 'spacing.small' },
+          ]}
+        />
+      </Col>
+    </Section>
+  ),
+};
+
+// ─── 6. 실전 예시 ───────────────────────────────────────────
+
+export const InContext: Story = {
+  name: '실전 예시',
+  render: () => {
+    const [value, setValue] = useState('main');
+    return (
+      <View style={{ gap: spacing['3xlarge'] }}>
+        <Section
+          title="실전 예시"
+          description="앱 메인 화면 — 상단 AppBar, 중간 콘텐츠, 하단 BottomNavigation이 배치된 모바일 화면 시뮬레이션입니다."
+        >
+          <View style={{
+            maxWidth: 375,
+            padding: spacing.xlarge,
+            backgroundColor: semanticColor.backgroundPrimary,
+            borderRadius: radius.large,
+            borderWidth: 1,
+            borderColor: semanticColor.borderDefault,
+          }}>
+            <View style={{
+              width: '100%' as any,
+              height: 56,
+              flexDirection: 'row',
+              alignItems: 'center',
+              paddingHorizontal: spacing.large,
+              borderBottomWidth: 1,
+              borderBottomColor: semanticColor.borderDefault,
+            }}>
+              <Text style={{
+                fontSize: fontSize.large,
+                fontWeight: fontWeight.semibold,
+                color: semanticColor.textPrimary,
+              }}>
+                Biocom
+              </Text>
+            </View>
+
+            <View style={{ padding: spacing.large, gap: spacing.medium, minHeight: 280 }}>
+              <View style={{
+                backgroundColor: semanticColor.backgroundSecondary,
+                borderRadius: radius.medium,
+                padding: spacing.large,
+                gap: spacing.small,
+              }}>
+                <Text style={{
+                  fontSize: fontSize.large,
+                  fontWeight: fontWeight.semibold,
+                  color: semanticColor.textPrimary,
+                }}>
+                  오늘의 건강 점수
+                </Text>
+                <Text style={{
+                  fontSize: fontSize.xlarge,
+                  fontWeight: fontWeight.bold,
+                  color: semanticColor.textBrand,
+                }}>
+                  92점
+                </Text>
+              </View>
+              <View style={{
+                backgroundColor: semanticColor.backgroundSecondary,
+                borderRadius: radius.medium,
+                padding: spacing.large,
+              }}>
+                <Text style={{
+                  fontSize: fontSize.medium,
+                  color: semanticColor.textSecondary,
+                }}>
+                  식단 · 수면 · 운동 기록을 확인해보세요
+                </Text>
+              </View>
+            </View>
+
+            <BottomNavigation
+              items={BIOCOM_TABS}
+              value={value}
+              onChange={setValue}
+            />
+          </View>
+        </Section>
+      </View>
+    );
+  },
+};
+
+// ─── 7. 사용 가이드 ─────────────────────────────────────────
+
+export const Usage: Story = {
+  name: '사용 가이드',
+  render: () => (
+    <Section title="사용 가이드" description="개발자를 위한 BottomNavigation 컴포넌트 사용 예시입니다.">
+      <Col gap={spacing.large}>
+        <CodeBlock
+          title="Import"
+          code={`import { BottomNavigation, BIOCOM_TABS } from '@design-system/components/BottomNavigation';`}
+        />
+
+        <CodeBlock
+          title="바이오컴 기본 탭바 (가장 간단한 사용법)"
+          code={`const [value, setValue] = useState('main');
+
+<BottomNavigation
+  items={BIOCOM_TABS}
+  value={value}
+  onChange={setValue}
+/>`}
+        />
+
+        <CodeBlock
+          title="커스텀 탭 구성"
+          code={`<BottomNavigation
+  items={[
+    { key: 'contents', label: '콘텐츠', icon: 'stack' },
+    { key: 'goal', label: '목표', icon: 'streak' },
+    { key: 'main', label: '메인', icon: 'house' },
+    { key: 'ai', label: 'AI', icon: 'heart' },
+    { key: 'shop', label: '쇼핑', icon: 'shopping-cart-simple' },
+  ]}
+  value={value}
+  onChange={setValue}
+/>`}
+        />
+      </Col>
+    </Section>
+  ),
+};

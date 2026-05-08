@@ -1,0 +1,624 @@
+import React from 'react';
+import { Meta } from '@storybook/addon-docs/blocks';
+
+<Meta title="Getting Started/Brand Logo" />
+
+<style>
+  {`
+    .logo-page {
+      max-width: 900px;
+      margin: 0 auto;
+      padding-bottom: 64px;
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      color: #37383C;
+    }
+    .logo-page h2.page-title {
+      font-size: 28px;
+      font-weight: 700;
+      color: #171719;
+      margin: 0 0 8px;
+      padding-bottom: 12px;
+      border-bottom: 2px solid #22C3BC;
+    }
+    .logo-page > p.page-desc {
+      font-size: 15px;
+      color: #5A5C63;
+      margin: 0 0 40px;
+      line-height: 1.7;
+    }
+    .logo-page h3 {
+      font-size: 20px;
+      font-weight: 700;
+      color: #171719;
+      margin: 48px 0 4px;
+    }
+    .logo-page h3 + p {
+      font-size: 14px;
+      color: #70737C;
+      margin: 0 0 20px;
+    }
+    .logo-page h4 {
+      font-size: 16px;
+      font-weight: 700;
+      color: #171719;
+      margin: 24px 0 8px;
+    }
+
+    /* ── Hero ── */
+    .logo-hero {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 24px;
+      padding: 48px;
+      background: #F7F7F8;
+      border-radius: 16px;
+      margin-bottom: 48px;
+    }
+    .logo-hero img {
+      height: 120px;
+    }
+    .logo-hero-text {
+      font-size: 15px;
+      color: #5A5C63;
+      text-align: center;
+      line-height: 1.7;
+    }
+
+    /* ── Logo Card Grid ── */
+    .logo-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+      margin-bottom: 32px;
+    }
+    .logo-card {
+      border: 1px solid #E1E2E4;
+      border-radius: 12px;
+      overflow: hidden;
+    }
+    .logo-card-preview {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+      min-height: 120px;
+    }
+    .logo-card-preview.light {
+      background: #FFFFFF;
+    }
+    .logo-card-preview.dark {
+      background: #171719;
+    }
+    .logo-card-preview img {
+      max-height: 48px;
+      max-width: 100%;
+    }
+    .logo-card-info {
+      padding: 12px 16px;
+      background: #F7F7F8;
+      border-top: 1px solid #E1E2E4;
+    }
+    .logo-card-title {
+      font-size: 13px;
+      font-weight: 600;
+      color: #171719;
+      margin: 0 0 2px;
+    }
+    .logo-card-desc {
+      font-size: 12px;
+      color: #70737C;
+      margin: 0;
+    }
+
+    /* ── Color Variant Grid ── */
+    .color-variant-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+      margin-bottom: 16px;
+    }
+    .color-variant-card {
+      border-radius: 12px;
+      padding: 32px 24px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 16px;
+      border: 1px solid #E1E2E4;
+    }
+    .color-variant-card.light {
+      background: #FFFFFF;
+    }
+    .color-variant-card.dark {
+      background: #171719;
+      border-color: #37383C;
+    }
+    .color-variant-card img {
+      height: 40px;
+    }
+    .color-variant-label {
+      font-size: 12px;
+      font-weight: 600;
+      padding: 2px 8px;
+      border-radius: 4px;
+    }
+    .color-variant-label.on-light {
+      background: #E9FBF5;
+      color: #22C289;
+    }
+    .color-variant-label.on-dark {
+      background: rgba(255,255,255,0.1);
+      color: #A8F0EC;
+    }
+
+    /* ── Min Size ── */
+    .min-size-row {
+      display: flex;
+      gap: 48px;
+      align-items: flex-end;
+      margin-bottom: 24px;
+    }
+    .min-size-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 8px;
+    }
+    .min-size-label {
+      font-size: 11px;
+      font-weight: 600;
+      color: #22C3BC;
+      background: #E9FBF5;
+      padding: 2px 8px;
+      border-radius: 4px;
+    }
+    .min-size-bad {
+      opacity: 0.35;
+      position: relative;
+    }
+    .min-size-bad::after {
+      content: '\\2716';
+      position: absolute;
+      top: -6px;
+      right: -6px;
+      color: #EF7676;
+      font-size: 14px;
+      font-weight: 700;
+    }
+
+    /* ── Clear Space ── */
+    .clearspace-box {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      border: 2px dashed #22C3BC;
+      padding: 32px;
+      border-radius: 12px;
+      background: rgba(34,195,188,0.05);
+      position: relative;
+      margin-bottom: 8px;
+    }
+    .clearspace-box img {
+      height: 48px;
+    }
+    .clearspace-label {
+      font-size: 11px;
+      color: #22C3BC;
+      font-weight: 600;
+    }
+
+    /* ── Do & Don't ── */
+    .dodont-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+      margin-bottom: 24px;
+    }
+    .dodont-card {
+      border-radius: 12px;
+      overflow: hidden;
+      border: 1px solid #E1E2E4;
+    }
+    .dodont-header {
+      padding: 10px 16px;
+      font-size: 13px;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .dodont-header.do {
+      background: #E9FBF5;
+      color: #22C289;
+    }
+    .dodont-header.dont {
+      background: #FFF0F0;
+      color: #EF7676;
+    }
+    .dodont-body {
+      padding: 24px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 80px;
+      background: #FFFFFF;
+    }
+    .dodont-body img {
+      height: 40px;
+    }
+    .dodont-desc {
+      padding: 8px 16px 12px;
+      font-size: 12px;
+      color: #70737C;
+      background: #F7F7F8;
+    }
+
+    /* ── Download Table ── */
+    .dl-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 13px;
+      margin-bottom: 32px;
+    }
+    .dl-table thead th {
+      text-align: left;
+      padding: 10px 14px;
+      font-weight: 600;
+      color: #46474C;
+      font-size: 12px;
+      background: #F7F7F8;
+      border-bottom: 2px solid #E1E2E4;
+    }
+    .dl-table td {
+      padding: 12px 14px;
+      border-bottom: 1px solid #F4F4F5;
+      vertical-align: middle;
+    }
+    .dl-table tr:hover td {
+      background: #FBFEFE;
+    }
+    .dl-preview {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 80px;
+      height: 48px;
+      border-radius: 8px;
+    }
+    .dl-preview.light {
+      background: #FFFFFF;
+      border: 1px solid #E1E2E4;
+    }
+    .dl-preview.dark {
+      background: #171719;
+    }
+    .dl-preview img {
+      max-height: 28px;
+      max-width: 64px;
+    }
+    .dl-filename {
+      font-family: 'SF Mono', 'Fira Code', monospace;
+      font-size: 12px;
+      color: #5A5C63;
+    }
+    .dl-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 6px 14px;
+      border-radius: 8px;
+      border: 1px solid #E1E2E4;
+      background: #FFFFFF;
+      color: #171719;
+      font-size: 12px;
+      font-weight: 600;
+      text-decoration: none;
+      cursor: pointer;
+      transition: background 0.15s, border-color 0.15s;
+    }
+    .dl-btn:hover {
+      background: #F7F7F8;
+      border-color: #C2C4C8;
+    }
+    .dl-btn:visited {
+      color: #171719;
+    }
+
+    /* ── Section Divider ── */
+    .section-divider {
+      border: none;
+      border-top: 1px solid #E1E2E4;
+      margin: 48px 0;
+    }
+  `}
+</style>
+
+<div className="logo-page">
+
+<h2 className="page-title">Logo</h2>
+<p className="page-desc">
+  biocom의 브랜드 아이덴티티를 담은 공식 로고 가이드입니다.
+</p>
+
+{/* ══════════ 4-1. 개요 ══════════ */}
+
+<div className="logo-hero">
+  <img src="/Logo/biocom-symbol.svg" alt="biocom 심볼 로고" />
+  <p className="logo-hero-text">
+    biocom의 브랜드 아이덴티티를 담은 공식 로고입니다.<br />
+    본 가이드를 준수하여 일관된 브랜드 경험을 만들어주세요.
+  </p>
+</div>
+
+{/* ══════════ 4-2. 로고 구성 ══════════ */}
+
+<h3>로고 구성</h3>
+<p>세 가지 로고 타입을 제공합니다.</p>
+
+<div className="logo-grid">
+  <div className="logo-card">
+    <div className="logo-card-preview light">
+      <img src="/Logo/biocom-symbol.svg" alt="biocom 심볼 로고" />
+    </div>
+    <div className="logo-card-info">
+      <p className="logo-card-title">Symbol</p>
+      <p className="logo-card-desc">파비콘, 앱 아이콘, 제한 공간. 최소 24px</p>
+    </div>
+  </div>
+  <div className="logo-card">
+    <div className="logo-card-preview light">
+      <img src="/Logo/biocom-horizontal-color.svg" alt="biocom 가로형 로고 (컬러)" />
+    </div>
+    <div className="logo-card-info">
+      <p className="logo-card-title">Horizontal</p>
+      <p className="logo-card-desc">헤더, 내비게이션, 가로 레이아웃. 최소 높이 32px</p>
+    </div>
+  </div>
+  <div className="logo-card">
+    <div className="logo-card-preview light">
+      <img src="/Logo/biocom-vertical-color.svg" alt="biocom 세로형 로고 (컬러)" />
+    </div>
+    <div className="logo-card-info">
+      <p className="logo-card-title">Vertical</p>
+      <p className="logo-card-desc">스플래시, 중앙 정렬, 세로 공간. 최소 높이 64px</p>
+    </div>
+  </div>
+</div>
+
+<hr className="section-divider" />
+
+{/* ══════════ 4-3. 색상 변형 & 배경 규칙 ══════════ */}
+
+<h3>색상 변형 & 배경 규칙</h3>
+<p>배경에 따라 올바른 색상 버전을 선택하세요.</p>
+
+<h4>Horizontal</h4>
+<div className="color-variant-grid">
+  <div className="color-variant-card light">
+    <img src="/Logo/biocom-horizontal-color.svg" alt="biocom 가로형 로고 (컬러)" />
+    <span className="color-variant-label on-light">Color — 밝은 배경</span>
+  </div>
+  <div className="color-variant-card dark">
+    <img src="/Logo/biocom-horizontal-white.svg" alt="biocom 가로형 로고 (화이트)" />
+    <span className="color-variant-label on-dark">White — 어두운 배경</span>
+  </div>
+  <div className="color-variant-card light">
+    <img src="/Logo/biocom-horizontal-black.svg" alt="biocom 가로형 로고 (블랙)" />
+    <span className="color-variant-label on-light">Black — 모노크롬</span>
+  </div>
+</div>
+
+<h4>Vertical</h4>
+<div className="color-variant-grid">
+  <div className="color-variant-card light">
+    <img src="/Logo/biocom-vertical-color.svg" alt="biocom 세로형 로고 (컬러)" style={{ height: 64 }} />
+    <span className="color-variant-label on-light">Color — 밝은 배경</span>
+  </div>
+  <div className="color-variant-card dark">
+    <img src="/Logo/biocom-vertical-white.svg" alt="biocom 세로형 로고 (화이트)" style={{ height: 64 }} />
+    <span className="color-variant-label on-dark">White — 어두운 배경</span>
+  </div>
+  <div className="color-variant-card light">
+    <img src="/Logo/biocom-vertical-black.svg" alt="biocom 세로형 로고 (블랙)" style={{ height: 64 }} />
+    <span className="color-variant-label on-light">Black — 모노크롬</span>
+  </div>
+</div>
+
+<hr className="section-divider" />
+
+{/* ══════════ 4-4. 최소 크기 ══════════ */}
+
+<h3>최소 크기</h3>
+<p>가독성을 보장하기 위해 아래 최소 크기를 준수하세요.</p>
+
+<div className="min-size-row">
+  <div className="min-size-item">
+    <img src="/Logo/biocom-symbol.svg" alt="biocom 심볼 최소 크기" style={{ height: 24, width: 24 }} />
+    <span className="min-size-label">Symbol 24px</span>
+  </div>
+  <div className="min-size-item">
+    <img src="/Logo/biocom-horizontal-color.svg" alt="biocom 가로형 최소 크기" style={{ height: 32 }} />
+    <span className="min-size-label">Horizontal 높이 32px</span>
+  </div>
+  <div className="min-size-item">
+    <img src="/Logo/biocom-vertical-color.svg" alt="biocom 세로형 최소 크기" style={{ height: 64 }} />
+    <span className="min-size-label">Vertical 높이 64px</span>
+  </div>
+</div>
+
+<div style={{ display: 'flex', gap: 48, alignItems: 'flex-end', marginBottom: 24 }}>
+  <div className="min-size-item">
+    <div className="min-size-bad" aria-label="잘못된 사용 예시: 너무 작은 심볼">
+      <img src="/Logo/biocom-symbol.svg" alt="너무 작은 심볼 (판독 불가)" style={{ height: 12, width: 12 }} />
+    </div>
+    <span style={{ fontSize: 11, color: '#EF7676', fontWeight: 600 }}>판독 불가</span>
+  </div>
+  <div className="min-size-item">
+    <div className="min-size-bad" aria-label="잘못된 사용 예시: 너무 작은 가로형">
+      <img src="/Logo/biocom-horizontal-color.svg" alt="너무 작은 가로형 (판독 불가)" style={{ height: 14 }} />
+    </div>
+    <span style={{ fontSize: 11, color: '#EF7676', fontWeight: 600 }}>판독 불가</span>
+  </div>
+</div>
+
+<hr className="section-divider" />
+
+{/* ══════════ 4-5. Clear Space ══════════ */}
+
+<h3>Clear Space (여백 규칙)</h3>
+<p>로고 주변에 최소 여백(심볼 높이의 1/2)을 확보하세요. 이 영역 안에는 다른 요소를 배치하지 마세요.</p>
+
+<div style={{ display: 'flex', gap: 32, alignItems: 'center', marginBottom: 8 }}>
+  <div>
+    <div className="clearspace-box">
+      <img src="/Logo/biocom-symbol.svg" alt="biocom 심볼 Clear Space 예시" />
+    </div>
+    <p className="clearspace-label">여백 = 심볼 높이의 1/2</p>
+  </div>
+  <div>
+    <div className="clearspace-box">
+      <img src="/Logo/biocom-horizontal-color.svg" alt="biocom 가로형 Clear Space 예시" style={{ height: 32 }} />
+    </div>
+    <p className="clearspace-label">여백 = 로고 높이의 1/2</p>
+  </div>
+</div>
+
+<hr className="section-divider" />
+
+{/* ══════════ 4-6. Do & Don't ══════════ */}
+
+<h3>Do & Don't</h3>
+<p>로고의 일관성을 유지하기 위해 아래 규칙을 준수하세요.</p>
+
+<div className="dodont-grid">
+  <div className="dodont-card" aria-label="올바른 사용 예시">
+    <div className="dodont-header do">✅ 원본 비율 유지</div>
+    <div className="dodont-body">
+      <img src="/Logo/biocom-horizontal-color.svg" alt="올바른 비율" />
+    </div>
+    <div className="dodont-desc">제공된 SVG를 그대로 사용</div>
+  </div>
+  <div className="dodont-card" aria-label="잘못된 사용 예시">
+    <div className="dodont-header dont">❌ 비율 왜곡</div>
+    <div className="dodont-body">
+      <img src="/Logo/biocom-horizontal-color.svg" alt="왜곡된 비율" style={{ height: 40, transform: 'scaleX(1.5)' }} />
+    </div>
+    <div className="dodont-desc">가로/세로 비율을 임의로 변경하지 마세요</div>
+  </div>
+</div>
+
+<div className="dodont-grid">
+  <div className="dodont-card" aria-label="올바른 사용 예시">
+    <div className="dodont-header do">✅ 적절한 배경 대비</div>
+    <div className="dodont-body" style={{ background: '#171719' }}>
+      <img src="/Logo/biocom-horizontal-white.svg" alt="다크 배경에 화이트 로고" />
+    </div>
+    <div className="dodont-desc">White 로고는 어두운 배경에서 사용</div>
+  </div>
+  <div className="dodont-card" aria-label="잘못된 사용 예시">
+    <div className="dodont-header dont">❌ 대비 부족</div>
+    <div className="dodont-body">
+      <img src="/Logo/biocom-horizontal-white.svg" alt="밝은 배경에 화이트 로고 (대비 부족)" style={{ opacity: 0.15 }} />
+    </div>
+    <div className="dodont-desc">White 로고를 밝은 배경에 사용하면 안 됩니다</div>
+  </div>
+</div>
+
+<div className="dodont-grid">
+  <div className="dodont-card" aria-label="올바른 사용 예시">
+    <div className="dodont-header do">✅ Clear Space 준수</div>
+    <div className="dodont-body">
+      <img src="/Logo/biocom-horizontal-color.svg" alt="여백이 충분한 로고" />
+    </div>
+    <div className="dodont-desc">로고 주변에 충분한 여백 확보</div>
+  </div>
+  <div className="dodont-card" aria-label="잘못된 사용 예시">
+    <div className="dodont-header dont">❌ 회전/기울임</div>
+    <div className="dodont-body">
+      <img src="/Logo/biocom-horizontal-color.svg" alt="회전된 로고" style={{ height: 40, transform: 'rotate(-15deg)' }} />
+    </div>
+    <div className="dodont-desc">로고를 회전하거나 기울이지 마세요</div>
+  </div>
+</div>
+
+<div className="dodont-grid">
+  <div className="dodont-card" aria-label="올바른 사용 예시">
+    <div className="dodont-header do">✅ 제공된 색상 버전 사용</div>
+    <div className="dodont-body">
+      <img src="/Logo/biocom-horizontal-color.svg" alt="공식 컬러 로고" />
+    </div>
+    <div className="dodont-desc">Color / White / Black 3종만 사용</div>
+  </div>
+  <div className="dodont-card" aria-label="잘못된 사용 예시">
+    <div className="dodont-header dont">❌ 효과 추가 금지</div>
+    <div className="dodont-body">
+      <img src="/Logo/biocom-horizontal-color.svg" alt="그림자가 추가된 로고" style={{ height: 40, filter: 'drop-shadow(4px 4px 8px rgba(0,0,0,0.4))' }} />
+    </div>
+    <div className="dodont-desc">그림자, 글로우, 외곽선 등 효과를 추가하지 마세요</div>
+  </div>
+</div>
+
+<hr className="section-divider" />
+
+{/* ══════════ 4-7. 다운로드 ══════════ */}
+
+<h3>다운로드</h3>
+<p>공식 로고 에셋을 SVG 포맷으로 다운로드할 수 있습니다.</p>
+
+<table className="dl-table">
+  <thead>
+    <tr>
+      <th scope="col" style={{ width: '20%' }}>로고 타입</th>
+      <th scope="col" style={{ width: '15%' }}>미리보기</th>
+      <th scope="col" style={{ width: '35%' }}>파일명</th>
+      <th scope="col" style={{ width: '20%' }}>다운로드</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Symbol</td>
+      <td><div className="dl-preview light"><img src="/Logo/biocom-symbol.svg" alt="biocom 심볼" /></div></td>
+      <td><span className="dl-filename">biocom-symbol.svg</span></td>
+      <td><a href="/Logo/biocom-symbol.svg" download="biocom-symbol.svg" className="dl-btn" aria-label="biocom 심볼 SVG 다운로드">↓ SVG</a></td>
+    </tr>
+    <tr>
+      <td>Horizontal Color</td>
+      <td><div className="dl-preview light"><img src="/Logo/biocom-horizontal-color.svg" alt="biocom 가로형 (컬러)" /></div></td>
+      <td><span className="dl-filename">biocom-horizontal-color.svg</span></td>
+      <td><a href="/Logo/biocom-horizontal-color.svg" download="biocom-horizontal-color.svg" className="dl-btn" aria-label="biocom 가로형 컬러 로고 SVG 다운로드">↓ SVG</a></td>
+    </tr>
+    <tr>
+      <td>Horizontal White</td>
+      <td><div className="dl-preview dark"><img src="/Logo/biocom-horizontal-white.svg" alt="biocom 가로형 (화이트)" /></div></td>
+      <td><span className="dl-filename">biocom-horizontal-white.svg</span></td>
+      <td><a href="/Logo/biocom-horizontal-white.svg" download="biocom-horizontal-white.svg" className="dl-btn" aria-label="biocom 가로형 화이트 로고 SVG 다운로드">↓ SVG</a></td>
+    </tr>
+    <tr>
+      <td>Horizontal Black</td>
+      <td><div className="dl-preview light"><img src="/Logo/biocom-horizontal-black.svg" alt="biocom 가로형 (블랙)" /></div></td>
+      <td><span className="dl-filename">biocom-horizontal-black.svg</span></td>
+      <td><a href="/Logo/biocom-horizontal-black.svg" download="biocom-horizontal-black.svg" className="dl-btn" aria-label="biocom 가로형 블랙 로고 SVG 다운로드">↓ SVG</a></td>
+    </tr>
+    <tr>
+      <td>Vertical Color</td>
+      <td><div className="dl-preview light"><img src="/Logo/biocom-vertical-color.svg" alt="biocom 세로형 (컬러)" /></div></td>
+      <td><span className="dl-filename">biocom-vertical-color.svg</span></td>
+      <td><a href="/Logo/biocom-vertical-color.svg" download="biocom-vertical-color.svg" className="dl-btn" aria-label="biocom 세로형 컬러 로고 SVG 다운로드">↓ SVG</a></td>
+    </tr>
+    <tr>
+      <td>Vertical White</td>
+      <td><div className="dl-preview dark"><img src="/Logo/biocom-vertical-white.svg" alt="biocom 세로형 (화이트)" /></div></td>
+      <td><span className="dl-filename">biocom-vertical-white.svg</span></td>
+      <td><a href="/Logo/biocom-vertical-white.svg" download="biocom-vertical-white.svg" className="dl-btn" aria-label="biocom 세로형 화이트 로고 SVG 다운로드">↓ SVG</a></td>
+    </tr>
+    <tr>
+      <td>Vertical Black</td>
+      <td><div className="dl-preview light"><img src="/Logo/biocom-vertical-black.svg" alt="biocom 세로형 (블랙)" /></div></td>
+      <td><span className="dl-filename">biocom-vertical-black.svg</span></td>
+      <td><a href="/Logo/biocom-vertical-black.svg" download="biocom-vertical-black.svg" className="dl-btn" aria-label="biocom 세로형 블랙 로고 SVG 다운로드">↓ SVG</a></td>
+    </tr>
+  </tbody>
+</table>
+
+</div>

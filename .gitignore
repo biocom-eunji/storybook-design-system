@@ -39,3 +39,17 @@ yarn-error.*
 # generated native folders
 /ios
 /android
+
+# Storybook
+storybook-static/
+build-storybook.log
+debug-storybook.log
+
+# Design source files
+*.png
+*.xlsx
+*.zip
+vitest.shims.d.ts
+
+# Fonts (use public/fonts/ for serving)
+/PretendardVariable.woff2
