@@ -221,7 +221,89 @@ export const DesignSpec: Story = {
   ),
 };
 
-// ─── 8. 사용 가이드 ──────────────────────────────────────────
+// ─── 8. 실전 예시 ───────────────────────────────────────────
+
+export const InContext: Story = {
+  name: '실전 예시',
+  render: () => (
+    <View style={{ gap: spacing['3xlarge'] }}>
+      <Section
+        title="실전 예시"
+        description="도움말 아이콘 위 Tooltip — 건강 점수 옆 도움말 아이콘에 Tooltip이 표시되는 구조입니다."
+      >
+        <View style={{
+          maxWidth: 375,
+          padding: spacing.xlarge,
+          backgroundColor: semanticColor.backgroundPrimary,
+          borderRadius: radius.large,
+          borderWidth: 1,
+          borderColor: semanticColor.borderDefault,
+          gap: spacing.large,
+        }}>
+          <View style={{
+            flexDirection: 'row',
+            alignItems: 'center',
+            gap: spacing.small,
+          }}>
+            <Text style={{
+              fontSize: textStyle.heading.fontSize,
+              fontWeight: textStyle.heading.fontWeight,
+              lineHeight: textStyle.heading.lineHeight,
+              color: semanticColor.textPrimary,
+            }}>
+              건강 점수
+            </Text>
+            <View style={{
+              width: 20,
+              height: 20,
+              borderRadius: radius.full,
+              backgroundColor: semanticColor.backgroundTertiary,
+              alignItems: 'center',
+              justifyContent: 'center',
+            }}>
+              <Text style={{
+                fontSize: textStyle.caption.fontSize,
+                fontWeight: textStyle.caption.fontWeight,
+                color: semanticColor.textSecondary,
+              }}>
+                ?
+              </Text>
+            </View>
+          </View>
+          <Tooltip
+            content="식단, 수면, 운동 데이터를 종합하여 산출한 점수입니다"
+            position="bottom"
+            align="leading"
+            size="medium"
+          />
+          <View style={{
+            backgroundColor: semanticColor.backgroundSecondary,
+            borderRadius: radius.medium,
+            padding: spacing.xlarge,
+            alignItems: 'center',
+          }}>
+            <Text style={{
+              fontSize: textStyle.title1.fontSize,
+              fontWeight: textStyle.title1.fontWeight,
+              color: semanticColor.textBrand,
+            }}>
+              85
+            </Text>
+            <Text style={{
+              fontSize: textStyle.caption.fontSize,
+              color: semanticColor.textSecondary,
+              marginTop: spacing.xsmall,
+            }}>
+              100점 만점
+            </Text>
+          </View>
+        </View>
+      </Section>
+    </View>
+  ),
+};
+
+// ─── 9. 사용 가이드 ──────────────────────────────────────────
 
 export const Usage: Story = {
   name: '사용 가이드',

@@ -376,6 +376,50 @@ export const DesignSpec: Story = {
   },
 };
 
+// ─── 실전 예시 ──────────────────────────────────────────────
+
+export const InContext: Story = {
+  name: '실전 예시',
+  render: () => (
+    <View style={{ gap: spacing['3xlarge'] }}>
+      <Section
+        title="실전 예시"
+        description="실제 화면에서 Button이 배치되는 맥락을 확인합니다."
+      >
+        <View style={{ gap: spacing['2xlarge'], maxWidth: 375 }}>
+          <Col gap={spacing.small}>
+            <StateLabel>회원가입 폼 하단</StateLabel>
+            <View style={{
+              borderWidth: 1,
+              borderColor: semanticColor.borderDefault,
+              borderRadius: radius.large,
+              padding: spacing.xlarge,
+              backgroundColor: semanticColor.backgroundPrimary,
+            }}>
+              <View style={{ gap: spacing.small }}>
+                <Button
+                  label="회원가입"
+                  variant="solid"
+                  colorScheme="primary"
+                  size="large"
+                  onPress={() => {}}
+                />
+                <Button
+                  label="이전으로"
+                  variant="outlined"
+                  colorScheme="assistive"
+                  size="large"
+                  onPress={() => {}}
+                />
+              </View>
+            </View>
+          </Col>
+        </View>
+      </Section>
+    </View>
+  ),
+};
+
 // ─── 7. 사용 가이드 ──────────────────────────────────────────
 
 export const Usage: Story = {

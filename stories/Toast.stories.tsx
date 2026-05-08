@@ -329,7 +329,71 @@ export const DesignSpec: Story = {
   },
 };
 
-// ─── 6. 사용 가이드 ──────────────────────────────────────────
+// ─── 6. 실전 예시 ───────────────────────────────────────────
+
+export const InContext: Story = {
+  name: '실전 예시',
+  render: () => (
+    <View style={{ gap: spacing['3xlarge'] }}>
+      <Section
+        title="실전 예시"
+        description="식단 저장 성공 — 인라인 Toast 미리보기입니다. 식단 기록 후 표시되는 성공 토스트 시나리오입니다."
+      >
+        <View style={{
+          maxWidth: 375,
+          padding: spacing.xlarge,
+          backgroundColor: semanticColor.backgroundPrimary,
+          borderRadius: radius.large,
+          borderWidth: 1,
+          borderColor: semanticColor.borderDefault,
+          gap: spacing.large,
+        }}>
+          <Text style={{
+            fontSize: textStyle.heading.fontSize,
+            fontWeight: textStyle.heading.fontWeight,
+            lineHeight: textStyle.heading.lineHeight,
+            color: semanticColor.textPrimary,
+          }}>
+            식단 기록
+          </Text>
+          <View style={{
+            backgroundColor: semanticColor.backgroundSecondary,
+            borderRadius: radius.medium,
+            padding: spacing.large,
+            gap: spacing.small,
+          }}>
+            <Text style={{
+              fontSize: textStyle.headline.fontSize,
+              fontWeight: textStyle.headline.fontWeight,
+              color: semanticColor.textPrimary,
+            }}>
+              점심 식단
+            </Text>
+            <Text style={{
+              fontSize: textStyle.body2.fontSize,
+              color: semanticColor.textSecondary,
+            }}>
+              현미밥, 된장찌개, 고등어구이
+            </Text>
+            <Text style={{
+              fontSize: textStyle.caption.fontSize,
+              color: semanticColor.textTertiary,
+            }}>
+              약 520kcal
+            </Text>
+          </View>
+          <ToastPreview
+            message="식단이 저장되었습니다."
+            variant="success"
+            actionLabel="되돌리기"
+          />
+        </View>
+      </Section>
+    </View>
+  ),
+};
+
+// ─── 7. 사용 가이드 ──────────────────────────────────────────
 
 export const Usage: Story = {
   name: '사용 가이드',

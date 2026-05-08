@@ -239,6 +239,71 @@ export const DesignSpec: Story = {
   ),
 };
 
+// ─── 실전 예시 ──────────────────────────────────────────────
+
+export const InContext: Story = {
+  name: '실전 예시',
+  render: () => (
+    <View style={{ gap: spacing['3xlarge'] }}>
+      <Section
+        title="실전 예시"
+        description="실제 화면에서 FAB이 배치되는 맥락을 확인합니다."
+      >
+        <View style={{ gap: spacing['2xlarge'], maxWidth: 375 }}>
+          <Col gap={spacing.small}>
+            <StateLabel>식단 기록 화면 하단</StateLabel>
+            <View style={{
+              borderWidth: 1,
+              borderColor: semanticColor.borderDefault,
+              borderRadius: radius.large,
+              padding: spacing.xlarge,
+              backgroundColor: semanticColor.backgroundPrimary,
+              height: 320,
+              position: 'relative' as const,
+            }}>
+              <Text style={{
+                fontSize: textStyle.headline.fontSize,
+                fontWeight: textStyle.headline.fontWeight,
+                color: semanticColor.textPrimary,
+                marginBottom: spacing.medium,
+              }}>
+                오늘의 식단
+              </Text>
+              {['아침 · 토스트, 샐러드', '점심 · 현미밥, 된장찌개'].map((item, i) => (
+                <View key={i} style={{
+                  height: 56,
+                  backgroundColor: semanticColor.backgroundSecondary,
+                  borderRadius: radius.small,
+                  marginBottom: spacing.small,
+                  paddingHorizontal: spacing.large,
+                  justifyContent: 'center',
+                }}>
+                  <Text style={{
+                    fontSize: textStyle.body2.fontSize,
+                    color: semanticColor.textSecondary,
+                  }}>{item}</Text>
+                </View>
+              ))}
+              <View style={{
+                position: 'absolute',
+                bottom: spacing.large,
+                right: spacing.large,
+              }}>
+                <FAB
+                  variant="extended"
+                  iconName="plus"
+                  label="기록하기"
+                  onPress={() => {}}
+                />
+              </View>
+            </View>
+          </Col>
+        </View>
+      </Section>
+    </View>
+  ),
+};
+
 // ─── 7. 사용 가이드 ──────────────────────────────────────────
 
 export const Usage: Story = {

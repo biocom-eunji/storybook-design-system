@@ -1,7 +1,8 @@
 import React from 'react';
-import { View } from 'react-native';
+import { View, Text } from 'react-native';
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import { TextField } from '../src/components/TextField';
+import { Button } from '../src/components/Button';
 import {
   Section, StateLabel, Col, CodeBlock, Divider,
 } from './storyHelpers';
@@ -252,7 +253,56 @@ export const CustomHeight: Story = {
   ),
 };
 
-// ─── 5. 디자인 스펙 ──────────────────────────────────────────
+// ─── 5. 실전 예시 ───────────────────────────────────────────
+
+export const InContext: Story = {
+  name: '실전 예시',
+  render: () => (
+    <View style={{ gap: spacing['3xlarge'] }}>
+      <Section
+        title="실전 예시"
+        description="피드백 작성 폼에서의 TextArea 활용 예시입니다."
+      >
+        <View style={{
+          maxWidth: 375,
+          padding: spacing.xlarge,
+          backgroundColor: semanticColor.backgroundPrimary,
+          borderRadius: radius.large,
+          borderWidth: 1,
+          borderColor: semanticColor.borderDefault,
+          gap: spacing.xlarge,
+        }}>
+          <Text style={{
+            fontSize: textStyle.heading.fontSize,
+            fontWeight: textStyle.heading.fontWeight,
+            lineHeight: textStyle.heading.lineHeight,
+            color: semanticColor.textPrimary,
+          }}>
+            피드백 작성
+          </Text>
+
+          <View style={{ gap: spacing.large }}>
+            <TextField
+              label="제목"
+              placeholder="피드백 제목을 입력해 주세요."
+            />
+            <TextField
+              label="내용"
+              placeholder="피드백 내용을 자세히 작성해 주세요."
+              multiline
+              minHeight={120}
+              maxCharCount={500}
+            />
+          </View>
+
+          <Button label="제출하기" variant="solid" colorScheme="primary" size="large" />
+        </View>
+      </Section>
+    </View>
+  ),
+};
+
+// ─── 6. 디자인 스펙 ──────────────────────────────────────────
 
 export const DesignSpec: Story = {
   name: '디자인 스펙',
@@ -333,7 +383,7 @@ export const DesignSpec: Story = {
   },
 };
 
-// ─── 6. 사용 가이드 ──────────────────────────────────────────
+// ─── 7. 사용 가이드 ──────────────────────────────────────────
 
 export const Usage: Story = {
   name: '사용 가이드',

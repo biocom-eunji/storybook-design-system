@@ -6,7 +6,7 @@ import {
   Section, StateLabel, Col, CodeBlock, Divider,
 } from './storyHelpers';
 import { TokenSpecTable } from '../src/storybook-components/TokenSpecTable';
-import { spacing, semanticColor, textStyle } from '../src/tokens/theme';
+import { spacing, semanticColor, textStyle, radius } from '../src/tokens/theme';
 
 // ─── Meta ────────────────────────────────────────────────────
 
@@ -379,7 +379,89 @@ export const DesignSpec: Story = {
   ),
 };
 
-// ─── 12. 사용 가이드 ─────────────────────────────────────────
+// ─── 12. 실전 예시 ──────────────────────────────────────────
+
+export const InContext: Story = {
+  name: '실전 예시',
+  render: () => (
+    <View style={{ gap: spacing['3xlarge'] }}>
+      <Section
+        title="실전 예시"
+        description="건강 대시보드 상단바 — AppBar 아래 콘텐츠 카드가 배치된 모바일 화면 시뮬레이션입니다."
+      >
+        <View style={{
+          maxWidth: 375,
+          padding: spacing.xlarge,
+          backgroundColor: semanticColor.backgroundPrimary,
+          borderRadius: radius.large,
+          borderWidth: 1,
+          borderColor: semanticColor.borderDefault,
+        }}>
+          <AppBar
+            title="건강 대시보드"
+            leading={<AppBar.BackButton />}
+            trailing={[
+              <AppBar.IconAction key="search" name="magnifying-glass" label="검색" />,
+              <AppBar.IconAction key="bell" name="bell" label="알림" />,
+            ]}
+            showDivider
+          />
+          <View style={{ gap: spacing.medium, marginTop: spacing.large }}>
+            <View style={{
+              backgroundColor: semanticColor.backgroundSecondary,
+              borderRadius: radius.medium,
+              padding: spacing.large,
+              gap: spacing.small,
+            }}>
+              <Text style={{
+                fontSize: textStyle.headline.fontSize,
+                fontWeight: '600',
+                color: semanticColor.textPrimary,
+              }}>
+                오늘의 건강 점수
+              </Text>
+              <Text style={{
+                fontSize: textStyle.title2.fontSize,
+                fontWeight: '700',
+                color: semanticColor.textBrand,
+              }}>
+                85점
+              </Text>
+              <Text style={{
+                fontSize: textStyle.caption.fontSize,
+                color: semanticColor.textSecondary,
+              }}>
+                어제보다 5점 상승
+              </Text>
+            </View>
+            <View style={{
+              backgroundColor: semanticColor.backgroundSecondary,
+              borderRadius: radius.medium,
+              padding: spacing.large,
+              gap: spacing.small,
+            }}>
+              <Text style={{
+                fontSize: textStyle.headline.fontSize,
+                fontWeight: '600',
+                color: semanticColor.textPrimary,
+              }}>
+                수분 섭취
+              </Text>
+              <Text style={{
+                fontSize: textStyle.body1.fontSize,
+                color: semanticColor.textSecondary,
+              }}>
+                1,200mL / 2,000mL
+              </Text>
+            </View>
+          </View>
+        </View>
+      </Section>
+    </View>
+  ),
+};
+
+// ─── 13. 사용 가이드 ─────────────────────────────────────────
 
 export const Usage: Story = {
   name: '사용 가이드',

@@ -428,7 +428,7 @@ export const LINK = {
     <CaretIcon />
     <span className="emoji">✨</span>
     <span className="title">Features</span>
-    <span className="count">8</span>
+    <span className="count">11</span>
   </summary>
   <div className="toggle-body">
     <div className="component-tags">
@@ -439,6 +439,8 @@ export const LINK = {
       <span className="component-tag new">TimePicker</span>
       <span className="component-tag new">Stepper</span>
       <span className="component-tag new">Guide</span>
+      <span className="component-tag updated">DatePicker</span>
+      <span className="component-tag updated">EmptyState</span>
     </div>
 
     <div className="change-item">
@@ -470,8 +472,20 @@ export const LINK = {
       <span className="desc">상태별 토큰 매핑 테이블(default/filled/disabled) + 레이아웃 스펙 추가</span>
     </div>
     <div className="change-item">
+      <span className="name"><a href={LINK.DatePicker}>DatePicker 스토리 고도화</a></span>
+      <span className="desc">States(상태별) + DesignSpec(날짜 셀 5상태 토큰 테이블 + 컨테이너/헤더/레이아웃 스펙) 추가</span>
+    </div>
+    <div className="change-item">
+      <span className="name"><a href={LINK.EmptyState}>EmptyState 스토리 고도화</a></span>
+      <span className="desc">InContext(식단 기록/목표 미설정 실전 예시) + DesignSpec(아이콘/제목/설명/CTA/레이아웃 토큰 테이블) 추가</span>
+    </div>
+    <div className="change-item">
       <span className="name"><a href={LINK.Guide}>Guide</a></span>
       <span className="desc">Figma 실무 가이드 페이지 신규 추가. 사용법 4단계, 스크린샷 5장 포함</span>
+    </div>
+    <div className="change-item">
+      <span className="name-plain">Figma 캔버스 시각화 17종</span>
+      <span className="desc">SearchBar · DatePicker · TimePicker · Stepper · LikertScale · CircularProgress · EmptyState · Tabs · BottomNavigation · AppBar · FrequencyChip · StatCard · List · LevelIndicator · Avatar · Badge · Tag — 전체 Figma Variables 바인딩</span>
     </div>
   </div>
 </details>
@@ -481,13 +495,14 @@ export const LINK = {
     <CaretIcon />
     <span className="emoji">♻️</span>
     <span className="title">Refactored</span>
-    <span className="count">7</span>
+    <span className="count">8</span>
   </summary>
   <div className="toggle-body">
     <div className="component-tags">
       <span className="component-tag updated">TextField</span>
       <span className="component-tag updated">SearchBar</span>
       <span className="component-tag updated">Icon</span>
+      <span className="component-tag updated">EmptyState</span>
     </div>
 
     <div className="change-item">
@@ -517,6 +532,10 @@ export const LINK = {
     <div className="change-item">
       <span className="name"><a href={LINK.Intro}>Introduction</a></span>
       <span className="desc">자동화 파이프라인, 리뷰 프로세스 섹션 추가</span>
+    </div>
+    <div className="change-item">
+      <span className="name-plain">EmptyState CTA 버튼</span>
+      <span className="desc"><code>color="primary"</code> → <code>colorScheme="primary"</code> Button API 동기화</span>
     </div>
   </div>
 </details>
@@ -552,6 +571,23 @@ export const LINK = {
       <span className="name-plain">Auto Release Notes</span>
       <span className="desc">GitHub Actions 자동 릴리즈 노트 워크플로우 추가</span>
     </div>
+  </div>
+</details>
+
+<details className="toggle-card" open>
+  <summary>
+    <CaretIcon />
+    <span className="emoji">🐛</span>
+    <span className="title">Fixes</span>
+    <span className="count">4</span>
+  </summary>
+  <div className="toggle-body">
+    <ul className="simple-list">
+      <li>FrequencyChip <code>severity="moderate"</code> → <code>"caution"</code> prop 이름 변경 미반영 수정</li>
+      <li>PageIndicator <code>OPACITY_CONFIG</code> 키 <code>white</code> → <code>inverse</code> 동기화 수정</li>
+      <li>Tabs <code>SIZE_TOKEN_MAP</code> 키 <code>S/M/L</code> → <code>small/medium/large</code> 동기화 수정</li>
+      <li>TextField 스토리 <code>stateColors</code> 중복 키(<code>color/text/primary</code>) 제거</li>
+    </ul>
   </div>
 </details>
 

@@ -437,7 +437,69 @@ export const DashboardGrid: Story = {
   ),
 };
 
-// ─── 7. 디자인 스펙 ─────────────────────────────────────────
+// ─── 7. 실전 예시 ───────────────────────────────────────────
+
+export const InContext: Story = {
+  name: '실전 예시',
+  render: () => (
+    <View style={{ gap: spacing['3xlarge'] }}>
+      <Section
+        title="실전 예시"
+        description="건강 대시보드에서의 StatCard 2열 그리드 활용 예시입니다."
+      >
+        <View style={{
+          maxWidth: 375,
+          padding: spacing.large,
+          backgroundColor: semanticColor.backgroundSecondary,
+          borderRadius: radius.large,
+          gap: spacing.large,
+        }}>
+          <Text style={{
+            fontSize: textStyle.heading.fontSize,
+            fontWeight: textStyle.heading.fontWeight,
+            lineHeight: textStyle.heading.lineHeight,
+            color: semanticColor.textPrimary,
+          }}>
+            오늘의 건강
+          </Text>
+
+          <View style={{
+            flexDirection: 'row',
+            flexWrap: 'wrap',
+            gap: spacing.medium,
+          }}>
+            <View style={{ flex: 1, minWidth: 150 }}>
+              <StatCard accent="violet">
+                <StatCard.Header icon={<Icon name="activity" style="mini" size={16} />} title="목표" />
+                <StatCard.Count current={3} total={10} unit="개" />
+              </StatCard>
+            </View>
+            <View style={{ flex: 1, minWidth: 150 }}>
+              <StatCard accent="green">
+                <StatCard.Header icon={<Icon name="meal" style="mini" size={16} />} title="식단" />
+                <StatCard.Label label="점수" value="좋음" />
+              </StatCard>
+            </View>
+            <View style={{ flex: 1, minWidth: 150 }}>
+              <StatCard accent="mint">
+                <StatCard.Header icon={<Icon name="sleep" style="mini" size={16} />} title="수면" />
+                <StatCard.Duration hours={7} minutes={30} />
+              </StatCard>
+            </View>
+            <View style={{ flex: 1, minWidth: 150 }}>
+              <StatCard accent="red">
+                <StatCard.Header icon={<Icon name="activity" style="mini" size={16} />} title="활동" />
+                <StatCard.Count current={483} unit="Kcal" />
+              </StatCard>
+            </View>
+          </View>
+        </View>
+      </Section>
+    </View>
+  ),
+};
+
+// ─── 8. 디자인 스펙 ─────────────────────────────────────────
 
 export const DesignSpec: Story = {
   name: '디자인 스펙',
@@ -518,7 +580,7 @@ export const DesignSpec: Story = {
   ),
 };
 
-// ─── 8. 사용 가이드 ─────────────────────────────────────────
+// ─── 9. 사용 가이드 ─────────────────────────────────────────
 
 export const Usage: Story = {
   name: '사용 가이드',

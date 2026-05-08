@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { View } from 'react-native';
+import { View, Text } from 'react-native';
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import { SegmentedControl } from '../src/components/SegmentedControl';
 import {
@@ -254,7 +254,74 @@ export const DesignSpec: Story = {
   ),
 };
 
-// ─── 8. 사용 가이드 ──────────────────────────────────────────
+// ─── 8. 실전 예시 ───────────────────────────────────────────
+
+export const InContext: Story = {
+  name: '실전 예시',
+  render: () => {
+    const [period, setPeriod] = useState('daily');
+    return (
+      <View style={{ gap: spacing['3xlarge'] }}>
+        <Section
+          title="실전 예시"
+          description="기간 선택 — 일간/주간/월간 SegmentedControl과 하단 차트 영역 플레이스홀더입니다."
+        >
+          <View style={{
+            maxWidth: 375,
+            padding: spacing.xlarge,
+            backgroundColor: semanticColor.backgroundPrimary,
+            borderRadius: radius.large,
+            borderWidth: 1,
+            borderColor: semanticColor.borderDefault,
+            gap: spacing.large,
+          }}>
+            <Text style={{
+              fontSize: textStyle.heading.fontSize,
+              fontWeight: textStyle.heading.fontWeight,
+              lineHeight: textStyle.heading.lineHeight,
+              color: semanticColor.textPrimary,
+            }}>
+              활동 리포트
+            </Text>
+            <SegmentedControl
+              items={[
+                { key: 'daily', label: '일간' },
+                { key: 'weekly', label: '주간' },
+                { key: 'monthly', label: '월간' },
+              ]}
+              value={period}
+              onChange={setPeriod}
+              size="medium"
+            />
+            <View style={{
+              backgroundColor: semanticColor.backgroundTertiary,
+              borderRadius: radius.medium,
+              height: 180,
+              alignItems: 'center',
+              justifyContent: 'center',
+            }}>
+              <Text style={{
+                fontSize: textStyle.body2.fontSize,
+                color: semanticColor.textSecondary,
+              }}>
+                {period === 'daily' ? '일간' : period === 'weekly' ? '주간' : '월간'} 차트 영역
+              </Text>
+            </View>
+            <Text style={{
+              fontSize: textStyle.caption.fontSize,
+              color: semanticColor.textTertiary,
+              textAlign: 'center',
+            }}>
+              데이터가 충분히 모이면 더 정확한 분석 제공
+            </Text>
+          </View>
+        </Section>
+      </View>
+    );
+  },
+};
+
+// ─── 9. 사용 가이드 ──────────────────────────────────────────
 
 export const Usage: Story = {
   name: '사용 가이드',

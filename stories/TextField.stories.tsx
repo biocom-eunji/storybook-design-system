@@ -1,7 +1,8 @@
 import React from 'react';
-import { View } from 'react-native';
+import { View, Text } from 'react-native';
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import { TextField } from '../src/components/TextField';
+import { Button } from '../src/components/Button';
 import {
   Section, StateLabel, Row, Col, CodeBlock, CompareGrid, Divider,
 } from './storyHelpers';
@@ -284,7 +285,60 @@ export const CharCounter: Story = {
   },
 };
 
-// ─── 5. 디자인 스펙 ──────────────────────────────────────────
+// ─── 5. 실전 예시 ───────────────────────────────────────────
+
+export const InContext: Story = {
+  name: '실전 예시',
+  render: () => (
+    <View style={{ gap: spacing['3xlarge'] }}>
+      <Section
+        title="실전 예시"
+        description="회원가입 폼에서의 TextField 활용 예시입니다."
+      >
+        <View style={{
+          maxWidth: 375,
+          padding: spacing.xlarge,
+          backgroundColor: semanticColor.backgroundPrimary,
+          borderRadius: radius.large,
+          borderWidth: 1,
+          borderColor: semanticColor.borderDefault,
+          gap: spacing.xlarge,
+        }}>
+          <Text style={{
+            fontSize: textStyle.heading.fontSize,
+            fontWeight: textStyle.heading.fontWeight,
+            lineHeight: textStyle.heading.lineHeight,
+            color: semanticColor.textPrimary,
+          }}>
+            회원가입
+          </Text>
+
+          <View style={{ gap: spacing.large }}>
+            <TextField
+              label="이름"
+              placeholder="이름을 입력해 주세요."
+            />
+            <TextField
+              label="이메일"
+              placeholder="이메일을 입력해 주세요."
+              keyboardType="email-address"
+            />
+            <TextField
+              label="비밀번호"
+              placeholder="비밀번호를 입력해 주세요."
+              secureTextEntry
+              helperText="영문, 숫자, 특수문자 포함 8자 이상"
+            />
+          </View>
+
+          <Button label="가입하기" variant="solid" colorScheme="primary" size="large" />
+        </View>
+      </Section>
+    </View>
+  ),
+};
+
+// ─── 6. 디자인 스펙 ──────────────────────────────────────────
 
 export const DesignSpec: Story = {
   name: '디자인 스펙',
@@ -357,7 +411,7 @@ export const DesignSpec: Story = {
   },
 };
 
-// ─── 6. 사용 가이드 ──────────────────────────────────────────
+// ─── 7. 사용 가이드 ──────────────────────────────────────────
 
 export const Usage: Story = {
   name: '사용 가이드',

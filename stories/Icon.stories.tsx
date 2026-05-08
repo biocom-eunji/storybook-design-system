@@ -272,6 +272,129 @@ export const AllIcons: Story = {
   },
 };
 
+// ─── DesignSpec ─────────────────────────────────────────
+
+export const DesignSpec: Story = {
+  name: '디자인 스펙',
+  render: () => (
+    <View style={{ gap: spacing['3xlarge'] }}>
+      <View style={{ gap: spacing.xlarge }}>
+        <View>
+          <Text style={{
+            fontSize: fontSize.large,
+            fontWeight: fontWeight.bold,
+            color: semanticColor.textPrimary,
+            marginBottom: spacing.xsmall,
+          }}>
+            디자인 스펙
+          </Text>
+          <Text style={{
+            fontSize: fontSize.small,
+            color: semanticColor.textSecondary,
+            marginBottom: spacing['2xlarge'],
+          }}>
+            Figma 시맨틱 토큰 기준 Icon 카테고리별 크기 · 색상 스펙입니다.
+          </Text>
+        </View>
+
+        {/* 카테고리별 크기 테이블 */}
+        <View style={{
+          borderWidth: 1,
+          borderColor: semanticColor.borderDefault,
+          borderRadius: radius.medium,
+          overflow: 'hidden',
+        }}>
+          {/* Header */}
+          <View style={{
+            flexDirection: 'row',
+            backgroundColor: semanticColor.backgroundTertiary,
+            paddingVertical: spacing.small,
+            paddingHorizontal: spacing.medium,
+          }}>
+            <Text style={{ flex: 1, fontSize: fontSize.xsmall, fontWeight: fontWeight.semibold, color: semanticColor.textPrimary }}>카테고리</Text>
+            <Text style={{ flex: 1, fontSize: fontSize.xsmall, fontWeight: fontWeight.semibold, color: semanticColor.textPrimary }}>기본 크기</Text>
+            <Text style={{ flex: 1, fontSize: fontSize.xsmall, fontWeight: fontWeight.semibold, color: semanticColor.textPrimary }}>용도</Text>
+          </View>
+          {/* Rows */}
+          {([
+            { category: 'normal', size: '24px', desc: '범용 UI 아이콘' },
+            { category: 'color', size: '32px', desc: '멀티컬러 구분 아이콘' },
+            { category: 'circle', size: '48px', desc: '원형 카테고리 아이콘' },
+            { category: 'mini', size: '20px', desc: '인라인 · 뱃지 소형 아이콘' },
+          ] as const).map((row, idx) => (
+            <View key={row.category} style={{
+              flexDirection: 'row',
+              paddingVertical: spacing.small,
+              paddingHorizontal: spacing.medium,
+              borderTopWidth: 1,
+              borderTopColor: semanticColor.borderDefault,
+              backgroundColor: idx % 2 === 1 ? semanticColor.backgroundSecondary : semanticColor.backgroundPrimary,
+            }}>
+              <Text style={{ flex: 1, fontSize: fontSize.xsmall, fontWeight: fontWeight.medium, color: semanticColor.textPrimary }}>{row.category}</Text>
+              <Text style={{ flex: 1, fontSize: fontSize.xsmall, color: semanticColor.textSecondary, fontFamily: 'monospace' }}>{row.size}</Text>
+              <Text style={{ flex: 1, fontSize: fontSize.xsmall, color: semanticColor.textSecondary }}>{row.desc}</Text>
+            </View>
+          ))}
+        </View>
+
+        {/* 색상 토큰 테이블 */}
+        <View style={{
+          borderWidth: 1,
+          borderColor: semanticColor.borderDefault,
+          borderRadius: radius.medium,
+          overflow: 'hidden',
+          marginTop: spacing.large,
+        }}>
+          {/* Header */}
+          <View style={{
+            flexDirection: 'row',
+            backgroundColor: semanticColor.backgroundTertiary,
+            paddingVertical: spacing.small,
+            paddingHorizontal: spacing.medium,
+          }}>
+            <Text style={{ flex: 1, fontSize: fontSize.xsmall, fontWeight: fontWeight.semibold, color: semanticColor.textPrimary }}>속성</Text>
+            <Text style={{ flex: 1, fontSize: fontSize.xsmall, fontWeight: fontWeight.semibold, color: semanticColor.textPrimary }}>토큰</Text>
+            <Text style={{ width: 24, fontSize: fontSize.xsmall, fontWeight: fontWeight.semibold, color: semanticColor.textPrimary }}>값</Text>
+          </View>
+          {/* Color Rows */}
+          {([
+            { property: '기본 아이콘', token: 'color/icon/primary', color: semanticColor.iconPrimary },
+            { property: '보조 아이콘', token: 'color/icon/secondary', color: semanticColor.iconSecondary },
+            { property: '비활성 아이콘', token: 'color/icon/disabled', color: semanticColor.iconDisabled },
+            { property: '브랜드 아이콘', token: 'color/icon/brand', color: semanticColor.iconBrand },
+            { property: '색상 배경 위', token: 'color/icon/onColor', color: semanticColor.iconOnColor },
+            { property: '에러 아이콘', token: 'color/icon/error', color: semanticColor.iconError },
+            { property: '성공 아이콘', token: 'color/icon/success', color: semanticColor.iconSuccess },
+            { property: '경고 아이콘', token: 'color/icon/warning', color: semanticColor.iconWarning },
+            { property: '미선택 아이콘', token: 'color/icon/inactive', color: semanticColor.iconInactive },
+          ]).map((row, idx) => (
+            <View key={row.token} style={{
+              flexDirection: 'row',
+              alignItems: 'center',
+              paddingVertical: spacing.small,
+              paddingHorizontal: spacing.medium,
+              borderTopWidth: 1,
+              borderTopColor: semanticColor.borderDefault,
+              backgroundColor: idx % 2 === 1 ? semanticColor.backgroundSecondary : semanticColor.backgroundPrimary,
+            }}>
+              <Text style={{ flex: 1, fontSize: fontSize.xsmall, color: semanticColor.textPrimary }}>{row.property}</Text>
+              <Text style={{ flex: 1, fontSize: fontSize.xsmall, color: semanticColor.textSecondary, fontFamily: 'monospace' }}>{row.token}</Text>
+              <View style={{
+                width: 20,
+                height: 20,
+                borderRadius: radius.xsmall,
+                backgroundColor: row.color,
+                borderWidth: 1,
+                borderColor: semanticColor.borderDefault,
+              }} />
+            </View>
+          ))}
+        </View>
+      </View>
+    </View>
+  ),
+};
+
 // ─── Styles ──────────────────────────────────────────────
 
 const styles = StyleSheet.create({

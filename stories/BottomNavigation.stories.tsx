@@ -167,7 +167,93 @@ export const DesignSpec: Story = {
   ),
 };
 
-// ─── 6. 사용 가이드 ─────────────────────────────────────────
+// ─── 6. 실전 예시 ───────────────────────────────────────────
+
+export const InContext: Story = {
+  name: '실전 예시',
+  render: () => {
+    const [value, setValue] = useState('main');
+    return (
+      <View style={{ gap: spacing['3xlarge'] }}>
+        <Section
+          title="실전 예시"
+          description="앱 메인 화면 — 상단 AppBar, 중간 콘텐츠, 하단 BottomNavigation이 배치된 모바일 화면 시뮬레이션입니다."
+        >
+          <View style={{
+            maxWidth: 375,
+            padding: spacing.xlarge,
+            backgroundColor: semanticColor.backgroundPrimary,
+            borderRadius: radius.large,
+            borderWidth: 1,
+            borderColor: semanticColor.borderDefault,
+          }}>
+            <View style={{
+              width: '100%' as any,
+              height: 56,
+              flexDirection: 'row',
+              alignItems: 'center',
+              paddingHorizontal: spacing.large,
+              borderBottomWidth: 1,
+              borderBottomColor: semanticColor.borderDefault,
+            }}>
+              <Text style={{
+                fontSize: fontSize.large,
+                fontWeight: fontWeight.semibold,
+                color: semanticColor.textPrimary,
+              }}>
+                Biocom
+              </Text>
+            </View>
+
+            <View style={{ padding: spacing.large, gap: spacing.medium, minHeight: 280 }}>
+              <View style={{
+                backgroundColor: semanticColor.backgroundSecondary,
+                borderRadius: radius.medium,
+                padding: spacing.large,
+                gap: spacing.small,
+              }}>
+                <Text style={{
+                  fontSize: fontSize.large,
+                  fontWeight: fontWeight.semibold,
+                  color: semanticColor.textPrimary,
+                }}>
+                  오늘의 건강 점수
+                </Text>
+                <Text style={{
+                  fontSize: fontSize.xlarge,
+                  fontWeight: fontWeight.bold,
+                  color: semanticColor.textBrand,
+                }}>
+                  92점
+                </Text>
+              </View>
+              <View style={{
+                backgroundColor: semanticColor.backgroundSecondary,
+                borderRadius: radius.medium,
+                padding: spacing.large,
+              }}>
+                <Text style={{
+                  fontSize: fontSize.medium,
+                  color: semanticColor.textSecondary,
+                }}>
+                  식단 · 수면 · 운동 기록을 확인해보세요
+                </Text>
+              </View>
+            </View>
+
+            <BottomNavigation
+              items={BIOCOM_TABS}
+              value={value}
+              onChange={setValue}
+            />
+          </View>
+        </Section>
+      </View>
+    );
+  },
+};
+
+// ─── 7. 사용 가이드 ─────────────────────────────────────────
 
 export const Usage: Story = {
   name: '사용 가이드',

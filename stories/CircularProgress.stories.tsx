@@ -3,7 +3,10 @@ import { View, Text } from 'react-native';
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import { CircularProgress } from '../src/components/CircularProgress';
 import { Section, StateLabel, Row, Col, CodeBlock, Divider } from './storyHelpers';
-import { spacing, semanticColor, textStyle } from '../src/tokens/theme';
+import {
+  spacing, semanticColor, textStyle, fontWeight as fw,
+} from '../src/tokens/theme';
+import { TokenSpecTable } from '../src/storybook-components/TokenSpecTable';
 
 const meta: Meta<typeof CircularProgress> = {
   title: 'Feedback/CircularProgress',
@@ -118,6 +121,66 @@ export const InContext: Story = {
     </View>
   ),
 };
+
+// ─── 디자인 스펙 ────────────────────────────────────────────
+
+export const DesignSpec: Story = {
+  name: '디자인 스펙',
+  render: () => (
+    <View style={{ gap: spacing['3xlarge'] }}>
+      <Section
+        title="디자인 스펙"
+        description="Figma 시맨틱 토큰 기준 CircularProgress 구성 요소별 스펙입니다."
+        badge="디자인"
+      >
+        <TokenSpecTable
+          title="트랙 (배경 링)"
+          rows={[
+            { property: '색상', token: 'color/background/disabled', value: semanticColor.backgroundDisabled, type: 'color' },
+          ]}
+        />
+
+        <Divider />
+
+        <TokenSpecTable
+          title="진행 호 (color별)"
+          rows={[
+            { property: 'primary', token: 'color/background/brand', value: semanticColor.backgroundBrand, type: 'color' },
+            { property: 'success', token: 'color/background/success', value: semanticColor.backgroundSuccess, type: 'color' },
+            { property: 'warning', token: 'color/background/warning', value: semanticColor.backgroundWarning, type: 'color' },
+            { property: 'error', token: 'color/background/error', value: semanticColor.backgroundError, type: 'color' },
+          ]}
+        />
+
+        <Divider />
+
+        <TokenSpecTable
+          title="라벨 텍스트"
+          rows={[
+            { property: '색상', token: 'color/text/primary', value: semanticColor.textPrimary, type: 'color' },
+            { property: 'fontWeight', token: 'fontWeight/bold', value: fw.bold },
+            { property: 'fontSize (size >= 80)', token: 'Headline', value: `${textStyle.headline.fontSize}px`, type: 'typography' },
+            { property: 'fontSize (size >= 56)', token: 'Label 1', value: `${textStyle.label1.fontSize}px`, type: 'typography' },
+            { property: 'fontSize (size < 56)', token: 'Caption', value: `${textStyle.caption.fontSize}px`, type: 'typography' },
+          ]}
+        />
+
+        <Divider />
+
+        <TokenSpecTable
+          title="기본값"
+          rows={[
+            { property: '기본 size (지름)', token: '—', value: 80, type: 'size' },
+            { property: '기본 strokeWidth', token: '—', value: 6, type: 'size' },
+            { property: 'strokeLinecap', token: '—', value: 'round' },
+          ]}
+        />
+      </Section>
+    </View>
+  ),
+};
+
+// ─── 사용 가이드 ────────────────────────────────────────────
 
 export const Usage: Story = {
   name: '사용 가이드',

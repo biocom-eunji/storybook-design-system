@@ -1,12 +1,12 @@
 import React, { useState } from 'react';
-import { View } from 'react-native';
+import { View, Text } from 'react-native';
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import { Radio } from '../src/components/Radio';
 import {
   Section, StateLabel, Row, Col, CodeBlock, CompareGrid, Divider,
 } from './storyHelpers';
 import { TokenSpecTable } from '../src/storybook-components/TokenSpecTable';
-import { spacing, semanticColor } from '../src/tokens/theme';
+import { spacing, semanticColor, radius, textStyle } from '../src/tokens/theme';
 
 // ─── 토큰 매핑 테이블 (Single Source of Truth) ──────────────
 
@@ -326,6 +326,63 @@ export const DesignSpec: Story = {
               { property: '서브라벨 타이포',     token: 'Label 2 / Caption',   value: '14px / 13px' },
             ]}
           />
+        </Section>
+      </View>
+    );
+  },
+};
+
+// ─── 실전 예시 ──────────────────────────────────────────────
+
+export const InContext: Story = {
+  name: '실전 예시',
+  render: () => {
+    const [selected, setSelected] = useState('normal');
+
+    const options = [
+      { id: 'normal', label: '일반식', sublabel: '균형 잡힌 일반 식단' },
+      { id: 'vegan', label: '채식', sublabel: '식물성 위주 식단' },
+      { id: 'lowcarb', label: '저탄고지', sublabel: '탄수화물 제한, 건강한 지방 중심' },
+    ];
+
+    return (
+      <View style={{ gap: spacing['3xlarge'] }}>
+        <Section
+          title="실전 예시"
+          description="실제 화면에서 Radio가 배치되는 맥락을 확인합니다."
+        >
+          <View style={{ gap: spacing['2xlarge'], maxWidth: 375 }}>
+            <Col gap={spacing.small}>
+              <StateLabel>식단 유형 선택</StateLabel>
+              <View style={{
+                borderWidth: 1,
+                borderColor: semanticColor.borderDefault,
+                borderRadius: radius.large,
+                padding: spacing.xlarge,
+                backgroundColor: semanticColor.backgroundPrimary,
+              }}>
+                <Text style={{
+                  fontSize: textStyle.headline.fontSize,
+                  fontWeight: textStyle.headline.fontWeight,
+                  color: semanticColor.textPrimary,
+                  marginBottom: spacing.medium,
+                }}>
+                  식단 유형을 선택해주세요
+                </Text>
+                <View style={{ gap: spacing.small }}>
+                  {options.map(opt => (
+                    <Radio
+                      key={opt.id}
+                      checked={selected === opt.id}
+                      label={opt.label}
+                      sublabel={opt.sublabel}
+                      onPress={() => setSelected(opt.id)}
+                    />
+                  ))}
+                </View>
+              </View>
+            </Col>
+          </View>
         </Section>
       </View>
     );

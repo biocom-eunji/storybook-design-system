@@ -250,7 +250,81 @@ export const WrappingExample: Story = {
   ),
 };
 
-// ─── 5. 디자인 스펙 ─────────────────────────────────────────
+// ─── 5. 실전 예시 ───────────────────────────────────────────
+
+export const InContext: Story = {
+  name: '실전 예시',
+  render: () => (
+    <View style={{ gap: spacing['3xlarge'] }}>
+      <Section
+        title="실전 예시"
+        description="실제 화면에서 Badge가 배치되는 맥락을 확인합니다."
+      >
+        <View style={{ maxWidth: 375 }}>
+          <Col gap={spacing.small}>
+            <StateLabel>알림 탭 아이콘에 뱃지</StateLabel>
+            <View style={{
+              borderWidth: 1,
+              borderColor: semanticColor.borderDefault,
+              borderRadius: radius.large,
+              backgroundColor: semanticColor.backgroundPrimary,
+              paddingHorizontal: spacing.xlarge,
+              paddingVertical: spacing.xlarge,
+            }}>
+              <Row gap={spacing['3xlarge']} align="center">
+                <Col gap={spacing.small}>
+                  <Badge count={3} variant="filled" color="error">
+                    <View style={{
+                      width: 48,
+                      height: 48,
+                      borderRadius: radius.medium,
+                      backgroundColor: semanticColor.backgroundTertiary,
+                      alignItems: 'center',
+                      justifyContent: 'center',
+                    }}>
+                      <Text style={{ fontSize: fontSize.xlarge, color: semanticColor.textSecondary }}>🔔</Text>
+                    </View>
+                  </Badge>
+                  <Text style={{ fontSize: fontSize.xsmall, color: semanticColor.textSecondary, textAlign: 'center' }}>알림</Text>
+                </Col>
+                <Col gap={spacing.small}>
+                  <Badge variant="dot" color="error">
+                    <View style={{
+                      width: 48,
+                      height: 48,
+                      borderRadius: radius.medium,
+                      backgroundColor: semanticColor.backgroundTertiary,
+                      alignItems: 'center',
+                      justifyContent: 'center',
+                    }}>
+                      <Text style={{ fontSize: fontSize.xlarge, color: semanticColor.textSecondary }}>💬</Text>
+                    </View>
+                  </Badge>
+                  <Text style={{ fontSize: fontSize.xsmall, color: semanticColor.textSecondary, textAlign: 'center' }}>메시지</Text>
+                </Col>
+                <Col gap={spacing.small}>
+                  <View style={{
+                    width: 48,
+                    height: 48,
+                    borderRadius: radius.medium,
+                    backgroundColor: semanticColor.backgroundTertiary,
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                  }}>
+                    <Text style={{ fontSize: fontSize.xlarge, color: semanticColor.textSecondary }}>⚙️</Text>
+                  </View>
+                  <Text style={{ fontSize: fontSize.xsmall, color: semanticColor.textSecondary, textAlign: 'center' }}>설정</Text>
+                </Col>
+              </Row>
+            </View>
+          </Col>
+        </View>
+      </Section>
+    </View>
+  ),
+};
+
+// ─── 6. 디자인 스펙 ─────────────────────────────────────────
 
 export const DesignSpec: Story = {
   name: '디자인 스펙',

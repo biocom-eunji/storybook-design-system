@@ -6,7 +6,7 @@ import {
   Section, StateLabel, Row, Col, CodeBlock, CompareGrid, Divider,
 } from './storyHelpers';
 import { TokenSpecTable } from '../src/storybook-components/TokenSpecTable';
-import { spacing, textButtonToken } from '../src/tokens/theme';
+import { spacing, textButtonToken, semanticColor, radius } from '../src/tokens/theme';
 
 // ─── 토큰 매핑 테이블 (Single Source of Truth) ──────────────
 // Figma 시맨틱 토큰명과 theme.ts textButtonToken의 1:1 매핑
@@ -300,6 +300,48 @@ export const DesignSpec: Story = {
       },
     },
   },
+};
+
+// ─── 실전 예시 ──────────────────────────────────────────────
+
+export const InContext: Story = {
+  name: '실전 예시',
+  render: () => (
+    <View style={{ gap: spacing['3xlarge'] }}>
+      <Section
+        title="실전 예시"
+        description="실제 화면에서 TextButton이 배치되는 맥락을 확인합니다."
+      >
+        <View style={{ gap: spacing['2xlarge'], maxWidth: 375 }}>
+          <Col gap={spacing.small}>
+            <StateLabel>약관 동의 화면</StateLabel>
+            <View style={{
+              borderWidth: 1,
+              borderColor: semanticColor.borderDefault,
+              borderRadius: radius.large,
+              padding: spacing.xlarge,
+              backgroundColor: semanticColor.backgroundPrimary,
+            }}>
+              <View style={{ gap: spacing.medium }}>
+                <TextButton
+                  label="이용약관 보기"
+                  colorScheme="primary"
+                  size="medium"
+                  onPress={() => {}}
+                />
+                <TextButton
+                  label="개인정보처리방침"
+                  colorScheme="primary"
+                  size="medium"
+                  onPress={() => {}}
+                />
+              </View>
+            </View>
+          </Col>
+        </View>
+      </Section>
+    </View>
+  ),
 };
 
 // ─── 7. 사용 가이드 ──────────────────────────────────────────

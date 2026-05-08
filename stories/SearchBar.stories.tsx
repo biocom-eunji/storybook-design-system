@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { View, Text } from 'react-native';
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import { SearchBar } from '../src/components/SearchBar';
+import { Icon } from '../src/components/Icon';
 import { Section, StateLabel, Col, CodeBlock, Divider } from './storyHelpers';
 import { TokenSpecTable } from '../src/storybook-components/TokenSpecTable';
 import { spacing, semanticColor, textStyle, radius, fontWeight as fw } from '../src/tokens/theme';
@@ -137,6 +138,81 @@ export const DesignSpec: Story = {
               { property: '비활성 투명도',   token: '0.5',                             value: 0.5,             type: 'opacity' },
             ]}
           />
+        </Section>
+      </View>
+    );
+  },
+};
+
+// ─── 실전 예시 ──────────────────────────────────────────────
+
+export const InContext: Story = {
+  name: '실전 예시',
+  render: () => {
+    const [query, setQuery] = useState('닭가슴살');
+
+    const mockResults = [
+      { name: '닭가슴살 샐러드', kcal: 180 },
+      { name: '닭가슴살 스테이크', kcal: 220 },
+      { name: '닭가슴살 김밥', kcal: 310 },
+    ];
+
+    return (
+      <View style={{ gap: spacing['3xlarge'] }}>
+        <Section
+          title="실전 예시"
+          description="음식 검색 화면에서의 SearchBar 활용 예시입니다."
+        >
+          <View style={{
+            maxWidth: 375,
+            backgroundColor: semanticColor.backgroundPrimary,
+            borderRadius: radius.large,
+            borderWidth: 1,
+            borderColor: semanticColor.borderDefault,
+            overflow: 'hidden',
+          }}>
+            <View style={{ padding: spacing.large }}>
+              <SearchBar
+                value={query}
+                onChangeText={setQuery}
+                placeholder="음식을 검색하세요"
+              />
+            </View>
+
+            <View style={{ borderTopWidth: 1, borderTopColor: semanticColor.borderDefault }}>
+              {mockResults.map((item, idx) => (
+                <View
+                  key={item.name}
+                  style={{
+                    flexDirection: 'row',
+                    alignItems: 'center',
+                    justifyContent: 'space-between',
+                    paddingVertical: spacing.medium,
+                    paddingHorizontal: spacing.large,
+                    borderBottomWidth: idx < mockResults.length - 1 ? 1 : 0,
+                    borderBottomColor: semanticColor.borderDefault,
+                  }}
+                >
+                  <View style={{ flexDirection: 'row', alignItems: 'center', gap: spacing.medium }}>
+                    <Icon name="meal" style="mini" size={16} />
+                    <Text style={{
+                      fontSize: textStyle.body2.fontSize,
+                      lineHeight: textStyle.body2.lineHeight,
+                      color: semanticColor.textPrimary,
+                    }}>
+                      {item.name}
+                    </Text>
+                  </View>
+                  <Text style={{
+                    fontSize: textStyle.caption.fontSize,
+                    color: semanticColor.textSecondary,
+                  }}>
+                    {item.kcal} kcal
+                  </Text>
+                </View>
+              ))}
+            </View>
+          </View>
         </Section>
       </View>
     );

@@ -1,12 +1,12 @@
 import React, { useState } from 'react';
-import { View } from 'react-native';
+import { View, Text } from 'react-native';
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import { Chip } from '../src/components/Chip';
 import {
   Section, StateLabel, Row, Col, CodeBlock, CompareGrid, Divider,
 } from './storyHelpers';
 import { TokenSpecTable } from '../src/storybook-components/TokenSpecTable';
-import { spacing, chipToken, semanticColor } from '../src/tokens/theme';
+import { spacing, chipToken, semanticColor, radius, textStyle } from '../src/tokens/theme';
 
 // ─── 토큰 매핑 테이블 (Single Source of Truth) ──────────────
 
@@ -312,6 +312,65 @@ export const DesignSpec: Story = {
               ]}
             />
           ))}
+        </Section>
+      </View>
+    );
+  },
+};
+
+// ─── 실전 예시 ──────────────────────────────────────────────
+
+export const InContext: Story = {
+  name: '실전 예시',
+  render: () => {
+    const [selected, setSelected] = useState<string[]>(['식단', '운동']);
+    const categories = ['전체', '식단', '수면', '운동', '영양제', '수분'];
+
+    const toggle = (cat: string) => {
+      setSelected(prev =>
+        prev.includes(cat) ? prev.filter(c => c !== cat) : [...prev, cat]
+      );
+    };
+
+    return (
+      <View style={{ gap: spacing['3xlarge'] }}>
+        <Section
+          title="실전 예시"
+          description="실제 화면에서 Chip이 배치되는 맥락을 확인합니다."
+        >
+          <View style={{ gap: spacing['2xlarge'], maxWidth: 375 }}>
+            <Col gap={spacing.small}>
+              <StateLabel>카테고리 필터</StateLabel>
+              <View style={{
+                borderWidth: 1,
+                borderColor: semanticColor.borderDefault,
+                borderRadius: radius.large,
+                padding: spacing.xlarge,
+                backgroundColor: semanticColor.backgroundPrimary,
+              }}>
+                <Text style={{
+                  fontSize: textStyle.headline.fontSize,
+                  fontWeight: textStyle.headline.fontWeight,
+                  color: semanticColor.textPrimary,
+                  marginBottom: spacing.medium,
+                }}>
+                  건강 기록 필터
+                </Text>
+                <Row gap={spacing.small} wrap>
+                  {categories.map(cat => (
+                    <Chip
+                      key={cat}
+                      label={cat}
+                      variant="solid"
+                      size="medium"
+                      active={selected.includes(cat)}
+                      onPress={() => toggle(cat)}
+                    />
+                  ))}
+                </Row>
+              </View>
+            </Col>
+          </View>
         </Section>
       </View>
     );

@@ -422,7 +422,51 @@ export const DesignSpec: Story = {
   ),
 };
 
-// ─── 10. 사용 가이드 ─────────────────────────────────────────
+// ─── 10. 실전 예시 ──────────────────────────────────────────
+
+export const InContext: Story = {
+  name: '실전 예시',
+  render: () => (
+    <View style={{ gap: spacing['3xlarge'] }}>
+      <Section
+        title="실전 예시"
+        description="필터 선택 — 인라인 BottomSheet 미리보기입니다. 건강 기록 필터를 선택하는 시나리오입니다."
+      >
+        <View style={{
+          maxWidth: 375,
+          padding: spacing.xlarge,
+          backgroundColor: semanticColor.backgroundPrimary,
+          borderRadius: radius.large,
+          borderWidth: 1,
+          borderColor: semanticColor.borderDefault,
+          gap: spacing.large,
+        }}>
+          <Text style={{
+            fontSize: textStyle.heading.fontSize,
+            fontWeight: textStyle.heading.fontWeight,
+            lineHeight: textStyle.heading.lineHeight,
+            color: semanticColor.textPrimary,
+          }}>
+            건강 기록
+          </Text>
+          <SheetPreview title="기록 필터" showHandle>
+            <View style={{ gap: spacing.small }}>
+              <Checkbox state="checked" label="식단 기록" />
+              <Checkbox state="unchecked" label="수면 기록" />
+              <Checkbox state="checked" label="운동 기록" />
+              <Checkbox state="unchecked" label="영양제 기록" />
+              <View style={{ marginTop: spacing.medium }}>
+                <Button label="필터 적용" variant="solid" color="primary" size="medium" />
+              </View>
+            </View>
+          </SheetPreview>
+        </View>
+      </Section>
+    </View>
+  ),
+};
+
+// ─── 11. 사용 가이드 ─────────────────────────────────────────
 
 export const Usage: Story = {
   name: '사용 가이드',

@@ -1,12 +1,12 @@
 import React, { useState } from 'react';
-import { View } from 'react-native';
+import { View, Text } from 'react-native';
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import { Checkbox } from '../src/components/Checkbox';
 import {
   Section, StateLabel, Row, Col, CodeBlock, CompareGrid, Divider,
 } from './storyHelpers';
 import { TokenSpecTable } from '../src/storybook-components/TokenSpecTable';
-import { spacing, semanticColor } from '../src/tokens/theme';
+import { spacing, semanticColor, radius, textStyle } from '../src/tokens/theme';
 
 // ─── 토큰 매핑 테이블 (Single Source of Truth) ──────────────
 
@@ -377,6 +377,65 @@ export const DesignSpec: Story = {
               { property: '서브라벨 타이포',   token: 'Label 2 / Caption', value: '14px / 13px' },
             ]}
           />
+        </Section>
+      </View>
+    );
+  },
+};
+
+// ─── 실전 예시 ──────────────────────────────────────────────
+
+export const InContext: Story = {
+  name: '실전 예시',
+  render: () => {
+    const [goals, setGoals] = useState([
+      { id: 'water', label: '물 2L 마시기', checked: true },
+      { id: 'walk', label: '만보 걷기', checked: true },
+      { id: 'sleep', label: '12시 이전 취침', checked: false },
+      { id: 'veg', label: '채소 3회 이상 섭취', checked: false },
+    ]);
+
+    const toggleGoal = (id: string) => {
+      setGoals(goals.map(g => g.id === id ? { ...g, checked: !g.checked } : g));
+    };
+
+    return (
+      <View style={{ gap: spacing['3xlarge'] }}>
+        <Section
+          title="실전 예시"
+          description="실제 화면에서 Checkbox가 배치되는 맥락을 확인합니다."
+        >
+          <View style={{ gap: spacing['2xlarge'], maxWidth: 375 }}>
+            <Col gap={spacing.small}>
+              <StateLabel>건강 목표 체크리스트</StateLabel>
+              <View style={{
+                borderWidth: 1,
+                borderColor: semanticColor.borderDefault,
+                borderRadius: radius.large,
+                padding: spacing.xlarge,
+                backgroundColor: semanticColor.backgroundPrimary,
+              }}>
+                <Text style={{
+                  fontSize: textStyle.headline.fontSize,
+                  fontWeight: textStyle.headline.fontWeight,
+                  color: semanticColor.textPrimary,
+                  marginBottom: spacing.medium,
+                }}>
+                  오늘의 건강 목표
+                </Text>
+                <View style={{ gap: spacing.small }}>
+                  {goals.map(goal => (
+                    <Checkbox
+                      key={goal.id}
+                      state={goal.checked ? 'checked' : 'unchecked'}
+                      label={goal.label}
+                      onPress={() => toggleGoal(goal.id)}
+                    />
+                  ))}
+                </View>
+              </View>
+            </Col>
+          </View>
         </Section>
       </View>
     );

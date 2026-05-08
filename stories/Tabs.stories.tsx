@@ -1,12 +1,12 @@
 import React, { useState } from 'react';
-import { View } from 'react-native';
+import { View, Text } from 'react-native';
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import { Tabs } from '../src/components/Tabs';
 import {
   Section, StateLabel, Row, Col, CodeBlock, Divider,
 } from './storyHelpers';
 import { TokenSpecTable } from '../src/storybook-components/TokenSpecTable';
-import { spacing, semanticColor, textStyle } from '../src/tokens/theme';
+import { spacing, semanticColor, textStyle, radius } from '../src/tokens/theme';
 
 // ─── 토큰 매핑 (Single Source of Truth) ─────────────────────
 
@@ -287,7 +287,72 @@ export const DesignSpec: Story = {
   ),
 };
 
-// ─── 8. 사용 가이드 ──────────────────────────────────────────
+// ─── 8. 실전 예시 ───────────────────────────────────────────
+
+export const InContext: Story = {
+  name: '실전 예시',
+  render: () => {
+    const [value, setValue] = useState('tab1');
+    const tabContent: Record<string, string> = {
+      tab1: '전체 건강 리포트 요약이 표시되는 영역',
+      tab2: '식단 분석 결과 및 칼로리 차트 영역',
+      tab3: '운동 기록 및 소모 칼로리 차트 영역',
+    };
+    return (
+      <View style={{ gap: spacing['3xlarge'] }}>
+        <Section
+          title="실전 예시"
+          description="건강 리포트 탭 — Tabs 아래 콘텐츠 영역이 전환되는 구조입니다."
+        >
+          <View style={{
+            maxWidth: 375,
+            padding: spacing.xlarge,
+            backgroundColor: semanticColor.backgroundPrimary,
+            borderRadius: radius.large,
+            borderWidth: 1,
+            borderColor: semanticColor.borderDefault,
+          }}>
+            <Text style={{
+              fontSize: textStyle.heading.fontSize,
+              fontWeight: textStyle.heading.fontWeight,
+              lineHeight: textStyle.heading.lineHeight,
+              color: semanticColor.textPrimary,
+              marginBottom: spacing.large,
+            }}>
+              건강 리포트
+            </Text>
+            <Tabs
+              items={defaultItems}
+              value={value}
+              onChange={setValue}
+              size="medium"
+              resize="fill"
+            />
+            <View style={{
+              backgroundColor: semanticColor.backgroundSecondary,
+              borderRadius: radius.medium,
+              padding: spacing.xlarge,
+              marginTop: spacing.large,
+              minHeight: 120,
+              justifyContent: 'center',
+              alignItems: 'center',
+            }}>
+              <Text style={{
+                fontSize: textStyle.body2.fontSize,
+                color: semanticColor.textSecondary,
+                textAlign: 'center',
+              }}>
+                {tabContent[value] ?? ''}
+              </Text>
+            </View>
+          </View>
+        </Section>
+      </View>
+    );
+  },
+};
+
+// ─── 9. 사용 가이드 ──────────────────────────────────────────
 
 export const Usage: Story = {
   name: '사용 가이드',

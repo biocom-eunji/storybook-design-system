@@ -1,12 +1,12 @@
 import React, { useState } from 'react';
-import { View } from 'react-native';
+import { View, Text } from 'react-native';
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import { PageIndicator } from '../src/components/PageIndicator';
 import {
   Section, StateLabel, Row, Col, CodeBlock, Divider,
 } from './storyHelpers';
 import { TokenSpecTable } from '../src/storybook-components/TokenSpecTable';
-import { spacing, semanticColor, opacity } from '../src/tokens/theme';
+import { spacing, semanticColor, opacity, radius, textStyle } from '../src/tokens/theme';
 
 // ─── 토큰 매핑 (Single Source of Truth) ─────────────────────
 
@@ -277,7 +277,68 @@ export const DesignSpec: Story = {
   ),
 };
 
-// ─── 8. 사용 가이드 ──────────────────────────────────────────
+// ─── 8. 실전 예시 ───────────────────────────────────────────
+
+export const InContext: Story = {
+  name: '실전 예시',
+  render: () => {
+    const [current, setCurrent] = useState(0);
+    const slides = ['건강 데이터를 한눈에', '맞춤 식단 추천', '수면 패턴 분석'];
+    return (
+      <View style={{ gap: spacing['3xlarge'] }}>
+        <Section
+          title="실전 예시"
+          description="온보딩 캐러셀 — 이미지 플레이스홀더 하단에 PageIndicator가 배치된 구조입니다."
+        >
+          <View style={{
+            maxWidth: 375,
+            padding: spacing.xlarge,
+            backgroundColor: semanticColor.backgroundPrimary,
+            borderRadius: radius.large,
+            borderWidth: 1,
+            borderColor: semanticColor.borderDefault,
+            gap: spacing.xlarge,
+          }}>
+            <View style={{
+              backgroundColor: semanticColor.backgroundTertiary,
+              borderRadius: radius.medium,
+              height: 240,
+              alignItems: 'center',
+              justifyContent: 'center',
+            }}>
+              <Text style={{
+                fontSize: textStyle.heading.fontSize,
+                fontWeight: textStyle.heading.fontWeight,
+                color: semanticColor.textPrimary,
+                textAlign: 'center',
+              }}>
+                {slides[current]}
+              </Text>
+              <Text style={{
+                fontSize: textStyle.caption.fontSize,
+                color: semanticColor.textSecondary,
+                marginTop: spacing.small,
+              }}>
+                슬라이드 {current + 1} / {slides.length}
+              </Text>
+            </View>
+            <View style={{ alignItems: 'center' }}>
+              <PageIndicator
+                variant="normal"
+                size="medium"
+                total={slides.length}
+                current={current}
+                onChange={setCurrent}
+              />
+            </View>
+          </View>
+        </Section>
+      </View>
+    );
+  },
+};
+
+// ─── 9. 사용 가이드 ──────────────────────────────────────────
 
 export const Usage: Story = {
   name: '사용 가이드',

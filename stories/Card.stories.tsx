@@ -6,7 +6,7 @@ import {
   Section, StateLabel, Row, Col, CodeBlock, Divider,
 } from './storyHelpers';
 import { TokenSpecTable } from '../src/storybook-components/TokenSpecTable';
-import { spacing, semanticColor, radius, textStyle } from '../src/tokens/theme';
+import { spacing, semanticColor, radius, textStyle, fontWeight as fw } from '../src/tokens/theme';
 
 const meta: Meta<typeof Card> = {
   title: 'Data Display/Card',
@@ -175,7 +175,68 @@ export const Grid: Story = {
   ),
 };
 
-// ─── 8. 디자인 스펙 ──────────────────────────────────────────
+// ─── 8. 실전 예시 ────────────────────────────────────────────
+
+export const InContext: Story = {
+  name: '실전 예시',
+  render: () => (
+    <View style={{ gap: spacing['3xlarge'] }}>
+      <Section
+        title="실전 예시"
+        description="실제 화면에서 Card가 배치되는 맥락을 확인합니다."
+      >
+        <View style={{ maxWidth: 375 }}>
+          <Col gap={spacing.small}>
+            <StateLabel>건강 콘텐츠 피드</StateLabel>
+            <View style={{
+              borderWidth: 1,
+              borderColor: semanticColor.borderDefault,
+              borderRadius: radius.large,
+              overflow: 'hidden',
+              backgroundColor: semanticColor.backgroundPrimary,
+            }}>
+              <View style={{
+                paddingHorizontal: spacing.xlarge,
+                paddingVertical: spacing.medium,
+                borderBottomWidth: 1,
+                borderBottomColor: semanticColor.borderDefault,
+              }}>
+                <Text style={{
+                  fontSize: textStyle.headline.fontSize,
+                  fontWeight: fw.semibold,
+                  color: semanticColor.textPrimary,
+                }}>
+                  추천 콘텐츠
+                </Text>
+              </View>
+              <View style={{
+                padding: spacing.xlarge,
+                gap: spacing.medium,
+              }}>
+                {[
+                  { title: '아침 공복에 좋은 음식 5가지', caption: '식단 관리', subCaption: '3분 읽기' },
+                  { title: '수면의 질을 높이는 저녁 루틴', caption: '수면 관리', subCaption: '5분 읽기' },
+                  { title: '하루 10분 홈트레이닝 가이드', caption: '운동', subCaption: '4분 읽기' },
+                ].map((item, i) => (
+                  <Card
+                    key={i}
+                    title={item.title}
+                    caption={item.caption}
+                    subCaption={item.subCaption}
+                    width={375 - spacing.xlarge * 2}
+                    onPress={() => {}}
+                  />
+                ))}
+              </View>
+            </View>
+          </Col>
+        </View>
+      </Section>
+    </View>
+  ),
+};
+
+// ─── 9. 디자인 스펙 ──────────────────────────────────────────
 
 export const DesignSpec: Story = {
   name: '디자인 스펙',

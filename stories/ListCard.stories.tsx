@@ -7,7 +7,7 @@ import {
   Section, StateLabel, Col, Row, CodeBlock, Divider,
 } from './storyHelpers';
 import { TokenSpecTable } from '../src/storybook-components/TokenSpecTable';
-import { spacing, semanticColor, radius, textStyle } from '../src/tokens/theme';
+import { spacing, semanticColor, radius, textStyle, fontWeight as fw } from '../src/tokens/theme';
 
 const meta: Meta<typeof ListCard> = {
   title: 'Data Display/ListCard',
@@ -174,7 +174,75 @@ export const ListExample: Story = {
   ),
 };
 
-// ─── 8. 디자인 스펙 ──────────────────────────────────────────
+// ─── 8. 실전 예시 ────────────────────────────────────────────
+
+export const InContext: Story = {
+  name: '실전 예시',
+  render: () => (
+    <View style={{ gap: spacing['3xlarge'] }}>
+      <Section
+        title="실전 예시"
+        description="실제 화면에서 ListCard가 배치되는 맥락을 확인합니다."
+      >
+        <View style={{ maxWidth: 375 }}>
+          <Col gap={spacing.small}>
+            <StateLabel>최근 기록</StateLabel>
+            <View style={{
+              borderWidth: 1,
+              borderColor: semanticColor.borderDefault,
+              borderRadius: radius.large,
+              overflow: 'hidden',
+              backgroundColor: semanticColor.backgroundPrimary,
+            }}>
+              <View style={{
+                paddingHorizontal: spacing.xlarge,
+                paddingVertical: spacing.medium,
+                borderBottomWidth: 1,
+                borderBottomColor: semanticColor.borderDefault,
+              }}>
+                <Text style={{
+                  fontSize: textStyle.headline.fontSize,
+                  fontWeight: fw.semibold,
+                  color: semanticColor.textPrimary,
+                }}>
+                  최근 기록
+                </Text>
+              </View>
+              {[
+                { title: '오늘의 아침 식단', caption: '식단 · 08:30' },
+                { title: '저녁 30분 조깅', caption: '운동 · 19:00' },
+                { title: '수면 7시간 42분', caption: '수면 · 어젯밤' },
+              ].map((item, i, arr) => (
+                <View key={item.title}>
+                  <View style={{
+                    paddingHorizontal: spacing.xlarge,
+                    paddingVertical: spacing.medium,
+                  }}>
+                    <ListCard
+                      title={item.title}
+                      caption={item.caption}
+                      trailing={<Icon name="caret-right" size={20} color={semanticColor.iconSecondary} />}
+                      onPress={() => {}}
+                    />
+                  </View>
+                  {i < arr.length - 1 && (
+                    <View style={{
+                      height: 1,
+                      backgroundColor: semanticColor.borderDefault,
+                      marginLeft: 96 + spacing.medium + spacing.xlarge,
+                    }} />
+                  )}
+                </View>
+              ))}
+            </View>
+          </Col>
+        </View>
+      </Section>
+    </View>
+  ),
+};
+
+// ─── 9. 디자인 스펙 ──────────────────────────────────────────
 
 export const DesignSpec: Story = {
   name: '디자인 스펙',

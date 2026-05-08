@@ -142,6 +142,64 @@ export const Inset: Story = {
   ),
 };
 
+// ─── 5. 실전 예시 ───────────────────────────────────────────
+
+export const InContext: Story = {
+  name: '실전 예시',
+  render: () => (
+    <View style={{ gap: spacing['3xlarge'] }}>
+      <Section
+        title="실전 예시"
+        description="실제 화면에서 Divider가 배치되는 맥락을 확인합니다."
+      >
+        <View style={{ maxWidth: 375 }}>
+          <Col gap={spacing.small}>
+            <StateLabel>설정 화면 구분선</StateLabel>
+            <View style={{
+              borderWidth: 1,
+              borderColor: semanticColor.borderDefault,
+              borderRadius: radius.large,
+              overflow: 'hidden',
+              backgroundColor: semanticColor.backgroundPrimary,
+            }}>
+              {[
+                { label: '프로필 설정', desc: '이름, 사진, 목표 체중' },
+                { label: '알림 설정', desc: '푸시 알림, 리마인더' },
+                { label: '데이터 관리', desc: '내보내기, 초기화' },
+                { label: '앱 정보', desc: '버전, 라이선스' },
+              ].map((item, i, arr) => (
+                <View key={item.label}>
+                  <View style={{
+                    paddingHorizontal: spacing.xlarge,
+                    paddingVertical: spacing.large,
+                    gap: spacing.xsmall,
+                  }}>
+                    <Text style={{
+                      fontSize: fontSize.medium,
+                      color: semanticColor.textPrimary,
+                    }}>
+                      {item.label}
+                    </Text>
+                    <Text style={{
+                      fontSize: fontSize.xsmall,
+                      color: semanticColor.textSecondary,
+                    }}>
+                      {item.desc}
+                    </Text>
+                  </View>
+                  {i < arr.length - 1 && (
+                    <DividerComponent inset={spacing.xlarge} />
+                  )}
+                </View>
+              ))}
+            </View>
+          </Col>
+        </View>
+      </Section>
+    </View>
+  ),
+};
+
 // ─── 6. 디자인 스펙 ─────────────────────────────────────────
 
 export const DesignSpec: Story = {

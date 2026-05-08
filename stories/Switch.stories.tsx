@@ -6,7 +6,7 @@ import {
   Section, StateLabel, Row, Col, CodeBlock, CompareGrid, Divider,
 } from './storyHelpers';
 import { TokenSpecTable } from '../src/storybook-components/TokenSpecTable';
-import { spacing, semanticColor, radius, shadow } from '../src/tokens/theme';
+import { spacing, semanticColor, radius, shadow, textStyle, fontWeight as fw } from '../src/tokens/theme';
 
 // ─── 토큰 매핑 테이블 (Single Source of Truth) ──────────────
 
@@ -236,6 +236,70 @@ export const DesignSpec: Story = {
               { property: 'Reduce Motion 대응', token: '—', value: 'prefers-reduced-motion 시 즉시 전환' },
             ]}
           />
+        </Section>
+      </View>
+    );
+  },
+};
+
+// ─── 실전 예시 ──────────────────────────────────────────────
+
+export const InContext: Story = {
+  name: '실전 예시',
+  render: () => {
+    const [push, setPush] = useState(true);
+    const [meal, setMeal] = useState(true);
+    const [sleep, setSleep] = useState(false);
+
+    const settings = [
+      { label: '푸시 알림', sublabel: '건강 리포트, 목표 달성 알림', checked: push, onPress: () => setPush(!push) },
+      { label: '식단 기록 리마인더', sublabel: '매일 아침·점심·저녁 알림', checked: meal, onPress: () => setMeal(!meal) },
+      { label: '수면 분석 알림', sublabel: '기상 후 수면 리포트 발송', checked: sleep, onPress: () => setSleep(!sleep) },
+    ];
+
+    return (
+      <View style={{ gap: spacing['3xlarge'] }}>
+        <Section
+          title="실전 예시"
+          description="실제 화면에서 Switch가 배치되는 맥락을 확인합니다."
+        >
+          <View style={{ gap: spacing['2xlarge'], maxWidth: 375 }}>
+            <Col gap={spacing.small}>
+              <StateLabel>알림 설정</StateLabel>
+              <View style={{
+                borderWidth: 1,
+                borderColor: semanticColor.borderDefault,
+                borderRadius: radius.large,
+                padding: spacing.xlarge,
+                backgroundColor: semanticColor.backgroundPrimary,
+              }}>
+                {settings.map((item, i) => (
+                  <View key={item.label} style={{
+                    flexDirection: 'row',
+                    alignItems: 'center',
+                    justifyContent: 'space-between',
+                    paddingVertical: spacing.medium,
+                    borderBottomWidth: i < settings.length - 1 ? 1 : 0,
+                    borderBottomColor: semanticColor.borderDefault,
+                  }}>
+                    <View style={{ flex: 1, marginRight: spacing.large }}>
+                      <Text style={{
+                        fontSize: textStyle.body2.fontSize,
+                        fontWeight: fw.medium,
+                        color: semanticColor.textPrimary,
+                      }}>{item.label}</Text>
+                      <Text style={{
+                        fontSize: textStyle.caption.fontSize,
+                        color: semanticColor.textSecondary,
+                        marginTop: spacing.xsmall,
+                      }}>{item.sublabel}</Text>
+                    </View>
+                    <Switch checked={item.checked} onPress={item.onPress} />
+                  </View>
+                ))}
+              </View>
+            </Col>
+          </View>
         </Section>
       </View>
     );

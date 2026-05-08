@@ -373,7 +373,53 @@ export const DesignSpec: Story = {
   ),
 };
 
-// ─── 9. 사용 가이드 ──────────────────────────────────────────
+// ─── 9. 실전 예시 ───────────────────────────────────────────
+
+export const InContext: Story = {
+  name: '실전 예시',
+  render: () => (
+    <View style={{ gap: spacing['3xlarge'] }}>
+      <Section
+        title="실전 예시"
+        description="로그아웃 확인 모달 — 인라인 카드 형태로 시각화한 모달 미리보기입니다."
+      >
+        <View style={{
+          maxWidth: 375,
+          padding: spacing.xlarge,
+          backgroundColor: semanticColor.backgroundPrimary,
+          borderRadius: radius.large,
+          borderWidth: 1,
+          borderColor: semanticColor.borderDefault,
+          gap: spacing.xlarge,
+        }}>
+          <Text style={{
+            fontSize: textStyle.heading.fontSize,
+            fontWeight: textStyle.heading.fontWeight,
+            lineHeight: textStyle.heading.lineHeight,
+            color: semanticColor.textPrimary,
+          }}>
+            설정
+          </Text>
+          <View style={{
+            backgroundColor: `rgba(0,0,0,${opacity[22]})`,
+            borderRadius: radius.medium,
+            padding: spacing['2xlarge'],
+            alignItems: 'center',
+          }}>
+            <ModalPreview
+              title="로그아웃"
+              description="정말 로그아웃 하시겠습니까? 저장하지 않은 건강 기록이 있을 수 있습니다."
+              primaryLabel="로그아웃"
+              secondaryLabel="취소"
+            />
+          </View>
+        </View>
+      </Section>
+    </View>
+  ),
+};
+
+// ─── 10. 사용 가이드 ─────────────────────────────────────────
 
 export const Usage: Story = {
   name: '사용 가이드',
