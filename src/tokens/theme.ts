@@ -619,6 +619,31 @@ export const shadowTokensV2 = {
 
 export type ShadowTokensV2 = typeof shadowTokensV2;
 
+/**
+ * v2.3.0 Dimmed Layer 토큰 — Figma "5. dimmed layer" 캔버스 미러링
+ *
+ * - BK 3단(20/60/80): 라이트 배경 위 black 오버레이 (모달 backdrop, 풀스크린 dim 등)
+ * - WH 2단(20/60): 다크 배경 위 white 오버레이 (이미지 위 하이라이트 등)
+ * - 토큰 값은 `rgba()` 문자열 — RN/Web 양쪽에서 그대로 사용 가능
+ *
+ * @see src/tokens/figma-tokens.json Primitives.dimmedLayer
+ * @since v2.3.0 (2026-05-08)
+ */
+export const dimmedLayerTokensV2 = {
+  /** BK-20 — 가벼운 강조 dim */
+  bk20: 'rgba(0,0,0,0.2)',
+  /** BK-60 — 표준 backdrop scrim (모달, 바텀시트) */
+  bk60: 'rgba(0,0,0,0.6)',
+  /** BK-80 — 강한 dim (이미지/풀스크린 오버레이) */
+  bk80: 'rgba(0,0,0,0.8)',
+  /** WH-20 — 다크 배경 위 가벼운 하이라이트 dim */
+  wh20: 'rgba(255,255,255,0.2)',
+  /** WH-60 — 다크 배경 위 강한 하이라이트 dim */
+  wh60: 'rgba(255,255,255,0.6)',
+} as const;
+
+export type DimmedLayerTokensV2 = typeof dimmedLayerTokensV2;
+
 /** 화면 좌우 마진 토큰 */
 export const screenMargin = {
   default: 16,
