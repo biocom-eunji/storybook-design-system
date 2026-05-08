@@ -113,8 +113,19 @@ export const PaletteRow = ({ title, description, children }) => (
 
 <div className="color-page">
 
-<h2>Color Palette</h2>
+<h2>Color Palette (v1.x — Deprecated)</h2>
 <p>바이오컴 색상 규칙은 다음과 같이 구성되어 있습니다.</p>
+
+<div style={{ background: '#FCE8E8', border: '1px solid #EF7676', borderRadius: 12, padding: '14px 18px', margin: '0 0 32px', fontSize: 14, color: '#5A0707', lineHeight: 1.6 }}>
+  <strong style={{ display: 'block', fontSize: 15, marginBottom: 4 }}>⚠️ v1.x 컬러 팔레트 (Deprecated)</strong>
+  이 페이지에 표시된 토큰들은 v2.0에서 deprecated 상태입니다. 신규 코드에서는 <strong>v2.0 Color Tokens</strong> 페이지의 토큰을 사용하세요. 기존 v1 토큰은 컴포넌트 마이그레이션이 완료될 때까지 한시적으로 유지됩니다.
+  <ul style={{ margin: '8px 0 0', paddingLeft: 20, fontSize: 13 }}>
+    <li>shade 네이밍 역전: 99/95/.../10 → 50/100/.../900</li>
+    <li>Mono.coolNeutral 22단 → Mono.neutral 10단</li>
+    <li>Brand.mint → Mono.mint, Accent.orange → Semantic.orange 이동</li>
+    <li>red50/yellow50/cyan50 등 8개 토큰 의미 반전 (강한 색 → 옅은 색)</li>
+  </ul>
+</div>
 
 ## Mono
 
