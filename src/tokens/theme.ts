@@ -516,7 +516,12 @@ export const radius = {
 
 // ─── Shadow & Elevation ─────────────────────────────────
 
-/** 그림자 단계 토큰 — 카드, 모달, 바텀시트 등에 사용 */
+/**
+ * 그림자 단계 토큰 — 카드, 모달, 바텀시트 등에 사용
+ *
+ * @deprecated v2.2.0: `shadowTokensV2`를 사용하세요. 기존 토큰은 React Native 호환을 위해
+ *  spread 필드를 누락한 채로 유지됩니다. v2는 Figma 원본 spread 값을 보존합니다.
+ */
 export const shadow = {
   /** Level 1 — Subtle / 카드, 버튼 hover 등 가벼운 고도감 */
   level1: {
@@ -542,7 +547,77 @@ export const shadow = {
     shadowRadius: 16,
     elevation: 8,
   },
+  /** Level 4 — Inverted / bottom sheet (위로 향한 그림자) — v2.2.0 신규 */
+  level4: {
+    shadowColor: palette.black,
+    shadowOffset: { width: 0, height: -4 },
+    shadowOpacity: 0.1,
+    shadowRadius: 16,
+    elevation: 8,
+  },
 } as const;
+
+/**
+ * v2.2.0 그림자 토큰 — Figma "4. Shadow" 캔버스 원본 미러링
+ *
+ * - 4개 level (1~4) — Figma DROP_SHADOW 효과 1:1 매핑
+ * - **`spread` 필드 보존**: React Native는 spread를 미지원하므로 RN 컴포넌트에서는
+ *   `shadowOffset`/`shadowOpacity`/`shadowRadius`/`elevation`만 사용. 웹/Storybook은
+ *   `boxShadow`로 spread 포함 렌더링 가능
+ * - color는 alpha 포함 8자리 hex(`#00000014` = `rgba(0,0,0,0.08)` 등)
+ *
+ * @see src/tokens/figma-tokens.json Primitives.shadow
+ * @since v2.2.0 (2026-05-08)
+ */
+export const shadowTokensV2 = {
+  /** Level 1 — Subtle / 카드, 버튼 hover, 가벼운 고도감 */
+  level1: {
+    color: '#00000014', // rgba(0,0,0,0.08)
+    offsetX: 0,
+    offsetY: 0,
+    blur: 4,
+    spread: 0,
+    opacity: 0.08,
+    elevation: 1,
+    /** 웹용 CSS box-shadow 문자열 (spread 포함) */
+    css: '0px 0px 4px 0px rgba(0,0,0,0.08)',
+  },
+  /** Level 2 — Medium / 플로팅 요소, 드롭다운, 호버 카드 */
+  level2: {
+    color: '#0000001A', // rgba(0,0,0,0.10)
+    offsetX: 0,
+    offsetY: 2,
+    blur: 8,
+    spread: 4,
+    opacity: 0.1,
+    elevation: 4,
+    css: '0px 2px 8px 4px rgba(0,0,0,0.1)',
+  },
+  /** Level 3 — Strong / 모달 */
+  level3: {
+    color: '#00000026', // rgba(0,0,0,0.15)
+    offsetX: 0,
+    offsetY: 4,
+    blur: 16,
+    spread: 8,
+    opacity: 0.15,
+    elevation: 8,
+    css: '0px 4px 16px 8px rgba(0,0,0,0.15)',
+  },
+  /** Level 4 — Inverted / bottom sheet (위로 향한 그림자) */
+  level4: {
+    color: '#0000001A', // rgba(0,0,0,0.10)
+    offsetX: 0,
+    offsetY: -4,
+    blur: 16,
+    spread: 4,
+    opacity: 0.1,
+    elevation: 8,
+    css: '0px -4px 16px 4px rgba(0,0,0,0.1)',
+  },
+} as const;
+
+export type ShadowTokensV2 = typeof shadowTokensV2;
 
 /** 화면 좌우 마진 토큰 */
 export const screenMargin = {
