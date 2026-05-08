@@ -9,7 +9,7 @@ import {
   useWindowDimensions,
   type ViewStyle,
 } from 'react-native';
-import { fontSize, fontWeight, spacing, semanticColor, radius, interaction } from '../tokens/theme';
+import { fontSize, fontWeight, spacing, semanticColor, radius } from '../tokens/theme';
 
 /** BottomSheet — 하단에서 올라오는 시트 */
 export interface BottomSheetProps {
@@ -34,7 +34,10 @@ export interface BottomSheetProps {
 }
 
 const ANIMATION_DURATION = 300;
-const BACKDROP_OPACITY = interaction.overlayOpacity;
+// v2.3.1: backdrop alpha는 semanticColor.backgroundScrim(=bk60, 0.6)에 인코딩되어 있음.
+// 애니메이션은 entrance/exit 페이드 (0 → 1)만 담당 → 최종 visible alpha = 0.6 × 1 = 0.6 (BK-60).
+// 이전: 0.4 × 0.4 = 0.16 (의도하지 않은 multiplicative 약화)
+const BACKDROP_OPACITY = 1;
 
 export function BottomSheet({
   visible,
