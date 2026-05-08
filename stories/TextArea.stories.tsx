@@ -327,7 +327,6 @@ export const DesignSpec: Story = {
               'color/text/primary':          semanticColor.textPrimary,
               'color/text/tertiary':         semanticColor.textTertiary,
               'color/text/error':            semanticColor.textError,
-              'color/text/primary':               semanticColor.textPrimary,
             };
             const resolve = (token: string) => stateColors[token] ?? token;
             const st = STATE_TOKEN_MAP[state];

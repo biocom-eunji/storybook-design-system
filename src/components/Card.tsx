@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Text, Image, Pressable, StyleSheet, type ViewStyle, type TextStyle, type ImageSourcePropType } from 'react-native';
+import { View, Text, Image, Pressable, StyleSheet, type ViewStyle, type TextStyle, type ImageStyle, type ImageSourcePropType } from 'react-native';
 import { Skeleton } from './Skeleton';
 import { semanticColor, fontWeight, textStyle, spacing, radius, interaction } from '../tokens/theme';
 
@@ -101,7 +101,7 @@ const styles = StyleSheet.create({
   thumbImage: {
     width: '100%',
     height: '100%',
-  } as ViewStyle,
+  } as ImageStyle,
   thumbPlaceholder: {
     width: '100%',
     height: '100%',

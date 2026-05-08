@@ -47,7 +47,10 @@ const OPACITY_CONFIG = {
   },
 } as const;
 
-function getPageIndicatorSize(distance: number, sizeConfig: typeof SIZE_CONFIG['medium']): number {
+function getPageIndicatorSize(
+  distance: number,
+  sizeConfig: typeof SIZE_CONFIG[keyof typeof SIZE_CONFIG],
+): number {
   if (distance >= sizeConfig.sizes.length) return sizeConfig.sizes[sizeConfig.sizes.length - 1];
   return sizeConfig.sizes[distance];
 }

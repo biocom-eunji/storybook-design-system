@@ -128,18 +128,18 @@ export const WithSwitch: Story = {
               <List.Item
                 title="푸시 알림"
                 description="건강 리포트, 식단 알림"
-                trailing={<Switch active={notifications} onPress={() => setNotifications(!notifications)} />}
+                trailing={<Switch checked={notifications} onPress={() => setNotifications(!notifications)} />}
               />
               <List.Item
                 title="다크 모드"
                 description="준비 중 (v2 예정)"
-                trailing={<Switch active={darkMode} onPress={() => setDarkMode(!darkMode)} disabled />}
+                trailing={<Switch checked={darkMode} onPress={() => setDarkMode(!darkMode)} disabled />}
                 disabled
               />
               <List.Item
                 title="생체 인증"
                 description="Face ID / 지문으로 빠른 로그인"
-                trailing={<Switch active={biometric} onPress={() => setBiometric(!biometric)} />}
+                trailing={<Switch checked={biometric} onPress={() => setBiometric(!biometric)} />}
               />
             </List>
           </View>
@@ -253,11 +253,11 @@ export const SettingsScreen: Story = {
                 <List.Item title="프로필" trailing={<Icon name="caret-right" size={20} color={semanticColor.iconSecondary} />} onPress={() => {}} />
                 <List.Item
                   title="알림"
-                  trailing={<Switch active={notifications} onPress={() => setNotifications(!notifications)} />}
+                  trailing={<Switch checked={notifications} onPress={() => setNotifications(!notifications)} />}
                 />
                 <List.Item
                   title="생체 인증"
-                  trailing={<Switch active={biometric} onPress={() => setBiometric(!biometric)} />}
+                  trailing={<Switch checked={biometric} onPress={() => setBiometric(!biometric)} />}
                 />
               </List>
             </View>
@@ -356,7 +356,7 @@ export const Usage: Story = {
     title="푸시 알림"
     description="건강 리포트, 식단 알림"
     trailing={
-      <Switch active={notifications} onPress={toggleNotifications} />
+      <Switch checked={notifications} onPress={toggleNotifications} />
     }
   />
 </List>`}
@@ -375,7 +375,7 @@ export const Usage: Story = {
           title="혼합 사용"
           code={`<List>
   <List.Item title="프로필" trailing={<Icon name="caret-right" />} onPress={go} />
-  <List.Item title="알림" trailing={<Switch active={on} onPress={toggle} />} />
+  <List.Item title="알림" trailing={<Switch checked={on} onPress={toggle} />} />
   <List.ExpandableItem title="앱 버전">
     <Text>v1.4.0</Text>
   </List.ExpandableItem>

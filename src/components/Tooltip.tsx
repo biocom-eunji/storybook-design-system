@@ -21,12 +21,12 @@ export type TooltipProps = {
       /** 툴팁 위치 (anchor 기준) */
       position: 'top' | 'bottom';
       /** 화살표 정렬 (가로축) */
-      align?: TooltipAlignVertical;
+      align?: TooltipAlignHorizontal;
     }
   | {
       position: 'left' | 'right';
       /** 화살표 정렬 (세로축) */
-      align?: TooltipAlignHorizontal;
+      align?: TooltipAlignVertical;
     }
 );
 

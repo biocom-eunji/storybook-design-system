@@ -75,7 +75,11 @@ export const Positions: Story = {
           {(['top', 'bottom', 'left', 'right'] as const).map(pos => (
             <Col key={pos} gap={spacing.small}>
               <StateLabel>{`position="${pos}"`}</StateLabel>
-              <Tooltip content={`${pos} 방향 툴팁`} position={pos} align={pos === 'top' || pos === 'bottom' ? 'leading' : 'top'} />
+              {pos === 'top' || pos === 'bottom' ? (
+                <Tooltip content={`${pos} 방향 툴팁`} position={pos} align="leading" />
+              ) : (
+                <Tooltip content={`${pos} 방향 툴팁`} position={pos} align="top" />
+              )}
             </Col>
           ))}
         </View>

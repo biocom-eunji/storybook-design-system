@@ -282,12 +282,12 @@ export const DesignSpec: Story = {
           {variants.map(variant =>
             states.map(state => {
               const ct = COLOR_TOKEN_MAP[variant][state];
-              const rows = [
-                { property: '배경색',   token: ct.background, value: r(ct.background), type: 'color' as const },
-                { property: '텍스트',   token: ct.content,    value: r(ct.content),    type: 'color' as const },
+              const rows: Array<{ property: string; token: string; value: string; type: 'color' }> = [
+                { property: '배경색',   token: ct.background, value: r(ct.background), type: 'color' },
+                { property: '텍스트',   token: ct.content,    value: r(ct.content),    type: 'color' },
               ];
               if ('border' in ct) {
-                rows.push({ property: '테두리', token: ct.border, value: r(ct.border), type: 'color' as const });
+                rows.push({ property: '테두리', token: ct.border, value: r(ct.border), type: 'color' });
               }
               return (
                 <View key={`${variant}-${state}`}>

@@ -125,8 +125,8 @@ export const Playground: Story = {
             <Text style={{ fontSize: fontSize.medium, color: semanticColor.textSecondary }}>
               아래에서 원하는 옵션을 선택해주세요.
             </Text>
-            <Button label="확인" variant="solid" color="primary" size="medium" />
-            <Button label="취소" variant="solid" color="assistive" size="medium" />
+            <Button label="확인" variant="solid" colorScheme="primary" size="medium" />
+            <Button label="취소" variant="solid" colorScheme="assistive" size="medium" />
           </View>
         </SheetPreview>
       </Section>
@@ -206,8 +206,8 @@ export const ActionSheet: Story = {
               이 기록을 삭제하시겠습니까? 삭제된 기록은 복구할 수 없습니다.
             </Text>
             <View style={{ gap: spacing.small, marginTop: spacing.small }}>
-              <Button label="삭제" variant="solid" color="primary" size="medium" />
-              <Button label="취소" variant="solid" color="assistive" size="medium" />
+              <Button label="삭제" variant="solid" colorScheme="primary" size="medium" />
+              <Button label="취소" variant="solid" colorScheme="assistive" size="medium" />
             </View>
           </View>
         </SheetPreview>
@@ -231,8 +231,8 @@ export const FormSheet: Story = {
             <TextField label="목표명" placeholder="예: 하루 물 2L 마시기" />
             <TextField label="메모" placeholder="상세 설명 (선택)" multiline minHeight={60} />
             <View style={{ gap: spacing.small, marginTop: spacing.small }}>
-              <Button label="저장" variant="solid" color="primary" size="medium" />
-              <Button label="취소" variant="solid" color="assistive" size="medium" />
+              <Button label="저장" variant="solid" colorScheme="primary" size="medium" />
+              <Button label="취소" variant="solid" colorScheme="assistive" size="medium" />
             </View>
           </View>
         </SheetPreview>
@@ -297,7 +297,7 @@ export const CheckboxSheet: Story = {
             <Checkbox state="checked" label="개인정보 처리방침 동의 (필수)" />
             <Checkbox state="unchecked" label="마케팅 수신 동의 (선택)" sublabel="이벤트, 혜택 정보를 받아볼 수 있습니다." />
             <View style={{ marginTop: spacing.medium }}>
-              <Button label="동의하고 계속하기" variant="solid" color="primary" size="large" />
+              <Button label="동의하고 계속하기" variant="solid" colorScheme="primary" size="large" />
             </View>
           </View>
         </SheetPreview>
@@ -321,8 +321,8 @@ export const Interactive: Story = {
           description="버튼을 클릭하여 실제 BottomSheet 컴포넌트를 열어봅니다."
         >
           <View style={{ flexDirection: 'row', gap: spacing.medium }}>
-            <Button label="Action Sheet" variant="solid" color="primary" size="small" onPress={() => setVisible(true)} />
-            <Button label="Form Sheet" variant="outlined" color="primary" size="small" onPress={() => setFormVisible(true)} />
+            <Button label="Action Sheet" variant="solid" colorScheme="primary" size="small" onPress={() => setVisible(true)} />
+            <Button label="Form Sheet" variant="outlined" colorScheme="primary" size="small" onPress={() => setFormVisible(true)} />
           </View>
 
           <BottomSheet visible={visible} onClose={() => setVisible(false)} title="기록 삭제" showHandle>
@@ -330,15 +330,15 @@ export const Interactive: Story = {
               <Text style={{ fontSize: fontSize.medium, color: semanticColor.textSecondary }}>
                 이 기록을 삭제하시겠습니까?
               </Text>
-              <Button label="삭제" variant="solid" color="primary" size="medium" onPress={() => setVisible(false)} />
-              <Button label="취소" variant="solid" color="assistive" size="medium" onPress={() => setVisible(false)} />
+              <Button label="삭제" variant="solid" colorScheme="primary" size="medium" onPress={() => setVisible(false)} />
+              <Button label="취소" variant="solid" colorScheme="assistive" size="medium" onPress={() => setVisible(false)} />
             </View>
           </BottomSheet>
 
           <BottomSheet visible={formVisible} onClose={() => setFormVisible(false)} title="목표 설정" showHandle>
             <View style={{ gap: spacing.medium }}>
               <TextField label="목표명" placeholder="예: 하루 물 2L 마시기" />
-              <Button label="저장" variant="solid" color="primary" size="medium" onPress={() => setFormVisible(false)} />
+              <Button label="저장" variant="solid" colorScheme="primary" size="medium" onPress={() => setFormVisible(false)} />
             </View>
           </BottomSheet>
         </Section>
@@ -456,7 +456,7 @@ export const InContext: Story = {
               <Checkbox state="checked" label="운동 기록" />
               <Checkbox state="unchecked" label="영양제 기록" />
               <View style={{ marginTop: spacing.medium }}>
-                <Button label="필터 적용" variant="solid" color="primary" size="medium" />
+                <Button label="필터 적용" variant="solid" colorScheme="primary" size="medium" />
               </View>
             </View>
           </SheetPreview>
@@ -495,7 +495,7 @@ import { Button } from '@design-system/components/Button';`}
 >
   <Text>이 기록을 삭제하시겠습니까?</Text>
   <Button label="삭제" onPress={handleDelete} />
-  <Button label="취소" variant="solid" color="assistive" onPress={() => setVisible(false)} />
+  <Button label="취소" variant="solid" colorScheme="assistive" onPress={() => setVisible(false)} />
 </BottomSheet>`}
         />
 

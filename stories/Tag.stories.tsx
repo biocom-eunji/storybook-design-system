@@ -178,7 +178,7 @@ export const InContextList: Story = {
                   fontSize: textStyle.body2.fontSize,
                   color: semanticColor.textPrimary,
                 }}>{item.name}</Text>
-                <Tag variant="level" level={item.level} size="small">{item.level}단계</Tag>
+                <Tag variant="level" level={item.level} size="small">{`${item.level}단계`}</Tag>
               </View>
             ))}
           </View>
@@ -251,7 +251,7 @@ export const AllColors: Story = {
             <StateLabel>Level</StateLabel>
             <Row gap={spacing.small} wrap>
               {([1, 2, 3, 4, 5] as TagLevel[]).map(level => (
-                <Tag key={level} variant="level" level={level}>{level}단계</Tag>
+                <Tag key={level} variant="level" level={level}>{`${level}단계`}</Tag>
               ))}
             </Row>
           </Col>
