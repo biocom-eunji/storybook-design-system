@@ -1748,6 +1748,38 @@
         "description": "Inverted — bottom sheet (위로 향한 그림자)",
         "comment": "v2.0 신규 (Figma Shadow/Level 4). RN: shadowOpacity=0.10, shadowOffset y=-4 (negative), elevation=8. spread=4는 RN 미지원"
       }
+    },
+    "dimmedLayer": {
+      "bk20": {
+        "value": "rgba(0,0,0,0.2)",
+        "type": "color",
+        "description": "BK-20 — 가벼운 강조 dim",
+        "comment": "v2.3.0 신규 (Figma Dimmed layer/BK-20). #000000 + opacity 0.2"
+      },
+      "bk60": {
+        "value": "rgba(0,0,0,0.6)",
+        "type": "color",
+        "description": "BK-60 — 표준 backdrop scrim (모달, 바텀시트)",
+        "comment": "v2.3.0 신규 (Figma Dimmed layer/BK-60). #000000 + opacity 0.6"
+      },
+      "bk80": {
+        "value": "rgba(0,0,0,0.8)",
+        "type": "color",
+        "description": "BK-80 — 강한 dim (이미지/풀스크린 오버레이)",
+        "comment": "v2.3.0 신규 (Figma Dimmed layer/BK-80). #000000 + opacity 0.8"
+      },
+      "wh20": {
+        "value": "rgba(255,255,255,0.2)",
+        "type": "color",
+        "description": "WH-20 — 다크 배경 위 가벼운 하이라이트 dim",
+        "comment": "v2.3.0 신규 (Figma Dimmed layer/WH-20). #FFFFFF + opacity 0.2"
+      },
+      "wh60": {
+        "value": "rgba(255,255,255,0.6)",
+        "type": "color",
+        "description": "WH-60 — 다크 배경 위 강한 하이라이트 dim",
+        "comment": "v2.3.0 신규 (Figma Dimmed layer/WH-60). #FFFFFF + opacity 0.6"
+      }
     }
   },
   "Semantics": {
