@@ -90,8 +90,18 @@ import { Meta } from '@storybook/addon-docs/blocks';
 
 <div className="shadow-page">
 
-<h2>Shadow</h2>
+<h2>Shadow (v1 — Deprecated)</h2>
 <p>컴포넌트의 깊이감을 표현하는 그림자 단계입니다.</p>
+
+<div style={{ background: '#FCE8E8', border: '1px solid #EF7676', borderRadius: 12, padding: '14px 18px', margin: '0 0 32px', fontSize: 14, color: '#5A0707', lineHeight: 1.6 }}>
+  <strong style={{ display: 'block', fontSize: 15, marginBottom: 4 }}>⚠️ v2.2.0에서 deprecated</strong>
+  이 페이지의 토큰은 v2.2.0에서 deprecated 상태입니다. 신규 코드에서는 <strong>v2.2.0 Shadow Tokens</strong> 페이지의 <code>shadowTokensV2</code>를 사용하세요.
+  <ul style={{ margin: '8px 0 0', paddingLeft: 20, fontSize: 13 }}>
+    <li><strong>Level 4 신규 추가</strong> — bottom sheet 등 위로 향한 그림자 (offsetY: -4)</li>
+    <li><strong>spread 필드 보존</strong> — Figma 원본 spread 값 명시</li>
+    <li><strong>color에 alpha 포함</strong> — 8자리 hex 통일</li>
+  </ul>
+</div>
 
 ## Shadow Levels
 

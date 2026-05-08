@@ -383,6 +383,7 @@ export const LINK = {
   Shadow:           `${SB}semantics-token-shadow--docs`,
   ColorTokens:      `${SB}semantics-token-color--docs`,
   ColorTokensV2:    `${SB}primitives-palette-v2-0-color-tokens--docs`,
+  ShadowTokensV2:   `${SB}primitives-palette-v2-2-0-shadow-tokens--docs`,
   // Getting Started
   Guide:            `${SB}getting-started-guide--docs`,
   BrandLogo:        `${SB}getting-started-brand-logo--docs`,
@@ -416,6 +417,105 @@ export const LINK = {
 </div>
 
 {/* ══════════════════════════════════════════════════════ */}
+{/* v2.2.0 — 2026-05-08                                   */}
+{/* ══════════════════════════════════════════════════════ */}
+
+<div className="version-header">
+  <span className="version-badge minor">v2.2.0</span>
+  <span className="version-date">2026-05-08</span>
+</div>
+
+<details className="toggle-card" open>
+  <summary>
+    <CaretIcon />
+    <span className="emoji">✨</span>
+    <span className="title">Features</span>
+    <span className="count">5</span>
+  </summary>
+  <div className="toggle-body">
+    <div className="component-tags">
+      <span className="component-tag new">ShadowTokensV2</span>
+      <span className="component-tag updated">shadow.level4</span>
+    </div>
+
+    <div className="change-item">
+      <span className="name"><a href={LINK.ShadowTokensV2}>v2.2.0 Shadow Tokens</a></span>
+      <span className="desc">Figma "4. Shadow" 캔버스 기반 신규 그림자 시스템. <strong>4 level (1~4)</strong>, Figma DROP_SHADOW 효과 1:1 매핑. <code>spread</code> 필드 보존, color에 alpha 포함 8자리 hex (<code>#00000014</code> 등). <code>shadowTokensV2.{`{level}`}</code>로 접근</span>
+    </div>
+    <div className="change-item">
+      <span className="name-plain">Level 4 신규 그림자</span>
+      <span className="desc">bottom sheet 등 위로 향한 그림자 (<code>offsetY: -4</code>, <code>opacity: 0.10</code>, <code>blur: 16</code>, <code>spread: 4</code>)</span>
+    </div>
+    <div className="change-item">
+      <span className="name-plain">기존 shadow에 level4 추가</span>
+      <span className="desc">기존 <code>shadow</code> export에 level4 추가 (additive). 후방 호환 유지</span>
+    </div>
+    <div className="change-item">
+      <span className="name-plain">figma-tokens.json shadow 섹션</span>
+      <span className="desc">style-dictionary <code>boxShadow</code> 타입 4 level (Primitives.shadow)</span>
+    </div>
+    <div className="change-item">
+      <span className="name-plain">ShadowElevation deprecation 배너</span>
+      <span className="desc">v1 <code>ShadowElevation.mdx</code> 페이지 상단에 v2.2.0 마이그레이션 안내 배너 추가</span>
+    </div>
+  </div>
+</details>
+
+<details className="toggle-card" open>
+  <summary>
+    <CaretIcon />
+    <span className="emoji">♻️</span>
+    <span className="title">Refactored</span>
+    <span className="count">1</span>
+  </summary>
+  <div className="toggle-body">
+    <div className="change-item">
+      <span className="name-plain">theme.ts shadow에 @deprecated</span>
+      <span className="desc">기존 <code>shadow</code> export에 <code>@deprecated</code> JSDoc 추가. <code>shadowTokensV2</code> 사용 권장 (RN 호환을 위해 spread 누락 채로 유지)</span>
+    </div>
+  </div>
+</details>
+
+<details className="toggle-card" open>
+  <summary>
+    <CaretIcon />
+    <span className="emoji">⚠️</span>
+    <span className="title">Migration Notes</span>
+    <span className="count">1</span>
+  </summary>
+  <div className="toggle-body">
+    <div className="change-item">
+      <span className="name-plain">React Native 호환성</span>
+      <span className="desc">React Native shadow API는 <code>spread</code>를 미지원. v2 토큰의 <code>spread</code> 필드는 web Storybook 및 향후 cross-platform 디자인 도구용 메타데이터로 보존됨. RN 컴포넌트는 <code>offsetX/offsetY</code>/<code>opacity</code>/<code>blur</code>/<code>elevation</code>만 사용</span>
+    </div>
+
+    <div className="migration-block">
+      <div className="migration-row">
+        <div className="migration-col">
+          <p className="migration-label">Before (v1)</p>
+          <pre>{`shadow.level3
+// shadowOffset: { 0, 4 }
+// shadowOpacity: 0.15
+// shadowRadius: 16
+// (spread 없음)`}</pre>
+        </div>
+        <div className="migration-col">
+          <p className="migration-label">After (v2.2.0)</p>
+          <pre>{`shadowTokensV2.level3
+// offsetX: 0, offsetY: 4
+// opacity: 0.15
+// blur: 16
+// spread: 8 ← 신규 보존
+// css: '0px 4px 16px 8px rgba(0,0,0,0.15)'`}</pre>
+        </div>
+      </div>
+    </div>
+  </div>
+</details>
+
+<hr className="version-divider" />
+
+{/* ══════════════════════════════════════════════════════ */}
 {/* v2.1.0 — 2026-05-08                                   */}
 {/* ══════════════════════════════════════════════════════ */}
 
@@ -424,7 +524,7 @@ export const LINK = {
   <span className="version-date">2026-05-08</span>
 </div>
 
-<details className="toggle-card" open>
+<details className="toggle-card">
   <summary>
     <CaretIcon />
     <span className="emoji">✨</span>
@@ -500,7 +600,7 @@ export const LINK = {
   </div>
 </details>
 
-<details className="toggle-card" open>
+<details className="toggle-card">
   <summary>
     <CaretIcon />
     <span className="emoji">♻️</span>
@@ -564,7 +664,7 @@ export const LINK = {
   </div>
 </details>
 
-<details className="toggle-card" open>
+<details className="toggle-card">
   <summary>
     <CaretIcon />
     <span className="emoji">⚠️</span>
@@ -622,7 +722,7 @@ colorTokensV2.Mono.neutral[900]    // #171719 ✓`}</pre>
   </div>
 </details>
 
-<details className="toggle-card" open>
+<details className="toggle-card">
   <summary>
     <CaretIcon />
     <span className="emoji">🔧</span>
@@ -653,7 +753,7 @@ colorTokensV2.Mono.neutral[900]    // #171719 ✓`}</pre>
   </div>
 </details>
 
-<details className="toggle-card" open>
+<details className="toggle-card">
   <summary>
     <CaretIcon />
     <span className="emoji">🐛</span>
@@ -767,7 +867,7 @@ colorTokensV2.Mono.neutral[900]    // #171719 ✓`}</pre>
   </div>
 </details>
 
-<details className="toggle-card" open>
+<details className="toggle-card">
   <summary>
     <CaretIcon />
     <span className="emoji">⚠️</span>
@@ -898,7 +998,7 @@ colorTokensV2.Mono.neutral[900]    // #171719 ✓`}</pre>
   </div>
 </details>
 
-<details className="toggle-card" open>
+<details className="toggle-card">
   <summary>
     <CaretIcon />
     <span className="emoji">♻️</span>
@@ -970,7 +1070,7 @@ colorTokensV2.Mono.neutral[900]    // #171719 ✓`}</pre>
   </div>
 </details>
 
-<details className="toggle-card" open>
+<details className="toggle-card">
   <summary>
     <CaretIcon />
     <span className="emoji">🔧</span>
@@ -1011,7 +1111,7 @@ colorTokensV2.Mono.neutral[900]    // #171719 ✓`}</pre>
   </div>
 </details>
 
-<details className="toggle-card" open>
+<details className="toggle-card">
   <summary>
     <CaretIcon />
     <span className="emoji">♻️</span>
@@ -1151,7 +1251,7 @@ colorTokensV2.Mono.neutral[900]    // #171719 ✓`}</pre>
   <span className="version-date">2026-03-19</span>
 </div>
 
-<details className="toggle-card" open>
+<details className="toggle-card">
   <summary>
     <CaretIcon />
     <span className="emoji">✨</span>
@@ -1228,7 +1328,7 @@ colorTokensV2.Mono.neutral[900]    // #171719 ✓`}</pre>
   <span className="version-date">2026-03-18</span>
 </div>
 
-<details className="toggle-card" open>
+<details className="toggle-card">
   <summary>
     <CaretIcon />
     <span className="emoji">🔧</span>

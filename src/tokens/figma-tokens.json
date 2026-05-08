@@ -1694,6 +1694,60 @@
         "type": "borderRadius",
         "description": "9999px — 완전 원형"
       }
+    },
+    "shadow": {
+      "level1": {
+        "value": {
+          "x": "0",
+          "y": "0",
+          "blur": "4",
+          "spread": "0",
+          "color": "#00000014",
+          "type": "dropShadow"
+        },
+        "type": "boxShadow",
+        "description": "Subtle — 카드, 버튼 hover, 가벼운 고도감",
+        "comment": "v2.0 신규 (Figma Shadow/Level 1). RN: shadowOpacity=0.08, elevation=1"
+      },
+      "level2": {
+        "value": {
+          "x": "0",
+          "y": "2",
+          "blur": "8",
+          "spread": "4",
+          "color": "#0000001A",
+          "type": "dropShadow"
+        },
+        "type": "boxShadow",
+        "description": "Medium — 플로팅 요소, 드롭다운, 호버 카드",
+        "comment": "v2.0 신규 (Figma Shadow/Level 2). RN: shadowOpacity=0.10, elevation=4. spread=4는 RN 미지원 — 시각 회귀 가능"
+      },
+      "level3": {
+        "value": {
+          "x": "0",
+          "y": "4",
+          "blur": "16",
+          "spread": "8",
+          "color": "#00000026",
+          "type": "dropShadow"
+        },
+        "type": "boxShadow",
+        "description": "Strong — 모달",
+        "comment": "v2.0 신규 (Figma Shadow/Level 3). RN: shadowOpacity=0.15, elevation=8. spread=8은 RN 미지원"
+      },
+      "level4": {
+        "value": {
+          "x": "0",
+          "y": "-4",
+          "blur": "16",
+          "spread": "4",
+          "color": "#0000001A",
+          "type": "dropShadow"
+        },
+        "type": "boxShadow",
+        "description": "Inverted — bottom sheet (위로 향한 그림자)",
+        "comment": "v2.0 신규 (Figma Shadow/Level 4). RN: shadowOpacity=0.10, shadowOffset y=-4 (negative), elevation=8. spread=4는 RN 미지원"
+      }
     }
   },
   "Semantics": {
