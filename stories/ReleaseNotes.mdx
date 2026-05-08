@@ -384,6 +384,7 @@ export const LINK = {
   ColorTokens:      `${SB}semantics-token-color--docs`,
   ColorTokensV2:    `${SB}primitives-palette-v2-0-color-tokens--docs`,
   ShadowTokensV2:   `${SB}primitives-palette-v2-2-0-shadow-tokens--docs`,
+  DimmedLayerTokensV2: `${SB}primitives-palette-v2-3-0-dimmed-layer-tokens--docs`,
   // Getting Started
   Guide:            `${SB}getting-started-guide--docs`,
   BrandLogo:        `${SB}getting-started-brand-logo--docs`,
@@ -417,6 +418,79 @@ export const LINK = {
 </div>
 
 {/* ══════════════════════════════════════════════════════ */}
+{/* v2.3.0 — 2026-05-08                                   */}
+{/* ══════════════════════════════════════════════════════ */}
+
+<div className="version-header">
+  <span className="version-badge minor">v2.3.0</span>
+  <span className="version-date">2026-05-08</span>
+</div>
+
+<details className="toggle-card" open>
+  <summary>
+    <CaretIcon />
+    <span className="emoji">✨</span>
+    <span className="title">Features</span>
+    <span className="count">3</span>
+  </summary>
+  <div className="toggle-body">
+    <div className="component-tags">
+      <span className="component-tag new">DimmedLayerTokensV2</span>
+    </div>
+
+    <div className="change-item">
+      <span className="name"><a href={LINK.DimmedLayerTokensV2}>v2.3.0 Dimmed Layer Tokens</a></span>
+      <span className="desc">Figma "5. dimmed layer" 캔버스 기반 dim/scrim 토큰. <strong>BK 3단(20/60/80)</strong> + <strong>WH 2단(20/60)</strong> = 총 5개 <code>rgba()</code> 토큰. 모달 backdrop, 풀스크린 dim, 다크 배경 위 하이라이트 등 용도. <code>dimmedLayerTokensV2.{`{bk|wh}{20|60|80}`}</code></span>
+    </div>
+    <div className="change-item">
+      <span className="name-plain">표준 backdrop scrim</span>
+      <span className="desc">모달/바텀시트 표준 backdrop을 <code>bk60</code> (<code>rgba(0,0,0,0.6)</code>)로 권장. 기존 <code>backgroundScrim</code> (<code>rgba(0,0,0,0.4)</code>)은 후속 PR에서 마이그레이션 예정</span>
+    </div>
+    <div className="change-item">
+      <span className="name-plain">figma-tokens.json Primitives.dimmedLayer</span>
+      <span className="desc">5개 토큰 (color 타입 rgba 값) — Figma Variables Studio import 호환</span>
+    </div>
+  </div>
+</details>
+
+<details className="toggle-card" open>
+  <summary>
+    <CaretIcon />
+    <span className="emoji">⚠️</span>
+    <span className="title">Migration Notes</span>
+    <span className="count">1</span>
+  </summary>
+  <div className="toggle-body">
+    <div className="change-item">
+      <span className="name-plain">기존 backgroundScrim과의 차이</span>
+      <span className="desc">v1 <code>semanticColor.backgroundScrim</code>은 <code>rgba(0,0,0,0.4)</code> 단일 값. v2.3.0은 BK 3단 (0.2/0.6/0.8)으로 세분화. 표준 backdrop은 <code>bk60</code> 사용 권장. 이번 PR에서 컴포넌트 미수정 → 시각 회귀 없음</span>
+    </div>
+
+    <div className="migration-block">
+      <div className="migration-row">
+        <div className="migration-col">
+          <p className="migration-label">Before (v1)</p>
+          <pre>{`semanticColor.backgroundScrim
+// 'rgba(0,0,0,0.4)' (단일)
+// 사용처: Modal, BottomSheet`}</pre>
+        </div>
+        <div className="migration-col">
+          <p className="migration-label">After (v2.3.0)</p>
+          <pre>{`dimmedLayerTokensV2.bk60
+// 'rgba(0,0,0,0.6)' (표준 backdrop)
+dimmedLayerTokensV2.bk80
+// 'rgba(0,0,0,0.8)' (강한 dim)
+dimmedLayerTokensV2.wh20 / wh60
+// 다크 배경 위 하이라이트`}</pre>
+        </div>
+      </div>
+    </div>
+  </div>
+</details>
+
+<hr className="version-divider" />
+
+{/* ══════════════════════════════════════════════════════ */}
 {/* v2.2.0 — 2026-05-08                                   */}
 {/* ══════════════════════════════════════════════════════ */}
 
@@ -425,7 +499,7 @@ export const LINK = {
   <span className="version-date">2026-05-08</span>
 </div>
 
-<details className="toggle-card" open>
+<details className="toggle-card">
   <summary>
     <CaretIcon />
     <span className="emoji">✨</span>
@@ -461,7 +535,7 @@ export const LINK = {
   </div>
 </details>
 
-<details className="toggle-card" open>
+<details className="toggle-card">
   <summary>
     <CaretIcon />
     <span className="emoji">♻️</span>
@@ -476,7 +550,7 @@ export const LINK = {
   </div>
 </details>
 
-<details className="toggle-card" open>
+<details className="toggle-card">
   <summary>
     <CaretIcon />
     <span className="emoji">⚠️</span>

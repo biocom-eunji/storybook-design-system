@@ -4,6 +4,31 @@
 
 ---
 
+## v2.3.0 (2026-05-08)
+
+> Figma "5. dimmed layer" 캔버스 기반 dim/scrim 토큰 추가. 모달 backdrop, 풀스크린 dim, 다크 배경 하이라이트용. **Breaking Changes 없음 (additive only)**.
+
+### Added
+
+- **`dimmedLayerTokensV2`** namespace export (`theme.ts`) — 5개 토큰 (BK 3단 + WH 2단)
+  - **BK 3단**: `bk20` `rgba(0,0,0,0.2)` / `bk60` `rgba(0,0,0,0.6)` / `bk80` `rgba(0,0,0,0.8)`
+  - **WH 2단**: `wh20` `rgba(255,255,255,0.2)` / `wh60` `rgba(255,255,255,0.6)`
+  - 표준 backdrop scrim은 `bk60` (모달, 바텀시트 권장)
+- **`figma-tokens.json` `Primitives.dimmedLayer`** — 5개 토큰 (color 타입 rgba 값)
+- **Storybook Dimmed Layer Tokens v2 페이지** (`stories/DimmedLayerTokensV2.mdx`) — BK/WH 시각 카드(체커 배경 + 다크 그라데이션) + Spec Table + RN/Web 사용 예시
+
+### Migration Notes
+
+기존 `semanticColor.backgroundScrim` (`rgba(0,0,0,0.4)`)은 v2.3.0에서 미수정 (additive only). 모달/바텀시트 backdrop을 표준화하려면 후속 PR에서 `bk60` (`rgba(0,0,0,0.6)`)으로 마이그레이션 권장.
+
+| 위치 | 현재 (v1) | 권장 (v2.3.0) |
+|---|---|---|
+| Modal/BottomSheet backdrop | `rgba(0,0,0,0.4)` | `dimmedLayerTokensV2.bk60` |
+| 풀스크린 이미지 dim | (없음) | `dimmedLayerTokensV2.bk80` |
+| 다크 배경 위 하이라이트 | (없음) | `dimmedLayerTokensV2.wh20` / `wh60` |
+
+---
+
 ## v2.2.0 (2026-05-08)
 
 > Figma "4. Shadow" 캔버스 기반 그림자 토큰 v2 추가. **Level 4 신규** + spread 필드 보존.
