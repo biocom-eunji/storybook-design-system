@@ -422,6 +422,8 @@ export const LINK = {
   ShadowTokensV2:   `${SB}primitives-palette-v2-2-0-shadow-tokens--docs`,
   DimmedLayerTokensV2: `${SB}primitives-palette-v2-3-0-dimmed-layer-tokens--docs`,
   GradientTokensV2: `${SB}primitives-palette-v2-5-0-gradient-tokens--docs`,
+  TypographyV2:     `${SB}semantics-token-v2-6-0-typography--docs`,
+  Typography:       `${SB}semantics-token-typography--docs`,
   // Getting Started
   Guide:            `${SB}getting-started-guide--docs`,
   BrandLogo:        `${SB}getting-started-brand-logo--docs`,
@@ -455,18 +457,138 @@ export const LINK = {
 </div>
 
 {/* ══════════════════════════════════════════════════════ */}
-{/* v2.5.0 — 2026-05-11                                   */}
+{/* v2.6.0 — 2026-05-11                                   */}
 {/* ══════════════════════════════════════════════════════ */}
 
 <div className="date-section">
-<div className="date-header"><span className="date-label">2026-05-11</span><span className="date-meta">1 릴리즈</span></div>
+<div className="date-header"><span className="date-label">2026-05-11</span><span className="date-meta">2 릴리즈</span></div>
+
+<div className="version-header">
+  <span className="version-badge minor">v2.6.0</span>
+  <span className="version-date">2026-05-11</span>
+</div>
+
+<details className="toggle-card" open>
+  <summary>
+    <CaretIcon />
+    <span className="emoji">✨</span>
+    <span className="title">Features</span>
+    <span className="count">3</span>
+  </summary>
+  <div className="toggle-body">
+    <div className="component-tags">
+      <span className="component-tag new">TypographyV2</span>
+      <span className="component-tag updated">Typography (v1 배너)</span>
+    </div>
+
+    <div className="change-item">
+      <span className="name"><a href={LINK.TypographyV2}>v2.6.0 Typography</a></span>
+      <span className="desc">Figma Typography 캔버스 기반 신규 텍스트 스타일 13종. <code>textStyleV2</code> namespace export로 분리 추가 (기존 <code>textStyle</code> 무수정). 13개 = Title 3 + Headline 2 + Body 4 (Str 변형 포함) + Label 3 + Caption</span>
+    </div>
+    <div className="change-item">
+      <span className="name-plain">신규 토큰 3종 (Str 변형 + 큰 Label)</span>
+      <span className="desc"><code>body1Str</code> / <code>body2Str</code> — Body의 SemiBold 강조 변형. <code>label1</code> (16px SemiBold) — 가장 큰 label 사이즈 (v1 없음)</span>
+    </div>
+    <div className="change-item">
+      <span className="name-plain">figma-tokens.json Primitives.typographyV2</span>
+      <span className="desc">style-dictionary <code>typography</code> 타입 13개 composite 토큰 (Figma Variables Studio import 호환)</span>
+    </div>
+  </div>
+</details>
+
+<details className="toggle-card" open>
+  <summary>
+    <CaretIcon />
+    <span className="emoji">♻️</span>
+    <span className="title">Renamed / Changed</span>
+    <span className="count">7</span>
+  </summary>
+  <div className="toggle-body">
+    <div className="change-item">
+      <span className="name-plain">heading → headline1</span>
+      <span className="desc">20px SemiBold 토큰 이름 변경 (값 동일)</span>
+    </div>
+    <div className="change-item">
+      <span className="name-plain">headline → headline2</span>
+      <span className="desc">17px SemiBold 토큰 이름 변경 (값 동일)</span>
+    </div>
+    <div className="change-item">
+      <span className="name-plain">label1 → label2</span>
+      <span className="desc">14px Medium. letterSpacing <code>0.2</code> → <code>0</code> 변경</span>
+    </div>
+    <div className="change-item">
+      <span className="name-plain">label2 → label3</span>
+      <span className="desc">13px Medium. lineHeight <code>18</code> → <code>19</code>, letterSpacing <code>0.25</code> → <code>0</code> 변경</span>
+    </div>
+    <div className="change-item">
+      <span className="name-plain">body2 lineHeight 22 → 22.5</span>
+      <span className="desc">15px Regular. lineHeight 0.5px 증가 (1.5배 비율 정확 반영)</span>
+    </div>
+    <div className="change-item">
+      <span className="name-plain">caption weight 400 → 500</span>
+      <span className="desc">12px Caption이 Regular → Medium으로 변경 (가독성 강화)</span>
+    </div>
+    <div className="change-item">
+      <span className="name-plain">body3 @deprecated</span>
+      <span className="desc">기존 <code>textStyle.body3</code>에 <code>@deprecated</code> JSDoc. <code>body1</code>과 동일 값이며 Figma v2.6.0에서 대응 토큰이 없음. IDE strikethrough hint로 마이그레이션 유도</span>
+    </div>
+  </div>
+</details>
+
+<details className="toggle-card" open>
+  <summary>
+    <CaretIcon />
+    <span className="emoji">📝</span>
+    <span className="title">Migration Note</span>
+    <span className="count">1</span>
+  </summary>
+  <div className="toggle-body">
+    <div className="change-item">
+      <span className="name-plain">기존 사용처 무수정</span>
+      <span className="desc">기존 <code>textStyle</code> export(11개 토큰)는 그대로 유지. 컴포넌트가 사용 중인 <code>textStyle.heading</code> 등은 무변화. 신규 코드는 <code>textStyleV2</code> 권장. 사용처 점진 마이그레이션은 별도 PR로 진행</span>
+    </div>
+
+    <div className="migration-block">
+      <div className="migration-row">
+        <div className="migration-col">
+          <p className="migration-label">Before (v1)</p>
+          <pre>{`import { textStyle } from '@/tokens/theme';
+
+<Text style={textStyle.heading}>
+  섹션 제목
+</Text>
+<Text style={textStyle.label1}>
+  버튼 텍스트
+</Text>`}</pre>
+        </div>
+        <div className="migration-col">
+          <p className="migration-label">After (v2.6.0)</p>
+          <pre>{`import { textStyleV2 } from '@/tokens/theme';
+
+<Text style={textStyleV2.headline1}>
+  섹션 제목
+</Text>
+<Text style={textStyleV2.label2}>
+  버튼 텍스트
+</Text>`}</pre>
+        </div>
+      </div>
+    </div>
+  </div>
+</details>
+
+<hr className="inner-divider" />
+
+{/* ══════════════════════════════════════════════════════ */}
+{/* v2.5.0 — 2026-05-11                                   */}
+{/* ══════════════════════════════════════════════════════ */}
 
 <div className="version-header">
   <span className="version-badge minor">v2.5.0</span>
   <span className="version-date">2026-05-11</span>
 </div>
 
-<details className="toggle-card" open>
+<details className="toggle-card">
   <summary>
     <CaretIcon />
     <span className="emoji">✨</span>
@@ -493,7 +615,7 @@ export const LINK = {
   </div>
 </details>
 
-<details className="toggle-card" open>
+<details className="toggle-card">
   <summary>
     <CaretIcon />
     <span className="emoji">⚠️</span>

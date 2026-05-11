@@ -1808,6 +1808,164 @@
         "description": "WH-right — 왼쪽에서 오른쪽으로 흰색 페이드 (가로 스크롤 우측 콘텐츠 페이드)",
         "comment": "v2.5.0 신규 (Figma gradient/WH-right). 90deg, transparent→white"
       }
+    },
+    "typographyV2": {
+      "title1": {
+        "value": {
+          "fontFamily": "Pretendard Variable",
+          "fontWeight": "700",
+          "fontSize": "32",
+          "lineHeight": "44",
+          "letterSpacing": "-0.81"
+        },
+        "type": "typography",
+        "description": "Title 1 — 32px Bold, 서비스 핵심 타이틀",
+        "comment": "v2.6.0 신규 (Figma T/Title 1). 라벨 44px (1.375)로 반영"
+      },
+      "title2": {
+        "value": {
+          "fontFamily": "Pretendard Variable",
+          "fontWeight": "700",
+          "fontSize": "28",
+          "lineHeight": "38",
+          "letterSpacing": "-0.66"
+        },
+        "type": "typography",
+        "description": "Title 2 — 28px Bold",
+        "comment": "v2.6.0 신규 (Figma T/Title 2)"
+      },
+      "title3": {
+        "value": {
+          "fontFamily": "Pretendard Variable",
+          "fontWeight": "700",
+          "fontSize": "24",
+          "lineHeight": "32",
+          "letterSpacing": "-0.55"
+        },
+        "type": "typography",
+        "description": "Title 3 — 24px Bold",
+        "comment": "v2.6.0 신규 (Figma T/Title 3)"
+      },
+      "headline1": {
+        "value": {
+          "fontFamily": "Pretendard Variable",
+          "fontWeight": "600",
+          "fontSize": "20",
+          "lineHeight": "28",
+          "letterSpacing": "-0.24"
+        },
+        "type": "typography",
+        "description": "Headline 1 — 20px SemiBold (v1 heading 대응)",
+        "comment": "v2.6.0 신규 (Figma H/Headline 1). 기존 heading 토큰이 이름 변경됨"
+      },
+      "headline2": {
+        "value": {
+          "fontFamily": "Pretendard Variable",
+          "fontWeight": "600",
+          "fontSize": "17",
+          "lineHeight": "24",
+          "letterSpacing": "0"
+        },
+        "type": "typography",
+        "description": "Headline 2 — 17px SemiBold (v1 headline 대응)",
+        "comment": "v2.6.0 신규 (Figma H/Headline 2). 기존 headline 토큰이 이름 변경됨"
+      },
+      "body1Str": {
+        "value": {
+          "fontFamily": "Pretendard Variable",
+          "fontWeight": "600",
+          "fontSize": "16",
+          "lineHeight": "24",
+          "letterSpacing": "0.09"
+        },
+        "type": "typography",
+        "description": "Body 1 Str — 16px SemiBold (Body 1 강조 변형)",
+        "comment": "v2.6.0 신규 (Figma B/Body 1 Str)"
+      },
+      "body1": {
+        "value": {
+          "fontFamily": "Pretendard Variable",
+          "fontWeight": "400",
+          "fontSize": "16",
+          "lineHeight": "24",
+          "letterSpacing": "0.09"
+        },
+        "type": "typography",
+        "description": "Body 1 — 16px Regular, 기본 본문",
+        "comment": "v2.6.0 신규 (Figma B/Body 1). v1 body1과 동일 값"
+      },
+      "body2Str": {
+        "value": {
+          "fontFamily": "Pretendard Variable",
+          "fontWeight": "600",
+          "fontSize": "15",
+          "lineHeight": "22.5",
+          "letterSpacing": "0.14"
+        },
+        "type": "typography",
+        "description": "Body 2 Str — 15px SemiBold (Body 2 강조 변형)",
+        "comment": "v2.6.0 신규 (Figma B/Body 2 Str)"
+      },
+      "body2": {
+        "value": {
+          "fontFamily": "Pretendard Variable",
+          "fontWeight": "400",
+          "fontSize": "15",
+          "lineHeight": "22.5",
+          "letterSpacing": "0.14"
+        },
+        "type": "typography",
+        "description": "Body 2 — 15px Regular, 보조 본문",
+        "comment": "v2.6.0 신규 (Figma B/Body 2). v1 body2와 lineHeight 22 → 22.5 차이"
+      },
+      "label1": {
+        "value": {
+          "fontFamily": "Pretendard Variable",
+          "fontWeight": "600",
+          "fontSize": "16",
+          "lineHeight": "23",
+          "letterSpacing": "0"
+        },
+        "type": "typography",
+        "description": "Label 1 — 16px SemiBold (가장 큰 label 사이즈, v1 없음)",
+        "comment": "v2.6.0 신규 (Figma Label/Label 1). v1 label1(14px)과 완전 다른 토큰"
+      },
+      "label2": {
+        "value": {
+          "fontFamily": "Pretendard Variable",
+          "fontWeight": "500",
+          "fontSize": "14",
+          "lineHeight": "20",
+          "letterSpacing": "0"
+        },
+        "type": "typography",
+        "description": "Label 2 — 14px Medium (v1 label1 대응)",
+        "comment": "v2.6.0 신규 (Figma Label/Label 2). v1 label1 size 일치, letterSpacing 0.2 → 0 변경"
+      },
+      "label3": {
+        "value": {
+          "fontFamily": "Pretendard Variable",
+          "fontWeight": "500",
+          "fontSize": "13",
+          "lineHeight": "19",
+          "letterSpacing": "0"
+        },
+        "type": "typography",
+        "description": "Label 3 — 13px Medium (v1 label2 대응)",
+        "comment": "v2.6.0 신규 (Figma Label/Label 3). v1 label2 size 일치, lineHeight 18 → 19, letterSpacing 0.25 → 0 변경"
+      },
+      "caption": {
+        "value": {
+          "fontFamily": "Pretendard Variable",
+          "fontWeight": "500",
+          "fontSize": "12",
+          "lineHeight": "16",
+          "letterSpacing": "0.3"
+        },
+        "type": "typography",
+        "description": "Caption — 12px Medium, 최소 사이즈 (v1 caption 대응)",
+        "comment": "v2.6.0 신규 (Figma Caption). v1 caption weight 400 → 500 변경"
+      }
     }
   },
   "Semantics": {

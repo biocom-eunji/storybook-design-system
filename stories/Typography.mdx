@@ -210,8 +210,19 @@ export const styles = [
 
 <div className="typo-page">
 
-<h2 className="page-title">Typography</h2>
+<h2 className="page-title">Typography (v1 — 유지 중)</h2>
 <p className="page-desc">바이오컴 서비스의 타이포그래피 시스템입니다. Pretendard Variable 글꼴을 기반으로 11개의 시맨틱 텍스트 스타일을 정의합니다.</p>
+
+<div style={{ background: '#FFF8D8', border: '1px solid #FFCE00', borderRadius: 12, padding: '14px 18px', margin: '0 0 32px', fontSize: 14, color: '#604600', lineHeight: 1.6 }}>
+  <strong style={{ display: 'block', fontSize: 15, marginBottom: 4 }}>ℹ️ v2.6.0 신규 토큰 추가</strong>
+  Figma 타이포그래피 v2.6.0이 추가되었습니다 → <strong>v2.6.0 Typography</strong> 페이지 참조. 기존 <code>textStyle</code> 토큰은 그대로 유지되며, 신규 코드는 <code>textStyleV2</code>를 권장합니다. 사용처 마이그레이션은 별도 PR로 진행됩니다.
+  <ul style={{ margin: '8px 0 0', paddingLeft: 20, fontSize: 13 }}>
+    <li><code>heading</code> → <code>textStyleV2.headline1</code>, <code>headline</code> → <code>textStyleV2.headline2</code></li>
+    <li><code>label1/label2</code> → <code>textStyleV2.label2/label3</code> (한 단계씩 밀림, letterSpacing 0으로 통일)</li>
+    <li><code>caption</code> weight 400 → 500</li>
+    <li><strong><code>body3</code></strong>는 <code>@deprecated</code> 표시 — <code>body1</code>과 동일 값</li>
+  </ul>
+</div>
 
 ### Font Family
 

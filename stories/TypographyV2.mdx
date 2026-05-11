@@ -1,0 +1,149 @@
+import React from 'react';
+import { Meta } from '@storybook/addon-docs/blocks';
+
+<Meta title="Semantics Token/v2.6.0 Typography" />
+
+export const PREVIEW_TEXT = '당신을 가장 잘 아는 바이오컴이 건강을 약속할게요.';
+
+export const stylesV2 = [
+  { key: 'title1',    name: 'Title 1',    size: 32, lineHeight: 44,   letterSpacing: -0.81, weight: 700, weightName: 'Bold',     usage: '서비스 핵심 타이틀, 온보딩 메인 문구', v1: 'title1', changed: false },
+  { key: 'title2',    name: 'Title 2',    size: 28, lineHeight: 38,   letterSpacing: -0.66, weight: 700, weightName: 'Bold',     usage: '페이지 상단 헤더, 주요 섹션 대제목', v1: 'title2', changed: false },
+  { key: 'title3',    name: 'Title 3',    size: 24, lineHeight: 32,   letterSpacing: -0.55, weight: 700, weightName: 'Bold',     usage: '카드/모달 타이틀, 하위 페이지 대제목', v1: 'title3', changed: false },
+  { key: 'headline1', name: 'Headline 1', size: 20, lineHeight: 28,   letterSpacing: -0.24, weight: 600, weightName: 'SemiBold', usage: '소제목, 섹션 구분, 강조 중간 타이틀', v1: 'heading', changed: 'renamed' },
+  { key: 'headline2', name: 'Headline 2', size: 17, lineHeight: 24,   letterSpacing: 0,     weight: 600, weightName: 'SemiBold', usage: '리스트 헤더, 탭 섹션 제목', v1: 'headline', changed: 'renamed' },
+  { key: 'body1Str',  name: 'Body 1 Str', size: 16, lineHeight: 24,   letterSpacing: 0.09,  weight: 600, weightName: 'SemiBold', usage: '본문 강조 (Body 1의 SemiBold)', v1: '(없음)', changed: 'new' },
+  { key: 'body1',     name: 'Body 1',     size: 16, lineHeight: 24,   letterSpacing: 0.09,  weight: 400, weightName: 'Regular',  usage: '일반 본문, 상세 설명', v1: 'body1', changed: false },
+  { key: 'body2Str',  name: 'Body 2 Str', size: 15, lineHeight: 22.5, letterSpacing: 0.14,  weight: 600, weightName: 'SemiBold', usage: '보조 본문 강조 (Body 2의 SemiBold)', v1: '(없음)', changed: 'new' },
+  { key: 'body2',     name: 'Body 2',     size: 15, lineHeight: 22.5, letterSpacing: 0.14,  weight: 400, weightName: 'Regular',  usage: '보조 본문, 세부 설명', v1: 'body2', changed: 'lineheight' },
+  { key: 'label1',    name: 'Label 1',    size: 16, lineHeight: 23,   letterSpacing: 0,     weight: 600, weightName: 'SemiBold', usage: '가장 큰 label 사이즈 (신규)', v1: '(없음)', changed: 'new' },
+  { key: 'label2',    name: 'Label 2',    size: 14, lineHeight: 20,   letterSpacing: 0,     weight: 500, weightName: 'Medium',   usage: '버튼 텍스트, 탭 메뉴, 클릭 요소', v1: 'label1', changed: 'renamed-letterspacing' },
+  { key: 'label3',    name: 'Label 3',    size: 13, lineHeight: 19,   letterSpacing: 0,     weight: 500, weightName: 'Medium',   usage: '소형 버튼, 태그, 필터 칩', v1: 'label2', changed: 'renamed-lineheight-letterspacing' },
+  { key: 'caption',   name: 'Caption',    size: 12, lineHeight: 16,   letterSpacing: 0.3,   weight: 500, weightName: 'Medium',   usage: '캡션, 보조 설명, 날짜 등', v1: 'caption', changed: 'weight' },
+];
+
+export const ChangeBadge = ({ kind }) => {
+  if (!kind) return null;
+  const map = {
+    'new':                             { label: '신규',   bg: '#E9FBF5', color: '#0A6343' },
+    'renamed':                         { label: '이름변경', bg: '#FFF8D8', color: '#604600' },
+    'weight':                          { label: 'weight ↑', bg: '#FFE9E9', color: '#5A0707' },
+    'lineheight':                      { label: 'lineHeight 변경', bg: '#FFE9E9', color: '#5A0707' },
+    'renamed-letterspacing':           { label: '이름변경 + LS', bg: '#FFE9E9', color: '#5A0707' },
+    'renamed-lineheight-letterspacing':{ label: '이름변경 + LH + LS', bg: '#FFE9E9', color: '#5A0707' },
+  };
+  const c = map[kind];
+  if (!c) return null;
+  return <span style={{ display: 'inline-block', background: c.bg, color: c.color, fontSize: 10, fontWeight: 700, padding: '2px 8px', borderRadius: 10, marginLeft: 8 }}>{c.label}</span>;
+};
+
+<style>
+  {`
+    .typo-v2-page { max-width: 1100px; margin: 0 auto; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; }
+    .typo-v2-page h2 { font-size: 28px; font-weight: 700; color: #171719; margin: 0 0 8px; padding-bottom: 12px; border-bottom: 2px solid #22C3BC; }
+    .typo-v2-page > p.lead { font-size: 15px; color: #5A5C63; margin: 0 0 24px; line-height: 1.6; }
+    .v2-banner { background: linear-gradient(180deg, #E9FBFA 0%, #FFFFFF 100%); border: 1px solid #22C3BC; border-radius: 12px; padding: 16px 20px; margin-bottom: 32px; }
+    .v2-banner h4 { margin: 0 0 6px; color: #17827D; font-size: 15px; font-weight: 700; }
+    .v2-banner ul { margin: 6px 0 0; padding-left: 20px; font-size: 13px; color: #5A5C63; line-height: 1.7; }
+    .typo-v2-page table { width: 100%; border-collapse: collapse; margin: 12px 0 32px; font-size: 13px; }
+    .typo-v2-page th { text-align: left; padding: 10px 12px; background: #F7F8F9; border-bottom: 2px solid #E1E2E4; font-weight: 600; color: #37383C; }
+    .typo-v2-page td { padding: 10px 12px; border-bottom: 1px solid #E1E2E4; color: #5A5C63; vertical-align: top; }
+    .typo-v2-page code { background: #F0ECFE; padding: 1px 6px; border-radius: 4px; color: #2907B1; font-size: 12px; }
+    .style-row { display: flex; align-items: flex-start; gap: 24px; padding: 16px 0; border-bottom: 1px solid #E1E2E4; }
+    .style-meta { width: 240px; flex-shrink: 0; }
+    .style-meta .name-line { display: flex; align-items: center; }
+    .style-meta .name { font-size: 14px; font-weight: 700; color: #171719; }
+    .style-meta .spec { font-size: 11px; color: #70737C; margin-top: 4px; font-family: monospace; line-height: 1.6; }
+    .style-meta .usage { font-size: 11px; color: #989BA2; margin-top: 6px; line-height: 1.5; }
+    .style-meta .v1-map { font-size: 10px; color: #5A5C63; margin-top: 8px; font-family: monospace; background: #F7F8F9; padding: 4px 8px; border-radius: 4px; display: inline-block; }
+    .preview { flex: 1; color: #171719; font-family: 'Pretendard Variable', -apple-system, sans-serif; }
+  `}
+</style>
+
+<div className="typo-v2-page">
+
+<h2>v2.6.0 Typography</h2>
+<p className="lead">Figma "Typography" 캔버스 기반 v2.6.0 텍스트 스타일. 13개 시맨틱 토큰, Pretendard Variable 기반.</p>
+
+<div className="v2-banner">
+<h4>v1 → v2.6.0 주요 변경</h4>
+<ul>
+<li><strong>네이밍 변경</strong>: <code>heading</code> → <code>headline1</code>, <code>headline</code> → <code>headline2</code>, <code>label1</code> → <code>label2</code>, <code>label2</code> → <code>label3</code></li>
+<li><strong>신규 3종</strong>: <code>body1Str</code>, <code>body2Str</code> (SemiBold 강조 변형) + <code>label1</code> (16px Bold, 가장 큰 label)</li>
+<li><strong>값 변경</strong>: <code>caption</code> weight 400 → 500, <code>body2</code> lineHeight 22 → 22.5, <code>label2/3</code> letterSpacing 제거</li>
+<li><strong>v1 토큰 미수정</strong>: 기존 <code>textStyle</code> export는 그대로 유지 (사용처 마이그레이션은 별도 PR)</li>
+<li><strong><code>body3</code></strong>: <code>@deprecated</code> 표시 — Figma v2.6.0에서 대응 토큰 없음, <code>body1</code>과 동일 값</li>
+</ul>
+</div>
+
+## 스타일 미리보기
+
+{stylesV2.map((s) => (
+  <div className="style-row" key={s.key}>
+    <div className="style-meta">
+      <div className="name-line">
+        <span className="name">{s.name}</span>
+        <ChangeBadge kind={s.changed} />
+      </div>
+      <div className="spec">
+        <code>textStyleV2.{s.key}</code><br/>
+        {s.size}px · {s.weightName}({s.weight}) · {s.lineHeight}px · {s.letterSpacing}
+      </div>
+      <div className="usage">{s.usage}</div>
+      <div className="v1-map">v1: {s.v1}</div>
+    </div>
+    <div className="preview" style={{
+      fontSize: s.size,
+      fontWeight: s.weight,
+      lineHeight: `${s.lineHeight}px`,
+      letterSpacing: `${s.letterSpacing}px`,
+    }}>
+      {PREVIEW_TEXT}
+    </div>
+  </div>
+))}
+
+## Spec Table
+
+<table>
+  <thead>
+    <tr>
+      <th>v2 token</th>
+      <th>v1 token</th>
+      <th>size</th>
+      <th>weight</th>
+      <th>lineHeight</th>
+      <th>letterSpacing</th>
+      <th>변경 사항</th>
+    </tr>
+  </thead>
+  <tbody>
+    {stylesV2.map(s => (
+      <tr key={s.key}>
+        <td><code>{s.key}</code></td>
+        <td>{s.v1 === '(없음)' ? <em style={{ color: '#989BA2' }}>없음</em> : <code>{s.v1}</code>}</td>
+        <td>{s.size}px</td>
+        <td>{s.weight} ({s.weightName})</td>
+        <td>{s.lineHeight}px</td>
+        <td>{s.letterSpacing}</td>
+        <td><ChangeBadge kind={s.changed} /></td>
+      </tr>
+    ))}
+  </tbody>
+</table>
+
+## 사용 예시
+
+```typescript
+import { textStyleV2 } from '@/tokens/theme';
+import { Text } from 'react-native';
+
+function Heading() {
+  return (
+    <Text style={textStyleV2.headline1}>
+      섹션 제목
+    </Text>
+  );
+}
+```
+
+</div>
