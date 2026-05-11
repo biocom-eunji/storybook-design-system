@@ -1780,6 +1780,34 @@
         "description": "WH-60 — 다크 배경 위 강한 하이라이트 dim",
         "comment": "v2.3.0 신규 (Figma Dimmed layer/WH-60). #FFFFFF + opacity 0.6"
       }
+    },
+    "gradient": {
+      "whTopdown": {
+        "value": {
+          "type": "linear",
+          "angle": "180deg",
+          "stops": [
+            { "color": "rgba(255,255,255,0)", "position": 0 },
+            { "color": "#FFFFFF", "position": 1 }
+          ]
+        },
+        "type": "gradient",
+        "description": "WH-topdown — 위에서 아래로 흰색 페이드 (스크롤 상단 콘텐츠 페이드)",
+        "comment": "v2.5.0 신규 (Figma gradient/WH-topdown). 180deg, transparent→white"
+      },
+      "whRight": {
+        "value": {
+          "type": "linear",
+          "angle": "90deg",
+          "stops": [
+            { "color": "rgba(255,255,255,0)", "position": 0 },
+            { "color": "#FFFFFF", "position": 1 }
+          ]
+        },
+        "type": "gradient",
+        "description": "WH-right — 왼쪽에서 오른쪽으로 흰색 페이드 (가로 스크롤 우측 콘텐츠 페이드)",
+        "comment": "v2.5.0 신규 (Figma gradient/WH-right). 90deg, transparent→white"
+      }
     }
   },
   "Semantics": {
