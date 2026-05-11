@@ -3,322 +3,304 @@ import { Meta } from '@storybook/addon-docs/blocks';
 
 <Meta title="Primitives Palette/Color" />
 
-export const Swatch = ({ token, hex, desc }) => {
+export const Swatch = ({ token, hex, desc, isKey, warningText }) => {
   const [copied, setCopied] = React.useState(false);
   const isLight = hex === '#FFFFFF' || parseInt(hex.slice(1, 3), 16) > 240;
-  const handleCopy = () => {
-    navigator.clipboard.writeText(hex).then(() => {
-      setCopied(true);
-      setTimeout(() => setCopied(false), 1500);
-    });
-  };
+  const copy = () => navigator.clipboard.writeText(hex).then(() => { setCopied(true); setTimeout(() => setCopied(false), 1500); });
   return (
-    <div style={{
-      display: 'flex',
-      flexDirection: 'column',
-      minWidth: 96,
-      flex: '1 1 96px',
-    }}>
-      <div
-        onClick={handleCopy}
-        style={{
-        height: 64,
-        borderRadius: 8,
-        backgroundColor: hex,
-        border: isLight ? '1px solid #E1E2E4' : 'none',
-        position: 'relative',
-        overflow: 'hidden',
-        cursor: 'pointer',
-      }}>
-        {copied && (
-          <div style={{
-            position: 'absolute',
-            inset: 0,
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-            backgroundColor: 'rgba(23, 23, 25, 0.75)',
-            borderRadius: 8,
-            animation: 'toastFade 1.5s ease-out forwards',
-          }}>
-            <span style={{ color: '#22C3BC', fontSize: 11, fontWeight: 600 }}>복사 완료!</span>
-          </div>
+    <div style={{ display: 'flex', flexDirection: 'column', minWidth: 96, flex: '1 1 96px', position: 'relative' }}>
+      <div onClick={copy} style={{ height: 64, borderRadius: 8, backgroundColor: hex, border: isLight ? '1px solid #E1E2E4' : 'none', position: 'relative', overflow: 'hidden', cursor: 'pointer' }}>
+        {isKey && (
+          <span style={{ position: 'absolute', top: 6, right: 6, fontSize: 10, padding: '2px 6px', borderRadius: 10, background: '#171719', color: '#22C3BC', fontWeight: 700 }}>KEY</span>
         )}
+        {copied && <div style={{ position: 'absolute', inset: 0, display: 'flex', alignItems: 'center', justifyContent: 'center', backgroundColor: 'rgba(23,23,25,0.75)', borderRadius: 8 }}><span style={{ color: '#22C3BC', fontSize: 11, fontWeight: 600 }}>복사 완료!</span></div>}
       </div>
-      <span style={{ fontSize: 12, fontWeight: 600, color: '#292A2D', marginTop: 6 }}>{token}</span>
-      <span
-        onClick={handleCopy}
-        style={{
-          fontSize: 11,
-          color: '#70737C',
-          fontFamily: 'monospace',
-          cursor: 'pointer',
-          borderRadius: 4,
-          padding: '1px 4px',
-          margin: '0 -4px',
-          transition: 'background 0.15s',
-        }}
-        onMouseEnter={(e) => { e.currentTarget.style.background = '#E9FBFA'; e.currentTarget.style.color = '#17827D'; }}
-        onMouseLeave={(e) => { e.currentTarget.style.background = 'transparent'; e.currentTarget.style.color = '#70737C'; }}
-        title="클릭하여 HEX 복사"
-      >{hex}</span>
-      {desc && <span style={{ fontSize: 11, color: '#989BA2', marginTop: 2, lineHeight: 1.4 }}>{desc}</span>}
+      <span style={{ fontSize: 12, fontWeight: 600, color: '#171719', marginTop: 6 }}>{token}</span>
+      <span onClick={copy} style={{ fontSize: 11, color: '#70737C', fontFamily: 'monospace', cursor: 'pointer' }}>{hex}</span>
+      {desc && <span style={{ fontSize: 11, color: warningText ? '#891010' : '#989BA2', marginTop: 2, lineHeight: 1.4 }}>{desc}</span>}
     </div>
   );
 };
 
 export const PaletteRow = ({ title, description, children }) => (
-  <div style={{ marginBottom: 48 }}>
-    <h3 style={{ fontSize: 20, fontWeight: 700, color: '#171719', margin: '0 0 4px' }}>{title}</h3>
-    {description && <p style={{ fontSize: 14, color: '#70737C', margin: '0 0 16px' }}>{description}</p>}
-    <div style={{ display: 'flex', flexWrap: 'wrap', gap: 10 }}>
-      {children}
+  <div style={{ marginBottom: 32 }}>
+    <h3 style={{ fontSize: 18, fontWeight: 700, color: '#171719', margin: '0 0 4px' }}>{title}</h3>
+    {description && <p style={{ fontSize: 13, color: '#70737C', margin: '0 0 16px' }}>{description}</p>}
+    <div style={{ display: 'flex', flexWrap: 'wrap', gap: 10 }}>{children}</div>
+  </div>
+);
+
+export const DimSwatch = ({ token, hex, opacity, rgba, baseDark }) => {
+  const [copied, setCopied] = React.useState(false);
+  const copy = () => navigator.clipboard.writeText(rgba).then(() => { setCopied(true); setTimeout(() => setCopied(false), 1500); });
+  return (
+    <div style={{ display: 'flex', flexDirection: 'column', minWidth: 160, flex: '1 1 160px' }}>
+      <div onClick={copy} style={{
+        position: 'relative',
+        height: 96,
+        borderRadius: 12,
+        overflow: 'hidden',
+        cursor: 'pointer',
+        backgroundImage: baseDark
+          ? 'linear-gradient(135deg, #171719 0%, #46474D 100%)'
+          : 'repeating-conic-gradient(#F0F1F2 0% 25%, #FFFFFF 0% 50%) 0 0 / 16px 16px',
+      }}>
+        <div style={{
+          position: 'absolute',
+          inset: 0,
+          background: rgba,
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+          color: baseDark ? '#FFFFFF' : (hex === '#000000' && opacity >= 0.6 ? '#FFFFFF' : '#171719'),
+          fontSize: 13,
+          fontWeight: 600,
+          letterSpacing: 0.2,
+        }}>
+          {token}
+        </div>
+        {copied && (
+          <div style={{ position: 'absolute', inset: 0, display: 'flex', alignItems: 'center', justifyContent: 'center', backgroundColor: 'rgba(34,195,188,0.95)', color: '#FFFFFF', fontSize: 12, fontWeight: 600 }}>
+            복사 완료!
+          </div>
+        )}
+      </div>
+      <div style={{ marginTop: 8, fontSize: 11, color: '#70737C', fontFamily: 'monospace', lineHeight: 1.5 }}>
+        <div>{hex} · opacity {opacity}</div>
+        <div style={{ wordBreak: 'break-all' }}>{rgba}</div>
+      </div>
     </div>
+  );
+};
+
+export const UsageNote = ({ children }) => (
+  <div style={{ background: '#FFF8D8', border: '1px solid #FFCE00', borderRadius: 8, padding: 12, marginBottom: 16, fontSize: 13, color: '#604600' }}>
+    <strong>⚠️ 사용 주의:</strong> <span style={{ marginLeft: 6 }}>{children}</span>
   </div>
 );
 
 <style>
   {`
-    @keyframes toastFade {
-      0%   { opacity: 0; }
-      15%  { opacity: 1; }
-      70%  { opacity: 1; }
-      100% { opacity: 0; }
-    }
-    .color-page {
-      max-width: 900px;
-      margin: 0 auto;
-      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-    }
-    .color-page h2 {
-      font-size: 28px;
-      font-weight: 700;
-      color: #171719;
-      margin: 0 0 8px;
-      padding-bottom: 12px;
-      border-bottom: 2px solid #22C3BC;
-    }
-    .color-page > p {
-      font-size: 15px;
-      color: #5A5C63;
-      margin: 0 0 40px;
-    }
-    .section-divider {
-      border: none;
-      border-top: 1px solid #E1E2E4;
-      margin: 16px 0 48px;
-    }
+    .color-page { max-width: 960px; margin: 0 auto; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; }
+    .color-page h2 { font-size: 28px; font-weight: 700; color: #171719; margin: 0 0 8px; padding-bottom: 12px; border-bottom: 2px solid #22C3BC; }
+    .color-page h3 { font-size: 18px; }
+    .color-page > p.lead { font-size: 15px; color: #5A5C63; margin: 0 0 24px; line-height: 1.6; }
+    .section-divider { border: none; border-top: 1px solid #E1E2E4; margin: 16px 0 40px; }
   `}
 </style>
 
 <div className="color-page">
 
-<h2>Color Palette (v1.x — Deprecated)</h2>
-<p>바이오컴 색상 규칙은 다음과 같이 구성되어 있습니다.</p>
+<h2>Color</h2>
+<p className="lead">Pretendard 디자인 시스템의 컬러 토큰. Mono / Semantic / Accent 3개 그룹 + Dimmed Layer 오버레이로 구성. 각 스케일은 <strong>50(가장 옅음) → 900(가장 진함)</strong> 10단계.</p>
 
-<div style={{ background: '#FCE8E8', border: '1px solid #EF7676', borderRadius: 12, padding: '14px 18px', margin: '0 0 32px', fontSize: 14, color: '#5A0707', lineHeight: 1.6 }}>
-  <strong style={{ display: 'block', fontSize: 15, marginBottom: 4 }}>⚠️ v1.x 컬러 팔레트 (Deprecated)</strong>
-  이 페이지에 표시된 토큰들은 v2.0에서 deprecated 상태입니다. 신규 코드에서는 <strong>v2.0 Color Tokens</strong> 페이지의 토큰을 사용하세요. 기존 v1 토큰은 컴포넌트 마이그레이션이 완료될 때까지 한시적으로 유지됩니다.
-  <ul style={{ margin: '8px 0 0', paddingLeft: 20, fontSize: 13 }}>
-    <li>shade 네이밍 역전: 99/95/.../10 → 50/100/.../900</li>
-    <li>Mono.coolNeutral 22단 → Mono.neutral 10단</li>
-    <li>Brand.mint → Mono.mint, Accent.orange → Semantic.orange 이동</li>
-    <li>red50/yellow50/cyan50 등 8개 토큰 의미 반전 (강한 색 → 옅은 색)</li>
+## Basic Colors
+
+<PaletteRow title="Mono / Neutral" description="UI 골격 — 텍스트, 배경, 보더에 사용하는 무채색 스케일">
+  <Swatch token="50" hex="#F3F5F7" />
+  <Swatch token="100" hex="#E1E3E8" />
+  <Swatch token="200" hex="#C4C7CD" />
+  <Swatch token="300" hex="#ACAEB5" />
+  <Swatch token="400" hex="#8A8D94" />
+  <Swatch token="500" hex="#72747B" />
+  <Swatch token="600" hex="#5A5C63" />
+  <Swatch token="700" hex="#46474D" />
+  <Swatch token="800" hex="#2C2E32" />
+  <Swatch token="900" hex="#171719" />
+</PaletteRow>
+
+<PaletteRow title="Mono / Mint" description="브랜드 메인 컬러. mint400(#22C3BC)이 CTA, 활성 상태 등 핵심 인터랙션에 사용됨">
+  <Swatch token="50" hex="#E4FCFC" />
+  <Swatch token="100" hex="#C2F7F6" />
+  <Swatch token="200" hex="#8BEAE5" />
+  <Swatch token="300" hex="#64D7D2" />
+  <Swatch token="400" hex="#22C3BC" isKey />
+  <Swatch token="500" hex="#12A09A" />
+  <Swatch token="600" hex="#157D78" />
+  <Swatch token="700" hex="#105E5A" />
+  <Swatch token="800" hex="#093F3E" />
+  <Swatch token="900" hex="#082B2A" />
+</PaletteRow>
+
+<PaletteRow title="Mono / Pure" description="순수 흑백 토큰">
+  <Swatch token="WH" hex="#FFFFFF" desc="화이트" />
+  <Swatch token="BK" hex="#000000" desc="블랙" />
+</PaletteRow>
+
+<hr className="section-divider" />
+
+## Semantic Colors
+
+<UsageNote>
+  Semantic 스케일은 모두 <strong>50번이 가장 옅은 색</strong>입니다 (배경/halo 용도). 강한 색이 필요하면:
+  <ul style={{ margin: '6px 0 0', paddingLeft: 20 }}>
+    <li><code>red500</code> (#D92020) — 에러 강조</li>
+    <li><code>yellow300</code> (#FFCE00) — caution 강조</li>
+    <li><code>orange400</code> (#F67900) — warning 강조</li>
   </ul>
+</UsageNote>
+
+<PaletteRow title="Semantic / Green" description="성공, 완료, 긍정적 피드백">
+  <Swatch token="50" hex="#E9FBF5" />
+  <Swatch token="100" hex="#B5F7E1" />
+  <Swatch token="200" hex="#7AF0C6" />
+  <Swatch token="300" hex="#33D49A" />
+  <Swatch token="400" hex="#12BA7E" isKey />
+  <Swatch token="500" hex="#0B9D69" />
+  <Swatch token="600" hex="#108159" />
+  <Swatch token="700" hex="#0A6343" />
+  <Swatch token="800" hex="#074730" />
+  <Swatch token="900" hex="#082B1F" />
+</PaletteRow>
+
+<PaletteRow title="Semantic / Red" description="에러, 위험. 강한 빨강은 red500.">
+  <Swatch token="50" hex="#FFE9E9" />
+  <Swatch token="100" hex="#FFC9C9" />
+  <Swatch token="200" hex="#FFA1A1" />
+  <Swatch token="300" hex="#F86F6F" />
+  <Swatch token="400" hex="#F04545" />
+  <Swatch token="500" hex="#D92020" isKey />
+  <Swatch token="600" hex="#B51616" />
+  <Swatch token="700" hex="#8B0B0B" />
+  <Swatch token="800" hex="#5A0707" />
+  <Swatch token="900" hex="#2E0505" />
+</PaletteRow>
+
+<PaletteRow title="Semantic / Yellow" description="주의, 경고. 키 컬러 yellow300(#FFCE00).">
+  <Swatch token="50" hex="#FFF8D8" />
+  <Swatch token="100" hex="#FFEDA2" />
+  <Swatch token="200" hex="#FFE05F" />
+  <Swatch token="300" hex="#FFCE00" isKey />
+  <Swatch token="400" hex="#F0B800" />
+  <Swatch token="500" hex="#E3A700" />
+  <Swatch token="600" hex="#C59000" />
+  <Swatch token="700" hex="#936C00" />
+  <Swatch token="800" hex="#604600" />
+  <Swatch token="900" hex="#3C2C00" />
+</PaletteRow>
+
+<PaletteRow title="Semantic / Orange" description="warning 시멘틱 후보. 키 컬러 orange400(#F67900).">
+  <Swatch token="50" hex="#FFF2E5" />
+  <Swatch token="100" hex="#FFD1A4" />
+  <Swatch token="200" hex="#FFB166" />
+  <Swatch token="300" hex="#FF932B" />
+  <Swatch token="400" hex="#F67900" isKey />
+  <Swatch token="500" hex="#DB6600" />
+  <Swatch token="600" hex="#B55400" />
+  <Swatch token="700" hex="#884200" />
+  <Swatch token="800" hex="#602D00" />
+  <Swatch token="900" hex="#361900" />
+</PaletteRow>
+
+<hr className="section-divider" />
+
+## Accent Colors
+
+<p style={{ fontSize: 13, color: '#70737C', margin: '0 0 16px' }}>대시보드, 차트, 카테고리 구분 등 데이터 시각화 영역에 사용합니다. 본 컬러는 시멘틱 의미를 갖지 않으니 의미 표현은 Semantic 스케일을 사용하세요.</p>
+
+<PaletteRow title="Accent / Pink">
+  <Swatch token="50" hex="#FFE3ED" />
+  <Swatch token="100" hex="#FFBACF" />
+  <Swatch token="200" hex="#FF9ABA" />
+  <Swatch token="300" hex="#FF729E" />
+  <Swatch token="400" hex="#FF417E" />
+  <Swatch token="500" hex="#F81C62" isKey />
+  <Swatch token="600" hex="#D50A4A" />
+  <Swatch token="700" hex="#A40236" />
+  <Swatch token="800" hex="#77072A" />
+  <Swatch token="900" hex="#480419" />
+</PaletteRow>
+
+<PaletteRow title="Accent / Purple">
+  <Swatch token="50" hex="#F7E6FF" />
+  <Swatch token="100" hex="#E9BAFF" />
+  <Swatch token="200" hex="#E09DFF" />
+  <Swatch token="300" hex="#D376FF" />
+  <Swatch token="400" hex="#C74CFF" />
+  <Swatch token="500" hex="#A924E5" isKey />
+  <Swatch token="600" hex="#8A18C1" />
+  <Swatch token="700" hex="#6C1097" />
+  <Swatch token="800" hex="#510B74" />
+  <Swatch token="900" hex="#32024A" />
+</PaletteRow>
+
+<PaletteRow title="Accent / Violet">
+  <Swatch token="50" hex="#F0ECFE" />
+  <Swatch token="100" hex="#CBBFFF" />
+  <Swatch token="200" hex="#B09CFF" />
+  <Swatch token="300" hex="#8E70FF" />
+  <Swatch token="400" hex="#704CFF" />
+  <Swatch token="500" hex="#552CF4" isKey />
+  <Swatch token="600" hex="#3C17CE" />
+  <Swatch token="700" hex="#2907B1" />
+  <Swatch token="800" hex="#1C057D" />
+  <Swatch token="900" hex="#0F004A" />
+</PaletteRow>
+
+<PaletteRow title="Accent / Light Blue">
+  <Swatch token="50" hex="#E5F6FE" />
+  <Swatch token="100" hex="#B9E9FF" />
+  <Swatch token="200" hex="#7ED6FF" />
+  <Swatch token="300" hex="#45C4FF" />
+  <Swatch token="400" hex="#08B1FF" isKey />
+  <Swatch token="500" hex="#0090D7" />
+  <Swatch token="600" hex="#006FB5" />
+  <Swatch token="700" hex="#00538A" />
+  <Swatch token="800" hex="#003659" />
+  <Swatch token="900" hex="#00223C" />
+</PaletteRow>
+
+<PaletteRow title="Accent / Cyan">
+  <Swatch token="50" hex="#E6FBFF" />
+  <Swatch token="100" hex="#C0F6FF" />
+  <Swatch token="200" hex="#82E9FB" />
+  <Swatch token="300" hex="#37DAF8" />
+  <Swatch token="400" hex="#05BDDF" isKey />
+  <Swatch token="500" hex="#00A5C2" />
+  <Swatch token="600" hex="#007E94" />
+  <Swatch token="700" hex="#005E6E" />
+  <Swatch token="800" hex="#003F49" />
+  <Swatch token="900" hex="#00252B" />
+</PaletteRow>
+
+<PaletteRow title="Accent / Khaki">
+  <Swatch token="50" hex="#F4F7EE" />
+  <Swatch token="100" hex="#DCE6C5" />
+  <Swatch token="200" hex="#C4D49E" />
+  <Swatch token="300" hex="#A8C072" />
+  <Swatch token="400" hex="#87A349" />
+  <Swatch token="500" hex="#6D8339" isKey />
+  <Swatch token="600" hex="#54642E" />
+  <Swatch token="700" hex="#3E4B1F" />
+  <Swatch token="800" hex="#303919" />
+  <Swatch token="900" hex="#202610" />
+</PaletteRow>
+
+<hr className="section-divider" />
+
+## Dimmed Layer
+
+<p style={{ fontSize: 13, color: '#70737C', margin: '0 0 16px' }}>모달 backdrop, 풀스크린 dim, 다크 배경 위 하이라이트 등 오버레이 dim 색상. <code>dimmedLayerTokensV2.{`{bk|wh}{20|60|80}`}</code>로 접근.</p>
+
+### BK Layer (라이트 배경 위 black 오버레이)
+
+<div style={{ display: 'flex', flexWrap: 'wrap', gap: 12, marginBottom: 24 }}>
+  <DimSwatch token="BK-20" hex="#000000" opacity="0.2" rgba="rgba(0,0,0,0.2)" />
+  <DimSwatch token="BK-60" hex="#000000" opacity="0.6" rgba="rgba(0,0,0,0.6)" />
+  <DimSwatch token="BK-80" hex="#000000" opacity="0.8" rgba="rgba(0,0,0,0.8)" />
 </div>
 
-## Mono
+<p style={{ fontSize: 12, color: '#5A5C63', margin: '0 0 24px' }}>
+  <strong>BK-60</strong>은 모달/바텀시트 표준 backdrop scrim입니다. <strong>BK-80</strong>은 이미지 뷰어/풀스크린 오버레이 등 강한 dim에 사용.
+</p>
 
-<PaletteRow title="Cool Neutral" description="UI의 뼈대를 구성하는 텍스트, 배경, 보더 등에 범용적으로 사용되는 단일 무채색(Mono) 팔레트입니다.">
-  <Swatch token="coolNeutral100" hex="#FFFFFF" desc="화이트" />
-  <Swatch token="coolNeutral99" hex="#F7F7F8" desc="서피스 배경" />
-  <Swatch token="coolNeutral98" hex="#F4F4F5" desc="카드 배경" />
-  <Swatch token="coolNeutral97" hex="#EAEBEC" desc="비활성 배경" />
-  <Swatch token="coolNeutral96" hex="#E1E2E4" desc="디바이더" />
-  <Swatch token="coolNeutral95" hex="#DBDCDF" desc="보더" />
-  <Swatch token="coolNeutral90" hex="#C2C4C8" desc="비활성 보더" />
-  <Swatch token="coolNeutral80" hex="#AEB0B6" desc="비활성 콘텐츠" />
-  <Swatch token="coolNeutral70" hex="#989BA2" desc="보조 텍스트" />
-  <Swatch token="coolNeutral60" hex="#878A93" desc="캡션 텍스트" />
-  <Swatch token="coolNeutral50" hex="#70737C" desc="설명 텍스트" />
-  <Swatch token="coolNeutral40" hex="#5A5C63" desc="본문 텍스트" />
-  <Swatch token="coolNeutral30" hex="#46474C" desc="강조 본문" />
-  <Swatch token="coolNeutral25" hex="#37383C" desc="타이틀" />
-  <Swatch token="coolNeutral23" hex="#333438" desc="서브 헤딩" />
-  <Swatch token="coolNeutral22" hex="#2E2F33" desc="헤딩" />
-  <Swatch token="coolNeutral20" hex="#292A2D" desc="강조 헤딩" />
-  <Swatch token="coolNeutral17" hex="#212225" desc="최고 강조 텍스트" />
-  <Swatch token="coolNeutral15" hex="#1B1C1E" desc="다크 서피스" />
-  <Swatch token="coolNeutral10" hex="#171719" desc="다크 배경" />
-  <Swatch token="coolNeutral7"  hex="#141415" desc="최고 어두운 배경" />
-  <Swatch token="coolNeutral5"  hex="#0F0F10" desc="순수 다크" />
-</PaletteRow>
+### WH Layer (다크 배경 위 white 오버레이)
 
-<hr className="section-divider" />
+<div style={{ display: 'flex', flexWrap: 'wrap', gap: 12, marginBottom: 16 }}>
+  <DimSwatch token="WH-20" hex="#FFFFFF" opacity="0.2" rgba="rgba(255,255,255,0.2)" baseDark />
+  <DimSwatch token="WH-60" hex="#FFFFFF" opacity="0.6" rgba="rgba(255,255,255,0.6)" baseDark />
+</div>
 
-## Brand
-
-<PaletteRow title="Mint" description="브랜드 메인 컬러. CTA 버튼, 활성 상태, 핵심 인터랙션 요소에 사용됩니다.">
-  <Swatch token="mint99" hex="#FBFEFE" desc="배경 틴트" />
-  <Swatch token="mint95" hex="#E9FBFA" desc="하이라이트 배경" />
-  <Swatch token="mint90" hex="#D4F7F6" desc="서브 배경" />
-  <Swatch token="mint80" hex="#A8F0EC" desc="호버 배경" />
-  <Swatch token="mint70" hex="#7DE8E3" desc="라이트 액센트" />
-  <Swatch token="mint60" hex="#52E0DA" desc="서브 액센트" />
-  <Swatch token="mint45" hex="#22C3BC" desc="⭐ 메인 브랜드" />
-  <Swatch token="mint40" hex="#1FADA7" desc="호버 상태" />
-  <Swatch token="mint30" hex="#17827D" desc="프레스 상태" />
-  <Swatch token="mint20" hex="#0F5753" desc="다크 액센트" />
-  <Swatch token="mint10" hex="#082B2A" desc="최고 어두운 액센트" />
-</PaletteRow>
-
-<hr className="section-divider" />
-
-## Semantic
-
-<PaletteRow title="Green" description="성공, 완료, 긍정적 피드백 상태에 사용됩니다.">
-  <Swatch token="green99" hex="#FBFEFD" desc="성공 배경 틴트" />
-  <Swatch token="green95" hex="#E9FBF5" desc="성공 배경" />
-  <Swatch token="green90" hex="#D4F7EB" desc="성공 하이라이트" />
-  <Swatch token="green80" hex="#A8F0D6" desc="서브 성공" />
-  <Swatch token="green70" hex="#7DE8C2" desc="라이트 성공" />
-  <Swatch token="green60" hex="#52E0AD" desc="성공 액센트" />
-  <Swatch token="green45" hex="#22C289" desc="성공 메인" />
-  <Swatch token="green40" hex="#1FAD7A" desc="성공 호버" />
-  <Swatch token="green30" hex="#17825C" desc="성공 프레스" />
-  <Swatch token="green20" hex="#0F573D" desc="성공 다크" />
-  <Swatch token="green10" hex="#082B1F" desc="성공 최고 다크" />
-</PaletteRow>
-
-<PaletteRow title="Red" description="에러, 경고, 삭제 등 위험 상태에 사용됩니다.">
-  <Swatch token="red99" hex="#FEFAFA" desc="에러 배경 틴트" />
-  <Swatch token="red95" hex="#FCE8E8" desc="에러 배경" />
-  <Swatch token="red90" hex="#FAD1D1" desc="에러 하이라이트" />
-  <Swatch token="red80" hex="#F5A3A3" desc="서브 에러" />
-  <Swatch token="red70" hex="#EF7676" desc="라이트 에러" />
-  <Swatch token="red60" hex="#EA4848" desc="에러 액센트" />
-  <Swatch token="red50" hex="#E51A1A" desc="에러 메인" />
-  <Swatch token="red40" hex="#B71515" desc="에러 호버" />
-  <Swatch token="red30" hex="#891010" desc="에러 프레스" />
-  <Swatch token="red20" hex="#5C0A0A" desc="에러 다크" />
-  <Swatch token="red10" hex="#2E0505" desc="에러 최고 다크" />
-</PaletteRow>
-
-<PaletteRow title="Yellow" description="주의 알림, 보류 상태, 경고 배지에 사용됩니다.">
-  <Swatch token="yellow99" hex="#FFFEFA" desc="경고 배경 틴트" />
-  <Swatch token="yellow95" hex="#FFFAE5" desc="경고 배경" />
-  <Swatch token="yellow90" hex="#FFF5CC" desc="경고 하이라이트" />
-  <Swatch token="yellow80" hex="#FFEC99" desc="서브 경고" />
-  <Swatch token="yellow70" hex="#FFE266" desc="라이트 경고" />
-  <Swatch token="yellow60" hex="#FFD833" desc="경고 액센트" />
-  <Swatch token="yellow50" hex="#FFCE00" desc="경고 메인" />
-  <Swatch token="yellow40" hex="#CCA500" desc="경고 호버" />
-  <Swatch token="yellow30" hex="#997C00" desc="경고 프레스" />
-  <Swatch token="yellow20" hex="#665300" desc="경고 다크" />
-  <Swatch token="yellow10" hex="#332900" desc="경고 최고 다크" />
-</PaletteRow>
-
-<PaletteRow title="Orange" description="포인트 관련 UI 등에 사용됩니다.">
-  <Swatch token="orange99" hex="#FFFCFA" desc="포인트 배경 틴트" />
-  <Swatch token="orange95" hex="#FFF2E5" desc="포인트 배경" />
-  <Swatch token="orange90" hex="#FFE5CC" desc="포인트 하이라이트" />
-  <Swatch token="orange80" hex="#FFCB99" desc="서브 포인트" />
-  <Swatch token="orange70" hex="#FFB166" desc="라이트 포인트" />
-  <Swatch token="orange60" hex="#FF9733" desc="포인트 액센트" />
-  <Swatch token="orange50" hex="#FF7D00" desc="포인트 메인" />
-  <Swatch token="orange40" hex="#CC6400" desc="포인트 호버" />
-  <Swatch token="orange30" hex="#994B00" desc="포인트 프레스" />
-  <Swatch token="orange20" hex="#663200" desc="포인트 다크" />
-  <Swatch token="orange10" hex="#331900" desc="포인트 최고 다크" />
-</PaletteRow>
-
-<hr className="section-divider" />
-
-## Extended
-
-<PaletteRow title="Pink" description="프로모션, 하트, 좋아요 등 감성적 인터랙션에 사용됩니다.">
-  <Swatch token="pink99" hex="#FFFAFC" desc="배경 틴트" />
-  <Swatch token="pink95" hex="#FFE5EE" desc="하이라이트 배경" />
-  <Swatch token="pink80" hex="#FF99B9" desc="서브 핑크" />
-  <Swatch token="pink75" hex="#FF80A8" desc="라이트 핑크" />
-  <Swatch token="pink70" hex="#FF6696" desc="액센트 핑크" />
-  <Swatch token="pink60" hex="#FF3374" desc="메인 핑크" />
-  <Swatch token="pink50" hex="#FF0051" desc="강조 핑크" />
-  <Swatch token="pink40" hex="#CC0041" desc="호버" />
-  <Swatch token="pink30" hex="#990030" desc="프레스" />
-  <Swatch token="pink20" hex="#660020" desc="다크" />
-  <Swatch token="pink10" hex="#330010" desc="최고 다크" />
-</PaletteRow>
-
-<PaletteRow title="Purple" description="멤버십, 특별 혜택 등 차별화된 업셀링 요소에 사용됩니다.">
-  <Swatch token="purple99" hex="#FEFBFF" desc="배경 틴트" />
-  <Swatch token="purple95" hex="#F9EDFF" desc="하이라이트 배경" />
-  <Swatch token="purple90" hex="#F2D6FF" desc="서브 퍼플" />
-  <Swatch token="purple80" hex="#E9BAFF" desc="라이트 퍼플" />
-  <Swatch token="purple70" hex="#DE96FF" desc="액센트 퍼플" />
-  <Swatch token="purple60" hex="#D478FF" desc="메인 퍼플" />
-  <Swatch token="purple50" hex="#CB59FF" desc="강조 퍼플" />
-  <Swatch token="purple40" hex="#AD36E3" desc="호버" />
-  <Swatch token="purple30" hex="#861CB8" desc="프레스" />
-  <Swatch token="purple20" hex="#580A7D" desc="다크" />
-  <Swatch token="purple10" hex="#290247" desc="최고 다크" />
-</PaletteRow>
-
-<PaletteRow title="Violet" description="인디케이터, 태그, 차트 등 데이터 시각화 요소에 사용됩니다.">
-  <Swatch token="violet99" hex="#FBFAFF" desc="배경 틴트" />
-  <Swatch token="violet95" hex="#F0ECFE" desc="하이라이트 배경" />
-  <Swatch token="violet90" hex="#DBD3FE" desc="서브 바이올렛" />
-  <Swatch token="violet80" hex="#C0B0FF" desc="라이트 바이올렛" />
-  <Swatch token="violet70" hex="#9E86FC" desc="액센트 바이올렛" />
-  <Swatch token="violet60" hex="#7D5EF7" desc="메인 바이올렛" />
-  <Swatch token="violet50" hex="#6541F2" desc="강조 바이올렛" />
-  <Swatch token="violet40" hex="#4F29E5" desc="호버" />
-  <Swatch token="violet30" hex="#3A16C9" desc="프레스" />
-  <Swatch token="violet20" hex="#23098F" desc="다크" />
-  <Swatch token="violet10" hex="#11024D" desc="최고 다크" />
-</PaletteRow>
-
-<PaletteRow title="Light Blue" description="정보성 알림, 링크, 안내 메시지에 사용됩니다.">
-  <Swatch token="lightBlue99" hex="#F7FDFF" desc="정보 배경 틴트" />
-  <Swatch token="lightBlue95" hex="#E5F6FE" desc="정보 배경" />
-  <Swatch token="lightBlue90" hex="#C4ECFE" desc="정보 하이라이트" />
-  <Swatch token="lightBlue80" hex="#A1E1FF" desc="서브 정보" />
-  <Swatch token="lightBlue70" hex="#70D2FF" desc="라이트 정보" />
-  <Swatch token="lightBlue60" hex="#3DC2FF" desc="정보 액센트" />
-  <Swatch token="lightBlue50" hex="#00AEFF" desc="정보 메인" />
-  <Swatch token="lightBlue40" hex="#008DCF" desc="정보 호버" />
-  <Swatch token="lightBlue30" hex="#006796" desc="정보 프레스" />
-  <Swatch token="lightBlue20" hex="#004261" desc="정보 다크" />
-  <Swatch token="lightBlue10" hex="#002130" desc="정보 최고 다크" />
-</PaletteRow>
-
-<PaletteRow title="Cyan" description="차트, 그래프, 보조 시각화 요소에 사용됩니다.">
-  <Swatch token="cyan99" hex="#F7FEFF" desc="배경 틴트" />
-  <Swatch token="cyan95" hex="#DEFAFF" desc="하이라이트 배경" />
-  <Swatch token="cyan90" hex="#B5F4FF" desc="서브 시안" />
-  <Swatch token="cyan80" hex="#8AEDFF" desc="라이트 시안" />
-  <Swatch token="cyan70" hex="#57DFF7" desc="액센트 시안" />
-  <Swatch token="cyan60" hex="#28D0ED" desc="메인 시안" />
-  <Swatch token="cyan50" hex="#00BDDE" desc="강조 시안" />
-  <Swatch token="cyan40" hex="#0098B2" desc="호버" />
-  <Swatch token="cyan30" hex="#006F82" desc="프레스" />
-  <Swatch token="cyan20" hex="#004854" desc="다크" />
-  <Swatch token="cyan10" hex="#00252B" desc="최고 다크" />
-</PaletteRow>
-
-<PaletteRow title="Khaki" description="자연 카테고리, 건강식 태그, 친환경 등 유기적 요소에 사용됩니다.">
-  <Swatch token="khaki99" hex="#FDFDFC" desc="배경 틴트" />
-  <Swatch token="khaki95" hex="#F4F7EE" desc="하이라이트 배경" />
-  <Swatch token="khaki90" hex="#E9EFDC" desc="서브 카키" />
-  <Swatch token="khaki80" hex="#D3DEBA" desc="라이트 카키" />
-  <Swatch token="khaki70" hex="#BDCE97" desc="액센트 카키" />
-  <Swatch token="khaki60" hex="#A7BE74" desc="메인 카키" />
-  <Swatch token="khaki50" hex="#91AD52" desc="강조 카키" />
-  <Swatch token="khaki40" hex="#748B41" desc="호버" />
-  <Swatch token="khaki30" hex="#576831" desc="프레스" />
-  <Swatch token="khaki20" hex="#3A4521" desc="다크" />
-  <Swatch token="khaki10" hex="#1D2310" desc="최고 다크" />
-</PaletteRow>
-
+<p style={{ fontSize: 12, color: '#5A5C63' }}>이미지 위 텍스트 가독성 확보, 다크 배경 위 하이라이트 강조 용도.</p>
 
 </div>
