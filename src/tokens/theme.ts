@@ -644,6 +644,45 @@ export const dimmedLayerTokensV2 = {
 
 export type DimmedLayerTokensV2 = typeof dimmedLayerTokensV2;
 
+/**
+ * v2.5.0 Gradient 토큰 — Figma "6. gradient" 캔버스 미러링
+ *
+ * 스크롤 가능 콘텐츠의 끝부분 페이드 효과 등에 사용. 모두 transparent → white 전환.
+ *
+ * 사용 라이브러리:
+ * - React Native: `expo-linear-gradient` 또는 `react-native-linear-gradient`
+ *   → `colors`, `locations`, `start`/`end` 속성에 토큰의 동명 필드 매핑
+ * - Web (Storybook 등): `css` 필드를 그대로 `background` 속성에 적용
+ *
+ * @see src/tokens/figma-tokens.json Primitives.gradient
+ * @since v2.5.0 (2026-05-11)
+ */
+export const gradientTokensV2 = {
+  /** WH-topdown — 위→아래 흰색 페이드 (수직 스크롤 상단 페이드) */
+  whTopdown: {
+    /** expo-linear-gradient `colors` 속성 */
+    colors: ['rgba(255,255,255,0)', '#FFFFFF'] as readonly string[],
+    /** expo-linear-gradient `locations` 속성 (0~1) */
+    locations: [0, 1] as readonly number[],
+    /** expo-linear-gradient `start` (top) */
+    start: { x: 0, y: 0 },
+    /** expo-linear-gradient `end` (bottom) */
+    end: { x: 0, y: 1 },
+    /** Web/Storybook CSS 문자열 */
+    css: 'linear-gradient(180deg, rgba(255,255,255,0) 0%, #FFFFFF 100%)',
+  },
+  /** WH-right — 왼쪽→오른쪽 흰색 페이드 (가로 스크롤 우측 페이드) */
+  whRight: {
+    colors: ['rgba(255,255,255,0)', '#FFFFFF'] as readonly string[],
+    locations: [0, 1] as readonly number[],
+    start: { x: 0, y: 0 },
+    end: { x: 1, y: 0 },
+    css: 'linear-gradient(90deg, rgba(255,255,255,0) 0%, #FFFFFF 100%)',
+  },
+} as const;
+
+export type GradientTokensV2 = typeof gradientTokensV2;
+
 /** 화면 좌우 마진 토큰 */
 export const screenMargin = {
   default: 16,
