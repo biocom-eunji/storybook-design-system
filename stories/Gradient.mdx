@@ -1,7 +1,7 @@
 import React from 'react';
 import { Meta } from '@storybook/addon-docs/blocks';
 
-<Meta title="Primitives Palette/v2.5.0 Gradient Tokens" />
+<Meta title="Primitives Palette/Gradient" />
 
 export const GradientCard = ({ token, direction, css, description, demoBackground }) => {
   const [copied, setCopied] = React.useState(false);
@@ -77,13 +77,13 @@ export const GradientCard = ({ token, direction, css, description, demoBackgroun
 
 <div className="gradient-page">
 
-<h2>v2.5.0 Gradient Tokens</h2>
-<p className="lead">Figma "6. gradient" 캔버스 기반 v2.5.0 그라데이션 토큰. 스크롤 가능 영역의 끝부분 페이드(fade-out) 효과 등 부분 적용용입니다.</p>
+<h2>Gradient</h2>
+<p className="lead">스크롤 가능 영역의 끝부분 페이드(fade-out) 효과 등 부분 적용용 그라데이션 토큰 2종. 모두 투명 → 흰색 페이드.</p>
 
 <div className="v2-banner">
 <h4>특징</h4>
 <ul>
-<li><strong>2종 그라데이션</strong>: 수직(WH-topdown) + 수평(WH-right)</li>
+<li><strong>2종 그라데이션</strong>: 수직(<code>whTopdown</code>) + 수평(<code>whRight</code>)</li>
 <li>모두 <code>rgba(255,255,255,0)</code> → <code>#FFFFFF</code> 페이드 (투명→흰색)</li>
 <li>React Native: <code>expo-linear-gradient</code> 호환 (<code>colors</code>, <code>locations</code>, <code>start</code>, <code>end</code> 필드 직접 매핑)</li>
 <li>Web: <code>css</code> 필드를 <code>background</code> 속성에 그대로 적용</li>
