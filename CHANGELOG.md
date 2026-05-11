@@ -4,6 +4,51 @@
 
 ---
 
+## v2.6.0 (2026-05-11)
+
+> Figma "Typography" 캔버스 기반 신규 타이포그래피 토큰 13개 추가. 기존 `textStyle` 미수정 (사용처 마이그레이션은 별도 PR). **Breaking Changes 없음 (additive only)**.
+
+### Added
+
+- **`textStyleV2`** namespace export (`theme.ts`) — 13개 시맨틱 텍스트 스타일
+  - **Title 계열 (3종)**: `title1` (32px Bold), `title2` (28px), `title3` (24px) — v1과 값 동일
+  - **Headline 계열 (2종)**: `headline1` (20px, v1 `heading` 대응), `headline2` (17px, v1 `headline` 대응) — 이름 변경
+  - **Body 계열 (4종)**: `body1` / `body1Str` (16px Regular/SemiBold), `body2` / `body2Str` (15px) — Str 변형 신규
+  - **Label 계열 (3종)**: `label1` (16px SemiBold, **신규**), `label2` (14px, v1 `label1`), `label3` (13px, v1 `label2`)
+  - **Caption (1종)**: `caption` (12px Medium) — v1 weight 400 → 500
+- **`figma-tokens.json` `Primitives.typographyV2`** — style-dictionary `typography` 타입 13개 composite 토큰
+- **Storybook v2.6.0 Typography 페이지** (`stories/TypographyV2.mdx`) — 13개 스타일 미리보기 + Spec Table + 변경 사항 배지
+
+### Changed
+
+- **`theme.ts` `textStyle.body3`에 `@deprecated` JSDoc** — `body1`과 동일 값이며 Figma v2.6.0에서 대응 토큰이 사라짐. `textStyleV2.body1` 또는 기존 `textStyle.body1` 사용 권장
+- **기존 `Typography.mdx`** — v2.6.0 신규 토큰 안내 배너 추가
+
+### Migration Map
+
+| 기존 `textStyle` | v2.6.0 `textStyleV2` | 비고 |
+|---|---|---|
+| `title1` (32/700/44/-0.81) | `title1` | 동일 |
+| `title2` (28/700/38/-0.66) | `title2` | 동일 |
+| `title3` (24/700/32/-0.55) | `title3` | 동일 |
+| `heading` (20/600/28/-0.24) | **`headline1`** | 이름 변경 |
+| `headline` (17/600/24/0) | **`headline2`** | 이름 변경 |
+| `body1` (16/400/24/0.09) | `body1` | 동일 |
+| (없음) | **`body1Str`** | 신규 (16px SemiBold) |
+| `body2` (15/400/**22**/0.14) | `body2` (15/400/**22.5**/0.14) | lineHeight 22 → 22.5 |
+| (없음) | **`body2Str`** | 신규 (15px SemiBold) |
+| `body3` (16/400/24/0.09) | (없음, deprecated) | `body1`과 중복 |
+| (없음) | **`label1`** (16/600/23/0) | 신규 (가장 큰 label) |
+| `label1` (14/500/20/**0.2**) | **`label2`** (14/500/20/**0**) | 이름 변경 + LS 제거 |
+| `label2` (13/500/**18**/**0.25**) | **`label3`** (13/500/**19**/**0**) | 이름 변경 + LH 18→19, LS 제거 |
+| `caption` (12/**400**/16/0.3) | `caption` (12/**500**/16/0.3) | weight 400 → 500 |
+
+### 후속 작업 (별도 PR)
+
+기존 컴포넌트의 `textStyle.heading`/`textStyle.label1` 등 v1 키 참조를 `textStyleV2.headline1`/`textStyleV2.label2` 등 v2 키로 점진적 마이그레이션 예정.
+
+---
+
 ## v2.5.0 (2026-05-11)
 
 > Figma "6. gradient" 캔버스 기반 그라데이션 토큰 추가. 스크롤 영역 페이드 효과용. **Breaking Changes 없음 (additive only)**.
