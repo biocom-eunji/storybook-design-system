@@ -143,9 +143,8 @@ export const GradientCard = ({ token, direction, css, description, demoBackgroun
 <strong>⚠️ React Native 호환성</strong>: React Native는 네이티브 그라데이션을 지원하지 않습니다. 사용하려면 <code>expo-linear-gradient</code>를 설치하세요(<code>npx expo install expo-linear-gradient</code>). <code>gradientTokensV2.whTopdown</code>의 <code>colors</code>/<code>locations</code>/<code>start</code>/<code>end</code> 필드를 그대로 props로 전달하면 됩니다.
 </div>
 
-## 사용 예시
+## 사용 예시 (React Native + expo-linear-gradient)
 
-### React Native (expo-linear-gradient)
 ```typescript
 import { LinearGradient } from 'expo-linear-gradient';
 import { gradientTokensV2 } from '@/tokens/theme';
@@ -162,15 +161,6 @@ function ScrollFade() {
     />
   );
 }
-```
-
-### Web (Storybook 등)
-```typescript
-import { gradientTokensV2 } from '@/tokens/theme';
-
-const fadeStyle = {
-  background: gradientTokensV2.whRight.css,
-};
 ```
 
 </div>
