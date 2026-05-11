@@ -3,21 +3,21 @@
 바이오컴 디자인 시스템의 변경 이력입니다.
 
 ---
-\
-## v2.7.0 (2026-05-11)\
-\
-### Added\
-\
-\
-\
----
-\
-## v2.6.0 (2026-05-11)\
-\
-### Added\
-\
-\
-\
+
+## v2.7.0 (2026-05-11)
+
+> `screenMargin.compact (12px)` 제거. Figma "4. units" 신규 spec에서 미문서화 + 컴포넌트 사용처 0건 확인됨.
+
+### Removed
+
+- **`theme.ts` `screenMargin.compact: 12`** — Figma 미문서화, `src/` `stories/` 전체 grep 결과 사용처 0건
+- **`theme.ts` `spacingFlat.screenMarginCompact`** — 위 항목 참조 동시 제거 (TS 정합)
+
+### ⚠️ 미결 / 미수정
+
+- **디자이너 확인 필요**: Figma 미문서화가 의도적 제거인지 단순 누락인지 확정 필요 (사용처 0건이라 즉시 제거해도 영향 없음)
+- **`stories/GridTokens.mdx:261`**: Screen Margin 표에 `screenMargin.compact` 행이 docs로 남아있음 (dead token 노출). 별도 정리 권장
+
 ---
 
 ## v2.6.0 (2026-05-11)
