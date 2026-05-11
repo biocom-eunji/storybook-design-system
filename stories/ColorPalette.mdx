@@ -103,12 +103,57 @@ export const GradientCard = ({ token, direction, css, description }) => {
   );
 };
 
+export const ShadowCard = ({ label, role, desc, css, opacity, offsetY, blur, spread, isInverted }) => (
+  <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'stretch', flex: '1 1 220px', minWidth: 220 }}>
+    <div style={{
+      backgroundColor: '#FFFFFF',
+      borderRadius: 16,
+      padding: '32px 24px',
+      display: 'flex',
+      flexDirection: 'column',
+      alignItems: 'center',
+      justifyContent: 'center',
+      gap: 6,
+      boxShadow: css,
+      marginBottom: isInverted ? 24 : 16,
+      marginTop: isInverted ? 24 : 16,
+    }}>
+      <span style={{ fontSize: 18, fontWeight: 600, color: '#212126' }}>{label}</span>
+      {role && <span style={{ fontSize: 13, color: '#70737D', fontWeight: 500 }}>{role}</span>}
+      <span style={{ fontSize: 12, color: '#999CA3', textAlign: 'center', maxWidth: 164, lineHeight: 1.4 }}>{desc}</span>
+    </div>
+    <div style={{ fontSize: 11, color: '#70737C', fontFamily: 'monospace', lineHeight: 1.6, padding: '8px 12px', background: '#F7F8F9', borderRadius: 8 }}>
+      <div>opacity: {opacity}</div>
+      <div>offsetY: {offsetY}</div>
+      <div>blur: {blur}</div>
+      <div>spread: {spread}</div>
+    </div>
+  </div>
+);
+
+export const ShadowSpecRow = ({ level, color, offset, opacity, radius, spread, elevation, usage }) => (
+  <tr>
+    <td><code>{level}</code></td>
+    <td><code>{color}</code></td>
+    <td>{offset}</td>
+    <td>{opacity}</td>
+    <td>{radius}</td>
+    <td>{spread}</td>
+    <td>{elevation}</td>
+    <td>{usage}</td>
+  </tr>
+);
+
 <style>
   {`
     .color-page { max-width: 960px; margin: 0 auto; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; }
     .color-page h2 { font-size: 28px; font-weight: 700; color: #171719; margin: 0 0 8px; padding-bottom: 12px; border-bottom: 2px solid #22C3BC; }
     .color-page h3 { font-size: 18px; }
     .color-page > p.lead { font-size: 15px; color: #5A5C63; margin: 0 0 24px; line-height: 1.6; }
+    .color-page table.spec-table { width: 100%; border-collapse: collapse; margin: 12px 0 24px; font-size: 13px; }
+    .color-page table.spec-table th { text-align: left; padding: 10px 12px; background: #F7F8F9; border-bottom: 2px solid #E1E2E4; font-weight: 600; color: #37383C; }
+    .color-page table.spec-table td { padding: 10px 12px; border-bottom: 1px solid #E1E2E4; color: #5A5C63; }
+    .color-page table.spec-table code { background: #F0ECFE; padding: 1px 6px; border-radius: 4px; color: #2907B1; font-size: 12px; }
     .section-divider { border: none; border-top: 1px solid #E1E2E4; margin: 16px 0 40px; }
   `}
 </style>
@@ -154,15 +199,6 @@ export const GradientCard = ({ token, direction, css, description }) => {
 <hr className="section-divider" />
 
 ## Semantic Colors
-
-<UsageNote>
-  Semantic 스케일은 모두 <strong>50번이 가장 옅은 색</strong>입니다 (배경/halo 용도). 강한 색이 필요하면:
-  <ul style={{ margin: '6px 0 0', paddingLeft: 20 }}>
-    <li><code>red500</code> (#D92020) — 에러 강조</li>
-    <li><code>yellow300</code> (#FFCE00) — caution 강조</li>
-    <li><code>orange400</code> (#F67900) — warning 강조</li>
-  </ul>
-</UsageNote>
 
 <PaletteRow title="Semantic / Green" description="성공, 완료, 긍정적 피드백">
   <Swatch token="50" hex="#E9FBF5" />
@@ -299,6 +335,83 @@ export const GradientCard = ({ token, direction, css, description }) => {
   <Swatch token="800" hex="#303919" />
   <Swatch token="900" hex="#202610" />
 </PaletteRow>
+
+<hr className="section-divider" />
+
+## Shadow
+
+<p style={{ fontSize: 13, color: '#70737C', margin: '0 0 16px' }}>컴포넌트의 깊이감을 표현하는 4단계 그림자 토큰. Figma DROP_SHADOW 효과를 1:1 매핑하며, color에 alpha 포함 8자리 hex(<code>#00000014</code> 등)와 <code>spread</code> 필드를 보존합니다. <code>shadowTokensV2.level{`{1|2|3|4}`}</code>로 접근.</p>
+
+<div style={{ display: 'flex', flexWrap: 'wrap', gap: 16, marginBottom: 24 }}>
+  <ShadowCard
+    label="Level 1"
+    role="Subtle"
+    desc="카드, 버튼 hover, 가벼운 고도감"
+    css="0px 0px 4px 0px rgba(0,0,0,0.08)"
+    opacity="0.08"
+    offsetY="0"
+    blur="4"
+    spread="0"
+  />
+  <ShadowCard
+    label="Level 2"
+    role="Medium"
+    desc="플로팅 요소, 드롭다운, 호버 카드"
+    css="0px 2px 8px 4px rgba(0,0,0,0.1)"
+    opacity="0.10"
+    offsetY="2"
+    blur="8"
+    spread="4"
+  />
+  <ShadowCard
+    label="Level 3"
+    role="Strong"
+    desc="모달"
+    css="0px 4px 16px 8px rgba(0,0,0,0.15)"
+    opacity="0.15"
+    offsetY="4"
+    blur="16"
+    spread="8"
+  />
+  <ShadowCard
+    label="Level 4"
+    role="Inverted"
+    desc="bottom sheet (위로 향한 그림자)"
+    css="0px -4px 16px 4px rgba(0,0,0,0.1)"
+    opacity="0.10"
+    offsetY="-4"
+    blur="16"
+    spread="4"
+    isInverted
+  />
+</div>
+
+### Spec Table
+
+<table className="spec-table">
+  <thead>
+    <tr>
+      <th>level</th>
+      <th>color</th>
+      <th>offset (x, y)</th>
+      <th>opacity</th>
+      <th>blur (radius)</th>
+      <th>spread</th>
+      <th>elevation</th>
+      <th>용도</th>
+    </tr>
+  </thead>
+  <tbody>
+    <ShadowSpecRow level="level1" color="#00000014" offset="0, 0" opacity="0.08" radius="4" spread="0" elevation="1" usage="카드, 버튼 hover" />
+    <ShadowSpecRow level="level2" color="#0000001A" offset="0, 2" opacity="0.10" radius="8" spread="4" elevation="4" usage="플로팅 요소, 드롭다운" />
+    <ShadowSpecRow level="level3" color="#00000026" offset="0, 4" opacity="0.15" radius="16" spread="8" elevation="8" usage="모달" />
+    <ShadowSpecRow level="level4" color="#0000001A" offset="0, -4" opacity="0.10" radius="16" spread="4" elevation="8" usage="bottom sheet" />
+  </tbody>
+</table>
+
+<div style={{ background: '#FFF8D8', border: '1px solid #FFCE00', borderRadius: 8, padding: '12px 16px', marginBottom: 8, fontSize: 13, color: '#604600', lineHeight: 1.6 }}>
+  <strong>⚠️ React Native 호환성</strong>: React Native의 shadow API는 <code>spread</code>를 지원하지 않습니다. RN 컴포넌트에서는 <code>shadowTokensV2.{`{level}`}</code>의 <code>offsetX/offsetY</code>, <code>opacity</code>, <code>blur</code>(=<code>shadowRadius</code>), <code>elevation</code>(Android)만 사용하세요. 웹 Storybook은 <code>css</code> 필드로 spread 포함 box-shadow를 렌더링합니다.
+</div>
 
 <hr className="section-divider" />
 
