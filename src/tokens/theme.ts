@@ -736,7 +736,6 @@ export type GradientTokensV2 = typeof gradientTokensV2;
 /** 화면 좌우 마진 토큰 */
 export const screenMargin = {
   default: 16,
-  compact: 12,
   wide: 20,
 } as const;
 
@@ -1029,7 +1028,6 @@ export const spacingFlat = {
 
   // 화면 여백
   screenMarginDefault: screenMargin.default,
-  screenMarginCompact: screenMargin.compact,
   screenMarginWide: screenMargin.wide,
 
   // Button
