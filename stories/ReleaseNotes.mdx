@@ -421,6 +421,7 @@ export const LINK = {
   ColorTokensV2:    `${SB}primitives-palette-v2-0-color-tokens--docs`,
   ShadowTokensV2:   `${SB}primitives-palette-v2-2-0-shadow-tokens--docs`,
   DimmedLayerTokensV2: `${SB}primitives-palette-v2-3-0-dimmed-layer-tokens--docs`,
+  GradientTokensV2: `${SB}primitives-palette-v2-5-0-gradient-tokens--docs`,
   // Getting Started
   Guide:            `${SB}getting-started-guide--docs`,
   BrandLogo:        `${SB}getting-started-brand-logo--docs`,
@@ -454,6 +455,64 @@ export const LINK = {
 </div>
 
 {/* ══════════════════════════════════════════════════════ */}
+{/* v2.5.0 — 2026-05-11                                   */}
+{/* ══════════════════════════════════════════════════════ */}
+
+<div className="date-section">
+<div className="date-header"><span className="date-label">2026-05-11</span><span className="date-meta">1 릴리즈</span></div>
+
+<div className="version-header">
+  <span className="version-badge minor">v2.5.0</span>
+  <span className="version-date">2026-05-11</span>
+</div>
+
+<details className="toggle-card" open>
+  <summary>
+    <CaretIcon />
+    <span className="emoji">✨</span>
+    <span className="title">Features</span>
+    <span className="count">3</span>
+  </summary>
+  <div className="toggle-body">
+    <div className="component-tags">
+      <span className="component-tag new">GradientTokensV2</span>
+    </div>
+
+    <div className="change-item">
+      <span className="name"><a href={LINK.GradientTokensV2}>v2.5.0 Gradient Tokens</a></span>
+      <span className="desc">Figma "6. gradient" 캔버스 기반 그라데이션 토큰 신규. <strong>2종</strong>: <code>whTopdown</code>(수직 위→아래) + <code>whRight</code>(가로 왼쪽→오른쪽). 모두 <code>rgba(255,255,255,0)</code> → <code>#FFFFFF</code> 페이드. 스크롤 영역 끝부분 fade-out 효과용</span>
+    </div>
+    <div className="change-item">
+      <span className="name-plain">expo-linear-gradient 호환 구조</span>
+      <span className="desc">각 토큰에 <code>colors</code>/<code>locations</code>/<code>start</code>/<code>end</code> 필드 (RN <code>expo-linear-gradient</code> props 직접 매핑) + <code>css</code> 필드 (web background 속성용)</span>
+    </div>
+    <div className="change-item">
+      <span className="name-plain">figma-tokens.json Primitives.gradient</span>
+      <span className="desc">style-dictionary <code>gradient</code> 타입 — angle + stops 배열 구조 (Figma Variables Studio import 호환)</span>
+    </div>
+  </div>
+</details>
+
+<details className="toggle-card" open>
+  <summary>
+    <CaretIcon />
+    <span className="emoji">⚠️</span>
+    <span className="title">Platform Notes</span>
+    <span className="count">1</span>
+  </summary>
+  <div className="toggle-body">
+    <div className="change-item">
+      <span className="name-plain">React Native 사용 시 expo-linear-gradient 필요</span>
+      <span className="desc">RN은 네이티브 linear-gradient 미지원. <code>npx expo install expo-linear-gradient</code> 후 토큰의 <code>colors</code>/<code>locations</code>/<code>start</code>/<code>end</code> 필드를 <code>{`<LinearGradient />`}</code> props로 매핑</span>
+    </div>
+  </div>
+</details>
+
+</div>
+
+<hr className="date-divider" />
+
+{/* ══════════════════════════════════════════════════════ */}
 {/* v2.4.0 — 2026-05-08                                   */}
 {/* ══════════════════════════════════════════════════════ */}
 
@@ -465,7 +524,7 @@ export const LINK = {
   <span className="version-date">2026-05-08</span>
 </div>
 
-<details className="toggle-card" open>
+<details className="toggle-card">
   <summary>
     <CaretIcon />
     <span className="emoji">♻️</span>
@@ -494,7 +553,7 @@ export const LINK = {
   </div>
 </details>
 
-<details className="toggle-card" open>
+<details className="toggle-card">
   <summary>
     <CaretIcon />
     <span className="emoji">⚠️</span>

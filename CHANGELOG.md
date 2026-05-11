@@ -3,13 +3,28 @@
 바이오컴 디자인 시스템의 변경 이력입니다.
 
 ---
-\
-## v2.5.0 (2026-05-08)\
-\
-### Added\
-\
-\
-\
+
+## v2.5.0 (2026-05-11)
+
+> Figma "6. gradient" 캔버스 기반 그라데이션 토큰 추가. 스크롤 영역 페이드 효과용. **Breaking Changes 없음 (additive only)**.
+
+### Added
+
+- **`gradientTokensV2`** namespace export (`theme.ts`) — 2개 토큰
+  - **`whTopdown`** — 위→아래 흰색 페이드 (수직 스크롤 상단 fade-out)
+  - **`whRight`** — 왼쪽→오른쪽 흰색 페이드 (가로 스크롤 우측 fade-out)
+  - 각 토큰은 `colors`/`locations`/`start`/`end` (expo-linear-gradient 호환) + `css` (web용) 필드 동봉
+- **`figma-tokens.json` `Primitives.gradient`** — type `gradient`로 2개 토큰 (stops 배열 + angle)
+- **Storybook Gradient Tokens v2 페이지** (`stories/GradientTokensV2.mdx`) — 체커 배경 위 페이드 시각 카드 + Spec Table + RN/Web 사용 예시 (expo-linear-gradient 가이드 포함)
+
+### React Native 호환성 노트
+
+React Native는 네이티브 linear-gradient 미지원. 사용 시 `expo-linear-gradient` 설치 필요:
+```bash
+npx expo install expo-linear-gradient
+```
+토큰의 `colors`/`locations`/`start`/`end` 필드를 그대로 props로 매핑.
+
 ---
 
 ## v2.4.0 (2026-05-08)
