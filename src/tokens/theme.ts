@@ -482,7 +482,11 @@ export const textStyle = {
   body1:    { fontSize: 16, fontWeight: '400' as const, lineHeight: 24, letterSpacing: 0.09 },
   /** 15px · Regular · 22px — 보조 본문, 세부 설명 */
   body2:    { fontSize: 15, fontWeight: '400' as const, lineHeight: 22, letterSpacing: 0.14 },
-  /** 16px · Regular · 24px — 본문 강조, Body 1 대체 스타일 */
+  /**
+   * 16px · Regular · 24px — 본문 강조, Body 1 대체 스타일
+   * @deprecated v2.6.0: `body1`과 동일 값입니다. `textStyleV2.body1` 또는 기존 `textStyle.body1`을 사용하세요.
+   *  Figma v2.6.0 타이포 토큰에서 `body3` 대응 항목이 사라졌습니다.
+   */
   body3:    { fontSize: 16, fontWeight: '400' as const, lineHeight: 24, letterSpacing: 0.09 },
   /** 14px · Medium · 20px — 버튼 텍스트, 탭 메뉴, 클릭 요소 */
   label1:   { fontSize: 14, fontWeight: '500' as const, lineHeight: 20, letterSpacing: 0.2 },
@@ -491,6 +495,52 @@ export const textStyle = {
   /** 12px · Regular · 16px — 캡션, 보조 설명, 날짜 등 작은 정보 */
   caption:  { fontSize: 12, fontWeight: '400' as const, lineHeight: 16, letterSpacing: 0.3 },
 } as const;
+
+/**
+ * v2.6.0 타이포그래피 토큰 — Figma Typography 캔버스 미러링 (13개 스타일)
+ *
+ * - Pretendard Variable 기반, 4단계 weight (700/600/500/400)
+ * - 기존 `textStyle`과 별개 export — 기존 사용처 무수정 유지
+ * - 네이밍 변경: heading → headline1, headline → headline2, label1 → label2, label2 → label3
+ * - 신규 토큰: body1Str, body2Str, label1 (모두 SemiBold 강조)
+ * - `caption` weight 400 → 500, `body2` lineHeight 22 → 22.5, `label2/3` letterSpacing 제거
+ *
+ * 사용처 마이그레이션은 별도 PR로 진행 예정.
+ *
+ * @see src/tokens/figma-tokens.json Primitives.typographyV2
+ * @since v2.6.0 (2026-05-11)
+ */
+export const textStyleV2 = {
+  /** 32px · Bold · 44px (1.375) · -0.81 — 서비스 핵심 타이틀, 온보딩 메인 문구 */
+  title1:    { fontSize: 32, fontWeight: '700' as const, lineHeight: 44,   letterSpacing: -0.81 },
+  /** 28px · Bold · 38px (1.358) · -0.66 — 페이지 상단 헤더, 주요 섹션 대제목 */
+  title2:    { fontSize: 28, fontWeight: '700' as const, lineHeight: 38,   letterSpacing: -0.66 },
+  /** 24px · Bold · 32px (1.334) · -0.55 — 카드/모달 타이틀, 하위 페이지 대제목 */
+  title3:    { fontSize: 24, fontWeight: '700' as const, lineHeight: 32,   letterSpacing: -0.55 },
+  /** 20px · SemiBold · 28px (1.4) · -0.24 — 소제목, 섹션 구분 (v1 heading 대응) */
+  headline1: { fontSize: 20, fontWeight: '600' as const, lineHeight: 28,   letterSpacing: -0.24 },
+  /** 17px · SemiBold · 24px (1.412) · 0 — 리스트 헤더, 탭 섹션 제목 (v1 headline 대응) */
+  headline2: { fontSize: 17, fontWeight: '600' as const, lineHeight: 24,   letterSpacing: 0 },
+  /** 16px · SemiBold · 24px (1.5) · 0.09 — Body 1 강조 변형 (신규) */
+  body1Str:  { fontSize: 16, fontWeight: '600' as const, lineHeight: 24,   letterSpacing: 0.09 },
+  /** 16px · Regular · 24px (1.5) · 0.09 — 일반 본문, 상세 설명 */
+  body1:     { fontSize: 16, fontWeight: '400' as const, lineHeight: 24,   letterSpacing: 0.09 },
+  /** 15px · SemiBold · 22.5px (1.5) · 0.14 — Body 2 강조 변형 (신규) */
+  body2Str:  { fontSize: 15, fontWeight: '600' as const, lineHeight: 22.5, letterSpacing: 0.14 },
+  /** 15px · Regular · 22.5px (1.5) · 0.14 — 보조 본문, 세부 설명 */
+  body2:     { fontSize: 15, fontWeight: '400' as const, lineHeight: 22.5, letterSpacing: 0.14 },
+  /** 16px · SemiBold · 23px (1.44) · 0 — 가장 큰 label 사이즈 (신규) */
+  label1:    { fontSize: 16, fontWeight: '600' as const, lineHeight: 23,   letterSpacing: 0 },
+  /** 14px · Medium · 20px (1.44) · 0 — 버튼 텍스트, 탭 메뉴 (v1 label1 대응) */
+  label2:    { fontSize: 14, fontWeight: '500' as const, lineHeight: 20,   letterSpacing: 0 },
+  /** 13px · Medium · 19px (1.44) · 0 — 소형 버튼, 태그, 필터 칩 (v1 label2 대응) */
+  label3:    { fontSize: 13, fontWeight: '500' as const, lineHeight: 19,   letterSpacing: 0 },
+  /** 12px · Medium · 16px (1.334) · 0.3 — 캡션, 보조 설명 (weight 400 → 500) */
+  caption:   { fontSize: 12, fontWeight: '500' as const, lineHeight: 16,   letterSpacing: 0.3 },
+} as const;
+
+export type TextStyleV2 = typeof textStyleV2;
+export type TextStyleV2Key = keyof typeof textStyleV2;
 
 // ─── Spacing & Radius ────────────────────────────────────
 
