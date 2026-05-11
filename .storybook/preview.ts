@@ -32,7 +32,7 @@ const preview: Preview = {
       storySort: {
         order: [
           'Getting Started', ['Guide', 'Introduction', 'Release Notes', 'Naming Convention', 'Brand Logo'],
-          'Primitives Palette', ['Color', 'Grid', 'Opacity', 'Shadow', 'Gradient'],
+          'Primitives Palette', ['Color', 'Grid', 'Opacity', 'Shadow'],
           'Semantics Token', ['Color', 'Typography', 'Spacing', 'Border Radius', 'Icon'],
           'Actions', ['Button', 'TextButton', 'FAB'],
           'Input', ['TextField', 'TextArea', 'SearchBar', 'DatePicker', 'TimePicker', 'Stepper', 'LikertScale', 'Checkbox', 'Radio', 'RadioCard', 'Switch', 'Chip', 'SegmentedControl'],
