@@ -1,5 +1,6 @@
 import React from 'react';
 import { View } from 'react-native';
+import Svg, { Path, Polyline } from 'react-native-svg';
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import { Button } from '../src/components/Button';
 import {
@@ -7,6 +8,24 @@ import {
 } from './storyHelpers';
 import { TokenSpecTable } from '../src/storybook-components/TokenSpecTable';
 import { buttonToken, spacing, textStyleV2 } from '../src/tokens/theme';
+
+// ─── Inline icons (Figma icon size 16) ────────────────────────
+
+const PlusIcon = ({ color = '#000', size = 16 }: { color?: string; size?: number }) => (
+  <Svg width={size} height={size} viewBox="0 0 24 24" fill="none">
+    <Path d="M12 5v14M5 12h14" stroke={color} strokeWidth={2} strokeLinecap="round" />
+  </Svg>
+);
+const ArrowRight = ({ color = '#000', size = 16 }: { color?: string; size?: number }) => (
+  <Svg width={size} height={size} viewBox="0 0 24 24" fill="none">
+    <Path d="M5 12h14M13 6l6 6-6 6" stroke={color} strokeWidth={2} strokeLinecap="round" strokeLinejoin="round" />
+  </Svg>
+);
+const CheckIcon = ({ color = '#000', size = 16 }: { color?: string; size?: number }) => (
+  <Svg width={size} height={size} viewBox="0 0 24 24" fill="none">
+    <Polyline points="20 6 9 17 4 12" stroke={color} strokeWidth={2.5} strokeLinecap="round" strokeLinejoin="round" />
+  </Svg>
+);
 
 // ─── Meta ────────────────────────────────────────────────────
 
@@ -45,6 +64,14 @@ type Story = StoryObj<typeof Button>;
 
 const VARIANTS = ['primary', 'sub', 'outlined', 'outlined-focused'] as const;
 const SIZES = ['small', 'medium', 'large'] as const;
+
+// variant별 현재(default) 라벨 색 — 아이콘도 동일 색으로 동기화
+const VARIANT_LABEL_COLOR: Record<typeof VARIANTS[number], string> = {
+  primary:            buttonToken.color.primary.default.label,
+  sub:                buttonToken.color.sub.default.label,
+  outlined:           buttonToken.color.outlined.default.label,
+  'outlined-focused': buttonToken.color['outlined-focused'].default.label,
+};
 
 // ─── 1. Playground ───────────────────────────────────────────
 
@@ -142,7 +169,77 @@ export const States: Story = {
   },
 };
 
-// ─── 5. 디자인 스펙 ──────────────────────────────────────────
+// ─── 5. With Icon ────────────────────────────────────────────
+
+export const WithIcon: Story = {
+  name: 'With Icon',
+  render: () => {
+    // Figma SPEC (node 166:4647): icon size 16 공통, 4 variant × 3 icon 패턴(leading / trailing / both) × 3 size
+    const ICON_PATTERNS = [
+      { key: 'leading',  label: 'leftIcon',           leadingFactory: PlusIcon,  trailingFactory: null },
+      { key: 'trailing', label: 'rightIcon',          leadingFactory: null,      trailingFactory: ArrowRight },
+      { key: 'both',     label: 'left + right Icon',  leadingFactory: CheckIcon, trailingFactory: ArrowRight },
+    ] as const;
+
+    return (
+      <View style={{ gap: spacing['3xlarge'] }}>
+        <Section
+          title="With Icon"
+          description="Figma 'SPEC: 아이콘이 있을 경우' (node 166:4647) — icon size 16 / gap large=6, medium=small=4. variant별 라벨 색에 아이콘 색 동기화."
+        >
+          {VARIANTS.map((v) => {
+            const iconColor = VARIANT_LABEL_COLOR[v];
+            return (
+              <View key={v} style={{ gap: spacing.small, marginBottom: spacing.xlarge }}>
+                <StateLabel>{v}</StateLabel>
+                {ICON_PATTERNS.map((p) => (
+                  <View key={p.key} style={{ marginBottom: spacing.medium }}>
+                    <StateLabel>{p.label}</StateLabel>
+                    <Row gap={spacing.medium} align="center">
+                      {SIZES.map((s) => (
+                        <Col key={s} gap={spacing.xsmall}>
+                          <StateLabel>{s}</StateLabel>
+                          <Button
+                            label="버튼"
+                            variant={v}
+                            size={s}
+                            leftIcon={p.leadingFactory ? <p.leadingFactory color={iconColor} size={buttonToken.size[s].iconSize} /> : undefined}
+                            rightIcon={p.trailingFactory ? <p.trailingFactory color={iconColor} size={buttonToken.size[s].iconSize} /> : undefined}
+                          />
+                        </Col>
+                      ))}
+                    </Row>
+                  </View>
+                ))}
+              </View>
+            );
+          })}
+        </Section>
+
+        <Section title="사용 예시 코드" badge="개발">
+          <CodeBlock
+            title="Button + leftIcon / rightIcon (Figma BOOLEAN property: left icon#175:5, right icon#175:8)"
+            code={`import { Icon } from '@/components/Icon';
+
+<Button label="추가" leftIcon={<Icon name="plus" size={16} />} />
+<Button label="다음" rightIcon={<Icon name="arrow-right" size={16} />} />
+<Button label="확인" leftIcon={<Icon name="check" size={16} />} rightIcon={<Icon name="arrow-right" size={16} />} />`}
+          />
+        </Section>
+      </View>
+    );
+  },
+  parameters: {
+    docs: {
+      description: {
+        story:
+          '**Figma 매핑**: `left icon#175:5` / `right icon#175:8` BOOLEAN property. icon size는 모든 size에서 16 공통. variant별 label 색을 아이콘 stroke에 동기화하면 자연스러움.',
+      },
+    },
+  },
+};
+
+// ─── 6. 디자인 스펙 ──────────────────────────────────────────
 
 export const DesignSpec: Story = {
   name: '디자인 스펙',
