@@ -425,8 +425,20 @@ export const palette = {
 
 // ─── Typography ──────────────────────────────────────────
 
+/**
+ * Pretendard 폰트 패밀리 (OFL 1.1 / orioncactus/pretendard)
+ *
+ * - 네이티브: `App.tsx`의 `useFonts` + `app.json`의 `expo-font` plugin으로 로딩
+ * - 웹 Storybook: `.storybook/global.css`의 `@font-face`로 PretendardVariable 로딩
+ *
+ * weight별 family를 분리 노출 — iOS는 fontWeight만으로 두께 분기가 일정치 않으므로
+ * 실제 사용 시 family + weight를 함께 지정하는 게 안전.
+ */
 export const fontFamily = {
-  base: 'System',
+  base:     'Pretendard',
+  medium:   'Pretendard-Medium',
+  semibold: 'Pretendard-SemiBold',
+  bold:     'Pretendard-Bold',
 } as const;
 
 export const fontSize = {
@@ -555,6 +567,17 @@ export const spacing = {
   '4xlarge': 48,
 } as const;
 
+/**
+ * @deprecated v3.0: Figma "4. units / radius" 명세에 맞춰 `radiusTokensV2`로 이전 권장.
+ *
+ * 이름 매핑 변경:
+ *   radius.medium (12) → radiusTokensV2.regular
+ *   radius.large  (16) → radiusTokensV2.medium
+ *   radius.xlarge (24) → radiusTokensV2.large
+ *   (신규 추가: radiusTokensV2.xlarge = 32)
+ *
+ * 기존 컴포넌트 호환을 위해 객체 유지. 신규 코드는 `radiusTokensV2` 사용.
+ */
 export const radius = {
   xsmall: 4,
   small: 8,
@@ -562,6 +585,93 @@ export const radius = {
   large: 16,
   xlarge: 24,
   full: 9999,
+} as const;
+
+/**
+ * Radius 토큰 — Figma "4. units / radius" 1:1 매핑 (7단계).
+ *
+ * 모서리 반경 (border radius).
+ */
+export const radiusTokensV2 = {
+  xsmall:  4,
+  small:   8,
+  regular: 12,
+  medium:  16,
+  large:   24,
+  xlarge:  32,
+  full:    9999,
+} as const;
+
+/**
+ * gap·margin·padding 토큰 — Figma "4. units / gap, margin, padding" 1:1 매핑.
+ *
+ * - `gap.inner`: 버튼·카드 등 컴포넌트 **내부** 갭/패딩/마진 (8단계).
+ * - `gap.outer`: 섹션 등 컴포넌트 **외부** 갭/마진 (5단계).
+ */
+export const gap = {
+  inner: {
+    '3xsmall': 4,
+    '2xsmall': 6,
+    xsmall:    8,
+    small:     12,
+    medium:    16,
+    large:     20,
+    xlarge:    24,
+    '2xlarge': 32,
+  },
+  outer: {
+    xsmall: 16,
+    small:  24,
+    medium: 32,
+    large:  40,
+    xlarge: 48,
+  },
+} as const;
+
+/**
+ * Line 토큰 — Figma "4. units / line" 1:1 매핑.
+ *
+ * 보더·언더라인·아웃라인 두께 (px). `hairline`은 device pixel ratio 기반 특수값.
+ */
+export const line = {
+  /** Device pixel ratio 기준의 1물리픽셀. CSS는 일반적으로 1px 또는 0.5px로 표현. */
+  hairline: 'hairline',
+  regular:  1,
+  medium:   1.5,
+  bold:     2,
+  heavy:    6,
+  black:    12,
+} as const;
+
+/**
+ * 컴포넌트 높이 토큰 — Figma "4. units / 콘텐츠, 컴포넌트 높이" 1:1 매핑
+ *
+ * 버튼·탭·카드 등 모든 컴포넌트 높이는 이 스케일에서 선택. 7단계.
+ *
+ * @see Figma node 307:6148
+ */
+export const height = {
+  '2xsmall': 24,
+  xsmall:    32,
+  small:     36,
+  medium:    40,
+  large:     44,
+  xlarge:    52,
+  '2xlarge': 56,
+} as const;
+
+/**
+ * 아이콘 크기 토큰 — Figma "4. units / 아이콘 크기" 1:1 매핑
+ *
+ * 4단계. Icon 컴포넌트의 size prop에 사용.
+ *
+ * @see Figma node 307:6382
+ */
+export const icon = {
+  small:  16,
+  medium: 20,
+  large:  24,
+  xlarge: 32,
 } as const;
 
 // ─── Shadow & Elevation ─────────────────────────────────
@@ -915,86 +1025,150 @@ export type SemanticColor = typeof semanticColor;
 
 // ─── Component Tokens ────────────────────────────────────
 
-/** Button: variant = solid | outlined, color = primary | assistive */
+/**
+ * Button — Figma "Button" 컴포넌트 1:1 매핑 (v3.0)
+ *
+ * Figma component sets:
+ *   - Btn:          primary∈{yes,no} · sub∈{yes,no}
+ *   - Btn-outlined: focused∈{yes,no} · sub∈{yes,no}
+ *
+ * 4개 named variant(`primary` / `sub` / `outlined` / `outlined-focused`)를
+ * 단일 `variant` prop union으로 표현합니다.
+ *
+ * size: small / medium / large — Figma SPEC 1:1
+ *   small  : height 36 · padding 12 · radius 8  · gap 4 · iconSize 16 · label3 (13px)
+ *   medium : height 44 · padding 16 · radius 8  · gap 4 · iconSize 16 · label2 (14px)
+ *   large  : height 52 · padding 24 · radius 12 · gap 6 · iconSize 16 · label1 (16px)
+ *
+ * @breaking-change v3.0 (2026-05-12):
+ *   - `colorScheme` prop 제거 → variant union으로 통합
+ *   - `loading` prop 제거 → Figma 미정의
+ *   - size별 radius/iconSize/fontSize 모두 변경 (Figma 일치)
+ *   마이그레이션:
+ *     <Button variant="solid" colorScheme="primary" />      → <Button variant="primary" />
+ *     <Button variant="solid" colorScheme="assistive" />    → <Button variant="sub" />
+ *     <Button variant="outlined" colorScheme="primary" />   → <Button variant="outlined-focused" />
+ *     <Button variant="outlined" colorScheme="assistive" /> → <Button variant="outlined" />
+ */
 export const buttonToken = {
   size: {
-    small:  { height: 36, paddingHorizontal: 14, fontSize: fontSize.small, iconSize: 16, radius: radius.small },
-    medium: { height: 44, paddingHorizontal: 18, fontSize: fontSize.medium, iconSize: 20, radius: radius.medium },
-    large:  { height: 52, paddingHorizontal: 24, fontSize: fontSize.large, iconSize: 24, radius: radius.medium },
+    small:  { height: 36, paddingHorizontal: 12, gap: 4, radius: 8,  iconSize: icon.small, textStyle: textStyleV2.label3 },
+    medium: { height: 44, paddingHorizontal: 16, gap: 4, radius: 8,  iconSize: icon.small, textStyle: textStyleV2.label2 },
+    large:  { height: 52, paddingHorizontal: 24, gap: 6, radius: 12, iconSize: icon.small, textStyle: textStyleV2.label1 },
   },
+  /**
+   * 4 variant × 3 state 컬러 매트릭스 — Figma 명세 1:1
+   *   variant: 'primary' | 'sub' | 'outlined' | 'outlined-focused'
+   *   state:   'default' | 'pressed' | 'disabled'
+   *
+   * TODO(figma-spec): pressed/disabled state는 Figma 미정의. mint/neutral 스케일 추론값.
+   *   디자이너 컨펌 후 v3.1에서 확정 예정.
+   */
   color: {
     primary: {
-      solid: {
-        background: mint[45],
-        content: coolNeutral[100],
-        backgroundPressed: mint[30],
-        backgroundHovered: mint[40],
-        backgroundDisabled: coolNeutral[96],
-        contentDisabled: coolNeutral[80],
-      },
-      outlined: {
-        background: 'transparent',
-        content: mint[45],
-        border: mint[45],
-        backgroundPressed: mint[99],
-        backgroundHovered: mint[99],
-        backgroundDisabled: 'transparent',
-        contentDisabled: coolNeutral[80],
-        borderDisabled: coolNeutral[96],
-      },
+      default:  { container: colorTokensV2.Mono.mint[400], label: colorTokensV2.Mono.WH },
+      pressed:  { container: colorTokensV2.Mono.mint[500], label: colorTokensV2.Mono.WH },
+      disabled: { container: colorTokensV2.Mono.mint[300], label: colorTokensV2.Mono.mint[100] },
     },
-    assistive: {
-      solid: {
-        background: semanticColor.backgroundDisabled,
-        content: coolNeutral[17],
-        backgroundPressed: coolNeutral[90],
-        backgroundHovered: coolNeutral[95],
-        backgroundDisabled: semanticColor.backgroundDisabled,
-        contentDisabled: coolNeutral[80],
-      },
-      outlined: {
-        background: 'transparent',
-        content: semanticColor.textPrimary,
-        border: coolNeutral[90],
-        backgroundPressed: coolNeutral[97],
-        backgroundHovered: coolNeutral[99],
-        backgroundDisabled: 'transparent',
-        contentDisabled: coolNeutral[80],
-        borderDisabled: coolNeutral[96],
-      },
+    sub: {
+      default:  { container: colorTokensV2.Mono.neutral[50],  label: colorTokensV2.Mono.neutral[800] },
+      pressed:  { container: colorTokensV2.Mono.neutral[100], label: colorTokensV2.Mono.neutral[800] },
+      disabled: { container: colorTokensV2.Mono.neutral[50],  label: colorTokensV2.Mono.neutral[300] },
+    },
+    outlined: {
+      default:  { container: colorTokensV2.Mono.WH,           label: colorTokensV2.Mono.neutral[800], border: colorTokensV2.Mono.neutral[100], borderWidth: line.regular },
+      pressed:  { container: colorTokensV2.Mono.neutral[50],  label: colorTokensV2.Mono.neutral[800], border: colorTokensV2.Mono.neutral[100], borderWidth: line.regular },
+      disabled: { container: colorTokensV2.Mono.WH,           label: colorTokensV2.Mono.neutral[300], border: colorTokensV2.Mono.neutral[100], borderWidth: line.regular },
+    },
+    'outlined-focused': {
+      default:  { container: colorTokensV2.Mono.WH,           label: colorTokensV2.Mono.mint[400], border: colorTokensV2.Mono.mint[400],    borderWidth: line.medium },
+      pressed:  { container: colorTokensV2.Mono.neutral[50],  label: colorTokensV2.Mono.mint[500], border: colorTokensV2.Mono.mint[500],    borderWidth: line.medium },
+      disabled: { container: colorTokensV2.Mono.WH,           label: colorTokensV2.Mono.neutral[300], border: colorTokensV2.Mono.neutral[200], borderWidth: line.medium },
     },
   },
 } as const;
 
-/** Text Button: 배경색이나 테두리가 없는 버튼 */
+export type ButtonVariantV2 = keyof typeof buttonToken.color;        // 'primary' | 'sub' | 'outlined' | 'outlined-focused'
+export type ButtonSizeV2 = keyof typeof buttonToken.size;            // 'small' | 'medium' | 'large'
+export type ButtonStateV2 = keyof typeof buttonToken.color.primary;  // 'default' | 'pressed' | 'disabled'
+
+/**
+ * Text Button — Figma "text button" 컴포넌트 1:1 매핑 (v3.0)
+ *
+ * Figma component set "Btn-Text" (134:4609):
+ *   variant properties: large∈{yes,no} · medium∈{yes,no} · focused∈{yes,no} · enabled∈{yes,no}
+ *
+ * 노출된 4개 named 조합 → 단일 `variant` union + `size` prop로 압축:
+ *   (large=yes, focused=no, enabled=yes) → variant="default", size="large"
+ *   (large=yes, focused=yes, enabled=no) → variant="focused", size="large"
+ *   (medium=yes, focused=no, enabled=yes) → variant="default", size="medium"
+ *   (medium=yes, focused=yes, enabled=no) → variant="focused", size="medium"
+ *
+ * size: large / medium — Figma SPEC은 단일 column (모든 토큰 동일). large/medium 변종은
+ *  향후 확장을 위해 prop으로 유지하되 현재는 동일 토큰값.
+ *
+ * @breaking-change v3.0 (2026-05-12):
+ *   - `colorScheme` prop 제거 → `variant` union으로 통합
+ *   - `size` 키 변경: small → medium / medium → large
+ *   - `loading` prop 제거 (Figma 미정의)
+ *   - `underlined` prop 신규 (기본 true)
+ *   마이그레이션:
+ *     <TextButton colorScheme="primary" />   → <TextButton variant="focused" />
+ *     <TextButton colorScheme="assistive" /> → <TextButton variant="default" />
+ *     <TextButton size="small" />            → <TextButton size="medium" /> (시각 회귀: body2 → label2)
+ *     <TextButton size="medium" />           → <TextButton size="large" /> (시각 동일: body2 유지)
+ */
 export const textButtonToken = {
   size: {
-    small:  { fontSize: textStyle.label2.fontSize, lineHeight: textStyle.label2.lineHeight, letterSpacing: textStyle.label2.letterSpacing },
-    medium: { fontSize: textStyle.body2.fontSize, lineHeight: textStyle.body2.lineHeight, letterSpacing: textStyle.body2.letterSpacing },
+    /** Figma 측정값: 15px / Regular(400) / lineHeight 22.5 / letterSpacing 0.14 → textStyleV2.body2 */
+    large:  { height: 32, paddingHorizontal: 4, gap: 4, radius: 8, iconSize: icon.small, lineWidth: line.regular, textStyle: textStyleV2.body2 },
+    /** Figma 측정값: 14px / Medium(500) / lineHeight 20 / letterSpacing 0 → textStyleV2.label2 */
+    medium: { height: 32, paddingHorizontal: 4, gap: 4, radius: 8, iconSize: icon.small, lineWidth: line.regular, textStyle: textStyleV2.label2 },
   },
+  /**
+   * 2 variant × 3 state 컬러 매트릭스 — Figma 명세 1:1
+   *   variant: 'default' | 'focused'
+   *   state:   'default' | 'pressed' | 'disabled'
+   *
+   * 각 셀: { label, underline, icon, container }
+   *
+   * TODO(figma-spec): pressed/disabled state는 Figma 미정의. mint/neutral 스케일 추론값.
+   *   디자이너 컨펌 후 v3.1에서 확정 예정.
+   */
   color: {
-    primary: {
-      content: semanticColor.textBrand,           // mint[45]
-      contentPressed: mint[30],                    // palette 직접 참조 (시맨틱 토큰 미존재)
-      contentHovered: mint[40],                    // palette 직접 참조 (시맨틱 토큰 미존재)
-      contentDisabled: semanticColor.textTertiary, // coolNeutral[80]
+    default: {
+      default:  { container: colorTokensV2.Mono.WH,          label: colorTokensV2.Mono.neutral[600], underline: colorTokensV2.Mono.neutral[300], icon: colorTokensV2.Mono.neutral[500] },
+      pressed:  { container: colorTokensV2.Mono.neutral[50], label: colorTokensV2.Mono.neutral[600], underline: colorTokensV2.Mono.neutral[300], icon: colorTokensV2.Mono.neutral[500] },
+      disabled: { container: colorTokensV2.Mono.WH,          label: colorTokensV2.Mono.neutral[300], underline: colorTokensV2.Mono.neutral[200], icon: colorTokensV2.Mono.neutral[300] },
     },
-    assistive: {
-      content: semanticColor.textSecondary,        // coolNeutral[50]
-      contentPressed: coolNeutral[30],             // palette 직접 참조 (시맨틱 토큰 미존재)
-      contentHovered: coolNeutral[40],             // palette 직접 참조 (시맨틱 토큰 미존재)
-      contentDisabled: semanticColor.textTertiary, // coolNeutral[80]
+    focused: {
+      default:  { container: colorTokensV2.Mono.WH,          label: colorTokensV2.Mono.mint[400], underline: colorTokensV2.Mono.mint[400], icon: colorTokensV2.Mono.mint[400] },
+      pressed:  { container: colorTokensV2.Mono.neutral[50], label: colorTokensV2.Mono.mint[500], underline: colorTokensV2.Mono.mint[500], icon: colorTokensV2.Mono.mint[500] },
+      disabled: { container: colorTokensV2.Mono.WH,          label: colorTokensV2.Mono.mint[300], underline: colorTokensV2.Mono.mint[300], icon: colorTokensV2.Mono.mint[300] },
     },
   },
 } as const;
 
-/** Chip: 상호작용을 통해 정보를 분류하거나, 상태를 표시 */
+export type TextButtonVariantV2 = keyof typeof textButtonToken.color;        // 'default' | 'focused'
+export type TextButtonSizeV2 = keyof typeof textButtonToken.size;            // 'large' | 'medium'
+export type TextButtonStateV2 = keyof typeof textButtonToken.color.default;  // 'default' | 'pressed' | 'disabled'
+
+/**
+ * Chip: 상호작용을 통해 정보를 분류하거나, 상태를 표시
+ *
+ * size.{xsmall/small/medium/large}의 height·iconSize는 Figma "4. units" 토큰 alias.
+ * 임의값(28/38/12/14/18)은 가장 가까운 Figma 값으로 자동 스납됨 (동률 시 큰 쪽):
+ *   xsmall = height['2xsmall'](24) · icon.small(16)   [임의 12 → 16, +4]
+ *   small  = height.xsmall(32)     · icon.small(16)   [임의 28 → 32, +4 / 14 → 16, +2]
+ *   medium = height.xsmall(32)     · icon.small(16)   [동일 — small과 height 충돌 허용]
+ *   large  = height.medium(40)     · icon.medium(20)  [임의 38 → 40, +2 / 18 → 20, +2]
+ */
 export const chipToken = {
   size: {
-    xsmall: { height: 24, paddingHorizontal: 8,  fontSize: fontSize.xsmall, iconSize: 12, radius: radius.xsmall },
-    small:  { height: 28, paddingHorizontal: 10, fontSize: fontSize.xsmall, iconSize: 14, radius: radius.small },
-    medium: { height: 32, paddingHorizontal: 12, fontSize: fontSize.small, iconSize: 16, radius: radius.small },
-    large:  { height: 38, paddingHorizontal: 14, fontSize: fontSize.medium, iconSize: 18, radius: radius.medium },
+    xsmall: { height: height['2xsmall'], paddingHorizontal: 8,  fontSize: fontSize.xsmall, iconSize: icon.small,  radius: radius.xsmall },
+    small:  { height: height.xsmall,     paddingHorizontal: 10, fontSize: fontSize.xsmall, iconSize: icon.small,  radius: radius.small },
+    medium: { height: height.xsmall,     paddingHorizontal: 12, fontSize: fontSize.small,  iconSize: icon.small,  radius: radius.small },
+    large:  { height: height.medium,     paddingHorizontal: 14, fontSize: fontSize.medium, iconSize: icon.medium, radius: radius.medium },
   },
   variant: {
     solid: {
