@@ -2,97 +2,117 @@ import React from 'react';
 import {
   Pressable,
   Text,
-  ActivityIndicator,
   StyleSheet,
   type ViewStyle,
   type TextStyle,
   type PressableStateCallbackType,
 } from 'react-native';
-import { buttonToken, fontWeight, textStyle } from '../tokens/theme';
+import {
+  buttonToken,
+  type ButtonVariantV2,
+  type ButtonSizeV2,
+} from '../tokens/theme';
 
-export type ButtonVariant = 'solid' | 'outlined';
-export type ButtonColorScheme = 'primary' | 'assistive';
-export type ButtonSize = 'small' | 'medium' | 'large';
+export type ButtonVariant = ButtonVariantV2;  // 'primary' | 'sub' | 'outlined' | 'outlined-focused'
+export type ButtonSize = ButtonSizeV2;        // 'small' | 'medium' | 'large'
 
-/** Button — 사용자가 원하는 동작을 수행할 수 있도록 돕는 버튼 */
+/**
+ * Button — Figma "Button" 컴포넌트 1:1
+ *
+ * Figma component sets:
+ *   - Btn (primary∈{yes,no}, sub∈{yes,no})
+ *   - Btn-outlined (focused∈{yes,no}, sub∈{yes,no})
+ *
+ * 4개 named variant를 단일 `variant` prop으로 표현:
+ *   primary           ← Btn(primary=yes, sub=no)
+ *   sub               ← Btn(primary=no, sub=yes)
+ *   outlined-focused  ← Btn-outlined(focused=yes, sub=no)
+ *   outlined          ← Btn-outlined(focused=no, sub=yes)
+ *
+ * @breaking-change v3.0
+ *   - `colorScheme` prop 제거 → variant union으로 통합
+ *   - `loading` prop 제거 → Figma 미정의
+ */
 export interface ButtonProps {
-  /** 버튼 텍스트 */
+  /** 버튼 텍스트 (Figma: label) */
   label: string;
   /** 클릭 콜백 */
   onPress?: () => void;
-  /** 버튼 스타일 변형 */
+  /** 버튼 스타일 변형 — Figma named variant (primary / sub / outlined / outlined-focused) */
   variant?: ButtonVariant;
-  /** 버튼 컬러 스킴 */
-  colorScheme?: ButtonColorScheme;
-  /** 버튼 크기 */
+  /** 버튼 크기 — Figma SPEC (small / medium / large) */
   size?: ButtonSize;
-  /** 비활성화 상태 */
+  /** 비활성화 상태 (Figma: disabled) */
   disabled?: boolean;
-  /** 로딩 상태 */
-  loading?: boolean;
+  /** 좌측 아이콘 (Figma BOOLEAN property: `left icon#175:5`) */
+  leftIcon?: React.ReactNode;
+  /** 우측 아이콘 (Figma BOOLEAN property: `right icon#175:8`) */
+  rightIcon?: React.ReactNode;
 }
-
-const TEXT_STYLE_MAP: Record<ButtonSize, TextStyle> = {
-  small:  { fontSize: textStyle.label2.fontSize,  lineHeight: textStyle.label2.lineHeight,  letterSpacing: textStyle.label2.letterSpacing },
-  medium: { fontSize: textStyle.body2.fontSize,   lineHeight: textStyle.body2.lineHeight,   letterSpacing: textStyle.body2.letterSpacing },
-  large:  { fontSize: textStyle.headline.fontSize, lineHeight: textStyle.headline.lineHeight, letterSpacing: textStyle.headline.letterSpacing },
-};
 
 export function Button({
   label,
   onPress,
-  variant = 'solid',
-  colorScheme = 'primary',
+  variant = 'primary',
   size = 'medium',
   disabled = false,
-  loading = false,
+  leftIcon,
+  rightIcon,
 }: ButtonProps) {
   const sizeToken = buttonToken.size[size];
-  const colorToken = buttonToken.color[colorScheme][variant];
+  const variantToken = buttonToken.color[variant];
 
-  const contentColor = disabled ? colorToken.contentDisabled : colorToken.content;
+  // Figma "Hover"는 RN에 없음 → Pressable의 pressed로 통합 (RN 변환 규칙 §상태 매핑)
+  const resolveColors = (pressed: boolean) => {
+    if (disabled) return variantToken.disabled;
+    if (pressed) return variantToken.pressed;
+    return variantToken.default;
+  };
 
   const getContainerStyle = ({ pressed }: PressableStateCallbackType): ViewStyle => {
-    let bg: string = colorToken.background;
-    if (disabled) bg = colorToken.backgroundDisabled;
-    else if (pressed) bg = colorToken.backgroundPressed;
-
+    const colors = resolveColors(pressed);
     const style: ViewStyle = {
       ...styles.base,
       height: sizeToken.height,
       paddingHorizontal: sizeToken.paddingHorizontal,
       borderRadius: sizeToken.radius,
-      backgroundColor: bg,
+      gap: sizeToken.gap,
+      backgroundColor: colors.container,
     };
-
-    if ('border' in colorToken) {
-      style.borderWidth = 1;
-      style.borderColor = disabled && 'borderDisabled' in colorToken
-        ? colorToken.borderDisabled
-        : colorToken.border;
+    if ('border' in colors) {
+      style.borderColor = colors.border;
+      style.borderWidth = colors.borderWidth;
     }
-
     return style;
   };
 
-  const labelStyle: TextStyle = {
-    ...TEXT_STYLE_MAP[size],
-    fontWeight: fontWeight.semibold,
-    color: contentColor,
+  const getLabelStyle = ({ pressed }: PressableStateCallbackType): TextStyle => {
+    const colors = resolveColors(pressed);
+    return {
+      fontSize: sizeToken.textStyle.fontSize,
+      lineHeight: sizeToken.textStyle.lineHeight,
+      letterSpacing: sizeToken.textStyle.letterSpacing,
+      // Figma "Label/버튼 크기별 적용" 변수의 weight: 600 (SemiBold) — 모든 사이즈 강제
+      fontWeight: '600',
+      color: colors.label,
+    };
   };
 
   return (
     <Pressable
       onPress={onPress}
-      disabled={disabled || loading}
+      disabled={disabled}
       accessibilityRole="button"
-      accessibilityState={{ disabled: disabled || loading }}
+      accessibilityState={{ disabled }}
+      accessibilityLabel={label}
       style={getContainerStyle}
     >
-      {loading ? (
-        <ActivityIndicator size="small" color={contentColor} />
-      ) : (
-        <Text style={labelStyle}>{label}</Text>
+      {(state) => (
+        <>
+          {leftIcon}
+          <Text style={getLabelStyle(state)}>{label}</Text>
+          {rightIcon}
+        </>
       )}
     </Pressable>
   );

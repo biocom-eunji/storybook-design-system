@@ -78,10 +78,10 @@ function ModalPreview({
       {(primaryLabel || secondaryLabel) && (
         <View style={{ marginTop: spacing['2xlarge'], gap: spacing.small }}>
           {primaryLabel && (
-            <Button label={primaryLabel} variant="solid" colorScheme="primary" size="medium" />
+            <Button label={primaryLabel} variant="primary" size="medium" />
           )}
           {secondaryLabel && (
-            <Button label={secondaryLabel} variant="solid" colorScheme="assistive" size="medium" />
+            <Button label={secondaryLabel} variant="sub" size="medium" />
           )}
         </View>
       )}
@@ -267,15 +267,13 @@ export const Interactive: Story = {
           <View style={{ flexDirection: 'row', gap: spacing.medium }}>
             <Button
               label="Confirmation Modal"
-              variant="solid"
-              colorScheme="primary"
+              variant="primary"
               size="small"
               onPress={() => setVisible(true)}
             />
             <Button
               label="Form Modal"
-              variant="outlined"
-              colorScheme="primary"
+              variant="outlined-focused"
               size="small"
               onPress={() => setFormVisible(true)}
             />

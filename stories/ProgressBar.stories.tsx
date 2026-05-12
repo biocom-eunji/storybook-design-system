@@ -165,8 +165,8 @@ export const Interactive: Story = {
           <View style={{ maxWidth: 400, gap: spacing.large }}>
             <ProgressBar progress={progress} size="large" color="primary" showLabel />
             <Row gap={spacing.medium}>
-              <Button label="시작" variant="solid" colorScheme="primary" size="small" onPress={start} />
-              <Button label="초기화" variant="solid" colorScheme="assistive" size="small" onPress={reset} />
+              <Button label="시작" variant="primary" size="small" onPress={start} />
+              <Button label="초기화" variant="sub" size="small" onPress={reset} />
             </Row>
           </View>
         </Section>

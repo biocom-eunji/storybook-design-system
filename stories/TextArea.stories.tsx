@@ -295,7 +295,7 @@ export const InContext: Story = {
             />
           </View>
 
-          <Button label="제출하기" variant="solid" colorScheme="primary" size="large" />
+          <Button label="제출하기" variant="primary" size="large" />
         </View>
       </Section>
     </View>

@@ -331,7 +331,7 @@ export const InContext: Story = {
             />
           </View>
 
-          <Button label="가입하기" variant="solid" colorScheme="primary" size="large" />
+          <Button label="가입하기" variant="primary" size="large" />
         </View>
       </Section>
     </View>

@@ -45,11 +45,11 @@ const ButtonRow = ({
   <View style={styles.row}>
     {secondary && (
       <View style={styles.flex1}>
-        <Button {...secondary} variant="outlined" colorScheme="assistive" size={size} />
+        <Button {...secondary} variant="outlined" size={size} />
       </View>
     )}
     <View style={{ flex: primaryFlex }}>
-      <Button {...primary} variant="solid" colorScheme="primary" size={size} />
+      <Button {...primary} variant="primary" size={size} />
     </View>
   </View>
 );
@@ -75,7 +75,7 @@ export function ActionArea({
     case 'strong':
       return (
         <View style={containerStyle}>
-          <Button {...primary} variant="solid" colorScheme="primary" size="large" />
+          <Button {...primary} variant="primary" size="large" />
         </View>
       );
 
