@@ -20,6 +20,8 @@ import {
   spacing,
   radius,
   textStyle,
+  height,
+  icon,
 } from '../tokens/theme';
 
 // ─── Types ───────────────────────────────────────────────
@@ -69,8 +71,9 @@ export interface TextFieldProps {
 
 // ─── Constants ───────────────────────────────────────────
 
-const ICON_SIZE = 20;
-const SINGLE_LINE_HEIGHT = spacing['4xlarge']; // 48px
+const ICON_SIZE = icon.medium; // 20
+// Figma "4. units"에 48 없음 — height.xlarge(52)로 자동 스납 (48→52, +4)
+const SINGLE_LINE_HEIGHT = height.xlarge; // 52px
 
 const TRAILING_ICON_MAP = {
   clear:   { name: 'x-circle',        color: semanticColor.iconDisabled },

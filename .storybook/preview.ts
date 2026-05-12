@@ -31,11 +31,10 @@ const preview: Preview = {
     options: {
       storySort: {
         order: [
-          'Getting Started', ['Guide', 'Introduction', 'Release Notes', 'Naming Convention', 'Brand Logo'],
-          'Primitives Palette', ['Color', 'Grid', 'Opacity'],
-          'Semantics Token', ['Color', 'Typography', 'Spacing', 'Border Radius', 'Icon'],
+          'Getting Started', ['Guide', 'Introduction', 'Release Notes', 'Naming Convention'],
+          'Token', ['App Logo', 'Colors', ['Palette', 'Tokens'], 'Typography', 'Units', 'Icons'],
           'Actions', ['Button', 'TextButton', 'FAB'],
-          'Input', ['TextField', 'TextArea', 'SearchBar', 'DatePicker', 'TimePicker', 'Stepper', 'LikertScale', 'Checkbox', 'Radio', 'RadioCard', 'Switch', 'Chip', 'SegmentedControl'],
+          'Input', ['TextField', 'TextArea', 'SearchBar', 'DatePicker', 'TimePicker', 'Stepper', 'LikertScale', 'Checkbox & Radio', 'RadioCard', 'Switch', 'Chip', 'SegmentedControl'],
           'Feedback', ['Toast', 'ProgressBar', 'CircularProgress', 'Skeleton', 'EmptyState'],
           'Overlay', ['Modal', 'BottomSheet', 'Tooltip'],
           'Navigation', ['AppBar', 'Tabs', 'BottomNavigation', 'PageIndicator'],

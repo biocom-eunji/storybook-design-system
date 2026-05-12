@@ -22,7 +22,7 @@ import {
 // ─── Meta ────────────────────────────────────────────────
 
 const meta: Meta<typeof Icon> = {
-  title: 'Semantics Token/Icon',
+  title: 'Token/Icons',
   component: Icon,
   argTypes: {
     name: { control: 'text', description: '아이콘 이름' },

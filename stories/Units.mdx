@@ -1,0 +1,773 @@
+import React from 'react';
+import { Meta } from '@storybook/addon-docs/blocks';
+
+<Meta title="Token/Units" />
+
+{/* ─────────────────────────────────────────────
+    Data — Figma "units" 단일 진실 원천
+   ───────────────────────────────────────────── */}
+
+export const gapInnerSteps = [
+  { name: '3XSmall', token: "gap.inner['3xsmall']", px: 4 },
+  { name: '2XSmall', token: "gap.inner['2xsmall']", px: 6 },
+  { name: 'XSmall',  token: 'gap.inner.xsmall',     px: 8 },
+  { name: 'Small',   token: 'gap.inner.small',      px: 12 },
+  { name: 'Medium',  token: 'gap.inner.medium',     px: 16 },
+  { name: 'Large',   token: 'gap.inner.large',      px: 20 },
+  { name: 'XLarge',  token: 'gap.inner.xlarge',     px: 24 },
+  { name: '2XLarge', token: "gap.inner['2xlarge']", px: 32 },
+];
+
+export const gapOuterSteps = [
+  { name: 'XSmall', token: 'gap.outer.xsmall', px: 16 },
+  { name: 'Small',  token: 'gap.outer.small',  px: 24 },
+  { name: 'Medium', token: 'gap.outer.medium', px: 32 },
+  { name: 'Large',  token: 'gap.outer.large',  px: 40 },
+  { name: 'XLarge', token: 'gap.outer.xlarge', px: 48 },
+];
+
+export const lineSteps = [
+  { name: 'Hairline', token: 'line.hairline', px: 'hairline', display: '0.5 px' },
+  { name: 'Regular',  token: 'line.regular',  px: 1,          display: '1 px' },
+  { name: 'Medium',   token: 'line.medium',   px: 1.5,        display: '1.5 px' },
+  { name: 'Bold',     token: 'line.bold',     px: 2,          display: '2 px' },
+  { name: 'Heavy',    token: 'line.heavy',    px: 6,          display: '6 px' },
+  { name: 'Black',    token: 'line.black',    px: 12,         display: '12 px' },
+];
+
+export const heightSteps = [
+  { name: '2XSmall', token: "height['2xsmall']", px: 24 },
+  { name: 'XSmall',  token: 'height.xsmall',     px: 32 },
+  { name: 'Small',   token: 'height.small',      px: 36 },
+  { name: 'Medium',  token: 'height.medium',     px: 40 },
+  { name: 'Large',   token: 'height.large',      px: 44 },
+  { name: 'XLarge',  token: 'height.xlarge',     px: 52 },
+  { name: '2XLarge', token: "height['2xlarge']", px: 56 },
+];
+
+export const iconSizeSteps = [
+  { name: 'Small',  token: 'icon.small',  px: 16 },
+  { name: 'Medium', token: 'icon.medium', px: 20 },
+  { name: 'Large',  token: 'icon.large',  px: 24 },
+  { name: 'XLarge', token: 'icon.xlarge', px: 32 },
+];
+
+export const radiusSteps = [
+  { name: 'XSmall',  token: 'radiusTokensV2.xsmall',  px: 4 },
+  { name: 'Small',   token: 'radiusTokensV2.small',   px: 8 },
+  { name: 'Regular', token: 'radiusTokensV2.regular', px: 12 },
+  { name: 'Medium',  token: 'radiusTokensV2.medium',  px: 16 },
+  { name: 'Large',   token: 'radiusTokensV2.large',   px: 24 },
+  { name: 'XLarge',  token: 'radiusTokensV2.xlarge',  px: 32 },
+  { name: 'full',    token: 'radiusTokensV2.full',    px: 9999 },
+];
+
+export const tocItems = [
+  { id: 'gap-inner', label: 'gap-inner' },
+  { id: 'gap-outer', label: 'gap-outer' },
+  { id: 'line',      label: 'line' },
+  { id: 'height',    label: 'height' },
+  { id: 'icon-size', label: 'icon size' },
+  { id: 'radius',    label: 'radius' },
+];
+
+{/* ─────────────────────────────────────────────
+    Copy + Toast — page-level singleton via Context
+   ───────────────────────────────────────────── */}
+
+export const ToastContext = React.createContext({ copy: () => {} });
+
+export const ToastProvider = ({ children }) => {
+  const [msg, setMsg] = React.useState(null);
+  const timer = React.useRef(null);
+  const lastCall = React.useRef(0);
+
+  const copy = React.useCallback((text) => {
+    const now = Date.now();
+    if (now - lastCall.current < 200) return; // debounce 200ms
+    lastCall.current = now;
+    if (timer.current) clearTimeout(timer.current);
+    try {
+      navigator.clipboard.writeText(text).then(() => {
+        setMsg(text);
+        timer.current = setTimeout(() => setMsg(null), 1500);
+      });
+    } catch {
+      setMsg(text);
+      timer.current = setTimeout(() => setMsg(null), 1500);
+    }
+  }, []);
+
+  return (
+    <ToastContext.Provider value={{ copy }}>
+      {children}
+      {msg && (
+        <div className="units-toast" role="status" aria-live="polite">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#22C3BC" strokeWidth={3} strokeLinecap="round" strokeLinejoin="round">
+            <polyline points="20 6 9 17 4 12" />
+          </svg>
+          <span>Copied: <code>{msg}</code></span>
+        </div>
+      )}
+    </ToastContext.Provider>
+  );
+};
+
+{/* ─────────────────────────────────────────────
+    Reusable Components
+   ───────────────────────────────────────────── */}
+
+export const CheckIcon = ({ size, color }) => (
+  <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke={color || '#22C3BC'} strokeWidth={3} strokeLinecap="round" strokeLinejoin="round">
+    <polyline points="20 6 9 17 4 12" />
+  </svg>
+);
+
+export const TokenRow = ({ token, children }) => {
+  const { copy } = React.useContext(ToastContext);
+  const onKeyDown = (e) => {
+    if (e.key === 'Enter' || e.key === ' ') {
+      e.preventDefault();
+      copy(token);
+    }
+  };
+  return (
+    <tr
+      className="token-row"
+      role="button"
+      tabIndex={0}
+      aria-label={`Copy token ${token}`}
+      onClick={() => copy(token)}
+      onKeyDown={onKeyDown}
+    >
+      {children}
+    </tr>
+  );
+};
+
+export const TokenCell = ({ name, token }) => (
+  <td className="name-cell">
+    <div className="name-label">{name}</div>
+    <code className="name-code">{token}</code>
+  </td>
+);
+
+export const SizeCell = ({ display }) => {
+  const m = typeof display === 'string' ? display.match(/^(.*?)\s*(px)$/) : null;
+  if (!m) {
+    return <td className="value-cell"><span className="value-number">{display}</span></td>;
+  }
+  return (
+    <td className="value-cell">
+      <span className="value-number">{m[1]}</span>
+      <span className="value-unit">{m[2]}</span>
+    </td>
+  );
+};
+
+{/* gap row — 회색 컨테이너 안에 토큰값 너비의 컬러바 */}
+export const GapRow = ({ name, token, px }) => (
+  <TokenRow token={token}>
+    <TokenCell name={name} token={token} />
+    <td className="preview-cell">
+      <div className="gap-track">
+        <div className="gap-fill" style={{ width: px }} aria-hidden="true" />
+      </div>
+    </td>
+    <SizeCell display={`${px} px`} />
+  </TokenRow>
+);
+
+{/* line row — 가로선, 두께=토큰값 */}
+export const LineRow = ({ name, token, px, display }) => {
+  const isHairline = px === 'hairline';
+  return (
+    <TokenRow token={token}>
+      <TokenCell name={name} token={token} />
+      <td className="preview-cell">
+        <div className="line-track">
+          <div
+            className="line-stroke"
+            style={{
+              height: isHairline ? 1 : px,
+              transform: isHairline ? 'scaleY(0.5)' : undefined,
+              transformOrigin: 'center',
+            }}
+            aria-hidden="true"
+          />
+        </div>
+      </td>
+      <SizeCell display={display} />
+    </TokenRow>
+  );
+};
+
+{/* height row — 120w 고정, height=토큰값, baseline-bottom 정렬 */}
+export const HeightRow = ({ name, token, px }) => (
+  <TokenRow token={token}>
+    <TokenCell name={name} token={token} />
+    <td className="preview-cell">
+      <div className="height-track">
+        <div className="height-fill" style={{ width: 120, height: px }} aria-hidden="true">
+          <span className="height-label">{px}</span>
+        </div>
+      </div>
+    </td>
+    <SizeCell display={`${px} px`} />
+  </TokenRow>
+);
+
+{/* icon size row — 32×32 회색 가이드 컨테이너 + SVG Check */}
+export const IconRow = ({ name, token, px }) => (
+  <TokenRow token={token}>
+    <TokenCell name={name} token={token} />
+    <td className="preview-cell">
+      <div className="icon-guide" aria-hidden="true">
+        <CheckIcon size={px} />
+      </div>
+    </td>
+    <SizeCell display={`${px} × ${px} px`} />
+  </TokenRow>
+);
+
+{/* radius row — 60x60 정사각형 + border-radius */}
+export const RadiusRow = ({ name, token, px }) => (
+  <TokenRow token={token}>
+    <TokenCell name={name} token={token} />
+    <td className="preview-cell">
+      <div
+        className="radius-box"
+        style={{ borderRadius: px === 9999 ? 9999 : px }}
+        aria-hidden="true"
+      />
+    </td>
+    <SizeCell display={px === 9999 ? '9999 px' : `${px} px`} />
+  </TokenRow>
+);
+
+export const SectionHead = () => (
+  <thead>
+    <tr>
+      <th style={{ width: '38%' }}>Token</th>
+      <th style={{ width: '34%' }}>Preview</th>
+      <th>size</th>
+    </tr>
+  </thead>
+);
+
+export const UsageBlock = ({ children }) => (
+  <div className="usage-card"><pre>{children}</pre></div>
+);
+
+export const SectionCard = ({ number, title, subtitle, description, children }) => (
+  <section className="section-card">
+    <header className="section-card-head">
+      {number != null && <span className="section-number">{number}</span>}
+      <div className="section-card-text">
+        <h3 className="section-title">
+          {title}
+          {subtitle && <span className="section-subtitle"> · {subtitle}</span>}
+        </h3>
+        {description && <p className="section-desc">{description}</p>}
+      </div>
+    </header>
+    <div className="section-card-body">{children}</div>
+  </section>
+);
+
+export const SubsectionTitle = ({ id, children }) => (
+  <h4 id={id} className="subsection-title">{children}</h4>
+);
+
+export const TableOfContents = () => {
+  const [active, setActive] = React.useState(tocItems[0].id);
+  React.useEffect(() => {
+    if (typeof IntersectionObserver === 'undefined') return;
+    const observer = new IntersectionObserver(
+      (entries) => {
+        const visible = entries.filter((e) => e.isIntersecting).sort((a, b) => a.target.getBoundingClientRect().top - b.target.getBoundingClientRect().top);
+        if (visible[0]) setActive(visible[0].target.id);
+      },
+      { rootMargin: '-25% 0px -65% 0px', threshold: 0 }
+    );
+    tocItems.forEach(({ id }) => {
+      const el = document.getElementById(id);
+      if (el) observer.observe(el);
+    });
+    return () => observer.disconnect();
+  }, []);
+  return (
+    <nav className="units-toc" aria-label="섹션 목차">
+      <ul>
+        {tocItems.map(({ id, label }) => (
+          <li key={id}>
+            <a
+              href={`#${id}`}
+              className={active === id ? 'active' : ''}
+              tabIndex={0}
+            >
+              {label}
+            </a>
+          </li>
+        ))}
+      </ul>
+    </nav>
+  );
+};
+
+<style>{`
+  .units-page {
+    max-width: 980px;
+    margin: 0 auto;
+    padding: 24px 24px 48px;
+    background: #FFFFFF;
+    font-family: 'Pretendard Variable', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    color: #37383C;
+    color-scheme: light;
+  }
+  .units-page > h2 {
+    font-size: 28px;
+    font-weight: 700;
+    color: #171719;
+    margin: 0 0 8px;
+    padding-bottom: 12px;
+    border-bottom: 2px solid #22C3BC;
+  }
+  .units-page > p.lead {
+    font-size: 14px;
+    color: #5A5C63;
+    margin: 0 0 24px;
+    line-height: 1.7;
+  }
+
+  /* ── ToC ── */
+  .units-toc {
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    margin: 0 0 32px;
+    padding: 8px 4px;
+    background: #FFFFFF;
+    border-bottom: 1px solid #E1E2E4;
+  }
+  .units-toc ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4px;
+  }
+  .units-toc a {
+    display: inline-block;
+    padding: 6px 12px;
+    font-size: 12px;
+    font-weight: 600;
+    color: #70737C;
+    text-decoration: none;
+    border-radius: 6px;
+    transition: background 0.15s, color 0.15s;
+  }
+  .units-toc a:hover { background: #F4F4F5; color: #171719; }
+  .units-toc a:focus-visible {
+    outline: 2px solid #22C3BC;
+    outline-offset: 2px;
+  }
+  .units-toc a.active {
+    background: #E9FBFA;
+    color: #17827D;
+  }
+
+  /* ── Section Card ── */
+  .section-card {
+    border: 1px solid #E1E2E4;
+    border-radius: 12px;
+    padding: 24px 28px;
+    margin: 0 0 32px;
+    background: #FFFFFF;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.02);
+  }
+  .section-card-head {
+    display: flex;
+    align-items: flex-start;
+    gap: 14px;
+    padding-left: 14px;
+    position: relative;
+    margin-bottom: 20px;
+  }
+  .section-card-head::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 6px;
+    bottom: 6px;
+    width: 4px;
+    border-radius: 2px;
+    background: #22C3BC;
+  }
+  .section-number {
+    flex-shrink: 0;
+    width: 28px;
+    height: 28px;
+    border-radius: 8px;
+    background: #E9FBFA;
+    color: #17827D;
+    font-size: 13px;
+    font-weight: 700;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 2px;
+  }
+  .section-card-text { flex: 1; min-width: 0; }
+  .section-title {
+    font-size: 20px;
+    font-weight: 700;
+    color: #171719;
+    margin: 0 0 4px;
+  }
+  .section-subtitle {
+    font-size: 14px;
+    font-weight: 500;
+    color: #70737C;
+  }
+  .section-desc {
+    font-size: 13px;
+    color: #70737C;
+    margin: 0;
+    line-height: 1.6;
+  }
+  .subsection-title {
+    scroll-margin-top: 80px;
+    font-size: 14px;
+    font-weight: 700;
+    color: #171719;
+    margin: 12px 0 8px;
+  }
+  .section-card-body > .subsection-title:first-child { margin-top: 0; }
+  .section-card-body > .subsection-title + .usage-card { margin-top: 0; }
+  .section-card-body > .subsection-title ~ .subsection-title { margin-top: 32px; }
+  /* anchor sections inside SectionCard (line/radius single-anchor case) */
+  .section-card[id], .units-page section[id] { scroll-margin-top: 64px; }
+
+  /* ── Usage Code ── */
+  .usage-card {
+    background: linear-gradient(135deg, #FBFEFE 0%, #E9FBFA 100%);
+    border: 1px solid #D4F7F6;
+    border-radius: 10px;
+    padding: 12px 16px;
+    margin: 0 0 14px;
+    overflow-x: auto;
+  }
+  .usage-card pre {
+    margin: 0;
+    font-family: 'SF Mono', 'Fira Code', monospace;
+    font-size: 12px;
+    line-height: 1.7;
+    color: #37383C;
+    white-space: pre;
+  }
+
+  /* ── Token Table ── */
+  .units-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 13px;
+    table-layout: fixed;
+  }
+  .units-table thead th {
+    text-align: left;
+    padding: 10px 14px;
+    font-weight: 600;
+    color: #46474C;
+    font-size: 12px;
+    background: #F7F7F8;
+    border-bottom: 2px solid #E1E2E4;
+  }
+  .units-table .token-row {
+    cursor: pointer;
+    transition: background 0.12s;
+  }
+  .units-table .token-row td {
+    padding: 12px 14px;
+    border-bottom: 1px solid #F4F4F5;
+    vertical-align: middle;
+  }
+  .units-table .token-row:hover td { background: #F7FCFC; }
+  .units-table .token-row:active td { background: #E9FBFA; }
+  .units-table .token-row:focus { outline: none; }
+  .units-table .token-row:focus-visible {
+    outline: 2px solid #22C3BC;
+    outline-offset: -2px;
+  }
+
+  .name-cell { padding: 12px 14px; }
+  .name-label { font-size: 13px; font-weight: 600; color: #171719; margin-bottom: 4px; line-height: 1.3; }
+  .name-code {
+    font-family: 'SF Mono', monospace;
+    font-size: 11px;
+    color: #989BA2;
+    background: transparent;
+    padding: 0;
+    display: inline-block;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 100%;
+    white-space: nowrap;
+  }
+  .value-cell { font-family: 'SF Mono', monospace; }
+  .value-cell .value-number {
+    font-size: 14px;
+    font-weight: 700;
+    color: #171719;
+  }
+  .value-cell .value-unit {
+    font-size: 12px;
+    color: #989BA2;
+    margin-left: 4px;
+  }
+  .preview-cell { padding-right: 8px !important; }
+
+  /* ── gap preview ── */
+  .gap-track {
+    box-sizing: border-box;
+    width: 180px;
+    height: 36px;
+    background: #F4F4F5;
+    border-radius: 6px;
+    display: flex;
+    align-items: center;
+    padding: 0 6px;
+  }
+  .gap-fill {
+    height: 14px;
+    background: #22C3BC;
+    border-radius: 4px;
+    min-width: 4px;
+  }
+
+  /* ── line preview ── */
+  .line-track {
+    box-sizing: border-box;
+    width: 200px;
+    height: 28px;
+    background: #FFFFFF;
+    border: 1px solid #E1E2E4;
+    border-radius: 6px;
+    display: flex;
+    align-items: center;
+    padding: 0 10px;
+  }
+  .line-stroke {
+    flex: 1;
+    background: #2C2E32;
+  }
+
+  /* ── height preview ── */
+  .height-track {
+    display: flex;
+    align-items: flex-end;
+    height: 64px;
+    border-bottom: 1px dashed #E1E2E4;
+  }
+  .height-fill {
+    background: #E9FBFA;
+    border: 1px solid #22C3BC;
+    border-radius: 6px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .height-label {
+    font-family: 'SF Mono', monospace;
+    font-size: 11px;
+    font-weight: 600;
+    color: #17827D;
+  }
+
+  /* ── icon size preview ── */
+  .icon-guide {
+    width: 32px;
+    height: 32px;
+    background: #F4F4F5;
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  /* ── radius preview ── */
+  .radius-box {
+    width: 60px;
+    height: 60px;
+    background: #E9FBFA;
+    border: 1px solid #22C3BC;
+  }
+
+  /* ── Toast ── */
+  .units-toast {
+    position: fixed;
+    bottom: 28px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: #171719;
+    color: #FFFFFF;
+    padding: 10px 16px;
+    border-radius: 999px;
+    font-size: 13px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.25);
+    z-index: 9999;
+    animation: units-toast-in 0.18s ease-out;
+  }
+  .units-toast code {
+    background: rgba(255, 255, 255, 0.14);
+    padding: 2px 8px;
+    border-radius: 6px;
+    font-family: 'SF Mono', monospace;
+    font-size: 12px;
+    color: #FFFFFF;
+  }
+  @keyframes units-toast-in {
+    from { opacity: 0; transform: translate(-50%, 12px); }
+    to   { opacity: 1; transform: translate(-50%, 0); }
+  }
+`}</style>
+
+<ToastProvider>
+<div className="units-page">
+
+<h2>Units</h2>
+<p className="lead">Figma <code>units</code> 페이지와 1:1 매핑된 단위 토큰. 6개 그룹: gap(inner/outer), line, height, icon size, radius. 모든 값은 px 단위 (line.hairline 제외). <strong>표의 어느 셀이든 클릭하면 토큰 경로가 복사됩니다.</strong></p>
+
+<TableOfContents />
+
+<SectionCard
+  number="①"
+  title="gap, margin, padding"
+  subtitle="gap-inner · gap-outer"
+  description="컴포넌트 내부 갭(gap-inner)과 컴포넌트 외부 갭(gap-outer)을 분리하여 의도를 명확히 합니다.">
+
+<SubsectionTitle id="gap-inner">gap-inner — 버튼·카드 등 컴포넌트 <strong>내부</strong> 갭/패딩/마진</SubsectionTitle>
+
+<UsageBlock>{`import { gap } from '@/tokens/theme';
+
+<View style={{ padding: gap.inner.medium, gap: gap.inner.small }}>
+  <Text>16px padding · 12px gap</Text>
+</View>`}</UsageBlock>
+
+<table className="units-table">
+  <SectionHead />
+  <tbody>
+    {gapInnerSteps.map((s) => <GapRow key={s.name} {...s} />)}
+  </tbody>
+</table>
+
+<SubsectionTitle id="gap-outer">gap-outer — 섹션 등 컴포넌트 <strong>외부</strong> 갭/마진</SubsectionTitle>
+
+<UsageBlock>{`import { gap } from '@/tokens/theme';
+
+<View style={{ marginVertical: gap.outer.large }}>  // 40px
+<View style={{ gap: gap.outer.medium }}>            // 32px section gap`}</UsageBlock>
+
+<table className="units-table">
+  <SectionHead />
+  <tbody>
+    {gapOuterSteps.map((s) => <GapRow key={s.name} {...s} />)}
+  </tbody>
+</table>
+
+</SectionCard>
+
+<section id="line">
+<SectionCard
+  number="②"
+  title="line"
+  subtitle="border · underline · outline"
+  description="보더·언더라인·아웃라인 두께. Hairline은 device pixel ratio 기준 1물리픽셀 (CSS는 0.5px 또는 1px + transform scale로 표현).">
+
+<UsageBlock>{`import { line } from '@/tokens/theme';
+
+<View style={{ borderWidth: line.regular }} />  // 1px
+<View style={{ borderWidth: line.bold }} />     // 2px
+
+// Hairline (RN 0.5px 또는 StyleSheet.hairlineWidth)
+<View style={{ borderWidth: StyleSheet.hairlineWidth }} />`}</UsageBlock>
+
+<table className="units-table">
+  <SectionHead />
+  <tbody>
+    {lineSteps.map((s) => <LineRow key={s.name} {...s} />)}
+  </tbody>
+</table>
+
+</SectionCard>
+</section>
+
+<SectionCard
+  number="③"
+  title="height"
+  subtitle="콘텐츠·컴포넌트 높이 · 아이콘 크기"
+  description="버튼·탭·카드 등 컴포넌트 높이와 아이콘 크기 스케일. Preview 박스는 너비 120px 고정, height만 변하며 하단 베이스라인 정렬.">
+
+<SubsectionTitle id="height">height — 콘텐츠·컴포넌트 높이</SubsectionTitle>
+
+<UsageBlock>{`import { height } from '@/tokens/theme';
+
+<View style={{ height: height.small }} />     // 36
+<View style={{ height: height.medium }} />    // 40
+<View style={{ height: height['2xlarge'] }} />// 56`}</UsageBlock>
+
+<table className="units-table">
+  <SectionHead />
+  <tbody>
+    {heightSteps.map((s) => <HeightRow key={s.name} {...s} />)}
+  </tbody>
+</table>
+
+<SubsectionTitle id="icon-size">icon size — 아이콘 크기</SubsectionTitle>
+
+<UsageBlock>{`import { Icon } from '@/components/Icon';
+import { icon } from '@/tokens/theme';
+
+<Icon name="Check" size={icon.small} />   // 16
+<Icon name="Check" size={icon.medium} />  // 20
+<Icon name="Check" size={icon.large} />   // 24
+<Icon name="Check" size={icon.xlarge} />  // 32`}</UsageBlock>
+
+<table className="units-table">
+  <SectionHead />
+  <tbody>
+    {iconSizeSteps.map((s) => <IconRow key={s.name} {...s} />)}
+  </tbody>
+</table>
+
+</SectionCard>
+
+<section id="radius">
+<SectionCard
+  number="④"
+  title="radius"
+  subtitle="border radius"
+  description="모서리 반경. full(9999)은 원형으로 렌더링됩니다.">
+
+<UsageBlock>{`import { radiusTokensV2 } from '@/tokens/theme';
+
+<View style={{ borderRadius: radiusTokensV2.regular }} />  // 12 — Button
+<View style={{ borderRadius: radiusTokensV2.medium }} />   // 16 — Card
+<View style={{ borderRadius: radiusTokensV2.full }} />     // pill — Avatar`}</UsageBlock>
+
+<table className="units-table">
+  <SectionHead />
+  <tbody>
+    {radiusSteps.map((s) => <RadiusRow key={s.name} {...s} />)}
+  </tbody>
+</table>
+
+</SectionCard>
+</section>
+
+</div>
+</ToastProvider>
